@@ -200,11 +200,16 @@ impl Game {
     }
 
     fn cmd_help(&self) {
-        println!("\n  gsh goal    — objectif de la mission");
-        println!("  gsh check   — valider la mission");
-        println!("  gsh reset   — réinitialiser la mission en cours (repartir à zéro sur la mission actuelle)");
-        println!("  gsh skills  — compétences acquises");
-        println!("  exit        — quitter\n");
+        println!("\n  📘 COMMANDES DU JEU (préfixe gsh):");
+        println!("    gsh goal    — voir l'objectif de la mission en cours");
+        println!("    gsh check   — valider la mission en cours");
+        println!("    gsh reset   — réinitialiser la mission en cours");
+        println!("    gsh skills  — voir les compétences shell acquises");
+        println!("    gsh help    — cette aide");
+        println!("    exit        — quitter le jeu");
+        println!("\n  💻 COMMANDES SHELL (s'utilisent normalement, ex: pwd, ls, cd /pont...):");
+        println!("    pwd ls cd cat touch mkdir cp mv rm grep find chmod chown");
+        println!("    ps top systemctl kill apt ssh ufw tar df du ...\n");
     }
 
     fn cmd_goal(&self) {
@@ -294,7 +299,7 @@ impl Game {
             }
             println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
             println!("  {}  🎯 {}", "│".yellow(), m.goal.bright_white().bold());
-            println!("  {}  🆕 Commandes à utiliser:", "│".yellow());
+            println!("  {}  🆕 Commandes SHELL à utiliser:", "│".yellow());
             for c in &m.required_commands {
                 let (tech, rp) = Self::cmd_brief(c);
                 println!("  {}    {} {}", "│".yellow(), "▸".bright_green(), c.bright_green().bold());

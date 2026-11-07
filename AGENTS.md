@@ -32,6 +32,25 @@ Au lancement et à chaque nouvelle mission, afficher:
 2. La mission avec: id, titre, histoire, objectif, **commandes à utiliser** (`required_commands`), XP
 3. Le statut: `X/50 | Niv N | XP | skills`
 
+## RÈGLE 4f — Vocabulaire strict: distinguer "commandes shell" et "commandes gsh" (OBLIGATOIRE)
+
+Il existe DEUX types de commandes dans le jeu, jamais confondre:
+- **Commandes SHELL** (pwd, ls, cd, cat...) = les vraies commandes Linux que le joueur apprend
+- **Commandes GSH** (gsh goal, gsh check, gsh reset, gsh skills, gsh help) = les commandes de gestion DU JEU
+
+Règles de wording:
+- Toujours dire "commandes SHELL à utiliser" (ou "outils shell") quand on parle de pwd/ls/cd...
+- Toujours préfixer "gsh " pour les commandes du jeu
+- Jamais dire juste "commandes" seul quand ça peut prêter à confusion
+- Dans gsh help, regrouper clairement: section "COMMANDES DU JEU (gsh)" et mention "les commandes shell (pwd, ls...) s'utilisent normalement"
+
+## RÈGLE 4g — ASCII art bien formé (OBLIGATOIRE)
+
+Tout ASCII art (vaisseau, cadres) doit être **visuellement reconnaissable**:
+- Tester en le collant dans un terminal 80x24
+- Les lignes doivent s'aligner correctement (pas de décalage)
+- Un vaisseau doit ressembler à un vaisseau (coque, hublots, ailes, propulseurs)
+
 ## RÈGLE 4d — Cohérence des analogies role play (OBLIGATOIRE)
 
 Chaque analogie role play doit être **logiquement cohérente** avec l'univers du vaisseau:
