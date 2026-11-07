@@ -31,13 +31,7 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │  MACHIN │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS ÊTES ICI] │
-      └──────────┬──────────┘
-            mission 4.1 → MACHINE".into(),
+            map: "VUE DE DESSUS — salle des machines (tableau de bord):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
             skill: Some(Skill { command: "ps".into(), name: "ps".into(), description: "ps".into() }),
         },
         Mission {
@@ -68,13 +62,7 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │  MACHIN │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS ÊTES ICI] │
-      └──────────┬──────────┘
-            mission 4.2 → MACHINE".into(),
+            map: "VUE DE DESSUS — salle des machines (jauges réacteur):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► /salle-des-machines/".into(),
             skill: Some(Skill { command: "top".into(), name: "top".into(), description: "top".into() }),
         },
         Mission {
@@ -105,13 +93,7 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 175,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │  MACHIN │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS ÊTES ICI] │
-      └──────────┬──────────┘
-            mission 4.3 → MACHINE".into(),
+            map: "VUE DE DESSUS — salle des machines (services):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
             skill: Some(Skill { command: "systemctl".into(), name: "systemctl".into(), description: "systemctl".into() }),
         },
         Mission {
@@ -142,13 +124,7 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 175,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │  MACHIN │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS ÊTES ICI] │
-      └──────────┬──────────┘
-            mission 4.4 → MACHINE".into(),
+            map: "VUE DE DESSUS — ALERTE: processus pirate dans les machines:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► ⚠️ backdoor détecté!".into(),
             skill: Some(Skill { command: "kill".into(), name: "kill".into(), description: "kill".into() }),
         },
         Mission {
@@ -179,13 +155,7 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │  MACHIN │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS ÊTES ICI] │
-      └──────────┬──────────┘
-            mission 4.5 → MACHINE".into(),
+            map: "VUE DE DESSUS — salle des machines (priorités):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
             skill: Some(Skill { command: "nice".into(), name: "nice".into(), description: "nice".into() }),
         },
     ]

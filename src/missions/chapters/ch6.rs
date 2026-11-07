@@ -31,13 +31,7 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 175,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │  NAV    │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS ÊTES ICI] │
-      └──────────┬──────────┘
-            mission 6.1 → NAV".into(),
+            map: "VUE DE DESSUS — salle de navigation (coordonnées):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶ NAV ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
             skill: Some(Skill { command: "ip".into(), name: "ip".into(), description: "ip".into() }),
         },
         Mission {
@@ -68,13 +62,7 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │  NAV    │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS ÊTES ICI] │
-      └──────────┬──────────┘
-            mission 6.2 → NAV".into(),
+            map: "VUE DE DESSUS — antenne de communication:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶ COMMS◀│\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
             skill: Some(Skill { command: "ping".into(), name: "ping".into(), description: "ping".into() }),
         },
         Mission {
@@ -105,13 +93,7 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │  SECUR  │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS ÊTES ICI] │
-      └──────────┬──────────┘
-            mission 6.3 → SECUR".into(),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ (pare-feu):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
             skill: Some(Skill { command: "ufw".into(), name: "ufw".into(), description: "ufw".into() }),
         },
         Mission {
@@ -142,13 +124,7 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │  SECUR  │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS ÊTES ICI] │
-      └──────────┬──────────┘
-            mission 6.4 → SECUR".into(),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ (canal SSH):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
             skill: Some(Skill { command: "ssh".into(), name: "ssh".into(), description: "ssh".into() }),
         },
         Mission {
@@ -179,13 +155,7 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │  NAV    │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS ÊTES ICI] │
-      └──────────┬──────────┘
-            mission 6.5 → NAV".into(),
+            map: "VUE DE DESSUS — salle de navigation (radar ports):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶ NAV ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
             skill: Some(Skill { command: "ss".into(), name: "ss".into(), description: "ss".into() }),
         },
     ]

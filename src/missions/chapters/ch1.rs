@@ -28,13 +28,7 @@ Sans cette information, elle ne peut pas vous donner accès aux systèmes de dé
             hints: vec![],
             xp_reward: 50,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │SOUTES  │
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │      [VOUS: ~]      │
-      └──────────┬──────────┘
-                 ▼ pwd + ls ici".into(),
+            map: "VUE DE DESSUS — vous êtes dans votre cabine:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └──────────┴──────────┘".into(),
             skill: Some(Skill { command: "pwd".into(), name: "pwd".into(), description: "pwd".into() }),
         },
         Mission {
@@ -63,13 +57,7 @@ Vous ouvrez le fichier pour en lire le contenu.".into(),
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │SOUTES  │
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │   ~/bienvenue.txt   │
-      └──────────┬──────────┘
-                 ▼ cat bienvenue.txt".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► bienvenue.txt sur votre bureau".into(),
             skill: Some(Skill { command: "ls".into(), name: "ls".into(), description: "ls".into() }),
         },
         Mission {
@@ -98,11 +86,7 @@ sous-compartiment messages, fichier dernier_message.txt.
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │COMMS   │←── ▼
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          │      /messages/dernier_message.txt
-      └──────────┴──────────┘".into(),
+            map: "VUE DE DESSUS — objectif: compartiment COMMUNICATIONS:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶COMMS ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └─────────┴──► /communications/messages/".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat".into() }),
         },
         Mission {
@@ -132,12 +116,7 @@ confirme Jean. Et avec les pirates qui approchent, on n'a pas de temps à perdre
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │SOUTES  │
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          ▼          │
-      │   [identité: qui es-tu?] │
-      └──────────┬──────────┘".into(),
+            map: "VUE DE DESSUS — vous êtes le capitaine:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │▶ PONT ◀│ │CABINES │ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └──── fauteuil du capitaine".into(),
             skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd".into() }),
         },
         Mission {
@@ -163,11 +142,7 @@ Vous consultez l'horloge du système de la station.".into(),
             hints: vec![],
             xp_reward: 50,
             code_required: None,
-            map: "  ┌────────┐ ┌────────┐ ┌────────┐
-  │  PONT  │ │CABINES │ │NAV     │←── ▼ horloge
-  └───┬────┘ └───┬────┘ └───┬────┘
-      │          │       coordonnees/
-      └──────────┴──────────┘".into(),
+            map: "VUE DE DESSUS — horloge de la salle de navigation:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶ NAV ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └─────────┴──► coordonnees/".into(),
             skill: Some(Skill { command: "hostname".into(), name: "hostname".into(), description: "hostname".into() }),
         },
     ]
