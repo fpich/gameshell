@@ -36,16 +36,20 @@ fn print_banner() {
     print!("\x1b[2J\x1b[H");
     io::stdout().flush().ok();
 
-    // Espace étoilé compact + titre — tient en ~12 lignes
+    // Espace étoilé avec titre entouré d'étoiles
     let espace = r#"
-     *    .        *     .    *       .    *
-  .      .   *       .        .  *     .
-     .  *     .   .    *  .      .   *
-  *    .    .    *     .    .  *     .
-     .   *    .    .   *     .    *     .
+  *  .  *     .  *    .  *     .  *   .  *  .  *
+ .    *    .     *  .    *   .     *    .   *
+    *   .  *    .   *    .    *  .    *  .    *
+  .    *     .   *   .   *    .   *     .  *
+     *   .    *    .  *    .    *   .    *   .
 
-        🏴‍☠️  LES PIRATES DE L'ESPACE  🏴‍☠️
-           Mission SISR — Station Orion-7
+  *   🏴‍☠️   LES PIRATES DE L'ESPACE   🏴‍☠️   *
+     *    Mission SISR — Station Orion-7    *
+
+  .   *    .   *    .    *   .    *   .    *
+     *    .   *    .   *    .  *    .   *
+  *    .    *    .   *    .    *    .    *  .
 "#;
     println!("{}", espace.green());
     println!();
