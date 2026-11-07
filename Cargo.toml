@@ -1,0 +1,17 @@
+[package]
+name = "gameshell"
+version = "2.0.0"
+edition = "2021"
+description = "GameShell - Les Pirates de l'Espace - RPG éducatif Debian 13 pour BTS SIO SISR"
+authors = ["Mistral Vibe <vibe@mistral.ai>"]
+
+[dependencies]
+colored = "2.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+clap = { version = "4.4", features = ["derive"] }
+
+[[bin]]
+name = "gameshell"
+path = "src/main.rs"

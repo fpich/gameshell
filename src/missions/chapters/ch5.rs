@@ -1,0 +1,157 @@
+//! CHAPITRE 5 - Enquete
+use crate::missions::types::*;
+
+pub fn missions() -> Vec<Mission> {
+    vec![
+        Mission {
+            id: "5.1".into(), chapter: 5, chapter_title: "Enquete".into(), act: 3,
+            title: "Compter les attaques".into(),
+            description: "Combien de tentatives SSH echouees?".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Jean veut le nombre exact de tentatives d'intrusion SSH pour évaluer la menace.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
+depuis le Galactica.
+
+Compter les attaques est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Jean veut le nombre exact de tentatives d'intrusion SSH pour évaluer la menace.
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "grep -c Failed /securite/logs/auth.log.".into(),
+            bloom_level: "Apply".into(),
+            bloom_question: "Compter les occurrences?".into(),
+            required_commands: vec!["grep".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "grep".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 175,
+            code_required: Some("6".into()),
+            skill: Some(Skill { command: "grep".into(), name: "grep".into(), description: "grep".into() }),
+        },
+        Mission {
+            id: "5.2".into(), chapter: 5, chapter_title: "Enquete".into(), act: 3,
+            title: "Localiser les logs".into(),
+            description: "Quels fichiers .log?".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Quels fichiers de logs existent sur le vaisseau? Où chercher les preuves?
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
+depuis le Galactica.
+
+Localiser les logs est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Quels fichiers de logs existent sur le vaisseau? Où chercher les preuves?
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "find /securite -name *.log.".into(),
+            bloom_level: "Apply".into(),
+            bloom_question: "Chercher par extension?".into(),
+            required_commands: vec!["find".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "find".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 175,
+            code_required: None,
+            skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find".into() }),
+        },
+        Mission {
+            id: "5.3".into(), chapter: 5, chapter_title: "Enquete".into(), act: 3,
+            title: "Chainer".into(),
+            description: "Combinez ps|grep et cat|grep.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Il faut combiner plusieurs outils pour analyser rapidement la situation.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
+depuis le Galactica.
+
+Chainer les analyses est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Il faut combiner plusieurs outils pour analyser rapidement la situation.
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "ps aux | grep ssh et cat syslog | grep UFW.".into(),
+            bloom_level: "Apply".into(),
+            bloom_question: "Chainer des commandes?".into(),
+            required_commands: vec!["|".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "|".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 200,
+            code_required: None,
+            skill: Some(Skill { command: "pipe".into(), name: "pipe".into(), description: "pipe".into() }),
+        },
+        Mission {
+            id: "5.4".into(), chapter: 5, chapter_title: "Enquete".into(), act: 3,
+            title: "Rapport".into(),
+            description: "Sauvegardez les traces.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Toutes les traces des pirates doivent être consignées dans un rapport officiel.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
+depuis le Galactica.
+
+Rédiger le rapport est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Toutes les traces des pirates doivent être consignées dans un rapport officiel.
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "grep Failed auth.log > ~/rapport.txt.".into(),
+            bloom_level: "Apply".into(),
+            bloom_question: "Sauvegarder dans un fichier?".into(),
+            required_commands: vec![">".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: ">".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/rapport.txt".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 200,
+            code_required: Some("None".into()),
+            skill: Some(Skill { command: ">".into(), name: ">".into(), description: ">".into() }),
+        },
+        Mission {
+            id: "5.5".into(), chapter: 5, chapter_title: "Enquete".into(), act: 3,
+            title: "Completer".into(),
+            description: "Ajoutez les IPs UFW.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Le rapport doit être complété avec les IPs bloquées par le pare-feu.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
+depuis le Galactica.
+
+Compléter le rapport est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Le rapport doit être complété avec les IPs bloquées par le pare-feu.
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "grep UFW syslog >> ~/rapport.txt.".into(),
+            bloom_level: "Apply".into(),
+            bloom_question: "Ajouter a un fichier?".into(),
+            required_commands: vec![">>".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: ">>".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 200,
+            code_required: None,
+            skill: Some(Skill { command: ">>".into(), name: ">>".into(), description: ">>".into() }),
+        },
+    ]
+}

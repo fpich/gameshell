@@ -1,0 +1,157 @@
+//! CHAPITRE 9 - Maintenance
+use crate::missions::types::*;
+
+pub fn missions() -> Vec<Mission> {
+    vec![
+        Mission {
+            id: "9.1".into(), chapter: 9, chapter_title: "Maintenance".into(), act: 5,
+            title: "Mise a jour".into(),
+            description: "Mettez a jour les paquets.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Les paquets de sécurité doivent être à jour contre les dernières vulnérabilités.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
+depuis le Galactica.
+
+Mettre à jour les paquets est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Les paquets de sécurité doivent être à jour contre les dernières vulnérabilités.
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "sudo apt update.".into(),
+            bloom_level: "Apply".into(),
+            bloom_question: "Rafraichir les paquets?".into(),
+            required_commands: vec!["apt update".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt update".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 200,
+            code_required: None,
+            skill: Some(Skill { command: "apt".into(), name: "apt".into(), description: "apt".into() }),
+        },
+        Mission {
+            id: "9.2".into(), chapter: 9, chapter_title: "Maintenance".into(), act: 5,
+            title: "Installer".into(),
+            description: "Installez cowsay.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Un outil de test est nécessaire pour vérifier le bon fonctionnement des annonces.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
+depuis le Galactica.
+
+Installer cowsay est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Un outil de test est nécessaire pour vérifier le bon fonctionnement des annonces.
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "sudo apt install -y cowsay + cowsay test.".into(),
+            bloom_level: "Apply".into(),
+            bloom_question: "Installer un logiciel?".into(),
+            required_commands: vec!["apt install".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt install".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 225,
+            code_required: None,
+            skill: Some(Skill { command: "dpkg".into(), name: "dpkg".into(), description: "dpkg".into() }),
+        },
+        Mission {
+            id: "9.3".into(), chapter: 9, chapter_title: "Maintenance".into(), act: 5,
+            title: "Redemarrer SSH".into(),
+            description: "Apres modif config.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Après modification de la config SSH, le service doit être redémarré.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
+depuis le Galactica.
+
+Redémarrer SSH est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Après modification de la config SSH, le service doit être redémarré.
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "sudo systemctl restart ssh + status.".into(),
+            bloom_level: "Apply".into(),
+            bloom_question: "Redemarrer un service?".into(),
+            required_commands: vec!["systemctl restart".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "systemctl restart".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 225,
+            code_required: None,
+            skill: Some(Skill { command: "systemctl restart".into(), name: "systemctl restart".into(), description: "systemctl restart".into() }),
+        },
+        Mission {
+            id: "9.4".into(), chapter: 9, chapter_title: "Maintenance".into(), act: 5,
+            title: "Journal".into(),
+            description: "Historique recent.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. L'historique complet de la station est dans le journal systemd. Consultez-le.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
+depuis le Galactica.
+
+Consulter le journal est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: L'historique complet de la station est dans le journal systemd. Consultez-le.
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "sudo journalctl -n 20 + -u ssh.".into(),
+            bloom_level: "Analyze".into(),
+            bloom_question: "Voir les logs systemd?".into(),
+            required_commands: vec!["journalctl".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "journalctl".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 250,
+            code_required: None,
+            skill: Some(Skill { command: "journalctl".into(), name: "journalctl".into(), description: "journalctl".into() }),
+        },
+        Mission {
+            id: "9.5".into(), chapter: 9, chapter_title: "Maintenance".into(), act: 5,
+            title: "Nettoyer".into(),
+            description: "Liberez de l'espace.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Les soutes sont pleines de paquets inutiles. Nettoyez pour libérer de l'espace.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
+depuis le Galactica.
+
+Nettoyer le système est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Les soutes sont pleines de paquets inutiles. Nettoyez pour libérer de l'espace.
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "sudo apt autoremove -y + apt clean + df -h.".into(),
+            bloom_level: "Apply".into(),
+            bloom_question: "Nettoyer le systeme?".into(),
+            required_commands: vec!["apt autoremove".into(), "apt clean".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt autoremove".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "apt clean".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 225,
+            code_required: None,
+            skill: Some(Skill { command: "apt update".into(), name: "apt update".into(), description: "apt update".into() }),
+        },
+    ]
+}
