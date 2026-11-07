@@ -1,209 +1,167 @@
-# 🚨 RÈGLES STRICTES DE DÉVELOPPEMENT — GameShell Orion-7
+# 🚨 RÈGLES STRICTES DE CONFORMITÉ — GameShell Orion-7
 
-Ce fichier définit les règles **non négociables** pour toute modification du dépôt.
-Toute régression par rapport à ces règles est un bug critique.
+Ce fichier est la **bible du projet**. Toute modification doit respecter ces règles.
+Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 
 ---
 
-## RÈGLE 1 — Isolation du monde de jeu
+# SECTION A — MOTEUR (fonctionnement figé, testé par tests/run_tests.sh)
 
+## RÈGLE A1 — Isolation du monde de jeu
 - Le joueur ne voit JAMAIS le vrai système de fichiers hôte.
 - Tous les chemins absolus `/...` sont mappés vers `~/.gameshell/vaisseau/...`.
-- `ls /` doit afficher les compartiments du vaisseau (pont, soutes, armes...), jamais `/bin`, `/usr` du vrai système.
-- Le prompt affiche `pseudo@orion7:chemin$` avec des chemins propres (`~`, `/pont/...`).
+- `ls /` affiche les compartiments du vaisseau (pont, soutes...), jamais `/bin`, `/usr`.
+- Prompt: `pseudo@orion7:chemin$` avec chemins propres (`~`, `/pont/...`).
 
-## RÈGLE 2 — Historique des commandes par mission
-
-- Les commandes sont trackées **en mémoire** (`mission_commands: Vec<String>`).
-- Ce vecteur est **reset à chaque changement de mission** ET au lancement du jeu.
+## RÈGLE A2 — Historique des commandes par mission
+- Tracké en mémoire (`mission_commands: Vec<String>`), reset à chaque mission ET au lancement.
 - `gsh check` ne valide JAMAIS sur l'historique d'une session précédente.
-- Test de non-régression: lancer une partie, taper `ls`, faire `gsh check` sur mission 1.1 → doit échouer (il manque `pwd`).
 
-## RÈGLE 3 — Pas de validation automatique
+## RÈGLE A3 — Pas de validation automatique
+- Une mission ne se termine JAMAIS automatiquement. Seul `gsh check` (manuel) valide.
+- Si `code_required` est défini, phase 2: le jeu demande le code après les commandes.
 
-- Une mission ne se termine JAMAIS automatiquement.
-- Seul `gsh check` (tapé manuellement par le joueur) peut valider une mission.
-- Après `gsh check` réussi, si la mission a un `code_required`, le jeu demande le code en phase 2.
+## RÈGLE A4 — Check matche sur la commande de BASE
+- Mission requiert `ls -la`, joueur tape `ls` → le check doit passer.
+- Comparer `split_whitespace().next()` des deux côtés. Jamais bloquer sur les arguments.
 
-## RÈGLE 4 — Affichage obligatoire
+## RÈGLE A5 — Parsing robuste
+- Toujours `split_whitespace()`, jamais `split(' ')`.
 
-Au lancement et à chaque nouvelle mission, afficher:
-1. Les commandes gsh disponibles (`gsh help` auto au start)
-2. La mission avec: id, titre, histoire, objectif, **commandes à utiliser** (`required_commands`), XP
-3. Le statut: `X/50 | Niv N | XP | skills`
-
-## RÈGLE 4f — Vocabulaire strict: distinguer "commandes shell" et "commandes gsh" (OBLIGATOIRE)
-
-Il existe DEUX types de commandes dans le jeu, jamais confondre:
-- **Commandes SHELL** (pwd, ls, cd, cat...) = les vraies commandes Linux que le joueur apprend
-- **Commandes GSH** (gsh goal, gsh check, gsh reset, gsh skills, gsh help) = les commandes de gestion DU JEU
-
-Règles de wording:
-- Toujours dire "commandes SHELL à utiliser" (ou "outils shell") quand on parle de pwd/ls/cd...
-- Toujours préfixer "gsh " pour les commandes du jeu
-- Jamais dire juste "commandes" seul quand ça peut prêter à confusion
-- Dans gsh help, regrouper clairement: section "COMMANDES DU JEU (gsh)" et mention "les commandes shell (pwd, ls...) s'utilisent normalement"
-
-## RÈGLE 4k — gsh goal = show_mission + compétence de départ = man (OBLIGATOIRE)
-
-- `gsh goal` doit réafficher EXACTEMENT le même cadre que le début de mission (appelle `show_mission()`)
-- La syntaxe shell dans gsh help = 2 lignes génériques uniquement:
-  `COMMANDE` / `COMMANDE argument` / `COMMANDE -option argument` / `man COMMANDE`
-- La première compétence débloquée (mission 1.1) doit être **man**
-- `man COMMANDE` est autorisé dans toutes les missions
-
-## RÈGLE 4j — Ne pas donner la réponse (OBLIGATOIRE)
-
-Les missions ne doivent PAS dire explicitement quelle commande utiliser dans l'objectif.
-L'objectif (`goal`) doit être **narratif**: "Marie attend votre réponse", "Prouvez votre identité"...
-L'étudiant doit LIRE le contexte et DÉDUIRE quelle commande utiliser.
-- Interdit: "Affichez votre position (pwd)"
-- Autorisé: "Montrez-lui où vous êtes dans le vaisseau"
-- La carte montre OÙ on est, jamais QUELLE commande taper
-- Toute la story doit être affichée (pas de troncature) — l'étudiant doit tout lire
-
-## RÈGLE 4h — Carte ASCII obligatoire par mission (OBLIGATOIRE)
-
-Chaque mission DOIT avoir un champ `map` contenant une **carte vue de dessus du vaisseau**
-en ASCII art avec une flèche (→ ou ▼) pointant vers le compartiment concerné par la mission.
-Exemple:
-```
-  ┌─────────┐  ┌─────────┐  ┌─────────┐
-  │  PONT   │  │ CABINES │  │ SOUTES  │
-  └────┬────┘  └────┬────┘  └────┬────┘
-       │            ▼              │
-       │         [VOUS ÊTES ICI]   │
-       └──────────→ /communications/messages/dernier_message.txt
-```
-Cette carte s'affiche dans le cadre de la mission. Interdit de valider une mission sans carte.
-
-## RÈGLE 4i — Palette adaptée terminal fond clair (OBLIGATOIRE)
-
-Le terminal xfce Debian 13 a un fond CLAIR par défaut:
-- Texte courant = `.black()` ou `.normal()` (jamais blanc sur fond clair)
-- Éléments importants (titres, cadres, commandes) = couleurs vives (vert, jaune, rouge)
-- Jamais de texte noir invisible ou blanc sur blanc
-
-## RÈGLE 4g — ASCII art bien formé (OBLIGATOIRE)
-
-Tout ASCII art (vaisseau, cadres) doit être **visuellement reconnaissable**:
-- Tester en le collant dans un terminal 80x24
-- Les lignes doivent s'aligner correctement (pas de décalage)
-- Un vaisseau doit ressembler à un vaisseau (coque, hublots, ailes, propulseurs)
-
-## RÈGLE 4d — Cohérence des analogies role play (OBLIGATOIRE)
-
-Chaque analogie role play doit être **logiquement cohérente** avec l'univers du vaisseau:
-- Le hublot montre l'ESPACE, pas l'intérieur → ne jamais dire "regarder par le hublot pour voir la pièce"
-- Une analogie doit pouvoir se visualiser concrètement dans le vaisseau
-- Tester chaque analogie: "Est-ce que cette action a du sens à bord d'Orion-7?"
-
-## RÈGLE 4e — Textes des commandes gsh cohérents
-
-- `gsh reset` = "réinitialiser la mission en cours" (PAS "le vaisseau")
-- Toute description de commande gsh doit dire ce qu'elle fait réellement dans le jeu
-
-## RÈGLE 4c — Minimum 20 lignes de contexte par mission (OBLIGATOIRE)
-
-Chaque mission doit contenir **au moins 20 lignes de texte** de mise en contexte
-(champs `description` + `story` combinés, affichés au joueur). Cela inclut:
-- La situation narrative (qui parle, pourquoi, l'urgence)
-- Le contexte du vaisseau (où on est, ce qui se passe)
-- L'objectif clair
-- Les enjeux (que se passe-t-il si on échoue?)
-
-Interdit de valider une mission avec moins de 20 lignes de contexte.
-Vérification: `wc -l` sur le texte description+story de chaque mission dans les fichiers ch*.rs.
-
-## RÈGLE 4b — Explication double obligatoire: role play PUIS technique
-
-Chaque commande requise par la mission DOIT afficher **deux lignes**:
-1. **Définition technique Linux** (ce que fait la commande réellement)
-2. **Analogie role play** (l'action équivalente dans le vaisseau Orion-7)
-
-L'ordre d'affichage est TOUJOURS: **role play d'abord, puis technique**.
-Exemple:
-```
-🆕 Commandes à utiliser:
-   pwd
-     🚀 roleplay : comme regarder par le hublot pour savoir dans quel compartiment du vaisseau vous êtes
-     💻 technique: affiche le chemin du répertoire courant
-   ls
-     🚀 roleplay : comme ouvrir la porte de votre cabine pour voir ce qu'elle contient
-     💻 technique: liste les fichiers et dossiers du répertoire courant
-```
-
-Ces définitions proviennent de la fonction `cmd_brief()` qui retourne `(technique, roleplay)`.
-**Interdit d'afficher une commande sans ses deux définitions.** C'est pédagogique: le joueur associe la commande Linux à une action concrète dans le vaisseau.
-
-## RÈGLE 5 — Pas d'indices automatiques
-
-- `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
-- `gsh check` en échec affiche UNIQUEMENT: `❌ Non validé: <liste des cibles manquantes>`. Aucun commentaire d'aide.
-
-## RÈGLE 6 — Parsing robuste
-
-- Toujours utiliser `split_whitespace()` pour parser les commandes (gère espaces/tabs multiples).
-- Jamais de `split(' ')`.
-
-## RÈGLE 7 — Commandes interceptées
-
-- `pwd` → affiche le chemin propre (display_path), pas le vrai chemin.
-- `hostname` → affiche `orion7`.
-- `whoami` → affiche `capitaine`.
+## RÈGLE A6 — Commandes interceptées
+- `pwd` → chemin propre (display_path), `hostname` → orion7, `whoami` → capitaine.
 - `cd` → met à jour `current_dir` avec résolution + canonicalisation (realpath).
 
-## RÈGLE 8 — Structure du vaisseau
+## RÈGLE A7 — Reset position à chaque nouvelle mission
+- Quand une mission est validée, le joueur retourne à sa cabine (`HOME` → prompt `~`).
+- Sinon un fichier créé ailleurs fait échouer la mission suivante sans explication.
 
-L'arborescence doit ressembler à un vaisseau spatial, pas un serveur Linux:
+## RÈGLE A8 — gsh check en échec = sobre
+- Affiche UNIQUEMENT: `❌ Non validé: <cibles manquantes>`. Aucun commentaire d'aide.
+
+## RÈGLE A9 — Pas d'indices
+- `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
+
+## RÈGLE A10 — Suite de tests obligatoire
+- Avant chaque commit: `./tests/run_tests.sh` → **25/25 PASS** obligatoire.
+
+---
+
+# SECTION B — AFFICHAGE & VISUEL (terminal xfce 80x24 fond clair)
+
+## RÈGLE B1 — Bannière de lancement
+- Clear écran + espace étoilé compact (~8 lignes) + titre entouré d'étoiles:
+  `* 🏴‍☠️ LES PIRATES DE L'ESPACE 🏴‍☠️ *` / `* Mission SISR — Station Orion-7 *`
+- **PAS de vaisseau au lancement** (le vaisseau est dans les cartes de mission).
+
+## RÈGLE B2 — gsh help affiché automatiquement au lancement
+- Section "Pour revoir l'aide: gsh help" + Bloom expliqué + compétence man + syntaxe shell générique.
+
+## RÈGLE B3 — Syntaxe shell dans gsh help = générique uniquement
+```
+COMMANDE                  → seule (ex: pwd)
+COMMANDE argument         → avec argument (ex: ls /pont)
+COMMANDE -option argument → avec option (ex: ls -la /pont)
+man COMMANDE              → manuel
+COMMANDE | COMMANDE       → chaîne
+COMMANDE > fichier        → redirection
+```
+Jamais de liste de 20 commandes avec exemples ici.
+
+## RÈGLE B4 — Dans la mission: nom de base de la commande seul
+- `▸ pwd`, `▸ ls` — pas `ls -la`. Les exemples d'arguments sont dans gsh help.
+
+## RÈGLE B5 — Cadre mission style "fenêtre terminal"
+- `┏━ MISSION X.X — Titre ━┓` ... `┗━━┛`, largeur 64, story COMPLÈTE affichée (pas de troncature).
+
+## RÈGLE B6 — Palette fond clair
+- Texte courant = `.black()`/`.normal()`. Éléments importants = couleurs vives (vert/jaune).
+- Jamais de blanc sur fond clair, jamais de noir invisible.
+
+## RÈGLE B7 — Footer mission = `gsh help` seul
+- `┃  🏆 50 XP  │  🧠 Bloom [Se souvenir]  │  gsh help`
+- Le joueur trouve `gsh check` dans `gsh help`.
+
+## RÈGLE B8 — Bloom en français
+- Se souvenir, Comprendre, Appliquer, Analyser, Évaluer, Créer.
+
+## RÈGLE B9 — ASCII art bien formé
+- Testé en 80x24, lignes alignées, reconnaissable visuellement.
+
+---
+
+# SECTION C — CONTENU DES MISSIONS (50 missions, 10 chapitres, 5 actes)
+
+## RÈGLE C1 — Structure
+- 50 missions, 10 chapitres × 5 missions, 5 actes narratifs "Les Pirates de l'Espace".
+- Chaque mission: 1-3 nouvelles commandes shell à apprendre.
+
+## RÈGLE C2 — Compétences persistantes
+- Chaque mission débloque UNE compétence (commande shell) qui reste acquise.
+- Compétence de départ: **man** (déjà acquise, affichée dans gsh skills).
+
+## RÈGLE C3 — Minimum 20 lignes de contexte par mission
+- `story` + `description` = 20+ lignes de narration (qui parle, pourquoi, urgence, enjeux).
+- Toute la story est affichée au joueur.
+
+## RÈGLE C4 — Objectif narratif, jamais la commande nommée
+- Interdit: "Affichez votre position (pwd)".
+- Autorisé: "Montrez-lui où vous êtes dans le vaisseau" → l'étudiant déduit `pwd`.
+
+## RÈGLE C5 — Noms exacts (fichiers, chemins) dans le dialogue PNJ
+- Si une mission exige `incident_15jan.txt`, le PNJ doit le dire: « crée incident_15jan.txt ».
+- Jamais faire deviner un nom de fichier exact.
+
+## RÈGLE C6 — Carte ASCII vue de dessus obligatoire
+- Champ `map` dans chaque mission: carte du vaisseau avec ▶ position, flèche vers la cible.
+- 100% role play: indique OÙ on est, jamais QUELLE commande taper.
+
+## RÈGLE C7 — Double définition commande: roleplay PUIS technique
+```
+▸ pwd
+  🚀 comme demander à l'ordinateur de bord dans quel compartiment vous êtes
+  💻 affiche le chemin du répertoire courant
+```
+Ordre fixe: 🚀 roleplay d'abord, 💻 technique ensuite. Fonction `cmd_brief()`.
+
+## RÈGLE C8 — Analogies roleplay cohérentes
+- Le hublot montre l'ESPACE, pas la pièce. Toute analogie doit être visualisable dans le vaisseau.
+
+## RÈGLE C9 — Taxonomie de Bloom par mission
+- Chaque mission a un `bloom_level`: Se souvenir → Comprendre → Appliquer → Analyser → Évaluer → Créer.
+
+## RÈGLE C10 — Vocabulaire strict
+- "commandes SHELL" (pwd, ls...) vs "commandes gsh" (gsh check...). Jamais "commandes" seul.
+
+## RÈGLE C11 — gsh goal = show_mission
+- `gsh goal` réaffiche EXACTEMENT le même cadre `┏━ MISSION ━┓` que le lancement.
+
+## RÈGLE C12 — Textes gsh cohérents
+- `gsh reset` = "réinitialiser la mission en cours" (pas "le vaisseau").
+
+---
+
+# SECTION D — MONDE DU JEU
+
+## RÈGLE D1 — Arborescence vaisseau (pas serveur Linux)
 `/pont/ /cabines/ /soutes/ /reacteur/ /hangar/ /securite/ /communications/ /navigation/ /armes/ /salle-des-machines/ /archives/`
+Générée par `vaisseau-gen.sh`. Jamais `/srv/`, `/etc/`, `/home/etudiant/`.
 
-Générée par `vaisseau-gen.sh`. Ne jamais revenir à une arborescence type `/srv/`, `/etc/`, `/home/etudiant/`.
+---
 
-## RÈGLE 9 — Build et test
+# SECTION E — BUILD, TEST, DÉPÔT
 
-Avant chaque commit:
+## RÈGLE E1 — Build avant commit
 ```bash
-cargo build --release 2>&1 | grep -E "^error"   # doit être vide
+cargo build --release 2>&1 | grep -E "^error"   # vide
 bash make-archive.sh                               # régénère gameshell.sh
-rm -rf ~/.gameshell && cd /tmp && cp ~/gameshell/gameshell.sh . && echo -e "Test\npwd\nls\ngsh check\nexit" | timeout 10 bash gameshell.sh
-# Résultat attendu: ✅ Mission réussie (car pwd ET ls tapés)
+./tests/run_tests.sh                               # 25/25 PASS
 ```
 
-Test de non-régression critique:
-```bash
-rm -rf ~/.gameshell && echo -e "Test\nls\ngsh check\nexit" | bash gameshell.sh
-# Résultat attendu: ❌ Non validé (pwd manquant) — JAMAIS ✅
-```
+## RÈGLE E2 — Distribution 100% offline
+- Un seul fichier `gameshell.sh` auto-extractible. `./gameshell.sh` installe dans `~/.gameshell/` et lance.
+- Aucune connexion internet requise.
 
-## RÈGLE 10 — Distribution
-
-- Un seul fichier `gameshell.sh` auto-extractible, 100% offline.
-- `./gameshell.sh` installe dans `~/.gameshell/` et lance.
-- Aucune dépendance externe, aucun accès réseau requis.
-
-## RÈGLE 4l — Bloom en français + footer 'gsh help' seul (OBLIGATOIRE)
-
-- Les niveaux de Bloom s'affichent en FRANÇAIS: Se souvenir, Comprendre, Appliquer, Analyser, Évaluer, Créer
-- Le footer de mission affiche UNIQUEMENT 'gsh help' — le joueur trouve gsh check dans gsh help
-
-## RÈGLE 6 — Reset position à chaque nouvelle mission (OBLIGATOIRE)
-
-Quand une mission est validée, le joueur retourne automatiquement à sa cabine (`HOME`).
-Sinon un fichier créé dans le mauvais répertoire fait échouer la mission suivante sans que l'étudiant comprenne pourquoi.
-Test: cd /pont, valider mission, vérifier que le prompt revient à ~.
-
-## RÈGLE 5 — Suite de tests automatisés obligatoire (OBLIGATOIRE)
-
-Avant chaque commit: `./tests/run_tests.sh` doit afficher **25/25 PASS**.
-Les 25 tests couvrent: 50 missions, pas d'auto-validation, gsh check, check commande de base,
-historique reset, isolation chemins, prompt orion7, pwd propre, cd persistant, hostname,
-lignes vides, commandes inconnues, cd invalide, gsh goal, gsh help auto, man départ,
-Bloom FR, footer gsh help, carte ASCII, double définition, mission suivante, exit, gsh reset.
-
-## RÈGLE 4m — Le check matche sur la commande de BASE (OBLIGATOIRE)
-
-Quand une mission requiert `ls -la`, le check `command_executed` doit matcher si le joueur a tapé `ls` (commande de base), pas uniquement `ls -la`.
-- Comparer `split_whitespace().next()` des deux côtés
-- Jamais bloquer un joueur qui a fait la bonne commande avec d'autres arguments
-- Test: mission avec `ls -la` requise, joueur tape `ls` → gsh check doit passer le check ls
+## RÈGLE E3 — Dépôt git
+- Branche: **master**. Remote: `https://github.com/fpich/gameshell.git`.
+- Commit avec le heredoc Mistral Vibe standard. Push sur `origin master`.
