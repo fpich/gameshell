@@ -287,15 +287,15 @@ impl Game {
             println!("\n  {} {}", "╭".yellow(), "─".repeat(60).yellow());
             println!("  {}  📡 MISSION {} — {}", "│".yellow(), m.id.black().bold().bold(), m.title.bright_yellow().bold());
             println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
-            // Histoire avec wrapping à 60 colonnes pour tenir dans le cadre
-            for line in m.story.lines() {
-                if line.is_empty() {
-                    println!("  {}  ", "│".yellow());
-                } else {
-                    for chunk in wrap_text(line, 58) {
-                        println!("  {}  {}", "│".yellow(), chunk.normal());
-                    }
+            // Histoire avec wrapping, limitée à 8 lignes pour tenir dans un écran 24 lignes
+            let wrapped: Vec<String> = m.story.lines().flat_map(|l| wrap_text(l, 58)).collect();
+            let max_story = 5;
+            for (i, chunk) in wrapped.iter().enumerate() {
+                if i >= max_story {
+                    println!("  {}  {} … (suite avec 'gsh goal')", "│".yellow(), "…".normal());
+                    break;
                 }
+                println!("  {}  {}", "│".yellow(), chunk.normal());
             }
             println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
             // Carte ASCII de la mission (règle 4h - OBLIGATOIRE)
