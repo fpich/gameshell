@@ -44,6 +44,14 @@ Règles de wording:
 - Jamais dire juste "commandes" seul quand ça peut prêter à confusion
 - Dans gsh help, regrouper clairement: section "COMMANDES DU JEU (gsh)" et mention "les commandes shell (pwd, ls...) s'utilisent normalement"
 
+## RÈGLE 4k — gsh goal = show_mission + compétence de départ = man (OBLIGATOIRE)
+
+- `gsh goal` doit réafficher EXACTEMENT le même cadre que le début de mission (appelle `show_mission()`)
+- La syntaxe shell dans gsh help = 2 lignes génériques uniquement:
+  `COMMANDE` / `COMMANDE argument` / `COMMANDE -option argument` / `man COMMANDE`
+- La première compétence débloquée (mission 1.1) doit être **man**
+- `man COMMANDE` est autorisé dans toutes les missions
+
 ## RÈGLE 4j — Ne pas donner la réponse (OBLIGATOIRE)
 
 Les missions ne doivent PAS dire explicitement quelle commande utiliser dans l'objectif.

@@ -110,6 +110,10 @@ impl Game {
                     println!("bash: cd: {}: No such file or directory", arg);
                 }
             }
+            "man" => {
+                let arg = parts.get(1).copied().unwrap_or("");
+                println!("Manuel de '{}': voir gsh help pour la syntaxe générale (COMMANDE, COMMANDE arg, COMMANDE -option arg)", arg);
+            }
             "pwd" => println!("{}", self.display_path(&self.current_dir)),
             "hostname" => println!("orion7"),
             "whoami" => println!("capitaine"),
@@ -146,6 +150,7 @@ impl Game {
     fn cmd_brief(cmd: &str) -> (&'static str, &'static str) {
         let base = cmd.split_whitespace().next().unwrap_or(cmd);
         match base {
+            "man" => ("affiche le manuel complet d'une commande (ex: man ls)", "comme ouvrir le mode d'emploi d'un équipement du vaisseau avant de l'utiliser"),
             "pwd" => ("affiche le chemin du répertoire courant", "comme demander à l'ordinateur de bord 'Dans quel compartiment du vaisseau suis-je exactement?'"),
             "ls" => ("liste les fichiers et dossiers du répertoire courant", "comme allumer la lumière dans le compartiment où vous êtes pour voir tout ce qu'il contient"),
             "cd" => ("change de répertoire (cd /pont, cd .., cd ~)", "comme emprunter les coursives du vaisseau pour aller d'un compartiment à un autre (ex: de votre cabine au pont)"),
@@ -207,42 +212,17 @@ impl Game {
         println!("    gsh skills  — voir les compétences shell acquises");
         println!("    gsh help    — cette aide");
         println!("    exit        — quitter le jeu");
-        println!("\n  💻 COMMANDES SHELL (avec exemples d'arguments):");
-        println!("    pwd                    ls, ls -la, ls -l");
-        println!("    cd /pont  cd ..  cd ~  cat bienvenue.txt");
-        println!("    touch fichier.txt      mkdir -p a/b/c");
-        println!("    cp src dest            mv old new     rm fichier");
-        println!("    grep motif fichier     find / -name *.log");
-        println!("    chmod 600 fichier      chown user fichier");
-        println!("    ps aux                 top -bn1       systemctl status ssh");
-        println!("    kill 9999              nice -n 10 cmd");
-        println!("    ip addr                ping -c 4 host  ss -tlnp");
-        println!("    sudo ufw status        ssh user@host");
-        println!("    tar czf a.tar.gz dir/  zip -r a.zip dir/");
-        println!("    df -h                  du -sh dir/    mount");
-        println!("    sudo apt update        sudo apt install -y paquet");
-        println!("    sudo useradd -m user   sudo passwd user");
-        println!("    su - user              journalctl -n 20");
-        println!("    cmd1 | grep motif      cmd > fichier  cmd >> fichier");
-        println!("    fail2ban-client status  iptables -L   auditctl -l");
-        println!("    sudo chroot /chemin /bin/bash\n");
+        println!("\n  💻 COMMANDES SHELL — syntaxe générale:");
+        println!("    COMMANDE                  → exécute la commande seule (ex: pwd)");
+        println!("    COMMANDE argument         → avec un argument (ex: ls /pont)");
+        println!("    COMMANDE -option argument → avec une option (ex: ls -la /pont)");
+        println!("    man COMMANDE              → affiche le manuel de la commande");
+        println!("    COMMANDE | COMMANDE       → chaîne deux commandes");
+        println!("    COMMANDE > fichier        → redirige la sortie vers un fichier\n");
     }
 
     fn cmd_goal(&self) {
-        if let Some(m) = self.missions.get(self.current_mission) {
-            println!("\n  🎯 Mission {} — {}", m.id, m.title);
-            println!("  {}", m.story);
-            println!("  Objectif: {}", m.goal);
-            println!("  Commandes:");
-            for c in &m.required_commands {
-                let (tech, rp) = Self::cmd_brief(c);
-                println!("    {} | 🚀 {} | 💻 {}", c, rp, tech);
-            }
-            if let Some(code) = &m.code_required {
-                println!("  🔐 Un code sera demandé à la validation.");
-            }
-            println!();
-        }
+        self.show_mission();
     }
 
     fn cmd_check(&mut self) -> bool {
