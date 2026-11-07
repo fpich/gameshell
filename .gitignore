@@ -18,3 +18,4 @@ Cargo.lock
 # Logs et état
 *.log
 state/
+src/missions/generated.rs

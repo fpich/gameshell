@@ -2,6 +2,7 @@
 pub mod types;
 pub mod acts;
 pub mod generator;
+pub mod generated;
 pub mod chapters {
     pub mod ch1;
     pub mod ch2;
@@ -18,11 +19,14 @@ pub mod chapters {
 pub use types::*;
 
 pub fn load_all_missions() -> Vec<Mission> {
-    // Mode génération procédurale si GAMESHELL_MISSIONS défini (ex: 5000)
+    // Mode 5000 missions EN DUR (compilées dans le binaire, 100% offline, sans LLM)
+    if std::env::var("GAMESHELL_MISSIONS").map(|v| v == "all" || v == "500").unwrap_or(false) {
+        return generated::generated_missions();
+    }
+    // Mode génération procédurale runtime si demandé
     if let Ok(n) = std::env::var("GAMESHELL_MISSIONS") {
         if let Ok(count) = n.parse::<usize>() {
-            if count > 50 {
-                eprintln!("🎲 Génération procédurale de {} missions...", count);
+            if count > 50 && count != 5000 {
                 return generator::generate(count);
             }
         }

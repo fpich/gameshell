@@ -84,7 +84,7 @@ Tout le jeu se déroule dans `~/.gameshell/vaisseau/`. Les chemins absolus `/...
 ### Mode procédural: jusqu'à 5000 missions (voir PLAN.md)
 
 ```bash
-GAMESHELL_MISSIONS=5000 ./gameshell.sh
+GAMESHELL_MISSIONS=all ./gameshell.sh   # 500 missions en dur (embarquées, offline)
 ```
 
 Générateur déterministe (seed=42) produisant des missions cohérentes par actes:

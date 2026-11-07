@@ -48,7 +48,7 @@ struct CmdTemplate {
 static TEMPLATES: &[CmdTemplate] = &[
     CmdTemplate {
         cmd: "pwd", bloom_levels: &["Se souvenir", "Comprendre"],
-        contexts: &["Marie veut savoir où vous êtes", "Jean vérifie votre position", "Sophie synchronise les consoles"],
+        contexts: &["Zyra-7 veut savoir où vous êtes", "Draz M'kal vérifie votre position", "Nira Okoro synchronise les consoles"],
         targets: &["~/", "/pont/", "/cabines/capitaine/"],
         goals: &["Montrez où vous êtes dans le vaisseau", "Indiquez votre position exacte à l'équipage"],
         check_type: "command_executed", file_target: None,
@@ -318,7 +318,16 @@ pub fn generate(count: usize) -> Vec<Mission> {
 }
 
 fn generate_story(rng: &mut Rng, act: &Act, ctx: &str, target: &str, cmd: &str) -> String {
-    let pnjs = ["Marie l'ingénieur", "Jean l'officier sécurité", "Sophie des communications", "Pierre le mécanicien", "l'Amiral Kowalski"];
+    let pnjs = [
+        "Zyra-7, l'IA de bord",
+        "Commandant Vex Korshun",
+        "Lieutenant Nira Okoro (communications)",
+        "Ingénieur-chef Tael Rhen (machines)",
+        "Officier sécurité Draz M'kal",
+        "Amiral Xylia Vorn du Galactica",
+        "Mécanicien Boz Tark",
+        "Medic-IA Andromède",
+    ];
     let pnj: &str = pnjs[rng.below(pnjs.len())];
     format!(
         "Acte {} — {}.\n\n{} vous contacte: « {} ». La situation à bord d'Orion-7 est tendue: {}\n\nLe compartiment concerné est {}. Les Corbeaux Noirs rôdent dans le secteur 7G\net chaque seconde compte. L'équipage de 5 personnes compte sur vous, Capitaine.\n\nPour avancer, vous devez utiliser vos outils de terminal. La commande adaptée à cette situation\nest disponible dans votre console. Consultez 'gsh help' si besoin, ou 'man {}' pour le manuel.\n\nN'oubliez pas: dans l'espace, la préparation et la précision font la différence entre\nla victoire et la défaite. Bonne chance, Capitaine.",
