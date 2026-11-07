@@ -306,7 +306,7 @@ impl Game {
                 println!("  ┃  🔐 Un code sera demandé à la validation (gsh check)");
             }
             println!("  ┣{}", "━".repeat(w).yellow());
-            println!("  ┃  🏆 {} XP  │  🧠 Bloom [{}]  │  gsh help", m.xp_reward, m.bloom_level);
+            println!("  ┃  🏆 {} XP  │  🧠 Bloom [{}]  │  'gsh check' valider  │  gsh help", m.xp_reward, m.bloom_level);
             println!("  ┗{}", "━".repeat(w).yellow());
             println!();
             println!("  📊 {} {}/50 missions  │  ⭐ Niv {}  │  💫 {} XP  │  🎖️ {} skills\n",
@@ -325,10 +325,13 @@ impl Game {
 
         for check in &m.checks {
             let ok = match check.check_type.as_str() {
-                "command_executed" => history.iter().any(|c| {
-                    let b = c.split_whitespace().next().unwrap_or("");
-                    b == check.target || c.starts_with(&check.target)
-                }),
+                "command_executed" => {
+                    let target_base = check.target.split_whitespace().next().unwrap_or(&check.target);
+                    history.iter().any(|c| {
+                        let b = c.split_whitespace().next().unwrap_or("");
+                        b == target_base  // match sur la commande de base (ls matche ls -la)
+                    })
+                },
                 "file_read" => {
                     let fname = check.target.rsplit('/').next().unwrap_or(&check.target);
                     history.iter().any(|c| c.contains(fname))
