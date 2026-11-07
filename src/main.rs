@@ -36,35 +36,28 @@ fn print_banner() {
     print!("\x1b[2J\x1b[H");
     io::stdout().flush().ok();
 
-    // Vaisseau ORION-7 vu de DESSUS — carte spatiale 80x24
-    let vaisseau = r#"
-              .    *        .    *    .    *    .
-    .    .         .                   .     .        .
-         .    .        _______              .    .
-   .          .      /       \      .           .   .
-          .     .   |  PONT   |   .    .    .
-    .    .         |  [■■■]   |        .         .    .
-         .    .    |_________|   .        .    .
-   .         .   /|CABINES|\        .   .
-          .      | | SOUTES| |   .        .    .
-     .    .      | |_______| |  .     .       .
-         .      |/  REACTEUR \|      .   .
-    .        .  |   SECURITE  | .        .    .
-          .     |   ARMES     |    .        .
-     .    .     |___________|  .    .
-         .    . /  HANGAR    \ .       .   .
-   .        . /_______________\   .
-          .      |  |   |  |      .    .
-    .    .   '--'   |   |   '--'     .    .
-             .   '--'   |   '--'   .
-        .        '--== PROPULSEURS ==--'   .
-              .    *    .    *    .   *    .
+    // Espace étoilé avec titre du jeu — pas de vaisseau
+    let espace = r#"
+        .    *       .        *     .        *    .
+   .         .           .          .    *
+      *    .     .   .        .         .       .   *
+         .    .         *    .    .         *
+   .  *       .    .         .       .  *      .
+        .         .    .  *     .        .         *
+      .    *  .       .       .    *   .     .
+   .       .     *       .         .       .    *
+        *    .      .  .    *  .       .  *
+   .       .   *        .       .  .       .    *
 
-   COQUE: [■■■■■■■■□□□]  BOUCLIERS: [■■■■□□□□□□]  FUEL: [■■■■■■■□□]
+              ╔══════════════════════════════════╗
+              ║                                  ║
+              ║   🏴‍☠️  LES PIRATES DE L'ESPACE  🏴‍☠️   ║
+              ║                                  ║
+              ║      Mission SISR — Orion-7      ║
+              ║                                  ║
+              ╚══════════════════════════════════╝
 "#;
-    println!("{}", vaisseau.green());
-    println!();
-    println!("{}", "  ══════ LES PIRATES DE L'ESPACE — MISSION SISR ══════".bright_yellow().bold());
+    println!("{}", espace.green());
     println!();
 }
 
