@@ -64,7 +64,9 @@ Tout le jeu se déroule dans `~/.gameshell/vaisseau/`. Les chemins absolus `/...
 
 ---
 
-## 📚 Les 50 missions — 10 chapitres, 5 actes
+## 📚 Missions — 50 manuelles + génération procédurale jusqu'à 5000
+
+### Mode par défaut: 50 missions manuelles (10 chapitres × 5 actes)
 
 | Chapitre | Acte | Thème | Compétences débloquées |
 |----------|------|-------|----------------------|
@@ -78,6 +80,20 @@ Tout le jeu se déroule dans `~/.gameshell/vaisseau/`. Les chemins absolus `/...
 | 8 | IV | Gestion de l'équipage | useradd, groupadd, passwd, su, sudo |
 | 9 | V | Maintenance | apt, dpkg, systemctl restart, journalctl |
 | 10 | V | Durcissement final | fail2ban, ssh durci, iptables, auditctl, chroot |
+
+### Mode procédural: jusqu'à 5000 missions (voir PLAN.md)
+
+```bash
+GAMESHELL_MISSIONS=5000 ./gameshell.sh
+```
+
+Générateur déterministe (seed=42) produisant des missions cohérentes par actes:
+- **5 actes narratifs** avec montée en compétences (I=découverte → V=durcissement)
+- **Templates de 20 commandes** × contextes RP × cibles vaisseau × niveaux Bloom
+- Chaque mission générée respecte les règles AGENTS.md (20+ lignes story, carte ASCII, double définition 🚀💻, objectif narratif...)
+- IDs uniques, Bloom varié par acte (Se souvenir → Créer)
+
+Voir `PLAN.md` pour le plan d'action complet.
 
 Chaque mission affiche:
 - **Story complète** (20+ lignes de contexte narratif obligatoire)

@@ -1,5 +1,7 @@
 //! Système de missions - Agrège tous les chapitres
 pub mod types;
+pub mod acts;
+pub mod generator;
 pub mod chapters {
     pub mod ch1;
     pub mod ch2;
@@ -16,6 +18,16 @@ pub mod chapters {
 pub use types::*;
 
 pub fn load_all_missions() -> Vec<Mission> {
+    // Mode génération procédurale si GAMESHELL_MISSIONS défini (ex: 5000)
+    if let Ok(n) = std::env::var("GAMESHELL_MISSIONS") {
+        if let Ok(count) = n.parse::<usize>() {
+            if count > 50 {
+                eprintln!("🎲 Génération procédurale de {} missions...", count);
+                return generator::generate(count);
+            }
+        }
+    }
+    // Mode par défaut: 50 missions manuelles
     let mut missions = Vec::new();
     missions.extend(chapters::ch1::missions());
     missions.extend(chapters::ch2::missions());
