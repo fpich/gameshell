@@ -23,7 +23,7 @@ Votre mission: Un nouvel arrivant rejoint l'équipage. Il lui faut un compte sur
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo useradd -m -s /bin/bash matelot + id matelot.".into(),
+            goal: "Un nouvel arrivant monte à bord. Créez-lui son badge d'accès.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Creer un user?".into(),
             required_commands: vec!["sudo useradd -m matelot".into(), "id".into()],
@@ -54,7 +54,7 @@ Votre mission: Pour gérer les accès collectifs, il faut créer un groupe d'éq
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo groupadd equipage + usermod -aG.".into(),
+            goal: "Créez une équipe 'equipage' et mettez le nouveau dedans.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Creer un groupe?".into(),
             required_commands: vec!["sudo groupadd equipage".into(), "usermod".into()],
@@ -85,7 +85,7 @@ Votre mission: Le compte matelot n'a pas de mot de passe. C'est une faille de s�
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo passwd matelot.".into(),
+            goal: "Le badge du nouveau n'a pas de code. Sécurisez-le.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Changer un MDP?".into(),
             required_commands: vec!["sudo passwd matelot".into()],
@@ -116,7 +116,7 @@ Votre mission: Il faut tester que le compte matelot fonctionne correctement.
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "su - matelot -c whoami.".into(),
+            goal: "Testez que le nouveau badge fonctionne bien.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Changer d'user?".into(),
             required_commands: vec!["su - matelot -c whoami".into()],
@@ -147,7 +147,7 @@ Votre mission: En tant que capitaine, vous devez connaître vos pouvoirs sudo.
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo whoami + sudo -l.".into(),
+            goal: "Montrez que vous avez bien les pouvoirs du capitaine.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Executer en root?".into(),
             required_commands: vec!["sudo whoami".into()],

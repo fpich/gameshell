@@ -23,7 +23,7 @@ Votre mission: Avant la contre-attaque, il faut archiver tous les logs comme pre
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "tar czf ~/logs.tar.gz /securite/logs/.".into(),
+            goal: "Avant la contre-attaque, archivez tous les logs comme preuves.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Creer une archive?".into(),
             required_commands: vec!["tar czf archive.tar.gz dossier/".into()],
@@ -54,7 +54,7 @@ Votre mission: Le Galactica demande les rapports au format ZIP pour compatibilit
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "zip -r ~/rapports.zip ~.".into(),
+            goal: "Le Galactica demande vos rapports au format ZIP. Compressez-les.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Faire un ZIP?".into(),
             required_commands: vec!["zip -r archive.zip dossier/".into()],
@@ -85,7 +85,7 @@ Votre mission: Avant d'archiver, vérifiez qu'il reste assez d'espace dans les s
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "df -h.".into(),
+            goal: "Vérifiez qu'il reste assez de place dans les soutes avant d'archiver.".into(),
             bloom_level: "Understand".into(),
             bloom_question: "Voir l'espace disque?".into(),
             required_commands: vec!["df -h".into()],
@@ -116,7 +116,7 @@ Votre mission: Quelle soute prend le plus de place? Il faut le savoir pour optim
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "du -sh /securite/*.".into(),
+            goal: "Quelle soute est la plus pleine? Pesmez-les.".into(),
             bloom_level: "Analyze".into(),
             bloom_question: "Taille des dossiers?".into(),
             required_commands: vec!["du -sh dossier/".into()],
@@ -147,7 +147,7 @@ Votre mission: Quels disques sont physiquement connectés à la station?
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "mount ou lsblk.".into(),
+            goal: "Quels disques sont physiquement connectés à la station?".into(),
             bloom_level: "Understand".into(),
             bloom_question: "Voir les partitions?".into(),
             required_commands: vec!["mount".into()],

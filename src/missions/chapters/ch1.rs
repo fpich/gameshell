@@ -20,7 +20,7 @@ Dites-moi où vous êtes exactement dans le vaisseau, qu'on puisse synchroniser 
 
 Elle a besoin de savoir votre position exacte pour calibrer les écrans du pont de commandement.
 Sans cette information, elle ne peut pas vous donner accès aux systèmes de défense.".into(),
-            goal: "Affichez votre position (pwd) et listez les compartiments de votre cabine (ls). Validez avec gsh check.".into(),
+            goal: "Marie attend votre réponse à l'intercom. Montrez-lui où vous êtes et ce qui vous entoure.".into(),
             bloom_level: "Remember".into(),
             bloom_question: "Quelle commande affiche le repertoire courant?".into(),
             required_commands: vec!["pwd".into(), "ls -la".into()],
@@ -49,7 +49,7 @@ Marie insiste: « Lisez-le attentivement, Capitaine. La station a déjà subi de
 Chaque membre d'équipage doit connaître les bases. »
 
 Vous ouvrez le fichier pour en lire le contenu.".into(),
-            goal: "Lisez bienvenue.txt de votre cabine.".into(),
+            goal: "Marie vous demande de lire le guide de survie posé sur votre bureau avant toute chose.".into(),
             bloom_level: "Understand".into(),
             bloom_question: "Comment lire un fichier?".into(),
             required_commands: vec!["cat bienvenue.txt".into()],
@@ -78,7 +78,7 @@ Sophie vous indique le chemin: le message est stocké dans le compartiment commu
 sous-compartiment messages, fichier dernier_message.txt.
 
 « Dépêchez-vous, Capitaine. Chaque seconde compte. »".into(),
-            goal: "Allez dans /communications/messages/ et lisez dernier_message.txt.".into(),
+            goal: "Sophie vous a dit où trouver le message de l'Amiral. Allez le lire et dites-nous ce qu'il contient.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Comment aller dans un dossier precis?".into(),
             required_commands: vec!["cd /pont".into(), "cat bienvenue.txt".into()],
@@ -108,7 +108,7 @@ Jean vous demande de prouver qui vous êtes:
 
 « Sans ça, je ne peux pas désactiver les verrouillages des portes du pont de commandement,
 confirme Jean. Et avec les pirates qui approchent, on n'a pas de temps à perdre. »".into(),
-            goal: "Affichez hostname, whoami, id.".into(),
+            goal: "Jean ne vous laissera pas monter au pont sans vérifier qui vous êtes. Prouvez votre identité.".into(),
             bloom_level: "Remember".into(),
             bloom_question: "Quelles commandes donnent hostname/user/groups?".into(),
             required_commands: vec!["hostname".into(), "whoami".into(), "id".into()],
@@ -134,7 +134,7 @@ avec les événements réels. L'Amiral Kowalski exige des horodatages fiables po
 « Vérifiez l'heure système, Capitaine. Dites-moi si elle est correcte. »
 
 Vous consultez l'horloge du système de la station.".into(),
-            goal: "Affichez date et heure (date).".into(),
+            goal: "Vérifiez que l'horloge de bord est bien réglée avant de commencer l'enquête.".into(),
             bloom_level: "Remember".into(),
             bloom_question: "Quelle commande donne date/heure?".into(),
             required_commands: vec!["date".into()],

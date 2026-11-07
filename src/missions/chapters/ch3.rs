@@ -23,7 +23,7 @@ Votre mission: Jean vous explique que chaque fichier du vaisseau a des permissio
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Affichez les permissions de votre cabine (ls -l, ls -la).".into(),
+            goal: "Jean vous explique que chaque fichier a des permissions. Regardez celles de votre cabine.".into(),
             bloom_level: "Understand".into(),
             bloom_question: "Que signifient rwx?".into(),
             required_commands: vec!["ls -l".into(), "ls -la".into()],
@@ -54,7 +54,7 @@ Votre mission: Votre code personnel FALCON-9 est dans un fichier lisible par tou
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Mettez ~/notes.txt en 600 (chmod 600).".into(),
+            goal: "Votre code personnel ne doit être lisible que par vous. Protégez ce fichier.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Restreindre au proprio seul?".into(),
             required_commands: vec!["chmod 600 fichier".into()],
@@ -85,7 +85,7 @@ Votre mission: Le plan de défense plan_defense.sh ne peut pas s'exécuter. Il l
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Rendez ~/plan_defense.sh executable (chmod +x).".into(),
+            goal: "Le plan de défense ne peut pas se lancer. Il lui manque quelque chose. Corrigez.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Comment ajouter +x?".into(),
             required_commands: vec!["chmod 600 fichier".into()],
@@ -116,7 +116,7 @@ Votre mission: Un fichier appartient à root. Vous devez en prendre la responsab
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo chown capitaine sur un fichier.".into(),
+            goal: "Un fichier appartient encore à l'ancien admin. Transférez-le à votre nom.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Comment changer le proprio?".into(),
             required_commands: vec!["chown capitaine fichier".into()],
@@ -147,7 +147,7 @@ Votre mission: Pour détecter une intrusion, comparez les dates de modification 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "stat sur /securite/logs/auth.log.".into(),
+            goal: "Comparez les dates de modification des fichiers de sécurité pour détecter une intrusion.".into(),
             bloom_level: "Analyze".into(),
             bloom_question: "stat vs ls -l?".into(),
             required_commands: vec!["stat fichier".into()],

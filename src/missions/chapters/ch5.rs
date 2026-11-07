@@ -23,7 +23,7 @@ Votre mission: Jean veut le nombre exact de tentatives d'intrusion SSH pour éva
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "grep -c Failed /securite/logs/auth.log.".into(),
+            goal: "Jean veut savoir combien de fois les pirates ont tenté de rentrer. Comptez dans les logs.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Compter les occurrences?".into(),
             required_commands: vec!["grep Failed auth.log".into()],
@@ -54,7 +54,7 @@ Votre mission: Quels fichiers de logs existent sur le vaisseau? Où chercher les
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "find /securite -name *.log.".into(),
+            goal: "Où sont stockés tous les logs de la station? Faites l'inventaire.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Chercher par extension?".into(),
             required_commands: vec!["find /securite -name *.log".into()],
@@ -85,7 +85,7 @@ Votre mission: Il faut combiner plusieurs outils pour analyser rapidement la sit
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "ps aux | grep ssh et cat syslog | grep UFW.".into(),
+            goal: "Combinez vos outils pour voir à la fois les processus SSH et les IPs bloquées.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Chainer des commandes?".into(),
             required_commands: vec!["ps aux | grep ssh".into()],
@@ -116,7 +116,7 @@ Votre mission: Toutes les traces des pirates doivent être consignées dans un r
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "grep Failed auth.log > ~/rapport.txt.".into(),
+            goal: "Toutes les tentatives d'intrusion doivent être consignées dans un rapport.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Sauvegarder dans un fichier?".into(),
             required_commands: vec!["grep Failed auth.log > rapport.txt".into()],
@@ -147,7 +147,7 @@ Votre mission: Le rapport doit être complété avec les IPs bloquées par le pa
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "grep UFW syslog >> ~/rapport.txt.".into(),
+            goal: "Ajoutez aussi les IPs que le pare-feu a bloquées au même rapport.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Ajouter a un fichier?".into(),
             required_commands: vec!["grep UFW syslog >> rapport.txt".into()],

@@ -23,7 +23,7 @@ Votre mission: Les pirates reviennent sans cesse. fail2ban les bannira automatiq
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "apt install fail2ban + enable + start + status.".into(),
+            goal: "Les pirates reviennent sans cesse. Il faut un videur automatique.".into(),
             bloom_level: "Create".into(),
             bloom_question: "Automatiser le bannissement?".into(),
             required_commands: vec!["sudo fail2ban-client status".into()],
@@ -54,7 +54,7 @@ Votre mission: SSH est vulnérable: root autorisé + mots de passe autorisés = 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Modifiez /securite/config/sshd_config: PermitRootLogin no + PasswordAuthentication no.".into(),
+            goal: "Fermez la porte aux attaques: plus de root, plus de mots de passe en SSH.".into(),
             bloom_level: "Create".into(),
             bloom_question: "Securiser SSH?".into(),
             required_commands: vec!["nano /securite/config/sshd_config".into()],
@@ -85,7 +85,7 @@ Votre mission: Au-delà d'UFW, iptables permet de limiter le débit de connexion
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "iptables -A INPUT ... + iptables -L.".into(),
+            goal: "Limitez les connexions SSH au strict minimum avec le pare-feu noyau.".into(),
             bloom_level: "Create".into(),
             bloom_question: "Limiter les connexions?".into(),
             required_commands: vec!["sudo iptables -L -n".into()],
@@ -116,7 +116,7 @@ Votre mission: Si un pirate crée un compte, il faut le détecter. Auditez passw
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "auditctl -w /etc/passwd -p wa -k modifs + auditctl -l.".into(),
+            goal: "Si un pirate crée un compte, il faut le savoir. Mettez en place la surveillance.".into(),
             bloom_level: "Create".into(),
             bloom_question: "Tracer les modifications?".into(),
             required_commands: vec!["sudo auditctl -l".into()],
@@ -147,7 +147,7 @@ Votre mission: Dernière barrière: isolez un processus dans un chroot pour le c
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Creez /soutes/chroot/ + sudo chroot.".into(),
+            goal: "Dernière barrière: enfermez un processus dans une cellule d'isolement.".into(),
             bloom_level: "Create".into(),
             bloom_question: "Isoler un processus?".into(),
             required_commands: vec!["sudo chroot /soutes/chroot /bin/bash".into()],

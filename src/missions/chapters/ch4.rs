@@ -23,7 +23,7 @@ Votre mission: Pierre entend des bruits bizarres dans les coursives. Des process
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "ps aux.".into(),
+            goal: "Pierre entend des bruits bizarres. Vérifiez quels systèmes tournent actuellement.".into(),
             bloom_level: "Understand".into(),
             bloom_question: "Voir tous les processus?".into(),
             required_commands: vec!["ps aux".into()],
@@ -54,7 +54,7 @@ Votre mission: La station ralentit. Les boucliers consomment trop de ressources.
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "top -bn1.".into(),
+            goal: "La station ralentit. Surveillez les ressources pour comprendre pourquoi.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Surveiller les ressources?".into(),
             required_commands: vec!["top -bn1".into()],
@@ -85,7 +85,7 @@ Votre mission: Jean veut vérifier que tous les services de sécurité sont bien
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "systemctl status ssh + list-units.".into(),
+            goal: "Jean veut savoir si tous les services de sécurité sont bien en marche.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Gerer les services?".into(),
             required_commands: vec!["systemctl status ssh".into()],
@@ -116,7 +116,7 @@ Votre mission: ALERTE ROUGE! Un processus backdoor (PID 9999) a été détecté.
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "kill 9999.".into(),
+            goal: "Un système pirate a pris le contrôle! Éliminez-le immédiatement!".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Tuer un processus?".into(),
             required_commands: vec!["kill 9999".into()],
@@ -147,7 +147,7 @@ Votre mission: Le scan de sécurité doit être prioritaire face à l'attaque im
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "nice -n 10 sleep 100 & + ps -l.".into(),
+            goal: "Le scan de sécurité est prioritaire en ce moment. Lancez-le en priorité.".into(),
             bloom_level: "Understand".into(),
             bloom_question: "Changer la priorite?".into(),
             required_commands: vec!["nice -n 10 commande".into()],

@@ -307,14 +307,13 @@ impl Game {
             for chunk in &wrapped {
                 println!("  ┃  {}", chunk.normal());
             }
-            println!("  ┣{}", "━".repeat(w).yellow());
-            println!("  ┃  🗺️  CARTE (vue de dessus):");
+            println!("  ┃{}", "─".repeat(w).normal());
             for ml in m.map.lines() {
                 println!("  ┃  {}", ml.green());
             }
-            println!("  ┣{}", "━".repeat(w).yellow());
+            println!("  ┃{}", "─".repeat(w).normal());
             for chunk in wrap_text(&m.goal, w - 6) {
-                println!("  ┃  🎯 {}", chunk.black().bold());
+                println!("  ┃  {}", chunk.black().bold());
             }
             println!("  ┣{}", "━".repeat(w).yellow());
             println!("  ┃  🆕 Commandes SHELL (avec exemples d'arguments):");

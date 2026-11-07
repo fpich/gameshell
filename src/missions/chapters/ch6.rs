@@ -23,7 +23,7 @@ Votre mission: Sophie a besoin de l'adresse IP du vaisseau pour configurer les c
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "ip addr + ip route.".into(),
+            goal: "Sophie a besoin de nos coordonnées réseau pour régler les communications.".into(),
             bloom_level: "Understand".into(),
             bloom_question: "Voir l'IP?".into(),
             required_commands: vec!["ip addr".into()],
@@ -54,7 +54,7 @@ Votre mission: Peut-on encore contacter la Terre et le Galactica? La liaison est
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "ping -c 4 127.0.0.1.".into(),
+            goal: "Vérifiez qu'on peut encore contacter le Galactica.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Tester une connexion?".into(),
             required_commands: vec!["ping -c 4 127.0.0.1".into()],
@@ -85,7 +85,7 @@ Votre mission: Le pare-feu UFW semble inactif. Sans lui, les pirates entrent lib
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo ufw status.".into(),
+            goal: "Le pare-feu est-il vraiment actif? Jean en doute. Vérifiez.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Etat du pare-feu?".into(),
             required_commands: vec!["sudo ufw status".into()],
@@ -116,7 +116,7 @@ Votre mission: Il faut tester le canal SSH pour vérifier qu'il fonctionne avant
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "ssh capitaine@localhost hostname.".into(),
+            goal: "Testez le canal sécurisé avec la station elle-même.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Se connecter en SSH?".into(),
             required_commands: vec!["ssh capitaine@localhost".into()],
@@ -147,7 +147,7 @@ Votre mission: Quels ports sont exposés? Les pirates scannent nos défenses ré
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "ss -tlnp.".into(),
+            goal: "Quels ports de la station sont exposés? Les pirates scannent nos défenses.".into(),
             bloom_level: "Analyze".into(),
             bloom_question: "Voir les ports ouverts?".into(),
             required_commands: vec!["ss -tlnp".into()],

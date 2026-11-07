@@ -44,6 +44,16 @@ Règles de wording:
 - Jamais dire juste "commandes" seul quand ça peut prêter à confusion
 - Dans gsh help, regrouper clairement: section "COMMANDES DU JEU (gsh)" et mention "les commandes shell (pwd, ls...) s'utilisent normalement"
 
+## RÈGLE 4j — Ne pas donner la réponse (OBLIGATOIRE)
+
+Les missions ne doivent PAS dire explicitement quelle commande utiliser dans l'objectif.
+L'objectif (`goal`) doit être **narratif**: "Marie attend votre réponse", "Prouvez votre identité"...
+L'étudiant doit LIRE le contexte et DÉDUIRE quelle commande utiliser.
+- Interdit: "Affichez votre position (pwd)"
+- Autorisé: "Montrez-lui où vous êtes dans le vaisseau"
+- La carte montre OÙ on est, jamais QUELLE commande taper
+- Toute la story doit être affichée (pas de troncature) — l'étudiant doit tout lire
+
 ## RÈGLE 4h — Carte ASCII obligatoire par mission (OBLIGATOIRE)
 
 Chaque mission DOIT avoir un champ `map` contenant une **carte vue de dessus du vaisseau**

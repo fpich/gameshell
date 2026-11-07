@@ -22,7 +22,7 @@ Il ajoute: « Et n'oubliez pas, Capitaine: dans l'espace, la paperasse sauve des
 Un bon rapport peut faire la différence entre une station sauvée et une station tombée. »
 
 Vous devez créer ce fichier vide pour commencer le rapport officiel.".into(),
-            goal: "Creez incident_15jan.txt (touch) et verifiez (ls).".into(),
+            goal: "Jean a besoin d'un document vierge pour commencer le rapport d'incident de la journée.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Comment creer un fichier vide?".into(),
             required_commands: vec!["touch incident_15jan.txt".into(), "ls -la".into()],
@@ -52,7 +52,7 @@ Elle insiste sur l'option -p qui crée toute l'arborescence d'un coup,
 évitant de créer chaque dossier un par un.
 
 « Créez rapports/2024/janvier dans votre cabine, Capitaine. Une seule commande suffit. »".into(),
-            goal: "Creez ~/rapports/2024/janvier en UNE commande (mkdir -p).".into(),
+            goal: "Marie veut que vos rapports soient classés par mois. Préparez l'arborescence.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Comment creer des dossiers imbriques?".into(),
             required_commands: vec!["mkdir -p rapports/2024/janvier".into()],
@@ -82,7 +82,7 @@ Il vous donne la procédure exacte: copier le fichier depuis votre cabine
 vers le répertoire /soutes/ du vaisseau.
 
 « Faites-le maintenant, Capitaine. On ne sait jamais quand les pirates frapperont. »".into(),
-            goal: "Copiez ~/incident_15jan.txt vers /soutes/ (cp).".into(),
+            goal: "Avant toute chose, sauvegardez ce rapport dans les soutes sécurisées du vaisseau.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Comment copier un fichier?".into(),
             required_commands: vec!["cp fichier.txt /soutes/".into(), "ls -la".into()],
@@ -111,7 +111,7 @@ déplacer le fichier ET le remettre dans le bon dossier.
 et le ranger dans la bonne étagère avec la bonne étiquette, en un seul geste. »
 
 « Déplacez ~/incident_15jan.txt vers ~/rapports/2024/janvier/, Capitaine. »".into(),
-            goal: "Deplacez ~/incident_15jan.txt vers ~/rapports/2024/janvier/ (mv).".into(),
+            goal: "Ce rapport doit être rangé dans le bon dossier, au bon endroit. Déplacez-le.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Comment deplacer/renommer?".into(),
             required_commands: vec!["mv ancien.txt nouveau.txt".into()],
@@ -141,7 +141,7 @@ puis de les supprimer proprement.
 
 « rm supprime définitivement. Attention, dans l'espace, pas de corbeille:
 une fois supprimé, c'est parti pour de bon. »".into(),
-            goal: "Creez temp1.txt temp2.txt temp3.txt puis supprimez-les (rm).".into(),
+            goal: "Pierre a laissé des fichiers temporaires partout. Faites le ménage dans votre cabine.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Comment supprimer des fichiers?".into(),
             required_commands: vec!["rm temp.txt".into()],

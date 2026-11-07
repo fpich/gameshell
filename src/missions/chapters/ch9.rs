@@ -23,7 +23,7 @@ Votre mission: Les paquets de sécurité doivent être à jour contre les derni�
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo apt update.".into(),
+            goal: "Mettez à jour la liste des pièces détachées disponibles.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Rafraichir les paquets?".into(),
             required_commands: vec!["sudo apt update".into()],
@@ -54,7 +54,7 @@ Votre mission: Un outil de test est nécessaire pour vérifier le bon fonctionne
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo apt install -y cowsay + cowsay test.".into(),
+            goal: "Installez un outil pour tester les annonces de la station.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Installer un logiciel?".into(),
             required_commands: vec!["sudo apt install -y cowsay".into()],
@@ -85,7 +85,7 @@ Votre mission: Après modification de la config SSH, le service doit être redé
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo systemctl restart ssh + status.".into(),
+            goal: "La config SSH a changé, il faut recharger le service.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Redemarrer un service?".into(),
             required_commands: vec!["sudo systemctl restart ssh".into()],
@@ -116,7 +116,7 @@ Votre mission: L'historique complet de la station est dans le journal systemd. C
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo journalctl -n 20 + -u ssh.".into(),
+            goal: "Qu'est-ce qui s'est passé récemment sur la station? Consultez le journal.".into(),
             bloom_level: "Analyze".into(),
             bloom_question: "Voir les logs systemd?".into(),
             required_commands: vec!["sudo journalctl -n 20".into()],
@@ -147,7 +147,7 @@ Votre mission: Les soutes sont pleines de paquets inutiles. Nettoyez pour libér
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "sudo apt autoremove -y + apt clean + df -h.".into(),
+            goal: "Les soutes sont pleines de vieilleries. Nettoyez le système.".into(),
             bloom_level: "Apply".into(),
             bloom_question: "Nettoyer le systeme?".into(),
             required_commands: vec!["sudo apt autoremove -y".into(), "apt clean".into()],
