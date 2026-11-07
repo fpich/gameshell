@@ -207,9 +207,25 @@ impl Game {
         println!("    gsh skills  — voir les compétences shell acquises");
         println!("    gsh help    — cette aide");
         println!("    exit        — quitter le jeu");
-        println!("\n  💻 COMMANDES SHELL (s'utilisent normalement, ex: pwd, ls, cd /pont...):");
-        println!("    pwd ls cd cat touch mkdir cp mv rm grep find chmod chown");
-        println!("    ps top systemctl kill apt ssh ufw tar df du ...\n");
+        println!("\n  💻 COMMANDES SHELL (avec exemples d'arguments):");
+        println!("    pwd                    ls, ls -la, ls -l");
+        println!("    cd /pont  cd ..  cd ~  cat bienvenue.txt");
+        println!("    touch fichier.txt      mkdir -p a/b/c");
+        println!("    cp src dest            mv old new     rm fichier");
+        println!("    grep motif fichier     find / -name *.log");
+        println!("    chmod 600 fichier      chown user fichier");
+        println!("    ps aux                 top -bn1       systemctl status ssh");
+        println!("    kill 9999              nice -n 10 cmd");
+        println!("    ip addr                ping -c 4 host  ss -tlnp");
+        println!("    sudo ufw status        ssh user@host");
+        println!("    tar czf a.tar.gz dir/  zip -r a.zip dir/");
+        println!("    df -h                  du -sh dir/    mount");
+        println!("    sudo apt update        sudo apt install -y paquet");
+        println!("    sudo useradd -m user   sudo passwd user");
+        println!("    su - user              journalctl -n 20");
+        println!("    cmd1 | grep motif      cmd > fichier  cmd >> fichier");
+        println!("    fail2ban-client status  iptables -L   auditctl -l");
+        println!("    sudo chroot /chemin /bin/bash\n");
     }
 
     fn cmd_goal(&self) {
@@ -288,11 +304,7 @@ impl Game {
             println!("  ┏━ {} ━┓", format!("MISSION {} — {}", m.id, m.title).bright_yellow().bold());
             println!("  ┃{}", "━".repeat(w).yellow());
             let wrapped: Vec<String> = m.story.lines().flat_map(|l| wrap_text(l, w - 4)).collect();
-            for (i, chunk) in wrapped.iter().enumerate() {
-                if i >= 5 {
-                    println!("  ┃  {} … (suite: gsh goal)", "…".normal());
-                    break;
-                }
+            for chunk in &wrapped {
                 println!("  ┃  {}", chunk.normal());
             }
             println!("  ┣{}", "━".repeat(w).yellow());
@@ -307,8 +319,9 @@ impl Game {
             println!("  ┣{}", "━".repeat(w).yellow());
             println!("  ┃  🆕 Commandes SHELL (avec exemples d'arguments):");
             for cmd in &m.required_commands {
+                let base = cmd.split_whitespace().next().unwrap_or(cmd);
                 let (tech, rp) = Self::cmd_brief(cmd);
-                println!("  ┃    ▸ {}", cmd.bright_green().bold());
+                println!("  ┃    ▸ {}", base.bright_green().bold());
                 println!("  ┃      🚀 {}", rp.green());
                 println!("  ┃      💻 {}", tech.normal());
             }
