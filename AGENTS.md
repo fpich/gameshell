@@ -187,6 +187,12 @@ rm -rf ~/.gameshell && echo -e "Test\nls\ngsh check\nexit" | bash gameshell.sh
 - Les niveaux de Bloom s'affichent en FRANÇAIS: Se souvenir, Comprendre, Appliquer, Analyser, Évaluer, Créer
 - Le footer de mission affiche UNIQUEMENT 'gsh help' — le joueur trouve gsh check dans gsh help
 
+## RÈGLE 6 — Reset position à chaque nouvelle mission (OBLIGATOIRE)
+
+Quand une mission est validée, le joueur retourne automatiquement à sa cabine (`HOME`).
+Sinon un fichier créé dans le mauvais répertoire fait échouer la mission suivante sans que l'étudiant comprenne pourquoi.
+Test: cd /pont, valider mission, vérifier que le prompt revient à ~.
+
 ## RÈGLE 5 — Suite de tests automatisés obligatoire (OBLIGATOIRE)
 
 Avant chaque commit: `./tests/run_tests.sh` doit afficher **25/25 PASS**.

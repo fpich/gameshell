@@ -256,6 +256,8 @@ impl Game {
             self.completed.push(mid);
             self.current_mission += 1;
             self.mission_commands.clear(); // reset commandes pour la nouvelle mission
+            // Reset position: retour à la cabine (HOME) pour la nouvelle mission
+            self.current_dir = std::env::var("HOME").unwrap_or_else(|_| ".".into());
             if self.current_mission >= self.missions.len() {
                 println!("\n  🏆 FÉLICITATIONS! Orion-7 est sauvée! Niveau {} | {} XP | {} compétences", self.level, self.xp, self.skills.len());
             }
