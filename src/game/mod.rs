@@ -52,7 +52,7 @@ impl Game {
 
         loop {
             let cwd = self.display_path(&self.current_dir);
-            print!("{}@{}:{}$ ", self.player_name.bright_green(), "orion7".bright_blue(), cwd.bright_blue());
+            print!("{}@{}:{}$ ", self.player_name.bright_green(), "orion7".white(), cwd.white());
             io::stdout().flush().ok();
 
             let mut line = String::new();
@@ -279,32 +279,34 @@ impl Game {
     fn show_mission(&self) {
         if let Some(m) = self.missions.get(self.current_mission) {
             // Cadre vaisseau stylisé
-            println!("\n  {} {}", "╭".bright_magenta(), "─".repeat(66).bright_magenta());
-            println!("  {}  📡 MISSION {} — {}", "│".bright_magenta(), m.id.bright_white().bold(), m.title.bright_yellow().bold());
-            println!("  {}", &("├".bright_magenta().to_string() + &"─".repeat(66).bright_magenta().to_string()));
-            // Histoire avec indentation propre
+            println!("\n  {} {}", "╭".yellow(), "─".repeat(60).yellow());
+            println!("  {}  📡 MISSION {} — {}", "│".yellow(), m.id.bright_white().bold(), m.title.bright_yellow().bold());
+            println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
+            // Histoire avec wrapping à 60 colonnes pour tenir dans le cadre
             for line in m.story.lines() {
                 if line.is_empty() {
-                    println!("  {}  {}", "│".bright_magenta(), "");
+                    println!("  {}  ", "│".yellow());
                 } else {
-                    println!("  {}  {}", "│".bright_magenta(), line.white());
+                    for chunk in wrap_text(line, 58) {
+                        println!("  {}  {}", "│".yellow(), chunk.white());
+                    }
                 }
             }
-            println!("  {}", &("├".bright_magenta().to_string() + &"─".repeat(66).bright_magenta().to_string()));
-            println!("  {}  🎯 {}", "│".bright_magenta(), m.goal.bright_white().bold());
-            println!("  {}  🆕 Commandes à utiliser:", "│".bright_magenta());
+            println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
+            println!("  {}  🎯 {}", "│".yellow(), m.goal.bright_white().bold());
+            println!("  {}  🆕 Commandes à utiliser:", "│".yellow());
             for c in &m.required_commands {
                 let (tech, rp) = Self::cmd_brief(c);
-                println!("  {}    {} {}", "│".bright_magenta(), "▸".bright_green(), c.bright_green().bold());
-                println!("  {}      🚀 {}", "│".bright_magenta(), rp.bright_cyan());
-                println!("  {}      💻 {}", "│".bright_magenta(), tech.bright_blue());
+                println!("  {}    {} {}", "│".yellow(), "▸".bright_green(), c.bright_green().bold());
+                println!("  {}      🚀 {}", "│".yellow(), rp.green());
+                println!("  {}      💻 {}", "│".yellow(), tech.white());
             }
             if m.code_required.is_some() {
-                println!("  {}  🔐 Un code sera demandé à la validation", "│".bright_magenta());
+                println!("  {}  🔐 Un code sera demandé à la validation", "│".yellow());
             }
-            println!("  {}", &("├".bright_magenta().to_string() + &"─".repeat(66).bright_magenta().to_string()));
-            println!("  {}  🏆 {} XP  |  🧠 Bloom [{}]  |  'gsh check' 'gsh goal' 'gsh help'", "│".bright_magenta(), m.xp_reward, m.bloom_level);
-            println!("  {}", &("╰".bright_magenta().to_string() + &"─".repeat(66).bright_magenta().to_string()));
+            println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
+            println!("  {}  🏆 {} XP  |  🧠 Bloom [{}]  |  'gsh check' 'gsh goal' 'gsh help'", "│".yellow(), m.xp_reward, m.bloom_level);
+            println!("  {}", &("╰".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
             println!("\n  📊 {} {}/50 missions  │  ⭐ Niveau {}  │  💫 {} XP  │  🎖️ {} compétences\n",
                 "▰".repeat(self.completed.len().min(20)), self.completed.len(), self.level, self.xp, self.skills.len());
         }
@@ -392,7 +394,26 @@ impl Game {
         if let Some(r) = real.strip_prefix(&format!("{}/", vaisseau)) { return format!("/{}", r); }
         real.to_string()
     }
+}
 
+/// Découpe un texte en lignes de max `width` caractères (word wrap)
+fn wrap_text(text: &str, width: usize) -> Vec<String> {
+    let mut lines = Vec::new();
+    let mut current = String::new();
+    for word in text.split_whitespace() {
+        if current.len() + word.len() + 1 > width && !current.is_empty() {
+            lines.push(std::mem::take(&mut current));
+        }
+        if !current.is_empty() { current.push(' '); }
+        current.push_str(word);
+    }
+    if !current.is_empty() { lines.push(current); }
+    if lines.is_empty() { lines.push(String::new()); }
+    lines
+}
+
+impl Game {
+    #[allow(dead_code)]
     pub fn run_test_mode(&mut self) {
         println!("🧪 {} missions", self.missions.len());
         for m in &self.missions {
