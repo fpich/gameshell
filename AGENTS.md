@@ -187,6 +187,14 @@ rm -rf ~/.gameshell && echo -e "Test\nls\ngsh check\nexit" | bash gameshell.sh
 - Les niveaux de Bloom s'affichent en FRANÇAIS: Se souvenir, Comprendre, Appliquer, Analyser, Évaluer, Créer
 - Le footer de mission affiche UNIQUEMENT 'gsh help' — le joueur trouve gsh check dans gsh help
 
+## RÈGLE 5 — Suite de tests automatisés obligatoire (OBLIGATOIRE)
+
+Avant chaque commit: `./tests/run_tests.sh` doit afficher **25/25 PASS**.
+Les 25 tests couvrent: 50 missions, pas d'auto-validation, gsh check, check commande de base,
+historique reset, isolation chemins, prompt orion7, pwd propre, cd persistant, hostname,
+lignes vides, commandes inconnues, cd invalide, gsh goal, gsh help auto, man départ,
+Bloom FR, footer gsh help, carte ASCII, double définition, mission suivante, exit, gsh reset.
+
 ## RÈGLE 4m — Le check matche sur la commande de BASE (OBLIGATOIRE)
 
 Quand une mission requiert `ls -la`, le check `command_executed` doit matcher si le joueur a tapé `ls` (commande de base), pas uniquement `ls -la`.
