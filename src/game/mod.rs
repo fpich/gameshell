@@ -283,42 +283,43 @@ impl Game {
 
     fn show_mission(&self) {
         if let Some(m) = self.missions.get(self.current_mission) {
-            // Cadre vaisseau stylisé
-            println!("\n  {} {}", "╭".yellow(), "─".repeat(60).yellow());
-            println!("  {}  📡 MISSION {} — {}", "│".yellow(), m.id.black().bold().bold(), m.title.bright_yellow().bold());
-            println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
-            // Histoire avec wrapping, limitée à 8 lignes pour tenir dans un écran 24 lignes
-            let wrapped: Vec<String> = m.story.lines().flat_map(|l| wrap_text(l, 58)).collect();
-            let max_story = 5;
+            let w = 64;
+            println!();
+            println!("  ┏━ {} ━┓", format!("MISSION {} — {}", m.id, m.title).bright_yellow().bold());
+            println!("  ┃{}", "━".repeat(w).yellow());
+            let wrapped: Vec<String> = m.story.lines().flat_map(|l| wrap_text(l, w - 4)).collect();
             for (i, chunk) in wrapped.iter().enumerate() {
-                if i >= max_story {
-                    println!("  {}  {} … (suite avec 'gsh goal')", "│".yellow(), "…".normal());
+                if i >= 5 {
+                    println!("  ┃  {} … (suite: gsh goal)", "…".normal());
                     break;
                 }
-                println!("  {}  {}", "│".yellow(), chunk.normal());
+                println!("  ┃  {}", chunk.normal());
             }
-            println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
-            // Carte ASCII de la mission (règle 4h - OBLIGATOIRE)
-            println!("  {}  🗺️  CARTE DU VAISSEAU (vue de dessus):", "│".yellow());
+            println!("  ┣{}", "━".repeat(w).yellow());
+            println!("  ┃  🗺️  CARTE (vue de dessus):");
             for ml in m.map.lines() {
-                println!("  {}  {}", "│".yellow(), ml.green());
+                println!("  ┃  {}", ml.green());
             }
-            println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
-            println!("  {}  🎯 {}", "│".yellow(), m.goal.black().bold());
-            println!("  {}  🆕 Commandes SHELL à utiliser:", "│".yellow());
-            for c in &m.required_commands {
-                let (tech, rp) = Self::cmd_brief(c);
-                println!("  {}    {} {}", "│".yellow(), "▸".bright_green(), c.bright_green().bold());
-                println!("  {}      🚀 {}", "│".yellow(), rp.green());
-                println!("  {}      💻 {}", "│".yellow(), tech.normal());
+            println!("  ┣{}", "━".repeat(w).yellow());
+            for chunk in wrap_text(&m.goal, w - 6) {
+                println!("  ┃  🎯 {}", chunk.black().bold());
+            }
+            println!("  ┣{}", "━".repeat(w).yellow());
+            println!("  ┃  🆕 Commandes SHELL (avec exemples d'arguments):");
+            for cmd in &m.required_commands {
+                let (tech, rp) = Self::cmd_brief(cmd);
+                println!("  ┃    ▸ {}", cmd.bright_green().bold());
+                println!("  ┃      🚀 {}", rp.green());
+                println!("  ┃      💻 {}", tech.normal());
             }
             if m.code_required.is_some() {
-                println!("  {}  🔐 Un code sera demandé à la validation", "│".yellow());
+                println!("  ┃  🔐 Un code sera demandé à la validation (gsh check)");
             }
-            println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
-            println!("  {}  🏆 {} XP  |  🧠 Bloom [{}]  |  'gsh check' 'gsh goal' 'gsh help'", "│".yellow(), m.xp_reward, m.bloom_level);
-            println!("  {}", &("╰".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
-            println!("\n  📊 {} {}/50 missions  │  ⭐ Niveau {}  │  💫 {} XP  │  🎖️ {} compétences\n",
+            println!("  ┣{}", "━".repeat(w).yellow());
+            println!("  ┃  🏆 {} XP  │  🧠 Bloom [{}]  │  gsh check / gsh goal / gsh help", m.xp_reward, m.bloom_level);
+            println!("  ┗{}", "━".repeat(w).yellow());
+            println!();
+            println!("  📊 {} {}/50 missions  │  ⭐ Niv {}  │  💫 {} XP  │  🎖️ {} skills\n",
                 "▰".repeat(self.completed.len().min(20)), self.completed.len(), self.level, self.xp, self.skills.len());
         }
     }
