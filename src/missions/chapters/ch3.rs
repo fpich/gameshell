@@ -24,7 +24,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Jean vous explique que chaque fichier a des permissions. Regardez celles de votre cabine.".into(),
-            bloom_level: "Understand".into(),
+            bloom_level: "Comprendre".into(),
             bloom_question: "Que signifient rwx?".into(),
             required_commands: vec!["ls -l".into(), "ls -la".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ls -l".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "ls -la".into(), expected: None }],
@@ -55,7 +55,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Votre code personnel ne doit être lisible que par vous. Protégez ce fichier.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Restreindre au proprio seul?".into(),
             required_commands: vec!["chmod 600 fichier".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chmod".into(), expected: None }, MissionCheck { check_type: "permission".into(), target: "~/notes.txt".into(), expected: Some("600".into()) }],
@@ -86,7 +86,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Le plan de défense ne peut pas se lancer. Il lui manque quelque chose. Corrigez.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter +x?".into(),
             required_commands: vec!["chmod 600 fichier".into()],
             checks: vec![MissionCheck { check_type: "permission".into(), target: "~/plan_defense.sh".into(), expected: Some("+x".into()) }],
@@ -117,7 +117,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Un fichier appartient encore à l'ancien admin. Transférez-le à votre nom.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer le proprio?".into(),
             required_commands: vec!["chown capitaine fichier".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chown".into(), expected: None }],
@@ -148,7 +148,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Comparez les dates de modification des fichiers de sécurité pour détecter une intrusion.".into(),
-            bloom_level: "Analyze".into(),
+            bloom_level: "Analyser".into(),
             bloom_question: "stat vs ls -l?".into(),
             required_commands: vec!["stat fichier".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "stat".into(), expected: None }],

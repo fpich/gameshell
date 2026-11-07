@@ -23,7 +23,7 @@ Un bon rapport peut faire la différence entre une station sauvée et une statio
 
 Vous devez créer ce fichier vide pour commencer le rapport officiel.".into(),
             goal: "Jean a besoin d'un document vierge pour commencer le rapport d'incident de la journée.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Comment creer un fichier vide?".into(),
             required_commands: vec!["touch incident_15jan.txt".into(), "ls -la".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "touch".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/incident_15jan.txt".into(), expected: None }],
@@ -53,7 +53,7 @@ Elle insiste sur l'option -p qui crée toute l'arborescence d'un coup,
 
 « Créez rapports/2024/janvier dans votre cabine, Capitaine. Une seule commande suffit. »".into(),
             goal: "Marie veut que vos rapports soient classés par mois. Préparez l'arborescence.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Comment creer des dossiers imbriques?".into(),
             required_commands: vec!["mkdir -p rapports/2024/janvier".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "mkdir".into(), expected: None }, MissionCheck { check_type: "dir_exists".into(), target: "~/rapports/2024/janvier".into(), expected: None }],
@@ -83,7 +83,7 @@ vers le répertoire /soutes/ du vaisseau.
 
 « Faites-le maintenant, Capitaine. On ne sait jamais quand les pirates frapperont. »".into(),
             goal: "Avant toute chose, sauvegardez ce rapport dans les soutes sécurisées du vaisseau.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Comment copier un fichier?".into(),
             required_commands: vec!["cp fichier.txt /soutes/".into(), "ls -la".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "cp".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "/soutes/incident_15jan.txt".into(), expected: None }],
@@ -112,7 +112,7 @@ et le ranger dans la bonne étagère avec la bonne étiquette, en un seul geste.
 
 « Déplacez ~/incident_15jan.txt vers ~/rapports/2024/janvier/, Capitaine. »".into(),
             goal: "Ce rapport doit être rangé dans le bon dossier, au bon endroit. Déplacez-le.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Comment deplacer/renommer?".into(),
             required_commands: vec!["mv ancien.txt nouveau.txt".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "mv".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/rapports/2024/janvier/incident_15jan.txt".into(), expected: None }],
@@ -142,7 +142,7 @@ puis de les supprimer proprement.
 « rm supprime définitivement. Attention, dans l'espace, pas de corbeille:
 une fois supprimé, c'est parti pour de bon. »".into(),
             goal: "Pierre a laissé des fichiers temporaires partout. Faites le ménage dans votre cabine.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Comment supprimer des fichiers?".into(),
             required_commands: vec!["rm temp.txt".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "rm".into(), expected: None }],

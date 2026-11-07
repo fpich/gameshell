@@ -24,7 +24,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Sophie a besoin de nos coordonnées réseau pour régler les communications.".into(),
-            bloom_level: "Understand".into(),
+            bloom_level: "Comprendre".into(),
             bloom_question: "Voir l'IP?".into(),
             required_commands: vec!["ip addr".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ip".into(), expected: None }],
@@ -55,7 +55,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Vérifiez qu'on peut encore contacter le Galactica.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Tester une connexion?".into(),
             required_commands: vec!["ping -c 4 127.0.0.1".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ping".into(), expected: None }],
@@ -86,7 +86,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Le pare-feu est-il vraiment actif? Jean en doute. Vérifiez.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Etat du pare-feu?".into(),
             required_commands: vec!["sudo ufw status".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ufw".into(), expected: None }],
@@ -117,7 +117,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Testez le canal sécurisé avec la station elle-même.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Se connecter en SSH?".into(),
             required_commands: vec!["ssh capitaine@localhost".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ssh".into(), expected: None }],
@@ -148,7 +148,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Quels ports de la station sont exposés? Les pirates scannent nos défenses.".into(),
-            bloom_level: "Analyze".into(),
+            bloom_level: "Analyser".into(),
             bloom_question: "Voir les ports ouverts?".into(),
             required_commands: vec!["ss -tlnp".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ss".into(), expected: None }],

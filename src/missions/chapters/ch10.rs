@@ -24,7 +24,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Les pirates reviennent sans cesse. Il faut un videur automatique.".into(),
-            bloom_level: "Create".into(),
+            bloom_level: "Créer".into(),
             bloom_question: "Automatiser le bannissement?".into(),
             required_commands: vec!["sudo fail2ban-client status".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "fail2ban".into(), expected: None }],
@@ -55,7 +55,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Fermez la porte aux attaques: plus de root, plus de mots de passe en SSH.".into(),
-            bloom_level: "Create".into(),
+            bloom_level: "Créer".into(),
             bloom_question: "Securiser SSH?".into(),
             required_commands: vec!["nano /securite/config/sshd_config".into()],
             checks: vec![MissionCheck { check_type: "config_contains".into(), target: "/securite/config/sshd_config".into(), expected: Some("PermitRootLogin no".into()) }, MissionCheck { check_type: "config_contains".into(), target: "/securite/config/sshd_config".into(), expected: Some("PasswordAuthentication no".into()) }],
@@ -86,7 +86,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Limitez les connexions SSH au strict minimum avec le pare-feu noyau.".into(),
-            bloom_level: "Create".into(),
+            bloom_level: "Créer".into(),
             bloom_question: "Limiter les connexions?".into(),
             required_commands: vec!["sudo iptables -L -n".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "iptables".into(), expected: None }],
@@ -117,7 +117,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Si un pirate crée un compte, il faut le savoir. Mettez en place la surveillance.".into(),
-            bloom_level: "Create".into(),
+            bloom_level: "Créer".into(),
             bloom_question: "Tracer les modifications?".into(),
             required_commands: vec!["sudo auditctl -l".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }],
@@ -148,7 +148,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Dernière barrière: enfermez un processus dans une cellule d'isolement.".into(),
-            bloom_level: "Create".into(),
+            bloom_level: "Créer".into(),
             bloom_question: "Isoler un processus?".into(),
             required_commands: vec!["sudo chroot /soutes/chroot /bin/bash".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chroot".into(), expected: None }, MissionCheck { check_type: "dir_exists".into(), target: "/soutes/chroot".into(), expected: None }],

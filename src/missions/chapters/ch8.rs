@@ -24,7 +24,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Un nouvel arrivant monte à bord. Créez-lui son badge d'accès.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Creer un user?".into(),
             required_commands: vec!["sudo useradd -m matelot".into(), "id".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "useradd".into(), expected: None }, MissionCheck { check_type: "user_exists".into(), target: "matelot".into(), expected: None }],
@@ -55,7 +55,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Créez une équipe 'equipage' et mettez le nouveau dedans.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Creer un groupe?".into(),
             required_commands: vec!["sudo groupadd equipage".into(), "usermod".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "groupadd".into(), expected: None }, MissionCheck { check_type: "group_exists".into(), target: "equipage".into(), expected: None }],
@@ -86,7 +86,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Le badge du nouveau n'a pas de code. Sécurisez-le.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Changer un MDP?".into(),
             required_commands: vec!["sudo passwd matelot".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "passwd".into(), expected: None }],
@@ -117,7 +117,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Testez que le nouveau badge fonctionne bien.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Changer d'user?".into(),
             required_commands: vec!["su - matelot -c whoami".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "su".into(), expected: None }],
@@ -148,7 +148,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Montrez que vous avez bien les pouvoirs du capitaine.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Executer en root?".into(),
             required_commands: vec!["sudo whoami".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "sudo".into(), expected: None }],

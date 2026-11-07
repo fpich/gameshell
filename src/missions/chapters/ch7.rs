@@ -24,7 +24,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Avant la contre-attaque, archivez tous les logs comme preuves.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Creer une archive?".into(),
             required_commands: vec!["tar czf archive.tar.gz dossier/".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "tar".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/logs.tar.gz".into(), expected: None }],
@@ -55,7 +55,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Le Galactica demande vos rapports au format ZIP. Compressez-les.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Faire un ZIP?".into(),
             required_commands: vec!["zip -r archive.zip dossier/".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "zip".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/rapports.zip".into(), expected: None }],
@@ -86,7 +86,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Vérifiez qu'il reste assez de place dans les soutes avant d'archiver.".into(),
-            bloom_level: "Understand".into(),
+            bloom_level: "Comprendre".into(),
             bloom_question: "Voir l'espace disque?".into(),
             required_commands: vec!["df -h".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "df".into(), expected: None }],
@@ -117,7 +117,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Quelle soute est la plus pleine? Pesmez-les.".into(),
-            bloom_level: "Analyze".into(),
+            bloom_level: "Analyser".into(),
             bloom_question: "Taille des dossiers?".into(),
             required_commands: vec!["du -sh dossier/".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "du".into(), expected: None }],
@@ -148,7 +148,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Quels disques sont physiquement connectés à la station?".into(),
-            bloom_level: "Understand".into(),
+            bloom_level: "Comprendre".into(),
             bloom_question: "Voir les partitions?".into(),
             required_commands: vec!["mount".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "mount".into(), expected: None }],

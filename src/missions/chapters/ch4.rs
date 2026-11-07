@@ -24,7 +24,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Pierre entend des bruits bizarres. Vérifiez quels systèmes tournent actuellement.".into(),
-            bloom_level: "Understand".into(),
+            bloom_level: "Comprendre".into(),
             bloom_question: "Voir tous les processus?".into(),
             required_commands: vec!["ps aux".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ps".into(), expected: None }],
@@ -55,7 +55,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "La station ralentit. Surveillez les ressources pour comprendre pourquoi.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Surveiller les ressources?".into(),
             required_commands: vec!["top -bn1".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "top".into(), expected: None }],
@@ -86,7 +86,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Jean veut savoir si tous les services de sécurité sont bien en marche.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Gerer les services?".into(),
             required_commands: vec!["systemctl status ssh".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "systemctl".into(), expected: None }],
@@ -117,7 +117,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Un système pirate a pris le contrôle! Éliminez-le immédiatement!".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Tuer un processus?".into(),
             required_commands: vec!["kill 9999".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "kill".into(), expected: None }],
@@ -148,7 +148,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Le scan de sécurité est prioritaire en ce moment. Lancez-le en priorité.".into(),
-            bloom_level: "Understand".into(),
+            bloom_level: "Comprendre".into(),
             bloom_question: "Changer la priorite?".into(),
             required_commands: vec!["nice -n 10 commande".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "nice".into(), expected: None }],

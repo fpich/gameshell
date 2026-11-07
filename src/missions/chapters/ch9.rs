@@ -24,7 +24,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Mettez à jour la liste des pièces détachées disponibles.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Rafraichir les paquets?".into(),
             required_commands: vec!["sudo apt update".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt update".into(), expected: None }],
@@ -55,7 +55,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Installez un outil pour tester les annonces de la station.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Installer un logiciel?".into(),
             required_commands: vec!["sudo apt install -y cowsay".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt install".into(), expected: None }],
@@ -86,7 +86,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "La config SSH a changé, il faut recharger le service.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Redemarrer un service?".into(),
             required_commands: vec!["sudo systemctl restart ssh".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "systemctl restart".into(), expected: None }],
@@ -117,7 +117,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Qu'est-ce qui s'est passé récemment sur la station? Consultez le journal.".into(),
-            bloom_level: "Analyze".into(),
+            bloom_level: "Analyser".into(),
             bloom_question: "Voir les logs systemd?".into(),
             required_commands: vec!["sudo journalctl -n 20".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "journalctl".into(), expected: None }],
@@ -148,7 +148,7 @@ N'oubliez pas: dans l'espace, la préparation fait la différence entre la victo
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
             goal: "Les soutes sont pleines de vieilleries. Nettoyez le système.".into(),
-            bloom_level: "Apply".into(),
+            bloom_level: "Appliquer".into(),
             bloom_question: "Nettoyer le systeme?".into(),
             required_commands: vec!["sudo apt autoremove -y".into(), "apt clean".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt autoremove".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "apt clean".into(), expected: None }],

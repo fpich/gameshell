@@ -181,3 +181,8 @@ rm -rf ~/.gameshell && echo -e "Test\nls\ngsh check\nexit" | bash gameshell.sh
 - Un seul fichier `gameshell.sh` auto-extractible, 100% offline.
 - `./gameshell.sh` installe dans `~/.gameshell/` et lance.
 - Aucune dépendance externe, aucun accès réseau requis.
+
+## RÈGLE 4l — Bloom en français + footer 'gsh help' seul (OBLIGATOIRE)
+
+- Les niveaux de Bloom s'affichent en FRANÇAIS: Se souvenir, Comprendre, Appliquer, Analyser, Évaluer, Créer
+- Le footer de mission affiche UNIQUEMENT 'gsh help' (pas 'gsh check / gsh goal / gsh help')

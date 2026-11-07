@@ -206,7 +206,7 @@ impl Game {
 
     fn cmd_help(&self) {
         println!("\n  📘 Pour revoir l\'aide complète: gsh help");
-        println!("\n  🧠 Taxonomie de Bloom: chaque mission a un niveau (Remember → Create).");
+        println!("\n  🧠 Taxonomie de Bloom: chaque mission a un niveau (Se souvenir → Créer).");
         println!("  🎖️ Compétence de départ: man COMMANDE (manuel) — déjà acquise!");
         println!("\n  💻 COMMANDES SHELL — syntaxe générale:");
         println!("    COMMANDE                  → exécute la commande seule (ex: pwd)");
@@ -306,7 +306,7 @@ impl Game {
                 println!("  ┃  🔐 Un code sera demandé à la validation (gsh check)");
             }
             println!("  ┣{}", "━".repeat(w).yellow());
-            println!("  ┃  🏆 {} XP  │  🧠 Bloom [{}]  │  gsh check / gsh goal / gsh help", m.xp_reward, m.bloom_level);
+            println!("  ┃  🏆 {} XP  │  🧠 Bloom [{}]  │  gsh help", m.xp_reward, m.bloom_level);
             println!("  ┗{}", "━".repeat(w).yellow());
             println!();
             println!("  📊 {} {}/50 missions  │  ⭐ Niv {}  │  💫 {} XP  │  🎖️ {} skills\n",
