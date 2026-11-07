@@ -278,21 +278,35 @@ impl Game {
 
     fn show_mission(&self) {
         if let Some(m) = self.missions.get(self.current_mission) {
-            println!("\n  ┌─────────────────────────────────────────┐");
-            println!("  │ {} — {}", m.id, m.title.bright_yellow().bold());
-            println!("  │ {}", m.story);
-            println!("  │ 🎯 {}", m.goal.bright_white());
-            println!("  │ 🆕 Commandes à utiliser:");
+            // Cadre vaisseau stylisé
+            println!("\n  {} {}", "╭".bright_magenta(), "─".repeat(66).bright_magenta());
+            println!("  {}  📡 MISSION {} — {}", "│".bright_magenta(), m.id.bright_white().bold(), m.title.bright_yellow().bold());
+            println!("  {}", &("├".bright_magenta().to_string() + &"─".repeat(66).bright_magenta().to_string()));
+            // Histoire avec indentation propre
+            for line in m.story.lines() {
+                if line.is_empty() {
+                    println!("  {}  {}", "│".bright_magenta(), "");
+                } else {
+                    println!("  {}  {}", "│".bright_magenta(), line.white());
+                }
+            }
+            println!("  {}", &("├".bright_magenta().to_string() + &"─".repeat(66).bright_magenta().to_string()));
+            println!("  {}  🎯 {}", "│".bright_magenta(), m.goal.bright_white().bold());
+            println!("  {}  🆕 Commandes à utiliser:", "│".bright_magenta());
             for c in &m.required_commands {
                 let (tech, rp) = Self::cmd_brief(c);
-                println!("  │    {}", c.bright_green().bold());
-                println!("  │      🚀 roleplay : {}", rp.bright_cyan());
-                println!("  │      💻 technique: {}", tech);
+                println!("  {}    {} {}", "│".bright_magenta(), "▸".bright_green(), c.bright_green().bold());
+                println!("  {}      🚀 {}", "│".bright_magenta(), rp.bright_cyan());
+                println!("  {}      💻 {}", "│".bright_magenta(), tech.bright_blue());
             }
-            if let Some(c) = &m.code_required { println!("  │ 🔐 Code requis à la validation"); }
-            println!("  │ 🏆 {} XP  |  'gsh check' pour valider  |  'gsh goal' pour revoir  |  'gsh help' pour l'aide", m.xp_reward);
-            println!("  └─────────────────────────────────────────┘");
-            println!("  📊 {}/50 | Niv {} | {} XP | {} skills\n", self.completed.len(), self.level, self.xp, self.skills.len());
+            if m.code_required.is_some() {
+                println!("  {}  🔐 Un code sera demandé à la validation", "│".bright_magenta());
+            }
+            println!("  {}", &("├".bright_magenta().to_string() + &"─".repeat(66).bright_magenta().to_string()));
+            println!("  {}  🏆 {} XP  |  🧠 Bloom [{}]  |  'gsh check' 'gsh goal' 'gsh help'", "│".bright_magenta(), m.xp_reward, m.bloom_level);
+            println!("  {}", &("╰".bright_magenta().to_string() + &"─".repeat(66).bright_magenta().to_string()));
+            println!("\n  📊 {} {}/50 missions  │  ⭐ Niveau {}  │  💫 {} XP  │  🎖️ {} compétences\n",
+                "▰".repeat(self.completed.len().min(20)), self.completed.len(), self.level, self.xp, self.skills.len());
         }
     }
 
