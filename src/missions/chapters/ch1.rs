@@ -28,6 +28,13 @@ Sans cette information, elle ne peut pas vous donner accès aux systèmes de dé
             hints: vec![],
             xp_reward: 50,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │SOUTES  │
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS: ~]      │
+      └──────────┬──────────┘
+                 ▼ pwd + ls ici".into(),
             skill: Some(Skill { command: "pwd".into(), name: "pwd".into(), description: "pwd".into() }),
         },
         Mission {
@@ -56,6 +63,13 @@ Vous ouvrez le fichier pour en lire le contenu.".into(),
             hints: vec![],
             xp_reward: 75,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │SOUTES  │
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │   ~/bienvenue.txt   │
+      └──────────┬──────────┘
+                 ▼ cat bienvenue.txt".into(),
             skill: Some(Skill { command: "ls".into(), name: "ls".into(), description: "ls".into() }),
         },
         Mission {
@@ -84,6 +98,11 @@ sous-compartiment messages, fichier dernier_message.txt.
             hints: vec![],
             xp_reward: 100,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │COMMS   │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          │      /messages/dernier_message.txt
+      └──────────┴──────────┘".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat".into() }),
         },
         Mission {
@@ -113,6 +132,12 @@ confirme Jean. Et avec les pirates qui approchent, on n'a pas de temps à perdre
             hints: vec![],
             xp_reward: 100,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │SOUTES  │
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │   [identité: qui es-tu?] │
+      └──────────┬──────────┘".into(),
             skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd".into() }),
         },
         Mission {
@@ -138,6 +163,11 @@ Vous consultez l'horloge du système de la station.".into(),
             hints: vec![],
             xp_reward: 50,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │NAV     │←── ▼ horloge
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          │       coordonnees/
+      └──────────┴──────────┘".into(),
             skill: Some(Skill { command: "hostname".into(), name: "hostname".into(), description: "hostname".into() }),
         },
     ]

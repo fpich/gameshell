@@ -30,6 +30,13 @@ Vous devez créer ce fichier vide pour commencer le rapport officiel.".into(),
             hints: vec![],
             xp_reward: 75,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  CABINE │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 2.1 → CABINE".into(),
             skill: Some(Skill { command: "touch".into(), name: "touch".into(), description: "touch".into() }),
         },
         Mission {
@@ -59,6 +66,13 @@ Elle insiste sur l'option -p qui crée toute l'arborescence d'un coup,
             hints: vec![],
             xp_reward: 100,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  CABINE │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 2.2 → CABINE".into(),
             skill: Some(Skill { command: "mkdir".into(), name: "mkdir".into(), description: "mkdir".into() }),
         },
         Mission {
@@ -88,6 +102,13 @@ vers le répertoire /soutes/ du vaisseau.
             hints: vec![],
             xp_reward: 100,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  SOUTES │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 2.3 → SOUTES".into(),
             skill: Some(Skill { command: "cp".into(), name: "cp".into(), description: "cp".into() }),
         },
         Mission {
@@ -116,6 +137,13 @@ et le ranger dans la bonne étagère avec la bonne étiquette, en un seul geste.
             hints: vec![],
             xp_reward: 100,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  CABINE │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 2.4 → CABINE".into(),
             skill: Some(Skill { command: "mv".into(), name: "mv".into(), description: "mv".into() }),
         },
         Mission {
@@ -145,6 +173,13 @@ une fois supprimé, c'est parti pour de bon. »".into(),
             hints: vec![],
             xp_reward: 100,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  CABINE │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 2.5 → CABINE".into(),
             skill: Some(Skill { command: "rm".into(), name: "rm".into(), description: "rm".into() }),
         },
     ]

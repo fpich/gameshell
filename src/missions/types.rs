@@ -33,6 +33,7 @@ pub struct Mission {
     pub xp_reward: u64,
     pub skill: Option<Skill>,
     pub code_required: Option<String>,  // Code à entrer en phase 2 de gsh check
+    pub map: String,                     // Carte ASCII vue de dessus du vaisseau (OBLIGATOIRE, règle 4h)
 }
 
 impl Mission {

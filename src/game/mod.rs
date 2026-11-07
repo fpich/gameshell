@@ -52,7 +52,7 @@ impl Game {
 
         loop {
             let cwd = self.display_path(&self.current_dir);
-            print!("{}@{}:{}$ ", self.player_name.bright_green(), "orion7".white(), cwd.white());
+            print!("{}@{}:{}$ ", self.player_name.bright_green(), "orion7".normal(), cwd.normal());
             io::stdout().flush().ok();
 
             let mut line = String::new();
@@ -285,7 +285,7 @@ impl Game {
         if let Some(m) = self.missions.get(self.current_mission) {
             // Cadre vaisseau stylisé
             println!("\n  {} {}", "╭".yellow(), "─".repeat(60).yellow());
-            println!("  {}  📡 MISSION {} — {}", "│".yellow(), m.id.bright_white().bold(), m.title.bright_yellow().bold());
+            println!("  {}  📡 MISSION {} — {}", "│".yellow(), m.id.black().bold().bold(), m.title.bright_yellow().bold());
             println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
             // Histoire avec wrapping à 60 colonnes pour tenir dans le cadre
             for line in m.story.lines() {
@@ -293,18 +293,24 @@ impl Game {
                     println!("  {}  ", "│".yellow());
                 } else {
                     for chunk in wrap_text(line, 58) {
-                        println!("  {}  {}", "│".yellow(), chunk.white());
+                        println!("  {}  {}", "│".yellow(), chunk.normal());
                     }
                 }
             }
             println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
-            println!("  {}  🎯 {}", "│".yellow(), m.goal.bright_white().bold());
+            // Carte ASCII de la mission (règle 4h - OBLIGATOIRE)
+            println!("  {}  🗺️  CARTE DU VAISSEAU (vue de dessus):", "│".yellow());
+            for ml in m.map.lines() {
+                println!("  {}  {}", "│".yellow(), ml.green());
+            }
+            println!("  {}", &("├".yellow().to_string() + &"─".repeat(60).yellow().to_string()));
+            println!("  {}  🎯 {}", "│".yellow(), m.goal.black().bold());
             println!("  {}  🆕 Commandes SHELL à utiliser:", "│".yellow());
             for c in &m.required_commands {
                 let (tech, rp) = Self::cmd_brief(c);
                 println!("  {}    {} {}", "│".yellow(), "▸".bright_green(), c.bright_green().bold());
                 println!("  {}      🚀 {}", "│".yellow(), rp.green());
-                println!("  {}      💻 {}", "│".yellow(), tech.white());
+                println!("  {}      💻 {}", "│".yellow(), tech.normal());
             }
             if m.code_required.is_some() {
                 println!("  {}  🔐 Un code sera demandé à la validation", "│".yellow());

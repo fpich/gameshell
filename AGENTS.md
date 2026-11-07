@@ -44,6 +44,28 @@ Règles de wording:
 - Jamais dire juste "commandes" seul quand ça peut prêter à confusion
 - Dans gsh help, regrouper clairement: section "COMMANDES DU JEU (gsh)" et mention "les commandes shell (pwd, ls...) s'utilisent normalement"
 
+## RÈGLE 4h — Carte ASCII obligatoire par mission (OBLIGATOIRE)
+
+Chaque mission DOIT avoir un champ `map` contenant une **carte vue de dessus du vaisseau**
+en ASCII art avec une flèche (→ ou ▼) pointant vers le compartiment concerné par la mission.
+Exemple:
+```
+  ┌─────────┐  ┌─────────┐  ┌─────────┐
+  │  PONT   │  │ CABINES │  │ SOUTES  │
+  └────┬────┘  └────┬────┘  └────┬────┘
+       │            ▼              │
+       │         [VOUS ÊTES ICI]   │
+       └──────────→ /communications/messages/dernier_message.txt
+```
+Cette carte s'affiche dans le cadre de la mission. Interdit de valider une mission sans carte.
+
+## RÈGLE 4i — Palette adaptée terminal fond clair (OBLIGATOIRE)
+
+Le terminal xfce Debian 13 a un fond CLAIR par défaut:
+- Texte courant = `.black()` ou `.normal()` (jamais blanc sur fond clair)
+- Éléments importants (titres, cadres, commandes) = couleurs vives (vert, jaune, rouge)
+- Jamais de texte noir invisible ou blanc sur blanc
+
 ## RÈGLE 4g — ASCII art bien formé (OBLIGATOIRE)
 
 Tout ASCII art (vaisseau, cadres) doit être **visuellement reconnaissable**:

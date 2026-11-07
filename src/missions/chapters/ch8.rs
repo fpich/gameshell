@@ -31,6 +31,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 225,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  CABINE │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 8.1 → CABINE".into(),
             skill: Some(Skill { command: "useradd".into(), name: "useradd".into(), description: "useradd".into() }),
         },
         Mission {
@@ -61,6 +68,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 225,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  CABINE │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 8.2 → CABINE".into(),
             skill: Some(Skill { command: "groupadd".into(), name: "groupadd".into(), description: "groupadd".into() }),
         },
         Mission {
@@ -91,6 +105,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 200,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  CABINE │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 8.3 → CABINE".into(),
             skill: Some(Skill { command: "passwd".into(), name: "passwd".into(), description: "passwd".into() }),
         },
         Mission {
@@ -121,6 +142,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 200,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  CABINE │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 8.4 → CABINE".into(),
             skill: Some(Skill { command: "su".into(), name: "su".into(), description: "su".into() }),
         },
         Mission {
@@ -151,6 +179,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 225,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  PONT   │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 8.5 → PONT".into(),
             skill: Some(Skill { command: "sudo".into(), name: "sudo".into(), description: "sudo".into() }),
         },
     ]

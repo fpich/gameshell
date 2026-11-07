@@ -31,6 +31,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 300,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  SECUR  │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 10.1 → SECUR".into(),
             skill: Some(Skill { command: "fail2ban".into(), name: "fail2ban".into(), description: "fail2ban".into() }),
         },
         Mission {
@@ -61,6 +68,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 350,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  SECUR  │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 10.2 → SECUR".into(),
             skill: Some(Skill { command: "ssh_hardening".into(), name: "ssh_hardening".into(), description: "ssh_hardening".into() }),
         },
         Mission {
@@ -91,6 +105,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 350,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  SECUR  │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 10.3 → SECUR".into(),
             skill: Some(Skill { command: "iptables".into(), name: "iptables".into(), description: "iptables".into() }),
         },
         Mission {
@@ -121,6 +142,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 350,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  SECUR  │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 10.4 → SECUR".into(),
             skill: Some(Skill { command: "auditctl".into(), name: "auditctl".into(), description: "auditctl".into() }),
         },
         Mission {
@@ -151,6 +179,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 400,
             code_required: Some("FORTRESS".into()),
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  SOUTES │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 10.5 → SOUTES".into(),
             skill: Some(Skill { command: "chroot".into(), name: "chroot".into(), description: "chroot".into() }),
         },
     ]

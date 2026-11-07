@@ -31,6 +31,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 200,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  SECUR  │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 7.1 → SECUR".into(),
             skill: Some(Skill { command: "tar".into(), name: "tar".into(), description: "tar".into() }),
         },
         Mission {
@@ -61,6 +68,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 200,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  CABINE │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 7.2 → CABINE".into(),
             skill: Some(Skill { command: "zip".into(), name: "zip".into(), description: "zip".into() }),
         },
         Mission {
@@ -91,6 +105,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 175,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  SOUTES │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 7.3 → SOUTES".into(),
             skill: Some(Skill { command: "df".into(), name: "df".into(), description: "df".into() }),
         },
         Mission {
@@ -121,6 +142,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 200,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  SOUTES │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 7.4 → SOUTES".into(),
             skill: Some(Skill { command: "du".into(), name: "du".into(), description: "du".into() }),
         },
         Mission {
@@ -151,6 +179,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 175,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  MACHIN │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 7.5 → MACHINE".into(),
             skill: Some(Skill { command: "mount".into(), name: "mount".into(), description: "mount".into() }),
         },
     ]

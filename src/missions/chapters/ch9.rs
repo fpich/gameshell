@@ -31,6 +31,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 200,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  MACHIN │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 9.1 → MACHINE".into(),
             skill: Some(Skill { command: "apt".into(), name: "apt".into(), description: "apt".into() }),
         },
         Mission {
@@ -61,6 +68,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 225,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  MACHIN │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 9.2 → MACHINE".into(),
             skill: Some(Skill { command: "dpkg".into(), name: "dpkg".into(), description: "dpkg".into() }),
         },
         Mission {
@@ -91,6 +105,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 225,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  SECUR  │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 9.3 → SECUR".into(),
             skill: Some(Skill { command: "systemctl restart".into(), name: "systemctl restart".into(), description: "systemctl restart".into() }),
         },
         Mission {
@@ -121,6 +142,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 250,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  MACHIN │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 9.4 → MACHINE".into(),
             skill: Some(Skill { command: "journalctl".into(), name: "journalctl".into(), description: "journalctl".into() }),
         },
         Mission {
@@ -151,6 +179,13 @@ la station et son équipage de 5 personnes.".into(),
             hints: vec![],
             xp_reward: 225,
             code_required: None,
+            map: "  ┌────────┐ ┌────────┐ ┌────────┐
+  │  PONT  │ │CABINES │ │  MACHIN │←── ▼
+  └───┬────┘ └───┬────┘ └───┬────┘
+      │          ▼          │
+      │      [VOUS ÊTES ICI] │
+      └──────────┬──────────┘
+            mission 9.5 → MACHINE".into(),
             skill: Some(Skill { command: "apt update".into(), name: "apt update".into(), description: "apt update".into() }),
         },
     ]
