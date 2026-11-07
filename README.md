@@ -1,127 +1,155 @@
-# 🚀 GameShell - Les Pirates de l'Espace
+# 🏴‍☠️ GameShell — Les Pirates de l'Espace
 
-Jeu de rôle éducatif pour apprendre les commandes shell et le durcissement d'un serveur **Debian 13** — conçu pour les étudiants de **BTS SIO SISR**.
+Jeu de rôle éducatif pour apprendre les **commandes shell Linux** et le **durcissement d'un serveur Debian 13**, conçu pour les étudiants de **BTS SIO SISR**.
 
 **100% local et offline** — aucune connexion internet requise après installation.
 
-## 📦 Distribution (1 seul fichier)
+---
+
+## 🚀 Installation et lancement
 
 ```bash
-# Compiler et créer l'archive auto-extractible
-./make-archive.sh
-# → génère gameshell.sh (un seul fichier ~500Ko)
+# Depuis le dépôt source: compiler et générer l'archive auto-extractible
+cargo build --release && ./make-archive.sh
+# → génère gameshell.sh (un seul fichier ~540K)
 
-# Distribuer gameshell.sh aux étudiants (USB, clé, ENT...)
 # Sur la machine de l'étudiant:
 ./gameshell.sh          # installe dans ~/.gameshell/ et lance le jeu
 ```
 
-## 🚀 Installation alternative
+Alternative: `./install.sh` installe dans `~/.gameshell/` ou `/opt/gameshell/` (sudo).
 
-```bash
-# Depuis le dépôt source
-./install.sh            # installe dans ~/.gameshell/
-sudo ./install.sh       # installe dans /opt/gameshell/ + lien dans /usr/local/bin
-```
+---
 
-## 🎮 Lancer le jeu
+## 🎮 Comment jouer
 
-```bash
-~/.gameshell/gameshell          # après install.sh
-~/.local/bin/gameshell          # si lien PATH créé
-gameshell                       # si installé en root
-./gameshell.sh                  # directement depuis l'archive
-```
+Le joueur est le **capitaine de la station spatiale Orion-7**, attaquée par les pirates de l'espace « Les Corbeaux Noirs ».
 
-## 🎯 Commandes du jeu (style gameshell.sh)
+### Commandes du jeu (préfixe `gsh`)
 
-| Commande | Description |
-|----------|-------------|
-| `gsh goal` | Voir l'objectif narratif de la mission en cours + indices |
-| `gsh hint` | Indice progressif (en цепляет plusieurs fois) |
-| `gsh check` | Vérifier si la mission est complétée |
-| `gsh reset` | Réinitialiser l'environnement |
-| `gsh help` | Aide complète |
-| `gsh skills` | Voir les compétences acquises |
-| `exit` | Quitter le jeu |
+| Commande | Action |
+|----------|--------|
+| `gsh help` | Aide complète (commandes gsh + syntaxe shell + Bloom) |
+| `gsh goal` | Réaffiche la mission en cours (même cadre que le lancement) |
+| `gsh check` | Valide la mission en cours (phase 2: code si requis) |
+| `gsh reset` | Réinitialise la mission en cours |
+| `gsh skills` | Voir les compétences shell acquises |
+| `exit` | Quitter |
 
-**Le prompt est propre** (pas de vrais chemins système) :
-```
-Fabien@orion7:~$ pwd
-~
-Fabien@orion7:~$ cd /srv/station-spatiale/logs
-Fabien@orion7:/srv/station-spatiale/logs$ ls
-auth.log  syslog  fail2ban.log
-```
+### Commandes shell
 
-**Les missions n'affichent PAS les commandes à taper** — seulement l'objectif narratif. Le joueur doit réfléchir (taxonomie de Bloom).
+Syntaxe générale: `COMMANDE`, `COMMANDE argument`, `COMMANDE -option argument`, `man COMMANDE`, `COMMANDE | COMMANDE`, `COMMANDE > fichier`.
 
-## 🌍 Dossier isolé
+**Compétence de départ acquise: `man`** — `man COMMANDE` affiche le manuel.
 
-Tout le jeu est contenu dans `~/.gameshell/` :
+---
+
+## 🗺️ Le vaisseau Orion-7 (monde isolé)
+
+Tout le jeu se déroule dans `~/.gameshell/vaisseau/`. Les chemins absolus `/...` sont automatiquement mappés vers l'intérieur du vaisseau.
 
 ```
-~/.gameshell/
-├── bin/gameshell              # binaire du jeu
-├── world/                     # 🌍 MONDE ISOLÉ (station Orion-7)
-│   ├── home/etudiant/         # home du joueur
-│   │   ├── station -> ../../srv/station-spatiale  (lien symbolique)
-│   │   ├── documents/         # fichiers de mission
-│   │   └── projets/
-│   ├── srv/station-spatiale/  # la station spatiale
-│   │   ├── logs/              # syslog, auth.log, fail2ban.log
-│   │   ├── config/            # sshd_config, ufw_rules.txt
-│   │   └── scripts/           # backup.sh, monitor.sh
-│   ├── var/log/
-│   └── etc/                   # hostname, motd, ssh/sshd_config
-├── state/                     # sauvegarde + historique des commandes
-│   ├── player.json
-│   └── commands.log           # pour évaluation par l'enseignant
-└── gameshell                  # launcher
+/pont/              pont de commandement
+/cabines/           quartiers équipage (capitaine, marie, jean...)
+/securite/          alertes, logs, coffre-fort, config SSH, pare-feu
+/soutes/            cargo, secrets
+/reacteur/          cœur énergétique
+/hangar/            corvettes (dont une pirate!)
+/communications/    messages du Galactica
+/navigation/        coordonnées, cartes
+/armes/             phasers, missiles, boucliers
+/salle-des-machines/  processus, services, monitoring
+/archives/
 ```
 
-## 📚 Les 10 chapitres (50 missions)
+---
 
-| Chapitre | Thème | Compétences débloquées |
-|----------|-------|----------------------|
-| 1 | Premiers Pas dans l'Espace | `pwd`, `ls`, `cat`, `cd`, `hostname` |
-| 2 | Organisation des Données | `touch`, `mkdir`, `cp`, `mv`, `rm` |
-| 3 | Permissions et Sécurité | `chmod`, `chown`, `ls -l`, `stat`, `getfacl` |
-| 4 | Surveillance des Systèmes | `ps`, `top`, `systemctl`, `kill`, `nice` |
-| 5 | Recherche et Filtrage | `grep`, `find`, `\|`, `>`, `>>` |
-| 6 | Réseau et Communications | `ip`, `ping`, `ufw`, `ssh`, `ss/netstat` |
-| 7 | Archivage et Stockage | `tar`, `zip`, `df`, `du`, `mount` |
-| 8 | Gestion des Utilisateurs | `useradd`, `groupadd`, `passwd`, `su`, `sudo` |
-| 9 | Maintenance du Système | `apt`, `dpkg`, `systemctl restart`, `journalctl`, `apt update` |
-| 10 | Durcissement du Serveur | `fail2ban`, `ssh_hardening`, `iptables`, `auditctl`, `chroot` |
+## 📚 Les 50 missions — 10 chapitres, 5 actes
 
-## 🧠 Taxonomie de Bloom
+| Chapitre | Acte | Thème | Compétences débloquées |
+|----------|------|-------|----------------------|
+| 1 | I | Arrivée à bord | man (départ), pwd, ls, cd, cat, hostname |
+| 2 | I | Organisation de la cabine | touch, mkdir, cp, mv, rm |
+| 3 | II | Sécuriser les accès | chmod, chown, ls -l, stat, getfacl |
+| 4 | II | Surveillance des systèmes | ps, top, systemctl, kill, nice |
+| 5 | III | Enquête sur les pirates | grep, find, pipe, >, >> |
+| 6 | III | Réseau et communications | ip, ping, ufw, ssh, ss |
+| 7 | IV | Sauvegarde des preuves | tar, zip, df, du, mount |
+| 8 | IV | Gestion de l'équipage | useradd, groupadd, passwd, su, sudo |
+| 9 | V | Maintenance | apt, dpkg, systemctl restart, journalctl |
+| 10 | V | Durcissement final | fail2ban, ssh durci, iptables, auditctl, chroot |
 
-Chaque mission a un niveau Bloom : **Remember → Understand → Apply → Analyze → Evaluate/Create**
+Chaque mission affiche:
+- **Story complète** (20+ lignes de contexte narratif obligatoire)
+- **Carte ASCII vue de dessus** du vaisseau avec position ▶
+- **Objectif narratif** (sans nommer la commande — l'étudiant déduit)
+- **Commandes shell** avec double définition: 🚀 roleplay + 💻 technique
+- **Niveau Bloom en français** (Se souvenir → Créer)
+- **XP**
 
-## 🎖️ Système de compétences
+### Validation
 
-Chaque mission débloque une commande qui **reste acquise** pour toutes les missions suivantes.
+- Jamais automatique — le joueur tape `gsh check`
+- Certaines missions demandent un **code en phase 2** (trouvé dans le vaisseau)
+- Historique des commandes tracké **par mission** (reset à chaque changement)
 
-## 👨‍🏫 Pour les enseignants
+---
 
-- Distribution offline via `gameshell.sh` (1 fichier)
-- Historique des commandes dans `~/.gameshell/state/commands.log` pour évaluation
-- Missions modifiables dans `src/missions/chapters/ch*.rs`
-- Recompilation : `cargo build --release && ./make-archive.sh`
+## 📋 Conformité — AGENTS.md
 
-## 📁 Structure du projet source
+Le fichier `AGENTS.md` contient **14 règles strictes** anti-régression:
+
+| Règle | Contenu |
+|-------|---------|
+| 1 | Isolation du monde (jamais le vrai système) |
+| 2 | Historique par mission, reset à chaque changement |
+| 3 | Pas de validation automatique |
+| 4 | Affichage obligatoire (gsh help auto, mission complète) |
+| 4b | Double définition: roleplay PUIS technique |
+| 4c | Minimum 20 lignes de contexte par mission |
+| 4d | Cohérence des analogies roleplay |
+| 4e | Textes gsh cohérents |
+| 4f | Vocabulaire: "commandes SHELL" vs "commandes gsh" |
+| 4g | ASCII art bien formé |
+| 4h | Carte ASCII obligatoire par mission |
+| 4i | Palette fond clair (texte noir, couleurs vives) |
+| 4j | Ne pas donner la réponse (objectif narratif) |
+| 4k | gsh goal = show_mission, man = compétence départ |
+| 4l | Bloom en français, footer 'gsh help' seul |
+| 4m | Check matche sur commande de base |
+
+---
+
+## 🏗️ Structure du dépôt
 
 ```
 gameshell/
-├── gameshell.sh          # archive auto-extractible (générée)
-├── make-archive.sh       # génère gameshell.sh
-├── install.sh            # installation dans dossier isolé
-├── world/                # monde du jeu (arborescence station Orion-7)
-├── src/
-│   ├── main.rs           # point d'entrée
-│   ├── game/mod.rs       # boucle de jeu + prompt Linux
-│   ├── shell/mod.rs      # exécution des commandes + état
-│   └── missions/         # 50 missions en 10 chapitres
-└── Cargo.toml
+├── AGENTS.md              # 14 règles de conformité
+├── README.md              # cette documentation
+├── Cargo.toml
+├── make-archive.sh        # génère gameshell.sh auto-extractible
+├── vaisseau-gen.sh        # génère le monde du vaisseau
+├── launcher.sh            # lance le jeu dans le vaisseau isolé
+├── install.sh             # installation système
+└── src/
+    ├── main.rs            # point d'entrée + banner espace étoilé
+    ├── game/mod.rs        # moteur de jeu (boucle, affichage, checks)
+    ├── shell/mod.rs       # exécution commandes + isolation chemins
+    └── missions/          # 50 missions en 10 chapitres
+        ├── types.rs       # Mission, Skill, MissionCheck
+        └── chapters/ch1..10.rs
+```
+
+## 👨‍🏫 Pour les enseignants
+
+- Distribution: un seul fichier `gameshell.sh` (clé USB, ENT...)
+- Historique des commandes dans `~/.gameshell/state/commands.log` pour évaluation
+- Missions modifiables dans `src/missions/chapters/ch*.rs`
+- Rebuild: `cargo build --release && ./make-archive.sh`
+
+## 📦 Dépôt git
+
+```bash
+git remote add origin https://github.com/fpich/gameshell.git
+git push -u origin master
 ```

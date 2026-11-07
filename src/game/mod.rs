@@ -306,7 +306,7 @@ impl Game {
                 println!("  ┃  🔐 Un code sera demandé à la validation (gsh check)");
             }
             println!("  ┣{}", "━".repeat(w).yellow());
-            println!("  ┃  🏆 {} XP  │  🧠 Bloom [{}]  │  'gsh check' valider  │  gsh help", m.xp_reward, m.bloom_level);
+            println!("  ┃  🏆 {} XP  │  🧠 Bloom [{}]  │  gsh help", m.xp_reward, m.bloom_level);
             println!("  ┗{}", "━".repeat(w).yellow());
             println!();
             println!("  📊 {} {}/50 missions  │  ⭐ Niv {}  │  💫 {} XP  │  🎖️ {} skills\n",

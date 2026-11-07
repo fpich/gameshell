@@ -182,10 +182,10 @@ rm -rf ~/.gameshell && echo -e "Test\nls\ngsh check\nexit" | bash gameshell.sh
 - `./gameshell.sh` installe dans `~/.gameshell/` et lance.
 - Aucune dépendance externe, aucun accès réseau requis.
 
-## RÈGLE 4l — Bloom en français + footer avec 'gsh check' (OBLIGATOIRE)
+## RÈGLE 4l — Bloom en français + footer 'gsh help' seul (OBLIGATOIRE)
 
 - Les niveaux de Bloom s'affichent en FRANÇAIS: Se souvenir, Comprendre, Appliquer, Analyser, Évaluer, Créer
-- Le footer de mission affiche: `'gsh check' pour valider  │  gsh help` (le joueur doit savoir comment valider)
+- Le footer de mission affiche UNIQUEMENT 'gsh help' — le joueur trouve gsh check dans gsh help
 
 ## RÈGLE 4m — Le check matche sur la commande de BASE (OBLIGATOIRE)
 
