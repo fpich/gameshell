@@ -245,8 +245,10 @@ impl Game {
             let mid = m.id.clone();
             let xp = m.xp_reward;
             if let Some(skill) = &m.skill {
-                println!("  🔓 Compétence: {}", skill.name);
-                self.skills.push(skill.clone());
+                if !self.skills.iter().any(|s| s.name == skill.name) {
+                    println!("  🔓 Compétence: {}", skill.name);
+                    self.skills.push(skill.clone());
+                }
             }
             self.xp += xp;
             let needed = self.level as u64 * 100;
@@ -268,8 +270,7 @@ impl Game {
     }
 
     fn cmd_skills(&self) {
-        println!("\n  🎖️ Compétences ({}):", self.skills.len() + 1);
-        println!("    ✓ man — man COMMANDE (manuel, compétence de départ)");
+        println!("\n  🎖️ Compétences ({}):", self.skills.len());
         for s in &self.skills { println!("    ✓ {} — {}", s.name, s.description); }
         println!();
     }
