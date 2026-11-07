@@ -32,7 +32,7 @@ impl Game {
             current_mission: 0,
             xp: 0,
             level: 1,
-            skills: Vec::new(),
+            skills: vec![Skill { command: "man".into(), name: "man".into(), description: "man COMMANDE — affiche le manuel (compétence de départ)".into() }],
             completed: Vec::new(),
             current_dir: home,
             pending_code: None,
@@ -205,13 +205,9 @@ impl Game {
     }
 
     fn cmd_help(&self) {
-        println!("\n  📘 COMMANDES DU JEU (préfixe gsh):");
-        println!("    gsh goal    — voir l'objectif de la mission en cours");
-        println!("    gsh check   — valider la mission en cours");
-        println!("    gsh reset   — réinitialiser la mission en cours");
-        println!("    gsh skills  — voir les compétences shell acquises");
-        println!("    gsh help    — cette aide");
-        println!("    exit        — quitter le jeu");
+        println!("\n  📘 Pour revoir l\'aide complète: gsh help");
+        println!("\n  🧠 Taxonomie de Bloom: chaque mission a un niveau (Remember → Create).");
+        println!("  🎖️ Compétence de départ: man COMMANDE (manuel) — déjà acquise!");
         println!("\n  💻 COMMANDES SHELL — syntaxe générale:");
         println!("    COMMANDE                  → exécute la commande seule (ex: pwd)");
         println!("    COMMANDE argument         → avec un argument (ex: ls /pont)");
@@ -272,8 +268,9 @@ impl Game {
     }
 
     fn cmd_skills(&self) {
-        println!("\n  🎖️ Compétences ({}):", self.skills.len());
-        for s in &self.skills { println!("    ✓ {}", s.name); }
+        println!("\n  🎖️ Compétences ({}):", self.skills.len() + 1);
+        println!("    ✓ man — man COMMANDE (manuel, compétence de départ)");
+        for s in &self.skills { println!("    ✓ {} — {}", s.name, s.description); }
         println!();
     }
 
