@@ -11,7 +11,7 @@ une à une par un banc automatisé + tests manuels en pty réel.
 | Banc de cas limites par mission | `GAMESHELL_EDGE=1 ./gameshell.sh` | **300/300, 0 problème** |
 | Torture par mission (partiel, typo, 2 mauvais codes, isolation hôte) | `GAMESHELL_TORTURE=1 ./gameshell.sh` | **300/300, 0 problème, exit 0** |
 | Conformité contenu (cargo) | `cargo test --release` | 2/2 (200 missions, 20/acte, C3/C6/B9/C9/C13/A15) |
-| Suite moteur | `./tests/run_tests.sh` | **45/45 PASS** (auto 300/300, EDGE 300/300, TORTURE 300/300, save/resume, export, victoire) |
+| Suite moteur | `./tests/run_tests.sh` | **48/48 PASS** (auto 300/300, EDGE 300/300, TORTURE 300/300, save/resume, export, victoire) |
 | Édition de ligne en vrai tty (flèches) | `script -qec` + séquences `\x1b[D`/`\x1b[A` | OK (curseur, historique) |
 | Inspection visuelle manuelle | sessions campagne 1 et 2 | OK |
 
@@ -71,7 +71,7 @@ et historique vidé après validation (règle A17).
 - 300/300 missions résolues réellement (auto-solve), 300/300 cas limites OK (EDGE), 300/300 torture OK (TORTURE).
 - Isolation hôte vérifiée en torture: `cat /etc/passwd` et `rm -rf /tmp` dans le jeu ne touchent jamais l'hôte (A1/A16).
 - Nouveau test de conformité cargo: chaque check `command_executed` doit être atteignable par une `required_command` (A4).
-- 42/42 tests moteur PASS, cargo test conformité OK.
+- 48/48 tests moteur PASS, cargo test conformité OK.
 - Aucune fuite d'infos hôte (A16), aucun check vacu (A17), cartes alignées (B9/C6),
   stories re-flowées, commandes affichées = checks atteignables (B4).
 
@@ -87,13 +87,13 @@ et historique vidé après validation (règle A17).
 - Taille archive: `gameshell.sh` ~884 Ko, 100% offline (3 mondes embarqués, binaire, générateurs).
 
 ### Audit docs ↔ réalité
-- README/PLAN/RETEX/TESTS_PLAYTHROUGH/AGENTS.md alignés: 3 campagnes × 100 missions, 42/42 tests,
+- README/PLAN/RETEX/TESTS_PLAYTHROUGH/AGENTS.md alignés: 3 campagnes × 100 missions, 48/48 tests,
   arborescence `missions/{chapters,japon,reseau}/ch1..20.rs`, monde-*-gen.sh.
 - Audit croisé règles AGENTS.md ↔ code: 16/16 règles vérifiées présentes (A1-A17, B, C14, D2, E2).
 
 ### Couverture de tests finale
 - `cargo test`: conformité 300 missions (structure, C3, A4 atteignabilité, A15, C9, C13).
-- `run_tests.sh` 42/42: moteur + auto-solve 300/300 + EDGE 300/300 + TORTURE 300/300 + isolation hôte.
+- `run_tests.sh` 48/48: moteur + auto-solve 300/300 + EDGE 300/300 + TORTURE 300/300 + isolation hôte.
 
 ### Améliorations IMPLÉMENTÉES cette session (plan P0-P3)
 - ✅ A18 sauvegarde/reprise auto par campagne (`state/save_campagne<N>.json`) + test 43

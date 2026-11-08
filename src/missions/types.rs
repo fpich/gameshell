@@ -44,5 +44,6 @@ pub struct SaveData {
     pub level: u32,
     pub skills: Vec<Skill>,
     pub completed: Vec<String>,
+    pub badges: Vec<String>,
     pub saved_at: String,
 }

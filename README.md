@@ -56,7 +56,7 @@ Tout le jeu se déroule dans `~/.gameshell/vaisseau/`. Les chemins absolus `/...
 /soutes/            cargo, secrets
 /reacteur/          cœur énergétique
 /hangar/            corvettes (dont une pirate!)
-/communications/    messages du Galactica
+/communications/    messages de la station Orion-7
 /navigation/        coordonnées, cartes
 /armes/             phasers, missiles, boucliers
 /salle-des-machines/  processus, services, monitoring
@@ -109,7 +109,7 @@ Chaque mission affiche:
 
 ## 📋 Conformité — AGENTS.md
 
-Le fichier `AGENTS.md` contient **14 règles strictes** anti-régression:
+Le fichier `AGENTS.md` contient **22 règles strictes** anti-régression:
 
 | Règle | Contenu |
 |-------|---------|
@@ -136,7 +136,7 @@ Le fichier `AGENTS.md` contient **14 règles strictes** anti-régression:
 
 ```
 gameshell/
-├── AGENTS.md              # 14 règles de conformité
+├── AGENTS.md              # 22 règles de conformité
 ├── README.md              # cette documentation
 ├── Cargo.toml
 ├── make-archive.sh        # génère gameshell.sh auto-extractible
@@ -159,10 +159,7 @@ gameshell/
 - Sauvegarde auto par campagne (`state/save_campagne<N>.json`) + reprise au lancement.
 - **Historique horodaté de chaque action** dans `state/history_campagne<N>.log` (session, commandes, checks, missions, codes) — RETEX complet de chaque partie.
 - `gsh restart` = recommencer la campagne à zéro (ou `rm ~/.gameshell/state/save_campagne<N>.json`).
-
-## 💾 Progression
-- Sauvegarde automatique par campagne à chaque mission validée (`~/.gameshell/state/save_campagne<N>.json`);
-  au lancement, la campagne reprend où elle en était. Tutoriel affiché au premier lancement.
+- Tutoriel affiché au premier lancement.
 
 ## 👨‍🏫 Pour les enseignants
 

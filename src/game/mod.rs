@@ -20,6 +20,7 @@ pub struct Game {
     level: u32,
     skills: Vec<Skill>,
     completed: Vec<String>,
+    badges: Vec<String>,
     current_dir: String,
     pending_code: Option<String>,  // code à valider en phase 2
     check_fails: u32,               // échecs consécutifs de gsh check (UX)
@@ -47,6 +48,7 @@ impl Game {
             level: 1,
             skills: vec![Skill { command: "man".into(), name: "man".into(), description: "man COMMANDE — affiche le manuel (compétence de départ)".into() }],
             completed: Vec::new(),
+            badges: Vec::new(),
             current_dir: home,
             pending_code: None,
             check_fails: 0,
@@ -60,6 +62,7 @@ impl Game {
                 game.level = sv.level;
                 game.skills = sv.skills;
                 game.completed = sv.completed;
+                game.badges = sv.badges;
             }
         }
         game
@@ -74,6 +77,7 @@ impl Game {
             level: self.level,
             skills: self.skills.clone(),
             completed: self.completed.clone(),
+            badges: self.badges.clone(),
             saved_at: chrono::Local::now().format("%Y-%m-%d %H:%M:%S").to_string(),
         };
         let _ = shell::write_save(&save);
@@ -138,11 +142,62 @@ impl Game {
         }
     }
 
+    /// RÈGLE A8-compatible: détecte une commande destructrice (rm) visant un fichier
+    /// critique de la mission courante. Affiche un avertissement NARRATIF (jamais la
+    /// solution), bloque l'exécution et propose gsh reset. Ne révèle jamais quel fichier.
+    fn warn_destructive(&self, parts: &[&str]) -> bool {
+        let base = parts.first().copied().unwrap_or("");
+        if base != "rm" {
+            return false;
+        }
+        // Cibles de fichiers de la mission courante (file_exists / file_read / file_size / file_owner...)
+        let mut critical: Vec<String> = Vec::new();
+        if let Some(m) = self.missions.get(self.current_mission) {
+            for ck in &m.checks {
+                match ck.check_type.as_str() {
+                    "file_exists" | "file_read" | "file_size" | "file_owner" | "file_contains_count" => {
+                        critical.push(ck.target.clone());
+                    }
+                    _ => {}
+                }
+            }
+        }
+        if critical.is_empty() {
+            return false;
+        }
+        // Un argument de rm pointe-t-il vers une cible critique (chemin relatif ou absolu)?
+        let vaisseau = shell::world_dir();
+        let hits = parts.iter().skip(1).any(|a| {
+            if a.starts_with('-') { return false; }
+            let resolved = if a.starts_with('/') {
+                format!("{}{}", vaisseau, a)
+            } else {
+                self.resolve_path(a, &vaisseau)
+            };
+            critical.iter().any(|c| {
+                let cabs = if c.starts_with('/') { format!("{}{}", vaisseau, c) } else { self.resolve_path(c, &vaisseau) };
+                self.canonical(&resolved) == self.canonical(&cabs)
+            })
+        });
+        if hits {
+            println!("\n  ⚠️  Cette commande est DESTRUCTRICE et viserait un élément important du vaisseau.");
+            println!("  🚀 L'équipage vous déconseille fortement cette action: elle pourrait compromettre la mission.");
+            println!("  💡 Si vous avez déjà modifié l'état du monde, tapez 'gsh reset' pour repartir proprement.");
+            return true;
+        }
+        false
+    }
+
     fn exec_shell(&mut self, cmd: &str) {
         // Parsing robuste: split_whitespace gère espaces/tabs multiples
         let parts: Vec<&str> = cmd.split_whitespace().collect();
         let base = parts.first().copied().unwrap_or("");
         let vaisseau = shell::world_dir();
+
+        // Échec narratif: rm sur un fichier critique → avertissement, on bloque l'exécution
+        if self.warn_destructive(&parts) {
+            return;
+        }
 
         match base {
             "cd" => {
@@ -420,7 +475,7 @@ impl Game {
             "su" => ("change d'utilisateur courant (su - user, su user -c cmd)", "comme prendre temporairement le fauteuil d'un autre officier pour utiliser ses droits"),
             "sudo" => ("exécute une commande en tant que root (sudo cmd, sudo -l)", "comme utiliser la clé maître du capitaine pour ouvrir les compartiments réservés à l'administration"),
             "id" => ("affiche uid, gid et groupes de l'utilisateur courant", "comme consulter votre badge d'identité: qui vous êtes et à quelles équipes vous appartenez"),
-            "whoami" => ("affiche le nom de l'utilisateur courant", "comme dire 'C'est le capitaine Fabien qui parle' avant de donner un ordre à l'équipage"),
+            "whoami" => ("affiche le nom de l'utilisateur courant", "comme dire 'C'est le Capitaine qui parle' avant de donner un ordre à l'équipage"),
             "hostname" => ("affiche le nom de la machine", "comme crier 'Ici la station Orion-7!' sur la fréquence radio pour s'identifier auprès des vaisseaux alliés"),
             "date" => ("affiche la date et l'heure du système (+format)", "comme consulter l'horloge atomique de bord pour horodater chaque entrée du journal de bord"),
             "apt" => ("gère les paquets Debian (update, upgrade, install, remove, search, clean)", "comme passer commande de pièces détachées au vaisseau-mère Andromède pour réparer la station"),
@@ -441,7 +496,7 @@ impl Game {
             "pgrep" => ("liste les processus par nom (-a affiche la commande complète)", "comme appeler par leur nom les membres d'équipage présents dans une salle"),
             "traceroute" => ("chemin des paquets jusqu'à une cible (chaque saut)", "comme suivre la route d'un convoi jusqu'à sa destination"),
             "nmap" => ("scanne les ports ouverts d'une machine (-sS, -p, -sV)", "comme sonder les déflecteurs d'un vaisseau ennemi"),
-            "curl" => ("interroge une URL HTTP (-I, -o, -s)", "comme demander un document à la base de données du Galactica"),
+            "curl" => ("interroge une URL HTTP (-I, -o, -s)", "comme demander un document à la base de données de la station Orion-7"),
             "dig" => ("résolution DNS: IP d'un nom de domaine (+short)", "comme demander à l'annuaire galactique l'adresse d'un vaisseau"),
             "nano" => ("éditeur de texte terminal", "comme rédiger un rapport directement sur la console de bord"),
             _ => ("commande shell standard", "action dans le vaisseau Orion-7"),
@@ -458,7 +513,14 @@ impl Game {
         println!("    COMMANDE -option argument → avec une option (ex: ls -la /pont)");
         println!("    man COMMANDE              → affiche le manuel de la commande");
         println!("    COMMANDE | COMMANDE       → chaîne deux commandes");
-        println!("    COMMANDE > fichier        → redirige la sortie vers un fichier\n");
+        println!("    COMMANDE > fichier        → redirige la sortie vers un fichier");
+        println!("\n  📚 GLOSSAIRE SHELL (rappel rapide):");
+        println!("    pwd  où suis-je?    ls  voir le contenu    cd  changer de dossier");
+        println!("    cat  lire un fichier   mkdir  créer un dossier   touch  créer un fichier");
+        println!("    cp  copier   mv  déplacer/renommer   rm  supprimer (⚠️ destructeur)");
+        println!("    chmod  changer les droits   chown  changer le propriétaire");
+        println!("    grep  chercher dans un texte   find  chercher des fichiers");
+        println!("    echo  afficher un texte   man  manuel   |  chaîner   >  rediriger\n");
     }
 
     fn cmd_goal(&self) {
@@ -495,10 +557,33 @@ impl Game {
         true
     }
 
+    /// Rétroaction positive contextualisée (Vague 3): félicitations thématisées par
+    /// niveau de Bloom et par campagne, au lieu d'un simple "✅ Mission réussie!".
+    fn congrats(&self, m: &crate::missions::types::Mission) -> (&'static str, &'static str) {
+        let bloom = m.bloom_level.as_str();
+        let (a, b) = match shell::campaign_id() {
+            2 => ("Le château Shiro vous salue, seigneur.", "Votre sagesse grandit dans les murs du château."),
+            3 => ("Le NOC Neon-9 valide votre intervention.", "Le réseau est entre de bonnes mains, netrunner."),
+            _ => ("La station Orion-7 vous félicite, Capitaine.", "L'équipage vous salue avec respect."),
+        };
+        match bloom {
+            "Se souvenir" => (a, "Vous maîtrisez désormais ce réflexe essentiel."),
+            "Comprendre" => (a, "Vous ne l'exécutez plus: vous le comprenez."),
+            "Appliquer" => (a, "Vous savez mettre cette compétence en pratique."),
+            "Analyser" => (a, "Vous savez décomposer et raisonner sur la situation."),
+            "Évaluer" => (a, "Vous savez juger et choisir la bonne action."),
+            "Créer" => (a, "Vous avez construit quelque chose de nouveau."),
+            _ => (a, b),
+        }
+    }
+
     fn complete_mission(&mut self) {
         if let Some(m) = self.missions.get(self.current_mission) {
             let mid = m.id.clone();
             let xp = m.xp_reward;
+            let (congrats, bloom_note) = self.congrats(m);
+            println!("  🎖️  {}", congrats);
+            println!("  🧠 {}", bloom_note);
             if let Some(skill) = &m.skill {
                 if !self.skills.iter().any(|s| s.name == skill.name) {
                     let (tech, _) = Self::cmd_brief(&skill.name);
@@ -512,11 +597,43 @@ impl Game {
             self.completed.push(mid);
             self.current_mission += 1;
             self.mission_commands.clear(); // reset commandes pour la nouvelle mission
+            // Badges thématiques (Vague 1): débloqués selon les commandes acquises
+            self.update_badges();
             // Reset position: retour à la cabine (HOME) pour la nouvelle mission
             self.current_dir = std::env::var("HOME").unwrap_or_else(|_| ".".into());
             self.save_progress(); // A18
             if self.current_mission >= self.missions.len() {
                 self.show_victory_screen(); // A19
+            }
+        }
+    }
+
+    /// Débloque des badges thématiques selon les compétences acquises (Vague 1)
+    fn update_badges(&mut self) {
+        let has = |cmds: &[&str]| cmds.iter().any(|c| self.skills.iter().any(|s| s.name == *c));
+        let mut new_badges: Vec<(&str, &str)> = Vec::new();
+        if has(&["ls", "cd", "pwd", "mkdir", "touch", "cp", "mv", "rm"]) {
+            new_badges.push(("🗂️ Explorateur", "maîtrise des fichiers et répertoires"));
+        }
+        if has(&["cat", "grep", "head", "tail", "wc", "find", "less"]) {
+            new_badges.push(("🔍 Fouineur", "lecture et recherche dans les fichiers"));
+        }
+        if has(&["chmod", "chown", "useradd", "groupadd", "passwd", "sudo", "su"]) {
+            new_badges.push(("🛡️ Gardien", "droits, utilisateurs et sécurité"));
+        }
+        if has(&["ps", "top", "kill", "pgrep", "systemctl", "journalctl"]) {
+            new_badges.push(("⚙️ Mécanicien", "processus et services"));
+        }
+        if has(&["ip", "ping", "netstat", "nmap", "ssh", "curl", "dig", "traceroute", "iptables", "ufw"]) {
+            new_badges.push(("🌐 Réseau", "réseau et connectivité"));
+        }
+        if has(&["tar", "zip", "unzip", "gzip", "df", "du", "mount"]) {
+            new_badges.push(("📦 Logisticien", "archives et stockage"));
+        }
+        for (name, desc) in new_badges {
+            if !self.badges.iter().any(|b| b.starts_with(name)) {
+                println!("  🏅 Badge débloqué: {} — {}", name, desc);
+                self.badges.push(format!("{} — {}", name, desc));
             }
         }
     }
@@ -535,9 +652,17 @@ impl Game {
         println!("  ┃  Missions: {}/{}                       ┃", self.completed.len(), self.missions.len());
         println!("  ┃  XP: {}  |  Niveau: {}                  ┃", self.xp, self.level);
         println!("  ┃  Compétences: {}                        ┃", self.skills.len());
+        println!("  ┃  Badges: {}                              ┃", self.badges.len());
         println!("  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫");
         for s in &self.skills {
             println!("  ┃  ✓ {:<36}┃", s.name);
+        }
+        if !self.badges.is_empty() {
+            println!("  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫");
+            for b in &self.badges {
+                let short = b.split(" — ").next().unwrap_or(b);
+                println!("  ┃  🏅 {:<36}┃", short);
+            }
         }
         println!("  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
     }
@@ -557,6 +682,8 @@ impl Game {
         }
         json.push_str(&format!("], \"xp_total\": {}, \"niveau\": {}, \"competences\": [", self.xp, self.level));
         for s in &self.skills { json.push_str(&format!("\"{}\",", s.name)); }
+        json.push_str(&format!("], \"badges\": ["));
+        for b in &self.badges { json.push_str(&format!("\"{}\",", b.replace('"', "'"))); }
         json.push_str("]}");
         let mut csv = String::from("id;titre;statut;xp\n");
         for m in &self.missions {
@@ -573,7 +700,7 @@ impl Game {
         println!("\n  📤 Export effectué:");
         if okj { println!("     JSON: {}", json_path); }
         if okc { println!("     CSV:  {}", csv_path); }
-        println!("     ({} missions, {} XP, niveau {}, {} compétences, historique: {} lignes)\n", self.completed.len(), self.xp, self.level, self.skills.len(), hist.lines().count());
+        println!("     ({} missions, {} XP, niveau {}, {} compétences, {} badges, historique: {} lignes)\n", self.completed.len(), self.xp, self.level, self.skills.len(), self.badges.len(), hist.lines().count());
     }
 
     /// Panneau tutoriel au premier lancement d'une campagne (pas de sauvegarde)
@@ -599,6 +726,7 @@ impl Game {
         self.xp = 0;
         self.level = 1;
         self.skills = vec![Skill { command: "man".into(), name: "man".into(), description: "man COMMANDE — affiche le manuel (compétence de départ)".into() }];
+        self.badges.clear();
         self.mission_commands.clear();
         self.pending_code = None;
         self.cmd_reset();
@@ -628,6 +756,12 @@ impl Game {
         for s in &self.skills {
             let (tech, _) = Self::cmd_brief(&s.name);
             println!("    ✓ {} — {}", s.name, tech);
+        }
+        if !self.badges.is_empty() {
+            println!("\n  🏅 Badges ({}):", self.badges.len());
+            for b in &self.badges {
+                println!("    • {}", b);
+            }
         }
         println!();
     }
@@ -730,6 +864,35 @@ impl Game {
                     let r = self.resolve_path(&check.target, &vaisseau);
                     match &check.expected { Some(e) => shell::file_contains(&r, e), None => true }
                 }
+                "file_size" => {
+                    // expected = taille minimale en octets (ex: "1024")
+                    let r = self.resolve_path(&check.target, &vaisseau);
+                    let min: u64 = check.expected.as_deref().and_then(|e| e.parse().ok()).unwrap_or(0);
+                    shell::file_size(&r) >= min
+                }
+                "file_owner" => {
+                    // expected = nom du propriétaire (ex: "capitaine")
+                    let r = self.resolve_path(&check.target, &vaisseau);
+                    match &check.expected { Some(e) => shell::file_owner(&r) == *e, None => true }
+                }
+                "file_contains_count" => {
+                    // expected = "N|motif" → au moins N occurrences du motif dans le fichier
+                    let r = self.resolve_path(&check.target, &vaisseau);
+                    match &check.expected {
+                        Some(e) => {
+                            if let Some((n, pat)) = e.split_once('|') {
+                                let min: usize = n.trim().parse().unwrap_or(1);
+                                shell::file_contains_count(&r, pat.trim()) >= min
+                            } else { shell::file_contains(&r, e) }
+                        }
+                        None => true,
+                    }
+                }
+                "process_running" => shell::process_running(&check.target),
+                "output_contains" => {
+                    // target = commande à exécuter, expected = texte attendu dans la sortie
+                    match &check.expected { Some(e) => shell::output_contains(&check.target, e), None => true }
+                }
                 _ => true,
             };
             if !ok { missing.push(check.target.clone()); }
@@ -764,7 +927,7 @@ impl Game {
     fn display_path(&self, real: &str) -> String {
         let home = std::env::var("HOME").unwrap_or_default();
         let vaisseau = shell::world_dir();
-        if real == home || real == format!("{}/cabines/capitaine", vaisseau) { return "~".into(); }
+        if real == home || real == shell::player_home() { return "~".into(); }
         if let Some(r) = real.strip_prefix(&home) { return if r.is_empty() { "~".into() } else { format!("~{}", r) }; }
         if real == vaisseau { return "/".into(); }
         if let Some(r) = real.strip_prefix(&format!("{}/", vaisseau)) { return format!("/{}", r); }
@@ -876,6 +1039,35 @@ impl Game {
                     }
                     "user_exists" => { shell::execute_interactive(&format!("sudo useradd -m '{}' 2>/dev/null || true", ck.target)); }
                     "group_exists" => { shell::execute_interactive(&format!("sudo groupadd '{}' 2>/dev/null || true", ck.target)); }
+                    "file_size" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        let min: u64 = ck.expected.as_deref().and_then(|e| e.parse().ok()).unwrap_or(0);
+                        if shell::file_size(&p) < min {
+                            shell::execute_interactive(&format!("head -c {} /dev/zero > '{}' 2>/dev/null || dd if=/dev/zero of='{}' bs=1 count={} 2>/dev/null", min, p, p, min));
+                        }
+                    }
+                    "file_owner" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if let Some(e) = &ck.expected { shell::execute_interactive(&format!("sudo chown {} '{}' 2>/dev/null || true", e, p)); }
+                    }
+                    "file_contains_count" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if let Some(e) = &ck.expected {
+                            if let Some((n, pat)) = e.split_once('|') {
+                                let min: usize = n.trim().parse().unwrap_or(1);
+                                let cur = shell::file_contains_count(&p, pat.trim());
+                                for _ in cur..min { shell::execute_interactive(&format!("echo '{}' >> '{}'", pat.trim(), p)); }
+                            }
+                        }
+                    }
+                    "process_running" => {
+                        if !shell::process_running(&ck.target) {
+                            shell::execute_interactive(&format!("nohup bash -c 'exec -a {} sleep 300' >/dev/null 2>&1 & disown; true", ck.target));
+                        }
+                    }
+                    "output_contains" => {
+                        // La commande est déjà exécutée via required_commands; rien à préparer ici.
+                    }
                     _ => {}
                 }
             }
@@ -999,6 +1191,35 @@ impl Game {
                     }
                     "user_exists" => { shell::execute_interactive(&format!("sudo useradd -m '{}' 2>/dev/null || true", ck.target)); }
                     "group_exists" => { shell::execute_interactive(&format!("sudo groupadd '{}' 2>/dev/null || true", ck.target)); }
+                    "file_size" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        let min: u64 = ck.expected.as_deref().and_then(|e| e.parse().ok()).unwrap_or(0);
+                        if shell::file_size(&p) < min {
+                            shell::execute_interactive(&format!("head -c {} /dev/zero > '{}' 2>/dev/null || dd if=/dev/zero of='{}' bs=1 count={} 2>/dev/null", min, p, p, min));
+                        }
+                    }
+                    "file_owner" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if let Some(e) = &ck.expected { shell::execute_interactive(&format!("sudo chown {} '{}' 2>/dev/null || true", e, p)); }
+                    }
+                    "file_contains_count" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if let Some(e) = &ck.expected {
+                            if let Some((n, pat)) = e.split_once('|') {
+                                let min: usize = n.trim().parse().unwrap_or(1);
+                                let cur = shell::file_contains_count(&p, pat.trim());
+                                for _ in cur..min { shell::execute_interactive(&format!("echo '{}' >> '{}'", pat.trim(), p)); }
+                            }
+                        }
+                    }
+                    "process_running" => {
+                        if !shell::process_running(&ck.target) {
+                            shell::execute_interactive(&format!("nohup bash -c 'exec -a {} sleep 300' >/dev/null 2>&1 & disown; true", ck.target));
+                        }
+                    }
+                    "output_contains" => {
+                        // La commande est déjà exécutée via required_commands; rien à préparer ici.
+                    }
                     _ => {}
                 }
             }
@@ -1081,6 +1302,35 @@ impl Game {
                     }
                     "user_exists" => { shell::execute_interactive(&format!("sudo useradd -m '{}' 2>/dev/null || true", ck.target)); }
                     "group_exists" => { shell::execute_interactive(&format!("sudo groupadd '{}' 2>/dev/null || true", ck.target)); }
+                    "file_size" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        let min: u64 = ck.expected.as_deref().and_then(|e| e.parse().ok()).unwrap_or(0);
+                        if shell::file_size(&p) < min {
+                            shell::execute_interactive(&format!("head -c {} /dev/zero > '{}' 2>/dev/null || dd if=/dev/zero of='{}' bs=1 count={} 2>/dev/null", min, p, p, min));
+                        }
+                    }
+                    "file_owner" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if let Some(e) = &ck.expected { shell::execute_interactive(&format!("sudo chown {} '{}' 2>/dev/null || true", e, p)); }
+                    }
+                    "file_contains_count" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if let Some(e) = &ck.expected {
+                            if let Some((n, pat)) = e.split_once('|') {
+                                let min: usize = n.trim().parse().unwrap_or(1);
+                                let cur = shell::file_contains_count(&p, pat.trim());
+                                for _ in cur..min { shell::execute_interactive(&format!("echo '{}' >> '{}'", pat.trim(), p)); }
+                            }
+                        }
+                    }
+                    "process_running" => {
+                        if !shell::process_running(&ck.target) {
+                            shell::execute_interactive(&format!("nohup bash -c 'exec -a {} sleep 300' >/dev/null 2>&1 & disown; true", ck.target));
+                        }
+                    }
+                    "output_contains" => {
+                        // La commande est déjà exécutée via required_commands; rien à préparer ici.
+                    }
                     _ => {}
                 }
             }

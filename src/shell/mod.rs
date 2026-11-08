@@ -54,10 +54,9 @@ pub fn world_user() -> &'static str {
     match campaign_id() { 2 => "seigneur", 3 => "netrunner", _ => "capitaine" }
 }
 
-/// Chemin vers le home du joueur dans le monde
-#[allow(dead_code)]
+/// Chemin vers le home du joueur dans le monde (défini par campagne via HOME)
 pub fn player_home() -> String {
-    format!("{}/cabines/capitaine", world_dir())
+    std::env::var("HOME").unwrap_or_else(|_| format!("{}/cabines/capitaine", world_dir()))
 }
 
 /// Exécute une commande shell réelle et retourne (stdout, stderr, exit_code)
@@ -134,6 +133,36 @@ pub fn get_permissions(path: &str) -> String {
 pub fn file_contains(path: &str, pattern: &str) -> bool {
     let (_, _, code) = execute_real(&format!("grep -q '{}' '{}' 2>/dev/null", pattern, path));
     code == 0
+}
+
+/// Taille d'un fichier en octets (0 si absent)
+pub fn file_size(path: &str) -> u64 {
+    let (stdout, _, _) = execute_real(&format!("stat -c '%s' '{}' 2>/dev/null", path));
+    stdout.trim().parse().unwrap_or(0)
+}
+
+/// Propriétaire d'un fichier (nom d'utilisateur, vide si absent)
+pub fn file_owner(path: &str) -> String {
+    let (stdout, _, _) = execute_real(&format!("stat -c '%U' '{}' 2>/dev/null", path));
+    stdout.trim().to_string()
+}
+
+/// Nombre d'occurrences d'un motif dans un fichier
+pub fn file_contains_count(path: &str, pattern: &str) -> usize {
+    let (stdout, _, _) = execute_real(&format!("grep -o '{}' '{}' 2>/dev/null | wc -l", pattern, path));
+    stdout.trim().parse().unwrap_or(0)
+}
+
+/// Vérifie si un processus tourne (par nom)
+pub fn process_running(name: &str) -> bool {
+    let (_, _, code) = execute_real(&format!("pgrep -x '{}' >/dev/null 2>&1 || pgrep -f '{}' >/dev/null 2>&1", name, name));
+    code == 0
+}
+
+/// Vérifie si la sortie d'une commande contient un texte
+pub fn output_contains(command: &str, pattern: &str) -> bool {
+    let (stdout, _, _) = execute_real(command);
+    stdout.contains(pattern)
 }
 
 /// Lit le contenu d'un fichier

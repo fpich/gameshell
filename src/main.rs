@@ -130,7 +130,7 @@ fn main() {
         println!("  3) 🌐  Nexus — NOC Neon-9 (réseau)               (niveau DIFFICILE, 100 missions)");
         println!();
         let mut hist = Vec::new();
-        let choix = game::lineedit::read_line("👉 Numéro de campagne (1 ou 2): ", &mut hist).unwrap_or_default();
+        let choix = game::lineedit::read_line("👉 Numéro de campagne (1, 2 ou 3): ", &mut hist).unwrap_or_default();
         match choix.trim() { "2" => 2, "3" => 3, _ => 1 }
     };
     shell::select_world(campaign);

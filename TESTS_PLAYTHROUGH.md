@@ -1,6 +1,6 @@
 # 🧪 RAPPORT DE TESTS — GameShell (3 campagnes × 100 missions)
 
-## Suite automatisée: `./tests/run_tests.sh` → **42/42 PASS**
+## Suite automatisée: `./tests/run_tests.sh` → **48/48 PASS**
 
 | Bloc | Contenu |
 |------|---------|

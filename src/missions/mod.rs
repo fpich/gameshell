@@ -29,7 +29,7 @@ pub use types::*;
 
 /// 100 missions EN DUR par campagne (20 chapitres x 5 missions, 5 actes x 20 missions).
 /// 100% offline, aucun générateur procédural (règle C1/C14).
-/// Campagne 1 = Pirates de l'Espace (facile), 2 = Japon Féodal (moyen).
+/// Campagne 1 = Pirates de l'Espace (facile), 2 = Japon Féodal (moyen), 3 = Nexus Réseau (difficile).
 pub fn load_all_missions() -> Vec<Mission> {
     let campaign: u8 = std::env::var("GAMESHELL_CAMPAIGN").ok().and_then(|v| v.parse().ok()).unwrap_or(1);
     match campaign {
@@ -135,6 +135,12 @@ mod conformity_tests {
                 let n = ms.iter().filter(|m| m.act == act).count();
                 assert_eq!(n, 20, "{} acte {} doit avoir 20 missions, trouvé {}", label, act, n);
             }
+            // Progression de difficulté (Vague 1): l'acte 1 ne contient jamais de niveau "Créer",
+            // l'acte 5 doit en contenir au moins un (courbe de difficulté croissante).
+            let act1_creer = ms.iter().filter(|m| m.act == 1 && m.bloom_level == "Créer").count();
+            assert_eq!(act1_creer, 0, "{}: l'acte 1 ne doit pas contenir de mission 'Créer' (difficulté progressive)", label);
+            let act5_creer = ms.iter().filter(|m| m.act == 5 && m.bloom_level == "Créer").count();
+            assert!(act5_creer >= 1, "{}: l'acte 5 doit contenir au moins une mission 'Créer'", label);
         }
     }
 
@@ -145,5 +151,11 @@ mod conformity_tests {
             assert!(!content.contains(bad), "vaisseau-gen.sh contient le nom interdit '{}' (règle C13)", bad);
         }
         assert!(!content.contains("Capitaine Fabien"), "vaisseau-gen.sh: nom du joueur en dur interdit (règle A12)");
+        // Le cmd_brief (analogies roleplay) ne doit pas non plus contenir de noms interdits ni le nom du joueur (règle C13/A12)
+        let brief = std::fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/src/game/mod.rs")).unwrap();
+        for bad in PNJ_BLACKLIST {
+            assert!(!brief.contains(bad), "cmd_brief (game/mod.rs) contient le nom interdit '{}' (règle C13)", bad);
+        }
+        assert!(!brief.contains("Fabien"), "cmd_brief (game/mod.rs): nom du joueur en dur interdit (règle A12)");
     }
 }
