@@ -133,6 +133,20 @@ impl Game {
                 let full = format!("cd '{}' && {} {}", self.current_dir, base, args.join(" "));
                 shell::execute_interactive(&full);
             }
+            "zip" | "unzip" | "apt" | "dpkg" | "systemctl" | "journalctl" | "ufw" | "iptables" | "fail2ban-client" | "auditctl" | "useradd" | "groupadd" | "usermod" | "passwd" | "ssh" => {
+                // Commandes système réelles: exécuter, mais si échec → message pédagogique
+                let vaisseau = format!("{}/vaisseau", shell::gameshell_home());
+                let rewritten: Vec<String> = parts.iter().enumerate().map(|(i, p)| {
+                    if i > 0 && p.starts_with('/') && !p.starts_with(&vaisseau) {
+                        format!("{}{}", vaisseau, p)
+                    } else { p.to_string() }
+                }).collect();
+                let full = format!("cd '{}' && {}", self.current_dir, rewritten.join(" "));
+                let code = shell::execute_interactive(&full);
+                if code != 0 {
+                    println!("  💡 Cette commande système nécessite un vrai serveur Debian 13. En bac à sable elle est simulée — mais la commande a bien été enregistrée!");
+                }
+            }
             _ => {
                 // Commande générique: réécrire les chemins absolus
                 let rewritten: Vec<String> = parts.iter().enumerate().map(|(i, p)| {
