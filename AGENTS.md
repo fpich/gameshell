@@ -77,8 +77,10 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - Un check `permission` ne doit pas être déjà vrai à l'état initial du monde
   (ex: plan_defense.sh créé 644, coffre-fort 755 — c'est la mission qui les verrouille).
 - `file_not_exists` / `permission` sans expected ne valident jamais seuls.
-- Test: `GAMESHELL_EDGE=1 ./gameshell.sh` joue les cas limites sur les 200 missions
+- Test: `GAMESHELL_EDGE=1 ./gameshell.sh` joue les cas limites sur les 300 missions
   (check vide, commande garbage, mauvais code phase 2, bon code, reset position/historique).
+- `GAMESHELL_TORTURE=1 ./gameshell.sh` tord chaque mission dans tous les sens (commande partielle,
+  typo, 2 mauvais codes, isolation hôte: /etc/passwd du jeu != hôte, rm -rf /tmp confiné au monde).
 
 ## RÈGLE A16 — Identité vaisseau simulée, jamais l'hôte (OBLIGATOIRE)
 - `id`, `uname`, `logname`, `whoami`, `hostname` sont interceptés et répondent avec l'identité du vaisseau
@@ -89,7 +91,7 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
 
 ## RÈGLE A10 — Suite de tests obligatoire
-- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **41/41 PASS** obligatoire.
+- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **42/42 PASS** obligatoire.
 
 ---
 

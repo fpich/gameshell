@@ -219,6 +219,15 @@ rm -rf ~/.gameshell
 out=$(printf 'Net\n3\nhostname\nwhoami\nexit\n' | timeout 20 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -q "Nexus" && echo "$out" | grep -q "100 missions" && echo "$out" | grep -q "Net@nexus:~" && echo "$out" | grep -qE "netrunner$" && ok "Campagne 3: bannière Nexus, prompt @nexus, whoami=netrunner, 100 missions" || ko "Campagne 3 devrait être sélectionnable (Nexus/nexus/netrunner)"
 
+# ─── TEST 42: TORTURE (GAMESHELL_TORTURE=1): 300 missions torturées + isolation hôte ───
+rm -rf ~/.gameshell
+out=$(printf 'T\nexit\n' | GAMESHELL_TORTURE=1 timeout 1200 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+ok42=1
+for c in "1 (Pirates de l'Espace)" "2 (Japon Féodal)" "3 (Nexus Réseau)"; do
+    echo "$out" | grep -q "TORTURE campagne $c: 100/100 OK, 0 problèmes" || ok42=0
+done
+[ "$ok42" = "1" ] && ok "TORTURE: 300/300 missions (check vide/partiel/typo, 2 mauvais codes, isolation hôte)" || ko "TORTURE: $(echo "$out" | grep -o 'TORTURE campagne [0-9][^:]*: [0-9/]* OK, [0-9]* problèmes' | tr '\n' ' ')"
+
 echo ""
 echo "═══════════════════════════════════════"
 echo -e "  RÉSULTAT: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL total"

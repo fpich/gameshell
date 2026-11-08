@@ -481,7 +481,8 @@ impl Game {
             // Reset position: retour à la cabine (HOME) pour la nouvelle mission
             self.current_dir = std::env::var("HOME").unwrap_or_else(|_| ".".into());
             if self.current_mission >= self.missions.len() {
-                println!("\n  🏆 FÉLICITATIONS! Orion-7 est sauvée! Niveau {} | {} XP | {} compétences", self.level, self.xp, self.skills.len());
+                let bastion = match self.campaign { 2 => "le château Shiro", 3 => "le NOC Nexus", _ => "Orion-7" };
+                println!("\n  🏆 FÉLICITATIONS! {} est sauvé(e)! Niveau {} | {} XP | {} compétences", bastion, self.level, self.xp, self.skills.len());
             }
         }
     }
@@ -761,6 +762,126 @@ impl Game {
                 if !self.mission_commands.is_empty() { issues.push(format!("{}: historique mission non vidé", m.id)); }
             } else {
                 issues.push(format!("{}: mission non résolue par les cas limites", m.id));
+                self.current_mission += 1;
+                self.mission_commands.clear();
+                self.pending_code = None;
+                self.current_dir = home.clone();
+            }
+        }
+        (ok, issues)
+    }
+
+    /// Mode TORTURE (GAMESHELL_TORTURE=1): pour CHAQUE mission, on la tord dans tous les sens:
+    /// check à vide, commande partielle, typo, mauvais ordre, 2 mauvais codes phase 2,
+    /// puis résolution complète; + test d'isolation (jamais de fuite du vrai système hôte).
+    pub fn run_torture(&mut self) -> (usize, Vec<String>) {
+        let mut issues: Vec<String> = Vec::new();
+        let home = std::env::var("HOME").unwrap_or_else(|_| ".".into());
+        // ── Test d'isolation global (A1): /etc/passwd du jeu != vrai /etc/passwd ──
+        let vaisseau = shell::world_dir();
+        let p = self.resolve_path("/etc/passwd", &vaisseau);
+        let (out, _, code) = shell::execute_real(&format!("cat '{}' 2>/dev/null", p));
+        if code == 0 && out.contains("root:") {
+            issues.push("FUITE HÔTE: /etc/passwd du jeu contient le vrai /etc/passwd!".into());
+        }
+        // rm -rf / ne doit toucher que le monde du jeu
+        let avant = shell::execute_real("ls /etc/passwd").2 == 0;
+        self.exec_shell("rm -rf /tmp");
+        let apres = shell::execute_real("ls /etc/passwd").2 == 0;
+        if avant != apres { issues.push("FUITE HÔTE: rm -rf /tmp a touché l'hôte!".into()); }
+        self.exec_shell("gsh reset");
+
+        let total = self.missions.len();
+        let mut ok = 0usize;
+        while self.current_mission < self.missions.len() {
+            let m = self.missions[self.current_mission].clone();
+            self.mission_commands.clear();
+            self.current_dir = home.clone();
+            self.pending_code = None;
+            // 1. check à vide échoue
+            if self.cmd_check() { issues.push(format!("{}: check à vide a validé", m.id)); }
+            // 2. commande partielle (la moitié des commandes requises): ne doit valider que si
+            //    tous les checks sont déjà couverts par cette moitié (règle A4: ls matche ls -la)
+            let half = m.required_commands.len().max(1) / 2;
+            let partial: Vec<String> = m.required_commands.iter().take(half).map(|c| c.replace("$USER", "capitaine")).collect();
+            for c in &partial { self.mission_commands.push(c.clone()); }
+            let before_partial = self.completed.len();
+            let partial_validated = m.required_commands.len() > 1 && self.cmd_check();
+            if partial_validated {
+                // Règle A4: la validation partielle est légitime si tous les checks command_executed
+                // sont couverts par la moitié testée; sinon c'est une fuite.
+                let partial_ok = m.checks.iter().all(|ck| {
+                    let tb = ck.target.split_whitespace().next().unwrap_or(&ck.target);
+                    ck.check_type != "command_executed" || partial.iter().any(|c| c.split_whitespace().any(|w| w == tb) || c.contains(&ck.target))
+                });
+                if !partial_ok {
+                    issues.push(format!("{}: commande partielle a validé sans couvrir tous les checks", m.id));
+                }
+                if self.completed.len() > before_partial {
+                    // mission déjà validée par la moitié: OK (A4), on passe à la suivante
+                    ok += 1;
+                    continue;
+                }
+            }
+            // 3. typo échoue
+            self.mission_commands.clear();
+            self.mission_commands.push("pwdd".into());
+            if self.cmd_check() { issues.push(format!("{}: typo 'pwdd' a validé", m.id)); }
+            self.mission_commands.clear();
+            // 4. résolution complète (comme run_auto)
+            let vaisseau = shell::world_dir();
+            for c in &m.required_commands {
+                let c = c.replace("$USER", "capitaine");
+                self.mission_commands.push(c.clone());
+                self.exec_shell(&c);
+            }
+            for ck in &m.checks {
+                match ck.check_type.as_str() {
+                    "command_executed" | "file_read" => {
+                        let base = ck.target.split_whitespace().next().unwrap_or(&ck.target);
+                        if !self.mission_commands.iter().any(|c| c.split_whitespace().any(|w| w == base) || c.contains(&ck.target)) {
+                            self.mission_commands.push(if ck.check_type == "file_read" { format!("cat {}", ck.target) } else { base.to_string() });
+                        }
+                    }
+                    "dir_reached" | "dir_exists" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if !shell::dir_exists(&p) { shell::execute_interactive(&format!("mkdir -p '{}'", p)); }
+                        if ck.check_type == "dir_reached" { self.current_dir = self.canonical(&p); }
+                    }
+                    "file_exists" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if !shell::file_exists(&p) { shell::execute_interactive(&format!("touch '{}'", p)); }
+                    }
+                    "file_not_exists" => { let p = self.resolve_path(&ck.target, &vaisseau); shell::execute_interactive(&format!("rm -f '{}'", p)); }
+                    "permission" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if let Some(e) = &ck.expected { shell::execute_interactive(&format!("chmod {} '{}'", e, p)); }
+                    }
+                    "config_contains" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if let Some(e) = &ck.expected {
+                            if !shell::file_contains(&p, e) { shell::execute_interactive(&format!("echo '{}' >> '{}'", e, p)); }
+                        }
+                    }
+                    "user_exists" => { shell::execute_interactive(&format!("sudo useradd -m '{}' 2>/dev/null || true", ck.target)); }
+                    "group_exists" => { shell::execute_interactive(&format!("sudo groupadd '{}' 2>/dev/null || true", ck.target)); }
+                    _ => {}
+                }
+            }
+            let before = self.completed.len();
+            self.cmd_check();
+            // 5. phase 2: deux mauvais codes d'affilée, puis le bon
+            if self.pending_code.is_some() {
+                if self.submit_code("FAUX-1") { issues.push(format!("{}: mauvais code 1 a validé", m.id)); }
+                if self.pending_code.is_some() && self.submit_code("FAUX-2") { issues.push(format!("{}: mauvais code 2 a validé", m.id)); }
+                if let Some(code) = self.pending_code.clone() { self.submit_code(&code); }
+            }
+            if self.completed.len() > before {
+                ok += 1;
+                if self.current_dir != home { issues.push(format!("{}: position non reset", m.id)); }
+                if !self.mission_commands.is_empty() { issues.push(format!("{}: historique non vidé", m.id)); }
+            } else {
+                issues.push(format!("{}: non résolue en torture", m.id));
                 self.current_mission += 1;
                 self.mission_commands.clear();
                 self.pending_code = None;

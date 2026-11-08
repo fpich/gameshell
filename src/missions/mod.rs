@@ -101,6 +101,14 @@ mod conformity_tests {
         for m in missions {
             assert!(!m.required_commands.is_empty(), "{} {}: required_commands vide", label, m.id);
             assert!(!m.checks.is_empty(), "{} {}: checks vide", label, m.id);
+            // Invariant A4: chaque check command_executed doit être atteignable par une required_command
+            for ck in &m.checks {
+                if ck.check_type == "command_executed" {
+                    let tb = ck.target.split_whitespace().next().unwrap_or(&ck.target);
+                    let reachable = m.required_commands.iter().any(|c| c.split_whitespace().any(|w| w == tb) || c.contains(&ck.target));
+                    assert!(reachable, "{} {}: check '{}' non atteignable par aucune required_command", label, m.id, ck.target);
+                }
+            }
             assert!(skill_ok(m), "{} {}: skill {:?} n'est pas une commande requise de la mission (règle A15)", label, m.id, m.skill.as_ref().map(|s| s.name.clone()));
             assert!(BLOOM_FR.contains(&m.bloom_level.as_str()), "{} {}: bloom_level {:?} pas en français (règle B8/C9)", label, m.id, m.bloom_level);
             // Règle C3: 20+ lignes de contexte AFFICHÉES (wrap à 60 car., comme show_mission)

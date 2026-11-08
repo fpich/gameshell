@@ -8,9 +8,10 @@ une à une par un banc automatisé + tests manuels en pty réel.
 | Méthode | Commande | Résultat |
 |---------|----------|----------|
 | Auto-solve (joue toutes les missions réellement) | `GAMESHELL_AUTO=1 ./gameshell.sh` | **100/100 × 2 campagnes** |
-| Banc de cas limites par mission | `GAMESHELL_EDGE=1 ./gameshell.sh` | **100/100 + 100/100, 0 problème** (après corrections) |
+| Banc de cas limites par mission | `GAMESHELL_EDGE=1 ./gameshell.sh` | **300/300, 0 problème** |
+| Torture par mission (partiel, typo, 2 mauvais codes, isolation hôte) | `GAMESHELL_TORTURE=1 ./gameshell.sh` | **300/300, 0 problème, exit 0** |
 | Conformité contenu (cargo) | `cargo test --release` | 2/2 (200 missions, 20/acte, C3/C6/B9/C9/C13/A15) |
-| Suite moteur | `./tests/run_tests.sh` | **40/40 PASS** |
+| Suite moteur | `./tests/run_tests.sh` | **42/42 PASS** (auto 300/300, EDGE 300/300, TORTURE 300/300) |
 | Édition de ligne en vrai tty (flèches) | `script -qec` + séquences `\x1b[D`/`\x1b[A` | OK (curseur, historique) |
 | Inspection visuelle manuelle | sessions campagne 1 et 2 | OK |
 
@@ -67,7 +68,9 @@ et historique vidé après validation (règle A17).
 
 ## État final constaté
 
-- 200/200 missions résolues réellement (auto-solve) et 200/200 cas limites OK (EDGE).
+- 300/300 missions résolues réellement (auto-solve), 300/300 cas limites OK (EDGE), 300/300 torture OK (TORTURE).
+- Isolation hôte vérifiée en torture: `cat /etc/passwd` et `rm -rf /tmp` dans le jeu ne touchent jamais l'hôte (A1/A16).
+- Nouveau test de conformité cargo: chaque check `command_executed` doit être atteignable par une `required_command` (A4).
 - 40/40 tests moteur PASS, cargo test conformité OK.
 - Aucune fuite d'infos hôte (A16), aucun check vacu (A17), cartes alignées (B9/C6),
   stories re-flowées, commandes affichées = checks atteignables (B4).

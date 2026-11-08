@@ -155,6 +155,19 @@ fn main() {
             if ok != 100 || !issues.is_empty() { all_ok = false; }
         }
         std::process::exit(if all_ok { 0 } else { 1 });
+    } else if std::env::var("GAMESHELL_TORTURE").is_ok() {
+        // Mode torture: tord chaque mission dans tous les sens sur les 3 campagnes
+        let mut all_ok = true;
+        for c in [1u8, 2, 3] {
+            shell::select_world(c);
+            let mut game = game::Game::new(&player_name);
+            let (ok, issues) = game.run_torture();
+            let name = match c { 2 => "Japon Féodal", 3 => "Nexus Réseau", _ => "Pirates de l'Espace" };
+            println!("🌪️  TORTURE campagne {} ({}): {}/100 OK, {} problèmes", c, name, ok, issues.len());
+            for i in &issues { println!("   ⚠️  {}", i); }
+            if ok != 100 || !issues.is_empty() { all_ok = false; }
+        }
+        std::process::exit(if all_ok { 0 } else { 1 });
     } else if std::env::var("GAMESHELL_AUTO").is_ok() {
         // Mode auto-solve: joue les 2 campagnes (100 missions chacune)
         let mut all_ok = true;
