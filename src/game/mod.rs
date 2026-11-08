@@ -57,7 +57,8 @@ impl Game {
 
             let mut line = String::new();
             if io::stdin().read_line(&mut line).is_err() { break; }
-            let cmd = line.trim().to_string();
+            // Ignorer les séquences d'échappement (flèches ^[[A, ^[[B...) — règle A11
+            let cmd = line.trim().replace("\u{1b}[A", "").replace("\u{1b}[B", "").replace("\u{1b}[C", "").replace("\u{1b}[D", "").trim().to_string();
             if cmd.is_empty() { continue; }
 
             // Phase 2: si un code est attendu, la saisie est le code
@@ -224,7 +225,8 @@ impl Game {
     fn cmd_check(&mut self) -> bool {
         let (ok, missing) = self.check_mission_detailed();
         if !ok {
-            println!("\n  ❌ Non validé: {}", missing.join(", "));
+            let _ = missing; // JAMAIS révéler quoi que ce soit (règle A8)
+            println!("\n  ❌ Mission non validée. Relisez le contexte et réessayez.");
             return false;
         }
         // Phase 2: si la mission demande un code

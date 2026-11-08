@@ -36,8 +36,14 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - Quand une mission est validée, le joueur retourne à sa cabine (`HOME` → prompt `~`).
 - Sinon un fichier créé ailleurs fait échouer la mission suivante sans explication.
 
-## RÈGLE A8 — gsh check en échec = sobre
-- Affiche UNIQUEMENT: `❌ Non validé: <cibles manquantes>`. Aucun commentaire d'aide.
+## RÈGLE A8 — gsh check en échec = JAMAIS révéler quoi que ce soit
+- Affiche UNIQUEMENT: `❌ Mission non validée. Relisez le contexte et réessayez.`
+- INTERDIT d'indiquer quelle commande/fichier manque (ex: jamais "Non validé: pwd")
+- Le joueur doit relire la mission et déduire lui-même
+
+## RÈGLE A11 — Ignorer les séquences d'échappement clavier
+- Les flèches (^[[A haut, ^[[B bas...) et autres séquences ANSI doivent être ignorées à la lecture.
+- Ne jamais les traiter comme des commandes.
 
 ## RÈGLE A9 — Pas d'indices
 - `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.

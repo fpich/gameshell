@@ -54,7 +54,7 @@ echo "$out" | grep -q "✅ Mission réussie" && ok "gsh check valide mission 1.1
 
 # ─── TEST 4: ls seul ne valide PAS (il manque pwd) ───
 out=$(run_game "Test\nls\ngsh check\nexit\n")
-echo "$out" | grep -q "❌ Non validé" && ok "ls seul → ❌ Non validé (pwd manquant)" || ko "ls seul devrait échouer"
+echo "$out" | grep -q "❌ Mission non validée" && ok "ls seul → ❌ Mission non validée (pwd manquant)" || ko "ls seul devrait échouer"
 
 # ─── TEST 5: Check matche commande de base (règle 4m) ───
 out=$(run_game "Test\npwd\nls -la\ngsh check\nexit\n")
@@ -65,7 +65,7 @@ rm -rf ~/.gameshell
 echo -e "Test\npwd\nls\ngsh check\nexit\n" | timeout 15 bash gameshell.sh > /dev/null 2>&1
 # Nouvelle session: juste ls, gsh check doit échouer (pas de pwd dans CETTE session)
 out=$(echo -e "Test2\nls\ngsh check\nexit\n" | timeout 15 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
-echo "$out" | grep -q "❌ Non validé" && ok "Historique reset entre sessions (règle 2)" || ko "Fuite d'historique entre sessions!"
+echo "$out" | grep -q "❌ Mission non validée" && ok "Historique reset entre sessions (règle 2)" || ko "Fuite d'historique entre sessions!"
 
 # ─── TEST 7: Isolation chemins — ls / montre le vaisseau ───
 out=$(run_game "Test\nls /\nexit\n")
@@ -101,7 +101,7 @@ echo "$out" | grep -q "No such file" && echo "$out" | grep -q "Test@orion7:~" &&
 
 # ─── TEST 15: gsh check sans rien faire → ❌ ───
 out=$(run_game "Test\ngsh check\nexit\n")
-echo "$out" | grep -q "❌ Non validé" && ok "gsh check sans rien → ❌ Non validé" || ko "gsh check vide devrait échouer"
+echo "$out" | grep -q "❌ Mission non validée" && ok "gsh check sans rien → ❌ Mission non validée" || ko "gsh check vide devrait échouer"
 
 # ─── TEST 16: gsh goal = même affichage que show_mission ───
 out=$(run_game "Test\ngsh goal\nexit\n")
