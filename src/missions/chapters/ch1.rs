@@ -28,7 +28,7 @@ Sans cette information, elle ne peut pas vous donner accès aux systèmes de dé
             hints: vec![],
             xp_reward: 50,
             code_required: None,
-            map: "VUE DE DESSUS — vous êtes dans votre cabine:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └──────────┴──────────┘".into(),
+            map: "VUE DE DESSUS — vous êtes dans votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
             skill: Some(Skill { command: "pwd".into(), name: "pwd".into(), description: "pwd — affiche le répertoire courant".into() }),
         },
         Mission {
@@ -57,7 +57,7 @@ Vous ouvrez le fichier pour en lire le contenu.".into(),
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► bienvenue.txt sur votre bureau".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► bienvenue.txt sur votre bureau".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche le contenu complet d'un fichier texte".into() }),
         },
         Mission {
@@ -86,7 +86,7 @@ sous-compartiment messages, fichier dernier_message.txt.
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — objectif: compartiment COMMUNICATIONS:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶COMMS ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └─────────┴──► /communications/messages/".into(),
+            map: "VUE DE DESSUS — objectif: compartiment COMMUNICATIONS:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶COMMS◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► /communications/messages/".into(),
             skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd — change de répertoire (cd /pont, cd .., cd ~)".into() }),
         },
         Mission {
@@ -116,7 +116,7 @@ confirme Vex Korshun. Et avec les pirates qui approchent, on n'a pas de temps à
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — vous êtes le capitaine:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │▶ PONT ◀│ │CABINES │ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └──── fauteuil du capitaine".into(),
+            map: "VUE DE DESSUS — vous êtes le capitaine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   ▶PONT◀   │ │  CABINES   │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
             skill: Some(Skill { command: "id".into(), name: "id".into(), description: "id — affiche uid, gid et groupes de l'utilisateur courant".into() }),
         },
         Mission {
@@ -132,7 +132,7 @@ confirme Vex Korshun. Et avec les pirates qui approchent, on n'a pas de temps à
             hints: vec![],
             xp_reward: 50,
             code_required: None,
-            map: "VUE DE DESSUS — horloge de la salle de navigation:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶ NAV ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └─────────┴──► coordonnees/".into(),
+            map: "VUE DE DESSUS — horloge de la salle de navigation:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │   ▶NAV◀    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► coordonnees/".into(),
             skill: Some(Skill { command: "date".into(), name: "date".into(), description: "date — affiche la date et l'heure du système (+format)".into() }),
         },
     ]

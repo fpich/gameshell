@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — donjon:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶DONJON◀│ │QUART.  │ │ARCH.  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► coffre-fort (700)".into(),
+            map: "VUE DE DESSUS — donjon:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │   ARCH.    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► coffre-fort (700)".into(),
             skill: Some(Skill { command: "chmod 700".into(), name: "chmod 700".into(), description: "chmod 700 — verrouillage total".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — donjon:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶DONJON◀│ │QUART.  │ │ARCH.  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► sceaux.txt".into(),
+            map: "VUE DE DESSUS — donjon:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │   ARCH.    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► sceaux.txt".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche un fichier".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — archives secrètes:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │QUART.  │ │▶ARCH. ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► code_coffre.txt".into(),
+            map: "VUE DE DESSUS — archives secrètes:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶ARCH.◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► code_coffre.txt".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche un fichier".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — salle du trône:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │QUART.  │ │▶TRÔNE ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► registre_impots.txt += ligne".into(),
+            map: "VUE DE DESSUS — salle du trône:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶TRÔNE◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► registre_impots.txt += ligne".into(),
             skill: Some(Skill { command: ">>".into(), name: ">>".into(), description: ">> — ajoute au registre".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — donjon:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶DONJON◀│ │QUART.  │ │ARCH.  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► fiche du coffre-fort".into(),
+            map: "VUE DE DESSUS — donjon:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │   ARCH.    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► fiche du coffre-fort".into(),
             skill: Some(Skill { command: "stat".into(), name: "stat".into(), description: "stat — métadonnées".into() }),
         },
     ]

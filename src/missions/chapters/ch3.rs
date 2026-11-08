@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘\\n      └────► .secret (fichier caché sur le bureau)".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► .secret (fichier caché sur le bureau)".into(),
             skill: Some(Skill { command: "ls -la".into(), name: "ls -la".into(), description: "ls -la — liste tout, y compris les fichiers cachés".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘\\n      └────► cible: dernier_message.txt (quelque part...)".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► cible: dernier_message.txt".into(),
             skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find — recherche des fichiers par nom dans tout le vaisseau".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — objectif: les SOUTES:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶SOUTES◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └─────────┴──► peser /soutes".into(),
+            map: "VUE DE DESSUS — objectif: les SOUTES:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶SOUTES◀  │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► peser /soutes".into(),
             skill: Some(Skill { command: "du -sh".into(), name: "du -sh".into(), description: "du -sh — taille totale lisible d'un compartiment".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — objectif: le PONT:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶ PONT ◀│ │CABINES │ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► /pont (briefing avec l'Amiral)".into(),
+            map: "VUE DE DESSUS — objectif: le PONT:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   ▶PONT◀   │ │  CABINES   │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► /pont (briefing avec l'Amiral)".into(),
             skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd — change de répertoire (cd /pont, cd .., cd ~)".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘\\n      └────► créer rappel.txt sur le bureau".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► créer rappel.txt sur le bureau".into(),
             skill: Some(Skill { command: "echo ... > fichier".into(), name: ">".into(), description: "COMMANDE > fichier — redirige la sortie vers un fichier (écrase)".into() }),
         },
     ]

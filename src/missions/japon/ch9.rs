@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — scribes:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │QUART.  │ │▶SCRIBES◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► alerte_ronin.txt".into(),
+            map: "VUE DE DESSUS — scribes:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │ ▶SCRIBES◀  │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► alerte_ronin.txt".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche un fichier".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │▶QUART.◀│ │GRENIER│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘\\n      └────► chercher 'registre*' partout".into(),
+            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │  ▶QUART.◀  │ │  GRENIER   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► chercher 'registre*' partout".into(),
             skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find -name — motif".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — donjon:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶DONJON◀│ │QUART.  │ │SCRIBES │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► journal des gardes".into(),
+            map: "VUE DE DESSUS — donjon:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │  SCRIBES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► journal des gardes".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche un fichier".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — portail:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶PORTAIL◀│ │QUART.  │ │SCRIBES │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► registre des visiteurs".into(),
+            map: "VUE DE DESSUS — portail:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │ ▶PORTAIL◀  │ │   QUART.   │ │  SCRIBES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► registre des visiteurs".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche un fichier".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — scribes:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │QUART.  │ │▶SCRIBES◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            map: "VUE DE DESSUS — scribes:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │ ▶SCRIBES◀  │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
             skill: Some(Skill { command: "wc -l".into(), name: "wc -l".into(), description: "wc -l — total des lignes".into() }),
         },
     ]

@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — pagode:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │QUART.  │ │▶PAGODE◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            map: "VUE DE DESSUS — pagode:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶PAGODE◀  │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
             skill: Some(Skill { command: "ip addr".into(), name: "ip addr".into(), description: "ip addr — interfaces et IP".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — pagode:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │QUART.  │ │▶PAGODE◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► table de routage".into(),
+            map: "VUE DE DESSUS — pagode:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶PAGODE◀  │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► table de routage".into(),
             skill: Some(Skill { command: "ip route".into(), name: "ip route".into(), description: "ip route — table de routage".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — donjon (radar):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶DONJON◀│ │QUART.  │ │PAGODE │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► ports en écoute".into(),
+            map: "VUE DE DESSUS — donjon (radar):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │   PAGODE   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► ports en écoute".into(),
             skill: Some(Skill { command: "ss -tlnp".into(), name: "ss -tlnp".into(), description: "ss -tlnp — ports en écoute".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — remparts:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶REMP. ◀│ │QUART.  │ │PAGODE │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► ping 10.0.0.66".into(),
+            map: "VUE DE DESSUS — remparts:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶REMP.◀   │ │   QUART.   │ │   PAGODE   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► ping 10.0.0.66".into(),
             skill: Some(Skill { command: "ping -c".into(), name: "ping -c".into(), description: "ping -c N — N paquets".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — pagode:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │QUART.  │ │▶PAGODE◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► offrandes.txt".into(),
+            map: "VUE DE DESSUS — pagode:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶PAGODE◀  │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► offrandes.txt".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche un fichier".into() }),
         },
     ]

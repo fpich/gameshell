@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ (config):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► /securite/config/sshd_config".into(),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ (config):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶SECUR◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► /securite/config/sshd_config".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche le contenu complet d'un fichier texte".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ (config):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► sshd_config += PermitRootLogin no".into(),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ (config):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶SECUR◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► sshd_config += PermitRootLogin no".into(),
             skill: Some(Skill { command: "cmd >> fichier".into(), name: ">>".into(), description: "COMMANDE >> fichier — ajoute la sortie à la fin du fichier".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► état du service ssh".into(),
+            map: "VUE DE DESSUS — salle des machines:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │   ▶MACH◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► état du service ssh".into(),
             skill: Some(Skill { command: "systemctl status".into(), name: "systemctl status".into(), description: "systemctl status — affiche l'état d'un service".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► redémarrer ssh (systemctl restart)".into(),
+            map: "VUE DE DESSUS — salle des machines:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │   ▶MACH◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► redémarrer ssh (systemctl restart)".into(),
             skill: Some(Skill { command: "systemctl restart".into(), name: "systemctl restart".into(), description: "systemctl restart — redémarre un service pour appliquer sa config".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines (journaux):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► journal de ssh (journalctl -u ssh -n 10)".into(),
+            map: "VUE DE DESSUS — salle des machines (journaux):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │   ▶MACH◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► journal de ssh (journalctl -u ssh -n 10)".into(),
             skill: Some(Skill { command: "journalctl".into(), name: "journalctl".into(), description: "journalctl -u service -n N — logs d'un service (N dernières lignes)".into() }),
         },
     ]

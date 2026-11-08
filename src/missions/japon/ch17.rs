@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — donjon (boucliers):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶DONJON◀│ │QUART.  │ │REMP.  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► état du pare-feu".into(),
+            map: "VUE DE DESSUS — donjon (boucliers):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │   REMP.    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► état du pare-feu".into(),
             skill: Some(Skill { command: "ufw status".into(), name: "ufw status".into(), description: "ufw status — état du pare-feu".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — remparts:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶REMP. ◀│ │QUART.  │ │DONJON │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► bloquer 10.0.0.66".into(),
+            map: "VUE DE DESSUS — remparts:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶REMP.◀   │ │   QUART.   │ │   DONJON   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► bloquer 10.0.0.66".into(),
             skill: Some(Skill { command: "ufw deny from".into(), name: "ufw deny from".into(), description: "ufw deny from IP — bloque une IP".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — donjon (noyau):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶DONJON◀│ │QUART.  │ │REMP.  │\\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            map: "VUE DE DESSUS — donjon (noyau):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │   REMP.    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
             skill: Some(Skill { command: "iptables -L".into(), name: "iptables -L".into(), description: "iptables -L -n — règles du noyau".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — portail:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶PORTAIL◀│ │QUART.  │ │DONJON │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► autoriser le port 22".into(),
+            map: "VUE DE DESSUS — portail:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │ ▶PORTAIL◀  │ │   QUART.   │ │   DONJON   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► autoriser le port 22".into(),
             skill: Some(Skill { command: "ufw allow".into(), name: "ufw allow".into(), description: "ufw allow 22 — autorise le SSH".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — remparts:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶REMP. ◀│ │QUART.  │ │DONJON │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► activer les déflecteurs".into(),
+            map: "VUE DE DESSUS — remparts:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶REMP.◀   │ │   QUART.   │ │   DONJON   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► activer les déflecteurs".into(),
             skill: Some(Skill { command: "ufw enable".into(), name: "ufw enable".into(), description: "ufw enable — active le pare-feu".into() }),
         },
     ]

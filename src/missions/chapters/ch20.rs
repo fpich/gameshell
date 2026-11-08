@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ (boucliers):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► état du pare-feu (ufw status)".into(),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ (boucliers):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶SECUR◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► état du pare-feu (ufw status)".into(),
             skill: Some(Skill { command: "ufw status".into(), name: "ufw".into(), description: "ufw — pare-feu du vaisseau (status, allow, deny, enable)".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — boucliers (secteur 7G):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► bloquer 10.0.0.66 (ufw deny from)".into(),
+            map: "VUE DE DESSUS — boucliers (secteur 7G):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶SECUR◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► bloquer 10.0.0.66 (ufw deny from)".into(),
             skill: Some(Skill { command: "ufw deny from".into(), name: "ufw deny from".into(), description: "ufw deny from IP — bloque tout le trafic d'une IP pirate".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ (noyau):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► règles du noyau (iptables -L -n)".into(),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ (noyau):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶SECUR◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► règles du noyau (iptables -L -n)".into(),
             skill: Some(Skill { command: "iptables -L".into(), name: "iptables".into(), description: "iptables -L -n — liste les règles de filtrage du noyau".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ (videur):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► déban 10.0.0.99 (Andromède)".into(),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ (videur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶SECUR◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► déban 10.0.0.99 (Andromède)".into(),
             skill: Some(Skill { command: "fail2ban-client".into(), name: "fail2ban-client".into(), description: "fail2ban-client unban IP — révoque un bannissement".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 500,
             code_required: Some("OMEGA-9981-DELTA".into()),
-            map: "VUE DE DESSUS — les SOUTES (coffre-fort):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶SOUTES◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► /soutes/secrets (caméra d'audit) + code du coffre-fort".into(),
+            map: "VUE DE DESSUS — les SOUTES (coffre-fort):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶SOUTES◀  │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► /soutes/secrets + code coffre-fort".into(),
             skill: Some(Skill { command: "auditctl -w".into(), name: "auditctl".into(), description: "auditctl -w — installe une caméra d'audit sur un fichier sensible".into() }),
         },
     ]

@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — forge:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │QUART.  │ │▶FORGE ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            map: "VUE DE DESSUS — forge:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶FORGE◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
             skill: Some(Skill { command: "nice -n".into(), name: "nice -n".into(), description: "nice -n 19 — priorité basse".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — cellier:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │QUART.  │ │▶CELLIER◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            map: "VUE DE DESSUS — cellier:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │ ▶CELLIER◀  │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
             skill: Some(Skill { command: "df -h".into(), name: "df -h".into(), description: "df -h — espace disque lisible".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — greniers:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │QUART.  │ │▶GREN. ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            map: "VUE DE DESSUS — greniers:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶GREN.◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
             skill: Some(Skill { command: "du -sh".into(), name: "du -sh".into(), description: "du -sh — taille d'un dossier".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — remonter à la racine:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶RACINE◀│ │QUART.  │ │ARCH.  │\\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            map: "VUE DE DESSUS — remonter à la racine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶RACINE◀  │ │   QUART.   │ │   ARCH.    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
             skill: Some(Skill { command: "cd ..".into(), name: "cd ..".into(), description: "cd .. — remonte d'un niveau".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │DONJON │ │▶QUART.◀│ │GRENIER│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘".into(),
+            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │  ▶QUART.◀  │ │  GRENIER   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
             skill: Some(Skill { command: "cd ~".into(), name: "cd ~".into(), description: "cd ~ — retour aux quartiers".into() }),
         },
     ]

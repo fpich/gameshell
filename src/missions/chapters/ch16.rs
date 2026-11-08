@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — poste de garde (sécurité):\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶ PONT ◀│ │CABINES │ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► badge du capitaine (groups)".into(),
+            map: "VUE DE DESSUS — poste de garde (sécurité):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   ▶PONT◀   │ │  CABINES   │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► badge du capitaine (groups)".into(),
             skill: Some(Skill { command: "groups".into(), name: "groups".into(), description: "groups — affiche les groupes de l'utilisateur courant".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — poste de garde:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶ PONT ◀│ │CABINES │ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► fiche du matelot (id matelot)".into(),
+            map: "VUE DE DESSUS — poste de garde:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   ▶PONT◀   │ │  CABINES   │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► fiche du matelot (id matelot)".into(),
             skill: Some(Skill { command: "id user".into(), name: "id".into(), description: "id — affiche uid, gid et groupes d'un utilisateur".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — poste de garde:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶ PONT ◀│ │CABINES │ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► matelot → équipe equipage (usermod -aG)".into(),
+            map: "VUE DE DESSUS — poste de garde:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   ▶PONT◀   │ │  CABINES   │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► matelot → équipe equipage (usermod -aG)".into(),
             skill: Some(Skill { command: "usermod -aG".into(), name: "usermod".into(), description: "usermod -aG — ajoute un utilisateur à un groupe".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — cabines:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │▶CABINES◀│ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► session matelot (su - matelot -c whoami)".into(),
+            map: "VUE DE DESSUS — cabines:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │ ▶CABINES◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► session matelot (su - matelot -c whoami)".into(),
             skill: Some(Skill { command: "su - user -c cmd".into(), name: "su".into(), description: "su - user -c cmd — exécute une commande en tant qu'autre utilisateur".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — poste de garde:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶ PONT ◀│ │CABINES │ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► droits du capitaine (sudo -l)".into(),
+            map: "VUE DE DESSUS — poste de garde:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   ▶PONT◀   │ │  CABINES   │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► droits du capitaine (sudo -l)".into(),
             skill: Some(Skill { command: "sudo".into(), name: "sudo".into(), description: "sudo — exécute une commande en tant que root (clé maître du capitaine)".into() }),
         },
     ]
