@@ -16,7 +16,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — tout le château:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃  ▶RACINE◀  ┃ ┃   QUART.   ┃ ┃   DONJON   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "ls /".into(), name: "ls /".into(), description: "ls / — liste la racine".into() }),
         },
         Mission {
@@ -32,7 +31,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — racine:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃  ▶RACINE◀  ┃ ┃   QUART.   ┃ ┃   DONJON   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "ls -la".into(), name: "ls -la".into(), description: "ls -la — tout lister".into() }),
         },
         Mission {
@@ -48,7 +46,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► tous les *.txt".into(),
             skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find -name '*.txt' — tous les documents".into() }),
         },
         Mission {
@@ -64,7 +61,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — remparts:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃  ▶REMP.◀   ┃ ┃   QUART.   ┃ ┃   DONJON   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► etat_rembarts.txt".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche un fichier".into() }),
         },
         Mission {
@@ -80,7 +76,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — greniers:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶GREN.◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► registre_riz.txt".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche un fichier".into() }),
         },
     ]

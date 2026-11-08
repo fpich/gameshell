@@ -16,7 +16,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — scribes:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃ ▶SCRIBES◀  ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► grep | grep | wc".into(),
             skill: Some(Skill { command: "|".into(), name: "|".into(), description: "| — chaîne de commandes".into() }),
         },
         Mission {
@@ -32,7 +31,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► créer rapport.txt".into(),
             skill: Some(Skill { command: ">".into(), name: ">".into(), description: "> — redirige vers un fichier".into() }),
         },
         Mission {
@@ -48,7 +46,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► ajouter à rapport.txt".into(),
             skill: Some(Skill { command: ">>".into(), name: ">>".into(), description: ">> — ajoute à la fin".into() }),
         },
         Mission {
@@ -64,7 +61,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — remparts:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃  ▶REMP.◀   ┃ ┃   QUART.   ┃ ┃   FORGE    ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "|".into(), name: "|".into(), description: "| — chaîne".into() }),
         },
         Mission {
@@ -80,7 +76,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► rapport_final.txt complet".into(),
             skill: Some(Skill { command: ">".into(), name: ">".into(), description: "> — compose le rapport".into() }),
         },
     ]

@@ -125,9 +125,9 @@ out=$(run_game "Test\nexit\n")
 line=$(echo "$out" | grep "🏆" | head -1)
 echo "$line" | grep -q "gsh help" && ! echo "$line" | grep -q "gsh check" && ok "Footer mission = 'gsh help' seul (règle 4l)" || ko "Footer devrait être 'gsh help' seul"
 
-# ─── TEST 21: Carte ASCII présente dans chaque mission ───
+# ─── TEST 21: Carte vue de dessus SUPPRIMÉE (règle C6, décision utilisateur) ───
 out=$(run_game "Test\nexit\n")
-echo "$out" | grep -q "VUE DE DESSUS" && ok "Carte vue de dessus affichée (règle 4h)" || ko "Carte devrait être affichée"
+! echo "$out" | grep -q "VUE DE DESSUS" && ok "Plus de vue de dessus affichée (règle C6 supprimée)" || ko "La vue de dessus devrait être supprimée"
 
 # ─── TEST 22: Double définition commande (roleplay + technique) ───
 out=$(run_game "Test\nexit\n")

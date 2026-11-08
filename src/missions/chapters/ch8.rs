@@ -16,7 +16,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃   ▶MACH◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► filtrer les processus (ps + grep)".into(),
             skill: Some(Skill { command: "cmd1 | cmd2".into(), name: "|".into(), description: "COMMANDE | COMMANDE — chaîne deux commandes (filtre)".into() }),
         },
         Mission {
@@ -32,7 +31,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃   ▶MACH◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► processus 'bash' (pgrep)".into(),
             skill: Some(Skill { command: "pgrep".into(), name: "pgrep".into(), description: "pgrep -a — liste les processus par nom avec leur commande".into() }),
         },
         Mission {
@@ -48,7 +46,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines (jauges):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃   ▶MACH◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► jauges CPU/mémoire (top)".into(),
             skill: Some(Skill { command: "top".into(), name: "top".into(), description: "top -bn1 — aperçu des ressources CPU/mémoire des processus".into() }),
         },
         Mission {
@@ -64,7 +61,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃   ▶MACH◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► couper le processus 4242 (kill -9)".into(),
             skill: Some(Skill { command: "kill".into(), name: "kill".into(), description: "kill — termine un processus par son PID (kill -9 = forcé)".into() }),
         },
         Mission {
@@ -80,7 +76,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃   ▶MACH◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► tâche de fond prioritaire basse (nice)".into(),
             skill: Some(Skill { command: "nice".into(), name: "nice".into(), description: "nice -n 19 — lance une commande avec une priorité basse".into() }),
         },
     ]

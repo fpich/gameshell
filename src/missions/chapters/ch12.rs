@@ -16,7 +16,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment COMMUNICATIONS (antenne):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃  ▶COMMS◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► config réseau (ip addr)".into(),
             skill: Some(Skill { command: "ip addr".into(), name: "ip".into(), description: "ip addr — affiche les interfaces et adresses IP".into() }),
         },
         Mission {
@@ -32,7 +31,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment COMMUNICATIONS:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃  ▶COMMS◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► table de routage (ip route)".into(),
             skill: Some(Skill { command: "ip route".into(), name: "ip route".into(), description: "ip route — affiche la table de routage".into() }),
         },
         Mission {
@@ -48,7 +46,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — radar (secteur 7G):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃  ▶COMMS◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► ping 10.0.0.66 (pirate détecté)".into(),
             skill: Some(Skill { command: "ping -c 4".into(), name: "ping".into(), description: "ping -c N — envoie N paquets pour tester la connectivité".into() }),
         },
         Mission {
@@ -64,7 +61,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — radar réseau:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃  ▶COMMS◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► ports en écoute (ss -tlnp)".into(),
             skill: Some(Skill { command: "ss -tlnp".into(), name: "ss".into(), description: "ss -tlnp — affiche les connexions actives et ports en écoute".into() }),
         },
         Mission {
@@ -80,7 +76,6 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — salle de NAVIGATION:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃   ▶NAV◀    ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► /navigation/coordonnees/orion7.txt".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche le contenu complet d'un fichier texte".into() }),
         },
     ]

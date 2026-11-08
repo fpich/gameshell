@@ -161,8 +161,9 @@ Jamais de liste de 20 commandes avec exemples ici.
 - Si une mission exige `incident_15jan.txt`, le PNJ doit le dire: « crée incident_15jan.txt ».
 - Jamais faire deviner un nom de fichier exact.
 
-## RÈGLE C6 — Carte ASCII vue de dessus obligatoire
-- Gabarit FIXE en traits LOURDS (comme le cadre ┏━┓): boîtes ┏━┓ de 14 car., 3 salles,
+## RÈGLE C6 — Carte vue de dessus SUPPRIMÉE (décision utilisateur)
+- Plus de champ `map`, plus d'affichage "VUE DE DESSUS" dans les missions: jugé sans intérêt dans le jeu.
+- La position du joueur se lit dans le prompt (`pseudo@orion7:/pont$`) et via `pwd`.
   ▶ = position, ┳ en position 7/22/37, jonction ┻ exactement alignée dessous, └────► = cible,
   lignes ≤ 60 car. Testé par `cargo test` (règle B9: alignement + alignement ┳/┻) sur les 200 missions.
 - Champ `map` dans chaque mission: carte du vaisseau avec ▶ position, flèche vers la cible.

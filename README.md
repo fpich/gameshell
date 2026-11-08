@@ -92,7 +92,6 @@ Voir `PLAN.md` pour le plan d'action complet.
 
 Chaque mission affiche:
 - **Story complète** (20+ lignes de contexte narratif obligatoire)
-- **Carte ASCII vue de dessus** du vaisseau avec position ▶
 - **Objectif narratif** (sans nommer la commande — l'étudiant déduit)
 - **Commandes shell** avec double définition: 🚀 roleplay + 💻 technique
 - **Niveau Bloom en français** (Se souvenir → Créer)

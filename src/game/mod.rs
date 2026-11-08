@@ -450,10 +450,6 @@ impl Game {
                 println!("  ┃  {}", chunk.normal());
             }
             println!("  ┃{}", "─".repeat(w).normal());
-            for ml in m.map.lines() {
-                println!("  ┃  {}", ml.green());
-            }
-            println!("  ┃{}", "─".repeat(w).normal());
             for chunk in wrap_text(&m.goal, w - 6) {
                 println!("  ┃  {}", chunk.black().bold());
             }
