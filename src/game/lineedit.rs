@@ -274,7 +274,6 @@ fn read_line_raw(prompt: &str, history: &mut Vec<String>) -> Option<String> {
                         }
                     }
                     Some(_) => {} // ESC + autre chose: ignoré
-                    None => {}
                 }
             }
             _ if c >= 0x20 => {

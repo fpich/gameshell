@@ -198,7 +198,7 @@ Ordre fixe: 🚀 roleplay d'abord, 💻 technique ensuite. Fonction `cmd_brief()
 - Liste figée: Zyra-7 (IA de bord), Vex Korshun (commandant), Nira Okoro (communications),
   Tael Rhen (ingénieur-chef machines), Draz M'kal (sécurité), Boz Tark (mécanicien),
   Amiral Xylia Vorn, Medic-IA Andromède. Vaisseau-mère: **l'Andromède**.
-- INTERDIT partout (chapitres, generator, generated.json, vaisseau-gen.sh): Marie, Sophie, Jean,
+- INTERDIT partout (chapitres des 3 campagnes, vaisseau-gen.sh, monde-*-gen.sh): Marie, Sophie, Jean,
   Pierre, Kowalski, Galactica, et tout nom contemporain banal.
 - Jamais de nom de joueur en dur dans vaisseau-gen.sh (utiliser "le Capitaine").
 - Test: `cargo test` (vaisseau_gen_sans_noms_interdits + blacklist dans toutes les missions).
@@ -239,7 +239,7 @@ Générée par `vaisseau-gen.sh`. Jamais `/srv/`, `/etc/`, `/home/etudiant/`.
 ```bash
 cargo build --release 2>&1 | grep -E "^error"   # vide
 bash make-archive.sh                               # régénère gameshell.sh
-./tests/run_tests.sh                               # 37/37 PASS + cargo test (conformité)
+./tests/run_tests.sh                               # 42/42 PASS + cargo test (conformité)
 ```
 
 ## RÈGLE E2 — Distribution 100% offline

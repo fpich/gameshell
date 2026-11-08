@@ -17,7 +17,6 @@ cargo build --release && ./make-archive.sh
 ./gameshell.sh          # installe dans ~/.gameshell/ et lance le jeu
 ```
 
-Alternative: `./install.sh` installe dans `~/.gameshell/` ou `/opt/gameshell/` (sudo).
 
 ---
 
@@ -139,23 +138,26 @@ gameshell/
 ├── README.md              # cette documentation
 ├── Cargo.toml
 ├── make-archive.sh        # génère gameshell.sh auto-extractible
-├── vaisseau-gen.sh        # génère le monde du vaisseau
-├── launcher.sh            # lance le jeu dans le vaisseau isolé
-├── install.sh             # installation système
+├── vaisseau-gen.sh        # génère les 3 mondes (espace|japon|reseau)
+├── monde-japon-gen.sh     # monde campagne 2 (château Shiro)
+├── monde-reseau-gen.sh   # monde campagne 3 (NOC Nexus)
+├── launcher.sh            # lance le jeu dans le monde isolé
 └── src/
-    ├── main.rs            # point d'entrée + banner espace étoilé
-    ├── game/mod.rs        # moteur de jeu (boucle, affichage, checks)
-    ├── shell/mod.rs       # exécution commandes + isolation chemins
-    └── missions/          # 100 missions en dur, 20 chapitres
+    ├── main.rs            # point d'entrée + menu campagnes + bannières
+    ├── game/mod.rs        # moteur de jeu (boucle, édition de ligne, checks, auto/edge/torture)
+    ├── shell/mod.rs       # exécution commandes + isolation chemins + sélection monde
+    └── missions/          # 300 missions en dur (3 campagnes x 100)
         ├── types.rs       # Mission, Skill, MissionCheck
-        └── chapters/ch1..20.rs
+        ├── chapters/ch1..20.rs   # campagne 1 (espace)
+        ├── japon/ch1..20.rs      # campagne 2 (Japon féodal)
+        └── reseau/ch1..20.rs     # campagne 3 (Nexus réseau)
 ```
 
 ## 👨‍🏫 Pour les enseignants
 
 - Distribution: un seul fichier `gameshell.sh` (clé USB, ENT...)
 - Historique des commandes dans `~/.gameshell/state/commands.log` pour évaluation
-- Missions modifiables dans `src/missions/chapters/ch*.rs`
+- Missions modifiables dans `src/missions/{chapters,japon,reseau}/ch*.rs`
 - Rebuild: `cargo build --release && ./make-archive.sh`
 
 ## 📦 Dépôt git

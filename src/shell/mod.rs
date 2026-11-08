@@ -100,24 +100,6 @@ pub fn execute_interactive(command: &str) -> i32 {
     }
 }
 
-/// Obtient le répertoire courant réel
-pub fn get_current_dir() -> String {
-    let (stdout, _, _) = execute_real("pwd");
-    stdout.trim().to_string()
-}
-
-/// Obtient le hostname du monde (orion7) ou le vrai hostname
-pub fn get_hostname() -> String {
-    "orion7".to_string()
-}
-
-/// Obtient l'utilisateur courant
-#[allow(dead_code)]
-pub fn get_current_user() -> String {
-    let (stdout, _, _) = execute_real("whoami");
-    stdout.trim().to_string()
-}
-
 /// Vérifie si un fichier existe
 pub fn file_exists(path: &str) -> bool {
     let (_, _, code) = execute_real(&format!("test -e '{}'", path));
@@ -178,24 +160,3 @@ pub fn log_command(cmd: &str) {
     }
 }
 
-/// Lit l'historique des commandes
-pub fn read_command_history() -> Vec<String> {
-    std::fs::read_to_string(history_path())
-        .unwrap_or_default()
-        .lines()
-        .map(|s| s.to_string())
-        .collect()
-}
-
-/// Réinitialise le monde du jeu (reset)
-#[allow(dead_code)]
-pub fn reset_world() -> bool {
-    let src = format!("{}/vaisseau", gameshell_home());
-    let repo_world = concat!(env!("CARGO_MANIFEST_DIR"), "/vaisseau");
-    // Copie le monde depuis le repo ou depuis une sauvegarde
-    let (_, _, code) = execute_real(&format!(
-        "cp -r '{}'/* '{}/' 2>/dev/null || true",
-        repo_world, src
-    ));
-    code == 0
-}

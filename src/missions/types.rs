@@ -34,10 +34,3 @@ pub struct Mission {
     pub skill: Option<Skill>,
     pub code_required: Option<String>,  // Code à entrer en phase 2 de gsh check
 }
-
-impl Mission {
-    /// Retourne l'objectif en langage naturel (pour l'affichage au joueur)
-    pub fn goal_text(&self) -> &str {
-        &self.goal
-    }
-}

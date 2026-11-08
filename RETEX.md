@@ -71,6 +71,31 @@ et historique vidé après validation (règle A17).
 - 300/300 missions résolues réellement (auto-solve), 300/300 cas limites OK (EDGE), 300/300 torture OK (TORTURE).
 - Isolation hôte vérifiée en torture: `cat /etc/passwd` et `rm -rf /tmp` dans le jeu ne touchent jamais l'hôte (A1/A16).
 - Nouveau test de conformité cargo: chaque check `command_executed` doit être atteignable par une `required_command` (A4).
-- 40/40 tests moteur PASS, cargo test conformité OK.
+- 42/42 tests moteur PASS, cargo test conformité OK.
 - Aucune fuite d'infos hôte (A16), aucun check vacu (A17), cartes alignées (B9/C6),
   stories re-flowées, commandes affichées = checks atteignables (B4).
+
+---
+
+## 🔍 Revue globale de qualité (session courante)
+
+### Audit code
+- **0 warning** de compilation (nettoyage: bras dupliqués dans `cmd_brief_raw`, arm `None` inaccessible
+  dans lineedit, variables inutilisées, dead code supprimé: `acts.rs`, `goal_text`, helpers shell morts).
+- `install.sh` supprimé (obsolète, non utilisé par `make-archive.sh`).
+- Plus de `unwrap()` sur entrée utilisateur (seulement tests + `pending_code` gardé).
+- Taille archive: `gameshell.sh` ~884 Ko, 100% offline (3 mondes embarqués, binaire, générateurs).
+
+### Audit docs ↔ réalité
+- README/PLAN/RETEX/TESTS_PLAYTHROUGH/AGENTS.md alignés: 3 campagnes × 100 missions, 42/42 tests,
+  arborescence `missions/{chapters,japon,reseau}/ch1..20.rs`, monde-*-gen.sh.
+- Audit croisé règles AGENTS.md ↔ code: 16/16 règles vérifiées présentes (A1-A17, B, C14, D2, E2).
+
+### Couverture de tests finale
+- `cargo test`: conformité 300 missions (structure, C3, A4 atteignabilité, A15, C9, C13).
+- `run_tests.sh` 42/42: moteur + auto-solve 300/300 + EDGE 300/300 + TORTURE 300/300 + isolation hôte.
+
+### Améliorations identifiées (non bloquantes, voir plan P0-P3 ci-dessus)
+- Sauvegarde/reprise de progression par campagne (P1).
+- Écran de fin par campagne avec score (P1).
+- `gsh export` enseignant (P3).

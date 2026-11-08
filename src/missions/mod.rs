@@ -1,6 +1,5 @@
 //! Système de missions - Agrège tous les chapitres
 pub mod types;
-pub mod acts;
 pub mod japon;
 pub mod reseau;
 pub mod chapters {

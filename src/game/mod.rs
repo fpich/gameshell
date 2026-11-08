@@ -399,10 +399,6 @@ impl Game {
             "|" => ("chaîne deux commandes: la sortie de l'une devient l'entrée de l'autre", "comme passer le résultat du radar (ps) dans un filtre (grep) pour ne garder que les ennemis"),
             ">" => ("redirige la sortie d'une commande vers un fichier (écrase)", "comme enregistrer le rapport du radar dans un nouveau fichier sur votre bureau"),
             ">>" => ("redirige la sortie vers un fichier en ajoutant à la fin (append)", "comme ajouter une nouvelle ligne à la fin du journal de bord existant"),
-            "zip" => ("compresse en ZIP (-r récursif)", "comme empaqueter des documents dans une valise compressée pour l'Andromède"),
-            "unzip" => ("extrait une archive ZIP", "comme déballer une valise reçue du vaisseau-mère"),
-            "ss" => ("connexions réseau (ss -tlnp)", "comme consulter le radar des vaisseaux connectés à nos ports"),
-            "netstat" => ("connexions réseau (netstat -tlnp)", "comme le radar réseau, version classique"),
             "head" => ("affiche les N premières lignes d'un fichier (-n N)", "comme lire seulement le début du grand journal de bord du pont"),
             "tail" => ("affiche les N dernières lignes d'un fichier (-n N)", "comme consulter les dernières entrées du journal système, là où l'action récente est écrite"),
             "wc" => ("compte les lignes/mots/caractères d'un fichier (-l lignes)", "comme compter combien de lignes fait un rapport avant de l'envoyer"),
@@ -688,7 +684,7 @@ impl Game {
     /// check à vide échoue, commande garbage échoue, résolution réussit, mauvais code phase 2 échoue,
     /// bon code réussit, position reset à ~ et historique mission vidé après validation.
     pub fn run_edge(&mut self) -> (usize, Vec<String>) {
-        let total = self.missions.len();
+        let _total = self.missions.len();
         let mut ok = 0usize;
         let mut issues: Vec<String> = Vec::new();
         let home = std::env::var("HOME").unwrap_or_else(|_| ".".into());
@@ -791,7 +787,6 @@ impl Game {
         if avant != apres { issues.push("FUITE HÔTE: rm -rf /tmp a touché l'hôte!".into()); }
         self.exec_shell("gsh reset");
 
-        let total = self.missions.len();
         let mut ok = 0usize;
         while self.current_mission < self.missions.len() {
             let m = self.missions[self.current_mission].clone();
