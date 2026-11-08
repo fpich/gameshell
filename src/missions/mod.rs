@@ -1,6 +1,7 @@
 //! Système de missions - Agrège tous les chapitres
 pub mod types;
 pub mod acts;
+pub mod japon;
 pub mod chapters {
     pub mod ch1;
     pub mod ch2;
@@ -26,9 +27,14 @@ pub mod chapters {
 
 pub use types::*;
 
-/// 100 missions EN DUR (20 chapitres x 5 missions, 5 actes x 20 missions).
-/// 100% offline, aucun générateur procédural (règle C1).
+/// 100 missions EN DUR par campagne (20 chapitres x 5 missions, 5 actes x 20 missions).
+/// 100% offline, aucun générateur procédural (règle C1/C14).
+/// Campagne 1 = Pirates de l'Espace (facile), 2 = Japon Féodal (moyen).
 pub fn load_all_missions() -> Vec<Mission> {
+    let campaign: u8 = std::env::var("GAMESHELL_CAMPAIGN").ok().and_then(|v| v.parse().ok()).unwrap_or(1);
+    if campaign == 2 {
+        return japon::missions();
+    }
     let mut missions = Vec::new();
     missions.extend(chapters::ch1::missions());
     missions.extend(chapters::ch2::missions());
@@ -108,13 +114,18 @@ mod conformity_tests {
 
     #[test]
     fn missions_conformes() {
-        let ms = load_all_missions();
-        assert_eq!(ms.len(), 100, "100 missions en dur attendues (20 chapitres x 5, 5 actes x 20)");
-        check_missions(&ms, "manuel");
-        // 20 missions par acte (règle C1)
-        for act in 1..=5u32 {
-            let n = ms.iter().filter(|m| m.act == act).count();
-            assert_eq!(n, 20, "acte {} doit avoir 20 missions, trouvé {}", act, n);
+        for camp in [1u8, 2] {
+            std::env::set_var("GAMESHELL_CAMPAIGN", camp.to_string());
+            let ms = load_all_missions();
+            std::env::remove_var("GAMESHELL_CAMPAIGN");
+            let label = if camp == 2 { "japon" } else { "espace" };
+            assert_eq!(ms.len(), 100, "campagne {}: 100 missions en dur attendues (20 chapitres x 5, 5 actes x 20)", label);
+            check_missions(&ms, label);
+            // 20 missions par acte (règle C1)
+            for act in 1..=5u32 {
+                let n = ms.iter().filter(|m| m.act == act).count();
+                assert_eq!(n, 20, "{} acte {} doit avoir 20 missions, trouvé {}", label, act, n);
+            }
         }
     }
 

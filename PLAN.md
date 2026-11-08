@@ -1,26 +1,25 @@
-# 📋 PLAN — GameShell Orion-7 : 100 missions en dur (20 par acte)
+# 📋 PLAN — GameShell : 2 campagnes de 100 missions en dur (20 par acte)
 
-## Structure retenue (100% offline, AUCUNE génération procédurale)
+## Campagne 1 — Les Pirates de l'Espace (FACILE) — `src/missions/chapters/ch1..20.rs`
+Station Orion-7, hôte orion7, capitaine. 5 actes × 20 missions.
 
-- **100 missions écrites à la main** dans `src/missions/chapters/ch1..20.rs`
-- **20 chapitres × 5 missions**, **5 actes × 20 missions** (4 chapitres par acte)
-- Boucle narrative "Les Pirates de l'Espace": arrivée → enquête → défense → durcissement
+## Campagne 2 — Le Japon Féodal (MOYEN) — `src/missions/japon/ch1..20.rs`
+Château Shiro, hôte shiro, seigneur. Monde dédié `monde_japon/` (monde-japon-gen.sh).
+5 actes × 20 missions, checks plus exigeants (options exactes, multi-checks, codes phase 2).
 
-| Acte | Chapitres | Thème |
-|------|-----------|-------|
-| I | 1–4 | Arrivée à bord, exploration, organisation, journal de bord |
-| II | 5–8 | Sécuriser les accès, surveiller les processus |
-| III | 9–12 | Enquête (logs), diagnostic réseau |
-| IV | 13–16 | Sauvegarde/archives, gestion de l'équipage |
-| V | 17–20 | Maintenance, durcissement SSH, boucliers, mission finale avec code |
+| Acte | Chapitres (les 2 campagnes) | Thème |
+|------|------------------------------|-------|
+| I | 1–4 | Arrivée (vaisseau / château), exploration, organisation |
+| II | 5–8 | Permissions, surveillance des processus |
+| III | 9–12 | Enquête (logs/espions), réseau, combos de commandes, archives |
+| IV | 13–16 | Recrutement/équipage, coffre-fort, inventaire |
+| V | 17–20 | Pare-feu, services, durcissement, siège final avec code |
 
-## Conformité (figée par `cargo test` + `tests/run_tests.sh` 38/38)
+## Moteur multi-campagnes (règles C14/D2)
+- Sélection au lancement; `GAMESHELL_CAMPAIGN` + `GAMESHELL_WORLD` par campagne.
+- Bannière, prompt, hostname/whoami/id/groups/uname et analogies 🚀 thématisés par campagne.
+- `gsh reset` régénère le monde de la campagne courante (vaisseau-gen.sh embarqué).
 
-Chaque mission respecte AGENTS.md: 20+ lignes de contexte affichées (C3), carte ASCII vue de dessus (C6),
-double définition 🚀 roleplay + 💻 technique (C7), objectif narratif sans nommer la commande (C4),
-compétence débloquée = commande de LA mission (A15), PNJ noms SF (C13), Bloom en français (C9).
-
-## Extension future
-
-Pour ajouter des missions: créer `ch21.rs`, ... et les enregistrer dans `src/missions/mod.rs`.
-Toujours en dur, jamais de génération runtime.
+## Tests (figés)
+- `cargo test`: conformité des 2 campagnes (100 missions chacune, 20/acte, C3/C6/C9/C13/A15).
+- `tests/run_tests.sh`: 39/39 PASS dont auto-solve 100/100 × 2 campagnes (GAMESHELL_AUTO=1) et sélection campagne 2.

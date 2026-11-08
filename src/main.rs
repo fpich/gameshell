@@ -31,13 +31,38 @@ struct Cli {
     name: Option<String>,
 }
 
-fn print_banner() {
+fn print_banner(campaign: u8) {
     // Clear écran au lancement
     print!("\x1b[2J\x1b[H");
     io::stdout().flush().ok();
 
-    // Espace étoilé avec titre entouré d'étoiles
-    let espace = r#"
+    if campaign == 2 {
+        // Bannière Japon Féodal: torii et pagode
+        let japon = r#"
+           .    .        /
+      .        .      /  \
+  .     .        .  /____\      .
+        .    .     /|    |\   .
+   .        .     / |    | \      .
+         .     .  |  |    |  |  .
+   .        .    _|__|____|__|_    .
+        .    .   |   SHIRO    |  .
+   .        .    |____________|    .
+  ________________/    ||    \_______________
+  \   GARDE: [####..]   Honneur: [######..]   /
+   \______________________________________/
+      |##|                          |##|
+      |##|   DOJO        PAGODE     |##|
+      |##|                          |##|
+"#;
+        println!("{}", japon.red());
+        println!();
+        println!("{}", "  *   🏯   LE JAPON FÉODAL   🏯   *".red().bold());
+        println!("{}", "     *  Mission Administration — Château Shiro  *".yellow());
+        println!("{}", "  *        Niveau MOYEN — 100 missions        *".red());
+    } else {
+        // Espace étoilé avec titre entouré d'étoiles
+        let espace = r#"
   *  .  *     .  *    .  *     .  *   .  *  .  *
  .    *    .     *  .    *   .     *    .   *
     *   .  *    .   *    .    *  .    *  .    *
@@ -51,36 +76,69 @@ fn print_banner() {
      *    .   *    .   *    .  *    .   *
   *    .    *    .   *    .    *    .    *  .
 "#;
-    println!("{}", espace.green());
+        println!("{}", espace.green());
+        println!();
+        println!("{}", "  *   🏴‍☠️   LES PIRATES DE L'ESPACE   🏴‍☠️   *".green().bold());
+        println!("{}", "     *    Mission SISR — Station Orion-7    *".yellow());
+        println!("{}", "  *        Niveau FACILE — 100 missions        *".green());
+    }
     println!();
 }
 
 fn main() {
     let cli = Cli::parse();
 
-    print_banner();
-
-    // Demander le nom du joueur
+    // Nom du joueur d'abord
+    print!("\x1b[2J\x1b[H");
+    println!("  ╔══════════════════════════════════════╗");
+    println!("  ║          🕹️  GAMESHELL               ║");
+    println!("  ║   Jeu RPG éducatif — shell Debian    ║");
+    println!("  ╚══════════════════════════════════════╝\n");
     let player_name = cli.name.unwrap_or_else(|| {
         let mut hist = Vec::new();
-        let name = game::lineedit::read_line("👤 Entrez votre nom de capitaine: ", &mut hist)
+        let name = game::lineedit::read_line("👤 Entrez votre nom: ", &mut hist)
             .unwrap_or_default();
         let name = name.trim().to_string();
         if name.is_empty() { "Capitaine".to_string() } else { name }
     });
 
+    // Sélection de la campagne (règle C14) — défaut espace si non interactif
+    let campaign: u8 = if std::env::var("GAMESHELL_AUTO").is_ok() {
+        1 // le mode auto itère sur les 2 campagnes plus bas
+    } else {
+        println!("\n  ╔══════════════════════════════════════╗");
+        println!("  ║     Choisissez votre CAMPAGNE        ║");
+        println!("  ╚══════════════════════════════════════╝\n");
+        println!("  1) 🏴‍☠️  Les Pirates de l'Espace — Station Orion-7  (niveau FACILE, 100 missions)");
+        println!("  2) 🏯  Le Japon Féodal — Château Shiro           (niveau MOYEN, 100 missions)");
+        println!();
+        let mut hist = Vec::new();
+        let choix = game::lineedit::read_line("👉 Numéro de campagne (1 ou 2): ", &mut hist).unwrap_or_default();
+        if choix.trim() == "2" { 2 } else { 1 }
+    };
+    shell::select_world(campaign);
+    print_banner(campaign);
+
     println!("\n👋 Bienvenue, {}!", player_name.bright_green().bold());
     println!("📦 Chargement des missions...\n");
 
-    let mut game = game::Game::new(&player_name);
-
     if cli.test {
+        let mut game = game::Game::new(&player_name);
         game.run_test_mode();
     } else if std::env::var("GAMESHELL_AUTO").is_ok() {
-        // Mode auto-solve (tests d'exhaustivité): joue toutes les missions
-        let (ok, total) = game.run_auto();
-        std::process::exit(if ok == total { 0 } else { 1 });
+        // Mode auto-solve: joue les 2 campagnes (100 missions chacune)
+        let mut all_ok = true;
+        for c in [1u8, 2] {
+            shell::select_world(c);
+            let mut game = game::Game::new(&player_name);
+            let (ok, total) = game.run_auto();
+            println!("🤖 AUTO campagne {} ({}): {}/{} missions résolues",
+                c, if c == 2 { "Japon Féodal" } else { "Pirates de l'Espace" }, ok, total);
+            if ok != total { all_ok = false; }
+        }
+        std::process::exit(if all_ok { 0 } else { 1 });
     } else {
+        let mut game = game::Game::new(&player_name);
         game.run();
     }
 }

@@ -13,6 +13,7 @@ pub mod lineedit;
 
 pub struct Game {
     player_name: String,
+    campaign: u8,
     missions: Vec<Mission>,
     current_mission: usize,
     xp: u64,
@@ -28,10 +29,13 @@ pub struct Game {
 
 impl Game {
     pub fn new(player_name: &str) -> Self {
+        let campaign = shell::campaign_id();
         let missions = load_all_missions();
+        shell::select_world(campaign);
         let home = std::env::var("HOME").unwrap_or_else(|_| ".".into());
         Game {
             player_name: player_name.to_string(),
+            campaign,
             missions,
             current_mission: 0,
             xp: 0,
@@ -49,16 +53,20 @@ impl Game {
     pub fn run(&mut self) {
         // Reset historique au démarrage
         let _ = std::fs::remove_file(shell::history_path());
+        let (titre, sous_titre) = match self.campaign {
+            2 => ("🏯 CHÂTEAU SHIRO — Terminal du Seigneur", format!("Seigneur: {}  │  Campagne: Le Japon Féodal  │  Niveau: MOYEN", self.player_name)),
+            _ => ("🚀 ORION-7 — Terminal du Capitaine", format!("Admin: {}  │  Campagne: Les Pirates de l'Espace  │  Niveau: FACILE", self.player_name)),
+        };
         println!("\n  ╔══════════════════════════════════════╗");
-        println!("  ║  🚀 ORION-7 — Terminal du Capitaine  ║");
-        println!("  ║  {}", format!("Admin: {}", self.player_name));
+        println!("  ║  {:^36}  ║", titre);
+        println!("  ║  {:^36}  ║", sous_titre);
         println!("  ╚══════════════════════════════════════╝");
         self.cmd_help();
         self.show_mission();
 
         loop {
             let cwd = self.display_path(&self.current_dir);
-            let prompt = format!("{}@{}:{}$ [{}/{}] ", self.player_name.bright_green(), "orion7".normal(), cwd.normal(), self.completed.len(), self.missions.len());
+            let prompt = format!("{}@{}:{}$ [{}/{}] ", self.player_name.bright_green(), shell::world_hostname().normal(), cwd.normal(), self.completed.len(), self.missions.len());
 
             // Règle A11: édition de ligne façon terminal (flèches gauche/droite, haut/bas = historique)
             let line = match lineedit::read_line(&prompt, &mut self.history) {
@@ -106,7 +114,7 @@ impl Game {
         // Parsing robuste: split_whitespace gère espaces/tabs multiples
         let parts: Vec<&str> = cmd.split_whitespace().collect();
         let base = parts.first().copied().unwrap_or("");
-        let vaisseau = format!("{}/vaisseau", shell::gameshell_home());
+        let vaisseau = shell::world_dir();
 
         match base {
             "cd" => {
@@ -123,15 +131,15 @@ impl Game {
                 println!("Manuel de '{}': voir gsh help pour la syntaxe générale (COMMANDE, COMMANDE arg, COMMANDE -option arg)", arg);
             }
             "pwd" => println!("{}", self.display_path(&self.current_dir)),
-            "hostname" => println!("orion7"),
-            "whoami" => println!("capitaine"),
+            "hostname" => println!("{}", shell::world_hostname()),
+            "whoami" => println!("{}", shell::world_user()),
             // Règle A16: jamais d'infos de l'hôte réel — identité vaisseau simulée
-            "id" => println!("uid=1000(capitaine) gid=1000(capitaine) groupes=1000(capitaine),27(sudo),1001(equipage_pont),1002(securite)"),
-            "groups" => println!("capitaine equipage_pont securite sudo"),
-            "logname" => println!("capitaine"),
+            "id" => println!("{}", id_line()),
+            "groups" => println!("{}", groups_line()),
+            "logname" => println!("{}", shell::world_user()),
             "uname" => {
                 if parts.iter().any(|a| *a == "-a" || *a == "--all") {
-                    println!("Linux orion7 6.6.7-orion #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux");
+                    println!("Linux {} 6.6.7-{} #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux", shell::world_hostname(), shell::world_hostname());
                 } else {
                     println!("Linux");
                 }
@@ -173,7 +181,7 @@ impl Game {
             }
             "unzip" | "apt" | "dpkg" | "systemctl" | "journalctl" | "ufw" | "iptables" | "fail2ban-client" | "auditctl" | "useradd" | "groupadd" | "usermod" | "passwd" | "ssh" => {
                 // Commandes système réelles: exécuter, mais si échec → message pédagogique
-                let vaisseau = format!("{}/vaisseau", shell::gameshell_home());
+                let vaisseau = shell::world_dir();
                 let rewritten: Vec<String> = parts.iter().enumerate().map(|(i, p)| {
                     if i > 0 && p.starts_with('/') && !p.starts_with(&vaisseau) {
                         format!("{}{}", vaisseau, p)
@@ -198,9 +206,82 @@ impl Game {
         }
     }
 
-    /// Définition double d'une commande: (technique Linux, analogie role play vaisseau)
-    /// RÈGLE 4b: jamais afficher une commande sans ses deux définitions
+    /// Définition double d'une commande: (technique Linux, analogie role play)
+    /// RÈGLE C7: roleplay d'abord, technique ensuite. Analogie selon la campagne (C14).
     fn cmd_brief(cmd: &str) -> (&'static str, &'static str) {
+        let (tech, rp) = Self::cmd_brief_raw(cmd);
+        if shell::campaign_id() == 2 {
+            if let Some(jp) = Self::cmd_brief_jp(cmd) { return (tech, jp); }
+        }
+        (tech, rp)
+    }
+
+    /// Analogies role play thématisées Japon Féodal (campagne 2 — règle C14)
+    fn cmd_brief_jp(cmd: &str) -> Option<&'static str> {
+        let base = cmd.split_whitespace().next().unwrap_or(cmd);
+        Some(match base {
+            "man" => "comme consulter le rouleau de sagesse d'un équipement du château avant de l'utiliser",
+            "pwd" => "comme demander au gong du château 'Dans quelle salle du château suis-je exactement?'",
+            "ls" => "comme ouvrir la porte de votre salle pour voir tout ce qu'elle contient",
+            "cd" => "comme emprunter les couloirs du château pour aller d'une salle à une autre (ex: de vos quartiers au donjon)",
+            "cat" => "comme dérouler et lire entièrement un parchemin posé sur votre bureau",
+            "touch" => "comme poser une feuille de papier vierge sur votre bureau, prête à recevoir vos sceaux",
+            "mkdir" => "comme demander aux charpentiers de bâtir une nouvelle pièce dans le château (-p: toute une aile d'un coup)",
+            "cp" => "comme faire recopier un parchemin important pour en garder un double dans les archives",
+            "mv" => "comme déplacer un coffre d'une salle à une autre, ou changer son étiquette",
+            "rm" => "comme jeter un document au brasero du château (irrévocable)",
+            "chmod" => "comme changer le verrou d'une porte du château: qui peut lire, écrire ou entrer?",
+            "chown" => "comme céder la garde d'une salle à un autre vassal",
+            "stat" => "comme consulter la fiche d'inventaire complète d'un objet du château",
+            "ps" => "comme passer en revue tous les serviteurs actifs dans le château en ce moment",
+            "top" => "comme surveiller en direct les jauges de la cuisine et de la forge",
+            "pgrep" => "comme appeler par son nom un serviteur précis dans le château",
+            "kill" => "comme congédier de force un serviteur traître (PID)",
+            "nice" => "comme dire à un serviteur quelle tâche est prioritaire quand le siège commence",
+            "grep" => "comme passer les registres au crible pour ne garder que les lignes 'attaque'",
+            "find" => "comme envoyer un serviteur fouiller tout le château pour trouver un document précis",
+            "head" => "comme lire seulement le début d'un long rouleau d'annales",
+            "tail" => "comme consulter les dernières entrées du journal du château",
+            "wc" => "comme compter combien de lignes fait un parchemin avant de le sceller",
+            "echo" => "comme crier un ordre dans les couloirs du château",
+            "ip" => "comme consulter les coordonnées du château dans le secteur",
+            "ping" => "comme envoyer un messager 'ping' au clan Hattori pour vérifier qu'il répond",
+            "ss" | "netstat" => "comme surveiller le portail pour voir quels visiteurs sont connectés",
+            "ufw" => "comme régler les herses et les déflecteurs du château: quels ennemis sont bloqués?",
+            "iptables" => "comme programmer les meurtrières du donjon pour bloquer tout sauf les alliés",
+            "fail2ban" | "fail2ban-client" => "comme un portier automatique qui bannit dans les oubliettes tout espion qui frappe 3 fois",
+            "ssh" => "comme ouvrir un tunnel secret crypté avec le clan allié Hattori",
+            "systemctl" => "comme commander depuis le donjon l'allumage/extinction des services du château",
+            "journalctl" => "comme lire le journal automatique qui consigne tout ce qui se passe au château",
+            "tar" => "comme mettre tous les parchemins dans une malle hermétique compressée pour les archives",
+            "zip" | "unzip" => "comme compresser des documents dans une boîte scellée pour le clan Hattori",
+            "df" => "comme lire la jauge des réserves de nourriture du château",
+            "du" => "comme peser chaque grenier du château un par un",
+            "mount" => "comme voir quels tonneaux sont branchés dans le cellier",
+            "useradd" => "comme graver un nouveau sceau d'identité pour un nouveau vassal",
+            "groupadd" => "comme créer une nouvelle garnison (samouraïs, gardes...)",
+            "usermod" => "comme ajouter un vassal à une nouvelle garnison",
+            "passwd" => "comme changer le mot de passe du sceau d'une salle",
+            "su" => "comme prendre temporairement le fauteuil d'un autre vassal pour agir en son nom",
+            "sudo" => "comme utiliser la clé du seigneur pour ouvrir les salles réservées",
+            "id" => "comme consulter son sceau d'identité: qui on est et à quelles garnisons on appartient",
+            "groups" => "comme consulter son sceau: à quelles garnisons on appartient",
+            "whoami" => "comme crier 'C'est le seigneur qui parle!' avant de donner un ordre",
+            "hostname" => "comme crier 'Ici le château Shiro!' pour s'identifier auprès des clans voisins",
+            "date" => "comme consulter l'horloge du beffroi pour dater chaque entrée des registres",
+            "auditctl" => "comme installer une caméra de surveillance sur le coffre-fort des sceaux",
+            "chroot" => "comme enfermer un prisonnier dans une cellule où il ne voit plus que les murs",
+            "nano" => "comme rédiger un édit directement sur la console du donjon",
+            "apt" => "comme commander des matériaux au marché du clan Hattori",
+            "dpkg" => "comme installer manuellement un équipement livré en caisse (.deb)",
+            "|" => "comme passer le résultat d'un registre dans un filtre pour ne garder que les alertes",
+            ">" => "comme consigner le rapport d'une ronde dans un nouveau parchemin",
+            ">>" => "comme ajouter une nouvelle ligne à la fin du journal existant",
+            _ => return None,
+        })
+    }
+
+    fn cmd_brief_raw(cmd: &str) -> (&'static str, &'static str) {
         let base = cmd.split_whitespace().next().unwrap_or(cmd);
         match base {
             "man" => ("affiche le manuel complet d'une commande (ex: man ls)", "comme ouvrir le mode d'emploi d'un équipement du vaisseau avant de l'utiliser"),
@@ -338,7 +419,7 @@ impl Game {
 
     fn cmd_reset(&mut self) {
         self.mission_commands.clear();
-        let vaisseau = format!("{}/vaisseau", shell::gameshell_home());
+        let vaisseau = shell::world_dir();
         let src = concat!(env!("CARGO_MANIFEST_DIR"), "/vaisseau");
         shell::execute_interactive(&format!("rm -rf '{}' && cp -r '{}' '{}'", vaisseau, src, vaisseau));
         println!("\n  🔄 Vaisseau réinitialisé.\n");
@@ -398,7 +479,7 @@ impl Game {
         };
         // Utilise UNIQUEMENT les commandes de la mission courante (pas l'historique global)
         let history = &self.mission_commands;
-        let vaisseau = format!("{}/vaisseau", shell::gameshell_home());
+        let vaisseau = shell::world_dir();
         let mut missing = Vec::new();
 
         for check in &m.checks {
@@ -472,7 +553,7 @@ impl Game {
 
     fn display_path(&self, real: &str) -> String {
         let home = std::env::var("HOME").unwrap_or_default();
-        let vaisseau = format!("{}/vaisseau", shell::gameshell_home());
+        let vaisseau = shell::world_dir();
         if real == home || real == format!("{}/cabines/capitaine", vaisseau) { return "~".into(); }
         if let Some(r) = real.strip_prefix(&home) { return if r.is_empty() { "~".into() } else { format!("~{}", r) }; }
         if real == vaisseau { return "/".into(); }
@@ -515,7 +596,7 @@ impl Game {
         while self.current_mission < self.missions.len() {
             let m = self.missions[self.current_mission].clone();
             self.mission_commands.clear();
-            let vaisseau = format!("{}/vaisseau", shell::gameshell_home());
+            let vaisseau = shell::world_dir();
             // 1. Exécute les commandes requises de la mission (vraiment)
             for c in &m.required_commands {
                 let c = c.replace("$USER", "capitaine");
@@ -591,5 +672,21 @@ impl Game {
         println!("🤖 AUTO: {}/{} missions résolues{}", ok, total,
             if fails.is_empty() { String::new() } else { format!(" — échecs: {}", fails.join(", ")) });
         (ok, total)
+    }
+}
+
+/// Ligne id simulée selon la campagne (règle A16)
+fn id_line() -> String {
+    match shell::campaign_id() {
+        2 => "uid=1000(seigneur) gid=1000(seigneur) groupes=1000(seigneur),27(sudo),1001(samourai),1002(gardes)".to_string(),
+        _ => "uid=1000(capitaine) gid=1000(capitaine) groupes=1000(capitaine),27(sudo),1001(equipage_pont),1002(securite)".to_string(),
+    }
+}
+
+/// Ligne groups simulée selon la campagne (règle A16)
+fn groups_line() -> String {
+    match shell::campaign_id() {
+        2 => "seigneur samourai gardes sudo".to_string(),
+        _ => "capitaine equipage_pont securite sudo".to_string(),
     }
 }

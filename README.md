@@ -64,7 +64,19 @@ Tout le jeu se déroule dans `~/.gameshell/vaisseau/`. Les chemins absolus `/...
 
 ---
 
-## 📚 Missions — 100 missions EN DUR (20 chapitres × 5, soit 20 missions par acte)
+## 🕹️ Campagnes — 2 campagnes de 100 missions EN DUR chacune (5 actes × 20 missions)
+
+Choix au lancement (après le nom du joueur):
+
+| # | Campagne | Monde | Niveau | Hôte / rôle |
+|---|----------|-------|--------|-------------|
+| 1 | 🏴‍☠️ Les Pirates de l'Espace | `vaisseau/` (station Orion-7) | FACILE | orion7 / capitaine |
+| 2 | 🏯 Le Japon Féodal | `monde_japon/` (château Shiro) | MOYEN | shiro / seigneur |
+
+La campagne 2 est plus difficile: options exactes requises (`-la`, `-n`, `-c`, `-i`...), multi-checks,
+codes en phase 2, permissions, config_contains. Bannière, prompt, identité et analogies roleplay thématisés.
+
+## 📚 Missions — 100 missions EN DUR par campagne (20 chapitres × 5, soit 20 missions par acte)
 
 **Aucune génération procédurale**: tout est écrit à la main dans `src/missions/chapters/ch1..20.rs` (100% offline).
 

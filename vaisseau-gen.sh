@@ -3,11 +3,17 @@
 # ║  GÉNÉRATEUR DU VAISSEAU SPATIAL ORION-7                   ║
 # ║  Arborescence 100% immersive - pas un serveur Linux!     ║
 # ╚══════════════════════════════════════════════════════════╝
-# Usage: ./vaisseau-gen.sh [dossier_destination]
-
+# Usage: ./vaisseau-gen.sh [campagne] [dossier_destination]
+#   campagne = espace (défaut) | japon
 set -e
-V="${1:-vaisseau}"
+CAMP="${1:-espace}"
+if [ "$CAMP" = "japon" ]; then V="${2:-$HOME/.gameshell/monde_japon}"; else V="${2:-${1:-vaisseau}}"; fi
 rm -rf "$V"
+
+if [ "$CAMP" = "japon" ]; then
+  bash "$(dirname "$0")/monde-japon-gen.sh" "$V"
+  exit 0
+fi
 
 # ═══════════════════════════════════════════════
 #  NIVEAU 0 — LA RACINE DU VAISSEAU

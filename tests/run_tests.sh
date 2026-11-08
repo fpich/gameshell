@@ -31,7 +31,8 @@ bash make-archive.sh > /dev/null 2>&1
 run_game() {
     local input="$1"
     rm -rf ~/.gameshell
-    echo -e "$input" | timeout 15 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g'
+    # insère le choix de campagne "1" (Pirates de l'Espace) après le nom
+    echo -e "$input" | sed '1a 1' | timeout 15 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g'
 }
 
 echo ""
@@ -64,7 +65,7 @@ echo "$out" | grep -q "✅ Mission réussie" && ok "ls -la matche le check 'ls' 
 rm -rf ~/.gameshell
 echo -e "Test\npwd\nls\ngsh check\nexit\n" | timeout 15 bash gameshell.sh > /dev/null 2>&1
 # Nouvelle session: juste ls, gsh check doit échouer (pas de pwd dans CETTE session)
-out=$(echo -e "Test2\nls\ngsh check\nexit\n" | timeout 15 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+out=$(echo -e "Test2\n1\nls\ngsh check\nexit\n" | timeout 15 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -q "❌ Mission non validée" && ok "Historique reset entre sessions (règle 2)" || ko "Fuite d'historique entre sessions!"
 
 # ─── TEST 7: Isolation chemins — ls / montre le vaisseau ───
@@ -146,33 +147,33 @@ echo "$out" | grep -q "réinitialisé\|🔄" && ok "gsh reset fonctionne" || ko 
 
 
 # ─── TEST 26: Playthrough 10 premières missions ───
-out=$(printf 'Test\npwd\nls\ngsh check\ncat bienvenue.txt\ngsh check\ncd /communications/messages\ncat dernier_message.txt\ngsh check\nhostname\nwhoami\nid\ngsh check\ndate\ngsh check\ntouch incident_15jan.txt\nls\ngsh check\nmkdir -p rapports/2024/janvier\ngsh check\ncp incident_15jan.txt /soutes/\ngsh check\nmv incident_15jan.txt rapports/2024/janvier/\ngsh check\ntouch t1 t2 t3\nrm t1 t2 t3\ngsh check\nexit\n' | timeout 30 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+out=$(printf 'Test\n1\npwd\nls\ngsh check\ncat bienvenue.txt\ngsh check\ncd /communications/messages\ncat dernier_message.txt\ngsh check\nhostname\nwhoami\nid\ngsh check\ndate\ngsh check\ntouch incident_15jan.txt\nls\ngsh check\nmkdir -p rapports/2024/janvier\ngsh check\ncp incident_15jan.txt /soutes/\ngsh check\nmv incident_15jan.txt rapports/2024/janvier/\ngsh check\ntouch t1 t2 t3\nrm t1 t2 t3\ngsh check\nexit\n' | timeout 30 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 n=$(echo "$out" | grep -c "✅ Mission réussie")
 [ "$n" -ge 10 ] && ok "Playthrough 10 premières missions ($n/10 réussies)" || ko "Playthrough 10 missions: seulement $n/10"
 
 
 # ─── TEST 27: EOF (Ctrl+D) = sortie propre ───
-out=$(printf 'Test\npwd\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+out=$(printf 'Test\n1\npwd\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -q "EOF\|Déconnexion" && ok "EOF (Ctrl+D) → déconnexion propre (règle A13)" || ko "EOF devrait déconnecter proprement"
 
 # ─── TEST 28: Input très long tronqué (anti freeze) ───
-out=$(printf 'Test\nls %s\npwd\nexit\n' "$(python3 -c "print('a'*8000)")" | timeout 15 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+out=$(printf 'Test\n1\nls %s\npwd\nexit\n' "$(python3 -c "print('a'*8000)")" | timeout 15 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -q "Test@orion7" && ! echo "$out" | grep -q "panicked" && ok "Input 8000 chars → tronqué, pas de crash" || ko "Input long devrait être tronqué sans crash"
 
 # ─── TEST 29: gsh goal suggéré après 2 échecs ───
-out=$(printf 'Test\ngsh check\ngsh check\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+out=$(printf 'Test\n1\ngsh check\ngsh check\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -q "gsh goal" && ok "Après 2 échecs, suggère 'gsh goal' (UX)" || ko "Devrait suggérer gsh goal après 2 échecs"
 
 # ─── TEST 30: Progression dans le prompt [N/50] ───
-out=$(printf 'Test\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+out=$(printf 'Test\n1\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -qE "\[0/100\]" && ok "Prompt affiche [N/100] progression" || ko "Prompt devrait afficher [N/100]"
 
 # ─── TEST 31: Pipe multiple fonctionne ───
-out=$(printf 'Test\ncat /pont/journaux-de-bord/dernier_rapport.txt | grep ALERTE | wc -l\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+out=$(printf 'Test\n1\ncat /pont/journaux-de-bord/dernier_rapport.txt | grep ALERTE | wc -l\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -qE "[0-9]+" && ok "Pipe multiple (cat | grep | wc) fonctionne" || ko "Pipe multiple devrait fonctionner"
 
 # ─── TEST 32: Redirection > dans le vaisseau ───
-out=$(printf 'Test\necho hello > /soutes/test_gsh.txt\ncat /soutes/test_gsh.txt\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+out=$(printf 'Test\n1\necho hello > /soutes/test_gsh.txt\ncat /soutes/test_gsh.txt\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -q "hello" && ok "Redirection > fonctionne dans le vaisseau" || ko "Redirection > devrait fonctionner"
 
 # ─── TEST 33: Tests de conformité cargo (règles A15/C6/C9/C13) ───
@@ -187,7 +188,7 @@ out=$(run_game "Test\nid\nuname -a\nexit\n")
 echo "$out" | grep -q "uid=1000(capitaine)" && echo "$out" | grep -q "Linux orion7 6.6" && ! echo "$out" | grep -qE "uid=[0-9]+\($(whoami)\)|^$(hostname -s)$|$(hostname)$" && ok "id/uname → identité vaisseau (capitaine/orion7), pas l'hôte (règle A16)" || ko "id/uname ne doivent pas révéler l'hôte"
 
 # ─── TEST 35: Flèches en mode pipe = séquences ANSI nettoyées (règle A11) ───
-out=$(printf 'Test\n\x1b[D\x1b[Cpwd\x1b[A\x1b[B\nls\ngsh check\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+out=$(printf 'Test\n1\n\x1b[D\x1b[Cpwd\x1b[A\x1b[B\nls\ngsh check\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -q "✅ Mission réussie" && ok "Séquences ANSI (flèches) nettoyées en mode non-tty, commande intacte" || ko "Les flèches ne devraient rien insérer dans la commande"
 
 # ─── TEST 36: Compétence débloquée = commande de LA mission (règle A15) ───
@@ -198,10 +199,15 @@ echo "$out" | grep -q "🔓 Compétence: pwd" && echo "$out" | grep -q "🔓 Com
 out=$(run_game "Test\nexit\n")
 echo "$out" | grep -q "Zyra-7" && ! echo "$out" | grep -qE "\b(Marie|Sophie|Jean|Kowalski|Galactica)\b" && ok "PNJ avec noms SF (Zyra-7...), jamais Marie/Kowalski/Galactica (règle C13)" || ko "PNJ non conformes"
 
-# ─── TEST 38: Auto-solve exhaustif des 100 missions (GAMESHELL_AUTO=1) ───
+# ─── TEST 38: Auto-solve exhaustif des 2 campagnes x 100 missions (GAMESHELL_AUTO=1) ───
 rm -rf ~/.gameshell
-out=$(printf 'Auto\nexit\n' | GAMESHELL_AUTO=1 timeout 120 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
-echo "$out" | grep -q "AUTO: 100/100 missions résolues" && ok "Auto-solve: 100/100 missions résolues en jouant réellement" || ko "Auto-solve: $(echo "$out" | grep -o 'AUTO: [0-9/]*' | head -1)"
+out=$(printf 'Auto\nexit\n' | GAMESHELL_AUTO=1 timeout 300 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "AUTO campagne 1 (Pirates de l'Espace): 100/100" && echo "$out" | grep -q "AUTO campagne 2 (Japon Féodal): 100/100" && ok "Auto-solve: 100/100 sur les 2 campagnes (joué réellement)" || ko "Auto-solve: $(echo "$out" | grep -o 'AUTO campagne [0-9][^ ]*: [0-9/]*' | tr '\n' ' ')"
+
+# ─── TEST 39: Campagne 2 (Japon Féodal) sélectionnée au lancement (règle C14) ───
+rm -rf ~/.gameshell
+out=$(printf 'Samoura\n2\nhostname\nwhoami\nexit\n' | timeout 20 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "Japon Féodal" && echo "$out" | grep -q "100 missions" && echo "$out" | grep -q "Samoura@shiro:~" && echo "$out" | grep -qE "seigneur$" && ok "Campagne 2: bannière Japon Féodal, prompt @shiro, whoami=seigneur, 100 missions" || ko "Campagne 2 devrait être sélectionnable (Japon Féodal/shiro/seigneur)"
 
 echo ""
 echo "═══════════════════════════════════════"

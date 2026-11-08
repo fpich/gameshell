@@ -13,9 +13,44 @@ pub fn gameshell_home() -> String {
         })
 }
 
-/// Chemin vers le monde du jeu
+/// Chemin vers le monde du jeu (dédié à la campagne choisie — règle D2)
 pub fn world_dir() -> String {
-    format!("{}/vaisseau", gameshell_home())
+    std::env::var("GAMESHELL_WORLD")
+        .unwrap_or_else(|_| format!("{}/vaisseau", gameshell_home()))
+}
+
+/// Campagne active: 1 = Pirates de l'Espace (facile), 2 = Japon Féodal (moyen)
+pub fn campaign_id() -> u8 {
+    std::env::var("GAMESHELL_CAMPAIGN").ok().and_then(|v| v.parse().ok()).unwrap_or(1)
+}
+
+/// Sélectionne le monde d'une campagne (génère si absent) et ajuste HOME — règle D2
+pub fn select_world(campaign: u8) {
+    let home_dir = gameshell_home();
+    let (world, home, camp) = match campaign {
+        2 => (format!("{}/monde_japon", home_dir), format!("{}/monde_japon/quartiers/seigneur", home_dir), "japon"),
+        _ => (format!("{}/vaisseau", home_dir), format!("{}/vaisseau/cabines/capitaine", home_dir), "espace"),
+    };
+    if !std::path::Path::new(&world).exists() {
+        // monde absent (reset supprimé): régénère via vaisseau-gen.sh embarqué
+        let gen = format!("{}/vaisseau-gen.sh", home_dir);
+        if std::path::Path::new(&gen).exists() {
+            let _ = Command::new("bash").arg(&gen).arg(camp).arg(&world).status();
+        }
+    }
+    std::env::set_var("GAMESHELL_WORLD", &world);
+    std::env::set_var("GAMESHELL_CAMPAIGN", campaign.to_string());
+    std::env::set_var("HOME", &home);
+}
+
+/// Nom d'hôte du monde courant
+pub fn world_hostname() -> &'static str {
+    match campaign_id() { 2 => "shiro", _ => "orion7" }
+}
+
+/// Nom du joueur dans le monde courant
+pub fn world_user() -> &'static str {
+    match campaign_id() { 2 => "seigneur", _ => "capitaine" }
 }
 
 /// Chemin vers le home du joueur dans le monde

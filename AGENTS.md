@@ -80,7 +80,7 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
 
 ## RÈGLE A10 — Suite de tests obligatoire
-- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **38/38 PASS** obligatoire.
+- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **39/39 PASS** obligatoire.
 
 ---
 
@@ -130,9 +130,9 @@ Jamais de liste de 20 commandes avec exemples ici.
 # SECTION C — CONTENU DES MISSIONS (50 missions, 10 chapitres, 5 actes)
 
 ## RÈGLE C1 — Structure
-- **100 missions EN DUR**, 20 chapitres × 5 missions, 5 actes narratifs "Les Pirates de l'Espace".
+- **100 missions EN DUR par campagne**, 20 chapitres × 5 missions, 5 actes narratifs.
 - **20 missions par acte** (4 chapitres × 5 missions par acte). PAS de génération procédurale:
-  tout le contenu est écrit à la main dans `src/missions/chapters/ch1..20.rs`.
+  tout le contenu est écrit à la main (`chapters/ch1..20.rs` et `japon/ch1..20.rs`).
 - Chaque mission: 1-3 nouvelles commandes shell à apprendre.
 
 ## RÈGLE C2 — Compétences persistantes
@@ -187,6 +187,15 @@ Ordre fixe: 🚀 roleplay d'abord, 💻 technique ensuite. Fonction `cmd_brief()
 - Jamais de nom de joueur en dur dans vaisseau-gen.sh (utiliser "le Capitaine").
 - Test: `cargo test` (vaisseau_gen_sans_noms_interdits + blacklist dans toutes les missions).
 
+## RÈGLE C14 — Campagnes (OBLIGATOIRE)
+- **2 campagnes** sélectionnées au lancement (après le nom du joueur):
+  - **1 = Les Pirates de l'Espace** (Station Orion-7, niveau FACILE) — monde `vaisseau/`, hôte `orion7`, user `capitaine`.
+  - **2 = Le Japon Féodal** (Château Shiro, niveau MOYEN) — monde `monde_japon/`, hôte `shiro`, user `seigneur`.
+- Chaque campagne = 100 missions en dur, 5 actes × 20, difficulté propre (Japon = checks plus exigeants:
+  options exactes -la/-n/-c/-i, multi-checks, codes phase 2, permissions, config_contains).
+- Bannière, prompt, hostname/whoami/id/groups/uname, analogies 🚀 roleplay : tout est thématisé par campagne.
+- Test: `cargo test` vérifie les 2 campagnes (100 missions, 20/acte, conformité); `run_tests.sh` test 39 = campagne 2.
+
 ---
 
 # SECTION D — MONDE DU JEU
@@ -194,6 +203,14 @@ Ordre fixe: 🚀 roleplay d'abord, 💻 technique ensuite. Fonction `cmd_brief()
 ## RÈGLE D1 — Arborescence vaisseau (pas serveur Linux)
 `/pont/ /cabines/ /soutes/ /reacteur/ /hangar/ /securite/ /communications/ /navigation/ /armes/ /salle-des-machines/ /archives/`
 Générée par `vaisseau-gen.sh`. Jamais `/srv/`, `/etc/`, `/home/etudiant/`.
+
+## RÈGLE D2 — Monde dédié par campagne (OBLIGATOIRE)
+- Campagne 1 (espace): `~/.gameshell/vaisseau/` généré par `vaisseau-gen.sh espace`.
+- Campagne 2 (Japon Féodal): `~/.gameshell/monde_japon/` généré par `vaisseau-gen.sh japon` → `monde-japon-gen.sh`
+  (château Shiro: donjon, pagode, jardins, remparts, greniers, scribes, quartiers/seigneur... home = `quartiers/seigneur`).
+- `shell::world_dir()` = `$GAMESHELL_WORLD` (sélectionné par campagne). `gsh reset` régénère le monde
+  de la campagne courante via le `vaisseau-gen.sh` embarqué.
+- Les deux mondes sont embarqués dans `gameshell.sh` (générés par `make-archive.sh`).
 
 ---
 
