@@ -71,6 +71,22 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - Jamais une commande d'une autre mission (ex: mission "lire bienvenue.txt" ne débloque PAS ls -la).
 - Test: `cargo test` (conformity_tests) vérifie les 50 missions manuelles + les 500 embarquées.
 
+## RÈGLE A18 — Sauvegarde/reprise par campagne (OBLIGATOIRE)
+- Progression sauvegardée automatiquement à chaque mission validée:
+  `~/.gameshell/state/save_campagne<N>.json` (mission courante, XP, niveau, compétences, faites).
+- Au lancement, la campagne reprend là où elle en était. Modes test (AUTO/EDGE/TORTURE) = sans save.
+- Test: `run_tests.sh` test 43.
+
+## RÈGLE A19 — Écran de victoire par campagne (OBLIGATOIRE)
+- Quand les 100 missions d'une campagne sont faites: panneau récapitulatif (campagne, missions,
+  XP, niveau, liste des compétences), pas une simple ligne.
+- Test: test 45 (3 écrans de victoire en auto).
+
+## RÈGLE A20 — gsh export enseignant (OBLIGATOIRE)
+- `gsh export` exporte la progression en JSON + CSV dans `~/.gameshell/state/export_campagne<N>_<date>.{json,csv}`
+  (par mission: id, titre, statut, XP; + totaux + compétences).
+- Test: test 44.
+
 ## RÈGLE A17 — Checks jamais vacuels (OBLIGATOIRE, testé par GAMESHELL_EDGE=1)
 - `gsh check` à vide (aucune commande tapée) doit TOUJOURS échouer.
 - `dir_reached` = ÉGALITÉ stricte (jamais starts_with, sinon "/" est toujours atteint).
@@ -91,7 +107,7 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
 
 ## RÈGLE A10 — Suite de tests obligatoire
-- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **42/42 PASS** obligatoire.
+- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **45/45 PASS** obligatoire.
 
 ---
 
@@ -239,7 +255,7 @@ Générée par `vaisseau-gen.sh`. Jamais `/srv/`, `/etc/`, `/home/etudiant/`.
 ```bash
 cargo build --release 2>&1 | grep -E "^error"   # vide
 bash make-archive.sh                               # régénère gameshell.sh
-./tests/run_tests.sh                               # 42/42 PASS + cargo test (conformité)
+./tests/run_tests.sh                               # 45/45 PASS + cargo test (conformité)
 ```
 
 ## RÈGLE E2 — Distribution 100% offline

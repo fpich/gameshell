@@ -29,6 +29,7 @@ Le joueur est le **capitaine de la station spatiale Orion-7**, attaquée par les
 | Commande | Action |
 |----------|--------|
 | `gsh help` | Aide complète (commandes gsh + syntaxe shell + Bloom) |
+| `gsh export` | Exporte la progression en JSON + CSV (`~/.gameshell/state/export_campagne<N>_*.json/csv`) pour l'enseignant |
 | `gsh goal` | Réaffiche la mission en cours (même cadre que le lancement) |
 | `gsh check` | Valide la mission en cours (phase 2: code si requis) |
 | `gsh reset` | Réinitialise la mission en cours |
@@ -152,6 +153,10 @@ gameshell/
         ├── japon/ch1..20.rs      # campagne 2 (Japon féodal)
         └── reseau/ch1..20.rs     # campagne 3 (Nexus réseau)
 ```
+
+## 💾 Progression
+- Sauvegarde automatique par campagne à chaque mission validée (`~/.gameshell/state/save_campagne<N>.json`);
+  au lancement, la campagne reprend où elle en était. Tutoriel affiché au premier lancement.
 
 ## 👨‍🏫 Pour les enseignants
 

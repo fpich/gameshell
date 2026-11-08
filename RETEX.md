@@ -11,7 +11,7 @@ une à une par un banc automatisé + tests manuels en pty réel.
 | Banc de cas limites par mission | `GAMESHELL_EDGE=1 ./gameshell.sh` | **300/300, 0 problème** |
 | Torture par mission (partiel, typo, 2 mauvais codes, isolation hôte) | `GAMESHELL_TORTURE=1 ./gameshell.sh` | **300/300, 0 problème, exit 0** |
 | Conformité contenu (cargo) | `cargo test --release` | 2/2 (200 missions, 20/acte, C3/C6/B9/C9/C13/A15) |
-| Suite moteur | `./tests/run_tests.sh` | **42/42 PASS** (auto 300/300, EDGE 300/300, TORTURE 300/300) |
+| Suite moteur | `./tests/run_tests.sh` | **45/45 PASS** (auto 300/300, EDGE 300/300, TORTURE 300/300, save/resume, export, victoire) |
 | Édition de ligne en vrai tty (flèches) | `script -qec` + séquences `\x1b[D`/`\x1b[A` | OK (curseur, historique) |
 | Inspection visuelle manuelle | sessions campagne 1 et 2 | OK |
 
@@ -95,7 +95,12 @@ et historique vidé après validation (règle A17).
 - `cargo test`: conformité 300 missions (structure, C3, A4 atteignabilité, A15, C9, C13).
 - `run_tests.sh` 42/42: moteur + auto-solve 300/300 + EDGE 300/300 + TORTURE 300/300 + isolation hôte.
 
-### Améliorations identifiées (non bloquantes, voir plan P0-P3 ci-dessus)
-- Sauvegarde/reprise de progression par campagne (P1).
-- Écran de fin par campagne avec score (P1).
-- `gsh export` enseignant (P3).
+### Améliorations IMPLÉMENTÉES cette session (plan P0-P3)
+- ✅ A18 sauvegarde/reprise auto par campagne (`state/save_campagne<N>.json`) + test 43
+- ✅ A19 écran de victoire par campagne (missions, XP, niveau, compétences) + test 45
+- ✅ A20 `gsh export` enseignant (JSON + CSV dans `state/`) + test 44
+- ✅ Tutoriel au premier lancement d'une campagne
+- ✅ EDGE teste aussi `gsh reset` en pleine mission (historique vidé, monde régénéré)
+
+### Reste (non bloquant)
+- Mode enseignant (campagne imposée) — P3.

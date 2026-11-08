@@ -160,3 +160,25 @@ pub fn log_command(cmd: &str) {
     }
 }
 
+
+/// Chemin de la sauvegarde d'une campagne (règle A18)
+pub fn save_path(campaign: u8) -> String {
+    format!("{}/state/save_campagne{}.json", gameshell_home(), campaign)
+}
+
+/// Charge la sauvegarde d'une campagne si elle existe
+pub fn load_save(campaign: u8) -> Option<crate::missions::SaveData> {
+    let content = std::fs::read_to_string(save_path(campaign)).ok()?;
+    serde_json::from_str(&content).ok()
+}
+
+/// Écrit la sauvegarde d'une campagne
+pub fn write_save(save: &crate::missions::SaveData) -> bool {
+    if let Some(parent) = std::path::Path::new(&save_path(save.campaign)).parent() {
+        let _ = std::fs::create_dir_all(parent);
+    }
+    match serde_json::to_string_pretty(save) {
+        Ok(json) => std::fs::write(save_path(save.campaign), json).is_ok(),
+        Err(_) => false,
+    }
+}

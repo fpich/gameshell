@@ -34,3 +34,15 @@ pub struct Mission {
     pub skill: Option<Skill>,
     pub code_required: Option<String>,  // Code à entrer en phase 2 de gsh check
 }
+
+/// Sauvegarde de progression par campagne (règle A18)
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SaveData {
+    pub campaign: u8,
+    pub current_mission: usize,
+    pub xp: u64,
+    pub level: u32,
+    pub skills: Vec<Skill>,
+    pub completed: Vec<String>,
+    pub saved_at: String,
+}

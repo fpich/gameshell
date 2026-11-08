@@ -33,7 +33,12 @@ impl Game {
         let missions = load_all_missions();
         shell::select_world(campaign);
         let home = std::env::var("HOME").unwrap_or_else(|_| ".".into());
-        Game {
+        // Règle A18: reprend la sauvegarde de la campagne, sauf en mode test (auto/edge/torture)
+        let test_mode = std::env::var("GAMESHELL_AUTO").is_ok()
+            || std::env::var("GAMESHELL_EDGE").is_ok()
+            || std::env::var("GAMESHELL_TORTURE").is_ok();
+        let save = if test_mode { None } else { shell::load_save(campaign) };
+        let mut game = Game {
             player_name: player_name.to_string(),
             campaign,
             missions,
@@ -47,7 +52,31 @@ impl Game {
             check_fails: 0,
             mission_commands: Vec::new(),
             history: Vec::new(),
+        };
+        if let Some(sv) = save {
+            if sv.campaign == game.campaign && sv.current_mission <= game.missions.len() {
+                game.current_mission = sv.current_mission;
+                game.xp = sv.xp;
+                game.level = sv.level;
+                game.skills = sv.skills;
+                game.completed = sv.completed;
+            }
         }
+        game
+    }
+
+    /// Écrit la sauvegarde de la campagne (règle A18)
+    fn save_progress(&self) {
+        let save = crate::missions::SaveData {
+            campaign: self.campaign,
+            current_mission: self.current_mission,
+            xp: self.xp,
+            level: self.level,
+            skills: self.skills.clone(),
+            completed: self.completed.clone(),
+            saved_at: chrono::Local::now().format("%Y-%m-%d %H:%M:%S").to_string(),
+        };
+        let _ = shell::write_save(&save);
     }
 
     pub fn run(&mut self) {
@@ -63,6 +92,7 @@ impl Game {
         println!("  ║  {:^36}  ║", sous_titre);
         println!("  ╚══════════════════════════════════════╝");
         self.cmd_help();
+        self.show_tutorial_if_first_run();
         self.show_mission();
 
         loop {
@@ -93,6 +123,7 @@ impl Game {
                 }
                 "gsh reset" => { self.cmd_reset(); continue; }
                 "gsh skills" => { self.cmd_skills(); continue; }
+                "gsh export" => { self.cmd_export(); continue; }
                 "exit" | "quit" => { println!("\n👋 Déconnexion."); break; }
                 "clear" => { print!("\x1b[2J\x1b[H"); io::stdout().flush().ok(); continue; }
                 _ => {}
@@ -476,19 +507,92 @@ impl Game {
             self.mission_commands.clear(); // reset commandes pour la nouvelle mission
             // Reset position: retour à la cabine (HOME) pour la nouvelle mission
             self.current_dir = std::env::var("HOME").unwrap_or_else(|_| ".".into());
+            self.save_progress(); // A18
             if self.current_mission >= self.missions.len() {
-                let bastion = match self.campaign { 2 => "le château Shiro", 3 => "le NOC Nexus", _ => "Orion-7" };
-                println!("\n  🏆 FÉLICITATIONS! {} est sauvé(e)! Niveau {} | {} XP | {} compétences", bastion, self.level, self.xp, self.skills.len());
+                self.show_victory_screen(); // A19
             }
+        }
+    }
+
+    /// Écran de fin par campagne (règle A19)
+    fn show_victory_screen(&self) {
+        let (campagne, bastion) = match self.campaign {
+            2 => ("🏯 LE JAPON FÉODAL", "le château Shiro"),
+            3 => ("🌐 NEXUS — NOC NEON-9", "le NOC Nexus"),
+            _ => ("🏴‍☠️ LES PIRATES DE L'ESPACE", "Orion-7"),
+        };
+        println!("\n  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        println!("  ┃  🏆 FÉLICITATIONS! {} est sauvé(e)!   ┃", bastion);
+        println!("  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫");
+        println!("  ┃  Campagne: {:<31}┃", campagne);
+        println!("  ┃  Missions: {}/{}                       ┃", self.completed.len(), self.missions.len());
+        println!("  ┃  XP: {}  |  Niveau: {}                  ┃", self.xp, self.level);
+        println!("  ┃  Compétences: {}                        ┃", self.skills.len());
+        println!("  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫");
+        for s in &self.skills {
+            println!("  ┃  ✓ {:<36}┃", s.name);
+        }
+        println!("  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+    }
+
+    /// gsh export: exporte la progression de la campagne en JSON + CSV (règle A20, enseignant)
+    fn cmd_export(&self) {
+        let dir = format!("{}/state", shell::gameshell_home());
+        let _ = std::fs::create_dir_all(&dir);
+        let stamp = chrono::Local::now().format("%Y%m%d_%H%M%S").to_string();
+        let json_path = format!("{}/export_campagne{}_{}.json", dir, self.campaign, stamp);
+        let csv_path = format!("{}/export_campagne{}_{}.csv", dir, self.campaign, stamp);
+        let done: std::collections::HashSet<&str> = self.completed.iter().map(|s| s.as_str()).collect();
+        let mut json = format!("{{\"campagne\": {}, \"joueur\": \"{}\", \"date\": \"{}\", \"missions\": [", self.campaign, self.player_name, stamp);
+        for m in &self.missions {
+            let statut = if done.contains(m.id.as_str()) { "réussie" } else { "à faire" };
+            json.push_str(&format!("{{\"id\": \"{}\", \"titre\": \"{}\", \"statut\": \"{}\", \"xp\": {}}},", m.id, m.title.replace('"', "'"), statut, m.xp_reward));
+        }
+        json.push_str(&format!("], \"xp_total\": {}, \"niveau\": {}, \"competences\": [", self.xp, self.level));
+        for s in &self.skills { json.push_str(&format!("\"{}\",", s.name)); }
+        json.push_str("]}");
+        let mut csv = String::from("id;titre;statut;xp\n");
+        for m in &self.missions {
+            csv.push_str(&format!("{};{};{};{}
+", m.id, m.title.replace('"', "'"), if done.contains(m.id.as_str()) { "réussie" } else { "à faire" }, m.xp_reward));
+        }
+        let okj = std::fs::write(&json_path, json).is_ok();
+        let okc = std::fs::write(&csv_path, csv).is_ok();
+        println!("\n  📤 Export effectué:");
+        if okj { println!("     JSON: {}", json_path); }
+        if okc { println!("     CSV:  {}", csv_path); }
+        println!("     ({} missions, {} XP, niveau {}, {} compétences)\n", self.completed.len(), self.xp, self.level, self.skills.len());
+    }
+
+    /// Panneau tutoriel au premier lancement d'une campagne (pas de sauvegarde)
+    pub fn show_tutorial_if_first_run(&self) {
+        if shell::load_save(self.campaign).is_none() && self.current_mission == 0 && self.completed.is_empty() {
+            println!("  ┌─ 🎓 TUTORIEL ─────────────────────────┐");
+            println!("  │  Lisez la mission (histoire + objectif)│");
+            println!("  │  Tapez les commandes SHELL affichées   │");
+            println!("  │  Validez avec: gsh check               │");
+            println!("  │  Revoir l'objectif: gsh goal           │");
+            println!("  │  Aide: gsh help  │  Skills: gsh skills │");
+            println!("  │  ← → éditent la ligne, ↑ ↓ historique  │");
+            println!("  │  Progression sauvegardée automatiquement│");
+            println!("  └────────────────────────────────────────┘\n");
         }
     }
 
     fn cmd_reset(&mut self) {
         self.mission_commands.clear();
+        // Règle D2: régénère le monde de la campagne courante via le vaisseau-gen.sh embarqué.
+        // cd sur GAMESHELL_HOME d'abord: le cwd courant (home) est DANS le monde supprimé.
         let vaisseau = shell::world_dir();
-        let src = concat!(env!("CARGO_MANIFEST_DIR"), "/vaisseau");
-        shell::execute_interactive(&format!("rm -rf '{}' && cp -r '{}' '{}'", vaisseau, src, vaisseau));
-        println!("\n  🔄 Vaisseau réinitialisé.\n");
+        let camp = match shell::campaign_id() { 2 => "japon", 3 => "reseau", _ => "espace" };
+        let gen = format!("{}/vaisseau-gen.sh", shell::gameshell_home());
+        if std::path::Path::new(&gen).exists() {
+            shell::execute_interactive(&format!(
+                "cd '{}' && rm -rf '{}' && bash '{}' '{}' '{}'",
+                shell::gameshell_home(), vaisseau, gen, camp, vaisseau
+            ));
+        }
+        println!("\n  🔄 Mission en cours réinitialisée (monde régénéré).\n");
     }
 
     fn cmd_skills(&self) {
@@ -688,6 +792,12 @@ impl Game {
         let mut ok = 0usize;
         let mut issues: Vec<String> = Vec::new();
         let home = std::env::var("HOME").unwrap_or_else(|_| ".".into());
+        // Test gsh reset une fois par campagne: historique vidé + monde régénéré (C12/D2)
+        self.mission_commands.push("ls".into());
+        self.cmd_reset();
+        if !self.mission_commands.is_empty() { issues.push("gsh reset n'a pas vidé l'historique".into()); }
+        if !shell::dir_exists(&shell::world_dir()) { issues.push("gsh reset a supprimé le monde".into()); }
+        self.mission_commands.clear();
         while self.current_mission < self.missions.len() {
             let m = self.missions[self.current_mission].clone();
             self.mission_commands.clear();
@@ -822,7 +932,6 @@ impl Game {
             self.mission_commands.clear();
             self.mission_commands.push("pwdd".into());
             if self.cmd_check() { issues.push(format!("{}: typo 'pwdd' a validé", m.id)); }
-            self.mission_commands.clear();
             // 4. résolution complète (comme run_auto)
             let vaisseau = shell::world_dir();
             for c in &m.required_commands {
