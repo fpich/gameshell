@@ -332,8 +332,10 @@ impl Game {
                 "command_executed" => {
                     let target_base = check.target.split_whitespace().next().unwrap_or(&check.target);
                     history.iter().any(|c| {
-                        let b = c.split_whitespace().next().unwrap_or("");
-                        b == target_base  // match sur la commande de base (ls matche ls -la)
+                        // match si la cible apparaît dans la ligne:
+                        // - commande de base comme mot (chown matche 'sudo chown ...')
+                        // - ou cible spéciale comme '|' (pipe)
+                        c.split_whitespace().any(|w| w == target_base) || c.contains(target_base)
                     })
                 },
                 "file_read" => {

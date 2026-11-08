@@ -146,6 +146,18 @@ NOTES PERSONNELLES DU CAPITAINE
 - Mot de passe perso: ne pas oublier!
 EOF
 
+cat > "$C/capitaine/plan_defense.sh" << 'SHEOF'
+#!/bin/bash
+# Plan de défense Orion-7 — Capitaine
+echo "Activation du plan de défense..."
+echo "1. Vérification des logs"
+echo "2. Activation UFW"
+echo "3. Configuration fail2ban"
+echo "4. Durcissement SSH"
+echo "Plan prêt!"
+SHEOF
+chmod 700 "$C/capitaine/plan_defense.sh"
+
 cat > "$C/capitaine/.secret" << 'EOF'
 CODE PERSONNEL: FALCON-9
 Mot de passe wifi station: Orion7-Secure-2024

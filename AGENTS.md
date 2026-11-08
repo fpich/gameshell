@@ -21,9 +21,15 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - Une mission ne se termine JAMAIS automatiquement. Seul `gsh check` (manuel) valide.
 - Si `code_required` est défini, phase 2: le jeu demande le code après les commandes.
 
-## RÈGLE A4 — Check matche sur la commande de BASE
-- Mission requiert `ls -la`, joueur tape `ls` → le check doit passer.
-- Comparer `split_whitespace().next()` des deux côtés. Jamais bloquer sur les arguments.
+## RÈGLE A4 — Check matche sur la commande de BASE, n'importe où dans la ligne
+- Mission requiert `ls -la`, joueur tape `ls` → passe. `sudo chown x` matche check `chown`. `cmd | grep` matche check `|`.
+- Le check matche si: la cible est un mot de la ligne OU la cible est contenue dans la ligne (pour `|`).
+- Jamais bloquer sur les arguments ou les préfixes (sudo...).
+
+## RÈGLE A12 — Toute cible de fichier/commande d'une mission doit exister/être valide
+- Un fichier référencé dans une mission (ex: plan_defense.sh) DOIT exister dans le vaisseau (généré par vaisseau-gen.sh).
+- Un nom d'user dans un exemple (ex: chown) doit être valide → utiliser $USER, jamais un nom fictif.
+- Test: jouer chaque mission manuellement au moins une fois (voir TESTS_PLAYTHROUGH.md).
 
 ## RÈGLE A5 — Parsing robuste
 - Toujours `split_whitespace()`, jamais `split(' ')`.
