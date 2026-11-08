@@ -105,8 +105,9 @@ COMMANDE > fichier        → redirection
 ```
 Jamais de liste de 20 commandes avec exemples ici.
 
-## RÈGLE B4 — Dans la mission: nom de base de la commande seul
-- `▸ pwd`, `▸ ls` — pas `ls -la`. Les exemples d'arguments sont dans gsh help.
+## RÈGLE B4 — Dans la mission: commande affichée telle quelle
+- `▸ pwd`, `▸ ls` — sauf si un check exige une option exacte (`-la`, `-n`...): dans ce cas
+  on affiche la commande complète (`▸ ls -la`) pour que le check soit atteignable (équité).
 
 ## RÈGLE B5 — Cadre mission style "fenêtre terminal"
 - `┏━ MISSION X.X — Titre ━┓` ... `┗━━┛`, largeur 64, story COMPLÈTE affichée (pas de troncature).

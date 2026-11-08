@@ -440,7 +440,19 @@ impl Game {
             println!();
             println!("  ┏━ {} ━┓", format!("MISSION {} — {}", m.id, m.title).bright_yellow().bold());
             println!("  ┃{}", "━".repeat(w).yellow());
-            let wrapped: Vec<String> = m.story.lines().flat_map(|l| wrap_text(l, w - 4)).collect();
+            // Re-flow: on joint les lignes dures de chaque paragraphe avant de wrapper (évite les coupures mid-phrase)
+            let mut wrapped: Vec<String> = Vec::new();
+            let mut para = String::new();
+            for l in m.story.lines() {
+                if l.trim().is_empty() {
+                    if !para.is_empty() { wrapped.extend(wrap_text(&para, w - 4)); para.clear(); }
+                    wrapped.push(String::new());
+                } else {
+                    if !para.is_empty() { para.push(' '); }
+                    para.push_str(l.trim());
+                }
+            }
+            if !para.is_empty() { wrapped.extend(wrap_text(&para, w - 4)); }
             for chunk in &wrapped {
                 println!("  ┃  {}", chunk.normal());
             }
@@ -457,7 +469,9 @@ impl Game {
             for cmd in &m.required_commands {
                 let base = cmd.split_whitespace().next().unwrap_or(cmd);
                 let (tech, rp) = Self::cmd_brief(cmd);
-                println!("  ┃    ▸ {}", base.bright_green().bold());
+                // On affiche la commande complète (avec options) si un check exige une option exacte
+                let full = if m.checks.iter().any(|c| c.target.starts_with('-') && cmd.contains(&c.target)) { cmd } else { base };
+                println!("  ┃    ▸ {}", full.bright_green().bold());
                 println!("  ┃      🚀 {}", rp.green());
                 println!("  ┃      💻 {}", tech.normal());
             }
