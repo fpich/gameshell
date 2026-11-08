@@ -144,6 +144,12 @@ echo "$out" | grep -q "Déconnexion" && ok "exit → déconnexion propre" || ko 
 out=$(run_game "Test\ngsh reset\nexit\n")
 echo "$out" | grep -q "réinitialisé\|🔄" && ok "gsh reset fonctionne" || ko "gsh reset devrait fonctionner"
 
+
+# ─── TEST 26: Playthrough 10 premières missions ───
+out=$(printf 'Test\npwd\nls\ngsh check\ncat bienvenue.txt\ngsh check\ncd /communications/messages\ncat dernier_message.txt\ngsh check\nhostname\nwhoami\nid\ngsh check\ndate\ngsh check\ntouch incident_15jan.txt\nls\ngsh check\nmkdir -p rapports/2024/janvier\ngsh check\ncp incident_15jan.txt /soutes/\ngsh check\nmv incident_15jan.txt rapports/2024/janvier/\ngsh check\ntouch t1 t2 t3\nrm t1 t2 t3\ngsh check\nexit\n' | timeout 30 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+n=$(echo "$out" | grep -c "✅ Mission réussie")
+[ "$n" -ge 10 ] && ok "Playthrough 10 premières missions ($n/10 réussies)" || ko "Playthrough 10 missions: seulement $n/10"
+
 echo ""
 echo "═══════════════════════════════════════"
 echo -e "  RÉSULTAT: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL total"

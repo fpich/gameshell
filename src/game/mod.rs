@@ -201,6 +201,11 @@ impl Game {
             "|" => ("chaîne deux commandes: la sortie de l'une devient l'entrée de l'autre", "comme passer le résultat du radar (ps) dans un filtre (grep) pour ne garder que les ennemis"),
             ">" => ("redirige la sortie d'une commande vers un fichier (écrase)", "comme enregistrer le rapport du radar dans un nouveau fichier sur votre bureau"),
             ">>" => ("redirige la sortie vers un fichier en ajoutant à la fin (append)", "comme ajouter une nouvelle ligne à la fin du journal de bord existant"),
+            "zip" => ("compresse en ZIP (-r récursif)", "comme empaqueter des documents dans une valise compressée pour le Galactica"),
+            "unzip" => ("extrait une archive ZIP", "comme déballer une valise reçue du vaisseau-mère"),
+            "ss" => ("connexions réseau (ss -tlnp)", "comme consulter le radar des vaisseaux connectés à nos ports"),
+            "netstat" => ("connexions réseau (netstat -tlnp)", "comme le radar réseau, version classique"),
+            "nano" => ("éditeur de texte terminal", "comme rédiger un rapport directement sur la console de bord"),
             _ => ("commande shell standard", "action dans le vaisseau Orion-7"),
         }
     }
@@ -232,7 +237,7 @@ impl Game {
         // Phase 2: si la mission demande un code
         if let Some(m) = self.missions.get(self.current_mission) {
             if let Some(code) = &m.code_required {
-                println!("\n  🔐 Dernière étape: entrez le code trouvé dans le vaisseau:");
+                println!("\n  🔐 Dernière étape: entrez le code trouvé dans les fichiers du vaisseau (pensez à lire les logs...):");
                 self.pending_code = Some(code.clone());
                 return false; // pas encore fini, attend le code
             }
@@ -266,7 +271,8 @@ impl Game {
         }
     }
 
-    fn cmd_reset(&self) {
+    fn cmd_reset(&mut self) {
+        self.mission_commands.clear();
         let vaisseau = format!("{}/vaisseau", shell::gameshell_home());
         let src = concat!(env!("CARGO_MANIFEST_DIR"), "/vaisseau");
         shell::execute_interactive(&format!("rm -rf '{}' && cp -r '{}' '{}'", vaisseau, src, vaisseau));
