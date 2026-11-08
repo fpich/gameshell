@@ -19,6 +19,7 @@ pub struct Game {
     completed: Vec<String>,
     current_dir: String,
     pending_code: Option<String>,  // code à valider en phase 2
+    check_fails: u32,               // échecs consécutifs de gsh check (UX)
     mission_commands: Vec<String>, // commandes tapées DANS la mission courante (reset à chaque mission)
 }
 
@@ -36,6 +37,7 @@ impl Game {
             completed: Vec::new(),
             current_dir: home,
             pending_code: None,
+            check_fails: 0,
             mission_commands: Vec::new(),
         }
     }
@@ -52,11 +54,14 @@ impl Game {
 
         loop {
             let cwd = self.display_path(&self.current_dir);
-            print!("{}@{}:{}$ ", self.player_name.bright_green(), "orion7".normal(), cwd.normal());
+            print!("{}@{}:{}$ [{}/{}] ", self.player_name.bright_green(), "orion7".normal(), cwd.normal(), self.completed.len(), self.missions.len());
             io::stdout().flush().ok();
 
             let mut line = String::new();
-            if io::stdin().read_line(&mut line).is_err() { break; }
+            let n = io::stdin().read_line(&mut line).unwrap_or(0);
+            if n == 0 { println!("\n👋 Déconnexion (EOF)."); break; } // Ctrl+D = sortie propre
+            // Règle A13: limiter la taille de l'input (anti freeze)
+            if line.len() > 4096 { line.truncate(4096); eprintln!("(input tronqué à 4096 caractères)"); }
             // Ignorer les séquences d'échappement (flèches ^[[A, ^[[B...) — règle A11
             let cmd = line.trim().replace("\u{1b}[A", "").replace("\u{1b}[B", "").replace("\u{1b}[C", "").replace("\u{1b}[D", "").trim().to_string();
             if cmd.is_empty() { continue; }
@@ -245,7 +250,12 @@ impl Game {
         let (ok, missing) = self.check_mission_detailed();
         if !ok {
             let _ = missing; // JAMAIS révéler quoi que ce soit (règle A8)
+            self.check_fails += 1;
             println!("\n  ❌ Mission non validée. Relisez le contexte et réessayez.");
+            if self.check_fails >= 2 {
+                println!("  💡 Besoin de revoir l'objectif? Tapez 'gsh goal'");
+                self.check_fails = 0;
+            }
             return false;
         }
         // Phase 2: si la mission demande un code
@@ -256,6 +266,7 @@ impl Game {
                 return false; // pas encore fini, attend le code
             }
         }
+        self.check_fails = 0;
         println!("\n  ✅ Mission réussie!");
         self.complete_mission();
         true

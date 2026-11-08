@@ -150,6 +150,31 @@ out=$(printf 'Test\npwd\nls\ngsh check\ncat bienvenue.txt\ngsh check\ncd /commun
 n=$(echo "$out" | grep -c "✅ Mission réussie")
 [ "$n" -ge 10 ] && ok "Playthrough 10 premières missions ($n/10 réussies)" || ko "Playthrough 10 missions: seulement $n/10"
 
+
+# ─── TEST 27: EOF (Ctrl+D) = sortie propre ───
+out=$(printf 'Test\npwd\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "EOF\|Déconnexion" && ok "EOF (Ctrl+D) → déconnexion propre (règle A13)" || ko "EOF devrait déconnecter proprement"
+
+# ─── TEST 28: Input très long tronqué (anti freeze) ───
+out=$(printf 'Test\nls %s\npwd\nexit\n' "$(python3 -c "print('a'*8000)")" | timeout 15 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "Test@orion7" && ! echo "$out" | grep -q "panicked" && ok "Input 8000 chars → tronqué, pas de crash" || ko "Input long devrait être tronqué sans crash"
+
+# ─── TEST 29: gsh goal suggéré après 2 échecs ───
+out=$(printf 'Test\ngsh check\ngsh check\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "gsh goal" && ok "Après 2 échecs, suggère 'gsh goal' (UX)" || ko "Devrait suggérer gsh goal après 2 échecs"
+
+# ─── TEST 30: Progression dans le prompt [N/50] ───
+out=$(printf 'Test\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -qE "\[0/50\]" && ok "Prompt affiche [N/50] progression" || ko "Prompt devrait afficher [N/50]"
+
+# ─── TEST 31: Pipe multiple fonctionne ───
+out=$(printf 'Test\ncat /pont/journaux-de-bord/dernier_rapport.txt | grep ALERTE | wc -l\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -qE "[0-9]+" && ok "Pipe multiple (cat | grep | wc) fonctionne" || ko "Pipe multiple devrait fonctionner"
+
+# ─── TEST 32: Redirection > dans le vaisseau ───
+out=$(printf 'Test\necho hello > /soutes/test_gsh.txt\ncat /soutes/test_gsh.txt\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "hello" && ok "Redirection > fonctionne dans le vaisseau" || ko "Redirection > devrait fonctionner"
+
 echo ""
 echo "═══════════════════════════════════════"
 echo -e "  RÉSULTAT: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL total"

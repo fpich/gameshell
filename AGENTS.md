@@ -51,11 +51,21 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - Les flèches (^[[A haut, ^[[B bas...) et autres séquences ANSI doivent être ignorées à la lecture.
 - Ne jamais les traiter comme des commandes.
 
+## RÈGLE A13 — Robustesse input (OBLIGATOIRE)
+- EOF (Ctrl+D, read_line retourne 0) = déconnexion propre avec message.
+- Input > 4096 caractères = tronqué (anti-freeze), jamais de crash/panic.
+- Lignes vides, tabs, espaces multiples = ignorées proprement (split_whitespace).
+- Jamais de panic sur input utilisateur, même binaire/invalide.
+
+## RÈGLE A14 — UX anti-blocage (OBLIGATOIRE)
+- Après 2 `gsh check` échoués consécutifs, suggérer 'gsh goal'.
+- Le prompt affiche la progression: `pseudo@orion7:~$ [N/50]`.
+
 ## RÈGLE A9 — Pas d'indices
 - `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
 
 ## RÈGLE A10 — Suite de tests obligatoire
-- Avant chaque commit: `./tests/run_tests.sh` → **26/26 PASS** obligatoire.
+- Avant chaque commit: `./tests/run_tests.sh` → **32/32 PASS** obligatoire.
 
 ---
 
@@ -167,7 +177,7 @@ Générée par `vaisseau-gen.sh`. Jamais `/srv/`, `/etc/`, `/home/etudiant/`.
 ```bash
 cargo build --release 2>&1 | grep -E "^error"   # vide
 bash make-archive.sh                               # régénère gameshell.sh
-./tests/run_tests.sh                               # 26/26 PASS
+./tests/run_tests.sh                               # 32/32 PASS
 ```
 
 ## RÈGLE E2 — Distribution 100% offline

@@ -12,7 +12,7 @@ rm -rf "$V"
 # ═══════════════════════════════════════════════
 #  NIVEAU 0 — LA RACINE DU VAISSEAU
 # ═══════════════════════════════════════════════
-mkdir -p "$V"/{pont,cabines,soutes,reacteur,hangar,salle-des-machines,infirmerie,cantine,navigation,communications,securite,armes,cale-a-carburant,cale-a-oxygene,soute-a-munitions,archives,corvettes,sas-entree,soute-dechets,atelier,bibliotheque,salle-de-reunion,cuisine,douches,toilettes,soute-refroidissement,soute-chauffage,vide-ordures,local-technique,antenne,soute-reserve,parking,garage,zone-industrielle}
+mkdir -p "$V"/{pont,cabines,soutes,reacteur,hangar,salle-des-machines,infirmerie,cantine,navigation,communications,securite,armes,cale-a-carburant,cale-a-oxygene,soute-a-munitions,archives,corvettes,sas-entree,soute-dechets,atelier,bibliotheque,salle-de-reunion,cuisine,douches,toilettes,soute-refroidissement,soute-chauffage,vide-ordures,local-technique,antenne,soute-reserve,parking,garage,zone-industrielle,tmp,var/tmp}
 
 # ═══════════════════════════════════════════════
 #  PONT DE COMMANDEMENT (le QG)
