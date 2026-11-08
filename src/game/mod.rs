@@ -55,6 +55,7 @@ impl Game {
         let _ = std::fs::remove_file(shell::history_path());
         let (titre, sous_titre) = match self.campaign {
             2 => ("🏯 CHÂTEAU SHIRO — Terminal du Seigneur", format!("Seigneur: {}  │  Campagne: Le Japon Féodal  │  Niveau: MOYEN", self.player_name)),
+            3 => ("🌐 NEXUS — NOC Neon-9", format!("Netrunner: {}  │  Campagne: Nexus Réseau  │  Niveau: DIFFICILE", self.player_name)),
             _ => ("🚀 ORION-7 — Terminal du Capitaine", format!("Admin: {}  │  Campagne: Les Pirates de l'Espace  │  Niveau: FACILE", self.player_name)),
         };
         println!("\n  ╔══════════════════════════════════════╗");
@@ -203,8 +204,10 @@ impl Game {
     /// RÈGLE C7: roleplay d'abord, technique ensuite. Analogie selon la campagne (C14).
     fn cmd_brief(cmd: &str) -> (&'static str, &'static str) {
         let (tech, rp) = Self::cmd_brief_raw(cmd);
-        if shell::campaign_id() == 2 {
-            if let Some(jp) = Self::cmd_brief_jp(cmd) { return (tech, jp); }
+        match shell::campaign_id() {
+            2 => if let Some(jp) = Self::cmd_brief_jp(cmd) { return (tech, jp); },
+            3 => if let Some(rs) = Self::cmd_brief_rs(cmd) { return (tech, rs); },
+            _ => {}
         }
         (tech, rp)
     }
@@ -274,6 +277,75 @@ impl Game {
         })
     }
 
+    /// Analogies role play thématisées Nexus Réseau (campagne 3 — règle C14)
+    fn cmd_brief_rs(cmd: &str) -> Option<&'static str> {
+        let base = cmd.split_whitespace().next().unwrap_or(cmd);
+        Some(match base {
+            "man" => "comme ouvrir la doc d'un équipement réseau du NOC avant de le configurer",
+            "pwd" => "comme demander au monitoring 'Dans quelle salle du NOC suis-je?'",
+            "ls" => "comme ouvrir la baie serveurs pour voir ce qu'elle contient",
+            "cd" => "comme passer d'une salle du datacenter à une autre (baies, logs, configs...)",
+            "cat" => "comme dérouler un fichier de config ou de log ligne par ligne",
+            "touch" => "comme créer un fichier de ticket vierge dans le NOC",
+            "mkdir" => "comme monter une nouvelle baie dans le datacenter (-p: toute une rangée)",
+            "cp" => "comme dupliquer une config critique en backup",
+            "mv" => "comme déplacer un serveur d'une baie à une autre",
+            "rm" => "comme jeter une vieille capture réseau à la corbeille (définitif)",
+            "chmod" => "comme changer les droits d'accès d'une config réseau (qui peut la lire/modifier)",
+            "chown" => "comme transférer la responsabilité d'un équipement à un autre opérateur",
+            "stat" => "comme lire la fiche technique d'un équipement (taille, dates, inode)",
+            "ps" => "comme voir tous les démons actifs sur le cluster",
+            "top" => "comme surveiller en direct les jauges CPU/RAM des serveurs",
+            "pgrep" => "comme retrouver un processus précis par son nom dans le cluster",
+            "kill" => "comme couper un processus zombie qui encombre un serveur",
+            "nice" => "comme régler la priorité d'une tâche de fond (scan, backup)",
+            "grep" => "comme filtrer les logs pour ne garder que les lignes 'ALERTE intrusion'",
+            "find" => "comme chercher une capture ou un fichier de config dans tout le datacenter",
+            "head" => "comme lire seulement le début d'un gros log",
+            "tail" => "comme surveiller les dernières lignes d'un log en direct",
+            "wc" => "comme compter les tentatives d'intrusion dans un fichier de log",
+            "echo" => "comme diffuser un message sur le canal interne du NOC",
+            "ip" => "comme lire la carte réseau du NOC: interfaces, IP, routes",
+            "ping" => "comme envoyer des paquets de test vers une cible pour voir si elle répond",
+            "ss" | "netstat" => "comme voir sur le radar quelles connexions sont ouvertes sur les serveurs",
+            "traceroute" => "comme suivre le chemin des paquets jusqu'à une cible (chaque saut)",
+            "nmap" => "comme scanner les ports ouverts d'une machine du réseau",
+            "curl" => "comme interroger une API interne du NOC par HTTP",
+            "dig" => "comme interroger les DNS: quelle IP derrière ce nom de domaine?",
+            "ssh" => "comme ouvrir un tunnel chiffré vers un serveur du cluster",
+            "ufw" => "comme régler le pare-feu du NOC: quelles IP/ports sont bloqués",
+            "iptables" => "comme programmer les règles de filtrage au niveau noyau",
+            "fail2ban" | "fail2ban-client" => "comme un système qui bannit automatiquement les IP qui attaquent",
+            "systemctl" => "comme allumer/éteindre/redémarrer les services du cluster",
+            "journalctl" => "comme lire le journal système filtré par service",
+            "tar" => "comme archiver les captures réseau dans une malle compressée",
+            "zip" | "unzip" => "comme compresser/décompresser des rapports d'incident",
+            "df" => "comme lire la jauge de stockage des serveurs",
+            "du" => "comme mesurer l'espace occupé par chaque baie",
+            "mount" => "comme voir quels disques sont montés sur les serveurs",
+            "useradd" => "comme créer le badge d'accès d'un nouvel opérateur",
+            "groupadd" => "comme créer une équipe (netops, securite)",
+            "usermod" => "comme ajouter un opérateur à une équipe",
+            "passwd" => "comme changer le mot de passe d'un compte",
+            "su" => "comme prendre temporairement la session d'un autre opérateur",
+            "sudo" => "comme utiliser la clé root du NOC",
+            "id" => "comme consulter son badge: uid, gid, équipes",
+            "groups" => "comme voir à quelles équipes on appartient",
+            "whoami" => "comme s'identifier sur le canal interne avant de donner un ordre",
+            "hostname" => "comme crier 'Ici le NOC Nexus!' pour s'identifier",
+            "date" => "comme horodater chaque entrée de log d'incident",
+            "auditctl" => "comme poser une caméra d'audit sur un fichier de config critique",
+            "chroot" => "comme isoler un processus suspect dans une cage",
+            "nano" => "comme éditer une config directement sur la console du NOC",
+            "apt" => "comme installer un nouvel outil de sécurité depuis les dépôts",
+            "dpkg" => "comme installer un paquet .deb à la main",
+            "|" => "comme passer la sortie d'une commande dans un filtre",
+            ">" => "comme sauvegarder le résultat d'un scan dans un rapport",
+            ">>" => "comme ajouter une ligne à la fin d'un log existant",
+            _ => return None,
+        })
+    }
+
     fn cmd_brief_raw(cmd: &str) -> (&'static str, &'static str) {
         let base = cmd.split_whitespace().next().unwrap_or(cmd);
         match base {
@@ -337,6 +409,10 @@ impl Game {
             "echo" => ("affiche un texte à l'écran (echo 'texte')", "comme crier un message dans les coursives du vaisseau"),
             "groups" => ("affiche les groupes de l'utilisateur courant", "comme consulter son badge d'équipage: à quelles équipes on appartient"),
             "pgrep" => ("liste les processus par nom (-a affiche la commande complète)", "comme appeler par leur nom les membres d'équipage présents dans une salle"),
+            "traceroute" => ("chemin des paquets jusqu'à une cible (chaque saut)", "comme suivre la route d'un convoi jusqu'à sa destination"),
+            "nmap" => ("scanne les ports ouverts d'une machine (-sS, -p, -sV)", "comme sonder les déflecteurs d'un vaisseau ennemi"),
+            "curl" => ("interroge une URL HTTP (-I, -o, -s)", "comme demander un document à la base de données du Galactica"),
+            "dig" => ("résolution DNS: IP d'un nom de domaine (+short)", "comme demander à l'annuaire galactique l'adresse d'un vaisseau"),
             "nano" => ("éditeur de texte terminal", "comme rédiger un rapport directement sur la console de bord"),
             _ => ("commande shell standard", "action dans le vaisseau Orion-7"),
         }
@@ -786,6 +862,7 @@ impl Game {
 fn id_line() -> String {
     match shell::campaign_id() {
         2 => "uid=1000(seigneur) gid=1000(seigneur) groupes=1000(seigneur),27(sudo),1001(samourai),1002(gardes)".to_string(),
+        3 => "uid=1000(netrunner) gid=1000(netrunner) groupes=1000(netrunner),27(sudo),1001(netops),1002(securite)".to_string(),
         _ => "uid=1000(capitaine) gid=1000(capitaine) groupes=1000(capitaine),27(sudo),1001(equipage_pont),1002(securite)".to_string(),
     }
 }
@@ -794,6 +871,7 @@ fn id_line() -> String {
 fn groups_line() -> String {
     match shell::campaign_id() {
         2 => "seigneur samourai gardes sudo".to_string(),
+        3 => "netrunner netops securite sudo".to_string(),
         _ => "capitaine equipage_pont securite sudo".to_string(),
     }
 }

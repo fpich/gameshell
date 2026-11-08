@@ -64,7 +64,7 @@ Tout le jeu se déroule dans `~/.gameshell/vaisseau/`. Les chemins absolus `/...
 
 ---
 
-## 🕹️ Campagnes — 2 campagnes de 100 missions EN DUR chacune (5 actes × 20 missions)
+## 🕹️ Campagnes — 3 campagnes de 100 missions EN DUR chacune (5 actes × 20 missions)
 
 Choix au lancement (après le nom du joueur):
 
@@ -72,6 +72,7 @@ Choix au lancement (après le nom du joueur):
 |---|----------|-------|--------|-------------|
 | 1 | 🏴‍☠️ Les Pirates de l'Espace | `vaisseau/` (station Orion-7) | FACILE | orion7 / capitaine |
 | 2 | 🏯 Le Japon Féodal | `monde_japon/` (château Shiro) | MOYEN | shiro / seigneur |
+| 3 | 🌐 Nexus — NOC Neon-9 (réseau) | `monde_reseau/` (datacenter) | DIFFICILE | nexus / netrunner |
 
 La campagne 2 est plus difficile: options exactes requises (`-la`, `-n`, `-c`, `-i`...), multi-checks,
 codes en phase 2, permissions, config_contains. Bannière, prompt, identité et analogies roleplay thématisés.

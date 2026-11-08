@@ -17,14 +17,15 @@ mkdir -p "$TMPDIR/payload/bin"
 cp target/release/gameshell "$TMPDIR/payload/bin/"
 bash vaisseau-gen.sh espace "$TMPDIR/payload/vaisseau"
 bash vaisseau-gen.sh japon "$TMPDIR/payload/monde_japon"
+bash vaisseau-gen.sh reseau "$TMPDIR/payload/monde_reseau"
 
 # Copier le lanceur comme "gameshell" à la racine du payload
 cp launcher.sh "$TMPDIR/payload/gameshell"
 chmod +x "$TMPDIR/payload/gameshell"
 
 # embarquer les générateurs de monde (pour gsh reset par campagne)
-cp vaisseau-gen.sh monde-japon-gen.sh "$TMPDIR/payload/"
-chmod +x "$TMPDIR/payload/vaisseau-gen.sh" "$TMPDIR/payload/monde-japon-gen.sh"
+cp vaisseau-gen.sh monde-japon-gen.sh monde-reseau-gen.sh "$TMPDIR/payload/"
+chmod +x "$TMPDIR/payload/vaisseau-gen.sh" "$TMPDIR/payload/monde-japon-gen.sh" "$TMPDIR/payload/monde-reseau-gen.sh"
 
 tar czf "$TMPDIR/payload.tar.gz" -C "$TMPDIR/payload" .
 

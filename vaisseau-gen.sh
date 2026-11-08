@@ -7,11 +7,15 @@
 #   campagne = espace (défaut) | japon
 set -e
 CAMP="${1:-espace}"
-if [ "$CAMP" = "japon" ]; then V="${2:-$HOME/.gameshell/monde_japon}"; else V="${2:-${1:-vaisseau}}"; fi
+if [ "$CAMP" = "japon" ]; then V="${2:-$HOME/.gameshell/monde_japon}"; elif [ "$CAMP" = "reseau" ]; then V="${2:-$HOME/.gameshell/monde_reseau}"; else V="${2:-${1:-vaisseau}}"; fi
 rm -rf "$V"
 
 if [ "$CAMP" = "japon" ]; then
   bash "$(dirname "$0")/monde-japon-gen.sh" "$V"
+  exit 0
+fi
+if [ "$CAMP" = "reseau" ]; then
+  bash "$(dirname "$0")/monde-reseau-gen.sh" "$V"
   exit 0
 fi
 

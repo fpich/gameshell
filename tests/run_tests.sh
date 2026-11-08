@@ -201,8 +201,8 @@ echo "$out" | grep -q "Zyra-7" && ! echo "$out" | grep -qE "\b(Marie|Sophie|Jean
 
 # ─── TEST 38: Auto-solve exhaustif des 2 campagnes x 100 missions (GAMESHELL_AUTO=1) ───
 rm -rf ~/.gameshell
-out=$(printf 'Auto\nexit\n' | GAMESHELL_AUTO=1 timeout 300 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
-echo "$out" | grep -q "AUTO campagne 1 (Pirates de l'Espace): 100/100" && echo "$out" | grep -q "AUTO campagne 2 (Japon Féodal): 100/100" && ok "Auto-solve: 100/100 sur les 2 campagnes (joué réellement)" || ko "Auto-solve: $(echo "$out" | grep -o 'AUTO campagne [0-9][^ ]*: [0-9/]*' | tr '\n' ' ')"
+out=$(printf 'Auto\nexit\n' | GAMESHELL_AUTO=1 timeout 900 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "AUTO campagne 1 (Pirates de l'Espace): 100/100" && echo "$out" | grep -q "AUTO campagne 2 (Japon Féodal): 100/100" && echo "$out" | grep -q "AUTO campagne 3 (Nexus Réseau): 100/100" && ok "Auto-solve: 100/100 sur les 3 campagnes (joué réellement)" || ko "Auto-solve: $(echo "$out" | grep -o 'AUTO campagne [0-9][^ ]*: [0-9/]*' | tr '\n' ' ')"
 
 # ─── TEST 39: Campagne 2 (Japon Féodal) sélectionnée au lancement (règle C14) ───
 rm -rf ~/.gameshell
@@ -211,8 +211,13 @@ echo "$out" | grep -q "Japon Féodal" && echo "$out" | grep -q "100 missions" &&
 
 # ─── TEST 40: Banc de cas limites EDGE (GAMESHELL_EDGE=1) sur les 200 missions ───
 rm -rf ~/.gameshell
-out=$(printf 'Edge\nexit\n' | GAMESHELL_EDGE=1 timeout 300 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
-echo "$out" | grep -q "EDGE campagne 1 (Pirates de l'Espace): 100/100 missions OK, 0 problèmes" && echo "$out" | grep -q "EDGE campagne 2 (Japon Féodal): 100/100 missions OK, 0 problèmes" && ok "EDGE: 200/200 missions passent les cas limites (check vide, garbage, mauvais code, reset)" || ko "EDGE: $(echo "$out" | grep -o 'EDGE campagne [0-9][^ ]*: [0-9/]* missions OK, [0-9]* problèmes' | tr '\n' ' ')"
+out=$(printf 'Edge\nexit\n' | GAMESHELL_EDGE=1 timeout 900 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "EDGE campagne 1 (Pirates de l'Espace): 100/100 missions OK, 0 problèmes" && echo "$out" | grep -q "EDGE campagne 2 (Japon Féodal): 100/100 missions OK, 0 problèmes" && echo "$out" | grep -q "EDGE campagne 3 (Nexus Réseau): 100/100 missions OK, 0 problèmes" && ok "EDGE: 300/300 missions passent les cas limites (check vide, garbage, mauvais code, reset)" || ko "EDGE: $(echo "$out" | grep -o 'EDGE campagne [0-9][^ ]*: [0-9/]* missions OK, [0-9]* problèmes' | tr '\n' ' ')"
+
+# ─── TEST 41: Campagne 3 (Nexus Réseau) sélectionnée au lancement (règle C14) ───
+rm -rf ~/.gameshell
+out=$(printf 'Net\n3\nhostname\nwhoami\nexit\n' | timeout 20 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "Nexus" && echo "$out" | grep -q "100 missions" && echo "$out" | grep -q "Net@nexus:~" && echo "$out" | grep -qE "netrunner$" && ok "Campagne 3: bannière Nexus, prompt @nexus, whoami=netrunner, 100 missions" || ko "Campagne 3 devrait être sélectionnable (Nexus/nexus/netrunner)"
 
 echo ""
 echo "═══════════════════════════════════════"

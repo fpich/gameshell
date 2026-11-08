@@ -60,6 +60,22 @@ fn print_banner(campaign: u8) {
         println!("{}", "  *   🏯   LE JAPON FÉODAL   🏯   *".red().bold());
         println!("{}", "     *  Mission Administration — Château Shiro  *".yellow());
         println!("{}", "  *        Niveau MOYEN — 100 missions        *".red());
+    } else if campaign == 3 {
+        // Bannière Nexus: baie serveurs / radar réseau
+        let reseau = r#"
+        ┌─[ NEXUS-9 ]─────────────────────┐
+        │  ▮▮▮   NOC NEON-9   ▮▮▮         │
+        │  ┌──┐  ┌──┐  ┌──┐  ┌──┐       │
+        │  │OK│  │OK│  │!!│  │OK│  BAIES │
+        │  └──┘  └──┘  └──┘  └──┘       │
+        │  UPLINK: ━━━━▶  10.0.0.1       │
+        └────────────────────────────────┘
+"#;
+        println!("{}", reseau.cyan());
+        println!();
+        println!("{}", "  *   🌐   NEXUS — NOC NEON-9   🌐   *".cyan().bold());
+        println!("{}", "     *  Mission Administration Réseau    *".yellow());
+        println!("{}", "  *        Niveau DIFFICILE — 100 missions   *".cyan());
     } else {
         // Espace étoilé avec titre entouré d'étoiles
         let espace = r#"
@@ -111,10 +127,11 @@ fn main() {
         println!("  ╚══════════════════════════════════════╝\n");
         println!("  1) 🏴‍☠️  Les Pirates de l'Espace — Station Orion-7  (niveau FACILE, 100 missions)");
         println!("  2) 🏯  Le Japon Féodal — Château Shiro           (niveau MOYEN, 100 missions)");
+        println!("  3) 🌐  Nexus — NOC Neon-9 (réseau)               (niveau DIFFICILE, 100 missions)");
         println!();
         let mut hist = Vec::new();
         let choix = game::lineedit::read_line("👉 Numéro de campagne (1 ou 2): ", &mut hist).unwrap_or_default();
-        if choix.trim() == "2" { 2 } else { 1 }
+        match choix.trim() { "2" => 2, "3" => 3, _ => 1 }
     };
     shell::select_world(campaign);
     print_banner(campaign);
@@ -128,11 +145,11 @@ fn main() {
     } else if std::env::var("GAMESHELL_EDGE").is_ok() {
         // Mode cas limites: teste chaque mission une à une sur les 2 campagnes
         let mut all_ok = true;
-        for c in [1u8, 2] {
+        for c in [1u8, 2, 3] {
             shell::select_world(c);
             let mut game = game::Game::new(&player_name);
             let (ok, issues) = game.run_edge();
-            let name = if c == 2 { "Japon Féodal" } else { "Pirates de l'Espace" };
+            let name = match c { 2 => "Japon Féodal", 3 => "Nexus Réseau", _ => "Pirates de l'Espace" };
             println!("🧪 EDGE campagne {} ({}): {}/100 missions OK, {} problèmes", c, name, ok, issues.len());
             for i in &issues { println!("   ⚠️  {}", i); }
             if ok != 100 || !issues.is_empty() { all_ok = false; }
@@ -141,12 +158,12 @@ fn main() {
     } else if std::env::var("GAMESHELL_AUTO").is_ok() {
         // Mode auto-solve: joue les 2 campagnes (100 missions chacune)
         let mut all_ok = true;
-        for c in [1u8, 2] {
+        for c in [1u8, 2, 3] {
             shell::select_world(c);
             let mut game = game::Game::new(&player_name);
             let (ok, total) = game.run_auto();
             println!("🤖 AUTO campagne {} ({}): {}/{} missions résolues",
-                c, if c == 2 { "Japon Féodal" } else { "Pirates de l'Espace" }, ok, total);
+                c, match c { 2 => "Japon Féodal", 3 => "Nexus Réseau", _ => "Pirates de l'Espace" }, ok, total);
             if ok != total { all_ok = false; }
         }
         std::process::exit(if all_ok { 0 } else { 1 });

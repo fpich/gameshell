@@ -2,6 +2,7 @@
 pub mod types;
 pub mod acts;
 pub mod japon;
+pub mod reseau;
 pub mod chapters {
     pub mod ch1;
     pub mod ch2;
@@ -32,8 +33,10 @@ pub use types::*;
 /// Campagne 1 = Pirates de l'Espace (facile), 2 = Japon Féodal (moyen).
 pub fn load_all_missions() -> Vec<Mission> {
     let campaign: u8 = std::env::var("GAMESHELL_CAMPAIGN").ok().and_then(|v| v.parse().ok()).unwrap_or(1);
-    if campaign == 2 {
-        return japon::missions();
+    match campaign {
+        2 => return japon::missions(),
+        3 => return reseau::missions(),
+        _ => {}
     }
     let mut missions = Vec::new();
     missions.extend(chapters::ch1::missions());
@@ -113,11 +116,11 @@ mod conformity_tests {
 
     #[test]
     fn missions_conformes() {
-        for camp in [1u8, 2] {
+        for camp in [1u8, 2, 3] {
             std::env::set_var("GAMESHELL_CAMPAIGN", camp.to_string());
             let ms = load_all_missions();
             std::env::remove_var("GAMESHELL_CAMPAIGN");
-            let label = if camp == 2 { "japon" } else { "espace" };
+            let label = match camp { 2 => "japon", 3 => "reseau", _ => "espace" };
             assert_eq!(ms.len(), 100, "campagne {}: 100 missions en dur attendues (20 chapitres x 5, 5 actes x 20)", label);
             check_missions(&ms, label);
             // 20 missions par acte (règle C1)

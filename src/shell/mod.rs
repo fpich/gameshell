@@ -29,6 +29,7 @@ pub fn select_world(campaign: u8) {
     let home_dir = gameshell_home();
     let (world, home, camp) = match campaign {
         2 => (format!("{}/monde_japon", home_dir), format!("{}/monde_japon/quartiers/seigneur", home_dir), "japon"),
+        3 => (format!("{}/monde_reseau", home_dir), format!("{}/monde_reseau/noc/netrunner", home_dir), "reseau"),
         _ => (format!("{}/vaisseau", home_dir), format!("{}/vaisseau/cabines/capitaine", home_dir), "espace"),
     };
     if !std::path::Path::new(&world).exists() {
@@ -45,12 +46,12 @@ pub fn select_world(campaign: u8) {
 
 /// Nom d'hôte du monde courant
 pub fn world_hostname() -> &'static str {
-    match campaign_id() { 2 => "shiro", _ => "orion7" }
+    match campaign_id() { 2 => "shiro", 3 => "nexus", _ => "orion7" }
 }
 
 /// Nom du joueur dans le monde courant
 pub fn world_user() -> &'static str {
-    match campaign_id() { 2 => "seigneur", _ => "capitaine" }
+    match campaign_id() { 2 => "seigneur", 3 => "netrunner", _ => "capitaine" }
 }
 
 /// Chemin vers le home du joueur dans le monde

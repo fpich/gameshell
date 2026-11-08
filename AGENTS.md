@@ -89,7 +89,7 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
 
 ## RÈGLE A10 — Suite de tests obligatoire
-- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **40/40 PASS** obligatoire.
+- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **41/41 PASS** obligatoire.
 
 ---
 
@@ -202,13 +202,14 @@ Ordre fixe: 🚀 roleplay d'abord, 💻 technique ensuite. Fonction `cmd_brief()
 - Test: `cargo test` (vaisseau_gen_sans_noms_interdits + blacklist dans toutes les missions).
 
 ## RÈGLE C14 — Campagnes (OBLIGATOIRE)
-- **2 campagnes** sélectionnées au lancement (après le nom du joueur):
+- **3 campagnes** sélectionnées au lancement (après le nom du joueur):
   - **1 = Les Pirates de l'Espace** (Station Orion-7, niveau FACILE) — monde `vaisseau/`, hôte `orion7`, user `capitaine`.
   - **2 = Le Japon Féodal** (Château Shiro, niveau MOYEN) — monde `monde_japon/`, hôte `shiro`, user `seigneur`.
+  - **3 = Nexus Réseau** (NOC Neon-9, niveau DIFFICILE, orienté réseau) — monde `monde_reseau/`, hôte `nexus`, user `netrunner`.
 - Chaque campagne = 100 missions en dur, 5 actes × 20, difficulté propre (Japon = checks plus exigeants:
   options exactes -la/-n/-c/-i, multi-checks, codes phase 2, permissions, config_contains).
 - Bannière, prompt, hostname/whoami/id/groups/uname, analogies 🚀 roleplay : tout est thématisé par campagne.
-- Test: `cargo test` vérifie les 2 campagnes (100 missions, 20/acte, conformité); `run_tests.sh` test 39 = campagne 2.
+- Test: `cargo test` vérifie les 3 campagnes (100 missions chacune, 20/acte, conformité); `run_tests.sh` tests 39/41 = campagnes 2 et 3.
 
 ---
 
@@ -221,6 +222,8 @@ Générée par `vaisseau-gen.sh`. Jamais `/srv/`, `/etc/`, `/home/etudiant/`.
 ## RÈGLE D2 — Monde dédié par campagne (OBLIGATOIRE)
 - Campagne 1 (espace): `~/.gameshell/vaisseau/` généré par `vaisseau-gen.sh espace`.
 - Campagne 2 (Japon Féodal): `~/.gameshell/monde_japon/` généré par `vaisseau-gen.sh japon` → `monde-japon-gen.sh`
+- Campagne 3 (Nexus Réseau): `~/.gameshell/monde_reseau/` généré par `vaisseau-gen.sh reseau` → `monde-reseau-gen.sh`
+  (datacenter: baies, serveurs, logs, configs, captures, firewall, noc/netrunner... home = `noc/netrunner`).
   (château Shiro: donjon, pagode, jardins, remparts, greniers, scribes, quartiers/seigneur... home = `quartiers/seigneur`).
 - `shell::world_dir()` = `$GAMESHELL_WORLD` (sélectionné par campagne). `gsh reset` régénère le monde
   de la campagne courante via le `vaisseau-gen.sh` embarqué.
