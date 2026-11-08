@@ -64,34 +64,17 @@ Tout le jeu se déroule dans `~/.gameshell/vaisseau/`. Les chemins absolus `/...
 
 ---
 
-## 📚 Missions — 50 manuelles + génération procédurale jusqu'à 5000
+## 📚 Missions — 100 missions EN DUR (20 chapitres × 5, soit 20 missions par acte)
 
-### Mode par défaut: 50 missions manuelles (10 chapitres × 5 actes)
+**Aucune génération procédurale**: tout est écrit à la main dans `src/missions/chapters/ch1..20.rs` (100% offline).
 
-| Chapitre | Acte | Thème | Compétences débloquées |
-|----------|------|-------|----------------------|
-| 1 | I | Arrivée à bord | man (départ), pwd, ls, cd, cat, hostname |
-| 2 | I | Organisation de la cabine | touch, mkdir, cp, mv, rm |
-| 3 | II | Sécuriser les accès | chmod, chown, ls -l, stat, getfacl |
-| 4 | II | Surveillance des systèmes | ps, top, systemctl, kill, nice |
-| 5 | III | Enquête sur les pirates | grep, find, pipe, >, >> |
-| 6 | III | Réseau et communications | ip, ping, ufw, ssh, ss |
-| 7 | IV | Sauvegarde des preuves | tar, zip, df, du, mount |
-| 8 | IV | Gestion de l'équipage | useradd, groupadd, passwd, su, sudo |
-| 9 | V | Maintenance | apt, dpkg, systemctl restart, journalctl |
-| 10 | V | Durcissement final | fail2ban, ssh durci, iptables, auditctl, chroot |
-
-### Mode procédural: jusqu'à 5000 missions (voir PLAN.md)
-
-```bash
-GAMESHELL_MISSIONS=all ./gameshell.sh   # 500 missions en dur (embarquées, offline)
-```
-
-Générateur déterministe (seed=42) produisant des missions cohérentes par actes:
-- **5 actes narratifs** avec montée en compétences (I=découverte → V=durcissement)
-- **Templates de 20 commandes** × contextes RP × cibles vaisseau × niveaux Bloom
-- Chaque mission générée respecte les règles AGENTS.md (20+ lignes story, carte ASCII, double définition 🚀💻, objectif narratif...)
-- IDs uniques, Bloom varié par acte (Se souvenir → Créer)
+| Acte | Chapitres | Thème | Exemples de compétences |
+|------|-----------|-------|------------------------|
+| I | 1–4 | Arrivée à bord, exploration, organisation, journal de bord | man (départ), pwd, ls, cd, cat, ls -la, find, du, echo >, wc, head, tail |
+| II | 5–8 | Sécuriser les accès, surveiller les systèmes | chmod, chown, stat, ps, top, pgrep, kill, nice, \| |
+| III | 9–12 | Enquête sur les pirates, diagnostic réseau | grep (-c/-n/-i), find, >, >>, ip, ping, ss |
+| IV | 13–16 | Sauvegarde des preuves, gestion de l'équipage | tar, zip/unzip, df, du, mount, useradd, groupadd, usermod, su, sudo, groups |
+| V | 17–20 | Maintenance, durcissement final, boucliers | apt, dpkg, systemctl, journalctl, fail2ban-client, iptables, ufw, auditctl, chroot, nano |
 
 Voir `PLAN.md` pour le plan d'action complet.
 
@@ -151,9 +134,9 @@ gameshell/
     ├── main.rs            # point d'entrée + banner espace étoilé
     ├── game/mod.rs        # moteur de jeu (boucle, affichage, checks)
     ├── shell/mod.rs       # exécution commandes + isolation chemins
-    └── missions/          # 50 missions en 10 chapitres
+    └── missions/          # 100 missions en dur, 20 chapitres
         ├── types.rs       # Mission, Skill, MissionCheck
-        └── chapters/ch1..10.rs
+        └── chapters/ch1..20.rs
 ```
 
 ## 👨‍🏫 Pour les enseignants

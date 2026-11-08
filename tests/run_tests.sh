@@ -42,7 +42,7 @@ echo ""
 
 # ─── TEST 1: 50 missions chargées ───
 out=$(run_game "Test\nexit\n")
-echo "$out" | grep -q "50 missions" && ok "50 missions chargées au démarrage" || ko "50 missions chargées"
+echo "$out" | grep -q "100 missions" && ok "100 missions en dur chargées (20 chapitres x 5, 20/acte)" || ko "100 missions chargées"
 
 # ─── TEST 2: Pas d'auto-validation (règle 3) ───
 out=$(run_game "Test\npwd\nls\nexit\n")
@@ -165,7 +165,7 @@ echo "$out" | grep -q "gsh goal" && ok "Après 2 échecs, suggère 'gsh goal' (U
 
 # ─── TEST 30: Progression dans le prompt [N/50] ───
 out=$(printf 'Test\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
-echo "$out" | grep -qE "\[0/50\]" && ok "Prompt affiche [N/50] progression" || ko "Prompt devrait afficher [N/50]"
+echo "$out" | grep -qE "\[0/100\]" && ok "Prompt affiche [N/100] progression" || ko "Prompt devrait afficher [N/100]"
 
 # ─── TEST 31: Pipe multiple fonctionne ───
 out=$(printf 'Test\ncat /pont/journaux-de-bord/dernier_rapport.txt | grep ALERTE | wc -l\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
@@ -197,6 +197,11 @@ echo "$out" | grep -q "🔓 Compétence: pwd" && echo "$out" | grep -q "🔓 Com
 # ─── TEST 37: PNJ noms SF dans les missions (règle C13) ───
 out=$(run_game "Test\nexit\n")
 echo "$out" | grep -q "Zyra-7" && ! echo "$out" | grep -qE "\b(Marie|Sophie|Jean|Kowalski|Galactica)\b" && ok "PNJ avec noms SF (Zyra-7...), jamais Marie/Kowalski/Galactica (règle C13)" || ko "PNJ non conformes"
+
+# ─── TEST 38: Auto-solve exhaustif des 100 missions (GAMESHELL_AUTO=1) ───
+rm -rf ~/.gameshell
+out=$(printf 'Auto\nexit\n' | GAMESHELL_AUTO=1 timeout 120 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "AUTO: 100/100 missions résolues" && ok "Auto-solve: 100/100 missions résolues en jouant réellement" || ko "Auto-solve: $(echo "$out" | grep -o 'AUTO: [0-9/]*' | head -1)"
 
 echo ""
 echo "═══════════════════════════════════════"

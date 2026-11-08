@@ -1,162 +1,162 @@
-//! CHAPITRE 9 - Maintenance
+//! CHAPITRE 5 - Enquete
 use crate::missions::types::*;
 
 pub fn missions() -> Vec<Mission> {
     vec![
         Mission {
-            id: "9.1".into(), chapter: 9, chapter_title: "Maintenance".into(), act: 5,
-            title: "Mise a jour".into(),
-            description: "Mettez a jour les paquets.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Les paquets de sécurité doivent être à jour contre les dernières vulnérabilités.
+            id: "9.1".into(), chapter: 9, chapter_title: "Enquete".into(), act: 3,
+            title: "Compter les attaques".into(),
+            description: "Combien de tentatives SSH echouees?".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Vex Korshun veut le nombre exact de tentatives d'intrusion SSH pour évaluer la menace.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
 depuis l'Andromède.
 
-Mettre à jour les paquets est une étape cruciale pour préparer la station à l'attaque imminente.
+Compter les attaques est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Les paquets de sécurité doivent être à jour contre les dernières vulnérabilités.
+Votre mission: Vex Korshun veut le nombre exact de tentatives d'intrusion SSH pour évaluer la menace.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Mettez à jour la liste des pièces détachées disponibles.".into(),
+            goal: "Vex Korshun veut savoir combien de fois les pirates ont tenté de rentrer. Comptez dans les logs.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Rafraichir les paquets?".into(),
-            required_commands: vec!["sudo apt update".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt update".into(), expected: None }],
+            bloom_question: "Compter les occurrences?".into(),
+            required_commands: vec!["grep Failed auth.log".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "grep".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 175,
+            code_required: Some("6".into()),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ (logs auth):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► /securite/logs/auth.log".into(),
+            skill: Some(Skill { command: "grep".into(), name: "grep".into(), description: "grep".into() }),
+        },
+        Mission {
+            id: "9.2".into(), chapter: 9, chapter_title: "Enquete".into(), act: 3,
+            title: "Localiser les logs".into(),
+            description: "Quels fichiers .log?".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Quels fichiers de logs existent sur le vaisseau? Où chercher les preuves?
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
+
+Localiser les logs est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Quels fichiers de logs existent sur le vaisseau? Où chercher les preuves?
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "Où sont stockés tous les logs de la station? Faites l'inventaire.".into(),
+            bloom_level: "Appliquer".into(),
+            bloom_question: "Chercher par extension?".into(),
+            required_commands: vec!["find /securite -name *.log".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "find".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 175,
+            code_required: None,
+            map: "VUE DE DESSUS — fouille de tout le vaisseau:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► tous les *.log".into(),
+            skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find".into() }),
+        },
+        Mission {
+            id: "9.3".into(), chapter: 9, chapter_title: "Enquete".into(), act: 3,
+            title: "Chainer".into(),
+            description: "Combinez ps|grep et cat|grep.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Il faut combiner plusieurs outils pour analyser rapidement la situation.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
+
+Chainer les analyses est une étape cruciale pour préparer la station à l'attaque imminente.
+
+Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
+pourront prendre le contrôle du vaisseau.
+
+Votre mission: Il faut combiner plusieurs outils pour analyser rapidement la situation.
+
+N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
+et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
+la station et son équipage de 5 personnes.".into(),
+            goal: "Combinez vos outils pour voir à la fois les processus SSH et les IPs bloquées.".into(),
+            bloom_level: "Appliquer".into(),
+            bloom_question: "Chainer des commandes?".into(),
+            required_commands: vec!["ps aux | grep ssh".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "|".into(), expected: None }],
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines (mise à jour):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "apt".into(), name: "apt".into(), description: "apt".into() }),
+            map: "VUE DE DESSUS — salle des machines + logs:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            skill: Some(Skill { command: "COMMANDE | COMMANDE".into(), name: "|".into(), description: "COMMANDE | COMMANDE — chaîne deux commandes".into() }),
         },
         Mission {
-            id: "9.2".into(), chapter: 9, chapter_title: "Maintenance".into(), act: 5,
-            title: "Installer".into(),
-            description: "Installez cowsay.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Un outil de test est nécessaire pour vérifier le bon fonctionnement des annonces.
+            id: "9.4".into(), chapter: 9, chapter_title: "Enquete".into(), act: 3,
+            title: "Rapport".into(),
+            description: "Sauvegardez les traces.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Toutes les traces des pirates doivent être consignées dans un rapport officiel.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
 depuis l'Andromède.
 
-Installer cowsay est une étape cruciale pour préparer la station à l'attaque imminente.
+Rédiger le rapport est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Un outil de test est nécessaire pour vérifier le bon fonctionnement des annonces.
+Votre mission: Toutes les traces des pirates doivent être consignées dans un rapport officiel.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Installez un outil pour tester les annonces de la station.".into(),
+            goal: "Toutes les tentatives d'intrusion doivent être consignées dans un rapport.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Installer un logiciel?".into(),
-            required_commands: vec!["sudo apt install -y cowsay".into(), "dpkg -s cowsay".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt install".into(), expected: None }],
+            bloom_question: "Sauvegarder dans un fichier?".into(),
+            required_commands: vec!["grep Failed auth.log > rapport.txt".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: ">".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/rapport.txt".into(), expected: None }],
             hints: vec![],
-            xp_reward: 225,
+            xp_reward: 200,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines (installation):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "dpkg".into(), name: "dpkg".into(), description: "dpkg".into() }),
+            map: "VUE DE DESSUS — votre cabine (rédaction du rapport):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            skill: Some(Skill { command: ">".into(), name: ">".into(), description: ">".into() }),
         },
         Mission {
-            id: "9.3".into(), chapter: 9, chapter_title: "Maintenance".into(), act: 5,
-            title: "Redemarrer SSH".into(),
-            description: "Apres modif config.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Après modification de la config SSH, le service doit être redémarré.
+            id: "9.5".into(), chapter: 9, chapter_title: "Enquete".into(), act: 3,
+            title: "Completer".into(),
+            description: "Ajoutez les IPs UFW.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Le rapport doit être complété avec les IPs bloquées par le pare-feu.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
 depuis l'Andromède.
 
-Redémarrer SSH est une étape cruciale pour préparer la station à l'attaque imminente.
+Compléter le rapport est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Après modification de la config SSH, le service doit être redémarré.
+Votre mission: Le rapport doit être complété avec les IPs bloquées par le pare-feu.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "La config SSH a changé, il faut recharger le service.".into(),
+            goal: "Ajoutez aussi les IPs que le pare-feu a bloquées au même rapport.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Redemarrer un service?".into(),
-            required_commands: vec!["sudo systemctl restart ssh".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "systemctl restart".into(), expected: None }],
+            bloom_question: "Ajouter a un fichier?".into(),
+            required_commands: vec!["grep UFW syslog >> rapport.txt".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: ">>".into(), expected: None }],
             hints: vec![],
-            xp_reward: 225,
+            xp_reward: 200,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ (redémarrer SSH):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "systemctl restart".into(), name: "systemctl restart".into(), description: "systemctl restart".into() }),
-        },
-        Mission {
-            id: "9.4".into(), chapter: 9, chapter_title: "Maintenance".into(), act: 5,
-            title: "Journal".into(),
-            description: "Historique recent.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. L'historique complet de la station est dans le journal systemd. Consultez-le.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Consulter le journal est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: L'historique complet de la station est dans le journal systemd. Consultez-le.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Qu'est-ce qui s'est passé récemment sur la station? Consultez le journal.".into(),
-            bloom_level: "Analyser".into(),
-            bloom_question: "Voir les logs systemd?".into(),
-            required_commands: vec!["sudo journalctl -n 20".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "journalctl".into(), expected: None }],
-            hints: vec![],
-            xp_reward: 250,
-            code_required: None,
-            map: "VUE DE DESSUS — salle des machines (journal de bord):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "journalctl".into(), name: "journalctl".into(), description: "journalctl".into() }),
-        },
-        Mission {
-            id: "9.5".into(), chapter: 9, chapter_title: "Maintenance".into(), act: 5,
-            title: "Nettoyer".into(),
-            description: "Liberez de l'espace.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Les soutes sont pleines de paquets inutiles. Nettoyez pour libérer de l'espace.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Nettoyer le système est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Les soutes sont pleines de paquets inutiles. Nettoyez pour libérer de l'espace.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Les soutes sont pleines de vieilleries. Nettoyez le système.".into(),
-            bloom_level: "Appliquer".into(),
-            bloom_question: "Nettoyer le systeme?".into(),
-            required_commands: vec!["sudo apt autoremove -y".into(), "apt clean".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt autoremove".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "apt clean".into(), expected: None }],
-            hints: vec![],
-            xp_reward: 225,
-            code_required: None,
-            map: "VUE DE DESSUS — salle des machines (nettoyage):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "apt update".into(), name: "apt update".into(), description: "apt update".into() }),
+            map: "VUE DE DESSUS — votre cabine (compléter le rapport):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            skill: Some(Skill { command: ">>".into(), name: ">>".into(), description: ">>".into() }),
         },
     ]
 }

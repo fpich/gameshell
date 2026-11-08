@@ -1,162 +1,87 @@
-//! CHAPITRE 3 - Securiser les acces
+//! CHAPITRE 3 - Explorer la station (Acte 1) — missions EN DUR (règle C1)
 use crate::missions::types::*;
 
 pub fn missions() -> Vec<Mission> {
     vec![
         Mission {
-            id: "3.1".into(), chapter: 3, chapter_title: "Securiser les acces".into(), act: 2,
-            title: "Comprendre les permissions".into(),
-            description: "Vex Korshun explique: ls -l montre rwx.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Vex Korshun vous explique que chaque fichier du vaisseau a des permissions. Sans comprendre ça, impossible de protéger quoi que ce soit.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Comprendre les permissions est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Vex Korshun vous explique que chaque fichier du vaisseau a des permissions. Sans comprendre ça, impossible de protéger quoi que ce soit.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Vex Korshun vous explique que chaque fichier a des permissions. Regardez celles de votre cabine.".into(),
-            bloom_level: "Comprendre".into(),
-            bloom_question: "Que signifient rwx?".into(),
-            required_commands: vec!["ls -l".into(), "ls -la".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ls -l".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "ls -la".into(), expected: None }],
-            hints: vec![],
-            xp_reward: 125,
-            code_required: None,
-            map: "VUE DE DESSUS — votre cabine (permissions des portes):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "ls -l".into(), name: "ls -l".into(), description: "ls -l — liste détaillée: permissions, taille, date".into() }),
-        },
-        Mission {
-            id: "3.2".into(), chapter: 3, chapter_title: "Securiser les acces".into(), act: 2,
-            title: "Proteger le code secret".into(),
-            description: "Votre .secret contient FALCON-9. Protegez-le.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Votre code personnel FALCON-9 est dans un fichier lisible par tous. Un pirate pourrait le voler.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Protéger le code secret est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Votre code personnel FALCON-9 est dans un fichier lisible par tous. Un pirate pourrait le voler.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Votre code personnel ne doit être lisible que par vous. Protégez ce fichier.".into(),
+            id: "3.1".into(), chapter: 3, chapter_title: "Explorer la station".into(), act: 1,
+            title: "Fichiers caches de la cabine".into(),
+            description: "Zyra-7: certains documents de la cabine sont invisibles au premier abord.".into(),
+            story: "Zyra-7, l'IA de bord, vous parle par l'intercom depuis la salle des machines:\n« Capitaine, avant de poursuivre, familiarisez-vous avec votre cabine.\nCertains fichiers sont cachés: ils commencent par un point et n'apparaissent\npas avec un simple listing. »\n\nElle vous explique que sur Orion-7, les documents sensibles du capitaine\nsont stockés dans des fichiers cachés, comme le fichier .secret posé sur\nvotre bureau.\n\n« Affichez TOUT le contenu de votre cabine, y compris les fichiers cachés,\npuis lisez ce fichier .secret. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.".into(),
+            goal: "Zyra-7 veut la liste complète de votre cabine, fichiers cachés compris, et le contenu du fichier caché.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Restreindre au proprio seul?".into(),
-            required_commands: vec!["chmod 600 fichier".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chmod".into(), expected: None }, MissionCheck { check_type: "permission".into(), target: "~/notes.txt".into(), expected: Some("600".into()) }],
+            bloom_question: "Comment lister aussi les fichiers caches?".into(),
+            required_commands: vec!["ls -la".into(), "cat .secret".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "-la".into(), expected: None }, MissionCheck { check_type: "file_read".into(), target: ".secret".into(), expected: None }],
             hints: vec![],
-            xp_reward: 150,
+            xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine (coffre personnel):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "chmod".into(), name: "chmod".into(), description: "chmod — change les permissions rwx d'un fichier (600, +x)".into() }),
+            map: "VUE DE DESSUS — votre cabine:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘\\n      └────► .secret (fichier caché sur le bureau)".into(),
+            skill: Some(Skill { command: "ls -la".into(), name: "ls -la".into(), description: "ls -la — liste tout, y compris les fichiers cachés".into() }),
         },
         Mission {
-            id: "3.3".into(), chapter: 3, chapter_title: "Securiser les acces".into(), act: 2,
-            title: "Rendre executable".into(),
-            description: "Le plan de defense doit s'executer.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Le plan de défense plan_defense.sh ne peut pas s'exécuter. Il lui manque le droit d'exécution.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Rendre le plan exécutable est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Le plan de défense plan_defense.sh ne peut pas s'exécuter. Il lui manque le droit d'exécution.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Le plan de défense ne peut pas se lancer. Il lui manque quelque chose. Corrigez.".into(),
+            id: "3.2".into(), chapter: 3, chapter_title: "Explorer la station".into(), act: 1,
+            title: "Trouver un document".into(),
+            description: "Nira Okoro a besoin du dernier message de l'Andromède, perdu quelque part.".into(),
+            story: "Nira Okoro, officier communications, coupe l'intercom:\n« Capitaine, j'ai égaré le chemin exact du dernier message de l'Amiral Xylia Vorn.\nLe fichier s'appelle dernier_message.txt mais je ne sais plus dans quel\ncompartiment il se trouve. »\n\nElle vous conseille d'utiliser l'outil de recherche du vaisseau qui fouille\nTOUS les compartiments à la recherche d'un nom de fichier.\n\n« Trouvez où se cache dernier_message.txt, Capitaine. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            goal: "Retrouvez dans quel compartiment du vaisseau se trouve le fichier dernier_message.txt.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Comment ajouter +x?".into(),
-            required_commands: vec!["chmod 600 fichier".into()],
-            checks: vec![MissionCheck { check_type: "permission".into(), target: "~/plan_defense.sh".into(), expected: Some("+x".into()) }],
+            bloom_question: "Comment rechercher un fichier par son nom dans tout le vaisseau?".into(),
+            required_commands: vec!["find / -name dernier_message.txt".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "find".into(), expected: None }],
             hints: vec![],
-            xp_reward: 125,
+            xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine (plan de défense):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "chmod".into(), name: "chmod +x".into(), description: "chmod +x — rend un fichier exécutable (script de défense)".into() }),
+            map: "VUE DE DESSUS — votre cabine:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘\\n      └────► cible: dernier_message.txt (quelque part...)".into(),
+            skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find — recherche des fichiers par nom dans tout le vaisseau".into() }),
         },
         Mission {
-            id: "3.4".into(), chapter: 3, chapter_title: "Securiser les acces".into(), act: 2,
-            title: "Changer le proprio".into(),
-            description: "Transferez le fichier equipage.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Un fichier appartient à root. Vous devez en prendre la responsabilité pour le modifier.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Changer le propriétaire est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Un fichier appartient à root. Vous devez en prendre la responsabilité pour le modifier.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Un fichier appartient encore à l'ancien admin. Transférez-le à votre nom.".into(),
+            id: "3.3".into(), chapter: 3, chapter_title: "Explorer la station".into(), act: 1,
+            title: "Poids des soutes".into(),
+            description: "Tael Rhen veut savoir combien occupent les soutes.".into(),
+            story: "Tael Rhen, ingénieur-chef des machines, vous interpelle:\n« Capitaine, avant qu'on remplisse les soutes de nouvelles caisses,\nje voudrais savoir combien d'espace elles occupent déjà. »\n\nIl explique que chaque compartiment du vaisseau a un poids numérique:\nla somme de tous les fichiers qu'il contient.\n\n« Donnez-moi la taille totale des soutes, Capitaine. Une seule commande. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            goal: "Indiquez à Tael Rhen l'espace total occupé par le compartiment /soutes.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Comment changer le proprio?".into(),
-            required_commands: vec!["sudo chown $USER fichier".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chown".into(), expected: None }],
+            bloom_question: "Comment connaître la taille totale d'un compartiment?".into(),
+            required_commands: vec!["du -sh /soutes".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "du".into(), expected: None }],
             hints: vec![],
-            xp_reward: 150,
+            xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "chown".into(), name: "chown".into(), description: "chown — change le propriétaire d'un fichier (user:group)".into() }),
+            map: "VUE DE DESSUS — objectif: les SOUTES:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶SOUTES◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └─────────┴──► peser /soutes".into(),
+            skill: Some(Skill { command: "du -sh".into(), name: "du -sh".into(), description: "du -sh — taille totale lisible d'un compartiment".into() }),
         },
         Mission {
-            id: "3.5".into(), chapter: 3, chapter_title: "Securiser les acces".into(), act: 2,
-            title: "Metadonnees".into(),
-            description: "Comparez les dates de modification.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Pour détecter une intrusion, comparez les dates de modification des fichiers sensibles.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Analyser les métadonnées est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Pour détecter une intrusion, comparez les dates de modification des fichiers sensibles.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Comparez les dates de modification des fichiers de sécurité pour détecter une intrusion.".into(),
-            bloom_level: "Analyser".into(),
-            bloom_question: "stat vs ls -l?".into(),
-            required_commands: vec!["stat fichier".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "stat".into(), expected: None }],
+            id: "3.4".into(), chapter: 3, chapter_title: "Explorer la station".into(), act: 1,
+            title: "Monter au pont".into(),
+            description: "L'Amiral Xylia Vorn vous attend au pont de commandement.".into(),
+            story: "L'intercom grésille: « Capitaine! Amiral Xylia Vorn, vaisseau-mère Andromède.\nJe vous attends au PONT de commandement pour le briefing de défense. »\n\nVous quittez votre cabine et empruntez les coursives jusqu'au pont.\nLe pont est le compartiment /pont à la racine du vaisseau.\n\n« Venez me voir au pont, Capitaine. Les Corbeaux Noirs approchent. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            goal: "Rejoignez le pont de commandement (/pont) où vous attend l'Amiral.".into(),
+            bloom_level: "Appliquer".into(),
+            bloom_question: "Comment se déplacer jusqu'au pont avec un chemin absolu?".into(),
+            required_commands: vec!["cd /pont".into()],
+            checks: vec![MissionCheck { check_type: "dir_reached".into(), target: "/pont".into(), expected: None }],
             hints: vec![],
-            xp_reward: 150,
+            xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ (logs):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► /securite/logs/".into(),
-            skill: Some(Skill { command: "stat".into(), name: "stat".into(), description: "stat — affiche les métadonnées: taille, permissions, dates, inode".into() }),
+            map: "VUE DE DESSUS — objectif: le PONT:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶ PONT ◀│ │CABINES │ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► /pont (briefing avec l'Amiral)".into(),
+            skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd — change de répertoire (cd /pont, cd .., cd ~)".into() }),
+        },
+        Mission {
+            id: "3.5".into(), chapter: 3, chapter_title: "Explorer la station".into(), act: 1,
+            title: "Premier rappel sur le bureau".into(),
+            description: "Zyra-7 vous demande de noter un rappel sur votre bureau.".into(),
+            story: "Zyra-7 revient à l'intercom, plus calme:\n« Capitaine, notez sur votre bureau un rappel pour ne rien oublier:\n'Verifier les boucliers avant l'attaque'. »\n\nElle vous explique que pour écrire directement dans un fichier sans l'ouvrir,\non redirige un texte vers le fichier: le contenu est enregistré tel quel.\n\n« Créez le fichier rappel.txt sur votre bureau avec ce message dedans. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            goal: "Créez un fichier rappel.txt dans votre cabine contenant le texte demandé par Zyra-7.".into(),
+            bloom_level: "Appliquer".into(),
+            bloom_question: "Comment écrire un texte directement dans un fichier?".into(),
+            required_commands: vec!["echo 'Verifier les boucliers' > rappel.txt".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: ">".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/rappel.txt".into(), expected: None }],
+            hints: vec![],
+            xp_reward: 100,
+            code_required: None,
+            map: "VUE DE DESSUS — votre cabine:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘\\n      └────► créer rappel.txt sur le bureau".into(),
+            skill: Some(Skill { command: "echo ... > fichier".into(), name: ">".into(), description: "COMMANDE > fichier — redirige la sortie vers un fichier (écrase)".into() }),
         },
     ]
 }

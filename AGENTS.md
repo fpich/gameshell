@@ -80,7 +80,7 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
 
 ## RÈGLE A10 — Suite de tests obligatoire
-- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **37/37 PASS** obligatoire.
+- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **38/38 PASS** obligatoire.
 
 ---
 
@@ -130,7 +130,9 @@ Jamais de liste de 20 commandes avec exemples ici.
 # SECTION C — CONTENU DES MISSIONS (50 missions, 10 chapitres, 5 actes)
 
 ## RÈGLE C1 — Structure
-- 50 missions, 10 chapitres × 5 missions, 5 actes narratifs "Les Pirates de l'Espace".
+- **100 missions EN DUR**, 20 chapitres × 5 missions, 5 actes narratifs "Les Pirates de l'Espace".
+- **20 missions par acte** (4 chapitres × 5 missions par acte). PAS de génération procédurale:
+  tout le contenu est écrit à la main dans `src/missions/chapters/ch1..20.rs`.
 - Chaque mission: 1-3 nouvelles commandes shell à apprendre.
 
 ## RÈGLE C2 — Compétences persistantes

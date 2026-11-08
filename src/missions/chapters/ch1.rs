@@ -123,17 +123,7 @@ confirme Vex Korshun. Et avec les pirates qui approchent, on n'a pas de temps à
             id: "1.5".into(), chapter: 1, chapter_title: "Arrivee a bord".into(), act: 1,
             title: "Heure du vaisseau".into(),
             description: "Verifiez l'heure pour correler les logs.".into(),
-            story: "Zyra-7 revient à l'intercom: « Capitaine, une dernière vérification avant l'alerte.
-Pour corréler les événements dans les journaux de bord, l'horloge de la station doit être exacte.
-Vérifiez qu'elle est bien synchronisée. »
-
-Dans l'espace, la synchronisation temporelle est critique.
-Si l'horloge de bord est décalée, les logs d'attaque des pirates seront impossibles à corréler
-avec les événements réels. L'Amiral Xylia Vorn exige des horodatages fiables pour l'enquête.
-
-« Vérifiez l'heure système, Capitaine. Dites-moi si elle est correcte. »
-
-Vous consultez l'horloge du système de la station.".into(),
+            story: "Zyra-7 revient Ã  l'intercom: Â« Capitaine, une derniÃ¨re vÃ©rification avant l'alerte.\nPour corrÃ©ler les Ã©vÃ©nements dans les journaux de bord, l'horloge de la station doit Ãªtre exacte.\nVÃ©rifiez qu'elle est bien synchronisÃ©e. Â»\n\nDans l'espace, la synchronisation temporelle est critique.\nSi l'horloge de bord est dÃ©calÃ©e, les logs d'attaque des pirates seront impossibles Ã  corrÃ©ler\navec les Ã©vÃ©nements rÃ©els. L'Amiral Xylia Vorn exige des horodatages fiables pour l'enquÃªte.\n\nÂ« VÃ©rifiez l'heure systÃ¨me, Capitaine. Dites-moi si elle est correcte. Â»\n\nVous consultez l'horloge du systÃ¨me de la station.\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.".into(),
             goal: "Vérifiez que l'horloge de bord est bien réglée avant de commencer l'enquête.".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Quelle commande donne date/heure?".into(),

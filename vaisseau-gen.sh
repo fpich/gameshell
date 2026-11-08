@@ -119,7 +119,7 @@ EOF
 #  CABINES (quartiers de l'équipage)
 # ═══════════════════════════════════════════════
 C="$V/cabines"
-mkdir -p "$C"/{capitaine,marie,jean,sophie,pierre,matelot,invite}
+mkdir -p "$C"/{capitaine,zyra,vex,nira,tael,matelot,invite}
 
 cat > "$C/capitaine/bienvenue.txt" << 'EOF'
 BIENVENUE DANS VOTRE CABINE,CAPITAINE!
@@ -164,7 +164,7 @@ Mot de passe wifi station: Orion7-Secure-2024
 Ne pas divulguer!
 EOF
 
-cat > "$C/marie/rapport_technique.txt" << 'EOF'
+cat > "$C/zyra/rapport_technique.txt" << 'EOF'
 RAPPORT TECHNIQUE - MARIE (Ingénieur)
 
 Le réacteur tourne à 89%. Tout va bien de ce côté.
@@ -176,7 +176,7 @@ Par contre,nos systèmes de sécurité sont faibles:
 Il faut agir vite,Capitaine!
 EOF
 
-cat > "$C/jean/dossier_securite.txt" << 'EOF'
+cat > "$C/vex/dossier_securite.txt" << 'EOF'
 DOSSIER SÉCURITÉ - JEAN (Officier sécurité)
 
 Menace: Les Corbeaux Noirs
@@ -191,7 +191,7 @@ Recommandations:
 4. Surveiller les processus suspects
 EOF
 
-cat > "$C/sophie/message_galactica.txt" << 'EOF'
+cat > "$C/nira/message_andromede.txt" << 'EOF'
 📡 MESSAGE DU VAISSEAU-MÈRE GALACTICA
 
 De: Amiral Xylia Vorn
@@ -208,7 +208,7 @@ Nous restons en soutien à portée de phaser. »
 — Amiral Xylia Vorn,15/01/2024 10:00
 EOF
 
-cat > "$C/pierre/etat_machines.txt" << 'EOF'
+cat > "$C/tael/etat_machines.txt" << 'EOF'
 ÉTAT DES MACHINES - PIERRE (Mécanicien)
 
 Réacteur: 89% - stable

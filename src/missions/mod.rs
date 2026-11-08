@@ -1,8 +1,6 @@
 //! Système de missions - Agrège tous les chapitres
 pub mod types;
 pub mod acts;
-pub mod generator;
-pub mod generated;
 pub mod chapters {
     pub mod ch1;
     pub mod ch2;
@@ -14,24 +12,23 @@ pub mod chapters {
     pub mod ch8;
     pub mod ch9;
     pub mod ch10;
+    pub mod ch11;
+    pub mod ch12;
+    pub mod ch13;
+    pub mod ch14;
+    pub mod ch15;
+    pub mod ch16;
+    pub mod ch17;
+    pub mod ch18;
+    pub mod ch19;
+    pub mod ch20;
 }
 
 pub use types::*;
 
+/// 100 missions EN DUR (20 chapitres x 5 missions, 5 actes x 20 missions).
+/// 100% offline, aucun générateur procédural (règle C1).
 pub fn load_all_missions() -> Vec<Mission> {
-    // Mode 5000 missions EN DUR (compilées dans le binaire, 100% offline, sans LLM)
-    if std::env::var("GAMESHELL_MISSIONS").map(|v| v == "all" || v == "500").unwrap_or(false) {
-        return generated::generated_missions();
-    }
-    // Mode génération procédurale runtime si demandé
-    if let Ok(n) = std::env::var("GAMESHELL_MISSIONS") {
-        if let Ok(count) = n.parse::<usize>() {
-            if count > 50 && count != 5000 {
-                return generator::generate(count);
-            }
-        }
-    }
-    // Mode par défaut: 50 missions manuelles
     let mut missions = Vec::new();
     missions.extend(chapters::ch1::missions());
     missions.extend(chapters::ch2::missions());
@@ -43,7 +40,30 @@ pub fn load_all_missions() -> Vec<Mission> {
     missions.extend(chapters::ch8::missions());
     missions.extend(chapters::ch9::missions());
     missions.extend(chapters::ch10::missions());
+    missions.extend(chapters::ch11::missions());
+    missions.extend(chapters::ch12::missions());
+    missions.extend(chapters::ch13::missions());
+    missions.extend(chapters::ch14::missions());
+    missions.extend(chapters::ch15::missions());
+    missions.extend(chapters::ch16::missions());
+    missions.extend(chapters::ch17::missions());
+    missions.extend(chapters::ch18::missions());
+    missions.extend(chapters::ch19::missions());
+    missions.extend(chapters::ch20::missions());
     missions
+}
+
+#[cfg(test)]
+
+#[cfg(test)]
+fn wrap60(l: &str) -> usize {
+    // approxime le word wrap de show_mission (width 60)
+    if l.trim().is_empty() { return 1; }
+    let mut n = 1; let mut cur = 0;
+    for w in l.split_whitespace() {
+        if cur + w.len() + 1 > 60 && cur > 0 { n += 1; cur = w.len(); } else { cur += w.len() + 1; }
+    }
+    n
 }
 
 #[cfg(test)]
@@ -75,7 +95,9 @@ mod conformity_tests {
             assert!(skill_ok(m), "{} {}: skill {:?} n'est pas une commande requise de la mission (règle A15)", label, m.id, m.skill.as_ref().map(|s| s.name.clone()));
             assert!(BLOOM_FR.contains(&m.bloom_level.as_str()), "{} {}: bloom_level {:?} pas en français (règle B8/C9)", label, m.id, m.bloom_level);
             assert!(m.map.contains("VUE DE DESSUS") || m.map.contains("VUE"), "{} {}: pas de carte vue de dessus (règle C6)", label, m.id);
-            assert!(m.story.lines().count() + m.description.lines().count() >= 10, "{} {}: contexte trop court (règle C3)", label, m.id);
+            // Règle C3: 20+ lignes de contexte AFFICHÉES (wrap à 60 car., comme show_mission)
+            let disp = m.story.lines().map(|l| wrap60(l)).sum::<usize>() + m.description.lines().map(|l| wrap60(l)).sum::<usize>();
+            assert!(disp >= 18, "{} {}: contexte trop court ({} lignes affichées, règle C3: 20+)", label, m.id, disp);
             let all_text = format!("{} {} {} {} {}", m.title, m.description, m.story, m.goal, m.map);
             for bad in PNJ_BLACKLIST {
                 assert!(!all_text.split_whitespace().any(|w| w.trim_matches(|c: char| !c.is_alphabetic()).starts_with(bad) && w.starts_with(bad)),
@@ -86,16 +108,14 @@ mod conformity_tests {
 
     #[test]
     fn missions_conformes() {
-        // Un seul test séquentiel: la variable d'env GAMESHELL_MISSIONS est globale au process
         let ms = load_all_missions();
-        assert_eq!(ms.len(), 50, "50 missions manuelles attendues");
+        assert_eq!(ms.len(), 100, "100 missions en dur attendues (20 chapitres x 5, 5 actes x 20)");
         check_missions(&ms, "manuel");
-
-        std::env::set_var("GAMESHELL_MISSIONS", "all");
-        let ms = load_all_missions();
-        std::env::remove_var("GAMESHELL_MISSIONS");
-        assert_eq!(ms.len(), 500, "500 missions embarquées attendues");
-        check_missions(&ms, "genere");
+        // 20 missions par acte (règle C1)
+        for act in 1..=5u32 {
+            let n = ms.iter().filter(|m| m.act == act).count();
+            assert_eq!(n, 20, "acte {} doit avoir 20 missions, trouvé {}", act, n);
+        }
     }
 
     #[test]

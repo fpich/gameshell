@@ -1,162 +1,162 @@
-//! CHAPITRE 5 - Enquete
+//! CHAPITRE 3 - Securiser les acces
 use crate::missions::types::*;
 
 pub fn missions() -> Vec<Mission> {
     vec![
         Mission {
-            id: "5.1".into(), chapter: 5, chapter_title: "Enquete".into(), act: 3,
-            title: "Compter les attaques".into(),
-            description: "Combien de tentatives SSH echouees?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Vex Korshun veut le nombre exact de tentatives d'intrusion SSH pour évaluer la menace.
+            id: "5.1".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
+            title: "Comprendre les permissions".into(),
+            description: "Vex Korshun explique: ls -l montre rwx.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Vex Korshun vous explique que chaque fichier du vaisseau a des permissions. Sans comprendre ça, impossible de protéger quoi que ce soit.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
 depuis l'Andromède.
 
-Compter les attaques est une étape cruciale pour préparer la station à l'attaque imminente.
+Comprendre les permissions est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Vex Korshun veut le nombre exact de tentatives d'intrusion SSH pour évaluer la menace.
+Votre mission: Vex Korshun vous explique que chaque fichier du vaisseau a des permissions. Sans comprendre ça, impossible de protéger quoi que ce soit.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Vex Korshun veut savoir combien de fois les pirates ont tenté de rentrer. Comptez dans les logs.".into(),
-            bloom_level: "Appliquer".into(),
-            bloom_question: "Compter les occurrences?".into(),
-            required_commands: vec!["grep Failed auth.log".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "grep".into(), expected: None }],
+            goal: "Vex Korshun vous explique que chaque fichier a des permissions. Regardez celles de votre cabine.".into(),
+            bloom_level: "Comprendre".into(),
+            bloom_question: "Que signifient rwx?".into(),
+            required_commands: vec!["ls -l".into(), "ls -la".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ls -l".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "ls -la".into(), expected: None }],
             hints: vec![],
-            xp_reward: 175,
-            code_required: Some("6".into()),
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ (logs auth):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► /securite/logs/auth.log".into(),
-            skill: Some(Skill { command: "grep".into(), name: "grep".into(), description: "grep".into() }),
+            xp_reward: 125,
+            code_required: None,
+            map: "VUE DE DESSUS — votre cabine (permissions des portes):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            skill: Some(Skill { command: "ls -l".into(), name: "ls -l".into(), description: "ls -l — liste détaillée: permissions, taille, date".into() }),
         },
         Mission {
-            id: "5.2".into(), chapter: 5, chapter_title: "Enquete".into(), act: 3,
-            title: "Localiser les logs".into(),
-            description: "Quels fichiers .log?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Quels fichiers de logs existent sur le vaisseau? Où chercher les preuves?
+            id: "5.2".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
+            title: "Proteger le code secret".into(),
+            description: "Votre .secret contient FALCON-9. Protegez-le.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Votre code personnel FALCON-9 est dans un fichier lisible par tous. Un pirate pourrait le voler.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
 depuis l'Andromède.
 
-Localiser les logs est une étape cruciale pour préparer la station à l'attaque imminente.
+Protéger le code secret est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Quels fichiers de logs existent sur le vaisseau? Où chercher les preuves?
+Votre mission: Votre code personnel FALCON-9 est dans un fichier lisible par tous. Un pirate pourrait le voler.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Où sont stockés tous les logs de la station? Faites l'inventaire.".into(),
+            goal: "Votre code personnel ne doit être lisible que par vous. Protégez ce fichier.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Chercher par extension?".into(),
-            required_commands: vec!["find /securite -name *.log".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "find".into(), expected: None }],
+            bloom_question: "Restreindre au proprio seul?".into(),
+            required_commands: vec!["chmod 600 fichier".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chmod".into(), expected: None }, MissionCheck { check_type: "permission".into(), target: "~/notes.txt".into(), expected: Some("600".into()) }],
             hints: vec![],
-            xp_reward: 175,
+            xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — fouille de tout le vaisseau:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► tous les *.log".into(),
-            skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find".into() }),
+            map: "VUE DE DESSUS — votre cabine (coffre personnel):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            skill: Some(Skill { command: "chmod".into(), name: "chmod".into(), description: "chmod — change les permissions rwx d'un fichier (600, +x)".into() }),
         },
         Mission {
-            id: "5.3".into(), chapter: 5, chapter_title: "Enquete".into(), act: 3,
-            title: "Chainer".into(),
-            description: "Combinez ps|grep et cat|grep.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Il faut combiner plusieurs outils pour analyser rapidement la situation.
+            id: "5.3".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
+            title: "Rendre executable".into(),
+            description: "Le plan de defense doit s'executer.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Le plan de défense plan_defense.sh ne peut pas s'exécuter. Il lui manque le droit d'exécution.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
 depuis l'Andromède.
 
-Chainer les analyses est une étape cruciale pour préparer la station à l'attaque imminente.
+Rendre le plan exécutable est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Il faut combiner plusieurs outils pour analyser rapidement la situation.
+Votre mission: Le plan de défense plan_defense.sh ne peut pas s'exécuter. Il lui manque le droit d'exécution.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Combinez vos outils pour voir à la fois les processus SSH et les IPs bloquées.".into(),
+            goal: "Le plan de défense ne peut pas se lancer. Il lui manque quelque chose. Corrigez.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Chainer des commandes?".into(),
-            required_commands: vec!["ps aux | grep ssh".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "|".into(), expected: None }],
+            bloom_question: "Comment ajouter +x?".into(),
+            required_commands: vec!["chmod 600 fichier".into()],
+            checks: vec![MissionCheck { check_type: "permission".into(), target: "~/plan_defense.sh".into(), expected: Some("+x".into()) }],
             hints: vec![],
-            xp_reward: 200,
+            xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines + logs:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "COMMANDE | COMMANDE".into(), name: "|".into(), description: "COMMANDE | COMMANDE — chaîne deux commandes".into() }),
+            map: "VUE DE DESSUS — votre cabine (plan de défense):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            skill: Some(Skill { command: "chmod".into(), name: "chmod +x".into(), description: "chmod +x — rend un fichier exécutable (script de défense)".into() }),
         },
         Mission {
-            id: "5.4".into(), chapter: 5, chapter_title: "Enquete".into(), act: 3,
-            title: "Rapport".into(),
-            description: "Sauvegardez les traces.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Toutes les traces des pirates doivent être consignées dans un rapport officiel.
+            id: "5.4".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
+            title: "Changer le proprio".into(),
+            description: "Transferez le fichier equipage.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Un fichier appartient à root. Vous devez en prendre la responsabilité pour le modifier.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
 depuis l'Andromède.
 
-Rédiger le rapport est une étape cruciale pour préparer la station à l'attaque imminente.
+Changer le propriétaire est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Toutes les traces des pirates doivent être consignées dans un rapport officiel.
+Votre mission: Un fichier appartient à root. Vous devez en prendre la responsabilité pour le modifier.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Toutes les tentatives d'intrusion doivent être consignées dans un rapport.".into(),
+            goal: "Un fichier appartient encore à l'ancien admin. Transférez-le à votre nom.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Sauvegarder dans un fichier?".into(),
-            required_commands: vec!["grep Failed auth.log > rapport.txt".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: ">".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/rapport.txt".into(), expected: None }],
+            bloom_question: "Comment changer le proprio?".into(),
+            required_commands: vec!["sudo chown $USER fichier".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chown".into(), expected: None }],
             hints: vec![],
-            xp_reward: 200,
+            xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine (rédaction du rapport):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: ">".into(), name: ">".into(), description: ">".into() }),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
+            skill: Some(Skill { command: "chown".into(), name: "chown".into(), description: "chown — change le propriétaire d'un fichier (user:group)".into() }),
         },
         Mission {
-            id: "5.5".into(), chapter: 5, chapter_title: "Enquete".into(), act: 3,
-            title: "Completer".into(),
-            description: "Ajoutez les IPs UFW.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Le rapport doit être complété avec les IPs bloquées par le pare-feu.
+            id: "5.5".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
+            title: "Metadonnees".into(),
+            description: "Comparez les dates de modification.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Pour détecter une intrusion, comparez les dates de modification des fichiers sensibles.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
 depuis l'Andromède.
 
-Compléter le rapport est une étape cruciale pour préparer la station à l'attaque imminente.
+Analyser les métadonnées est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Le rapport doit être complété avec les IPs bloquées par le pare-feu.
+Votre mission: Pour détecter une intrusion, comparez les dates de modification des fichiers sensibles.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Ajoutez aussi les IPs que le pare-feu a bloquées au même rapport.".into(),
-            bloom_level: "Appliquer".into(),
-            bloom_question: "Ajouter a un fichier?".into(),
-            required_commands: vec!["grep UFW syslog >> rapport.txt".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: ">>".into(), expected: None }],
+            goal: "Comparez les dates de modification des fichiers de sécurité pour détecter une intrusion.".into(),
+            bloom_level: "Analyser".into(),
+            bloom_question: "stat vs ls -l?".into(),
+            required_commands: vec!["stat fichier".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "stat".into(), expected: None }],
             hints: vec![],
-            xp_reward: 200,
+            xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine (compléter le rapport):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: ">>".into(), name: ">>".into(), description: ">>".into() }),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ (logs):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► /securite/logs/".into(),
+            skill: Some(Skill { command: "stat".into(), name: "stat".into(), description: "stat — affiche les métadonnées: taille, permissions, dates, inode".into() }),
         },
     ]
 }

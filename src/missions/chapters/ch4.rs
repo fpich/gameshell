@@ -1,162 +1,87 @@
-//! CHAPITRE 4 - Surveillance
+//! CHAPITRE 4 - Journal de bord (Acte 1) — missions EN DUR (règle C1)
 use crate::missions::types::*;
 
 pub fn missions() -> Vec<Mission> {
     vec![
         Mission {
-            id: "4.1".into(), chapter: 4, chapter_title: "Surveillance".into(), act: 2,
-            title: "Processus actifs".into(),
-            description: "Quels processus tournent?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Tael Rhen entend des bruits bizarres dans les coursives. Des processus inconnus tournent peut-être.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Voir les processus actifs est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Tael Rhen entend des bruits bizarres dans les coursives. Des processus inconnus tournent peut-être.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Tael Rhen entend des bruits bizarres. Vérifiez quels systèmes tournent actuellement.".into(),
+            id: "4.1".into(), chapter: 4, chapter_title: "Journal de bord".into(), act: 1,
+            title: "Lire vos notes personnelles".into(),
+            description: "Vos propres notes de cabine: notes.txt.".into(),
+            story: "Sur votre bureau, à côté de bienvenue.txt, se trouve votre carnet personnel:\nnotes.txt.\n\nZyra-7 vous conseille de le relire: le précédent capitaine y a noté des\nchoses importantes sur la station.\n\n« Lisez vos notes, Capitaine. Elles contiennent des indices sur les\nhabitudes de sécurité de l'équipage. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            goal: "Lisez le contenu de votre fichier notes.txt dans votre cabine.".into(),
             bloom_level: "Comprendre".into(),
-            bloom_question: "Voir tous les processus?".into(),
-            required_commands: vec!["ps aux".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ps".into(), expected: None }],
+            bloom_question: "Comment lire le contenu d'un fichier texte?".into(),
+            required_commands: vec!["cat notes.txt".into()],
+            checks: vec![MissionCheck { check_type: "file_read".into(), target: "notes.txt".into(), expected: None }],
             hints: vec![],
-            xp_reward: 125,
+            xp_reward: 50,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines (tableau de bord):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "ps".into(), name: "ps".into(), description: "ps".into() }),
+            map: "VUE DE DESSUS — votre cabine:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘\\n      └────► notes.txt sur votre bureau".into(),
+            skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche le contenu complet d'un fichier texte".into() }),
         },
         Mission {
-            id: "4.2".into(), chapter: 4, chapter_title: "Surveillance".into(), act: 2,
-            title: "Ressources".into(),
-            description: "Surveillez CPU/RAM.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. La station ralentit. Les boucliers consomment trop de ressources.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Surveiller les ressources est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: La station ralentit. Les boucliers consomment trop de ressources.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "La station ralentit. Surveillez les ressources pour comprendre pourquoi.".into(),
+            id: "4.2".into(), chapter: 4, chapter_title: "Journal de bord".into(), act: 1,
+            title: "Ajouter une ligne au journal".into(),
+            description: "Ajoutez une entrée à la fin de notes.txt sans l'écraser.".into(),
+            story: "Zyra-7: « Capitaine, ajoutez une nouvelle entrée à la FIN de votre carnet\nsans effacer le reste: 'Verifier les boucliers avant attaque'. »\n\nElle vous prévient: avec une simple redirection, le fichier serait écrasé.\nIl faut une redirection qui AJOUTE à la fin du fichier existant.\n\n« Ne perdez pas vos notes précédentes, Capitaine. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            goal: "Ajoutez la ligne demandée à la fin de notes.txt sans effacer le contenu existant.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Surveiller les ressources?".into(),
-            required_commands: vec!["top -bn1".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "top".into(), expected: None }],
+            bloom_question: "Comment ajouter du texte à la fin d'un fichier sans l'écraser?".into(),
+            required_commands: vec!["echo 'Verifier les boucliers avant attaque' >> notes.txt".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: ">>".into(), expected: None }],
             hints: vec![],
-            xp_reward: 150,
+            xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines (jauges réacteur):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► /salle-des-machines/".into(),
-            skill: Some(Skill { command: "top".into(), name: "top".into(), description: "top".into() }),
+            map: "VUE DE DESSUS — votre cabine:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘\\n      └────► ajouter une ligne à la fin de notes.txt".into(),
+            skill: Some(Skill { command: "cmd >> fichier".into(), name: ">>".into(), description: "COMMANDE >> fichier — ajoute la sortie à la fin du fichier".into() }),
         },
         Mission {
-            id: "4.3".into(), chapter: 4, chapter_title: "Surveillance".into(), act: 2,
-            title: "Services".into(),
-            description: "Verifiez ssh et les services.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Vex Korshun veut vérifier que tous les services de sécurité sont bien actifs.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Vérifier les services est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Vex Korshun veut vérifier que tous les services de sécurité sont bien actifs.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Vex Korshun veut savoir si tous les services de sécurité sont bien en marche.".into(),
+            id: "4.3".into(), chapter: 4, chapter_title: "Journal de bord".into(), act: 1,
+            title: "Compter les lignes du guide".into(),
+            description: "Combien de lignes fait bienvenue.txt?".into(),
+            story: "Nira Okoro passe par là: « Capitaine, pour calibrer l'affichage des écrans\ndu pont, j'ai besoin de savoir combien de lignes fait le guide de survie\nbienvenue.txt. »\n\nElle vous demande de compter uniquement les lignes du fichier, sans afficher\nle contenu.\n\n« Juste le nombre, Capitaine. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            goal: "Donnez à Nira Okoro le nombre de lignes du fichier bienvenue.txt.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Gerer les services?".into(),
-            required_commands: vec!["systemctl status ssh".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "systemctl".into(), expected: None }],
+            bloom_question: "Comment compter les lignes d'un fichier?".into(),
+            required_commands: vec!["wc -l bienvenue.txt".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "wc".into(), expected: None }],
             hints: vec![],
-            xp_reward: 175,
+            xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines (services):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "systemctl".into(), name: "systemctl".into(), description: "systemctl".into() }),
+            map: "VUE DE DESSUS — votre cabine:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └──────────┴──────────┘\\n      └────► compter les lignes de bienvenue.txt".into(),
+            skill: Some(Skill { command: "wc -l".into(), name: "wc".into(), description: "wc -l — compte les lignes d'un fichier".into() }),
         },
         Mission {
-            id: "4.4".into(), chapter: 4, chapter_title: "Surveillance".into(), act: 2,
-            title: "Tuer un pirate".into(),
-            description: "PID 9999 backdoor!".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. ALERTE ROUGE! Un processus backdoor (PID 9999) a été détecté. Il faut l'éliminer immédiatement.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Tuer le processus pirate est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: ALERTE ROUGE! Un processus backdoor (PID 9999) a été détecté. Il faut l'éliminer immédiatement.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Un système pirate a pris le contrôle! Éliminez-le immédiatement!".into(),
+            id: "4.4".into(), chapter: 4, chapter_title: "Journal de bord".into(), act: 1,
+            title: "Début de l'historique du pont".into(),
+            description: "Les premières lignes du journal de bord du pont.".into(),
+            story: "Au pont, l'Amiral Xylia Vorn consulte le grand journal de bord:\nhistorique.txt dans /pont/journaux-de-bord/.\n\nÂ« Capitaine, montrez-moi seulement le DÃBUT de l'historique du pont.\nLes 5 premiÃ¨res lignes. Pas besoin de tout dÃ©filer. Â»\n\nLe fichier est long: il ne faut afficher que ses premiÃ¨res lignes.\n\nLes Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.\n\nLa station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.".into(),
+            goal: "Affichez uniquement les premières lignes du journal de bord du pont.".into(),
             bloom_level: "Appliquer".into(),
-            bloom_question: "Tuer un processus?".into(),
-            required_commands: vec!["kill 9999".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "kill".into(), expected: None }],
+            bloom_question: "Comment n'afficher que le début d'un fichier long?".into(),
+            required_commands: vec!["head -5 /pont/journaux-de-bord/historique.txt".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "head".into(), expected: None }],
             hints: vec![],
-            xp_reward: 175,
+            xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — ALERTE: processus pirate dans les machines:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► ⚠️ backdoor détecté!".into(),
-            skill: Some(Skill { command: "kill".into(), name: "kill".into(), description: "kill".into() }),
+            map: "VUE DE DESSUS — le pont:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │▶ PONT ◀│ │CABINES │ │SOUTES  │\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► /pont/journaux-de-bord/historique.txt (début)".into(),
+            skill: Some(Skill { command: "head".into(), name: "head".into(), description: "head -n N — affiche les N premières lignes d'un fichier".into() }),
         },
         Mission {
-            id: "4.5".into(), chapter: 4, chapter_title: "Surveillance".into(), act: 2,
-            title: "Priorites".into(),
-            description: "Scan prioritaire.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Le scan de sécurité doit être prioritaire face à l'attaque imminente.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Gérer les priorités est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Le scan de sécurité doit être prioritaire face à l'attaque imminente.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
-            goal: "Le scan de sécurité est prioritaire en ce moment. Lancez-le en priorité.".into(),
-            bloom_level: "Comprendre".into(),
-            bloom_question: "Changer la priorite?".into(),
-            required_commands: vec!["nice -n 10 commande".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "nice".into(), expected: None }],
+            id: "4.5".into(), chapter: 4, chapter_title: "Journal de bord".into(), act: 1,
+            title: "Fin des logs d'authentification".into(),
+            description: "Les dernières tentatives de connexion pirates dans auth.log.".into(),
+            story: "Vex Korshun, officier sécurité, vous montre les logs d'authentification:\n/securite/logs/auth.log.\n\n« Capitaine, les dernières entrées de ce fichier sont les tentatives de\nconnexion des pirates cette nuit. Montrez-moi seulement la FIN du fichier. »\n\nLe fichier est long: il ne faut afficher que ses dernières lignes.\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            goal: "Affichez uniquement les dernières lignes du fichier auth.log de la sécurité.".into(),
+            bloom_level: "Appliquer".into(),
+            bloom_question: "Comment n'afficher que la fin d'un fichier long?".into(),
+            required_commands: vec!["tail -3 /securite/logs/auth.log".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "tail".into(), expected: None }],
             hints: vec![],
-            xp_reward: 150,
+            xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — salle des machines (priorités):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶MACH ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "nice".into(), name: "nice".into(), description: "nice".into() }),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ:\\n  ┌────────┐ ┌────────┐ ┌────────┐\\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\\n  └───┬────┘ └───┬────┘ └───┬────┘\\n      └────► /securite/logs/auth.log (fin)".into(),
+            skill: Some(Skill { command: "tail".into(), name: "tail".into(), description: "tail -n N — affiche les N dernières lignes d'un fichier".into() }),
         },
     ]
 }

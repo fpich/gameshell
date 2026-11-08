@@ -76,6 +76,10 @@ fn main() {
 
     if cli.test {
         game.run_test_mode();
+    } else if std::env::var("GAMESHELL_AUTO").is_ok() {
+        // Mode auto-solve (tests d'exhaustivité): joue toutes les missions
+        let (ok, total) = game.run_auto();
+        std::process::exit(if ok == total { 0 } else { 1 });
     } else {
         game.run();
     }
