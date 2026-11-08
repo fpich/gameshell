@@ -47,9 +47,14 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - INTERDIT d'indiquer quelle commande/fichier manque (ex: jamais "Non validé: pwd")
 - Le joueur doit relire la mission et déduire lui-même
 
-## RÈGLE A11 — Ignorer les séquences d'échappement clavier
-- Les flèches (^[[A haut, ^[[B bas...) et autres séquences ANSI doivent être ignorées à la lecture.
-- Ne jamais les traiter comme des commandes.
+## RÈGLE A11 — Édition de ligne façon terminal réel (OBLIGATOIRE)
+- En mode tty (raw mode via stty), la saisie est un vrai éditeur de ligne:
+  - ← → déplacent le curseur dans la ligne, insertion au curseur, backspace/suppr effacent au curseur, Home/End (^[[H/^[[F, Ctrl+A/E), Ctrl+U efface la ligne, Ctrl+W efface le mot.
+  - ↑ ↓ naviguent dans l'historique de session.
+  - Ctrl+C annule la ligne, Ctrl+D sur ligne vide = EOF (sortie propre).
+  - Toute AUTRE séquence ANSI est ignorée, jamais traitée comme commande.
+- En mode non-tty (pipe, tests): TOUTES les séquences d'échappement ANSI sont nettoyées (strip), input tronqué à 4096 (A13).
+- Le terminal est restauré (stty) après chaque lecture, même en cas de sortie anticipée.
 
 ## RÈGLE A13 — Robustesse input (OBLIGATOIRE)
 - EOF (Ctrl+D, read_line retourne 0) = déconnexion propre avec message.
@@ -61,11 +66,21 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - Après 2 `gsh check` échoués consécutifs, suggérer 'gsh goal'.
 - Le prompt affiche la progression: `pseudo@orion7:~$ [N/50]`.
 
+## RÈGLE A15 — Compétence débloquée = commande de LA mission (OBLIGATOIRE)
+- La compétence débloquée (`skill`) doit être une des `required_commands` de la mission (mot de base, ou symbole | > >> présent dans la ligne).
+- Jamais une commande d'une autre mission (ex: mission "lire bienvenue.txt" ne débloque PAS ls -la).
+- Test: `cargo test` (conformity_tests) vérifie les 50 missions manuelles + les 500 embarquées.
+
+## RÈGLE A16 — Identité vaisseau simulée, jamais l'hôte (OBLIGATOIRE)
+- `id`, `uname`, `logname`, `whoami`, `hostname` sont interceptés et répondent avec l'identité du vaisseau
+  (capitaine / orion7 / Linux orion7 6.6.7-orion...).
+- Aucune commande du jeu ne doit révéler le vrai user, hostname ou groupes de la machine hôte.
+
 ## RÈGLE A9 — Pas d'indices
 - `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
 
 ## RÈGLE A10 — Suite de tests obligatoire
-- Avant chaque commit: `./tests/run_tests.sh` → **32/32 PASS** obligatoire.
+- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **37/37 PASS** obligatoire.
 
 ---
 
@@ -161,6 +176,15 @@ Ordre fixe: 🚀 roleplay d'abord, 💻 technique ensuite. Fonction `cmd_brief()
 ## RÈGLE C12 — Textes gsh cohérents
 - `gsh reset` = "réinitialiser la mission en cours" (pas "le vaisseau").
 
+## RÈGLE C13 — PNJ et vaisseaux nommés science-fiction (OBLIGATOIRE)
+- Liste figée: Zyra-7 (IA de bord), Vex Korshun (commandant), Nira Okoro (communications),
+  Tael Rhen (ingénieur-chef machines), Draz M'kal (sécurité), Boz Tark (mécanicien),
+  Amiral Xylia Vorn, Medic-IA Andromède. Vaisseau-mère: **l'Andromède**.
+- INTERDIT partout (chapitres, generator, generated.json, vaisseau-gen.sh): Marie, Sophie, Jean,
+  Pierre, Kowalski, Galactica, et tout nom contemporain banal.
+- Jamais de nom de joueur en dur dans vaisseau-gen.sh (utiliser "le Capitaine").
+- Test: `cargo test` (vaisseau_gen_sans_noms_interdits + blacklist dans toutes les missions).
+
 ---
 
 # SECTION D — MONDE DU JEU
@@ -177,7 +201,7 @@ Générée par `vaisseau-gen.sh`. Jamais `/srv/`, `/etc/`, `/home/etudiant/`.
 ```bash
 cargo build --release 2>&1 | grep -E "^error"   # vide
 bash make-archive.sh                               # régénère gameshell.sh
-./tests/run_tests.sh                               # 32/32 PASS
+./tests/run_tests.sh                               # 37/37 PASS + cargo test (conformité)
 ```
 
 ## RÈGLE E2 — Distribution 100% offline

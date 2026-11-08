@@ -7,23 +7,23 @@ pub fn missions() -> Vec<Mission> {
             id: "6.1".into(), chapter: 6, chapter_title: "Reseau".into(), act: 3,
             title: "Coordonnees".into(),
             description: "IP du vaisseau?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Sophie a besoin de l'adresse IP du vaisseau pour configurer les communications.
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Nira Okoro a besoin de l'adresse IP du vaisseau pour configurer les communications.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Coordonnées réseau est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Sophie a besoin de l'adresse IP du vaisseau pour configurer les communications.
+Votre mission: Nira Okoro a besoin de l'adresse IP du vaisseau pour configurer les communications.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Sophie a besoin de nos coordonnées réseau pour régler les communications.".into(),
+            goal: "Nira Okoro a besoin de nos coordonnées réseau pour régler les communications.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Voir l'IP?".into(),
             required_commands: vec!["ip addr".into()],
@@ -38,23 +38,23 @@ la station et son équipage de 5 personnes.".into(),
             id: "6.2".into(), chapter: 6, chapter_title: "Reseau".into(), act: 3,
             title: "Liaison".into(),
             description: "Appeler la Terre?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Peut-on encore contacter la Terre et le Galactica? La liaison est-elle intacte?
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Peut-on encore contacter la Terre et l'Andromède? La liaison est-elle intacte?
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Tester la liaison est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Peut-on encore contacter la Terre et le Galactica? La liaison est-elle intacte?
+Votre mission: Peut-on encore contacter la Terre et l'Andromède? La liaison est-elle intacte?
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Vérifiez qu'on peut encore contacter le Galactica.".into(),
+            goal: "Vérifiez qu'on peut encore contacter l'Andromède.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Tester une connexion?".into(),
             required_commands: vec!["ping -c 4 127.0.0.1".into()],
@@ -72,8 +72,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Le pare-feu UFW semble inactif. Sans lui, les pirates entrent librement.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 État du pare-feu est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -85,7 +85,7 @@ Votre mission: Le pare-feu UFW semble inactif. Sans lui, les pirates entrent lib
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Le pare-feu est-il vraiment actif? Jean en doute. Vérifiez.".into(),
+            goal: "Le pare-feu est-il vraiment actif? Vex Korshun en doute. Vérifiez.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Etat du pare-feu?".into(),
             required_commands: vec!["sudo ufw status".into()],
@@ -103,8 +103,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Il faut tester le canal SSH pour vérifier qu'il fonctionne avant de le durcir.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Connexion SSH est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -134,8 +134,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Quels ports sont exposés? Les pirates scannent nos défenses réseau.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Scanner les ports est une étape cruciale pour préparer la station à l'attaque imminente.
 

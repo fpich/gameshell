@@ -9,6 +9,8 @@ use crate::shell;
 use colored::Colorize;
 use std::io::{self, Write};
 
+pub mod lineedit;
+
 pub struct Game {
     player_name: String,
     missions: Vec<Mission>,
@@ -21,6 +23,7 @@ pub struct Game {
     pending_code: Option<String>,  // code à valider en phase 2
     check_fails: u32,               // échecs consécutifs de gsh check (UX)
     mission_commands: Vec<String>, // commandes tapées DANS la mission courante (reset à chaque mission)
+    history: Vec<String>,          // historique de session (flèches haut/bas) — édition de ligne
 }
 
 impl Game {
@@ -39,6 +42,7 @@ impl Game {
             pending_code: None,
             check_fails: 0,
             mission_commands: Vec::new(),
+            history: Vec::new(),
         }
     }
 
@@ -54,16 +58,14 @@ impl Game {
 
         loop {
             let cwd = self.display_path(&self.current_dir);
-            print!("{}@{}:{}$ [{}/{}] ", self.player_name.bright_green(), "orion7".normal(), cwd.normal(), self.completed.len(), self.missions.len());
-            io::stdout().flush().ok();
+            let prompt = format!("{}@{}:{}$ [{}/{}] ", self.player_name.bright_green(), "orion7".normal(), cwd.normal(), self.completed.len(), self.missions.len());
 
-            let mut line = String::new();
-            let n = io::stdin().read_line(&mut line).unwrap_or(0);
-            if n == 0 { println!("\n👋 Déconnexion (EOF)."); break; } // Ctrl+D = sortie propre
-            // Règle A13: limiter la taille de l'input (anti freeze)
-            if line.len() > 4096 { line.truncate(4096); eprintln!("(input tronqué à 4096 caractères)"); }
-            // Ignorer les séquences d'échappement (flèches ^[[A, ^[[B...) — règle A11
-            let cmd = line.trim().replace("\u{1b}[A", "").replace("\u{1b}[B", "").replace("\u{1b}[C", "").replace("\u{1b}[D", "").trim().to_string();
+            // Règle A11: édition de ligne façon terminal (flèches gauche/droite, haut/bas = historique)
+            let line = match lineedit::read_line(&prompt, &mut self.history) {
+                Some(l) => l,
+                None => { println!("\n👋 Déconnexion (EOF)."); break; } // Ctrl+D = sortie propre
+            };
+            let cmd = line.trim().to_string();
             if cmd.is_empty() { continue; }
 
             // Phase 2: si un code est attendu, la saisie est le code
@@ -123,6 +125,16 @@ impl Game {
             "pwd" => println!("{}", self.display_path(&self.current_dir)),
             "hostname" => println!("orion7"),
             "whoami" => println!("capitaine"),
+            // Règle A16: jamais d'infos de l'hôte réel — identité vaisseau simulée
+            "id" => println!("uid=1000(capitaine) gid=1000(capitaine) groupes=1000(capitaine),27(sudo),1001(equipage_pont),1002(securite)"),
+            "logname" => println!("capitaine"),
+            "uname" => {
+                if parts.iter().any(|a| *a == "-a" || *a == "--all") {
+                    println!("Linux orion7 6.6.7-orion #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux");
+                } else {
+                    println!("Linux");
+                }
+            }
             "ls" => {
                 // Réécrire les chemins absolus
                 let args: Vec<String> = parts[1..].iter().map(|a| {
@@ -138,7 +150,27 @@ impl Game {
                 let full = format!("cd '{}' && {} {}", self.current_dir, base, args.join(" "));
                 shell::execute_interactive(&full);
             }
-            "zip" | "unzip" | "apt" | "dpkg" | "systemctl" | "journalctl" | "ufw" | "iptables" | "fail2ban-client" | "auditctl" | "useradd" | "groupadd" | "usermod" | "passwd" | "ssh" => {
+            "zip" => {
+                // Règle A12: zip peut manquer sur l'hôte bac à sable → simulation par tar (le check vérifie le fichier créé)
+                let args: Vec<String> = parts[1..].iter().map(|a| {
+                    if a.starts_with('/') && !a.starts_with(&vaisseau) { format!("{}{}", vaisseau, a) } else { a.to_string() }
+                }).collect();
+                let (_, _, has_zip) = shell::execute_real("command -v zip");
+                if has_zip != 0 {
+                    // zip absent de l'hôte: simule l'archive avec tar pour que la mission reste jouable
+                    let target = args.iter().find(|a| !a.starts_with('-') && *a != "zip").cloned().unwrap_or_else(|| "archive.zip".into());
+                    let sources = args.iter().filter(|a| !a.starts_with('-') && *a != "zip" && *a != &target).cloned().collect::<Vec<_>>().join(" ");
+                    let _ = shell::execute_interactive(&format!("cd '{}' && tar -czf '{}' {}", self.current_dir, target, sources));
+                    println!("  💡 zip absent du bac à sable: archive créée avec tar (sur un vrai serveur Debian 13, zip fonctionne normalement).");
+                } else {
+                    let full = format!("cd '{}' && zip {}", self.current_dir, args.join(" "));
+                    let code = shell::execute_interactive(&full);
+                    if code != 0 {
+                        println!("  💡 Erreur zip: vérifiez les arguments (ex: zip -r archive.zip dossier/).");
+                    }
+                }
+            }
+            "unzip" | "apt" | "dpkg" | "systemctl" | "journalctl" | "ufw" | "iptables" | "fail2ban-client" | "auditctl" | "useradd" | "groupadd" | "usermod" | "passwd" | "ssh" => {
                 // Commandes système réelles: exécuter, mais si échec → message pédagogique
                 let vaisseau = format!("{}/vaisseau", shell::gameshell_home());
                 let rewritten: Vec<String> = parts.iter().enumerate().map(|(i, p)| {
@@ -191,11 +223,11 @@ impl Game {
             "grep" => ("recherche un motif texte dans un fichier (-c compte, -i insensible, -n numéros)", "comme passer le journal de bord au détecteur de mensonges pour ne garder que les lignes 'ALERTE pirate'"),
             "find" => ("recherche des fichiers par nom, type, taille, date", "comme envoyer un droïde fouiller dans toutes les soutes du vaisseau pour trouver un objet précis"),
             "ip" => ("affiche la configuration réseau (adresses IP, routes, interfaces)", "comme consulter les coordonnées radio du vaisseau dans le secteur 7G"),
-            "ping" => ("teste la connectivité réseau (envoie des paquets ICMP)", "comme envoyer un signal 'ping' au Galactica pour vérifier qu'il répond"),
+            "ping" => ("teste la connectivité réseau (envoie des paquets ICMP)", "comme envoyer un signal 'ping' à l'Andromède pour vérifier qu'il répond"),
             "ufw" => ("gère le pare-feu (status, allow PORT, deny, enable)", "comme régler les boucliers déflecteurs du vaisseau: quels vaisseaux ennemis sont bloqués, lesquels passent?"),
             "ssh" => ("connexion sécurisée à distance (ssh user@host, -p port)", "comme ouvrir un canal de communication crypté sécurisé avec une autre station spatiale"),
             "ss" | "netstat" => ("affiche les connexions réseau actives et ports en écoute", "comme surveiller le radar pour voir quels vaisseaux sont connectés à nos ports"),
-            "tar" => ("crée/extrait une archive compressée (.tar.gz: czf, xzf, tvf)", "comme mettre tous les journaux de bord dans une caisse hermétique compressée pour les envoyer au Galactica"),
+            "tar" => ("crée/extrait une archive compressée (.tar.gz: czf, xzf, tvf)", "comme mettre tous les journaux de bord dans une caisse hermétique compressée pour les envoyer à l'Andromède"),
             "zip" | "unzip" => ("compresse/extrait au format ZIP (-r récursif)", "comme compresser les rapports de mission dans un dossier ZIP pour les transmettre"),
             "df" => ("affiche l'espace disque utilisé/disponible par partition (-h lisible)", "comme lire la jauge des réservoirs de données du vaisseau: combien de carburant numérique il reste?"),
             "du" => ("affiche la taille occupée par chaque sous-répertoire (-sh, --max-depth)", "comme peser chaque soute du vaisseau une par une pour savoir laquelle est la plus pleine"),
@@ -210,17 +242,17 @@ impl Game {
             "whoami" => ("affiche le nom de l'utilisateur courant", "comme dire 'C'est le capitaine Fabien qui parle' avant de donner un ordre à l'équipage"),
             "hostname" => ("affiche le nom de la machine", "comme crier 'Ici la station Orion-7!' sur la fréquence radio pour s'identifier auprès des vaisseaux alliés"),
             "date" => ("affiche la date et l'heure du système (+format)", "comme consulter l'horloge atomique de bord pour horodater chaque entrée du journal de bord"),
-            "apt" => ("gère les paquets Debian (update, upgrade, install, remove, search, clean)", "comme passer commande de pièces détachées au vaisseau-mère Galactica pour réparer la station"),
+            "apt" => ("gère les paquets Debian (update, upgrade, install, remove, search, clean)", "comme passer commande de pièces détachées au vaisseau-mère Andromède pour réparer la station"),
             "dpkg" => ("gère les paquets .deb au niveau bas (-l liste, -i installe, -s info)", "comme installer manuellement un équipement livré en caisse (.deb)"),
             "journalctl" => ("consulte les logs journalisés par systemd (-n, -u service, -f, --since)", "comme lire le journal de bord automatique qui enregistre tout ce qui se passe"),
-            "fail2ban" => ("bannit automatiquement les IPs récidivistes (jail, ban, unban)", "comme un videur automatique à l'entrée du vaisseau qui éjecte dans l'espace tout pirate qui frappe 3 fois à la porte"),
+            "fail2ban" | "fail2ban-client" => ("bannit automatiquement les IPs récidivistes (jail, ban, unban)", "comme un videur automatique à l'entrée du vaisseau qui éjecte dans l'espace tout pirate qui frappe 3 fois à la porte"),
             "iptables" => ("règles de filtrage réseau au niveau noyau (-L, -A, -j DROP/ACCEPT)", "comme programmer les boucliers pour bloquer tout vaisseau ennemi sauf les alliés"),
             "auditctl" => ("définit des règles d'audit sur des fichiers (-w, -p, -k)", "comme installer des caméras de surveillance sur les compartiments sensibles (coffre-fort)"),
             "chroot" => ("isole un processus dans un environnement racine fermé (chroot /chemin cmd)", "comme enfermer un pirate capturé dans une cellule d'isolement blindée où il ne voit plus que les murs de sa cellule"),
             "|" => ("chaîne deux commandes: la sortie de l'une devient l'entrée de l'autre", "comme passer le résultat du radar (ps) dans un filtre (grep) pour ne garder que les ennemis"),
             ">" => ("redirige la sortie d'une commande vers un fichier (écrase)", "comme enregistrer le rapport du radar dans un nouveau fichier sur votre bureau"),
             ">>" => ("redirige la sortie vers un fichier en ajoutant à la fin (append)", "comme ajouter une nouvelle ligne à la fin du journal de bord existant"),
-            "zip" => ("compresse en ZIP (-r récursif)", "comme empaqueter des documents dans une valise compressée pour le Galactica"),
+            "zip" => ("compresse en ZIP (-r récursif)", "comme empaqueter des documents dans une valise compressée pour l'Andromède"),
             "unzip" => ("extrait une archive ZIP", "comme déballer une valise reçue du vaisseau-mère"),
             "ss" => ("connexions réseau (ss -tlnp)", "comme consulter le radar des vaisseaux connectés à nos ports"),
             "netstat" => ("connexions réseau (netstat -tlnp)", "comme le radar réseau, version classique"),
@@ -278,7 +310,8 @@ impl Game {
             let xp = m.xp_reward;
             if let Some(skill) = &m.skill {
                 if !self.skills.iter().any(|s| s.name == skill.name) {
-                    println!("  🔓 Compétence: {}", skill.name);
+                    let (tech, _) = Self::cmd_brief(&skill.name);
+                    println!("  🔓 Compétence: {} — {}", skill.name, tech);
                     self.skills.push(skill.clone());
                 }
             }
@@ -306,7 +339,10 @@ impl Game {
 
     fn cmd_skills(&self) {
         println!("\n  🎖️ Compétences ({}):", self.skills.len());
-        for s in &self.skills { println!("    ✓ {} — {}", s.name, s.description); }
+        for s in &self.skills {
+            let (tech, _) = Self::cmd_brief(&s.name);
+            println!("    ✓ {} — {}", s.name, tech);
+        }
         println!();
     }
 

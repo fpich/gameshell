@@ -9,7 +9,7 @@ Méthode: `tests/playthrough_all.sh` — exécution réelle du jeu, 50 missions 
 
 | Métrique | Valeur |
 |----------|--------|
-| Tests automatisés | **26/26 PASS** |
+| Tests automatisés | **37/37 PASS** + cargo test conformité |
 | Missions jouées en réel | 50/50 |
 | Missions réussies sans échec | ~32/50 |
 | Missions avec échec avant succès | ~18 (commandes système indisponibles dans le bac à sable: zip, apt, ssh, systemctl, sudo...) |

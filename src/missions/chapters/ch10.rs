@@ -10,8 +10,8 @@ pub fn missions() -> Vec<Mission> {
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Les pirates reviennent sans cesse. fail2ban les bannira automatiquement.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Installer fail2ban est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -32,7 +32,7 @@ la station et son équipage de 5 personnes.".into(),
             xp_reward: 300,
             code_required: None,
             map: "VUE DE DESSUS — compartiment SÉCURITÉ (fail2ban):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "fail2ban".into(), name: "fail2ban".into(), description: "fail2ban".into() }),
+            skill: Some(Skill { command: "fail2ban-client".into(), name: "fail2ban-client".into(), description: "fail2ban-client — bannit automatiquement les IPs pirates (jail, ban, unban)".into() }),
         },
         Mission {
             id: "10.2".into(), chapter: 10, chapter_title: "Durcissement".into(), act: 5,
@@ -41,8 +41,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. SSH est vulnérable: root autorisé + mots de passe autorisés = porte ouverte.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Durcir SSH est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -63,7 +63,7 @@ la station et son équipage de 5 personnes.".into(),
             xp_reward: 350,
             code_required: None,
             map: "VUE DE DESSUS — compartiment SÉCURITÉ (config SSH):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► /securite/config/sshd_config".into(),
-            skill: Some(Skill { command: "ssh_hardening".into(), name: "ssh_hardening".into(), description: "ssh_hardening".into() }),
+            skill: Some(Skill { command: "nano".into(), name: "nano".into(), description: "nano — éditeur de texte terminal pour modifier une config".into() }),
         },
         Mission {
             id: "10.3".into(), chapter: 10, chapter_title: "Durcissement".into(), act: 5,
@@ -72,8 +72,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Au-delà d'UFW, iptables permet de limiter le débit de connexions SSH.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Règles iptables est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -103,8 +103,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Si un pirate crée un compte, il faut le détecter. Auditez passwd et shadow.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Audit système est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -134,8 +134,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Dernière barrière: isolez un processus dans un chroot pour le contenir définitivement.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Chroot - la forteresse est une étape cruciale pour préparer la station à l'attaque imminente.
 

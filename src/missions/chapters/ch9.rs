@@ -10,8 +10,8 @@ pub fn missions() -> Vec<Mission> {
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Les paquets de sécurité doivent être à jour contre les dernières vulnérabilités.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Mettre à jour les paquets est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -41,8 +41,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Un outil de test est nécessaire pour vérifier le bon fonctionnement des annonces.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Installer cowsay est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -57,7 +57,7 @@ la station et son équipage de 5 personnes.".into(),
             goal: "Installez un outil pour tester les annonces de la station.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Installer un logiciel?".into(),
-            required_commands: vec!["sudo apt install -y cowsay".into()],
+            required_commands: vec!["sudo apt install -y cowsay".into(), "dpkg -s cowsay".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt install".into(), expected: None }],
             hints: vec![],
             xp_reward: 225,
@@ -72,8 +72,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Après modification de la config SSH, le service doit être redémarré.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Redémarrer SSH est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -103,8 +103,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. L'historique complet de la station est dans le journal systemd. Consultez-le.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Consulter le journal est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -134,8 +134,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Les soutes sont pleines de paquets inutiles. Nettoyez pour libérer de l'espace.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Nettoyer le système est une étape cruciale pour préparer la station à l'attaque imminente.
 

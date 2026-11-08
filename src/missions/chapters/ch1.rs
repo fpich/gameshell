@@ -6,7 +6,7 @@ pub fn missions() -> Vec<Mission> {
         Mission {
             id: "1.1".into(), chapter: 1, chapter_title: "Arrivee a bord".into(), act: 1,
             title: "Premier contact".into(),
-            description: "Vous amarrez a Orion-7. Vous êtes dans VOTRE cabine, indiquée par le symbole (~). Marie a l'intercom: Confirmez votre position!".into(),
+            description: "Vous amarrez a Orion-7. Vous êtes dans VOTRE cabine, indiquée par le symbole (~). Zyra-7 a l'intercom: Confirmez votre position!".into(),
             story: "Le sas d'amarrage de votre navette se referme avec un grondement métallique.
 Vous êtes seul dans votre cabine à bord de la station Orion-7, un vaisseau de classe éclaireur
 posté dans le secteur 7G pour surveiller les mouvements de la flotte pirate des Corbeaux Noirs.
@@ -14,13 +14,13 @@ posté dans le secteur 7G pour surveiller les mouvements de la flotte pirate des
 La cabine est petite mais fonctionnelle: un hublot donnant sur l'espace étoilé, un bureau avec
 quelques documents, et les liens vers les principaux compartiments du vaisseau.
 
-Marie, l'ingénieur système, vous contacte par l'intercom depuis la salle des machines:
-« Capitaine? Vous m'entendez? Le transfert depuis le Galactica s'est bien passé?
+Zyra-7, l'ingénieur système, vous contacte par l'intercom depuis la salle des machines:
+« Capitaine? Vous m'entendez? Le transfert depuis l'Andromède s'est bien passé?
 Dites-moi où vous êtes exactement dans le vaisseau, qu'on puisse synchroniser nos consoles! »
 
 Elle a besoin de savoir votre position exacte pour calibrer les écrans du pont de commandement.
 Sans cette information, elle ne peut pas vous donner accès aux systèmes de défense.".into(),
-            goal: "Marie attend votre réponse à l'intercom. Montrez-lui où vous êtes et ce qui vous entoure.".into(),
+            goal: "Zyra-7 attend votre réponse à l'intercom. Montrez-lui où vous êtes et ce qui vous entoure.".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Quelle commande affiche le repertoire courant?".into(),
             required_commands: vec!["pwd".into(), "ls -la".into()],
@@ -34,8 +34,8 @@ Sans cette information, elle ne peut pas vous donner accès aux systèmes de dé
         Mission {
             id: "1.2".into(), chapter: 1, chapter_title: "Arrivee a bord".into(), act: 1,
             title: "Lire le guide".into(),
-            description: "Marie: Lisez bienvenue.txt dans votre cabine.".into(),
-            story: "Marie poursuit à l'intercom: « Bien reçu pour la position, Capitaine.
+            description: "Zyra-7: Lisez bienvenue.txt dans votre cabine.".into(),
+            story: "Zyra-7 poursuit à l'intercom: « Bien reçu pour la position, Capitaine.
 Maintenant, prenez le temps de lire le guide de survie de la cabine.
 Il explique le fonctionnement de base de la station. »
 
@@ -45,11 +45,11 @@ C'est le manuel d'accueil rédigé par le précédent capitaine.
 Il contient les informations essentielles: comment naviguer dans les compartiments,
 qui contacter en cas de problème, et les consignes de sécurité de base.
 
-Marie insiste: « Lisez-le attentivement, Capitaine. La station a déjà subi des attaques.
+Zyra-7 insiste: « Lisez-le attentivement, Capitaine. La station a déjà subi des attaques.
 Chaque membre d'équipage doit connaître les bases. »
 
 Vous ouvrez le fichier pour en lire le contenu.".into(),
-            goal: "Marie vous demande de lire le guide de survie posé sur votre bureau avant toute chose.".into(),
+            goal: "Zyra-7 vous demande de lire le guide de survie posé sur votre bureau avant toute chose.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire un fichier?".into(),
             required_commands: vec!["cat bienvenue.txt".into()],
@@ -58,14 +58,14 @@ Vous ouvrez le fichier pour en lire le contenu.".into(),
             xp_reward: 75,
             code_required: None,
             map: "VUE DE DESSUS — votre cabine:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► bienvenue.txt sur votre bureau".into(),
-            skill: Some(Skill { command: "ls -la".into(), name: "ls -la".into(), description: "ls -la".into() }),
+            skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche le contenu complet d'un fichier texte".into() }),
         },
         Mission {
             id: "1.3".into(), chapter: 1, chapter_title: "Arrivee a bord".into(), act: 1,
             title: "Message de l'Amiral".into(),
-            description: "Sophie: L'Amiral a envoye un message dans /communications/messages/!".into(),
-            story: "Sophie, l'officier des communications, coupe la parole sur l'intercom:
-« Capitaine! Urgence! L'Amiral Kowalski du vaisseau-mère Galactica vient de nous envoyer
+            description: "Nira Okoro: L'Amiral a envoye un message dans /communications/messages/!".into(),
+            story: "Nira Okoro, l'officier des communications, coupe la parole sur l'intercom:
+« Capitaine! Urgence! L'Amiral Xylia Vorn du vaisseau-mère Andromède vient de nous envoyer
 un message prioritaire! »
 
 Elle a intercepté la transmission sur la fréquence d'urgence 121.5 MHz.
@@ -74,41 +74,41 @@ Le message provient du vaisseau amiral, actuellement positionné dans le quadran
 « Il faut le lire immédiatement, Capitaine. Nos capteurs détectent déjà des signatures hostiles
 qui s'approchent du secteur 7G. Les Corbeaux Noirs sont en route. »
 
-Sophie vous indique le chemin: le message est stocké dans le compartiment communications,
+Nira Okoro vous indique le chemin: le message est stocké dans le compartiment communications,
 sous-compartiment messages, fichier dernier_message.txt.
 
 « Dépêchez-vous, Capitaine. Chaque seconde compte. »".into(),
-            goal: "Sophie vous a dit où trouver le message de l'Amiral. Allez le lire et dites-nous ce qu'il contient.".into(),
+            goal: "Nira Okoro vous a dit où trouver le message de l'Amiral. Allez le lire et dites-nous ce qu'il contient.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment aller dans un dossier precis?".into(),
-            required_commands: vec!["cd /pont".into(), "cat bienvenue.txt".into()],
+            required_commands: vec!["cd /communications/messages".into(), "cat dernier_message.txt".into()],
             checks: vec![MissionCheck { check_type: "dir_reached".into(), target: "/communications/messages".into(), expected: None }, MissionCheck { check_type: "file_read".into(), target: "dernier_message.txt".into(), expected: None }],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
             map: "VUE DE DESSUS — objectif: compartiment COMMUNICATIONS:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶COMMS ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └─────────┴──► /communications/messages/".into(),
-            skill: Some(Skill { command: "cat bienvenue.txt".into(), name: "cat bienvenue.txt".into(), description: "cat bienvenue.txt".into() }),
+            skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd — change de répertoire (cd /pont, cd .., cd ~)".into() }),
         },
         Mission {
             id: "1.4".into(), chapter: 1, chapter_title: "Arrivee a bord".into(), act: 1,
             title: "Qui etes-vous?".into(),
-            description: "Jean verifie votre identite.".into(),
-            story: "Jean, l'officier sécurité, vous interpelle depuis le poste de garde:
-« Capitaine? Ici Jean. Avant que je vous ouvre les accès sécurisés du pont,
+            description: "Vex Korshun verifie votre identite.".into(),
+            story: "Vex Korshun, l'officier sécurité, vous interpelle depuis le poste de garde:
+« Capitaine? Ici Vex Korshun. Avant que je vous ouvre les accès sécurisés du pont,
 je dois vérifier votre identité sur le système. »
 
 La station Orion-7 utilise un système d'authentification strict.
 Chaque membre d'équipage a un badge numérique (uid) et appartient à des groupes
 qui déterminent ses droits d'accès.
 
-Jean vous demande de prouver qui vous êtes:
+Vex Korshun vous demande de prouver qui vous êtes:
 - Le nom de la station sur laquelle vous travaillez
 - Votre nom d'utilisateur sur le système
 - Vos identifiants complets (uid, gid, groupes)
 
 « Sans ça, je ne peux pas désactiver les verrouillages des portes du pont de commandement,
-confirme Jean. Et avec les pirates qui approchent, on n'a pas de temps à perdre. »".into(),
-            goal: "Jean ne vous laissera pas monter au pont sans vérifier qui vous êtes. Prouvez votre identité.".into(),
+confirme Vex Korshun. Et avec les pirates qui approchent, on n'a pas de temps à perdre. »".into(),
+            goal: "Vex Korshun ne vous laissera pas monter au pont sans vérifier qui vous êtes. Prouvez votre identité.".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Quelles commandes donnent hostname/user/groups?".into(),
             required_commands: vec!["hostname".into(), "whoami".into(), "id".into()],
@@ -117,19 +117,19 @@ confirme Jean. Et avec les pirates qui approchent, on n'a pas de temps à perdre
             xp_reward: 100,
             code_required: None,
             map: "VUE DE DESSUS — vous êtes le capitaine:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │▶ PONT ◀│ │CABINES │ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └──── fauteuil du capitaine".into(),
-            skill: Some(Skill { command: "cd /pont".into(), name: "cd /pont".into(), description: "cd /pont".into() }),
+            skill: Some(Skill { command: "id".into(), name: "id".into(), description: "id — affiche uid, gid et groupes de l'utilisateur courant".into() }),
         },
         Mission {
             id: "1.5".into(), chapter: 1, chapter_title: "Arrivee a bord".into(), act: 1,
             title: "Heure du vaisseau".into(),
             description: "Verifiez l'heure pour correler les logs.".into(),
-            story: "Marie revient à l'intercom: « Capitaine, une dernière vérification avant l'alerte.
+            story: "Zyra-7 revient à l'intercom: « Capitaine, une dernière vérification avant l'alerte.
 Pour corréler les événements dans les journaux de bord, l'horloge de la station doit être exacte.
 Vérifiez qu'elle est bien synchronisée. »
 
 Dans l'espace, la synchronisation temporelle est critique.
 Si l'horloge de bord est décalée, les logs d'attaque des pirates seront impossibles à corréler
-avec les événements réels. L'Amiral Kowalski exige des horodatages fiables pour l'enquête.
+avec les événements réels. L'Amiral Xylia Vorn exige des horodatages fiables pour l'enquête.
 
 « Vérifiez l'heure système, Capitaine. Dites-moi si elle est correcte. »
 
@@ -143,7 +143,7 @@ Vous consultez l'horloge du système de la station.".into(),
             xp_reward: 50,
             code_required: None,
             map: "VUE DE DESSUS — horloge de la salle de navigation:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶ NAV ◀ │\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └─────────┴──► coordonnees/".into(),
-            skill: Some(Skill { command: "hostname".into(), name: "hostname".into(), description: "hostname".into() }),
+            skill: Some(Skill { command: "date".into(), name: "date".into(), description: "date — affiche la date et l'heure du système (+format)".into() }),
         },
     ]
 }

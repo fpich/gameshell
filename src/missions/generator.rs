@@ -168,7 +168,7 @@ static TEMPLATES: &[CmdTemplate] = &[
     },
     CmdTemplate {
         cmd: "ip", bloom_levels: &["Comprendre"],
-        contexts: &["Quelles sont nos coordonnées réseau?", "Vérifiez la config IP", "Sophie a besoin de l'IP"],
+        contexts: &["Quelles sont nos coordonnées réseau?", "Vérifiez la config IP", "Nira Okoro a besoin de l'IP"],
         targets: &["/navigation/"],
         goals: &["Affichez la configuration réseau du vaisseau", "Quelles sont nos coordonnées dans le secteur?"],
         check_type: "command_executed", file_target: None,
@@ -184,7 +184,7 @@ static TEMPLATES: &[CmdTemplate] = &[
     },
     CmdTemplate {
         cmd: "tar", bloom_levels: &["Appliquer"],
-        contexts: &["Archivez les preuves", "Préparez une caisse de données", "Envoyez un colis au Galactica"],
+        contexts: &["Archivez les preuves", "Préparez une caisse de données", "Envoyez un colis à l'Andromède"],
         targets: &["/securite/logs/", "/archives/"],
         goals: &["Archivez ces fichiers dans une caisse compressée", "Préparez une archive pour l'envoi"],
         check_type: "file_exists", file_target: Some("~/archive.tar.gz"),
@@ -324,7 +324,7 @@ fn generate_story(rng: &mut Rng, act: &Act, ctx: &str, target: &str, cmd: &str) 
         "Lieutenant Nira Okoro (communications)",
         "Ingénieur-chef Tael Rhen (machines)",
         "Officier sécurité Draz M'kal",
-        "Amiral Xylia Vorn du Galactica",
+        "Amiral Xylia Vorn du l'Andromède",
         "Mécanicien Boz Tark",
         "Medic-IA Andromède",
     ];

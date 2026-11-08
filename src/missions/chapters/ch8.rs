@@ -10,8 +10,8 @@ pub fn missions() -> Vec<Mission> {
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Un nouvel arrivant rejoint l'équipage. Il lui faut un compte sur le système.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Recruter un matelot est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -41,8 +41,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Pour gérer les accès collectifs, il faut créer un groupe d'équipage.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Créer l'équipe equipage est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -72,8 +72,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Le compte matelot n'a pas de mot de passe. C'est une faille de sécurité.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Changer le mot de passe est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -103,8 +103,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Il faut tester que le compte matelot fonctionne correctement.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Tester le compte matelot est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -134,8 +134,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. En tant que capitaine, vous devez connaître vos pouvoirs sudo.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Utiliser sudo est une étape cruciale pour préparer la station à l'attaque imminente.
 

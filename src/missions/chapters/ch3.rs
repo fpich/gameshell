@@ -6,24 +6,24 @@ pub fn missions() -> Vec<Mission> {
         Mission {
             id: "3.1".into(), chapter: 3, chapter_title: "Securiser les acces".into(), act: 2,
             title: "Comprendre les permissions".into(),
-            description: "Jean explique: ls -l montre rwx.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Jean vous explique que chaque fichier du vaisseau a des permissions. Sans comprendre ça, impossible de protéger quoi que ce soit.
+            description: "Vex Korshun explique: ls -l montre rwx.".into(),
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Vex Korshun vous explique que chaque fichier du vaisseau a des permissions. Sans comprendre ça, impossible de protéger quoi que ce soit.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Comprendre les permissions est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Jean vous explique que chaque fichier du vaisseau a des permissions. Sans comprendre ça, impossible de protéger quoi que ce soit.
+Votre mission: Vex Korshun vous explique que chaque fichier du vaisseau a des permissions. Sans comprendre ça, impossible de protéger quoi que ce soit.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Jean vous explique que chaque fichier a des permissions. Regardez celles de votre cabine.".into(),
+            goal: "Vex Korshun vous explique que chaque fichier a des permissions. Regardez celles de votre cabine.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Que signifient rwx?".into(),
             required_commands: vec!["ls -l".into(), "ls -la".into()],
@@ -32,7 +32,7 @@ la station et son équipage de 5 personnes.".into(),
             xp_reward: 125,
             code_required: None,
             map: "VUE DE DESSUS — votre cabine (permissions des portes):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "chmod".into(), name: "chmod".into(), description: "chmod".into() }),
+            skill: Some(Skill { command: "ls -l".into(), name: "ls -l".into(), description: "ls -l — liste détaillée: permissions, taille, date".into() }),
         },
         Mission {
             id: "3.2".into(), chapter: 3, chapter_title: "Securiser les acces".into(), act: 2,
@@ -41,8 +41,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Votre code personnel FALCON-9 est dans un fichier lisible par tous. Un pirate pourrait le voler.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Protéger le code secret est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -63,7 +63,7 @@ la station et son équipage de 5 personnes.".into(),
             xp_reward: 150,
             code_required: None,
             map: "VUE DE DESSUS — votre cabine (coffre personnel):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "chown".into(), name: "chown".into(), description: "chown".into() }),
+            skill: Some(Skill { command: "chmod".into(), name: "chmod".into(), description: "chmod — change les permissions rwx d'un fichier (600, +x)".into() }),
         },
         Mission {
             id: "3.3".into(), chapter: 3, chapter_title: "Securiser les acces".into(), act: 2,
@@ -72,8 +72,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Le plan de défense plan_defense.sh ne peut pas s'exécuter. Il lui manque le droit d'exécution.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Rendre le plan exécutable est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -94,7 +94,7 @@ la station et son équipage de 5 personnes.".into(),
             xp_reward: 125,
             code_required: None,
             map: "VUE DE DESSUS — votre cabine (plan de défense):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │▶CABINE◀│ │SOUTES  │\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "ls -l".into(), name: "ls -l".into(), description: "ls -l".into() }),
+            skill: Some(Skill { command: "chmod".into(), name: "chmod +x".into(), description: "chmod +x — rend un fichier exécutable (script de défense)".into() }),
         },
         Mission {
             id: "3.4".into(), chapter: 3, chapter_title: "Securiser les acces".into(), act: 2,
@@ -103,8 +103,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Un fichier appartient à root. Vous devez en prendre la responsabilité pour le modifier.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Changer le propriétaire est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -125,7 +125,7 @@ la station et son équipage de 5 personnes.".into(),
             xp_reward: 150,
             code_required: None,
             map: "VUE DE DESSUS — compartiment SÉCURITÉ:\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘".into(),
-            skill: Some(Skill { command: "stat".into(), name: "stat".into(), description: "stat".into() }),
+            skill: Some(Skill { command: "chown".into(), name: "chown".into(), description: "chown — change le propriétaire d'un fichier (user:group)".into() }),
         },
         Mission {
             id: "3.5".into(), chapter: 3, chapter_title: "Securiser les acces".into(), act: 2,
@@ -134,8 +134,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Pour détecter une intrusion, comparez les dates de modification des fichiers sensibles.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Analyser les métadonnées est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -156,7 +156,7 @@ la station et son équipage de 5 personnes.".into(),
             xp_reward: 150,
             code_required: None,
             map: "VUE DE DESSUS — compartiment SÉCURITÉ (logs):\n  ┌────────┐ ┌────────┐ ┌────────┐\n  │  PONT  │ │CABINES │ │▶SECUR ◀│\n  └───┬────┘ └───┬────┘ └───┬────┘\n      └────► /securite/logs/".into(),
-            skill: Some(Skill { command: "getfacl".into(), name: "getfacl".into(), description: "getfacl".into() }),
+            skill: Some(Skill { command: "stat".into(), name: "stat".into(), description: "stat — affiche les métadonnées: taille, permissions, dates, inode".into() }),
         },
     ]
 }

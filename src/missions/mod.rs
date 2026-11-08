@@ -45,3 +45,65 @@ pub fn load_all_missions() -> Vec<Mission> {
     missions.extend(chapters::ch10::missions());
     missions
 }
+
+#[cfg(test)]
+mod conformity_tests {
+    //! Tests de conformité (AGENTS.md) — figent les règles C/B/A sur le contenu.
+    use super::*;
+
+    const BLOOM_FR: &[&str] = &["Se souvenir", "Comprendre", "Appliquer", "Analyser", "Évaluer", "Créer"];
+    const PNJ_BLACKLIST: &[&str] = &["Marie", "Sophie", "Jean", "Pierre", "Kowalski", "Galactica", "Lucas", "Emma", "Hugo", "Léa", "Chloé", "Camille"];
+    const SYMBOLIC: &[&str] = &["|", ">", ">>"];
+
+    fn skill_ok(m: &Mission) -> bool {
+        match &m.skill {
+            None => false,
+            Some(s) => {
+                let words: Vec<&str> = m.required_commands.iter().flat_map(|c| c.split_whitespace()).collect();
+                let base = s.name.split_whitespace().next().unwrap_or(&s.name);
+                words.iter().any(|w| *w == base)
+                    || (SYMBOLIC.contains(&s.name.as_str()) && m.required_commands.iter().any(|c| c.contains(s.name.as_str())))
+            }
+        }
+    }
+
+    fn check_missions(missions: &[Mission], label: &str) {
+        assert!(!missions.is_empty(), "{}: aucune mission", label);
+        for m in missions {
+            assert!(!m.required_commands.is_empty(), "{} {}: required_commands vide", label, m.id);
+            assert!(!m.checks.is_empty(), "{} {}: checks vide", label, m.id);
+            assert!(skill_ok(m), "{} {}: skill {:?} n'est pas une commande requise de la mission (règle A15)", label, m.id, m.skill.as_ref().map(|s| s.name.clone()));
+            assert!(BLOOM_FR.contains(&m.bloom_level.as_str()), "{} {}: bloom_level {:?} pas en français (règle B8/C9)", label, m.id, m.bloom_level);
+            assert!(m.map.contains("VUE DE DESSUS") || m.map.contains("VUE"), "{} {}: pas de carte vue de dessus (règle C6)", label, m.id);
+            assert!(m.story.lines().count() + m.description.lines().count() >= 10, "{} {}: contexte trop court (règle C3)", label, m.id);
+            let all_text = format!("{} {} {} {} {}", m.title, m.description, m.story, m.goal, m.map);
+            for bad in PNJ_BLACKLIST {
+                assert!(!all_text.split_whitespace().any(|w| w.trim_matches(|c: char| !c.is_alphabetic()).starts_with(bad) && w.starts_with(bad)),
+                    "{} {}: nom PNJ interdit '{}' (règle C13)", label, m.id, bad);
+            }
+        }
+    }
+
+    #[test]
+    fn missions_conformes() {
+        // Un seul test séquentiel: la variable d'env GAMESHELL_MISSIONS est globale au process
+        let ms = load_all_missions();
+        assert_eq!(ms.len(), 50, "50 missions manuelles attendues");
+        check_missions(&ms, "manuel");
+
+        std::env::set_var("GAMESHELL_MISSIONS", "all");
+        let ms = load_all_missions();
+        std::env::remove_var("GAMESHELL_MISSIONS");
+        assert_eq!(ms.len(), 500, "500 missions embarquées attendues");
+        check_missions(&ms, "genere");
+    }
+
+    #[test]
+    fn vaisseau_gen_sans_noms_interdits() {
+        let content = std::fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/vaisseau-gen.sh")).unwrap();
+        for bad in PNJ_BLACKLIST {
+            assert!(!content.contains(bad), "vaisseau-gen.sh contient le nom interdit '{}' (règle C13)", bad);
+        }
+        assert!(!content.contains("Capitaine Fabien"), "vaisseau-gen.sh: nom du joueur en dur interdit (règle A12)");
+    }
+}

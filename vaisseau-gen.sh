@@ -54,13 +54,13 @@ cat > "$P/ecrans/ecran_detection.txt" << 'EOF'
   - 10.0.0.66 (Corbeaux Noirs) - approche rapide
   - 10.0.0.99 (Corbeaux Noirs) - scan de nos ports
 
-Vaisseaux alliés: Galactica (secteur voisin)
+Vaisseaux alliés: Andromède (secteur voisin)
 EOF
 
 cat > "$P/journaux-de-bord/dernier_rapport.txt" << 'EOF'
 JOURNAL DE BORD - 15 JANVIER 2024 - 08:30
 
-08:00 - Départ du Galactica,transfert du Capitaine Fabien
+08:00 - Départ de l'Andromède — transfert du nouveau Capitaine
 08:15 - Arrivée à bord d'Orion-7
 08:23 - Connexion admin établie
 08:31 - 🚨 ALERTE: Tentatives SSH échouées depuis 10.0.0.66
@@ -81,7 +81,7 @@ HISTORIQUE DES MISSIONS D'ORION-7:
 2023-12-01: Mise en service de la station
 2023-12-15: Premier scan du secteur 7G - RAS
 2024-01-10: Détection d'une flotte pirate lointaine
-2024-01-14: Le Galactica nous transfère un nouveau capitaine
+2024-01-14: L'Andromède nous transfère un nouveau capitaine
 2024-01-15: 🚨 JOUR D'ATTAQUE - Corbeaux Noirs détectés
 EOF
 
@@ -137,7 +137,7 @@ EOF
 cat > "$C/capitaine/notes.txt" << 'EOF'
 NOTES PERSONNELLES DU CAPITAINE
 
-- Reçu ordre de l'Amiral Kowalski: défendre Orion-7
+- Reçu ordre de l'Amiral Xylia Vorn: défendre Orion-7
 - Attaques SSH détectées depuis 10.0.0.66 et 10.0.0.99
 - UFW inactif → activer!
 - fail2ban pas configuré → installer!
@@ -194,8 +194,8 @@ EOF
 cat > "$C/sophie/message_galactica.txt" << 'EOF'
 📡 MESSAGE DU VAISSEAU-MÈRE GALACTICA
 
-De: Amiral Kowalski
-À: Capitaine Fabien,Orion-7
+De: Amiral Xylia Vorn
+À: le nouveau Capitaine,Orion-7
 
 « Capitaine,nos capteurs confirment l'approche
 des Corbeaux Noirs. Préparez la station.
@@ -205,7 +205,7 @@ Défendez Orion-7 à tout prix.
 
 Nous restons en soutien à portée de phaser. »
 
-— Amiral Kowalski,15/01/2024 10:00
+— Amiral Xylia Vorn,15/01/2024 10:00
 EOF
 
 cat > "$C/pierre/etat_machines.txt" << 'EOF'
@@ -278,7 +278,7 @@ EOF
 cat > "$S/coffre-fort/codes_acces.txt" << 'EOF'
 🔒 COFFRE-FORT ORION-7 - NIVEAU 4 - ACCÈS RESTREINT 🔒
 
-Coordonnées flotte Galactica: Secteur 7G,Quadrant X-42
+Coordonnées flotte Andromède: Secteur 7G,Quadrant X-42
 Code lancement missiles: 8842-OMEGA
 Position trou de ver: [CLASSIFIÉ]
 Protocole auto-destruction: OMEGA-9981-DELTA
@@ -372,8 +372,8 @@ mkdir -p "$CO"/{messages,frequences,antenne,journal}
 cat > "$CO/messages/dernier_message.txt" << 'EOF'
 📡 DERNIER MESSAGE REÇU - 15/01 10:00
 
-De: Galactica (Amiral Kowalski)
-À: Orion-7 (Capitaine Fabien)
+De: Andromède (Amiral Xylia Vorn)
+À: Orion-7 (le nouveau Capitaine)
 
 « Capitaine,les Corbeaux Noirs approchent.
 Préparez la défense. Nous sommes en soutien.
@@ -387,7 +387,7 @@ FRÉQUENCES DÉTECTÉES (pirates):
 - 10.0.0.99: fréquence 88.1 MHz (Corbeaux Noirs - scan)
 
 Fréquences alliées:
-- Galactica: 121.5 MHz (détresse)
+- Andromède: 121.5 MHz (détresse)
 - Terre: 8.8.8.8 (DNS)
 EOF
 
@@ -438,7 +438,7 @@ CARTE DU SECTEUR 7G:
          ↑
     [7F]--+--[7H]
          ↓
-    [Galactica] ← vaisseau-mère allié
+    [Andromède] ← vaisseau-mère allié
 
 ⚠️ Zone pirate: quadrant Y (Corbeaux Noirs)
 EOF

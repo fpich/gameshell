@@ -7,23 +7,23 @@ pub fn missions() -> Vec<Mission> {
             id: "4.1".into(), chapter: 4, chapter_title: "Surveillance".into(), act: 2,
             title: "Processus actifs".into(),
             description: "Quels processus tournent?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Pierre entend des bruits bizarres dans les coursives. Des processus inconnus tournent peut-être.
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Tael Rhen entend des bruits bizarres dans les coursives. Des processus inconnus tournent peut-être.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Voir les processus actifs est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Pierre entend des bruits bizarres dans les coursives. Des processus inconnus tournent peut-être.
+Votre mission: Tael Rhen entend des bruits bizarres dans les coursives. Des processus inconnus tournent peut-être.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Pierre entend des bruits bizarres. Vérifiez quels systèmes tournent actuellement.".into(),
+            goal: "Tael Rhen entend des bruits bizarres. Vérifiez quels systèmes tournent actuellement.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Voir tous les processus?".into(),
             required_commands: vec!["ps aux".into()],
@@ -41,8 +41,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. La station ralentit. Les boucliers consomment trop de ressources.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Surveiller les ressources est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -69,23 +69,23 @@ la station et son équipage de 5 personnes.".into(),
             id: "4.3".into(), chapter: 4, chapter_title: "Surveillance".into(), act: 2,
             title: "Services".into(),
             description: "Verifiez ssh et les services.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Jean veut vérifier que tous les services de sécurité sont bien actifs.
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Vex Korshun veut vérifier que tous les services de sécurité sont bien actifs.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Vérifier les services est une étape cruciale pour préparer la station à l'attaque imminente.
 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Jean veut vérifier que tous les services de sécurité sont bien actifs.
+Votre mission: Vex Korshun veut vérifier que tous les services de sécurité sont bien actifs.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.".into(),
-            goal: "Jean veut savoir si tous les services de sécurité sont bien en marche.".into(),
+            goal: "Vex Korshun veut savoir si tous les services de sécurité sont bien en marche.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Gerer les services?".into(),
             required_commands: vec!["systemctl status ssh".into()],
@@ -103,8 +103,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. ALERTE ROUGE! Un processus backdoor (PID 9999) a été détecté. Il faut l'éliminer immédiatement.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Tuer le processus pirate est une étape cruciale pour préparer la station à l'attaque imminente.
 
@@ -134,8 +134,8 @@ la station et son équipage de 5 personnes.".into(),
             story: "La situation à bord d'Orion-7 se tend, Capitaine. Le scan de sécurité doit être prioritaire face à l'attaque imminente.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Kowalski attend votre rapport
-depuis le Galactica.
+nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
+depuis l'Andromède.
 
 Gérer les priorités est une étape cruciale pour préparer la station à l'attaque imminente.
 

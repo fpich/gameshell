@@ -6,8 +6,8 @@ pub fn missions() -> Vec<Mission> {
         Mission {
             id: "2.1".into(), chapter: 2, chapter_title: "Organisation de la cabine".into(), act: 1,
             title: "Creer un rapport".into(),
-            description: "Jean a besoin d'un fichier vierge.".into(),
-            story: "Jean, l'officier sécurité, passe la tête par l'embrasure de la porte de votre cabine.
+            description: "Vex Korshun a besoin d'un fichier vierge.".into(),
+            story: "Vex Korshun, l'officier sécurité, passe la tête par l'embrasure de la porte de votre cabine.
 « Capitaine, on démarre l'enquête sur les attaques. J'ai besoin d'un rapport vierge
 pour consigner toutes nos observations. »
 
@@ -22,7 +22,7 @@ Il ajoute: « Et n'oubliez pas, Capitaine: dans l'espace, la paperasse sauve des
 Un bon rapport peut faire la différence entre une station sauvée et une station tombée. »
 
 Vous devez créer ce fichier vide pour commencer le rapport officiel.".into(),
-            goal: "Jean a besoin d'un document vierge pour commencer le rapport d'incident de la journée.".into(),
+            goal: "Vex Korshun a besoin d'un document vierge pour commencer le rapport d'incident de la journée.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment creer un fichier vide?".into(),
             required_commands: vec!["touch incident_15jan.txt".into(), "ls -la".into()],
@@ -37,7 +37,7 @@ Vous devez créer ce fichier vide pour commencer le rapport officiel.".into(),
             id: "2.2".into(), chapter: 2, chapter_title: "Organisation de la cabine".into(), act: 1,
             title: "Classer les rapports".into(),
             description: "Creez une arborescence mensuelle.".into(),
-            story: "Marie, depuis la salle des machines, vous fait remarquer que votre cabine ressemble
+            story: "Zyra-7, depuis la salle des machines, vous fait remarquer que votre cabine ressemble
 à un champ de bataille après une bataille spatiale.
 « Capitaine, on ne retrouve plus rien dans vos affaires!
 Il nous faut une vraie arborescence pour classer les rapports. »
@@ -52,7 +52,7 @@ Elle insiste sur l'option -p qui crée toute l'arborescence d'un coup,
 évitant de créer chaque dossier un par un.
 
 « Créez rapports/2024/janvier dans votre cabine, Capitaine. Une seule commande suffit. »".into(),
-            goal: "Marie veut que vos rapports soient classés par mois. Préparez l'arborescence.".into(),
+            goal: "Zyra-7 veut que vos rapports soient classés par mois. Préparez l'arborescence.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment creer des dossiers imbriques?".into(),
             required_commands: vec!["mkdir -p rapports/2024/janvier".into()],
@@ -67,7 +67,7 @@ Elle insiste sur l'option -p qui crée toute l'arborescence d'un coup,
             id: "2.3".into(), chapter: 2, chapter_title: "Organisation de la cabine".into(), act: 1,
             title: "Sauvegarder dans les soutes".into(),
             description: "Copiez le rapport dans les soutes.".into(),
-            story: "Jean revient, plus sérieux cette fois: « Capitaine, avant qu'on fasse quoi que ce soit
+            story: "Vex Korshun revient, plus sérieux cette fois: « Capitaine, avant qu'on fasse quoi que ce soit
 de plus, il faut sauvegarder ce rapport dans les soutes sécurisées.
 Les pirates ont déjà tenté de modifier nos fichiers une fois. »
 
@@ -97,7 +97,7 @@ vers le répertoire /soutes/ du vaisseau.
             id: "2.4".into(), chapter: 2, chapter_title: "Organisation de la cabine".into(), act: 1,
             title: "Classer definitivement".into(),
             description: "Deplacez le rapport dans son dossier final.".into(),
-            story: "Marie secoue la tête en voyant votre bureau: « Capitaine, ce fichier incident_15jan.txt
+            story: "Zyra-7 secoue la tête en voyant votre bureau: « Capitaine, ce fichier incident_15jan.txt
 traîne encore à la racine de votre cabine! Il doit être dans rapports/2024/janvier/! »
 
 Elle explique l'importance d'un classement rigoureux:
@@ -126,7 +126,7 @@ et le ranger dans la bonne étagère avec la bonne étiquette, en un seul geste.
             id: "2.5".into(), chapter: 2, chapter_title: "Organisation de la cabine".into(), act: 1,
             title: "Nettoyer".into(),
             description: "Virez les fichiers temporaires.".into(),
-            story: "Pierre, le mécanicien, passe par votre cabine en courant:
+            story: "Tael Rhen, le mécanicien, passe par votre cabine en courant:
 « Capitaine! J'ai laissé traîner des fichiers temporaires partout!
 temp1.txt, temp2.txt, temp3.txt... Il faut nettoyer avant l'inspection de l'Amiral! »
 
@@ -141,7 +141,7 @@ puis de les supprimer proprement.
 
 « rm supprime définitivement. Attention, dans l'espace, pas de corbeille:
 une fois supprimé, c'est parti pour de bon. »".into(),
-            goal: "Pierre a laissé des fichiers temporaires partout. Faites le ménage dans votre cabine.".into(),
+            goal: "Tael Rhen a laissé des fichiers temporaires partout. Faites le ménage dans votre cabine.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment supprimer des fichiers?".into(),
             required_commands: vec!["rm temp.txt".into()],

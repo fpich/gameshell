@@ -175,6 +175,29 @@ echo "$out" | grep -qE "[0-9]+" && ok "Pipe multiple (cat | grep | wc) fonctionn
 out=$(printf 'Test\necho hello > /soutes/test_gsh.txt\ncat /soutes/test_gsh.txt\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -q "hello" && ok "Redirection > fonctionne dans le vaisseau" || ko "Redirection > devrait fonctionner"
 
+# ─── TEST 33: Tests de conformité cargo (règles A15/C6/C9/C13) ───
+if cargo test --release > /tmp/gsh_cargo_test.log 2>&1 && grep -q "test result: ok" /tmp/gsh_cargo_test.log; then
+    ok "cargo test: conformité missions (skill=A15, carte=C6, bloom FR=C9, PNJ SF=C13)"
+else
+    ko "cargo test conformité a échoué: $(grep -m1 panicked /tmp/gsh_cargo_test.log)"
+fi
+
+# ─── TEST 34: id/uname interceptés, jamais d'infos de l'hôte (règle A16) ───
+out=$(run_game "Test\nid\nuname -a\nexit\n")
+echo "$out" | grep -q "uid=1000(capitaine)" && echo "$out" | grep -q "Linux orion7 6.6" && ! echo "$out" | grep -qE "uid=[0-9]+\($(whoami)\)|^$(hostname -s)$|$(hostname)$" && ok "id/uname → identité vaisseau (capitaine/orion7), pas l'hôte (règle A16)" || ko "id/uname ne doivent pas révéler l'hôte"
+
+# ─── TEST 35: Flèches en mode pipe = séquences ANSI nettoyées (règle A11) ───
+out=$(printf 'Test\n\x1b[D\x1b[Cpwd\x1b[A\x1b[B\nls\ngsh check\nexit\n' | timeout 10 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "✅ Mission réussie" && ok "Séquences ANSI (flèches) nettoyées en mode non-tty, commande intacte" || ko "Les flèches ne devraient rien insérer dans la commande"
+
+# ─── TEST 36: Compétence débloquée = commande de LA mission (règle A15) ───
+out=$(run_game "Test\npwd\nls\ngsh check\ncat bienvenue.txt\ngsh check\nexit\n")
+echo "$out" | grep -q "🔓 Compétence: pwd" && echo "$out" | grep -q "🔓 Compétence: cat" && ok "Skills débloquées = commandes des missions (pwd, cat — règle A15)" || ko "Skill débloquée incohérente avec la mission"
+
+# ─── TEST 37: PNJ noms SF dans les missions (règle C13) ───
+out=$(run_game "Test\nexit\n")
+echo "$out" | grep -q "Zyra-7" && ! echo "$out" | grep -qE "\b(Marie|Sophie|Jean|Kowalski|Galactica)\b" && ok "PNJ avec noms SF (Zyra-7...), jamais Marie/Kowalski/Galactica (règle C13)" || ko "PNJ non conformes"
+
 echo ""
 echo "═══════════════════════════════════════"
 echo -e "  RÉSULTAT: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL total"

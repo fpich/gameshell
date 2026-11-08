@@ -62,10 +62,9 @@ fn main() {
 
     // Demander le nom du joueur
     let player_name = cli.name.unwrap_or_else(|| {
-        print!("👤 Entrez votre nom de capitaine: ");
-        io::stdout().flush().ok();
-        let mut name = String::new();
-        io::stdin().read_line(&mut name).ok();
+        let mut hist = Vec::new();
+        let name = game::lineedit::read_line("👤 Entrez votre nom de capitaine: ", &mut hist)
+            .unwrap_or_default();
         let name = name.trim().to_string();
         if name.is_empty() { "Capitaine".to_string() } else { name }
     });
