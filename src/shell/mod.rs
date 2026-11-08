@@ -182,3 +182,16 @@ pub fn write_save(save: &crate::missions::SaveData) -> bool {
         Err(_) => false,
     }
 }
+
+/// Historique horodaté des actions d'une partie (règle A22): state/history_campagne<N>.log
+pub fn log_action(campaign: u8, event: &str) {
+    let path = format!("{}/state/history_campagne{}.log", gameshell_home(), campaign);
+    if let Some(parent) = std::path::Path::new(&path).parent() {
+        let _ = std::fs::create_dir_all(parent);
+    }
+    let ts = chrono::Local::now().format("%Y-%m-%d %H:%M:%S").to_string();
+    if let Ok(mut f) = std::fs::OpenOptions::new().create(true).append(true).open(&path) {
+        use std::io::Write;
+        let _ = writeln!(f, "[{}] {}", ts, event);
+    }
+}

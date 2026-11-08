@@ -63,13 +63,13 @@ fn print_banner(campaign: u8) {
     } else if campaign == 3 {
         // Bannière Nexus: baie serveurs / radar réseau
         let reseau = r#"
-        ┌─[ NEXUS-9 ]─────────────────────┐
-        │  ▮▮▮   NOC NEON-9   ▮▮▮         │
-        │  ┌──┐  ┌──┐  ┌──┐  ┌──┐       │
-        │  │OK│  │OK│  │!!│  │OK│  BAIES │
-        │  └──┘  └──┘  └──┘  └──┘       │
-        │  UPLINK: ━━━━▶  10.0.0.1       │
-        └────────────────────────────────┘
+        ┌─[ NEXUS-9 ]──────────────────────────────┐
+        │          ▮▮▮   NOC NEON-9   ▮▮▮          │
+        │      ┌──┐  ┌──┐  ┌──┐  ┌──┐   BAIES      │
+        │          │OK│  │OK│  │!!│  │OK│          │
+        │          └──┘  └──┘  └──┘  └──┘          │
+        │          UPLINK: ━━━━▶ 10.0.0.1          │
+        └──────────────────────────────────────────┘
 "#;
         println!("{}", reseau.cyan());
         println!();

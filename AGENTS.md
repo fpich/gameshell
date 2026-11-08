@@ -82,6 +82,18 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
   XP, niveau, liste des compétences), pas une simple ligne.
 - Test: test 45 (3 écrans de victoire en auto).
 
+## RÈGLE A21 — gsh restart: recommencer une campagne (OBLIGATOIRE)
+- `gsh restart` supprime la sauvegarde de la campagne, remet mission 1.1 / XP 0 / compétences reset,
+  et régénère le monde. Alternative manuelle: `rm ~/.gameshell/state/save_campagne<N>.json`.
+- Test: test 46.
+
+## RÈGLE A22 — Historique horodaté de chaque partie (OBLIGATOIRE, pour le RETEX)
+- Toute action est loguée avec timestamp dans `~/.gameshell/state/history_campagne<N>.log`:
+  début de session, chaque commande SHELL (`CMD ...`), chaque `gsh check` (succès/échec),
+  chaque mission réussie (`MISSION x.y réussie (+XP)`), codes phase 2, restart, export.
+- `gsh export` embarque cet historique dans le JSON exporté.
+- Test: test 47.
+
 ## RÈGLE A20 — gsh export enseignant (OBLIGATOIRE)
 - `gsh export` exporte la progression en JSON + CSV dans `~/.gameshell/state/export_campagne<N>_<date>.{json,csv}`
   (par mission: id, titre, statut, XP; + totaux + compétences).
@@ -107,7 +119,7 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
 
 ## RÈGLE A10 — Suite de tests obligatoire
-- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **45/45 PASS** obligatoire.
+- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **47/47 PASS** obligatoire.
 
 ---
 
@@ -255,7 +267,7 @@ Générée par `vaisseau-gen.sh`. Jamais `/srv/`, `/etc/`, `/home/etudiant/`.
 ```bash
 cargo build --release 2>&1 | grep -E "^error"   # vide
 bash make-archive.sh                               # régénère gameshell.sh
-./tests/run_tests.sh                               # 45/45 PASS + cargo test (conformité)
+./tests/run_tests.sh                               # 47/47 PASS + cargo test (conformité)
 ```
 
 ## RÈGLE E2 — Distribution 100% offline

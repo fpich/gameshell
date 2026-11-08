@@ -262,6 +262,15 @@ out38=$(printf 'Auto\nexit\n' | GAMESHELL_AUTO=1 timeout 900 bash gameshell.sh 2
 n=$(echo "$out38" | grep -c "FÉLICITATIONS")
 [ "$n" -ge 3 ] && ok "Écran de victoire affiché pour les 3 campagnes ($n FÉLICITATIONS)" || ko "Écran de victoire manquant ($n/3)"
 
+# ─── TEST 46: gsh restart remet la campagne à zéro (règle A21) ───
+rm -rf ~/.gameshell
+printf 'Test\n1\npwd\nls\ngsh check\ngsh restart\ngsh goal\nexit\n' | timeout 20 bash gameshell.sh > /tmp/restart_test.log 2>&1
+out=$(sed 's/\x1b\[[0-9;]*m//g' /tmp/restart_test.log)
+echo "$out" | grep -q "recommencée depuis la mission 1.1" && echo "$out" | grep -q "MISSION 1.1" && echo "$out" | grep -q "\[0/100\]" && ok "gsh restart: retour à la mission 1.1 avec [0/100] (règle A21)" || ko "gsh restart ne remet pas à zéro"
+
+# ─── TEST 47: historique horodaté des actions (règle A22) ───
+ls ~/.gameshell/state/history_campagne1.log > /dev/null 2>&1 && grep -qE "^\[20[0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9:]{8}\]" ~/.gameshell/state/history_campagne1.log && grep -q "MISSION 1.1 réussie" ~/.gameshell/state/history_campagne1.log && grep -q "CMD pwd" ~/.gameshell/state/history_campagne1.log && ok "Historique horodaté avec timestamps + CMD + MISSION (règle A22)" || ko "Pas d'historique horodaté"
+
 echo ""
 echo "═══════════════════════════════════════"
 echo -e "  RÉSULTAT: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL total"

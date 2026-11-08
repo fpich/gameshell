@@ -29,7 +29,8 @@ Le joueur est le **capitaine de la station spatiale Orion-7**, attaquée par les
 | Commande | Action |
 |----------|--------|
 | `gsh help` | Aide complète (commandes gsh + syntaxe shell + Bloom) |
-| `gsh export` | Exporte la progression en JSON + CSV (`~/.gameshell/state/export_campagne<N>_*.json/csv`) pour l'enseignant |
+| `gsh export` | Exporte progression + historique horodaté en JSON + CSV (`~/.gameshell/state/export_campagne<N>_*.json/csv`) pour l'enseignant |
+| `gsh restart` | Recommence la campagne en cours depuis la mission 1.1 (supprime la sauvegarde) |
 | `gsh goal` | Réaffiche la mission en cours (même cadre que le lancement) |
 | `gsh check` | Valide la mission en cours (phase 2: code si requis) |
 | `gsh reset` | Réinitialise la mission en cours |
@@ -153,6 +154,11 @@ gameshell/
         ├── japon/ch1..20.rs      # campagne 2 (Japon féodal)
         └── reseau/ch1..20.rs     # campagne 3 (Nexus réseau)
 ```
+
+## 💾 Progression & historique (RETEX par partie)
+- Sauvegarde auto par campagne (`state/save_campagne<N>.json`) + reprise au lancement.
+- **Historique horodaté de chaque action** dans `state/history_campagne<N>.log` (session, commandes, checks, missions, codes) — RETEX complet de chaque partie.
+- `gsh restart` = recommencer la campagne à zéro (ou `rm ~/.gameshell/state/save_campagne<N>.json`).
 
 ## 💾 Progression
 - Sauvegarde automatique par campagne à chaque mission validée (`~/.gameshell/state/save_campagne<N>.json`);

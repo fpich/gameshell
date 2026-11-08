@@ -95,6 +95,7 @@ impl Game {
         self.show_tutorial_if_first_run();
         self.show_mission();
 
+        shell::log_action(self.campaign, &format!("SESSION début — joueur={} campagne={}", self.player_name, self.campaign));
         loop {
             let cwd = self.display_path(&self.current_dir);
             let prompt = format!("{}@{}:{}$ [{}/{}] ", self.player_name.bright_green(), shell::world_hostname().normal(), cwd.normal(), self.completed.len(), self.missions.len());
@@ -124,12 +125,14 @@ impl Game {
                 "gsh reset" => { self.cmd_reset(); continue; }
                 "gsh skills" => { self.cmd_skills(); continue; }
                 "gsh export" => { self.cmd_export(); continue; }
+                "gsh restart" => { self.cmd_restart(); continue; }
                 "exit" | "quit" => { println!("\n👋 Déconnexion."); break; }
                 "clear" => { print!("\x1b[2J\x1b[H"); io::stdout().flush().ok(); continue; }
                 _ => {}
             }
 
             shell::log_command(&cmd);
+            shell::log_action(self.campaign, &format!("CMD {}", cmd));
             self.mission_commands.push(cmd.clone());
             self.exec_shell(&cmd);
         }
@@ -467,6 +470,7 @@ impl Game {
         if !ok {
             let _ = missing; // JAMAIS révéler quoi que ce soit (règle A8)
             self.check_fails += 1;
+            shell::log_action(self.campaign, &format!("CHECK mission {} -> échec", self.missions.get(self.current_mission).map(|m| m.id.as_str()).unwrap_or("?")));
             println!("\n  ❌ Mission non validée. Relisez le contexte et réessayez.");
             if self.check_fails >= 2 {
                 println!("  💡 Besoin de revoir l'objectif? Tapez 'gsh goal'");
@@ -483,6 +487,9 @@ impl Game {
             }
         }
         self.check_fails = 0;
+        if let Some(mm) = self.missions.get(self.current_mission) {
+            shell::log_action(self.campaign, &format!("MISSION {} réussie (+{} XP)", mm.id, mm.xp_reward));
+        }
         println!("\n  ✅ Mission réussie!");
         self.complete_mission();
         true
@@ -556,12 +563,17 @@ impl Game {
             csv.push_str(&format!("{};{};{};{}
 ", m.id, m.title.replace('"', "'"), if done.contains(m.id.as_str()) { "réussie" } else { "à faire" }, m.xp_reward));
         }
-        let okj = std::fs::write(&json_path, json).is_ok();
+        // historique horodaté embarqué dans le JSON (règle A22)
+        let hist_path = format!("{}/state/history_campagne{}.log", shell::gameshell_home(), self.campaign);
+        let hist = std::fs::read_to_string(&hist_path).unwrap_or_default();
+        let hist_json: String = hist.lines().map(|l| format!("\"{}\",", l.replace('\\', "\\\\").replace('"', "\\\""))).collect();
+        let full = json.replacen("]}", &format!("], \"historique\": [{}]}}", hist_json), 1);
+        let okj = std::fs::write(&json_path, full).is_ok();
         let okc = std::fs::write(&csv_path, csv).is_ok();
         println!("\n  📤 Export effectué:");
         if okj { println!("     JSON: {}", json_path); }
         if okc { println!("     CSV:  {}", csv_path); }
-        println!("     ({} missions, {} XP, niveau {}, {} compétences)\n", self.completed.len(), self.xp, self.level, self.skills.len());
+        println!("     ({} missions, {} XP, niveau {}, {} compétences, historique: {} lignes)\n", self.completed.len(), self.xp, self.level, self.skills.len(), hist.lines().count());
     }
 
     /// Panneau tutoriel au premier lancement d'une campagne (pas de sauvegarde)
@@ -577,6 +589,22 @@ impl Game {
             println!("  │  Progression sauvegardée automatiquement│");
             println!("  └────────────────────────────────────────┘\n");
         }
+    }
+
+    /// gsh restart: recommence la campagne depuis la mission 1 (règle A21)
+    fn cmd_restart(&mut self) {
+        let _ = std::fs::remove_file(shell::save_path(self.campaign));
+        self.current_mission = 0;
+        self.completed.clear();
+        self.xp = 0;
+        self.level = 1;
+        self.skills = vec![Skill { command: "man".into(), name: "man".into(), description: "man COMMANDE — affiche le manuel (compétence de départ)".into() }];
+        self.mission_commands.clear();
+        self.pending_code = None;
+        self.cmd_reset();
+        shell::log_action(self.campaign, "RESTART campagne (retour mission 1)");
+        println!("\n  🔄 Campagne recommencée depuis la mission 1.1!\n");
+        self.show_mission();
     }
 
     fn cmd_reset(&mut self) {
@@ -773,11 +801,13 @@ impl Game {
     pub fn submit_code(&mut self, input: &str) -> bool {
         if let Some(expected) = self.pending_code.clone() {
             if input.trim().eq_ignore_ascii_case(&expected) {
+                shell::log_action(self.campaign, "CODE phase 2 -> correct");
                 println!("\n  ✅ Code correct! Mission réussie!");
                 self.pending_code = None;
                 self.complete_mission();
                 return true;
             } else {
+                shell::log_action(self.campaign, "CODE phase 2 -> incorrect");
                 println!("\n  ❌ Code incorrect. Relisez les fichiers du vaisseau et réessayez.");
             }
         }
