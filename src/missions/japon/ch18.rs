@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — forge (services):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶FORGE◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
+            map: "VUE DE DESSUS — forge (services):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶FORGE◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "systemctl status".into(), name: "systemctl status".into(), description: "systemctl status — état d'un service".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — forge:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶FORGE◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► redémarrer ssh".into(),
+            map: "VUE DE DESSUS — forge:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶FORGE◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► redémarrer ssh".into(),
             skill: Some(Skill { command: "systemctl restart".into(), name: "systemctl restart".into(), description: "systemctl restart — redémarre un service".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — scribes:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │ ▶SCRIBES◀  │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► journal de ssh".into(),
+            map: "VUE DE DESSUS — scribes:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃ ▶SCRIBES◀  ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► journal de ssh".into(),
             skill: Some(Skill { command: "journalctl".into(), name: "journalctl".into(), description: "journalctl -u ssh -n 10 — logs d'un service".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — donjon (videur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │   REMP.    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► statut fail2ban".into(),
+            map: "VUE DE DESSUS — donjon (videur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃  ▶DONJON◀  ┃ ┃   QUART.   ┃ ┃   REMP.    ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► statut fail2ban".into(),
             skill: Some(Skill { command: "fail2ban-client status".into(), name: "fail2ban-client status".into(), description: "fail2ban-client status — bannissements".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — donjon:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │   REMP.    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► déban 10.0.0.99 (Hattori)".into(),
+            map: "VUE DE DESSUS — donjon:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃  ▶DONJON◀  ┃ ┃   QUART.   ┃ ┃   REMP.    ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► déban 10.0.0.99 (Hattori)".into(),
             skill: Some(Skill { command: "fail2ban-client unban".into(), name: "fail2ban-client unban".into(), description: "fail2ban-client unban IP — révoque un ban".into() }),
         },
     ]

@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            map: "VUE DE DESSUS — scribes → archives:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶ARCH.◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
+            map: "VUE DE DESSUS — scribes → archives:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶ARCH.◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "tar czf".into(), name: "tar czf".into(), description: "tar czf — archive compressée".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — archives:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶ARCH.◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
+            map: "VUE DE DESSUS — archives:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶ARCH.◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "tar tvf".into(), name: "tar tvf".into(), description: "tar tvf — liste une archive".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — archives → /tmp:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶ARCH.◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
+            map: "VUE DE DESSUS — archives → /tmp:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶ARCH.◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "tar xzf".into(), name: "tar xzf".into(), description: "tar xzf — extrait une archive".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │  ▶QUART.◀  │ │  GRENIER   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► créer registres.zip".into(),
+            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► créer registres.zip".into(),
             skill: Some(Skill { command: "zip -r".into(), name: "zip -r".into(), description: "zip -r — archive ZIP".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │  ▶QUART.◀  │ │  GRENIER   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► contenu de registres.zip".into(),
+            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► contenu de registres.zip".into(),
             skill: Some(Skill { command: "unzip -l".into(), name: "unzip -l".into(), description: "unzip -l — liste un ZIP".into() }),
         },
     ]

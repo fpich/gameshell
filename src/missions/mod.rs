@@ -102,16 +102,21 @@ mod conformity_tests {
             assert!(BLOOM_FR.contains(&m.bloom_level.as_str()), "{} {}: bloom_level {:?} pas en français (règle B8/C9)", label, m.id, m.bloom_level);
             assert!(m.map.contains("VUE DE DESSUS"), "{} {}: pas de carte vue de dessus (règle C6)", label, m.id);
             // Règle B9: carte ASCII bien formée — lignes de la carte alignées (même largeur) et <= 60 car.
-            let box_lines: Vec<&str> = m.map.lines().filter(|l| l.contains('┌') || (l.contains('│') && l.contains('┬') == false && l.contains('┴') == false && l.split('│').count() > 2)).collect();
-            let w0 = m.map.lines().find(|l| l.contains('┌')).map(|l| l.chars().count());
+            // traits lourds (┏┃┗┛┳┻) comme le cadre; jonction ┻ alignée sous les ┳
+            let w0 = m.map.lines().find(|l| l.contains('┏')).map(|l| l.chars().count());
+            let mut sy = Vec::new();
             for l in m.map.lines() {
                 assert!(l.chars().count() <= 60, "{} {}: ligne de carte trop longue ({} car.)", label, m.id, l.chars().count());
-                if l.contains('┌') || l.contains('│') {
+                if l.contains('┏') || l.contains('┃') {
                     if let Some(w) = w0 { assert_eq!(l.chars().count(), w, "{} {}: carte mal alignée (règle B9): {:?}", label, m.id, l); }
+                }
+                if l.contains('┳') { sy = l.chars().enumerate().filter(|(_, c)| *c == '┳').map(|(i, _)| i).collect(); }
+                if l.contains('┻') {
+                    let up: Vec<usize> = l.chars().enumerate().filter(|(_, c)| *c == '┻').map(|(i, _)| i).collect();
+                    assert_eq!(sy, up, "{} {}: jonction ┻ non alignée sous les ┳ (règle B9)", label, m.id);
                 }
             }
             assert!(m.map.contains('▶'), "{} {}: la carte doit marquer la position (▶)", label, m.id);
-            let _ = box_lines;
             // Règle C3: 20+ lignes de contexte AFFICHÉES (wrap à 60 car., comme show_mission)
             let disp = m.story.lines().map(|l| wrap60(l)).sum::<usize>() + m.description.lines().map(|l| wrap60(l)).sum::<usize>();
             assert!(disp >= 18, "{} {}: contexte trop court ({} lignes affichées, règle C3: 20+)", label, m.id, disp);

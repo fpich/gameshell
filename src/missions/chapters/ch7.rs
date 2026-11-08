@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► verrouiller plan_defense.sh (700)".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  ▶CABINE◀  ┃ ┃   SOUTES   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► verrouiller plan_defense.sh (700)".into(),
             skill: Some(Skill { command: "chmod 700".into(), name: "chmod".into(), description: "chmod — change les permissions rwx d'un fichier (700, 600, +x)".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► rendre plan_defense.sh exécutable (+x)".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  ▶CABINE◀  ┃ ┃   SOUTES   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► rendre plan_defense.sh exécutable (+x)".into(),
             skill: Some(Skill { command: "chmod +x".into(), name: "chmod +x".into(), description: "chmod +x — rend un fichier exécutable (script)".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶SECUR◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► /securite/coffre-fort/codes_acces.txt".into(),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃  ▶SECUR◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► /securite/coffre-fort/codes_acces.txt".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche le contenu complet d'un fichier texte".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► fiche technique de plan_defense.sh".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  ▶CABINE◀  ┃ ┃   SOUTES   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► fiche technique de plan_defense.sh".into(),
             skill: Some(Skill { command: "stat".into(), name: "stat".into(), description: "stat — affiche les métadonnées: taille, permissions, dates, inode".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► plan_defense.sh → propriété capitaine".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  ▶CABINE◀  ┃ ┃   SOUTES   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► plan_defense.sh → propriété capitaine".into(),
             skill: Some(Skill { command: "chown".into(), name: "chown".into(), description: "chown — change le propriétaire d'un fichier (user:group)".into() }),
         },
     ]

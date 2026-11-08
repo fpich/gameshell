@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 200,
             code_required: Some("LACUS-7-ONI".into()),
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │  ▶QUART.◀  │ │  GRENIER   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► .secret (sceau) + code phase 2".into(),
+            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► .secret (sceau) + code phase 2".into(),
             skill: Some(Skill { command: "cat .secret".into(), name: "cat .secret".into(), description: "cat .secret — lit le sceau caché".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 200,
             code_required: Some("KAMI-442-TORA".into()),
-            map: "VUE DE DESSUS — donjon + archives:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶ARCH.◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► code du coffre + phase 2".into(),
+            map: "VUE DE DESSUS — donjon + archives:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶ARCH.◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► code du coffre + phase 2".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — lit les codes".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │  ▶QUART.◀  │ │  GRENIER   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► rapport_siege.txt complet".into(),
+            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► rapport_siege.txt complet".into(),
             skill: Some(Skill { command: ">".into(), name: ">".into(), description: "> — compose le rapport".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            map: "VUE DE DESSUS — scribes → archives:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶ARCH.◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► preuves_siege.tar.gz".into(),
+            map: "VUE DE DESSUS — scribes → archives:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶ARCH.◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► preuves_siege.tar.gz".into(),
             skill: Some(Skill { command: "tar czf".into(), name: "tar czf".into(), description: "tar czf — archive des preuves".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 500,
             code_required: Some("TORA-442-KAMI".into()),
-            map: "VUE DE DESSUS — donjon (coffre-fort):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │   ARCH.    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► protocole de siège + code final".into(),
+            map: "VUE DE DESSUS — donjon (coffre-fort):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃  ▶DONJON◀  ┃ ┃   QUART.   ┃ ┃   ARCH.    ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► protocole de siège + code final".into(),
             skill: Some(Skill { command: "auditctl -w".into(), name: "auditctl -w".into(), description: "auditctl -w — caméra finale".into() }),
         },
     ]

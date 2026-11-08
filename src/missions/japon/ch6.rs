@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — forge:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶FORGE◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
+            map: "VUE DE DESSUS — forge:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶FORGE◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "ps aux".into(), name: "ps aux".into(), description: "ps aux — tous les processus".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — remparts:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶REMP.◀   │ │   QUART.   │ │   FORGE    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► ps | grep".into(),
+            map: "VUE DE DESSUS — remparts:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃  ▶REMP.◀   ┃ ┃   QUART.   ┃ ┃   FORGE    ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► ps | grep".into(),
             skill: Some(Skill { command: "|".into(), name: "|".into(), description: "COMMANDE | COMMANDE — chaîne".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — salle de thé:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶S.THÉ◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
+            map: "VUE DE DESSUS — salle de thé:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶S.THÉ◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "pgrep -a".into(), name: "pgrep -a".into(), description: "pgrep -a — processus par nom".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — forge (jauges):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶FORGE◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
+            map: "VUE DE DESSUS — forge (jauges):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶FORGE◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "top -bn1".into(), name: "top -bn1".into(), description: "top -bn1 — aperçu CPU/mémoire".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            map: "VUE DE DESSUS — donjon:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │   FORGE    │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► couper le processus 6666".into(),
+            map: "VUE DE DESSUS — donjon:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃  ▶DONJON◀  ┃ ┃   QUART.   ┃ ┃   FORGE    ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► couper le processus 6666".into(),
             skill: Some(Skill { command: "kill -9".into(), name: "kill -9".into(), description: "kill -9 — tue de force".into() }),
         },
     ]

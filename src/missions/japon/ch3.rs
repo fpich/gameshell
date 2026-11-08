@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │  ▶QUART.◀  │ │  GRENIER   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► .secret (fichier caché)".into(),
+            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► .secret (fichier caché)".into(),
             skill: Some(Skill { command: "ls -la".into(), name: "ls -la".into(), description: "ls -la — liste tout, cachés compris".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │  ▶QUART.◀  │ │  GRENIER   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► chercher registre_riz.txt partout".into(),
+            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► chercher registre_riz.txt partout".into(),
             skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find -name — recherche par nom".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — les greniers:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │   QUART.   │ │  ▶GREN.◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
+            map: "VUE DE DESSUS — les greniers:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃   QUART.   ┃ ┃  ▶GREN.◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "du -sh".into(), name: "du -sh".into(), description: "du -sh — taille totale lisible".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — objectif: DONJON:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │  ▶DONJON◀  │ │   QUART.   │ │  GRENIER   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘".into(),
+            map: "VUE DE DESSUS — objectif: DONJON:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃  ▶DONJON◀  ┃ ┃   QUART.   ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛".into(),
             skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd — change de répertoire".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   DONJON   │ │  ▶QUART.◀  │ │  GRENIER   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► créer ordre.txt".into(),
+            map: "VUE DE DESSUS — vos quartiers (seigneur):\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   DONJON   ┃ ┃  ▶QUART.◀  ┃ ┃  GRENIER   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► créer ordre.txt".into(),
             skill: Some(Skill { command: "echo >".into(), name: ">".into(), description: "COMMANDE > fichier — redirige vers un fichier".into() }),
         },
     ]

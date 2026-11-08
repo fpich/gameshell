@@ -162,8 +162,9 @@ Jamais de liste de 20 commandes avec exemples ici.
 - Jamais faire deviner un nom de fichier exact.
 
 ## RÈGLE C6 — Carte ASCII vue de dessus obligatoire
-- Gabarit FIXE aligné (boîtes de 14 car., 3 salles, ▶ = position, └────► = cible), lignes ≤ 60 car.:
-  testé par `cargo test` (règle B9) sur les 200 missions des 2 campagnes.
+- Gabarit FIXE en traits LOURDS (comme le cadre ┏━┓): boîtes ┏━┓ de 14 car., 3 salles,
+  ▶ = position, ┳ en position 7/22/37, jonction ┻ exactement alignée dessous, └────► = cible,
+  lignes ≤ 60 car. Testé par `cargo test` (règle B9: alignement + alignement ┳/┻) sur les 200 missions.
 - Champ `map` dans chaque mission: carte du vaisseau avec ▶ position, flèche vers la cible.
 - 100% role play: indique OÙ on est, jamais QUELLE commande taper.
 

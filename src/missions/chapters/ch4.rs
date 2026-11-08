@@ -16,7 +16,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 50,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► notes.txt sur votre bureau".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  ▶CABINE◀  ┃ ┃   SOUTES   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► notes.txt sur votre bureau".into(),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche le contenu complet d'un fichier texte".into() }),
         },
         Mission {
@@ -32,7 +32,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► ajouter une ligne à la fin de notes.txt".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  ▶CABINE◀  ┃ ┃   SOUTES   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► ajouter une ligne à la fin de notes.txt".into(),
             skill: Some(Skill { command: "cmd >> fichier".into(), name: ">>".into(), description: "COMMANDE >> fichier — ajoute la sortie à la fin du fichier".into() }),
         },
         Mission {
@@ -48,7 +48,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — votre cabine:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  ▶CABINE◀  │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► compter les lignes de bienvenue.txt".into(),
+            map: "VUE DE DESSUS — votre cabine:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  ▶CABINE◀  ┃ ┃   SOUTES   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► compter les lignes de bienvenue.txt".into(),
             skill: Some(Skill { command: "wc -l".into(), name: "wc".into(), description: "wc -l — compte les lignes d'un fichier".into() }),
         },
         Mission {
@@ -64,7 +64,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — le pont:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │   ▶PONT◀   │ │  CABINES   │ │   SOUTES   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► historique.txt (début)".into(),
+            map: "VUE DE DESSUS — le pont:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃   ▶PONT◀   ┃ ┃  CABINES   ┃ ┃   SOUTES   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► historique.txt (début)".into(),
             skill: Some(Skill { command: "head".into(), name: "head".into(), description: "head -n N — affiche les N premières lignes d'un fichier".into() }),
         },
         Mission {
@@ -80,7 +80,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            map: "VUE DE DESSUS — compartiment SÉCURITÉ:\n  ┌────────────┐ ┌────────────┐ ┌────────────┐\n  │    PONT    │ │  CABINES   │ │  ▶SECUR◀   │\n  └────┬───────┘ └────┬───────┘ └────┬───────┘\n        └─────────────┴─────────────┘\n             └────► /securite/logs/auth.log (fin)".into(),
+            map: "VUE DE DESSUS — compartiment SÉCURITÉ:\n  ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n  ┃    PONT    ┃ ┃  CABINES   ┃ ┃  ▶SECUR◀   ┃\n  ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛ ┗━━━━┳━━━━━━━┛\n       ┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻┛\n       └────► /securite/logs/auth.log (fin)".into(),
             skill: Some(Skill { command: "tail".into(), name: "tail".into(), description: "tail -n N — affiche les N dernières lignes d'un fichier".into() }),
         },
     ]
