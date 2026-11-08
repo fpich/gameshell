@@ -209,6 +209,11 @@ rm -rf ~/.gameshell
 out=$(printf 'Samoura\n2\nhostname\nwhoami\nexit\n' | timeout 20 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
 echo "$out" | grep -q "Japon Féodal" && echo "$out" | grep -q "100 missions" && echo "$out" | grep -q "Samoura@shiro:~" && echo "$out" | grep -qE "seigneur$" && ok "Campagne 2: bannière Japon Féodal, prompt @shiro, whoami=seigneur, 100 missions" || ko "Campagne 2 devrait être sélectionnable (Japon Féodal/shiro/seigneur)"
 
+# ─── TEST 40: Banc de cas limites EDGE (GAMESHELL_EDGE=1) sur les 200 missions ───
+rm -rf ~/.gameshell
+out=$(printf 'Edge\nexit\n' | GAMESHELL_EDGE=1 timeout 300 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+echo "$out" | grep -q "EDGE campagne 1 (Pirates de l'Espace): 100/100 missions OK, 0 problèmes" && echo "$out" | grep -q "EDGE campagne 2 (Japon Féodal): 100/100 missions OK, 0 problèmes" && ok "EDGE: 200/200 missions passent les cas limites (check vide, garbage, mauvais code, reset)" || ko "EDGE: $(echo "$out" | grep -o 'EDGE campagne [0-9][^ ]*: [0-9/]* missions OK, [0-9]* problèmes' | tr '\n' ' ')"
+
 echo ""
 echo "═══════════════════════════════════════"
 echo -e "  RÉSULTAT: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL total"

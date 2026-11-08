@@ -162,7 +162,7 @@ echo "3. Configuration fail2ban"
 echo "4. Durcissement SSH"
 echo "Plan prêt!"
 SHEOF
-chmod 700 "$C/capitaine/plan_defense.sh"
+chmod 644 "$C/capitaine/plan_defense.sh"
 
 cat > "$C/capitaine/.secret" << 'EOF'
 CODE PERSONNEL: FALCON-9

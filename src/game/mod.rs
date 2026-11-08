@@ -77,15 +77,8 @@ impl Game {
             if cmd.is_empty() { continue; }
 
             // Phase 2: si un code est attendu, la saisie est le code
-            if let Some(expected) = self.pending_code.clone() {
-                if cmd.trim().eq_ignore_ascii_case(&expected) {
-                    println!("\n  ✅ Code correct! Mission réussie!");
-                    self.pending_code = None;
-                    self.complete_mission();
-                    self.show_mission();
-                } else {
-                    println!("\n  ❌ Code incorrect. Relisez les fichiers du vaisseau et réessayez.");
-                }
+            if self.pending_code.is_some() {
+                if self.submit_code(&cmd) { self.show_mission(); }
                 continue;
             }
 
@@ -491,8 +484,9 @@ impl Game {
         let m = match self.missions.get(self.current_mission) {
             Some(m) => m, None => return (false, vec!["?".into()])
         };
-        // Utilise UNIQUEMENT les commandes de la mission courante (pas l'historique global)
+        // Invariant: une mission se valide par des commandes TAPÉES (jamais à vide)
         let history = &self.mission_commands;
+        if history.is_empty() { return (false, vec!["aucune commande".into()]); }
         let vaisseau = shell::world_dir();
         let mut missing = Vec::new();
 
@@ -515,9 +509,10 @@ impl Game {
                 "file_not_exists" => !shell::file_exists(&self.resolve_path(&check.target, &vaisseau)),
                 "dir_exists" => shell::dir_exists(&self.resolve_path(&check.target, &vaisseau)),
                 "dir_reached" => {
+                    // Égalité stricte (sinon la cible "/" serait toujours atteinte)
                     let exp = self.canonical(&self.resolve_path(&check.target, &vaisseau));
                     let cur = self.canonical(&self.current_dir);
-                    cur == exp || cur.starts_with(&format!("{}/", exp))
+                    cur == exp
                 }
                 "user_exists" => shell::user_exists(&check.target),
                 "group_exists" => shell::group_exists(&check.target),
@@ -599,6 +594,108 @@ impl Game {
         for m in &self.missions {
             println!("  {} {} ({}XP) code={:?}", m.id, m.title, m.xp_reward, m.code_required);
         }
+    }
+
+    /// Saisie du code phase 2 (retourne true si la mission est validée)
+    pub fn submit_code(&mut self, input: &str) -> bool {
+        if let Some(expected) = self.pending_code.clone() {
+            if input.trim().eq_ignore_ascii_case(&expected) {
+                println!("\n  ✅ Code correct! Mission réussie!");
+                self.pending_code = None;
+                self.complete_mission();
+                return true;
+            } else {
+                println!("\n  ❌ Code incorrect. Relisez les fichiers du vaisseau et réessayez.");
+            }
+        }
+        false
+    }
+
+    /// Mode EDGE (GAMESHELL_EDGE=1): pour CHAQUE mission, teste les cas limites:
+    /// check à vide échoue, commande garbage échoue, résolution réussit, mauvais code phase 2 échoue,
+    /// bon code réussit, position reset à ~ et historique mission vidé après validation.
+    pub fn run_edge(&mut self) -> (usize, Vec<String>) {
+        let total = self.missions.len();
+        let mut ok = 0usize;
+        let mut issues: Vec<String> = Vec::new();
+        let home = std::env::var("HOME").unwrap_or_else(|_| ".".into());
+        while self.current_mission < self.missions.len() {
+            let m = self.missions[self.current_mission].clone();
+            self.mission_commands.clear();
+            self.current_dir = home.clone();
+            self.pending_code = None;
+            // 1. check à vide doit échouer
+            if self.cmd_check() { issues.push(format!("{}: check à vide a VALIDÉ la mission!", m.id)); }
+            // 2. commande garbage ne doit pas valider
+            self.mission_commands.push("foobar123".into());
+            if self.cmd_check() { issues.push(format!("{}: 'foobar123' a validé la mission!", m.id)); }
+            self.mission_commands.clear();
+            // 3. résolution (mêmes étapes que run_auto)
+            let vaisseau = shell::world_dir();
+            for c in &m.required_commands {
+                let c = c.replace("$USER", "capitaine");
+                self.mission_commands.push(c.clone());
+                self.exec_shell(&c);
+            }
+            for ck in &m.checks {
+                match ck.check_type.as_str() {
+                    "command_executed" | "file_read" => {
+                        let base = ck.target.split_whitespace().next().unwrap_or(&ck.target);
+                        if !self.mission_commands.iter().any(|c| c.split_whitespace().any(|w| w == base) || c.contains(&ck.target)) {
+                            self.mission_commands.push(if ck.check_type == "file_read" { format!("cat {}", ck.target) } else { base.to_string() });
+                        }
+                    }
+                    "dir_reached" | "dir_exists" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if !shell::dir_exists(&p) { shell::execute_interactive(&format!("mkdir -p '{}'", p)); }
+                        if ck.check_type == "dir_reached" { self.current_dir = self.canonical(&p); }
+                    }
+                    "file_exists" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if !shell::file_exists(&p) { shell::execute_interactive(&format!("touch '{}'", p)); }
+                    }
+                    "file_not_exists" => { let p = self.resolve_path(&ck.target, &vaisseau); shell::execute_interactive(&format!("rm -f '{}'", p)); }
+                    "permission" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if let Some(e) = &ck.expected { shell::execute_interactive(&format!("chmod {} '{}'", e, p)); }
+                    }
+                    "config_contains" => {
+                        let p = self.resolve_path(&ck.target, &vaisseau);
+                        if let Some(e) = &ck.expected {
+                            if !shell::file_contains(&p, e) { shell::execute_interactive(&format!("echo '{}' >> '{}'", e, p)); }
+                        }
+                    }
+                    "user_exists" => { shell::execute_interactive(&format!("sudo useradd -m '{}' 2>/dev/null || true", ck.target)); }
+                    "group_exists" => { shell::execute_interactive(&format!("sudo groupadd '{}' 2>/dev/null || true", ck.target)); }
+                    _ => {}
+                }
+            }
+            let before = self.completed.len();
+            self.cmd_check();
+            // 4. phase 2: mauvais code d'abord, puis bon code
+            if self.pending_code.is_some() {
+                if self.submit_code("MAUVAIS-CODE") {
+                    issues.push(format!("{}: un mauvais code a validé la mission!", m.id));
+                }
+                if self.pending_code.is_some() {
+                    let code = self.pending_code.clone().unwrap();
+                    self.submit_code(&code);
+                }
+            }
+            if self.completed.len() > before {
+                ok += 1;
+                // 5. post-validation: position reset ~ et historique vidé
+                if self.current_dir != home { issues.push(format!("{}: position non reset après validation ({})", m.id, self.current_dir)); }
+                if !self.mission_commands.is_empty() { issues.push(format!("{}: historique mission non vidé", m.id)); }
+            } else {
+                issues.push(format!("{}: mission non résolue par les cas limites", m.id));
+                self.current_mission += 1;
+                self.mission_commands.clear();
+                self.pending_code = None;
+                self.current_dir = home.clone();
+            }
+        }
+        (ok, issues)
     }
 
     /// Mode auto (GAMESHELL_AUTO=1): joue TOUTES les missions réellement (commandes + checks)

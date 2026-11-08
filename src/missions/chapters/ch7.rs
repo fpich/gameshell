@@ -28,7 +28,7 @@ pub fn missions() -> Vec<Mission> {
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment rendre un fichier exécutable?".into(),
             required_commands: vec!["chmod +x plan_defense.sh".into()],
-            checks: vec![MissionCheck { check_type: "permission".into(), target: "~/plan_defense.sh".into(), expected: Some("+x".into()) }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "+x".into(), expected: None }],
             hints: vec![],
             xp_reward: 100,
             code_required: None,

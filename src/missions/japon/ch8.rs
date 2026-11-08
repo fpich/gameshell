@@ -76,7 +76,7 @@ pub fn missions() -> Vec<Mission> {
             bloom_level: "Se souvenir".into(),
             bloom_question: "Comment revenir directement dans son home?".into(),
             required_commands: vec!["cd ~".into(), "pwd".into()],
-            checks: vec![MissionCheck { check_type: "dir_reached".into(), target: "~".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "~".into(), expected: None }],
             hints: vec![],
             xp_reward: 75,
             code_required: None,

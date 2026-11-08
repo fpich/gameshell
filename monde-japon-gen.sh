@@ -37,7 +37,7 @@ cat > "$Q/seigneur/plan_defense.sh" << 'SHEOF'
 # Plan de défense du château Shiro
 echo "Fermez le portail! Sonnez le gong! Tout le monde aux remparts!"
 SHEOF
-chmod 755 "$Q/seigneur/plan_defense.sh"
+chmod 644 "$Q/seigneur/plan_defense.sh"
 cat > "$Q/seigneur/.secret" << 'EOF'
 Le sceau secret du seigneur: LACUS-7-ONI
 EOF
@@ -205,6 +205,6 @@ EOF
 # ══════════ PERMISSIONS ══════════
 find "$V" -type d -exec chmod 755 {} \; 2>/dev/null
 chmod 600 "$Q/seigneur/.secret" "$D/coffre-fort/sceaux.txt" "$A/secret/code_coffre.txt"
-chmod 700 "$D/coffre-fort"
+chmod 755 "$D/coffre-fort"
 
 echo "✅ Château Shiro (Japon Féodal) généré: $(find "$V" -type f | wc -l) fichiers, $(find "$V" -type d | wc -l) pièces"
