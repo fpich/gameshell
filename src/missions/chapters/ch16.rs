@@ -7,7 +7,22 @@ pub fn missions() -> Vec<Mission> {
             id: "16.1".into(), chapter: 16, chapter_title: "Gestion de l'equipage".into(), act: 4,
             title: "Vos equipes".into(),
             description: "Vex Korshun veut savoir à quelles équipes appartient le capitaine.".into(),
-            story: "Vex Korshun, officier sÃ©curitÃ©: Â« Capitaine, pour le contrÃ´le d'accÃ¨s du pont,\nje dois vÃ©rifier Ã  quelles Ã©quipes (groupes) appartient votre badge. Â»\n\nLa commande qui affiche les groupes de l'utilisateur courant.\n\nÂ« Ã quelles Ã©quipes appartenez-vous, Capitaine? Â»\n\nLes Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.\n\nLa station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.".into(),
+            story: "Vex Korshun, officier sÃ©curitÃ©: Â« Capitaine, pour le contrÃ´le d'accÃ¨s du pont,
+je dois vÃ©rifier Ã  quelles Ã©quipes (groupes) appartient votre badge. Â»
+
+La commande qui affiche les groupes de l'utilisateur courant.
+
+Â« Ã quelles Ã©quipes appartenez-vous, Capitaine? Â»
+
+Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
+
+La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+
+La liste de vos groupes s'affiche. Vous appartenez à plusieurs équipes du vaisseau.
+
+« Chaque groupe définit vos droits », explique Vex Korshun. « Savoir à quelles équipes vous appartenez, c'est connaître votre place à bord. »".into(),
             goal: "Affichez la liste des groupes (équipes) auxquels appartient votre compte.".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Comment voir ses propres groupes?".into(),
@@ -22,7 +37,22 @@ pub fn missions() -> Vec<Mission> {
             id: "16.2".into(), chapter: 16, chapter_title: "Gestion de l'equipage".into(), act: 4,
             title: "Fiche du matelot".into(),
             description: "Vérifiez le badge complet du nouveau matelot.".into(),
-            story: "Vex Korshun: « Capitaine, le matelot vient d'être recruté. Vérifiez son\nbadge complet: uid, gid et tous ses groupes. »\n\nLa commande qui affiche l'identité complète d'un utilisateur précis.\n\n« Donnez-moi la fiche complète du matelot, Capitaine. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.\n\nN'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.".into(),
+            story: "Vex Korshun: « Capitaine, le matelot vient d'être recruté. Vérifiez son
+badge complet: uid, gid et tous ses groupes. »
+
+La commande qui affiche l'identité complète d'un utilisateur précis.
+
+« Donnez-moi la fiche complète du matelot, Capitaine. »
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+
+La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
+
+N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
+
+La fiche complète du compte matelot s'affiche: uid, gid, groupes.
+
+« Chaque membre a une identité numérique unique », explique Vex Korshun. « C'est elle qui détermine ses accès. »".into(),
             goal: "Affichez l'identité complète (uid, gid, groupes) du compte matelot.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'identité complète d'un autre utilisateur?".into(),
@@ -37,7 +67,23 @@ pub fn missions() -> Vec<Mission> {
             id: "16.3".into(), chapter: 16, chapter_title: "Gestion de l'equipage".into(), act: 4,
             title: "Ajouter le matelot a l'equipe".into(),
             description: "Le matelot rejoint l'équipe 'equipage' du vaisseau.".into(),
-            story: "Vex Korshun: Â« Capitaine, le matelot doit intÃ©grer l'Ã©quipe 'equipage'\npour accÃ©der aux coursives communes. Ajoutez-le Ã  ce groupe. Â»\n\nLa commande de modification d'utilisateur permet d'ajouter un membre\nÃ  un groupe existant, sans retirer les autres.\n\nÂ« Ajoutez matelot au groupe equipage, Capitaine. Â»\n\nLes Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.\n\nLa station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.".into(),
+            story: "Vex Korshun: Â« Capitaine, le matelot doit intÃ©grer l'Ã©quipe 'equipage'
+pour accÃ©der aux coursives communes. Ajoutez-le Ã  ce groupe. Â»
+
+La commande de modification d'utilisateur permet d'ajouter un membre
+Ã  un groupe existant, sans retirer les autres.
+
+Â« Ajoutez matelot au groupe equipage, Capitaine. Â»
+
+Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
+
+La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+
+Le compte matelot rejoint l'équipe equipage. Ses droits sont mis à jour.
+
+« Bien », approuve Vex Korshun. « Le matelot peut maintenant accéder aux ressources de son équipe. »".into(),
             goal: "Ajoutez le compte matelot au groupe equipage.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter un utilisateur à un groupe?".into(),
@@ -52,7 +98,23 @@ pub fn missions() -> Vec<Mission> {
             id: "16.4".into(), chapter: 16, chapter_title: "Gestion de l'equipage".into(), act: 4,
             title: "Prendre le fauteuil du matelot".into(),
             description: "Vérifiez que le compte matelot fonctionne en prenant sa session.".into(),
-            story: "Vex Korshun: Â« Capitaine, testez le compte du matelot: prenez sa session\net dites-moi qui il est. Â»\n\nLa commande de changement d'utilisateur ouvre une session temporaire\ndans le compte d'un autre membre d'Ã©quipage pour exÃ©cuter une commande.\n\nÂ« Prenez la session du matelot et affichez qui il est. Â»\n\nLes Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.\n\nLa station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.".into(),
+            story: "Vex Korshun: Â« Capitaine, testez le compte du matelot: prenez sa session
+et dites-moi qui il est. Â»
+
+La commande de changement d'utilisateur ouvre une session temporaire
+dans le compte d'un autre membre d'Ã©quipage pour exÃ©cuter une commande.
+
+Â« Prenez la session du matelot et affichez qui il est. Â»
+
+Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
+
+La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+
+Vous ouvrez une session temporaire du compte matelot. Le nom affiché confirme son identité.
+
+« Le compte fonctionne », note Vex Korshun. « Tester une session, c'est vérifier que tout est en ordre. »".into(),
             goal: "Ouvrez une session temporaire du compte matelot et affichez son nom d'utilisateur.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment exécuter une commande en tant qu'autre utilisateur?".into(),
@@ -67,8 +129,23 @@ pub fn missions() -> Vec<Mission> {
             id: "16.5".into(), chapter: 16, chapter_title: "Gestion de l'equipage".into(), act: 4,
             title: "Vos pouvoirs de capitaine".into(),
             description: "Quelles commandes sudo le capitaine peut-il lancer?".into(),
-            story: "Vex Korshun: « Capitaine, pour l'audit de sécurité, listez les commandes\nque votre clé maître (sudo) vous autorise à lancer. »\n\nLa commande sudo avec l'option de liste affiche les droits du capitaine.\n\n« Quels sont vos pouvoirs sudo, Capitaine? »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.\n\nN'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.".into(),
-            goal: "Listez les commandes que vous êtes autorisé à exécuter en sudo.".into(),
+            story: "Vex Korshun: « Capitaine, pour l'audit de sécurité, listez les commandes
+que votre clé maître (sudo) vous autorise à lancer. »
+
+La commande sudo avec l'option de liste affiche les droits du capitaine.
+
+« Quels sont vos pouvoirs sudo, Capitaine? »
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+
+La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
+
+N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
+
+La liste de vos droits sudo s'affiche. Vous pouvez exécuter certaines commandes en tant que capitaine.
+
+« Ces pouvoirs sont une responsabilité », rappelle Vex Korshun. « Utilisez-les avec discernement. »".into(),
+            goal: "Montrez à Vex Korshun les commandes que vous êtes autorisé à exécuter avec les pouvoirs du capitaine.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment lister ses propres droits sudo?".into(),
             required_commands: vec!["sudo -l".into()],

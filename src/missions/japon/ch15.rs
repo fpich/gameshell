@@ -7,7 +7,22 @@ pub fn missions() -> Vec<Mission> {
             id: "15.1".into(), chapter: 15, chapter_title: "Le coffre-fort du donjon".into(), act: 4,
             title: "Verrouiller le coffre".into(),
             description: "Le coffre-fort ne doit être lisible que par vous: 700.".into(),
-            story: "Le capitaine des gardes: « Seigneur, le coffre-fort du donjon contient\nles sceaux. Verrouillez le dossier lui-même: 700. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Le capitaine des gardes: « Seigneur, le coffre-fort du donjon contient
+les sceaux. Verrouillez le dossier lui-même: 700. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Le capitaine des gardes approuve: « Le coffre-fort est verrouillé, Seigneur. Seul vous pouvez y entrer. Les sceaux sont en sûreté. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Mettez les permissions 700 sur /donjon/coffre-fort.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment verrouiller un dossier entier?".into(),
@@ -22,7 +37,22 @@ pub fn missions() -> Vec<Mission> {
             id: "15.2".into(), chapter: 15, chapter_title: "Le coffre-fort du donjon".into(), act: 4,
             title: "Lire les sceaux".into(),
             description: "Lisez le fichier des sceaux du coffre-fort.".into(),
-            story: "Seigneur Hattori: « Seigneur, lisez les sceaux du coffre-fort:\n/donjon/coffre-fort/sceaux.txt. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Seigneur Hattori: « Seigneur, lisez les sceaux du coffre-fort:
+/donjon/coffre-fort/sceaux.txt. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Seigneur Hattori lit les sceaux: « Les sceaux du coffre-fort sont confirmés, Seigneur. Le donjon garde ses secrets. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Lisez le fichier sceaux.txt du coffre-fort.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire les sceaux?".into(),
@@ -37,7 +67,22 @@ pub fn missions() -> Vec<Mission> {
             id: "15.3".into(), chapter: 15, chapter_title: "Le coffre-fort du donjon".into(), act: 4,
             title: "Code du coffre aux archives".into(),
             description: "Le code du coffre est aussi aux archives.".into(),
-            story: "Dame Kaguya: « Seigneur, le code du coffre-fort est aussi consigné dans\n/archives/secret/code_coffre.txt. Lisez-le. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Seigneur, le code du coffre-fort est aussi consigné dans
+/archives/secret/code_coffre.txt. Lisez-le. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya confirme: « Le code du coffre-fort est retrouvé, Seigneur. Les archives secrètes sont fiables. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Lisez code_coffre.txt dans les archives secrètes.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire le code du coffre?".into(),
@@ -52,7 +97,20 @@ pub fn missions() -> Vec<Mission> {
             id: "15.4".into(), chapter: 15, chapter_title: "Le coffre-fort du donjon".into(), act: 4,
             title: "Note au registre des impôts".into(),
             description: "Ajoutez une ligne au registre des impôts.".into(),
-            story: "Dame Kaguya: « Seigneur, ajoutez à la FIN du registre des impôts:\n'Retard: village du haut - 10 koku'. Sans écraser le reste. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.".into(),
+            story: "Dame Kaguya: « Seigneur, ajoutez à la FIN du registre des impôts:
+'Retard: village du haut - 10 koku'. Sans écraser le reste. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Dame Kaguya vérifie le registre: « Le retard du village est ajouté, sans écraser le reste, Seigneur. Les impôts sont à jour. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Ajoutez une ligne à la fin de registre_impots.txt (>>).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter une ligne à un registre?".into(),
@@ -67,7 +125,22 @@ pub fn missions() -> Vec<Mission> {
             id: "15.5".into(), chapter: 15, chapter_title: "Le coffre-fort du donjon".into(), act: 4,
             title: "Fiche du coffre".into(),
             description: "Métadonnées du dossier coffre-fort.".into(),
-            story: "Le capitaine des gardes: « Seigneur, la fiche technique du dossier\n/donjon/coffre-fort: taille, permissions, dates. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Le capitaine des gardes: « Seigneur, la fiche technique du dossier
+/donjon/coffre-fort: taille, permissions, dates. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Le capitaine des gardes consulte la fiche: « Taille, permissions, dates... le coffre-fort est parfaitement documenté, Seigneur. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Affichez les métadonnées du dossier coffre-fort (stat).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les métadonnées d'un dossier?".into(),

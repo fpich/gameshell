@@ -7,7 +7,23 @@ pub fn missions() -> Vec<Mission> {
             id: "15.1".into(), chapter: 15, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Nouvel opérateur".into(),
             description: "Créez le compte 'stagiaire2'.".into(),
-            story: "Rosa: « Un nouveau stagiaire arrive: créez le compte stagiaire2 avec son home. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Rosa: « Un nouveau stagiaire arrive: créez le compte stagiaire2 avec son home. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Rosa approuve: « Le compte stagiaire2 est créé avec son home, netrunner. Le nouveau stagiaire est attendu. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Créez le compte stagiaire2 (sudo useradd -m) + sa fiche (id).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un utilisateur avec home?".into(),
@@ -22,7 +38,23 @@ pub fn missions() -> Vec<Mission> {
             id: "15.2".into(), chapter: 15, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Équipe netops".into(),
             description: "Créez le groupe 'netops2'.".into(),
-            story: "Karl: « Créez le groupe netops2 pour les nouveaux. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Créez le groupe netops2 pour les nouveaux. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl confirme: « Le groupe netops2 est créé, netrunner. Les nouveaux ont leur place. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Créez le groupe netops2 (sudo groupadd).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un groupe?".into(),
@@ -37,7 +69,23 @@ pub fn missions() -> Vec<Mission> {
             id: "15.3".into(), chapter: 15, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Affecter le stagiaire".into(),
             description: "Ajoutez stagiaire2 à netops2.".into(),
-            story: "Karl: « Ajoutez stagiaire2 au groupe netops2. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Ajoutez stagiaire2 au groupe netops2. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl vérifie: « stagiaire2 est bien dans netops2, netrunner. Les droits sont en place. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Ajoutez stagiaire2 à netops2 (sudo usermod -aG).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter à un groupe?".into(),
@@ -52,7 +100,23 @@ pub fn missions() -> Vec<Mission> {
             id: "15.4".into(), chapter: 15, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Vos équipes".into(),
             description: "À quels groupes appartenez-vous?".into(),
-            story: "Rosa: « Vérifiez vos propres groupes pour le contrôle d'accès. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Rosa: « Vérifiez vos propres groupes pour le contrôle d'accès. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Rosa vérifie vos groupes: « Vos groupes sont corrects, netrunner. Le contrôle d'accès est cohérent. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Affichez vos groupes (groups).".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Comment voir ses groupes?".into(),
@@ -67,7 +131,23 @@ pub fn missions() -> Vec<Mission> {
             id: "15.5".into(), chapter: 15, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Session du stagiaire".into(),
             description: "Testez le compte stagiaire2.".into(),
-            story: "Karl: « Prenez la session de stagiaire2 et dites qui il est. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Prenez la session de stagiaire2 et dites qui il est. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl confirme: « La session de stagiaire2 est ouverte, netrunner. L'identité est vérifiée. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Ouvrez une session stagiaire2 (su - stagiaire2 -c whoami).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tester un autre compte?".into(),

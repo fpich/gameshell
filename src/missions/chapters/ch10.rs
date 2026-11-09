@@ -22,7 +22,11 @@ Votre mission: Nira Okoro a besoin de l'adresse IP du vaisseau pour configurer l
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Les coordonnées réseau de la station s'affichent. Nira Okoro les note précieusement.
+
+« Parfait, Capitaine. Je pourrai enfin régler les communications avec l'Andromède. »".into(),
             goal: "Nira Okoro a besoin de nos coordonnées réseau pour régler les communications.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Voir l'IP?".into(),
@@ -52,7 +56,11 @@ Votre mission: Peut-on encore contacter la Terre et l'Andromède? La liaison est
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+La réponse de l'Andromède arrive: la liaison est toujours active. Nira Okoro sourit.
+
+« La ligne est bonne », confirme-t-elle. « Vérifier la connexion, c'est s'assurer que nous ne sommes pas coupés du monde. »".into(),
             goal: "Vérifiez qu'on peut encore contacter l'Andromède.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Tester une connexion?".into(),
@@ -82,7 +90,11 @@ Votre mission: Le pare-feu UFW semble inactif. Sans lui, les pirates entrent lib
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+L'état du pare-feu s'affiche. Vex Korshun vérifie qu'il est bien actif.
+
+« Le pare-feu est notre bouclier », explique-t-il. « Savoir s'il est en marche, c'est savoir si nous sommes protégés. »".into(),
             goal: "Le pare-feu est-il vraiment actif? Vex Korshun en doute. Vérifiez.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Etat du pare-feu?".into(),
@@ -112,7 +124,11 @@ Votre mission: Il faut tester le canal SSH pour vérifier qu'il fonctionne avant
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le canal sécurisé répond: la station se parle à elle-même sans erreur.
+
+« Le test est concluant », note Nira Okoro. « Tester une liaison, c'est vérifier qu'elle fonctionne avant d'en dépendre. »".into(),
             goal: "Testez le canal sécurisé avec la station elle-même.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Se connecter en SSH?".into(),
@@ -142,7 +158,11 @@ Votre mission: Quels ports sont exposés? Les pirates scannent nos défenses ré
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+La liste des ports exposés s'affiche. Plusieurs ports sont ouverts vers l'extérieur.
+
+« Chaque port ouvert est une porte d'entrée potentielle », avertit Draz M'kal. « Il faut savoir lesquels sont nécessaires. »".into(),
             goal: "Quels ports de la station sont exposés? Les pirates scannent nos défenses.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Voir les ports ouverts?".into(),

@@ -7,7 +7,23 @@ pub fn missions() -> Vec<Mission> {
             id: "18.1".into(), chapter: 18, chapter_title: "Audit et isolement".into(), act: 5,
             title: "Caméra sur le coffre".into(),
             description: "Surveillez les accès au coffre-fort réseau.".into(),
-            story: "Karl: « Posez une caméra d'audit sur les écritures de /firewall/coffre. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Posez une caméra d'audit sur les écritures de /firewall/coffre. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl approuve: « La caméra d'audit est posée sur /firewall/coffre, netrunner. Chaque écriture sera tracée. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Installez une règle d'audit (sudo auditctl -w /firewall/coffre -p wa -k reseau).".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment surveiller un dossier sensible?".into(),
@@ -22,8 +38,24 @@ pub fn missions() -> Vec<Mission> {
             id: "18.2".into(), chapter: 18, chapter_title: "Audit et isolement".into(), act: 5,
             title: "Isoler un processus".into(),
             description: "Chroot le processus suspect.".into(),
-            story: "Karl: « Isolez le processus capturé dans une cage: chroot /tmp/jail /bin/bash. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
-            goal: "Lancez un chroot dans /tmp/jail (créé si besoin).".into(),
+            story: "Karl: « Isolez le processus capturé dans une cage: chroot /tmp/jail /bin/bash. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl confirme: « Le processus est isolé dans la cage, netrunner. Il ne peut plus nuire. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            goal: "Isolez un processus dans un environnement confiné /tmp/jail (créé si besoin).".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment isoler un processus?".into(),
             required_commands: vec!["mkdir -p /tmp/jail".into(), "sudo chroot /tmp/jail /bin/bash".into()],
@@ -37,7 +69,23 @@ pub fn missions() -> Vec<Mission> {
             id: "18.3".into(), chapter: 18, chapter_title: "Audit et isolement".into(), act: 5,
             title: "Mise à jour sécurité".into(),
             description: "Mettez à jour les paquets.".into(),
-            story: "Rosa: « Avant la fin de semaine, sudo apt update. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Rosa: « Avant la fin de semaine, sudo apt update. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Rosa approuve: « Les paquets sont à jour, netrunner. Le NOC est protégé contre les failles connues. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Mettez à jour les paquets (sudo apt update).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment mettre à jour?".into(),
@@ -52,7 +100,23 @@ pub fn missions() -> Vec<Mission> {
             id: "18.4".into(), chapter: 18, chapter_title: "Audit et isolement".into(), act: 5,
             title: "Installer un outil IDS".into(),
             description: "Installez snort (paquet).".into(),
-            story: "Karl: « Installez snort pour la détection d'intrusion: sudo apt install -y snort. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Installez snort pour la détection d'intrusion: sudo apt install -y snort. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl confirme: « snort est installé, netrunner. La détection d'intrusion est renforcée. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Installez snort (sudo apt install -y snort).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment installer un paquet?".into(),
@@ -67,7 +131,23 @@ pub fn missions() -> Vec<Mission> {
             id: "18.5".into(), chapter: 18, chapter_title: "Audit et isolement".into(), act: 5,
             title: "Rapport quotidien".into(),
             description: "Lisez le rapport de monitoring.".into(),
-            story: "Rosa: « Lisez le rapport du jour: /monitoring/rapport_jour.txt. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Rosa: « Lisez le rapport du jour: /monitoring/rapport_jour.txt. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Rosa lit le rapport: « Le rapport du jour est clair, netrunner. La situation est sous contrôle. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Lisez rapport_jour.txt.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire le rapport du jour?".into(),

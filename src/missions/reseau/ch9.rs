@@ -7,7 +7,23 @@ pub fn missions() -> Vec<Mission> {
             id: "9.1".into(), chapter: 9, chapter_title: "Logs et intrusions".into(), act: 3,
             title: "Tentatives SSH échouées".into(),
             description: "Quelles attaques dans auth.log?".into(),
-            story: "Karl ouvre auth.log: « Montrez-moi toutes les tentatives 'Failed'. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl ouvre auth.log: « Montrez-moi toutes les tentatives 'Failed'. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl lit les échecs: « Toutes les tentatives 'Failed' sont là, netrunner. Quelqu'un cherche à entrer. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Affichez les lignes 'Failed' de /logs/auth.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment chercher un mot dans un log?".into(),
@@ -22,7 +38,23 @@ pub fn missions() -> Vec<Mission> {
             id: "9.2".into(), chapter: 9, chapter_title: "Logs et intrusions".into(), act: 3,
             title: "Combien d'attaques?".into(),
             description: "Comptez les 'Failed'.".into(),
-            story: "Karl: « Juste le NOMBRE d'échecs. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Juste le NOMBRE d'échecs. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl note le nombre: « Voilà le compte des échecs, netrunner. L'ampleur de l'attaque est claire. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Comptez les lignes 'Failed' (grep -c).".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter les résultats?".into(),
@@ -37,7 +69,23 @@ pub fn missions() -> Vec<Mission> {
             id: "9.3".into(), chapter: 9, chapter_title: "Logs et intrusions".into(), act: 3,
             title: "L'attaquant avec numéros".into(),
             description: "Lignes de 10.0.0.66 numérotées.".into(),
-            story: "Karl: « Quelles lignes parlent de 10.0.0.66? Avec leur NUMÉRO. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Quelles lignes parlent de 10.0.0.66? Avec leur NUMÉRO. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl relève les numéros de ligne: « Les preuves contre 10.0.0.66 sont consignées, netrunner. Le rapport sera solide. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Affichez les lignes de 10.0.0.66 avec numéros (grep -n).".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment afficher les numéros de ligne?".into(),
@@ -52,7 +100,23 @@ pub fn missions() -> Vec<Mission> {
             id: "9.4".into(), chapter: 9, chapter_title: "Logs et intrusions".into(), act: 3,
             title: "Alertes IDS".into(),
             description: "Quelles alertes dans ids.log?".into(),
-            story: "Karl: « L'IDS a levé quelles alertes? Filtrez 'ALERT' dans ids.log. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « L'IDS a levé quelles alertes? Filtrez 'ALERT' dans ids.log. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl approuve: « Toutes les alertes 'ALERT' de l'IDS sont trouvées, netrunner. Rien ne nous échappe. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Affichez les alertes 'ALERT' de /logs/ids.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment filtrer les alertes IDS?".into(),
@@ -67,7 +131,23 @@ pub fn missions() -> Vec<Mission> {
             id: "9.5".into(), chapter: 9, chapter_title: "Logs et intrusions".into(), act: 3,
             title: "Blocages pare-feu".into(),
             description: "Quels paquets le pare-feu a bloqués?".into(),
-            story: "Karl: « Montrez les paquets BLOQUÉS par le pare-feu (UFW BLOCK). »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Montrez les paquets BLOQUÉS par le pare-feu (UFW BLOCK). »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl note les blocages: « Les paquets 'UFW BLOCK' sont listés, netrunner. Le pare-feu fait son travail. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Affichez les lignes 'UFW BLOCK' de firewall.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les paquets bloqués?".into(),

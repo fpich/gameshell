@@ -352,7 +352,7 @@ EOF
 #  SOUTES (cargo)
 # ═══════════════════════════════════════════════
 SO="$V/soutes"
-mkdir -p "$SO"/{cargo,armes,municions,carburant,nourriture,pieces,dechets,secrets}
+mkdir -p "$SO"/{cargo,armes,municions,carburant,nourriture,pieces,dechets,secrets,chroot}
 
 cat > "$SO/manifest.txt" << 'EOF'
 MANIFESTE DES SOUTES - ORION-7
@@ -373,6 +373,15 @@ cat > "$SO/secrets/donnees_classifiees.txt" << 'EOF'
 Projet Stargate: coordonnées trou de ver X-42
 Opération Phoenix: plan d'évacuation
 Flotte pirate Corbeaux Noirs: composition connue
+EOF
+
+cat > "$SO/chroot/README.txt" << 'EOF'
+CELLULE D'ISOLEMENT - CHROOT
+
+Cette cellule permet de contenir un processus dans un environnement
+isolé, sans accès au reste de la station.
+
+Code d'accès à la cellule: FORTRESS
 EOF
 
 # ═══════════════════════════════════════════════

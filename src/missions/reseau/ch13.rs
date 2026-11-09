@@ -7,7 +7,23 @@ pub fn missions() -> Vec<Mission> {
             id: "13.1".into(), chapter: 13, chapter_title: "Pare-feu ufw".into(), act: 4,
             title: "État du pare-feu".into(),
             description: "Le pare-feu est-il actif?".into(),
-            story: "Karl: « Netrunner, vérifiez l'état du pare-feu en détaillé. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Netrunner, vérifiez l'état du pare-feu en détaillé. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl approuve: « L'état du pare-feu est clair, netrunner. Nous savons où nous en sommes. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Affichez l'état détaillé du pare-feu (sudo ufw status verbose).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'état du pare-feu?".into(),
@@ -22,7 +38,23 @@ pub fn missions() -> Vec<Mission> {
             id: "13.2".into(), chapter: 13, chapter_title: "Pare-feu ufw".into(), act: 4,
             title: "Bloquer l'attaquant".into(),
             description: "Bloquez 10.0.0.66 définitivement.".into(),
-            story: "Karl, alarmé: « L'attaquant 10.0.0.66 scanne nos ports. BLOQUEZ-LE. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl, alarmé: « L'attaquant 10.0.0.66 scanne nos ports. BLOQUEZ-LE. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl, soulagé: « 10.0.0.66 est bloqué, netrunner. Le scan est stoppé net. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Bloquez 10.0.0.66 (sudo ufw deny from 10.0.0.66).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment bloquer une IP?".into(),
@@ -37,7 +69,23 @@ pub fn missions() -> Vec<Mission> {
             id: "13.3".into(), chapter: 13, chapter_title: "Pare-feu ufw".into(), act: 4,
             title: "Autoriser HTTPS".into(),
             description: "Autorisez le port 443.".into(),
-            story: "Rosa: « Le portail web a besoin du 443. Autorisez-le. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Rosa: « Le portail web a besoin du 443. Autorisez-le. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Rosa confirme: « Le port 443 est autorisé, netrunner. Le portail web est accessible. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Autorisez le port 443 (sudo ufw allow 443/tcp).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment autoriser un port?".into(),
@@ -52,7 +100,23 @@ pub fn missions() -> Vec<Mission> {
             id: "13.4".into(), chapter: 13, chapter_title: "Pare-feu ufw".into(), act: 4,
             title: "Activer le pare-feu".into(),
             description: "Activez ufw maintenant.".into(),
-            story: "Karl: « Les règles sont prêtes. ACTIVEZ le pare-feu. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Les règles sont prêtes. ACTIVEZ le pare-feu. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl approuve: « Le pare-feu est actif, netrunner. Les règles sont en vigueur. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Activez le pare-feu (sudo ufw enable).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment activer le pare-feu?".into(),
@@ -67,8 +131,24 @@ pub fn missions() -> Vec<Mission> {
             id: "13.5".into(), chapter: 13, chapter_title: "Pare-feu ufw".into(), act: 4,
             title: "Règles du noyau".into(),
             description: "Vérifiez les règles iptables.".into(),
-            story: "Karl: « Au-delà d'ufw, listez les règles du noyau (iptables). »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
-            goal: "Listez les règles iptables (sudo iptables -L -n).".into(),
+            story: "Karl: « Au-delà d'ufw, listez les règles du noyau (iptables). »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl examine les règles: « Les règles iptables sont listées, netrunner. Le noyau est sous contrôle. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            goal: "Listez les règles de filtrage du pare-feu du NOC.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment lister les règles du noyau?".into(),
             required_commands: vec!["sudo iptables -L -n".into()],

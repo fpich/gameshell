@@ -7,7 +7,22 @@ pub fn missions() -> Vec<Mission> {
             id: "8.1".into(), chapter: 8, chapter_title: "Surveillance avancee".into(), act: 2,
             title: "Filtrer les processus SSH".into(),
             description: "Quels processus SSH tournent sur la station?".into(),
-            story: "Vex Korshun surveille les écrans de la sécurité:\n« Capitaine, la liste de tous les processus est longue. Je veux seulement\nceux qui concernent SSH, pour vérifier qu'aucun pirate n'est connecté. »\n\nIl vous faut lister tous les processus PUIS filtrer le résultat pour ne garder\nque les lignes contenant 'ssh'. Deux commandes enchaînées.\n\n« Montrez-moi les processus SSH, Capitaine. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            story: "Vex Korshun surveille les écrans de la sécurité:
+« Capitaine, la liste de tous les processus est longue. Je veux seulement
+ceux qui concernent SSH, pour vérifier qu'aucun pirate n'est connecté. »
+
+Il vous faut lister tous les processus PUIS filtrer le résultat pour ne garder
+que les lignes contenant 'ssh'. Deux commandes enchaînées.
+
+« Montrez-moi les processus SSH, Capitaine. »
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+
+La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
+
+La liste des processus liés à SSH s'affiche. Vous vérifiez que les connexions sont légitimes.
+
+« Chaque processus est une activité du vaisseau », rappelle Tael Rhen. « Savoir filtrer, c'est repérer l'anomalie dans la masse. »".into(),
             goal: "Affichez uniquement les processus liés à SSH parmi tous les processus du vaisseau.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment enchaîner deux commandes pour filtrer un résultat?".into(),
@@ -22,7 +37,23 @@ pub fn missions() -> Vec<Mission> {
             id: "8.2".into(), chapter: 8, chapter_title: "Surveillance avancee".into(), act: 2,
             title: "Processus par nom".into(),
             description: "Lister les processus 'bash' avec leur commande complète.".into(),
-            story: "Tael Rhen: Â« Capitaine, je cherche un processus prÃ©cis. Donnez-moi la liste\ndes processus dont le nom contient 'bash', avec la commande complÃ¨te. Â»\n\nLa commande de recherche par nom de processus affiche le PID et la commande\nde chaque processus correspondant.\n\nÂ« Quels processus bash tournent en ce moment? Â»\n\nLes Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.\n\nLa station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.".into(),
+            story: "Tael Rhen: Â« Capitaine, je cherche un processus prÃ©cis. Donnez-moi la liste
+des processus dont le nom contient 'bash', avec la commande complÃ¨te. Â»
+
+La commande de recherche par nom de processus affiche le PID et la commande
+de chaque processus correspondant.
+
+Â« Quels processus bash tournent en ce moment? Â»
+
+Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
+
+La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+
+Vous repérez les processus liés à bash. Certains semblent anormaux.
+
+Draz M'kal s'approche: « Un processus inattendu peut cacher un pirate. Votre vigilance fait la différence. »".into(),
             goal: "Listez tous les processus dont le nom contient 'bash'.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lister les processus par nom?".into(),
@@ -37,7 +68,22 @@ pub fn missions() -> Vec<Mission> {
             id: "8.3".into(), chapter: 8, chapter_title: "Surveillance avancee".into(), act: 2,
             title: "Surveillance temps reel".into(),
             description: "Tael Rhen veut un aperçu instantané des jauges du vaisseau.".into(),
-            story: "Tael Rhen, depuis la salle des machines: « Capitaine, j'ai besoin d'un cliché\ninstantané de la salle des machines: CPU, mémoire, processus les plus gourmands.\nPas de surveillance continue, juste un APERÇU. »\n\nL'outil de surveillance en temps réel du vaisseau affiche ces jauges.\nEn mode non interactif, une seule image suffit.\n\n« Donnez-moi un aperçu des ressources, Capitaine. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            story: "Tael Rhen, depuis la salle des machines: « Capitaine, j'ai besoin d'un cliché
+instantané de la salle des machines: CPU, mémoire, processus les plus gourmands.
+Pas de surveillance continue, juste un APERÇU. »
+
+L'outil de surveillance en temps réel du vaisseau affiche ces jauges.
+En mode non interactif, une seule image suffit.
+
+« Donnez-moi un aperçu des ressources, Capitaine. »
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+
+La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
+
+L'aperçu des ressources s'affiche: CPU, mémoire, processus gourmands.
+
+« Un cliché instantané, c'est souvent suffisant pour repérer un problème », note Tael Rhen. « La surveillance, c'est l'art de lire ces jauges. »".into(),
             goal: "Affichez un aperçu instantané de l'utilisation CPU/mémoire des processus.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment surveiller en direct les ressources du vaisseau?".into(),
@@ -52,7 +98,23 @@ pub fn missions() -> Vec<Mission> {
             id: "8.4".into(), chapter: 8, chapter_title: "Surveillance avancee".into(), act: 2,
             title: "Tuer un processus pirate".into(),
             description: "Un processus pirate (PID 4242) squatte la salle des machines.".into(),
-            story: "Alerte de Vex Korshun: Â« Capitaine! Un processus inconnu, PID 4242, tourne\nsur la station et consomme toute la mÃ©moire. C'est probablement un implant\ndes Corbeaux Noirs! Â»\n\nIl vous faut couper son alimentation Ã©lectrique, de force.\n\nÂ« Tuez le processus 4242, Capitaine. ImmÃ©diatement. Â»\n\nLes Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.\n\nLa station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.".into(),
+            story: "Alerte de Vex Korshun: Â« Capitaine! Un processus inconnu, PID 4242, tourne
+sur la station et consomme toute la mÃ©moire. C'est probablement un implant
+des Corbeaux Noirs! Â»
+
+Il vous faut couper son alimentation Ã©lectrique, de force.
+
+Â« Tuez le processus 4242, Capitaine. ImmÃ©diatement. Â»
+
+Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
+
+La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+
+Le processus pirate PID 4242 est éliminé. Draz M'kal pousse un soupir de soulagement.
+
+« Bien joué, Capitaine. Un processus malveillant neutralisé, c'est une menace de moins à bord. »".into(),
             goal: "Terminez de force le processus pirate portant le PID 4242.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tuer un processus par son PID?".into(),
@@ -67,7 +129,22 @@ pub fn missions() -> Vec<Mission> {
             id: "8.5".into(), chapter: 8, chapter_title: "Surveillance avancee".into(), act: 2,
             title: "Tache de fond prioritaire".into(),
             description: "La surveillance des soutes ne doit pas ralentir le vaisseau.".into(),
-            story: "Tael Rhen: « Capitaine, lancez la surveillance des soutes en tâche de fond,\nmais elle ne doit PAS ralentir les systèmes de défense. Donnez-lui une\npriorité FAIBLE. »\n\nIl vous faut lancer une commande avec une priorité basse: le vaisseau\ntraitera cette tâche quand il aura du temps libre.\n\n« Lancez le pesage des soutes en priorité basse, Capitaine. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            story: "Tael Rhen: « Capitaine, lancez la surveillance des soutes en tâche de fond,
+mais elle ne doit PAS ralentir les systèmes de défense. Donnez-lui une
+priorité FAIBLE. »
+
+Il vous faut lancer une commande avec une priorité basse: le vaisseau
+traitera cette tâche quand il aura du temps libre.
+
+« Lancez le pesage des soutes en priorité basse, Capitaine. »
+
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+
+La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
+
+Le pesage des soutes se lance en tâche de fond, sans gêner les autres systèmes.
+
+« Priorité basse, c'est de la politesse système », sourit Tael Rhen. « Les tâches importantes passent d'abord, les autres attendent leur tour. »".into(),
             goal: "Lancez la commande de pesage des soutes avec une priorité basse.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lancer une commande avec une priorité basse?".into(),

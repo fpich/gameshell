@@ -7,7 +7,22 @@ pub fn missions() -> Vec<Mission> {
             id: "8.1".into(), chapter: 8, chapter_title: "Navigation et disques".into(), act: 2,
             title: "Priorité basse".into(),
             description: "La surveillance des greniers ne doit pas gêner la forge.".into(),
-            story: "Le forgeron: « Seigneur, lancez le pesage des greniers en tâche de fond,\npriorité FAIBLE. La forge d'abord! »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Le forgeron: « Seigneur, lancez le pesage des greniers en tâche de fond,
+priorité FAIBLE. La forge d'abord! »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Le forgeron approuve: « Le pesage tourne en tâche de fond, à basse priorité, Seigneur. La forge garde toute sa puissance. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Lancez le pesage des greniers avec priorité basse (nice -n 19).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lancer une commande en priorité basse?".into(),
@@ -22,7 +37,22 @@ pub fn missions() -> Vec<Mission> {
             id: "8.2".into(), chapter: 8, chapter_title: "Navigation et disques".into(), act: 2,
             title: "Espace des réserves".into(),
             description: "Quelle place reste sur les réserves?".into(),
-            story: "Dame Kaguya: « Seigneur, quelle place disque reste-t-il sur les\nréserves du château? Taille lisible. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Seigneur, quelle place disque reste-t-il sur les
+réserves du château? Taille lisible. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya consulte l'espace: « Voilà la place restante, Seigneur. Les réserves du château sont saines. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Affichez l'espace disque restant (df -h).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'espace disque restant?".into(),
@@ -37,7 +67,22 @@ pub fn missions() -> Vec<Mission> {
             id: "8.3".into(), chapter: 8, chapter_title: "Navigation et disques".into(), act: 2,
             title: "Taille par grenier".into(),
             description: "Taille de chaque grenier.".into(),
-            story: "Le marchand Genji: « Seigneur, pesez chaque grenier UN PAR UN:\nriz, blé, saké, miso. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Le marchand Genji: « Seigneur, pesez chaque grenier UN PAR UN:
+riz, blé, saké, miso. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Le marchand Genji pèse chaque grenier: « Riz, blé, saké, miso... chaque réserve est mesurée, Seigneur. Le commerce sera juste. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Affichez la taille de chaque sous-dossier de /greniers.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir la taille de chaque sous-dossier?".into(),
@@ -46,13 +91,28 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            skill: Some(Skill { command: "du -sh".into(), name: "du -sh".into(), description: "du -sh — taille d'un dossier".into() }),
+            skill: Some(Skill { command: "du".into(), name: "du".into(), description: "du — taille des fichiers et dossiers".into() }),
         },
         Mission {
             id: "8.4".into(), chapter: 8, chapter_title: "Navigation et disques".into(), act: 2,
             title: "Remonter d'un niveau".into(),
             description: "Depuis /archives/lettres, revenez à la racine.".into(),
-            story: "Dame Kaguya: « Seigneur, vous êtes dans /archives/lettres. Revenez à\nla racine du château avec un chemin relatif. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Seigneur, vous êtes dans /archives/lettres. Revenez à
+la racine du château avec un chemin relatif. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya approuve: « Vous voilà à la racine du château, Seigneur. Un chemin relatif bien maîtrisé. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Depuis /archives/lettres, rejoignez la racine / du château.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment remonter dans l'arborescence?".into(),
@@ -67,7 +127,22 @@ pub fn missions() -> Vec<Mission> {
             id: "8.5".into(), chapter: 8, chapter_title: "Navigation et disques".into(), act: 2,
             title: "Le home du seigneur".into(),
             description: "Revenez dans vos quartiers avec ~.".into(),
-            story: "Après toutes ces courses, Dame Kaguya vous rappelle: « Seigneur,\nrevenez dans VOS quartiers avec le raccourci ~. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Après toutes ces courses, Dame Kaguya vous rappelle: « Seigneur,
+revenez dans VOS quartiers avec le raccourci ~. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya sourit: « Vous êtes de retour dans vos quartiers, Seigneur. Le raccourci ~ est bien pratique. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Revenez dans vos quartiers (~) et affichez votre position.".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Comment revenir directement dans son home?".into(),

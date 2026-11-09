@@ -7,7 +7,23 @@ pub fn missions() -> Vec<Mission> {
             id: "19.1".into(), chapter: 19, chapter_title: "Rapport d'incident".into(), act: 5,
             title: "Rapport complet".into(),
             description: "Rédigez le rapport d'incident.".into(),
-            story: "Karl: « Rédigez rapport_final.txt à votre poste: les 'Failed' PUIS les ALERT IDS, à la suite. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Rédigez rapport_final.txt à votre poste: les 'Failed' PUIS les ALERT IDS, à la suite. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl approuve: « rapport_final.txt est rédigé, netrunner. Les attaques puis les alertes IDS, tout y est. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Créez rapport_final.txt avec attaques puis alertes IDS.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment composer un rapport multi-sources?".into(),
@@ -22,7 +38,23 @@ pub fn missions() -> Vec<Mission> {
             id: "19.2".into(), chapter: 19, chapter_title: "Rapport d'incident".into(), act: 5,
             title: "Archiver les preuves".into(),
             description: "Archivez les logs pour le SOC.".into(),
-            story: "Karl: « Archivez les logs dans /archives/preuves.tar.gz pour le SOC. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Archivez les logs dans /archives/preuves.tar.gz pour le SOC. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl confirme: « preuves.tar.gz est créé, netrunner. Le SOC recevra les logs. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Créez /archives/preuves.tar.gz contenant /logs/.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment archiver les preuves?".into(),
@@ -31,13 +63,29 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "tar czf".into(), name: "tar czf".into(), description: "tar czf — archive des preuves".into() }),
+            skill: Some(Skill { command: "tar".into(), name: "tar".into(), description: "tar — crée et lit des archives".into() }),
         },
         Mission {
             id: "19.3".into(), chapter: 19, chapter_title: "Rapport d'incident".into(), act: 5,
             title: "Backup config durcie".into(),
             description: "Copiez la nouvelle sshd_config aux archives.".into(),
-            story: "Rosa: « Copiez la sshd_config durcie dans /archives/configs/. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Rosa: « Copiez la sshd_config durcie dans /archives/configs/. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Rosa vérifie: « La sshd_config durcie est copiée dans les archives, netrunner. La référence est conservée. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Copiez sshd_config vers /archives/configs/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment backuper la config durcie?".into(),
@@ -52,7 +100,23 @@ pub fn missions() -> Vec<Mission> {
             id: "19.4".into(), chapter: 19, chapter_title: "Rapport d'incident".into(), act: 5,
             title: "Compter les attaques du jour".into(),
             description: "Nombre total de tentatives échouées.".into(),
-            story: "Karl: « Nombre total de 'Failed' aujourd'hui dans auth.log. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Nombre total de 'Failed' aujourd'hui dans auth.log. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl note le nombre: « Voilà le total des 'Failed' aujourd'hui, netrunner. L'ampleur est mesurée. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Comptez toutes les attaques (grep -c Failed auth.log).".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter toutes les attaques?".into(),
@@ -67,7 +131,23 @@ pub fn missions() -> Vec<Mission> {
             id: "19.5".into(), chapter: 19, chapter_title: "Rapport d'incident".into(), act: 5,
             title: "IPs bloquées aujourd'hui".into(),
             description: "Comptez les UFW BLOCK.".into(),
-            story: "Karl: « Combien de paquets bloqués aujourd'hui? (UFW BLOCK) »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Combien de paquets bloqués aujourd'hui? (UFW BLOCK) »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl note le compte: « Voilà les paquets bloqués aujourd'hui, netrunner. Le pare-feu a bien travaillé. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Comptez les paquets bloqués (grep -c 'UFW BLOCK' firewall.log).".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter les paquets bloqués?".into(),

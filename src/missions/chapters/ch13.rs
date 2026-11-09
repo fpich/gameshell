@@ -22,7 +22,11 @@ Votre mission: Avant la contre-attaque, il faut archiver tous les logs comme pre
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Les logs sont archivés en une seule archive. Les preuves sont désormais en sécurité.
+
+« Une sauvegarde, c'est une assurance », explique Tael Rhen. « Si les originaux sont perdus, la copie nous sauve. »".into(),
             goal: "Avant la contre-attaque, archivez tous les logs comme preuves.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Creer une archive?".into(),
@@ -52,7 +56,11 @@ Votre mission: L'Andromède demande les rapports au format ZIP pour compatibilit
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Les rapports sont compressés au format ZIP. L'Andromède pourra les lire.
+
+« Le format ZIP est universel », note Nira Okoro. « C'est le langage commun des vaisseaux. »".into(),
             goal: "L'Andromède demande vos rapports au format ZIP. Compressez-les.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Faire un ZIP?".into(),
@@ -82,7 +90,11 @@ Votre mission: Avant d'archiver, vérifiez qu'il reste assez d'espace dans les s
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+L'espace disque s'affiche. Les soutes de données ont encore de la place pour archiver.
+
+« Bien », approuve Tael Rhen. « Nous savons combien de données nous pouvons encore stocker. »".into(),
             goal: "Vérifiez qu'il reste assez de place dans les soutes avant d'archiver.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Voir l'espace disque?".into(),
@@ -112,7 +124,11 @@ Votre mission: Quelle soute prend le plus de place? Il faut le savoir pour optim
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le pesage des soutes s'affiche. Vous repérez la soute la plus pleine.
+
+« Celle-là est saturée », note Tael Rhen. « Comparer les tailles, c'est gérer l'espace intelligemment. »".into(),
             goal: "Quelle soute est la plus pleine? Pesmez-les.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Taille des dossiers?".into(),
@@ -144,7 +160,11 @@ Votre mission: Quels disques sont physiquement connectés à la station?
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+La liste des disques connectés s'affiche. Vous voyez les volumes de stockage de la station.
+
+« Chaque disque est un réservoir de données », explique Tael Rhen. « Savoir lesquels sont connectés, c'est connaître nos capacités. »".into(),
             goal: "Quels disques sont physiquement connectés à la station?".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Voir les partitions?".into(),

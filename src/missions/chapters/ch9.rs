@@ -22,7 +22,11 @@ Votre mission: Vex Korshun veut le nombre exact de tentatives d'intrusion SSH po
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le compteur affiche le nombre de tentatives d'intrusion. Le chiffre est alarmant.
+
+« Autant d'attaques en si peu de temps », murmure Draz M'kal. « Nous devons renforcer nos défenses. »".into(),
             goal: "Vex Korshun veut savoir combien de fois les pirates ont tenté de rentrer. Comptez dans les logs.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Compter les occurrences?".into(),
@@ -52,7 +56,11 @@ Votre mission: Quels fichiers de logs existent sur le vaisseau? Où chercher les
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+L'inventaire des logs s'affiche. Vous savez désormais où sont stockées toutes les traces du vaisseau.
+
+« Les logs sont la mémoire de la station », explique Draz M'kal. « Savoir où ils sont, c'est pouvoir les consulter. »".into(),
             goal: "Où sont stockés tous les logs de la station? Faites l'inventaire.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Chercher par extension?".into(),
@@ -82,7 +90,11 @@ Votre mission: Il faut combiner plusieurs outils pour analyser rapidement la sit
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Vous combinez vos outils: les processus SSH et les IPs bloquées s'affichent côte à côte.
+
+« Bien vu », approuve Draz M'kal. « Combiner les sources, c'est croiser les indices pour trouver la vérité. »".into(),
             goal: "Combinez vos outils pour voir à la fois les processus SSH et les IPs bloquées.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Chainer des commandes?".into(),
@@ -112,7 +124,11 @@ Votre mission: Toutes les traces des pirates doivent être consignées dans un r
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le rapport des tentatives d'intrusion est consigné. Chaque attaque y est répertoriée.
+
+« Un rapport clair, c'est une preuve exploitable », note Draz M'kal. « La documentation est notre arme. »".into(),
             goal: "Toutes les tentatives d'intrusion doivent être consignées dans un rapport.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Sauvegarder dans un fichier?".into(),
@@ -142,7 +158,11 @@ Votre mission: Le rapport doit être complété avec les IPs bloquées par le pa
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Les IPs bloquées par le pare-feu s'ajoutent au rapport. Le dossier est complet.
+
+« Excellent », conclut Draz M'kal. « Toutes les traces sont réunies. Nous avons maintenant une vision complète de l'attaque. »".into(),
             goal: "Ajoutez aussi les IPs que le pare-feu a bloquées au même rapport.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Ajouter a un fichier?".into(),

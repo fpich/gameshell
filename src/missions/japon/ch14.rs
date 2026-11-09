@@ -7,7 +7,22 @@ pub fn missions() -> Vec<Mission> {
             id: "14.1".into(), chapter: 14, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Mot de passe du samouraï".into(),
             description: "Changez le mot de passe de samourai2.".into(),
-            story: "Seigneur Hattori: « Seigneur, changez le mot de passe de samourai2\npour sécuriser son compte. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Seigneur Hattori: « Seigneur, changez le mot de passe de samourai2
+pour sécuriser son compte. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Seigneur Hattori approuve: « Le mot de passe de samourai2 est changé, Seigneur. Son compte est sécurisé. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Changez le mot de passe de samourai2 (passwd).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer un mot de passe?".into(),
@@ -22,7 +37,22 @@ pub fn missions() -> Vec<Mission> {
             id: "14.2".into(), chapter: 14, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Session du samouraï".into(),
             description: "Testez le compte samourai2.".into(),
-            story: "Le capitaine des gardes: « Seigneur, prenez la session de samourai2\net dites qui il est. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Le capitaine des gardes: « Seigneur, prenez la session de samourai2
+et dites qui il est. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Le capitaine des gardes confirme: « C'est bien samourai2, Seigneur. La session est ouverte et vérifiée. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Ouvrez une session samourai2 et affichez qui il est (su - ... -c whoami).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment exécuter une commande en tant qu'autre utilisateur?".into(),
@@ -37,8 +67,22 @@ pub fn missions() -> Vec<Mission> {
             id: "14.3".into(), chapter: 14, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Vos pouvoirs".into(),
             description: "Quelles commandes sudo pouvez-vous lancer?".into(),
-            story: "Dame Kaguya: « Seigneur, pour l'audit, listez vos droits sudo. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
-            goal: "Listez vos droits sudo (sudo -l).".into(),
+            story: "Dame Kaguya: « Seigneur, pour l'audit, listez vos droits sudo. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya consulte vos droits: « Vos privilèges sudo sont listés, Seigneur. L'audit est en ordre. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+            goal: "Listez les commandes que vous êtes autorisé à exécuter avec les pouvoirs du seigneur.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment lister ses droits sudo?".into(),
             required_commands: vec!["sudo -l".into()],
@@ -52,8 +96,23 @@ pub fn missions() -> Vec<Mission> {
             id: "14.4".into(), chapter: 14, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Clé maître".into(),
             description: "Prouvez que sudo vous reconnaît comme seigneur.".into(),
-            story: "Le capitaine des gardes: « Seigneur, prouvez que vous avez la clé maître:\nexécutez whoami en sudo. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
-            goal: "Exécutez whoami en sudo (sudo whoami).".into(),
+            story: "Le capitaine des gardes: « Seigneur, prouvez que vous avez la clé maître:
+exécutez whoami en sudo. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Le capitaine des gardes salue: « La clé maître fonctionne, Seigneur. Vous avez bien les pleins pouvoirs. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+            goal: "Prouvez que vous disposez des pouvoirs du seigneur en exécutant une commande d'identité.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment exécuter une commande en root?".into(),
             required_commands: vec!["sudo whoami".into()],
@@ -67,7 +126,22 @@ pub fn missions() -> Vec<Mission> {
             id: "14.5".into(), chapter: 14, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Transférer un registre".into(),
             description: "Le registre des impôts appartient au seigneur.".into(),
-            story: "Pour l'audit, le registre des impôts doit vous appartenir.\n« Transférez /salle-du-trone/registres/registre_impots.txt à votre compte. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Pour l'audit, le registre des impôts doit vous appartenir.
+« Transférez /salle-du-trone/registres/registre_impots.txt à votre compte. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya confirme: « Le registre des impôts vous appartient, Seigneur. L'audit sera sans reproche. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Changez le propriétaire du registre des impôts (chown).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer le propriétaire d'un fichier?".into(),

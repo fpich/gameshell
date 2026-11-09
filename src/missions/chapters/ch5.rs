@@ -22,7 +22,11 @@ Votre mission: Vex Korshun vous explique que chaque fichier du vaisseau a des pe
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Vex Korshun examine la liste des permissions: « Bien, Capitaine. Chaque fichier a un propriétaire et des droits. Comprendre ces droits, c'est la base de toute sécurité. »
+
+Vous notez dans votre carnet les permissions de votre cabine. Savoir qui peut lire, écrire ou exécuter chaque fichier sera votre premier réflexe de défense.".into(),
             goal: "Vex Korshun vous explique que chaque fichier a des permissions. Regardez celles de votre cabine.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Que signifient rwx?".into(),
@@ -52,7 +56,11 @@ Votre mission: Votre code personnel FALCON-9 est dans un fichier lisible par tou
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Votre code personnel FALCON-9 est désormais lisible par vous seul. Vex Korshun approuve: « Parfait. Un secret doit rester secret. »
+
+Vous comprenez que protéger un fichier, c'est en restreindre l'accès. Les pirates ne pourront plus lire votre code.".into(),
             goal: "Votre code personnel ne doit être lisible que par vous. Protégez ce fichier.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Restreindre au proprio seul?".into(),
@@ -82,7 +90,11 @@ Votre mission: Le plan de défense plan_defense.sh ne peut pas s'exécuter. Il l
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le plan de défense plan_defense.sh peut enfin s'exécuter. Vex Korshun hoche la tête: « Bien joué. Un plan inutilisable ne sert à rien. »
+
+Vous réalisez qu'un fichier peut être lisible sans être exécutable. Savoir ajuster les droits, c'est rendre chaque outil opérationnel.".into(),
             goal: "Le plan de défense ne peut pas se lancer. Il lui manque quelque chose. Corrigez.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter +x?".into(),
@@ -112,7 +124,11 @@ Votre mission: Un fichier appartient à root. Vous devez en prendre la responsab
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le fichier appartient désormais à votre nom. Vex Korshun vérifie: « C'est corrigé. La propriété doit refléter la réalité des responsabilités. »
+
+Vous comprenez que chaque fichier a un propriétaire, et que cette attribution est essentielle pour l'audit et la sécurité.".into(),
             goal: "Un fichier appartient encore à l'ancien admin. Transférez-le à votre nom.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer le proprio?".into(),
@@ -142,7 +158,11 @@ Votre mission: Pour détecter une intrusion, comparez les dates de modification 
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Vous comparez les dates de modification des fichiers de sécurité. Une date semble anormale.
+
+« Ces métadonnées racontent l'histoire du fichier », explique Tael Rhen. « Une date suspecte peut révéler une intrusion. »".into(),
             goal: "Comparez les dates de modification des fichiers de sécurité pour détecter une intrusion.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "stat vs ls -l?".into(),

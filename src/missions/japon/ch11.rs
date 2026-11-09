@@ -7,7 +7,20 @@ pub fn missions() -> Vec<Mission> {
             id: "11.1".into(), chapter: 11, chapter_title: "Combiner les commandes".into(), act: 3,
             title: "Attaques filtrées".into(),
             description: "Combien de 'Failed' venant de 10.0.0.66?".into(),
-            story: "Hanzō: « Seigneur, combinez: 'Failed' dans auth.log, puis seulement les\nlignes de 10.0.0.66, puis COMPTEZ. Trois commandes enchaînées. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.".into(),
+            story: "Hanzō: « Seigneur, combinez: 'Failed' dans auth.log, puis seulement les
+lignes de 10.0.0.66, puis COMPTEZ. Trois commandes enchaînées. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Hanzō note le compte: « Voilà le nombre d'attaques de l'IP espion, Seigneur. La menace est mesurée. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Comptez les attaques venant de 10.0.0.66 (grep | grep | wc).".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment enchaîner trois commandes?".into(),
@@ -22,7 +35,22 @@ pub fn missions() -> Vec<Mission> {
             id: "11.2".into(), chapter: 11, chapter_title: "Combiner les commandes".into(), act: 3,
             title: "Rapport d'attaques".into(),
             description: "Écrivez les attaques dans rapport.txt.".into(),
-            story: "Dame Kaguya: « Seigneur, enregistrez toutes les lignes 'Failed' dans\nrapport.txt sur votre bureau. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Seigneur, enregistrez toutes les lignes 'Failed' dans
+rapport.txt sur votre bureau. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya vérifie rapport.txt: « Les échecs sont consignés, Seigneur. Le rapport est prêt. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Enregistrez les lignes 'Failed' dans rapport.txt (>).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment enregistrer un résultat dans un fichier?".into(),
@@ -37,7 +65,22 @@ pub fn missions() -> Vec<Mission> {
             id: "11.3".into(), chapter: 11, chapter_title: "Combiner les commandes".into(), act: 3,
             title: "Ajouter au rapport".into(),
             description: "Ajoutez la fin du syslog au rapport.".into(),
-            story: "Dame Kaguya: « Ajoutez maintenant les dernières lignes du syslog\nÀ LA FIN de rapport.txt, sans écraser. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Ajoutez maintenant les dernières lignes du syslog
+À LA FIN de rapport.txt, sans écraser. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya relit rapport.txt: « Les dernières lignes du syslog sont ajoutées, sans rien écraser, Seigneur. Le rapport est complet. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Ajoutez la fin du syslog à rapport.txt (>>).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter à la fin d'un fichier?".into(),
@@ -52,7 +95,22 @@ pub fn missions() -> Vec<Mission> {
             id: "11.4".into(), chapter: 11, chapter_title: "Combiner les commandes".into(), act: 3,
             title: "Compter les processus filtrés".into(),
             description: "Combien de processus 'garde'?".into(),
-            story: "Le capitaine des gardes: « Seigneur, comptez les processus qui parlent\nde 'garde': ps, filtre, compte. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Le capitaine des gardes: « Seigneur, comptez les processus qui parlent
+de 'garde': ps, filtre, compte. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Le capitaine des gardes note le compte: « Voilà le nombre de processus de garde, Seigneur. La surveillance est en ordre. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Comptez les processus contenant 'garde' (ps | grep | wc).".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter un résultat filtré?".into(),
@@ -67,7 +125,22 @@ pub fn missions() -> Vec<Mission> {
             id: "11.5".into(), chapter: 11, chapter_title: "Combiner les commandes".into(), act: 3,
             title: "Rapport complet".into(),
             description: "Rapport final: attaques + visiteurs.".into(),
-            story: "Dame Kaguya: « Seigneur, rapport final dans rapport_final.txt: les\n'Failed' PUIS le registre des visiteurs, à la suite. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Seigneur, rapport final dans rapport_final.txt: les
+'Failed' PUIS le registre des visiteurs, à la suite. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya lit rapport_final.txt: « Les attaques puis les visiteurs, à la suite, Seigneur. Le rapport final est impeccable. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Créez rapport_final.txt avec les attaques puis les visiteurs.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment composer un rapport multi-sources?".into(),
@@ -76,7 +149,7 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            skill: Some(Skill { command: ">".into(), name: ">".into(), description: "> — compose le rapport".into() }),
+            skill: Some(Skill { command: "grep".into(), name: "grep".into(), description: "grep — recherche du texte dans un fichier".into() }),
         },
     ]
 }

@@ -22,7 +22,11 @@ Votre mission: Les pirates reviennent sans cesse. fail2ban les bannira automatiq
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le videur automatique est en place. Les adresses malveillantes seront bannies.
+
+« Le videur fait son travail », note Draz M'kal. « Mais il faut vérifier qu'il ne bannit pas des alliés par erreur. »".into(),
             goal: "Les pirates reviennent sans cesse. Il faut un videur automatique.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Automatiser le bannissement?".into(),
@@ -52,7 +56,11 @@ Votre mission: SSH est vulnérable: root autorisé + mots de passe autorisés = 
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le login root est interdit et les mots de passe sont désactivés en SSH.
+
+« Bien », approuve Draz M'kal. « Des failles de moins. Chaque ligne durcie renforce nos défenses. »".into(),
             goal: "Fermez la porte aux attaques: plus de root, plus de mots de passe en SSH.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Securiser SSH?".into(),
@@ -82,7 +90,11 @@ Votre mission: Au-delà d'UFW, iptables permet de limiter le débit de connexion
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Les connexions SSH sont limitées au strict minimum par le pare-feu noyau.
+
+« Le noyau filtre chaque paquet », explique Draz M'kal. « Ces règles sont la dernière barrière. »".into(),
             goal: "Limitez les connexions SSH au strict minimum avec le pare-feu noyau.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Limiter les connexions?".into(),
@@ -112,7 +124,11 @@ Votre mission: Si un pirate crée un compte, il faut le détecter. Auditez passw
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+La surveillance des comptes est en place. Chaque création sera tracée.
+
+« La surveillance est notre meilleure alliée », conclut Draz M'kal. « Si un pirate crée un compte, nous le saurons. »".into(),
             goal: "Si un pirate crée un compte, il faut le savoir. Mettez en place la surveillance.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Tracer les modifications?".into(),
@@ -142,7 +158,11 @@ Votre mission: Dernière barrière: isolez un processus dans un chroot pour le c
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le processus pirate est enfermé dans une cellule d'isolement. Il ne peut plus nuire.
+
+« Dernière barrière franchie », conclut Draz M'kal. « Le vaisseau est désormais durci contre les intrusions. »".into(),
             goal: "Dernière barrière: enfermez un processus dans une cellule d'isolement.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Isoler un processus?".into(),

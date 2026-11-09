@@ -7,7 +7,23 @@ pub fn missions() -> Vec<Mission> {
             id: "17.1".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Config SSH actuelle".into(),
             description: "Lisez la config SSH du cluster.".into(),
-            story: "Karl: « Lisez la config SSH actuelle: /configs/sshd/sshd_config. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Lisez la config SSH actuelle: /configs/sshd/sshd_config. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl lit la config: « La config SSH actuelle est claire, netrunner. Nous allons pouvoir la durcir. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Lisez sshd_config.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire la config SSH?".into(),
@@ -22,7 +38,23 @@ pub fn missions() -> Vec<Mission> {
             id: "17.2".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Interdire root".into(),
             description: "Ajoutez 'PermitRootLogin no' à sshd_config.".into(),
-            story: "Karl: « PermitRootLogin yes est une faille. Ajoutez 'PermitRootLogin no' à la FIN. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « PermitRootLogin yes est une faille. Ajoutez 'PermitRootLogin no' à la FIN. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl approuve: « PermitRootLogin no est ajouté, netrunner. La faille est colmatée. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Ajoutez 'PermitRootLogin no' à la fin de sshd_config.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter une ligne de config?".into(),
@@ -37,7 +69,23 @@ pub fn missions() -> Vec<Mission> {
             id: "17.3".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Interdire les mots de passe".into(),
             description: "Ajoutez 'PasswordAuthentication no'.".into(),
-            story: "Karl: « Passez aussi PasswordAuthentication à no (clés SSH uniquement). »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Karl: « Passez aussi PasswordAuthentication à no (clés SSH uniquement). »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl confirme: « PasswordAuthentication no est en place, netrunner. Seules les clés SSH sont acceptées. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Ajoutez 'PasswordAuthentication no' à sshd_config.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment durcir l'authentification?".into(),
@@ -52,8 +100,24 @@ pub fn missions() -> Vec<Mission> {
             id: "17.4".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Redémarrer SSH".into(),
             description: "Appliquez la config.".into(),
-            story: "Karl: « Redémarrez ssh pour appliquer le durcissement. »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
-            goal: "Redémarrez ssh (sudo systemctl restart ssh).".into(),
+            story: "Karl: « Redémarrez ssh pour appliquer le durcissement. »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Karl vérifie: « ssh est redémarré, netrunner. Le durcissement est appliqué. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            goal: "Redémarrez le service SSH pour appliquer la nouvelle configuration.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment appliquer la nouvelle config?".into(),
             required_commands: vec!["sudo systemctl restart ssh".into()],
@@ -61,13 +125,29 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            skill: Some(Skill { command: "systemctl restart".into(), name: "systemctl restart".into(), description: "systemctl restart — applique la config".into() }),
+            skill: Some(Skill { command: "sudo".into(), name: "sudo".into(), description: "sudo — exécute une commande avec les pouvoirs du netrunner".into() }),
         },
         Mission {
             id: "17.5".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Connexion SSH au cluster".into(),
             description: "Testez un tunnel SSH vers nexus-02.".into(),
-            story: "Rosa: « Testez un tunnel chiffré vers nexus-02 (10.0.0.2). »\n\nUne vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.\n\nLe NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.\n\nN'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.\n\nL'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.\n\nLe pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.\n\nChaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.".into(),
+            story: "Rosa: « Testez un tunnel chiffré vers nexus-02 (10.0.0.2). »
+
+Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+
+Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+
+N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+
+L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
+
+Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
+
+Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
+
+Rosa confirme: « Le tunnel chiffré vers nexus-02 est établi, netrunner. La liaison est sécurisée. »
+
+Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
             goal: "Ouvrez une connexion SSH vers 10.0.0.2 (ssh netrunner@10.0.0.2).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment se connecter en SSH à un serveur?".into(),

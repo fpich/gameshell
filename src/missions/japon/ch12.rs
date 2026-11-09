@@ -7,7 +7,22 @@ pub fn missions() -> Vec<Mission> {
             id: "12.1".into(), chapter: 12, chapter_title: "Archives du domaine".into(), act: 3,
             title: "Archiver les registres".into(),
             description: "Archive compressée des logs vers les archives.".into(),
-            story: "Dame Kaguya: « Seigneur, archivez tous les logs des scribes dans une\ncaisse compressée: /archives/backup_logs.tar.gz. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Seigneur, archivez tous les logs des scribes dans une
+caisse compressée: /archives/backup_logs.tar.gz. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya approuve: « Les logs des scribes sont archivés, Seigneur. backup_logs.tar.gz est en sûreté. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Créez /archives/backup_logs.tar.gz contenant /scribes/logs/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer une archive compressée?".into(),
@@ -22,7 +37,21 @@ pub fn missions() -> Vec<Mission> {
             id: "12.2".into(), chapter: 12, chapter_title: "Archives du domaine".into(), act: 3,
             title: "Vérifier l'archive".into(),
             description: "Contenu de l'archive sans l'extraire.".into(),
-            story: "Dame Kaguya: « Vérifiez le contenu de l'archive avant l'envoi. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Vérifiez le contenu de l'archive avant l'envoi. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya vérifie le contenu: « Tout est dans l'archive, Seigneur. Rien ne manque avant l'envoi. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Listez le contenu de l'archive (tar tvf).".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister une archive sans l'extraire?".into(),
@@ -37,7 +66,21 @@ pub fn missions() -> Vec<Mission> {
             id: "12.3".into(), chapter: 12, chapter_title: "Archives du domaine".into(), act: 3,
             title: "Extraire l'archive".into(),
             description: "Extrayez l'archive dans /tmp.".into(),
-            story: "Dame Kaguya: « Extrayez l'archive dans /tmp pour vérification. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Extrayez l'archive dans /tmp pour vérification. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya inspecte /tmp: « L'archive est bien extraite, Seigneur. La vérification peut commencer. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Extrayez l'archive dans /tmp (tar xzf -C).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment extraire dans un dossier précis?".into(),
@@ -52,7 +95,20 @@ pub fn missions() -> Vec<Mission> {
             id: "12.4".into(), chapter: 12, chapter_title: "Archives du domaine".into(), act: 3,
             title: "Archiver en ZIP".into(),
             description: "Le clan Hattori préfère le ZIP.".into(),
-            story: "Le marchand Genji: « Seigneur, le clan Hattori préfère le ZIP.\nCréez registres.zip avec les registres de la salle du trône. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.".into(),
+            story: "Le marchand Genji: « Seigneur, le clan Hattori préfère le ZIP.
+Créez registres.zip avec les registres de la salle du trône. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Le marchand Genji approuve: « registres.zip est créé, Seigneur. Le clan Hattori recevra ses registres au format qu'il préfère. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Créez registres.zip contenant /salle-du-trone/registres/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer une archive ZIP?".into(),
@@ -67,7 +123,21 @@ pub fn missions() -> Vec<Mission> {
             id: "12.5".into(), chapter: 12, chapter_title: "Archives du domaine".into(), act: 3,
             title: "Lire le ZIP".into(),
             description: "Contenu de registres.zip.".into(),
-            story: "Genji: « Vérifiez le contenu de registres.zip avant l'envoi. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Genji: « Vérifiez le contenu de registres.zip avant l'envoi. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Genji vérifie le contenu: « Tout est dans registres.zip, Seigneur. L'envoi peut partir. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Listez le contenu de registres.zip (unzip -l).".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister un ZIP?".into(),

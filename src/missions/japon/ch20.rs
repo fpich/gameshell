@@ -7,7 +7,21 @@ pub fn missions() -> Vec<Mission> {
             id: "20.1".into(), chapter: 20, chapter_title: "Le siege final".into(), act: 5,
             title: "Sceau du seigneur".into(),
             description: "Prouvez que vous connaissez le sceau secret (fichier caché .secret).".into(),
-            story: "Seigneur Hattori: « Seigneur, avant de nous envoyer 20 samouraïs, prouvez\nque vous êtes le seigneur de Shiro: donnez-moi le SCEAU SECRET (fichier\ncaché .secret de vos quartiers). »\n\nTrouvez le sceau, puis validez la mission avec ce code.\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.".into(),
+            story: "Seigneur Hattori: « Seigneur, avant de nous envoyer 20 samouraïs, prouvez
+que vous êtes le seigneur de Shiro: donnez-moi le SCEAU SECRET (fichier
+caché .secret de vos quartiers). »
+
+Trouvez le sceau, puis validez la mission avec ce code.
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Seigneur Hattori vérifie le sceau: « Le sceau secret est authentique, Seigneur. Vous êtes bien le seigneur de Shiro. Les 20 samouraïs arrivent. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Trouvez le sceau secret dans .secret et validez avec ce code.".into(),
             bloom_level: "Évaluer".into(),
             bloom_question: "Où se trouve le sceau secret?".into(),
@@ -22,7 +36,21 @@ pub fn missions() -> Vec<Mission> {
             id: "20.2".into(), chapter: 20, chapter_title: "Le siege final".into(), act: 5,
             title: "Code du donjon".into(),
             description: "Validez avec le code du coffre-fort.".into(),
-            story: "Le capitaine des gardes: « Seigneur, le donjon est verrouillé. Entrez\nle CODE DU COFFRE-FORT (dans /donjon/coffre-fort/sceaux.txt et\n/archives/secret/code_coffre.txt) pour ouvrir la salle de guerre. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.".into(),
+            story: "Le capitaine des gardes: « Seigneur, le donjon est verrouillé. Entrez
+le CODE DU COFFRE-FORT (dans /donjon/coffre-fort/sceaux.txt et
+/archives/secret/code_coffre.txt) pour ouvrir la salle de guerre. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Le capitaine des gardes ouvre la salle de guerre: « Le code est correct, Seigneur. La salle de guerre est ouverte. Le conseil peut siéger. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Trouvez le code du coffre-fort et validez avec ce code.".into(),
             bloom_level: "Évaluer".into(),
             bloom_question: "Où se trouve le code du coffre-fort?".into(),
@@ -37,7 +65,20 @@ pub fn missions() -> Vec<Mission> {
             id: "20.3".into(), chapter: 20, chapter_title: "Le siege final".into(), act: 5,
             title: "Rapport de siège".into(),
             description: "Rédigez le rapport de siège complet.".into(),
-            story: "Dame Kaguya: « Seigneur, rédigez le rapport de siège dans rapport_siege.txt:\nles attaques 'Failed' du jour, puis l'état des remparts, à la suite. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.".into(),
+            story: "Dame Kaguya: « Seigneur, rédigez le rapport de siège dans rapport_siege.txt:
+les attaques 'Failed' du jour, puis l'état des remparts, à la suite. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Dame Kaguya lit rapport_siege.txt: « Les attaques puis l'état des remparts, à la suite, Seigneur. Le rapport de siège est complet. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Créez rapport_siege.txt avec les attaques puis l'état des remparts.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment composer un rapport multi-sources?".into(),
@@ -52,7 +93,22 @@ pub fn missions() -> Vec<Mission> {
             id: "20.4".into(), chapter: 20, chapter_title: "Le siege final".into(), act: 5,
             title: "Archiver les preuves".into(),
             description: "Archivez tous les logs dans les archives.".into(),
-            story: "Dame Kaguya: « Seigneur, archivez TOUS les logs des scribes dans\n/archives/preuves_siege.tar.gz pour le procès des espions. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Seigneur, archivez TOUS les logs des scribes dans
+/archives/preuves_siege.tar.gz pour le procès des espions. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya approuve: « Tous les logs sont archivés, Seigneur. Les preuves du siège sont en sûreté pour le procès. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Créez /archives/preuves_siege.tar.gz contenant /scribes/logs/.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment archiver toutes les preuves?".into(),
@@ -61,13 +117,27 @@ pub fn missions() -> Vec<Mission> {
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "tar czf".into(), name: "tar czf".into(), description: "tar czf — archive des preuves".into() }),
+            skill: Some(Skill { command: "tar".into(), name: "tar".into(), description: "tar — crée et lit des archives".into() }),
         },
         Mission {
             id: "20.5".into(), chapter: 20, chapter_title: "Le siege final".into(), act: 5,
             title: "Protocole de siège final".into(),
             description: "Dernière épreuve: validez avec le protocole de siège du coffre-fort.".into(),
-            story: "Seigneur Hattori: « Seigneur, dernière épreuve: donnez-moi le PROTOCOLE\nDE SIÈGE du coffre-fort (/donjon/coffre-fort/sceaux.txt) pour lancer la\ncontre-attaque décisive. »\n\nLisez les sceaux, installez une caméra sur les archives secrètes, puis validez avec ce code.\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.".into(),
+            story: "Seigneur Hattori: « Seigneur, dernière épreuve: donnez-moi le PROTOCOLE
+DE SIÈGE du coffre-fort (/donjon/coffre-fort/sceaux.txt) pour lancer la
+contre-attaque décisive. »
+
+Lisez les sceaux, installez une caméra sur les archives secrètes, puis validez avec ce code.
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Seigneur Hattori salue: « Le protocole de siège est confirmé, Seigneur. La contre-attaque décisive peut commencer. Shiro ne tombera pas! »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Lisez les sceaux, installez une caméra d'audit sur /archives/secret, validez avec le protocole de siège.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Quel est le protocole de siège?".into(),

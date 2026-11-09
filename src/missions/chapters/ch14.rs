@@ -22,7 +22,11 @@ Votre mission: Un nouvel arrivant rejoint l'équipage. Il lui faut un compte sur
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le badge d'accès du nouvel arrivant est créé. Vex Korshun vérifie le compte.
+
+« Bien », approuve-t-il. « Chaque membre de l'équipage a désormais son identité à bord. »".into(),
             goal: "Un nouvel arrivant monte à bord. Créez-lui son badge d'accès.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Creer un user?".into(),
@@ -52,7 +56,11 @@ Votre mission: Pour gérer les accès collectifs, il faut créer un groupe d'éq
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+L'équipe 'equipage' est créée et le nouveau membre y est ajouté.
+
+« Parfait », note Vex Korshun. « Les groupes définissent les droits. Le nouveau peut maintenant accéder aux ressources de son équipe. »".into(),
             goal: "Créez une équipe 'equipage' et mettez le nouveau dedans.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Creer un groupe?".into(),
@@ -82,7 +90,11 @@ Votre mission: Le compte matelot n'a pas de mot de passe. C'est une faille de s�
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le badge du nouveau est sécurisé avec un code. Vex Korshun approuve.
+
+« Un badge sans code, c'est une porte ouverte », explique-t-il. « Le sécuriser, c'est protéger l'accès. »".into(),
             goal: "Le badge du nouveau n'a pas de code. Sécurisez-le.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Changer un MDP?".into(),
@@ -112,7 +124,11 @@ Votre mission: Il faut tester que le compte matelot fonctionne correctement.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le nouveau badge est testé: la session fonctionne correctement.
+
+« Le compte est opérationnel », confirme Vex Korshun. « Tester une session, c'est vérifier que tout est en ordre. »".into(),
             goal: "Testez que le nouveau badge fonctionne bien.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Changer d'user?".into(),
@@ -142,7 +158,11 @@ Votre mission: En tant que capitaine, vous devez connaître vos pouvoirs sudo.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Vous montrez vos pouvoirs de capitaine. Vex Korshun vérifie vos droits.
+
+« Ces pouvoirs sont une responsabilité », rappelle-t-il. « Utilisez-les avec discernement. »".into(),
             goal: "Montrez que vous avez bien les pouvoirs du capitaine.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Executer en root?".into(),

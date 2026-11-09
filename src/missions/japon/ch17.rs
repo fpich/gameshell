@@ -7,7 +7,22 @@ pub fn missions() -> Vec<Mission> {
             id: "17.1".into(), chapter: 17, chapter_title: "Pare-feu du chateau".into(), act: 5,
             title: "État des déflecteurs".into(),
             description: "État du pare-feu (ufw) en détaillé.".into(),
-            story: "Le capitaine des gardes: « Seigneur, avant de bloquer les espions,\nvérifiez l'état des déflecteurs: le pare-feu est-il actif? »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Le capitaine des gardes: « Seigneur, avant de bloquer les espions,
+vérifiez l'état des déflecteurs: le pare-feu est-il actif? »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Le capitaine des gardes vérifie: « Le pare-feu est bien actif, Seigneur. Les déflecteurs sont en place. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Affichez l'état détaillé du pare-feu (sudo ufw status verbose).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'état du pare-feu?".into(),
@@ -22,7 +37,22 @@ pub fn missions() -> Vec<Mission> {
             id: "17.2".into(), chapter: 17, chapter_title: "Pare-feu du chateau".into(), act: 5,
             title: "Bloquer l'IP espion".into(),
             description: "Bloquez 10.0.0.66 au pare-feu.".into(),
-            story: "Hanzō, alarmé: « Seigneur! L'IP 10.0.0.66 attaque notre portail SSH.\nBloquez-la DÉFINITIVEMENT au pare-feu. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Hanzō, alarmé: « Seigneur! L'IP 10.0.0.66 attaque notre portail SSH.
+Bloquez-la DÉFINITIVEMENT au pare-feu. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Hanzō confirme: « L'IP espion est bloquée, Seigneur. Le portail SSH est protégé. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Bloquez 10.0.0.66 (sudo ufw deny from 10.0.0.66).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment bloquer une IP au pare-feu?".into(),
@@ -37,8 +67,23 @@ pub fn missions() -> Vec<Mission> {
             id: "17.3".into(), chapter: 17, chapter_title: "Pare-feu du chateau".into(), act: 5,
             title: "Règles du noyau".into(),
             description: "Listez les règles iptables.".into(),
-            story: "Le capitaine des gardes: « Seigneur, au-delà du pare-feu, listez les\nrègles de filtrage du noyau (iptables). »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
-            goal: "Listez les règles iptables (sudo iptables -L -n).".into(),
+            story: "Le capitaine des gardes: « Seigneur, au-delà du pare-feu, listez les
+règles de filtrage du noyau (iptables). »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Le capitaine des gardes inspecte les règles: « Les règles de filtrage du noyau sont listées, Seigneur. La défense est en profondeur. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+            goal: "Listez les règles de filtrage du pare-feu du château.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment lister les règles du noyau?".into(),
             required_commands: vec!["sudo iptables -L -n".into()],
@@ -52,7 +97,22 @@ pub fn missions() -> Vec<Mission> {
             id: "17.4".into(), chapter: 17, chapter_title: "Pare-feu du chateau".into(), act: 5,
             title: "Autoriser le SSH".into(),
             description: "Autorisez le port 22 au pare-feu.".into(),
-            story: "Dame Kaguya: « Seigneur, autorisez le port 22 (SSH) pour que le clan\nHattori puisse nous contacter en sécurité. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Dame Kaguya: « Seigneur, autorisez le port 22 (SSH) pour que le clan
+Hattori puisse nous contacter en sécurité. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Dame Kaguya approuve: « Le port 22 est ouvert pour nos alliés, Seigneur. Le clan Hattori pourra nous contacter. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Autorisez le port 22 (sudo ufw allow 22).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment autoriser un port au pare-feu?".into(),
@@ -67,7 +127,22 @@ pub fn missions() -> Vec<Mission> {
             id: "17.5".into(), chapter: 17, chapter_title: "Pare-feu du chateau".into(), act: 5,
             title: "Activer le pare-feu".into(),
             description: "Activez le pare-feu du château.".into(),
-            story: "Le capitaine des gardes: « Seigneur, le pare-feu est réglé. ACTIVEZ-le\nmaintenant: ufw enable. »\n\nLes espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.\n\nLe château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.\n\nN'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.\n\nLe moine Tetsuo médite à la pagode et prie pour la paix du domaine.\n\nLes gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.".into(),
+            story: "Le capitaine des gardes: « Seigneur, le pare-feu est réglé. ACTIVEZ-le
+maintenant: ufw enable. »
+
+Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+
+N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+
+Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+
+Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
+
+Le capitaine des gardes salue: « Le pare-feu est actif, Seigneur. Le château est désormais protégé. »
+
+Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
             goal: "Activez le pare-feu (sudo ufw enable).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment activer le pare-feu?".into(),

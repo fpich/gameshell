@@ -22,7 +22,11 @@ Votre mission: Tael Rhen entend des bruits bizarres dans les coursives. Des proc
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+La liste des systèmes en cours d'exécution s'affiche. Tael Rhen l'examine: « Tout semble normal, Capitaine. Merci. »
+
+Vous comprenez que surveiller les processus actifs, c'est garder un œil sur l'activité du vaisseau.".into(),
             goal: "Tael Rhen entend des bruits bizarres. Vérifiez quels systèmes tournent actuellement.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Voir tous les processus?".into(),
@@ -52,7 +56,11 @@ Votre mission: La station ralentit. Les boucliers consomment trop de ressources.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Les jauges de ressources s'affichent: CPU, mémoire, charge. Vous repérez un processus qui consomme trop.
+
+« Voilà le coupable », note Tael Rhen. « Surveiller les ressources, c'est diagnostiquer les ralentissements. »".into(),
             goal: "La station ralentit. Surveillez les ressources pour comprendre pourquoi.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Surveiller les ressources?".into(),
@@ -82,7 +90,11 @@ Votre mission: Vex Korshun veut vérifier que tous les services de sécurité so
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+La liste des services de sécurité s'affiche. Vex Korshun vérifie que chacun est bien actif.
+
+« Bien », approuve-t-il. « Savoir quels services tournent, c'est s'assurer que nos défenses sont en place. »".into(),
             goal: "Vex Korshun veut savoir si tous les services de sécurité sont bien en marche.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Gerer les services?".into(),
@@ -112,7 +124,11 @@ Votre mission: ALERTE ROUGE! Un processus backdoor (PID 9999) a été détecté.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le processus pirate est éliminé. Draz M'kal pousse un soupir de soulagement.
+
+« Bien joué, Capitaine. Un processus malveillant neutralisé, c'est une menace de moins à bord. »".into(),
             goal: "Un système pirate a pris le contrôle! Éliminez-le immédiatement!".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Tuer un processus?".into(),
@@ -142,7 +158,11 @@ Votre mission: Le scan de sécurité doit être prioritaire face à l'attaque im
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le scan de sécurité se lance en priorité. Les autres tâches attendent leur tour.
+
+« Priorité haute, c'est de la gestion d'urgence », explique Tael Rhen. « Les tâches critiques passent d'abord. »".into(),
             goal: "Le scan de sécurité est prioritaire en ce moment. Lancez-le en priorité.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Changer la priorite?".into(),

@@ -22,7 +22,11 @@ Votre mission: Les paquets de sécurité doivent être à jour contre les derni�
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+La liste des pièces détachées est mise à jour. Tael Rhen la consulte.
+
+« Parfait, Capitaine. Je saurai maintenant ce qui est disponible pour les réparations. »".into(),
             goal: "Mettez à jour la liste des pièces détachées disponibles.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Rafraichir les paquets?".into(),
@@ -52,7 +56,11 @@ Votre mission: Un outil de test est nécessaire pour vérifier le bon fonctionne
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+L'outil de test des annonces est installé. Tael Rhen le vérifie.
+
+« Bien », approuve-t-il. « Un outil installé, c'est une capacité de plus à bord. »".into(),
             goal: "Installez un outil pour tester les annonces de la station.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Installer un logiciel?".into(),
@@ -82,7 +90,11 @@ Votre mission: Après modification de la config SSH, le service doit être redé
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le service SSH est rechargé avec la nouvelle configuration.
+
+« Redémarrer, c'est appliquer les changements », explique Draz M'kal. « Le service repart avec les réglages à jour. »".into(),
             goal: "La config SSH a changé, il faut recharger le service.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Redemarrer un service?".into(),
@@ -112,7 +124,11 @@ Votre mission: L'historique complet de la station est dans le journal systemd. C
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Le journal récent de la station s'affiche. Vous y lisez les derniers événements.
+
+« Le journal raconte l'activité du vaisseau », note Draz M'kal. « C'est là qu'on repère les anomalies. »".into(),
             goal: "Qu'est-ce qui s'est passé récemment sur la station? Consultez le journal.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Voir les logs systemd?".into(),
@@ -142,7 +158,11 @@ Votre mission: Les soutes sont pleines de paquets inutiles. Nettoyez pour libér
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.".into(),
+la station et son équipage de 5 personnes.
+
+Les vieilleries sont nettoyées du système. L'espace est libéré.
+
+« Bien joué », approuve Tael Rhen. « Un système propre est un système sain. Nettoyer, c'est entretenir. »".into(),
             goal: "Les soutes sont pleines de vieilleries. Nettoyez le système.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Nettoyer le systeme?".into(),
