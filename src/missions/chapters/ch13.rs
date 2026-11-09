@@ -126,8 +126,10 @@ la station et son équipage de 5 personnes.".into(),
         Mission {
             id: "13.5".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
             title: "Disques".into(),
-            description: "Quels disques branches?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Quels disques sont physiquement connectés à la station?
+            description: "Boz Tark veut savoir quels disques sont branchés.".into(),
+            story: "Boz Tark, le mécanicien en chef, vous appelle depuis la salle des machines:
+« Capitaine, avant de brancher les disques de secours, je dois savoir quels disques
+sont physiquement connectés à la station. »
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport

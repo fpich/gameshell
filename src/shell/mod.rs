@@ -39,6 +39,19 @@ pub fn select_world(campaign: u8) {
             let _ = Command::new("bash").arg(&gen).arg(camp).arg(&world).status();
         }
     }
+    // P2.3: vérifie que les compartiments essentiels existent, sinon régénère le monde
+    let essentials: &[&str] = match campaign {
+        2 => &["donjon", "pagode", "jardins", "remparts", "greniers", "quartiers"],
+        3 => &["baies", "serveurs", "logs", "configs", "noc", "firewall"],
+        _ => &["pont", "cabines", "soutes", "reacteur", "hangar", "securite", "communications", "navigation", "armes", "salle-des-machines", "archives"],
+    };
+    let missing = essentials.iter().any(|d| !std::path::Path::new(&format!("{}/{}", world, d)).exists());
+    if missing {
+        let gen = format!("{}/vaisseau-gen.sh", home_dir);
+        if std::path::Path::new(&gen).exists() {
+            let _ = Command::new("bash").arg(&gen).arg(camp).arg(&world).status();
+        }
+    }
     std::env::set_var("GAMESHELL_WORLD", &world);
     std::env::set_var("GAMESHELL_CAMPAIGN", campaign.to_string());
     std::env::set_var("HOME", &home);

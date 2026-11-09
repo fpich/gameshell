@@ -55,7 +55,7 @@ Vous ouvrez le fichier pour en lire le contenu.".into(),
             checks: vec![MissionCheck { check_type: "file_read".into(), target: "bienvenue.txt".into(), expected: None }],
             hints: vec![],
             xp_reward: 75,
-            code_required: None,
+            code_required: Some("ORION-7-ACCUEIL".into()),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche le contenu complet d'un fichier texte".into() }),
         },
         Mission {
@@ -83,7 +83,7 @@ sous-compartiment messages, fichier dernier_message.txt.
             checks: vec![MissionCheck { check_type: "dir_reached".into(), target: "/communications/messages".into(), expected: None }, MissionCheck { check_type: "file_read".into(), target: "dernier_message.txt".into(), expected: None }],
             hints: vec![],
             xp_reward: 100,
-            code_required: None,
+            code_required: Some("ANDROMEDE-7G".into()),
             skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd — change de répertoire (cd /pont, cd .., cd ~)".into() }),
         },
         Mission {

@@ -25,6 +25,8 @@ Depuis votre poste, vous surveillez le trafic:
 - Durcir les serveurs du cluster
 
 Le NOC vous écoute. Tapez 'gsh help' pour l'aide.
+
+Code d'accueil du NOC: NEXUS-ACCUEIL
 EOF
 cat > "$N/netrunner/notes.txt" << 'EOF'
 NOTES DU NETRUNNER:
@@ -61,6 +63,7 @@ PermitRootLogin yes
 PasswordAuthentication yes
 MaxAuthTries 6
 UsePAM yes
+# Code de vérification: NEXUS-SSH-22
 EOF
 cat > "$C/ufw/regles.txt" << 'EOF'
 RÈGLES PARE-FEU NEXUS:

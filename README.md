@@ -51,7 +51,7 @@ Tout le jeu se déroule dans `~/.gameshell/vaisseau/`. Les chemins absolus `/...
 
 ```
 /pont/              pont de commandement
-/cabines/           quartiers équipage (capitaine, marie, jean...)
+/cabines/           quartiers équipage (capitaine, zyra-7, vex...)
 /securite/          alertes, logs, coffre-fort, config SSH, pare-feu
 /soutes/            cargo, secrets
 /reacteur/          cœur énergétique
@@ -164,7 +164,8 @@ gameshell/
 ## 👨‍🏫 Pour les enseignants
 
 - Distribution: un seul fichier `gameshell.sh` (clé USB, ENT...)
-- Historique des commandes dans `~/.gameshell/state/commands.log` pour évaluation
+- Suivi de classe: `gsh export` génère JSON + CSV par mission (id, titre, statut, XP) + historique horodaté dans `~/.gameshell/state/history_campagne<N>.log`
+- Mode enseignant: lancer avec `--campaign <1|2|3>` pour imposer une campagne (et `--locked` pour verrouiller l'ordre des missions)
 - Missions modifiables dans `src/missions/{chapters,japon,reseau}/ch*.rs`
 - Rebuild: `cargo build --release && ./make-archive.sh`
 

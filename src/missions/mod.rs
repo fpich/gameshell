@@ -146,11 +146,15 @@ mod conformity_tests {
 
     #[test]
     fn vaisseau_gen_sans_noms_interdits() {
-        let content = std::fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/vaisseau-gen.sh")).unwrap();
-        for bad in PNJ_BLACKLIST {
-            assert!(!content.contains(bad), "vaisseau-gen.sh contient le nom interdit '{}' (règle C13)", bad);
+        // Règle C13: aucun nom contemporain banal dans les mondes générés (3 campagnes)
+        let gens = ["vaisseau-gen.sh", "monde-japon-gen.sh", "monde-reseau-gen.sh"];
+        for gen in gens {
+            let content = std::fs::read_to_string(format!("{}/{}", env!("CARGO_MANIFEST_DIR"), gen)).unwrap();
+            for bad in PNJ_BLACKLIST {
+                assert!(!content.contains(bad), "{} contient le nom interdit '{}' (règle C13)", gen, bad);
+            }
+            assert!(!content.contains("Capitaine Fabien"), "{}: nom du joueur en dur interdit (règle A12)", gen);
         }
-        assert!(!content.contains("Capitaine Fabien"), "vaisseau-gen.sh: nom du joueur en dur interdit (règle A12)");
         // Le cmd_brief (analogies roleplay) ne doit pas non plus contenir de noms interdits ni le nom du joueur (règle C13/A12)
         let brief = std::fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/src/game/mod.rs")).unwrap();
         for bad in PNJ_BLACKLIST {

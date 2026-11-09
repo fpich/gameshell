@@ -69,7 +69,7 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 ## RÈGLE A15 — Compétence débloquée = commande de LA mission (OBLIGATOIRE)
 - La compétence débloquée (`skill`) doit être une des `required_commands` de la mission (mot de base, ou symbole | > >> présent dans la ligne).
 - Jamais une commande d'une autre mission (ex: mission "lire bienvenue.txt" ne débloque PAS ls -la).
-- Test: `cargo test` (conformity_tests) vérifie les 50 missions manuelles + les 500 embarquées.
+- Test: `cargo test` (conformity_tests) vérifie les 300 missions (3 campagnes × 100).
 
 ## RÈGLE A18 — Sauvegarde/reprise par campagne (OBLIGATOIRE)
 - Progression sauvegardée automatiquement à chaque mission validée:
@@ -167,7 +167,7 @@ Jamais de liste de 20 commandes avec exemples ici.
 
 ---
 
-# SECTION C — CONTENU DES MISSIONS (50 missions, 10 chapitres, 5 actes)
+# SECTION C — CONTENU DES MISSIONS (100 missions par campagne, 20 chapitres, 5 actes)
 
 ## RÈGLE C1 — Structure
 - **100 missions EN DUR par campagne**, 20 chapitres × 5 missions, 5 actes narratifs.

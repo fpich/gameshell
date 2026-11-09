@@ -29,6 +29,14 @@ struct Cli {
     /// Nom du joueur
     #[arg(short, long)]
     name: Option<String>,
+
+    /// Mode enseignant: impose la campagne (1, 2 ou 3) sans menu interactif
+    #[arg(long)]
+    campaign: Option<u8>,
+
+    /// Mode enseignant: verrouille l'ordre des missions (gsh restart refusé)
+    #[arg(long)]
+    locked: bool,
 }
 
 fn print_banner(campaign: u8) {
@@ -119,7 +127,10 @@ fn main() {
     });
 
     // Sélection de la campagne (règle C14) — défaut espace si non interactif
-    let campaign: u8 = if std::env::var("GAMESHELL_AUTO").is_ok() {
+    // Mode enseignant: --campaign impose la campagne et saute le menu
+    let campaign: u8 = if let Some(c) = cli.campaign {
+        c
+    } else if std::env::var("GAMESHELL_AUTO").is_ok() {
         1 // le mode auto itère sur les 2 campagnes plus bas
     } else {
         println!("\n  ╔══════════════════════════════════════╗");
@@ -134,6 +145,9 @@ fn main() {
         match choix.trim() { "2" => 2, "3" => 3, _ => 1 }
     };
     shell::select_world(campaign);
+    if cli.locked {
+        std::env::set_var("GAMESHELL_LOCKED", "1");
+    }
     print_banner(campaign);
 
     println!("\n👋 Bienvenue, {}!", player_name.bright_green().bold());

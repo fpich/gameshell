@@ -30,7 +30,7 @@ pub fn missions() -> Vec<Mission> {
             checks: vec![MissionCheck { check_type: "file_read".into(), target: "kaisho.txt".into(), expected: None }],
             hints: vec![],
             xp_reward: 75,
-            code_required: None,
+            code_required: Some("SHIRO-ACCUEIL".into()),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche le contenu d'un fichier".into() }),
         },
         Mission {
@@ -45,7 +45,7 @@ pub fn missions() -> Vec<Mission> {
             checks: vec![MissionCheck { check_type: "dir_reached".into(), target: "/archives/lettres".into(), expected: None }, MissionCheck { check_type: "file_read".into(), target: "lettre_clan_hattori.txt".into(), expected: None }],
             hints: vec![],
             xp_reward: 100,
-            code_required: None,
+            code_required: Some("HATTORI-20".into()),
             skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd — change de répertoire".into() }),
         },
         Mission {

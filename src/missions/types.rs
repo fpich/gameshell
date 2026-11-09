@@ -45,5 +45,6 @@ pub struct SaveData {
     pub skills: Vec<Skill>,
     pub completed: Vec<String>,
     pub badges: Vec<String>,
+    pub attempts: std::collections::HashMap<String, u32>, // nb de gsh check échoués par mission (P2.1)
     pub saved_at: String,
 }

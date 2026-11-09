@@ -142,6 +142,8 @@ Depuis ici,vous pouvez:
 - Vous reposer (théoriquement)
 
 La station vous écoute. Tapez 'gsh help' pour l'aide.
+
+Code d'accueil de la cabine: ORION-7-ACCUEIL
 EOF
 
 cat > "$C/capitaine/notes.txt" << 'EOF'
@@ -175,7 +177,7 @@ Ne pas divulguer!
 EOF
 
 cat > "$C/zyra/rapport_technique.txt" << 'EOF'
-RAPPORT TECHNIQUE - MARIE (Ingénieur)
+RAPPORT TECHNIQUE - ZYRA-7 (IA de bord)
 
 Le réacteur tourne à 89%. Tout va bien de ce côté.
 Par contre,nos systèmes de sécurité sont faibles:
@@ -187,7 +189,7 @@ Il faut agir vite,Capitaine!
 EOF
 
 cat > "$C/vex/dossier_securite.txt" << 'EOF'
-DOSSIER SÉCURITÉ - JEAN (Officier sécurité)
+DOSSIER SÉCURITÉ - VEX KORSHUN (Commandant)
 
 Menace: Les Corbeaux Noirs
 - Groupe de pirates connus pour leurs attaques SSH
@@ -202,7 +204,7 @@ Recommandations:
 EOF
 
 cat > "$C/nira/message_andromede.txt" << 'EOF'
-📡 MESSAGE DU VAISSEAU-MÈRE GALACTICA
+📡 MESSAGE DU VAISSEAU-MÈRE ANDROMÈDE
 
 De: Amiral Xylia Vorn
 À: le nouveau Capitaine,Orion-7
@@ -321,7 +323,7 @@ EOF
 cat > "$S/cles/cles_publiques.txt" << 'EOF'
 Clés SSH publiques autorisées:
 etudiant: ssh-ed25519 AAAAC3...commentaire
-marie:   ssh-ed25519 AAAAC3...marie@orion7
+zyra7:   ssh-ed25519 AAAAC3...zyra7@orion7
 EOF
 
 # ═══════════════════════════════════════════════
@@ -389,6 +391,8 @@ De: Andromède (Amiral Xylia Vorn)
 Préparez la défense. Nous sommes en soutien.
 
 Ne laissez pas la station tomber! »
+
+Code de confirmation: ANDROMEDE-7G
 EOF
 
 cat > "$CO/frequences/frequences_ennemies.txt" << 'EOF'

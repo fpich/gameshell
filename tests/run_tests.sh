@@ -150,8 +150,8 @@ echo "$out" | grep -q "réinitialisé\|🔄" && ok "gsh reset fonctionne" || ko 
 
 # ─── TEST 26: Playthrough 10 premières missions ───
 rm -rf ~/.gameshell
-out=$(printf 'Test\n1\npwd\nls\ngsh check\ncat bienvenue.txt\ngsh check\ncd /communications/messages\ncat dernier_message.txt\ngsh check\nhostname\nwhoami\nid\ngsh check\ndate\ngsh check\ntouch incident_15jan.txt\nls\ngsh check\nmkdir -p rapports/2024/janvier\ngsh check\ncp incident_15jan.txt /soutes/\ngsh check\nmv incident_15jan.txt rapports/2024/janvier/\ngsh check\ntouch t1 t2 t3\nrm t1 t2 t3\ngsh check\nexit\n' | timeout 30 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
-n=$(echo "$out" | grep -c "✅ Mission réussie")
+out=$(printf 'Test\n1\npwd\nls\ngsh check\ncat bienvenue.txt\ngsh check\nORION-7-ACCUEIL\ncd /communications/messages\ncat dernier_message.txt\ngsh check\nANDROMEDE-7G\nhostname\nwhoami\nid\ngsh check\ndate\ngsh check\ntouch incident_15jan.txt\nls\ngsh check\nmkdir -p rapports/2024/janvier\ngsh check\ncp incident_15jan.txt /soutes/\ngsh check\nmv incident_15jan.txt rapports/2024/janvier/\ngsh check\ntouch t1 t2 t3\nrm t1 t2 t3\ngsh check\nexit\n' | timeout 30 bash gameshell.sh 2>&1 | sed 's/\x1b\[[0-9;]*m//g')
+n=$(echo "$out" | grep -cE "✅ (Code correct! )?Mission réussie")
 [ "$n" -ge 10 ] && ok "Playthrough 10 premières missions ($n/10 réussies)" || ko "Playthrough 10 missions: seulement $n/10"
 
 
@@ -202,7 +202,7 @@ out=$(printf 'Test\n1\n\x1b[D\x1b[Cpwd\x1b[A\x1b[B\nls\ngsh check\nexit\n' | tim
 echo "$out" | grep -q "✅ Mission réussie" && ok "Séquences ANSI (flèches) nettoyées en mode non-tty, commande intacte" || ko "Les flèches ne devraient rien insérer dans la commande"
 
 # ─── TEST 36: Compétence débloquée = commande de LA mission (règle A15) ───
-out=$(run_game "Test\npwd\nls\ngsh check\ncat bienvenue.txt\ngsh check\nexit\n")
+out=$(run_game "Test\npwd\nls\ngsh check\ncat bienvenue.txt\ngsh check\nORION-7-ACCUEIL\nexit\n")
 echo "$out" | grep -q "🔓 Compétence: pwd" && echo "$out" | grep -q "🔓 Compétence: cat" && ok "Skills débloquées = commandes des missions (pwd, cat — règle A15)" || ko "Skill débloquée incohérente avec la mission"
 
 # ─── TEST 37: PNJ noms SF dans les missions (règle C13) ───

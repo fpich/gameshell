@@ -6,8 +6,8 @@ pub fn missions() -> Vec<Mission> {
         Mission {
             id: "11.1".into(), chapter: 11, chapter_title: "Logs de securite".into(), act: 3,
             title: "Tentatives de connexion pirates".into(),
-            description: "Vex Korshun analyse auth.log: quelles attaques?".into(),
-            story: "Vex Korshun ouvre le journal d'authentification de la station:\n/securite/logs/auth.log.\n\n« Capitaine, ce fichier enregistre toutes les tentatives de connexion.\nJe veux voir seulement les lignes qui parlent d'ÉCHEC ('Failed'). »\n\nIl vous faut chercher un mot précis dans ce fichier.\n\n« Montrez-moi les tentatives échouées, Capitaine. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
+            description: "Draz M'kal analyse auth.log: quelles attaques?".into(),
+            story: "Draz M'kal, l'officier de sécurité, ouvre le journal d'authentification de la station:\n/securite/logs/auth.log.\n\n« Capitaine, ce fichier enregistre toutes les tentatives de connexion.\nJe veux voir seulement les lignes qui parlent d'ÉCHEC ('Failed'). »\n\nIl vous faut chercher un mot précis dans ce fichier.\n\n« Montrez-moi les tentatives échouées, Capitaine. »\n\nLes Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.\n\nLa station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.".into(),
             goal: "Affichez uniquement les lignes contenant 'Failed' dans le fichier auth.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment chercher un mot précis dans un fichier de logs?".into(),

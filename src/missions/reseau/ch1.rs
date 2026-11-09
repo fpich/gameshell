@@ -30,7 +30,7 @@ pub fn missions() -> Vec<Mission> {
             checks: vec![MissionCheck { check_type: "file_read".into(), target: "bienvenue.txt".into(), expected: None }],
             hints: vec![],
             xp_reward: 75,
-            code_required: None,
+            code_required: Some("NEXUS-ACCUEIL".into()),
             skill: Some(Skill { command: "cat".into(), name: "cat".into(), description: "cat — affiche le contenu d'un fichier".into() }),
         },
         Mission {
@@ -45,7 +45,7 @@ pub fn missions() -> Vec<Mission> {
             checks: vec![MissionCheck { check_type: "dir_reached".into(), target: "/configs/sshd".into(), expected: None }, MissionCheck { check_type: "file_read".into(), target: "sshd_config".into(), expected: None }],
             hints: vec![],
             xp_reward: 100,
-            code_required: None,
+            code_required: Some("NEXUS-SSH-22".into()),
             skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd — change de répertoire".into() }),
         },
         Mission {

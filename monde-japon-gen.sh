@@ -25,6 +25,8 @@ Depuis vos quartiers, vous administrez le domaine:
 - Préparer la défense contre les clans rivaux
 
 Le château vous écoute. Tapez 'gsh help' pour l'aide.
+
+Code d'accueil des quartiers: SHIRO-ACCUEIL
 EOF
 cat > "$Q/seigneur/notes.txt" << 'EOF'
 NOTES DU SEIGNEUR:
@@ -113,6 +115,8 @@ Seigneur,
 Le clan Hattori vous renouvelle son allégeance.
 Nous enverrons 20 samouraïs en renfort si le siège commence.
 — Seigneur Hattori
+
+Code de confirmation: HATTORI-20
 EOF
 cat > "$A/traites/traite_paix.txt" << 'EOF'
 TRAITÉ DE PAIX entre Shiro et le clan voisin:

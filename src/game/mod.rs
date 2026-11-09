@@ -24,6 +24,7 @@ pub struct Game {
     current_dir: String,
     pending_code: Option<String>,  // code à valider en phase 2
     check_fails: u32,               // échecs consécutifs de gsh check (UX)
+    attempts: std::collections::HashMap<String, u32>, // nb de gsh check échoués par mission (P2.1)
     mission_commands: Vec<String>, // commandes tapées DANS la mission courante (reset à chaque mission)
     history: Vec<String>,          // historique de session (flèches haut/bas) — édition de ligne
 }
@@ -52,6 +53,7 @@ impl Game {
             current_dir: home,
             pending_code: None,
             check_fails: 0,
+            attempts: std::collections::HashMap::new(),
             mission_commands: Vec::new(),
             history: Vec::new(),
         };
@@ -63,6 +65,7 @@ impl Game {
                 game.skills = sv.skills;
                 game.completed = sv.completed;
                 game.badges = sv.badges;
+                game.attempts = sv.attempts;
             }
         }
         game
@@ -78,6 +81,7 @@ impl Game {
             skills: self.skills.clone(),
             completed: self.completed.clone(),
             badges: self.badges.clone(),
+            attempts: self.attempts.clone(),
             saved_at: chrono::Local::now().format("%Y-%m-%d %H:%M:%S").to_string(),
         };
         let _ = shell::write_save(&save);
@@ -211,7 +215,14 @@ impl Game {
             }
             "man" => {
                 let arg = parts.get(1).copied().unwrap_or("");
-                println!("Manuel de '{}': voir gsh help pour la syntaxe générale (COMMANDE, COMMANDE arg, COMMANDE -option arg)", arg);
+                if arg.is_empty() {
+                    println!("man: usage: man COMMANDE — consultez gsh help pour la syntaxe générale (COMMANDE, COMMANDE arg, COMMANDE -option arg)");
+                } else {
+                    // Règle C7: double définition roleplay PUIS technique (P1.3)
+                    let (tech, rp) = Self::cmd_brief(arg);
+                    println!("🚀 {}", rp);
+                    println!("💻 {}", tech);
+                }
             }
             "pwd" => println!("{}", self.display_path(&self.current_dir)),
             "hostname" => println!("{}", shell::world_hostname()),
@@ -532,9 +543,17 @@ impl Game {
         if !ok {
             let _ = missing; // JAMAIS révéler quoi que ce soit (règle A8)
             self.check_fails += 1;
+            if let Some(m) = self.missions.get(self.current_mission) {
+                *self.attempts.entry(m.id.clone()).or_insert(0) += 1; // P2.1
+            }
             shell::log_action(self.campaign, &format!("CHECK mission {} -> échec", self.missions.get(self.current_mission).map(|m| m.id.as_str()).unwrap_or("?")));
             println!("\n  ❌ Mission non validée. Relisez le contexte et réessayez.");
-            if self.check_fails >= 2 {
+            if self.check_fails >= 3 {
+                // Règle A8: message générique, JAMAIS la commande/fichier manquant (P1.2)
+                println!("  🧭 Relisez le dialogue du PNJ: il vous dit exactement quoi faire et où.");
+                println!("     Vérifiez que vous êtes au bon endroit (pwd) et que vous avez bien exécuté l'action demandée.");
+                self.check_fails = 0;
+            } else if self.check_fails >= 2 {
                 println!("  💡 Besoin de revoir l'objectif? Tapez 'gsh goal'");
                 self.check_fails = 0;
             }
@@ -678,17 +697,19 @@ impl Game {
         let mut json = format!("{{\"campagne\": {}, \"joueur\": \"{}\", \"date\": \"{}\", \"missions\": [", self.campaign, self.player_name, stamp);
         for m in &self.missions {
             let statut = if done.contains(m.id.as_str()) { "réussie" } else { "à faire" };
-            json.push_str(&format!("{{\"id\": \"{}\", \"titre\": \"{}\", \"statut\": \"{}\", \"xp\": {}}},", m.id, m.title.replace('"', "'"), statut, m.xp_reward));
+            let att = self.attempts.get(&m.id).copied().unwrap_or(0);
+            json.push_str(&format!("{{\"id\": \"{}\", \"titre\": \"{}\", \"statut\": \"{}\", \"xp\": {}, \"tentatives\": {}}},", m.id, m.title.replace('"', "'"), statut, m.xp_reward, att));
         }
         json.push_str(&format!("], \"xp_total\": {}, \"niveau\": {}, \"competences\": [", self.xp, self.level));
         for s in &self.skills { json.push_str(&format!("\"{}\",", s.name)); }
         json.push_str(&format!("], \"badges\": ["));
         for b in &self.badges { json.push_str(&format!("\"{}\",", b.replace('"', "'"))); }
         json.push_str("]}");
-        let mut csv = String::from("id;titre;statut;xp\n");
+        let mut csv = String::from("id;titre;statut;xp;tentatives\n");
         for m in &self.missions {
-            csv.push_str(&format!("{};{};{};{}
-", m.id, m.title.replace('"', "'"), if done.contains(m.id.as_str()) { "réussie" } else { "à faire" }, m.xp_reward));
+            let att = self.attempts.get(&m.id).copied().unwrap_or(0);
+            csv.push_str(&format!("{};{};{};{};{}
+", m.id, m.title.replace('"', "'"), if done.contains(m.id.as_str()) { "réussie" } else { "à faire" }, m.xp_reward, att));
         }
         // historique horodaté embarqué dans le JSON (règle A22)
         let hist_path = format!("{}/state/history_campagne{}.log", shell::gameshell_home(), self.campaign);
@@ -720,6 +741,11 @@ impl Game {
 
     /// gsh restart: recommence la campagne depuis la mission 1 (règle A21)
     fn cmd_restart(&mut self) {
+        // Mode enseignant verrouillé: l'ordre des missions est imposé (P1.1)
+        if std::env::var("GAMESHELL_LOCKED").is_ok() {
+            println!("\n  🔒 Campagne imposée par l'enseignant: gsh restart est désactivé.\n");
+            return;
+        }
         let _ = std::fs::remove_file(shell::save_path(self.campaign));
         self.current_mission = 0;
         self.completed.clear();
