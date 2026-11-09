@@ -97,7 +97,7 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             title: "Etat des remparts".into(),
             description: "Lisez l'état des remparts.".into(),
             story: "Le capitaine des gardes: « Seigneur, lisez l'état des remparts:
-/remparts/etat_rembarts.txt. Le rempart est est fissuré! »
+/remparts/etat_remparts.txt. Le rempart est est fissuré! »
 
 Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
 
@@ -112,11 +112,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes lit l'état: « Le rempart est est fissuré, Seigneur. Nous savons quoi réparer en priorité. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Lisez le fichier etat_rembarts.txt.".into(),
+            goal: "Lisez le fichier etat_remparts.txt.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire l'état des remparts?".into(),
-            required_commands: vec!["cat /remparts/etat_rembarts.txt".into()],
-            checks: vec![MissionCheck { check_type: "file_read".into(), target: "etat_rembarts.txt".into(), expected: None }],
+            required_commands: vec!["cat /remparts/etat_remparts.txt".into()],
+            checks: vec![MissionCheck { check_type: "file_read".into(), target: "etat_remparts.txt".into(), expected: None }],
             hints: vec![],
             xp_reward: 75,
             code_required: None,

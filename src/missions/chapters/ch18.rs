@@ -103,7 +103,7 @@ Les connexions SSH sont limitées au strict minimum par le pare-feu noyau.
             hints: vec![],
             xp_reward: 350,
             code_required: None,
-            skill: Some(Skill { command: "iptables".into(), name: "iptables".into(), description: "iptables".into() }),
+            skill: Some(Skill { command: "iptables".into(), name: "iptables".into(), description: "iptables — configure les règles de filtrage réseau du noyau".into() }),
         },
         Mission {
             id: "18.4".into(), chapter: 18, chapter_title: "Durcissement".into(), act: 5,
@@ -137,7 +137,7 @@ La surveillance des comptes est en place. Chaque création sera tracée.
             hints: vec![],
             xp_reward: 350,
             code_required: None,
-            skill: Some(Skill { command: "auditctl".into(), name: "auditctl".into(), description: "auditctl".into() }),
+            skill: Some(Skill { command: "auditctl".into(), name: "auditctl".into(), description: "auditctl — configure l'audit système (journalisation des événements)".into() }),
         },
         Mission {
             id: "18.5".into(), chapter: 18, chapter_title: "Durcissement".into(), act: 5,
@@ -171,7 +171,7 @@ Le processus pirate est enfermé dans une cellule d'isolement. Il ne peut plus n
             hints: vec![],
             xp_reward: 400,
             code_required: Some("FORTRESS".into()),
-            skill: Some(Skill { command: "chroot".into(), name: "chroot".into(), description: "chroot".into() }),
+            skill: Some(Skill { command: "chroot".into(), name: "chroot".into(), description: "chroot — exécute une commande dans un environnement racine isolé".into() }),
         },
     ]
 }

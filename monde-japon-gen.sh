@@ -198,7 +198,7 @@ EOF
 # ══════════ REMPARTS & PORTAIL ══════════
 R="$V/remparts"
 mkdir -p "$R"/{nord,sud,est,ouest}
-cat > "$R/etat_rembarts.txt" << 'EOF'
+cat > "$R/etat_remparts.txt" << 'EOF'
 REMPARTS: nord OK, sud OK, est fissuré (réparer), ouest OK.
 EOF
 PO="$V/portail"

@@ -320,6 +320,19 @@ cat > "$S/rapports/.placeholder" << 'EOF'
 Dossier pour vos rapports d'incident.
 EOF
 
+cat > "$S/rapports/equipage.txt" << 'EOF'
+LISTE DE L'ÉQUIPAGE D'ORION-7
+- Capitaine (vous)
+- Zyra-7 (IA de bord)
+- Vex Korshun (sécurité)
+- Nira Okoro (communications)
+- Tael Rhen (ingénieur-chef machines)
+- Draz M'kal (sécurité)
+- Boz Tark (mécanicien)
+EOF
+chown root:root "$S/rapports/equipage.txt" 2>/dev/null || true
+chmod 644 "$S/rapports/equipage.txt"
+
 cat > "$S/cles/cles_publiques.txt" << 'EOF'
 Clés SSH publiques autorisées:
 etudiant: ssh-ed25519 AAAAC3...commentaire

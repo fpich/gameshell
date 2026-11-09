@@ -82,7 +82,7 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             goal: "Créez rapport_siege.txt avec les attaques puis l'état des remparts.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment composer un rapport multi-sources?".into(),
-            required_commands: vec!["grep Failed /scribes/logs/auth.log > rapport_siege.txt".into(), "cat /remparts/etat_rembarts.txt >> rapport_siege.txt".into()],
+            required_commands: vec!["grep Failed /scribes/logs/auth.log > rapport_siege.txt".into(), "cat /remparts/etat_remparts.txt >> rapport_siege.txt".into()],
             checks: vec![MissionCheck { check_type: "file_exists".into(), target: "~/rapport_siege.txt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: ">".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: ">>".into(), expected: None }],
             hints: vec![],
             xp_reward: 200,

@@ -35,7 +35,7 @@ Les coordonnées réseau de la station s'affichent. Nira Okoro les note précieu
             hints: vec![],
             xp_reward: 175,
             code_required: None,
-            skill: Some(Skill { command: "ip".into(), name: "ip".into(), description: "ip".into() }),
+            skill: Some(Skill { command: "ip".into(), name: "ip".into(), description: "ip — configure et affiche les interfaces réseau (ip addr, ip link)".into() }),
         },
         Mission {
             id: "10.2".into(), chapter: 10, chapter_title: "Reseau".into(), act: 3,
@@ -69,7 +69,7 @@ La réponse de l'Andromède arrive: la liaison est toujours active. Nira Okoro s
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            skill: Some(Skill { command: "ping".into(), name: "ping".into(), description: "ping".into() }),
+            skill: Some(Skill { command: "ping".into(), name: "ping".into(), description: "ping — teste la connectivité réseau vers une adresse".into() }),
         },
         Mission {
             id: "10.3".into(), chapter: 10, chapter_title: "Reseau".into(), act: 3,
@@ -103,7 +103,7 @@ L'état du pare-feu s'affiche. Vex Korshun vérifie qu'il est bien actif.
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "ufw".into(), name: "ufw".into(), description: "ufw".into() }),
+            skill: Some(Skill { command: "ufw".into(), name: "ufw".into(), description: "ufw — pare-feu simple (status, allow, deny, enable)".into() }),
         },
         Mission {
             id: "10.4".into(), chapter: 10, chapter_title: "Reseau".into(), act: 3,
@@ -137,7 +137,7 @@ Le canal sécurisé répond: la station se parle à elle-même sans erreur.
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "ssh".into(), name: "ssh".into(), description: "ssh".into() }),
+            skill: Some(Skill { command: "ssh".into(), name: "ssh".into(), description: "ssh — connexion sécurisée à une machine distante".into() }),
         },
         Mission {
             id: "10.5".into(), chapter: 10, chapter_title: "Reseau".into(), act: 3,
@@ -171,7 +171,7 @@ La liste des ports exposés s'affiche. Plusieurs ports sont ouverts vers l'exté
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "ss".into(), name: "ss".into(), description: "ss".into() }),
+            skill: Some(Skill { command: "ss".into(), name: "ss".into(), description: "ss — affiche les sockets et connexions réseau actives".into() }),
         },
     ]
 }

@@ -35,7 +35,7 @@ Vous comprenez que surveiller les processus actifs, c'est garder un œil sur l'a
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            skill: Some(Skill { command: "ps".into(), name: "ps".into(), description: "ps".into() }),
+            skill: Some(Skill { command: "ps".into(), name: "ps".into(), description: "ps — liste les processus en cours d'exécution".into() }),
         },
         Mission {
             id: "6.2".into(), chapter: 6, chapter_title: "Surveillance".into(), act: 2,
@@ -69,7 +69,7 @@ Les jauges de ressources s'affichent: CPU, mémoire, charge. Vous repérez un pr
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            skill: Some(Skill { command: "top".into(), name: "top".into(), description: "top".into() }),
+            skill: Some(Skill { command: "top".into(), name: "top".into(), description: "top — affiche en temps réel les processus et l'utilisation CPU/mémoire".into() }),
         },
         Mission {
             id: "6.3".into(), chapter: 6, chapter_title: "Surveillance".into(), act: 2,
@@ -103,7 +103,7 @@ La liste des services de sécurité s'affiche. Vex Korshun vérifie que chacun e
             hints: vec![],
             xp_reward: 175,
             code_required: None,
-            skill: Some(Skill { command: "systemctl".into(), name: "systemctl".into(), description: "systemctl".into() }),
+            skill: Some(Skill { command: "systemctl".into(), name: "systemctl".into(), description: "systemctl — gère les services système (status, start, stop, enable)".into() }),
         },
         Mission {
             id: "6.4".into(), chapter: 6, chapter_title: "Surveillance".into(), act: 2,
@@ -137,7 +137,7 @@ Le processus pirate est éliminé. Draz M'kal pousse un soupir de soulagement.
             hints: vec![],
             xp_reward: 175,
             code_required: None,
-            skill: Some(Skill { command: "kill".into(), name: "kill".into(), description: "kill".into() }),
+            skill: Some(Skill { command: "kill".into(), name: "kill".into(), description: "kill — envoie un signal à un processus pour le terminer".into() }),
         },
         Mission {
             id: "6.5".into(), chapter: 6, chapter_title: "Surveillance".into(), act: 2,
@@ -171,7 +171,7 @@ Le scan de sécurité se lance en priorité. Les autres tâches attendent leur t
             hints: vec![],
             xp_reward: 150,
             code_required: None,
-            skill: Some(Skill { command: "nice".into(), name: "nice".into(), description: "nice".into() }),
+            skill: Some(Skill { command: "nice".into(), name: "nice".into(), description: "nice — lance un processus avec une priorité ajustée".into() }),
         },
     ]
 }

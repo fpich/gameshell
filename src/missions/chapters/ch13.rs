@@ -35,7 +35,7 @@ Les logs sont archivés en une seule archive. Les preuves sont désormais en sé
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "tar".into(), name: "tar".into(), description: "tar".into() }),
+            skill: Some(Skill { command: "tar".into(), name: "tar".into(), description: "tar — crée ou extrait une archive (avec -czf, compressée)".into() }),
         },
         Mission {
             id: "13.2".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
@@ -69,7 +69,7 @@ Les rapports sont compressés au format ZIP. L'Andromède pourra les lire.
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "zip".into(), name: "zip".into(), description: "zip".into() }),
+            skill: Some(Skill { command: "zip".into(), name: "zip".into(), description: "zip — compresse des fichiers dans une archive ZIP".into() }),
         },
         Mission {
             id: "13.3".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
@@ -103,7 +103,7 @@ L'espace disque s'affiche. Les soutes de données ont encore de la place pour ar
             hints: vec![],
             xp_reward: 175,
             code_required: None,
-            skill: Some(Skill { command: "df".into(), name: "df".into(), description: "df".into() }),
+            skill: Some(Skill { command: "df".into(), name: "df".into(), description: "df — affiche l'espace disque utilisé et disponible".into() }),
         },
         Mission {
             id: "13.4".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
@@ -137,7 +137,7 @@ Le pesage des soutes s'affiche. Vous repérez la soute la plus pleine.
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "du".into(), name: "du".into(), description: "du".into() }),
+            skill: Some(Skill { command: "du".into(), name: "du".into(), description: "du — affiche la taille occupée par des fichiers/répertoires".into() }),
         },
         Mission {
             id: "13.5".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
@@ -173,7 +173,7 @@ La liste des disques connectés s'affiche. Vous voyez les volumes de stockage de
             hints: vec![],
             xp_reward: 175,
             code_required: None,
-            skill: Some(Skill { command: "mount".into(), name: "mount".into(), description: "mount".into() }),
+            skill: Some(Skill { command: "mount".into(), name: "mount".into(), description: "mount — monte un système de fichiers sur un point de montage".into() }),
         },
     ]
 }

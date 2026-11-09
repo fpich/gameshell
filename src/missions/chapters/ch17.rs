@@ -35,7 +35,7 @@ La liste des pièces détachées est mise à jour. Tael Rhen la consulte.
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "apt".into(), name: "apt".into(), description: "apt".into() }),
+            skill: Some(Skill { command: "apt".into(), name: "apt".into(), description: "apt — gestionnaire de paquets (install, remove, update)".into() }),
         },
         Mission {
             id: "17.2".into(), chapter: 17, chapter_title: "Maintenance".into(), act: 5,
@@ -69,7 +69,7 @@ L'outil de test des annonces est installé. Tael Rhen le vérifie.
             hints: vec![],
             xp_reward: 225,
             code_required: None,
-            skill: Some(Skill { command: "dpkg".into(), name: "dpkg".into(), description: "dpkg".into() }),
+            skill: Some(Skill { command: "dpkg".into(), name: "dpkg".into(), description: "dpkg — gestionnaire de paquets Debian de bas niveau".into() }),
         },
         Mission {
             id: "17.3".into(), chapter: 17, chapter_title: "Maintenance".into(), act: 5,
@@ -103,7 +103,7 @@ Le service SSH est rechargé avec la nouvelle configuration.
             hints: vec![],
             xp_reward: 225,
             code_required: None,
-            skill: Some(Skill { command: "systemctl restart".into(), name: "systemctl restart".into(), description: "systemctl restart".into() }),
+            skill: Some(Skill { command: "systemctl restart".into(), name: "systemctl restart".into(), description: "systemctl restart — redémarre un service système".into() }),
         },
         Mission {
             id: "17.4".into(), chapter: 17, chapter_title: "Maintenance".into(), act: 5,
@@ -137,7 +137,7 @@ Le journal récent de la station s'affiche. Vous y lisez les derniers événemen
             hints: vec![],
             xp_reward: 250,
             code_required: None,
-            skill: Some(Skill { command: "journalctl".into(), name: "journalctl".into(), description: "journalctl".into() }),
+            skill: Some(Skill { command: "journalctl".into(), name: "journalctl".into(), description: "journalctl — consulte les journaux système (logs)".into() }),
         },
         Mission {
             id: "17.5".into(), chapter: 17, chapter_title: "Maintenance".into(), act: 5,
@@ -171,7 +171,7 @@ Les vieilleries sont nettoyées du système. L'espace est libéré.
             hints: vec![],
             xp_reward: 225,
             code_required: None,
-            skill: Some(Skill { command: "apt update".into(), name: "apt update".into(), description: "apt update".into() }),
+            skill: Some(Skill { command: "apt update".into(), name: "apt update".into(), description: "apt update — met à jour la liste des paquets disponibles".into() }),
         },
     ]
 }

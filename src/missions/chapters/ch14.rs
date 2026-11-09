@@ -35,7 +35,7 @@ Le badge d'accès du nouvel arrivant est créé. Vex Korshun vérifie le compte.
             hints: vec![],
             xp_reward: 225,
             code_required: None,
-            skill: Some(Skill { command: "useradd".into(), name: "useradd".into(), description: "useradd".into() }),
+            skill: Some(Skill { command: "useradd".into(), name: "useradd".into(), description: "useradd — crée un nouveau compte utilisateur".into() }),
         },
         Mission {
             id: "14.2".into(), chapter: 14, chapter_title: "Equipage".into(), act: 4,
@@ -69,7 +69,7 @@ L'équipe 'equipage' est créée et le nouveau membre y est ajouté.
             hints: vec![],
             xp_reward: 225,
             code_required: None,
-            skill: Some(Skill { command: "groupadd".into(), name: "groupadd".into(), description: "groupadd".into() }),
+            skill: Some(Skill { command: "groupadd".into(), name: "groupadd".into(), description: "groupadd — crée un nouveau groupe".into() }),
         },
         Mission {
             id: "14.3".into(), chapter: 14, chapter_title: "Equipage".into(), act: 4,
@@ -103,7 +103,7 @@ Le badge du nouveau est sécurisé avec un code. Vex Korshun approuve.
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "passwd".into(), name: "passwd".into(), description: "passwd".into() }),
+            skill: Some(Skill { command: "passwd".into(), name: "passwd".into(), description: "passwd — définit ou modifie le mot de passe d'un utilisateur".into() }),
         },
         Mission {
             id: "14.4".into(), chapter: 14, chapter_title: "Equipage".into(), act: 4,
@@ -137,7 +137,7 @@ Le nouveau badge est testé: la session fonctionne correctement.
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: "su".into(), name: "su".into(), description: "su".into() }),
+            skill: Some(Skill { command: "su".into(), name: "su".into(), description: "su — change d'utilisateur (switch user)".into() }),
         },
         Mission {
             id: "14.5".into(), chapter: 14, chapter_title: "Equipage".into(), act: 4,
@@ -171,7 +171,7 @@ Vous montrez vos pouvoirs de capitaine. Vex Korshun vérifie vos droits.
             hints: vec![],
             xp_reward: 225,
             code_required: None,
-            skill: Some(Skill { command: "sudo".into(), name: "sudo".into(), description: "sudo".into() }),
+            skill: Some(Skill { command: "sudo".into(), name: "sudo".into(), description: "sudo — exécute une commande avec les privilèges d'un autre utilisateur (root)".into() }),
         },
     ]
 }

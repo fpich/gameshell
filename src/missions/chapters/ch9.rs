@@ -35,7 +35,7 @@ Le compteur affiche le nombre de tentatives d'intrusion. Le chiffre est alarmant
             hints: vec![],
             xp_reward: 175,
             code_required: Some("6".into()),
-            skill: Some(Skill { command: "grep".into(), name: "grep".into(), description: "grep".into() }),
+            skill: Some(Skill { command: "grep".into(), name: "grep".into(), description: "grep — recherche un motif dans un fichier ou une sortie".into() }),
         },
         Mission {
             id: "9.2".into(), chapter: 9, chapter_title: "Enquete".into(), act: 3,
@@ -69,7 +69,7 @@ L'inventaire des logs s'affiche. Vous savez désormais où sont stockées toutes
             hints: vec![],
             xp_reward: 175,
             code_required: None,
-            skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find".into() }),
+            skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find — recherche des fichiers selon des critères (nom, type, taille)".into() }),
         },
         Mission {
             id: "9.3".into(), chapter: 9, chapter_title: "Enquete".into(), act: 3,
@@ -137,7 +137,7 @@ Le rapport des tentatives d'intrusion est consigné. Chaque attaque y est réper
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: ">".into(), name: ">".into(), description: ">".into() }),
+            skill: Some(Skill { command: ">".into(), name: ">".into(), description: "> — redirige la sortie d'une commande vers un fichier (écrase)".into() }),
         },
         Mission {
             id: "9.5".into(), chapter: 9, chapter_title: "Enquete".into(), act: 3,
@@ -171,7 +171,7 @@ Les IPs bloquées par le pare-feu s'ajoutent au rapport. Le dossier est complet.
             hints: vec![],
             xp_reward: 200,
             code_required: None,
-            skill: Some(Skill { command: ">>".into(), name: ">>".into(), description: ">>".into() }),
+            skill: Some(Skill { command: ">>".into(), name: ">>".into(), description: ">> — redirige la sortie d'une commande vers un fichier (ajoute)".into() }),
         },
     ]
 }
