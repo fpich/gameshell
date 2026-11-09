@@ -17,6 +17,54 @@ cargo build --release && ./make-archive.sh
 ./gameshell.sh          # installe dans ~/.gameshell/ et lance le jeu
 ```
 
+### 🖥️ Installation sur Debian 13 (Trixie) — sans cloner le dépôt
+
+Le jeu se distribue en **un seul fichier** `gameshell.sh` (auto-extractible, 100% offline).
+Aucun clone git ni connexion internet requis après installation.
+
+```bash
+# 1. Copier gameshell.sh sur la machine (clé USB, scp, ENT...)
+# 2. (Optionnel mais recommandé) installer les prérequis système:
+sudo bash install-debian13.sh
+# 3. Lancer:
+chmod +x gameshell.sh
+./gameshell.sh
+```
+
+**Prérequis minimaux** (présents par défaut sur Debian 13): `bash`, `tar`, `coreutils`
+(`ls`, `cat`, `cp`, `mv`, `rm`, `chmod`, `chown`, `mkdir`, `touch`, `date`...).
+
+**Paquets installés par `install-debian13.sh`** (pour les missions de durcissement
+des campagnes 1 et 3, sinon les commandes sont simulées par le jeu):
+
+| Paquet | Commandes | Campagnes |
+|--------|-----------|-----------|
+| `zip` / `unzip` | zip, unzip | 1, 2, 3 |
+| `nano` | nano (éditeur) | 1, 3 |
+| `curl` | curl | 3 |
+| `bind9-dnsutils` | dig, nslookup | 3 |
+| `iproute2` | ip, ss | 1, 2, 3 |
+| `iputils-ping` | ping | 1, 2, 3 |
+| `net-tools` | netstat, route | 1, 3 |
+| `traceroute` | traceroute | 3 |
+| `nmap` | nmap | 3 |
+| `openssh-client` / `openssh-server` | ssh, sshd | 1, 3 |
+| `ufw` | ufw | 1, 3 |
+| `iptables` | iptables | 1, 3 |
+| `fail2ban` | fail2ban-client | 1, 3 |
+| `auditd` | auditctl | 1, 3 |
+| `procps` | ps, top, pgrep, kill, nice | 1, 2, 3 |
+| `findutils` | find | 1, 2, 3 |
+| `gawk` | awk | 1, 2, 3 |
+| `man-db` | man | 1, 2, 3 |
+| `sudo` / `passwd` / `login` | sudo, passwd, su, useradd, groupadd | 1, 2, 3 |
+| `systemd` / `util-linux` / `mount` | systemctl, journalctl, mount, df, du | 1, 2, 3 |
+
+> 💡 Les services (`openssh-server`, `fail2ban`, `ufw`, `auditd`) sont installés mais
+> **pas démarrés automatiquement** pour ne pas modifier le comportement de la machine.
+> Le jeu fonctionne aussi sans eux (commandes simulées), mais les missions de
+> durcissement sont plus réalistes avec.
+
 
 ---
 
