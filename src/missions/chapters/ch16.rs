@@ -88,7 +88,7 @@ Le compte matelot rejoint l'équipe equipage. Ses droits sont mis à jour.
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter un utilisateur à un groupe?".into(),
             required_commands: vec!["sudo usermod -aG equipage matelot".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "usermod".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "usermod".into(), expected: None }, MissionCheck { check_type: "user_in_group".into(), target: "matelot".into(), expected: Some("equipage".into()) }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,

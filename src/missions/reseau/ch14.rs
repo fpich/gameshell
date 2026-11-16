@@ -55,11 +55,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa, soulagée: « Le FAI 10.0.0.254 est débanni, netrunner. La liaison est rétablie. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Débanissez 10.0.0.254 (sudo fail2ban-client unban 10.0.0.254).".into(),
+            goal: "Levez immédiatement le bannissement infligé par erreur au FAI 10.0.0.254 par le gardien anti-intrusion.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment révoquer un bannissement?".into(),
             required_commands: vec!["sudo fail2ban-client unban 10.0.0.254".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "unban".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "unban".into(), expected: None }, MissionCheck { check_type: "sim_not_contains".into(), target: "fail2ban.bans".into(), expected: Some("10.0.0.254".into()) }],
             hints: vec![],
             xp_reward: 150,
             code_required: None,
@@ -86,7 +86,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl vérifie: « sshd tourne bien, netrunner. Le service est en ordre. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez l'état du service ssh (systemctl status ssh).".into(),
+            goal: "Vérifiez pour Karl que le service d'accès distant sécurisé du NOC tourne bien, en affichant son état.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'état d'un service?".into(),
             required_commands: vec!["systemctl status ssh".into()],
@@ -121,7 +121,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment redémarrer un service?".into(),
             required_commands: vec!["sudo systemctl restart ssh".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "restart".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "restart".into(), expected: None }, MissionCheck { check_type: "sim_event".into(), target: "systemctl restart ssh".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,

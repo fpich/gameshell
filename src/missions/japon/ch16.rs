@@ -52,7 +52,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le moine Tetsuo inspecte la liste: « Même les fichiers cachés sont visibles, Seigneur. Rien ne vous échappe. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Listez la racine en détail avec cachés (ls -la /).".into(),
+            goal: "Montrez au moine Tetsuo le contenu de la racine / en format détaillé, fichiers cachés compris.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment tout lister à la racine?".into(),
             required_commands: vec!["ls -la /".into()],
@@ -82,7 +82,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya recense les documents: « Voilà tous les .txt du château, Seigneur. L'inventaire est complet. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Trouvez tous les fichiers .txt (find / -name '*.txt').".into(),
+            goal: "Recherchez dans tout le château, depuis la racine, chaque document dont le nom se termine par .txt.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment chercher tous les .txt?".into(),
             required_commands: vec!["find / -name '*.txt'".into()],

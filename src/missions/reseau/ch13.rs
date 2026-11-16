@@ -24,7 +24,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl approuve: « L'état du pare-feu est clair, netrunner. Nous savons où nous en sommes. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez l'état détaillé du pare-feu (sudo ufw status verbose).".into(),
+            goal: "Vérifiez avec les droits d'administrateur l'état complet et détaillé du pare-feu du NOC.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'état du pare-feu?".into(),
             required_commands: vec!["sudo ufw status verbose".into()],
@@ -55,11 +55,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl, soulagé: « 10.0.0.66 est bloqué, netrunner. Le scan est stoppé net. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Bloquez 10.0.0.66 (sudo ufw deny from 10.0.0.66).".into(),
+            goal: "Avec les droits d'administrateur, interdisez au pare-feu tout trafic en provenance de l'attaquant 10.0.0.66.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment bloquer une IP?".into(),
             required_commands: vec!["sudo ufw deny from 10.0.0.66".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ufw".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "deny".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ufw".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "deny".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "ufw.rules".into(), expected: Some("DENY&&from 10.0.0.66".into()) }],
             hints: vec![],
             xp_reward: 150,
             code_required: None,
@@ -86,11 +86,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa confirme: « Le port 443 est autorisé, netrunner. Le portail web est accessible. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Autorisez le port 443 (sudo ufw allow 443/tcp).".into(),
+            goal: "Ouvrez au pare-feu le port 443, en TCP uniquement, pour le portail web.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment autoriser un port?".into(),
             required_commands: vec!["sudo ufw allow 443/tcp".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "allow".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "443/tcp".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "allow".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "443/tcp".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "ufw.rules".into(), expected: Some("ALLOW IN 443".into()) }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,
@@ -117,11 +117,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl approuve: « Le pare-feu est actif, netrunner. Les règles sont en vigueur. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Activez le pare-feu (sudo ufw enable).".into(),
+            goal: "Les règles sont prêtes: mettez le pare-feu du NOC en service, avec les droits d'administrateur.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment activer le pare-feu?".into(),
             required_commands: vec!["sudo ufw enable".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "enable".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "enable".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "ufw.conf".into(), expected: Some("enabled=yes".into()) }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,

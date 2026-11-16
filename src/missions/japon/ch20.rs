@@ -142,7 +142,7 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             bloom_level: "Créer".into(),
             bloom_question: "Quel est le protocole de siège?".into(),
             required_commands: vec!["cat /donjon/coffre-fort/sceaux.txt".into(), "sudo auditctl -w /archives/secret -p wa -k sceau_final".into()],
-            checks: vec![MissionCheck { check_type: "file_read".into(), target: "sceaux.txt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "file_read".into(), target: "sceaux.txt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "audit.rules".into(), expected: Some("-w /archives/secret".into()) }],
             hints: vec![],
             xp_reward: 500,
             code_required: Some("TORA-442-KAMI".into()),

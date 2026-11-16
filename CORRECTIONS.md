@@ -1,6 +1,9 @@
 # 🔧 PLAN DE CORRECTIONS & AMÉLIORATIONS — post-playthrough
 
-Basé sur TESTS_PLAYTHROUGH.md (playthrough Lucas, 50 missions, 4 bugs trouvés).
+Basé sur TESTS_PLAYTHROUGH.md (playthrough Lucas, version initiale à 50 missions, 4 bugs trouvés).
+
+> ⚠️ Document historique. Le jeu compte aujourd'hui 3 campagnes × 100 missions; les commandes système
+> sont simulées par le jeu dans un bac à sable (voir AUDIT_CORRECTIONS / AGENTS.md règles A1, A23).
 
 ---
 

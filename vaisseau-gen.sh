@@ -3,12 +3,42 @@
 # ║  GÉNÉRATEUR DU VAISSEAU SPATIAL ORION-7                   ║
 # ║  Arborescence 100% immersive - pas un serveur Linux!     ║
 # ╚══════════════════════════════════════════════════════════╝
-# Usage: ./vaisseau-gen.sh [campagne] [dossier_destination]
-#   campagne = espace (défaut) | japon
+# Usage: ./vaisseau-gen.sh CAMPAGNE DOSSIER_DESTINATION
+#   CAMPAGNE = espace | japon | reseau
+#   DOSSIER  = .../vaisseau | .../monde_japon | .../monde_reseau (sous $GAMESHELL_HOME ou un dossier temporaire)
 set -e
-CAMP="${1:-espace}"
-if [ "$CAMP" = "japon" ]; then V="${2:-$HOME/.gameshell/monde_japon}"; elif [ "$CAMP" = "reseau" ]; then V="${2:-$HOME/.gameshell/monde_reseau}"; else V="${2:-${1:-vaisseau}}"; fi
-rm -rf "$V"
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 espace|japon|reseau DOSSIER_DESTINATION" >&2; exit 1
+fi
+CAMP="$1"; V="$2"
+case "$CAMP" in
+    espace) WANT=vaisseau ;;
+    japon)  WANT=monde_japon ;;
+    reseau) WANT=monde_reseau ;;
+    *) echo "❌ Campagne inconnue: $CAMP (espace, japon ou reseau)" >&2; exit 1 ;;
+esac
+
+# ── Garde-fou (audit P0.6): ce script EFFACE puis recrée la destination. On refuse toute
+#    destination qui ne serait pas un monde du jeu sous $GAMESHELL_HOME ou un dossier temporaire.
+gsh_check_dest() {
+    local dest="$1" want="$2"
+    if [ -z "$dest" ] || [ "$(basename "$dest")" != "$want" ]; then
+        echo "❌ Destination refusée: « $dest » (le dossier doit s'appeler $want)" >&2; exit 1
+    fi
+    local parent; parent="$(dirname "$dest")"
+    mkdir -p "$parent" 2>/dev/null || true
+    parent="$(cd "$parent" 2>/dev/null && pwd -P)" || { echo "❌ Dossier parent introuvable: $(dirname "$dest")" >&2; exit 1; }
+    local ok=0 allowed
+    for allowed in "${GAMESHELL_HOME:-$HOME/.gameshell}" "${TMPDIR:-/tmp}" /tmp /var/tmp; do
+        [ -d "$allowed" ] || continue
+        allowed="$(cd "$allowed" && pwd -P)"
+        case "$parent/" in "$allowed"/*) ok=1 ;; esac
+    done
+    [ "$ok" = 1 ] || { echo "❌ Destination refusée hors de \$GAMESHELL_HOME ou d'un dossier temporaire: $dest" >&2; exit 1; }
+}
+gsh_check_dest "$V" "$WANT"
+V="$(cd "$(dirname "$V")" && pwd -P)/$WANT"
+rm -rf --one-file-system "$V"
 
 if [ "$CAMP" = "japon" ]; then
   bash "$(dirname "$0")/monde-japon-gen.sh" "$V"
@@ -22,7 +52,7 @@ fi
 # ═══════════════════════════════════════════════
 #  NIVEAU 0 — LA RACINE DU VAISSEAU
 # ═══════════════════════════════════════════════
-mkdir -p "$V"/{pont,cabines,soutes,reacteur,hangar,salle-des-machines,infirmerie,cantine,navigation,communications,securite,armes,cale-a-carburant,cale-a-oxygene,soute-a-munitions,archives,corvettes,sas-entree,soute-dechets,atelier,bibliotheque,salle-de-reunion,cuisine,douches,toilettes,soute-refroidissement,soute-chauffage,vide-ordures,local-technique,antenne,soute-reserve,parking,garage,zone-industrielle,tmp,var/tmp}
+mkdir -p "$V"/{pont,cabines,soutes,reacteur,hangar,salle-des-machines,infirmerie,cantine,navigation,communications,securite,armes,cale-a-carburant,cale-a-oxygene,soute-a-munitions,archives,corvettes,sas-entree,soute-dechets,atelier,bibliotheque,salle-de-reunion,cuisine,douches,sanitaires,soute-refroidissement,soute-chauffage,vide-ordures,local-technique,antenne,soute-reserve,baie-navettes,quai-arrimage,module-recyclage,tmp,var/tmp}
 
 # ═══════════════════════════════════════════════
 #  PONT DE COMMANDEMENT (le QG)
@@ -131,6 +161,9 @@ EOF
 C="$V/cabines"
 mkdir -p "$C"/{capitaine,zyra,vex,nira,tael,matelot,invite}
 
+# Fichiers temporaires laissés par Tael Rhen (mission 2.5)
+for t in temp1 temp2 temp3; do echo "brouillon temporaire de Tael Rhen ($t)" > "$C/capitaine/$t.txt"; done
+
 cat > "$C/capitaine/bienvenue.txt" << 'EOF'
 BIENVENUE DANS VOTRE CABINE,CAPITAINE!
 
@@ -237,6 +270,15 @@ EOF
 #  SÉCURITÉ (le cœur de la défense)
 # ═══════════════════════════════════════════════
 S="$V/securite"
+mkdir -p "$S"
+# Scan de sécurité (mission 6.5: lancé avec une priorité réduite)
+cat > "$S/scan_securite.sh" << 'SHEOF'
+#!/bin/bash
+echo "🔎 Scan de sécurité d'Orion-7 en cours..."
+for c in pont soutes reacteur securite; do echo "  ✔ compartiment $c: aucune signature pirate"; done
+echo "Scan terminé (priorité: $(nice))"
+SHEOF
+chmod 755 "$S/scan_securite.sh"
 mkdir -p "$S"/{alertes,logs,coffre-fort,config,rapports,firewall,antivirus,cles}
 
 cat > "$S/alertes/alerte_rouge.txt" << 'EOF'

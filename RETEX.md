@@ -1,3 +1,13 @@
+> ## ⚠️ Rectificatif (audit du 2026-11-16, commit 78d1a91)
+> Plusieurs affirmations ci-dessous étaient **fausses** au moment où elles ont été écrites:
+> « aucune fuite d'infos hôte », « isolation hôte vérifiée » et « 48/48 PASS » ne tenaient que sur une
+> machine avec sudo sans mot de passe et un réseau 10.0.0.x joignable (`cd /..` sortait du monde,
+> `cat /../../../etc/passwd` lisait le vrai fichier, `sudo useradd/ufw` modifiaient l'hôte, les bancs
+> préparaient eux-mêmes l'état attendu par les checks).
+> **État corrigé**: bac à sable bubblewrap (A1), commandes système simulées (A23), validation par analyse
+> des lignes réussies (A4), bancs n'exécutant que les commandes requises — `cargo test` 11/11,
+> `./tests/run_tests.sh` 54/54 dans un dossier temporaire, AUTO/EDGE/TORTURE 300/300 dont isolation réelle.
+
 # 🧪 RETEX EXHAUSTIF — GameShell (2 campagnes × 100 missions)
 
 Date: session courante. Périmètre: exécution réelle du jeu (`gameshell.sh`), 200 missions jouées

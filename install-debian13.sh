@@ -2,19 +2,29 @@
 # ═══════════════════════════════════════════════════════════════
 #  🚀 GAMESHELL — Installation des prérequis sur Debian 13 (Trixie)
 #  Jeu RPG éducatif shell — BTS SIO SISR
-#  À exécuter en root ou avec sudo, AVANT de lancer gameshell.sh
+#  À exécuter UNE FOIS par l'administrateur (root ou sudo), AVANT de lancer gameshell.sh.
+#  Le jeu, lui, se lance ensuite avec un compte élève NORMAL (jamais en root).
 # ═══════════════════════════════════════════════════════════════
 set -e
+
+if [ "$(id -u)" != "0" ]; then
+    echo "❌ Ce script installe des paquets: lancez-le avec sudo (sudo bash install-debian13.sh)." >&2
+    exit 1
+fi
 
 echo "📦 Mise à jour des dépôts..."
 apt update
 
-echo "📦 Installation des paquets nécessaires pour les 3 campagnes..."
+# bubblewrap = bac à sable du jeu (isolation complète de la machine hôte).
+# Les autres paquets sont les outils SHELL réellement exécutés dans le bac à sable.
+# Les commandes d'administration (useradd, ufw, systemctl, apt, ping, ssh...) sont
+# SIMULÉES par le jeu: inutile d'installer ou de démarrer ssh/ufw/fail2ban pour jouer.
+echo "📦 Installation des paquets nécessaires..."
 apt install -y \
+    bubblewrap \
     bash \
     coreutils \
     findutils \
-    procps \
     grep \
     sed \
     gawk \
@@ -23,35 +33,23 @@ apt install -y \
     zip \
     unzip \
     nano \
-    curl \
-    bind9-dnsutils \
-    iproute2 \
-    iputils-ping \
-    net-tools \
-    traceroute \
-    nmap \
-    openssh-client \
-    openssh-server \
-    ufw \
-    iptables \
-    fail2ban \
-    auditd \
     less \
     man-db \
-    sudo \
-    passwd \
-    login \
-    systemd \
-    util-linux \
-    mount
+    util-linux
+
+# Debian 13 autorise par défaut les espaces de noms utilisateur non privilégiés,
+# nécessaires à bubblewrap. On le vérifie pour prévenir l'enseignant.
+if [ -r /proc/sys/kernel/unprivileged_userns_clone ] && [ "$(cat /proc/sys/kernel/unprivileged_userns_clone)" = "0" ]; then
+    echo "⚠️  kernel.unprivileged_userns_clone=0: le bac à sable ne pourra pas démarrer."
+    echo "    Activez-le: echo 'kernel.unprivileged_userns_clone=1' > /etc/sysctl.d/99-gameshell.conf && sysctl --system"
+fi
 
 echo ""
 echo "✅ Prérequis installés."
-echo "🚀 Lancez maintenant: ./gameshell.sh"
+echo "🚀 Les élèves lancent maintenant, avec LEUR compte (pas root): ./gameshell.sh"
 echo ""
 echo "💡 Notes:"
-echo "   - openssh-server + fail2ban + ufw + auditd sont nécessaires pour les missions"
-echo "     de durcissement (campagnes 1 et 3). Ils sont installés mais PAS démarrés"
-echo "     automatiquement pour ne pas modifier le comportement de la machine."
-echo "   - Le jeu fonctionne aussi sans ces paquets (les commandes sont simulées),"
-echo "     mais les missions système seront plus réalistes avec."
+echo "   - Le jeu s'exécute dans un bac à sable (bubblewrap): l'élève ne voit que le monde"
+echo "     du jeu, sans réseau ni accès aux fichiers de la machine."
+echo "   - useradd, ufw, systemctl, apt, kill, ping, ssh... sont simulés: aucun compte,"
+echo "     pare-feu, service ou paquet RÉEL n'est jamais modifié par les missions."

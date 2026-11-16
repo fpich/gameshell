@@ -98,7 +98,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
         },
         Mission {
             id: "17.4".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
-            title: "Redémarrer SSH".into(),
+            title: "Appliquer le durcissement SSH".into(),
             description: "Appliquez la config.".into(),
             story: "Karl: « Redémarrez ssh pour appliquer le durcissement. »
 
@@ -121,7 +121,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment appliquer la nouvelle config?".into(),
             required_commands: vec!["sudo systemctl restart ssh".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "restart".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "restart".into(), expected: None }, MissionCheck { check_type: "sim_event".into(), target: "systemctl restart ssh".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,
@@ -148,7 +148,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa confirme: « Le tunnel chiffré vers nexus-02 est établi, netrunner. La liaison est sécurisée. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Ouvrez une connexion SSH vers 10.0.0.2 (ssh netrunner@10.0.0.2).".into(),
+            goal: "Ouvrez un tunnel chiffré d'accès distant vers nexus-02, 10.0.0.2, en vous connectant avec le compte netrunner.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment se connecter en SSH à un serveur?".into(),
             required_commands: vec!["ssh netrunner@10.0.0.2".into()],

@@ -52,11 +52,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Hanzō confirme: « SSH est redémarré, Seigneur. Les réglages sont appliqués. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Redémarrez le service ssh (sudo systemctl restart ssh).".into(),
+            goal: "Avec les droits d'administrateur, redémarrez le service d'accès distant sécurisé du château pour appliquer les nouveaux réglages.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment redémarrer un service?".into(),
             required_commands: vec!["sudo systemctl restart ssh".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "restart".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "restart".into(), expected: None }, MissionCheck { check_type: "sim_event".into(), target: "systemctl restart ssh".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,
@@ -142,11 +142,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Hanzō, soulagé: « Le clan Hattori est débanni, Seigneur. Nos alliés peuvent revenir. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Débanissez 10.0.0.99 (sudo fail2ban-client unban 10.0.0.99).".into(),
+            goal: "Levez immédiatement le bannissement infligé par erreur au clan Hattori, 10.0.0.99, par le videur anti-intrusion.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment révoquer un bannissement?".into(),
             required_commands: vec!["sudo fail2ban-client unban 10.0.0.99".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "unban".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "unban".into(), expected: None }, MissionCheck { check_type: "sim_not_contains".into(), target: "fail2ban.bans".into(), expected: Some("10.0.0.99".into()) }],
             hints: vec![],
             xp_reward: 150,
             code_required: None,

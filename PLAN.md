@@ -1,4 +1,4 @@
-# 📋 PLAN — GameShell : 2 campagnes de 100 missions en dur (20 par acte)
+# 📋 PLAN — GameShell : 3 campagnes de 100 missions en dur (20 par acte)
 
 ## Campagne 1 — Les Pirates de l'Espace (FACILE) — `src/missions/chapters/ch1..20.rs`
 Station Orion-7, hôte orion7, capitaine. 5 actes × 20 missions.
@@ -7,7 +7,7 @@ Station Orion-7, hôte orion7, capitaine. 5 actes × 20 missions.
 Château Shiro, hôte shiro, seigneur. Monde dédié `monde_japon/` (monde-japon-gen.sh).
 5 actes × 20 missions, checks plus exigeants (options exactes, multi-checks, codes phase 2).
 
-| Acte | Chapitres (les 2 campagnes) | Thème |
+| Acte | Chapitres (les 3 campagnes) | Thème |
 |------|------------------------------|-------|
 | I | 1–4 | Arrivée (vaisseau / château), exploration, organisation |
 | II | 5–8 | Permissions, surveillance des processus |
@@ -21,5 +21,5 @@ Château Shiro, hôte shiro, seigneur. Monde dédié `monde_japon/` (monde-japon
 - `gsh reset` régénère le monde de la campagne courante (vaisseau-gen.sh embarqué).
 
 ## Tests (figés)
-- `cargo test`: conformité des 2 campagnes (100 missions chacune, 20/acte, C3/C6/C9/C13/A15).
-- `tests/run_tests.sh`: **48/48 PASS** dont auto-solve 100/100 × 3 campagnes (GAMESHELL_AUTO=1), EDGE 300/300, TORTURE 300/300, sélections campagnes 2 et 3.
+- `cargo test`: conformité des 3 campagnes (100 missions chacune, 20/acte, A4/A12/A15/A17, C3/C4/C5/C9/C13).
+- `tests/run_tests.sh`: **54/54 PASS** (dans un GAMESHELL_HOME temporaire) dont AUTO 300/300 par les seules commandes requises, EDGE 300/300, TORTURE 300/300 avec isolation réelle de l'hôte, sélections campagnes 2 et 3.

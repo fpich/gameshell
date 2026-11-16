@@ -24,11 +24,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa approuve: « Le compte stagiaire2 est créé avec son home, netrunner. Le nouveau stagiaire est attendu. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Créez le compte stagiaire2 (sudo useradd -m) + sa fiche (id).".into(),
+            goal: "Avec les droits d'administrateur, créez le compte stagiaire2 avec son dossier personnel, puis affichez sa fiche d'identité.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un utilisateur avec home?".into(),
             required_commands: vec!["sudo useradd -m stagiaire2".into(), "id stagiaire2".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "useradd".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-m".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "id".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "useradd".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-m".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "id".into(), expected: None }, MissionCheck { check_type: "user_exists".into(), target: "stagiaire2".into(), expected: None }],
             hints: vec![],
             xp_reward: 150,
             code_required: None,
@@ -55,11 +55,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl confirme: « Le groupe netops2 est créé, netrunner. Les nouveaux ont leur place. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Créez le groupe netops2 (sudo groupadd).".into(),
+            goal: "Avec les droits d'administrateur, créez le groupe netops2 qui accueillera les nouveaux.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un groupe?".into(),
             required_commands: vec!["sudo groupadd netops2".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "groupadd".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "groupadd".into(), expected: None }, MissionCheck { check_type: "group_exists".into(), target: "netops2".into(), expected: None }],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
@@ -86,11 +86,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl vérifie: « stagiaire2 est bien dans netops2, netrunner. Les droits sont en place. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Ajoutez stagiaire2 à netops2 (sudo usermod -aG).".into(),
+            goal: "Affectez stagiaire2 au groupe netops2 en complément, sans lui retirer ses autres affectations.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter à un groupe?".into(),
             required_commands: vec!["sudo usermod -aG netops2 stagiaire2".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "usermod".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-aG".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "usermod".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-aG".into(), expected: None }, MissionCheck { check_type: "user_in_group".into(), target: "stagiaire2".into(), expected: Some("netops2".into()) }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,
@@ -117,7 +117,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa vérifie vos groupes: « Vos groupes sont corrects, netrunner. Le contrôle d'accès est cohérent. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez vos groupes (groups).".into(),
+            goal: "Montrez à Rosa la liste des groupes auxquels votre propre compte appartient.".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Comment voir ses groupes?".into(),
             required_commands: vec!["groups".into()],
@@ -148,10 +148,10 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl confirme: « La session de stagiaire2 est ouverte, netrunner. L'identité est vérifiée. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Ouvrez une session stagiaire2 (su - stagiaire2 -c whoami).".into(),
+            goal: "Endossez l'identité de stagiaire2 dans une session de connexion complète, le temps d'exécuter une seule commande qui révèle sous quel nom vous agissez.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tester un autre compte?".into(),
-            required_commands: vec!["su - stagiaire2 -c whoami".into()],
+            required_commands: vec!["sudo su - stagiaire2 -c whoami".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "su".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-c".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,

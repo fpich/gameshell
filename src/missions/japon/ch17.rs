@@ -23,7 +23,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes vérifie: « Le pare-feu est bien actif, Seigneur. Les déflecteurs sont en place. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Affichez l'état détaillé du pare-feu (sudo ufw status verbose).".into(),
+            goal: "Avant de bloquer les espions, vérifiez avec les droits d'administrateur l'état complet et détaillé du pare-feu du château.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'état du pare-feu?".into(),
             required_commands: vec!["sudo ufw status verbose".into()],
@@ -53,11 +53,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Hanzō confirme: « L'IP espion est bloquée, Seigneur. Le portail SSH est protégé. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Bloquez 10.0.0.66 (sudo ufw deny from 10.0.0.66).".into(),
+            goal: "Interdisez définitivement au pare-feu tout trafic en provenance de l'espion 10.0.0.66.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment bloquer une IP au pare-feu?".into(),
             required_commands: vec!["sudo ufw deny from 10.0.0.66".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ufw".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "deny".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ufw".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "deny".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "ufw.rules".into(), expected: Some("DENY&&from 10.0.0.66".into()) }],
             hints: vec![],
             xp_reward: 150,
             code_required: None,
@@ -113,11 +113,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya approuve: « Le port 22 est ouvert pour nos alliés, Seigneur. Le clan Hattori pourra nous contacter. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Autorisez le port 22 (sudo ufw allow 22).".into(),
+            goal: "Ouvrez le port 22 au pare-feu pour que le clan Hattori puisse joindre le château par le canal chiffré.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment autoriser un port au pare-feu?".into(),
             required_commands: vec!["sudo ufw allow 22".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "allow".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "allow".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "ufw.rules".into(), expected: Some("ALLOW IN 22".into()) }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,
@@ -143,11 +143,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes salue: « Le pare-feu est actif, Seigneur. Le château est désormais protégé. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Activez le pare-feu (sudo ufw enable).".into(),
+            goal: "Les règles sont prêtes: mettez le pare-feu du château en service, avec les droits d'administrateur.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment activer le pare-feu?".into(),
             required_commands: vec!["sudo ufw enable".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "enable".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "enable".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "ufw.conf".into(), expected: Some("enabled=yes".into()) }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,

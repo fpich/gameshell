@@ -7,7 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "13.1".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
             title: "Archiver les logs".into(),
             description: "Archivez avant contre-attaque!".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Avant la contre-attaque, il faut archiver tous les logs comme preuves.
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Avant la contre-attaque, il faut archiver tout le dossier /securite/logs comme preuves, dans une archive compressée logs.tar.gz posée dans votre cabine.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
@@ -18,7 +18,7 @@ Archiver les logs est une étape cruciale pour préparer la station à l'attaque
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Avant la contre-attaque, il faut archiver tous les logs comme preuves.
+Votre mission: Avant la contre-attaque, il faut archiver tout le dossier /securite/logs comme preuves, dans une archive compressée logs.tar.gz posée dans votre cabine.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
@@ -27,10 +27,10 @@ la station et son équipage de 5 personnes.
 Les logs sont archivés en une seule archive. Les preuves sont désormais en sécurité.
 
 « Une sauvegarde, c'est une assurance », explique Tael Rhen. « Si les originaux sont perdus, la copie nous sauve. »".into(),
-            goal: "Avant la contre-attaque, archivez tous les logs comme preuves.".into(),
+            goal: "Avant la contre-attaque, rangez tout le dossier /securite/logs dans une archive compressée logs.tar.gz, dans votre cabine.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Creer une archive?".into(),
-            required_commands: vec!["tar czf archive.tar.gz dossier/".into()],
+            required_commands: vec!["tar czf logs.tar.gz /securite/logs/".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "tar".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/logs.tar.gz".into(), expected: None }],
             hints: vec![],
             xp_reward: 200,
@@ -41,7 +41,7 @@ Les logs sont archivés en une seule archive. Les preuves sont désormais en sé
             id: "13.2".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
             title: "ZIP".into(),
             description: "L'Andromède prefere le ZIP.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. L'Andromède demande les rapports au format ZIP pour compatibilité.
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. L'Andromède demande le dossier rapports de votre cabine (avec tout son contenu) au format ZIP, dans un fichier rapports.zip.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
@@ -52,7 +52,7 @@ Compresser en ZIP est une étape cruciale pour préparer la station à l'attaque
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: L'Andromède demande les rapports au format ZIP pour compatibilité.
+Votre mission: L'Andromède demande le dossier rapports de votre cabine (avec tout son contenu) au format ZIP, dans un fichier rapports.zip.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
@@ -61,10 +61,10 @@ la station et son équipage de 5 personnes.
 Les rapports sont compressés au format ZIP. L'Andromède pourra les lire.
 
 « Le format ZIP est universel », note Nira Okoro. « C'est le langage commun des vaisseaux. »".into(),
-            goal: "L'Andromède demande vos rapports au format ZIP. Compressez-les.".into(),
+            goal: "L'Andromède veut tout votre dossier rapports, sous-dossiers compris, compressé dans rapports.zip.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Faire un ZIP?".into(),
-            required_commands: vec!["zip -r archive.zip dossier/".into()],
+            required_commands: vec!["zip -r rapports.zip rapports/".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "zip".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/rapports.zip".into(), expected: None }],
             hints: vec![],
             xp_reward: 200,
@@ -109,7 +109,7 @@ L'espace disque s'affiche. Les soutes de données ont encore de la place pour ar
             id: "13.4".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
             title: "Gros fichiers".into(),
             description: "Quel compartiment est gros?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Quelle soute prend le plus de place? Il faut le savoir pour optimiser le stockage.
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Quelle soute prend le plus de place? Pesez un par un chaque compartiment de /soutes pour optimiser le stockage.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
@@ -120,7 +120,7 @@ Trouver les gros fichiers est une étape cruciale pour préparer la station à l
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Quelle soute prend le plus de place? Il faut le savoir pour optimiser le stockage.
+Votre mission: Quelle soute prend le plus de place? Pesez un par un chaque compartiment de /soutes pour optimiser le stockage.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
@@ -129,10 +129,10 @@ la station et son équipage de 5 personnes.
 Le pesage des soutes s'affiche. Vous repérez la soute la plus pleine.
 
 « Celle-là est saturée », note Tael Rhen. « Comparer les tailles, c'est gérer l'espace intelligemment. »".into(),
-            goal: "Quelle soute est la plus pleine? Pesmez-les.".into(),
+            goal: "Quelle soute est la plus pleine? Pesez un par un chaque compartiment de /soutes, en tailles lisibles.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Taille des dossiers?".into(),
-            required_commands: vec!["du -sh dossier/".into()],
+            required_commands: vec!["du -sh /soutes/*".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "du".into(), expected: None }],
             hints: vec![],
             xp_reward: 200,

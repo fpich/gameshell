@@ -24,7 +24,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl parcourt la liste: « Voilà tous les processus du cluster, netrunner. Le NOC est bien vivant. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Listez tous les processus (ps aux).".into(),
+            goal: "Dressez la liste complète de tous les processus du cluster, avec leur propriétaire et leur consommation.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lister tous les processus?".into(),
             required_commands: vec!["ps aux".into()],
@@ -55,7 +55,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl examine le filtre: « Seuls les processus sshd, netrunner. La surveillance est ciblée. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez les processus sshd (ps aux | grep sshd).".into(),
+            goal: "Isolez pour Karl, dans la liste complète des processus du cluster, uniquement les lignes qui mentionnent sshd.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment filtrer les processus?".into(),
             required_commands: vec!["ps aux | grep sshd".into()],
@@ -86,7 +86,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl examine la liste: « Le processus 'miner' est repéré, netrunner. Nous savons où il se cache. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Listez les processus 'miner' (pgrep -a miner).".into(),
+            goal: "Retrouvez sur le cluster tout processus dont le nom contient 'miner', en affichant son PID et sa ligne de commande complète.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment chercher un processus par nom?".into(),
             required_commands: vec!["pgrep -a miner".into()],
@@ -117,7 +117,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa regarde le cliché: « Mémoire, CPU, processus gourmands... le cluster tient bon, netrunner. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez un aperçu des ressources (top -bn1).".into(),
+            goal: "Donnez à Rosa un cliché unique des jauges du cluster (CPU, mémoire), en mode lot non interactif et en une seule itération.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment surveiller les ressources?".into(),
             required_commands: vec!["top -bn1".into()],
@@ -147,11 +147,11 @@ Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout 
 Karl confirme: « Le miner PID 6666 est neutralisé, netrunner. nexus-02 respire à nouveau. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Tuez le processus 6666 (kill -9).".into(),
+            goal: "Abattez de force le miner 6666 qui pompe le CPU de nexus-02, avec le signal qu'il ne peut ni ignorer ni intercepter.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tuer un processus par PID?".into(),
             required_commands: vec!["kill -9 6666".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "kill".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-9".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "kill".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-9".into(), expected: None }, MissionCheck { check_type: "process_absent".into(), target: "6666".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,

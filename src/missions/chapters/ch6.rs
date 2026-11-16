@@ -133,7 +133,7 @@ Le processus pirate est éliminé. Draz M'kal pousse un soupir de soulagement.
             bloom_level: "Appliquer".into(),
             bloom_question: "Tuer un processus?".into(),
             required_commands: vec!["kill 9999".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "kill".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "kill".into(), expected: None }, MissionCheck { check_type: "process_absent".into(), target: "9999".into(), expected: None }],
             hints: vec![],
             xp_reward: 175,
             code_required: None,
@@ -143,31 +143,38 @@ Le processus pirate est éliminé. Draz M'kal pousse un soupir de soulagement.
             id: "6.5".into(), chapter: 6, chapter_title: "Surveillance".into(), act: 2,
             title: "Priorites".into(),
             description: "Scan prioritaire.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Le scan de sécurité doit être prioritaire face à l'attaque imminente.
+            story: "Tael Rhen surgit du local technique, une tablette à la main:
+« Capitaine, le scan de sécurité est prêt: c'est le script
+/securite/scan_securite.sh. Mais il est très gourmand en calcul! »
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
+Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes
+scannent nos défenses. Les boucliers déflecteurs ont besoin de toute
+la puissance du processeur de bord en ce moment.
 
-Gérer les priorités est une étape cruciale pour préparer la station à l'attaque imminente.
+« Si on lance le scan normalement, il va voler du temps de calcul
+aux boucliers », explique-t-il. « Il faut le lancer avec une priorité
+réduite: niveau 10. Il tournera quand même, mais il laissera passer
+les systèmes vitaux d'abord. »
 
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
+Sur Linux, chaque processus a une « gentillesse »: de -20 (très
+prioritaire, réservé à l'administrateur) à 19 (très effacé). Plus le
+nombre est grand, plus le processus cède sa place aux autres.
 
-Votre mission: Le scan de sécurité doit être prioritaire face à l'attaque imminente.
+Draz M'kal hoche la tête: « Un bon capitaine sait quelles tâches
+peuvent attendre. »
 
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
+Votre mission: lancez /securite/scan_securite.sh avec une priorité
+réduite de niveau 10.
 
-Le scan de sécurité se lance en priorité. Les autres tâches attendent leur tour.
+Le scan démarre sans ralentir les boucliers.
 
-« Priorité haute, c'est de la gestion d'urgence », explique Tael Rhen. « Les tâches critiques passent d'abord. »".into(),
-            goal: "Le scan de sécurité est prioritaire en ce moment. Lancez-le en priorité.".into(),
+« Parfait », sourit Tael Rhen. « Les boucliers gardent toute leur
+puissance, et le scan avance quand même. »".into(),
+            goal: "Lancez le scan /securite/scan_securite.sh avec une priorité réduite de niveau 10, pour ne pas ralentir les boucliers.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Changer la priorite?".into(),
-            required_commands: vec!["nice -n 10 commande".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "nice".into(), expected: None }],
+            required_commands: vec!["nice -n 10 /securite/scan_securite.sh".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "nice".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-n".into(), expected: None }],
             hints: vec![],
             xp_reward: 150,
             code_required: None,

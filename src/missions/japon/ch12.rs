@@ -52,7 +52,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya vérifie le contenu: « Tout est dans l'archive, Seigneur. Rien ne manque avant l'envoi. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Listez le contenu de l'archive (tar tvf).".into(),
+            goal: "Montrez à Dame Kaguya le contenu détaillé de l'archive /archives/backup_logs.tar.gz, sans l'extraire.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister une archive sans l'extraire?".into(),
             required_commands: vec!["tar tvf /archives/backup_logs.tar.gz".into()],
@@ -81,7 +81,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya inspecte /tmp: « L'archive est bien extraite, Seigneur. La vérification peut commencer. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Extrayez l'archive dans /tmp (tar xzf -C).".into(),
+            goal: "Décompressez et extrayez l'archive /archives/backup_logs.tar.gz dans le répertoire /tmp pour que Dame Kaguya la vérifie.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment extraire dans un dossier précis?".into(),
             required_commands: vec!["tar xzf /archives/backup_logs.tar.gz -C /tmp".into()],
@@ -138,7 +138,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Genji vérifie le contenu: « Tout est dans registres.zip, Seigneur. L'envoi peut partir. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Listez le contenu de registres.zip (unzip -l).".into(),
+            goal: "Montrez à Genji la liste des fichiers contenus dans registres.zip, sans rien décompresser.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister un ZIP?".into(),
             required_commands: vec!["unzip -l registres.zip".into()],

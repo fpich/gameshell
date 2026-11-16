@@ -62,10 +62,8 @@ pub fn load_all_missions() -> Vec<Mission> {
 }
 
 #[cfg(test)]
-
-#[cfg(test)]
 fn wrap60(l: &str) -> usize {
-    // approxime le word wrap de show_mission (width 60)
+    // approxime le retour à la ligne de show_mission (≈ 60 colonnes)
     if l.trim().is_empty() { return 1; }
     let mut n = 1; let mut cur = 0;
     for w in l.split_whitespace() {
@@ -76,12 +74,27 @@ fn wrap60(l: &str) -> usize {
 
 #[cfg(test)]
 mod conformity_tests {
-    //! Tests de conformité (AGENTS.md) — figent les règles C/B/A sur le contenu.
+    //! Tests de conformité (AGENTS.md) — figent les règles A/B/C sur le contenu des 300 missions.
     use super::*;
+    use crate::game::parse;
 
     const BLOOM_FR: &[&str] = &["Se souvenir", "Comprendre", "Appliquer", "Analyser", "Évaluer", "Créer"];
     const PNJ_BLACKLIST: &[&str] = &["Marie", "Sophie", "Jean", "Pierre", "Kowalski", "Galactica", "Lucas", "Emma", "Hugo", "Léa", "Chloé", "Camille"];
     const SYMBOLIC: &[&str] = &["|", ">", ">>"];
+    /// mots français qui sont aussi des noms de commande (tolérés dans un objectif)
+    const FRENCH_WORDS: &[&str] = &["date", "su", "du"];
+
+    fn all_campaigns() -> Vec<(u8, Vec<Mission>)> {
+        let _lock = CAMPAIGN_LOCK.lock().unwrap_or_else(|e| e.into_inner());
+        [1u8, 2, 3].iter().map(|c| {
+            std::env::set_var("GAMESHELL_CAMPAIGN", c.to_string());
+            let ms = load_all_missions();
+            std::env::remove_var("GAMESHELL_CAMPAIGN");
+            (*c, ms)
+        }).collect()
+    }
+
+    fn label(c: u8) -> &'static str { match c { 2 => "japon", 3 => "reseau", _ => "espace" } }
 
     fn skill_ok(m: &Mission) -> bool {
         match &m.skill {
@@ -95,48 +108,78 @@ mod conformity_tests {
         }
     }
 
-    fn check_missions(missions: &[Mission], label: &str) {
-        assert!(!missions.is_empty(), "{}: aucune mission", label);
+    fn check_missions(missions: &[Mission], label: &str, errs: &mut Vec<String>) {
+        macro_rules! chk { ($c:expr, $($t:tt)*) => { if !$c { errs.push(format!($($t)*)); } } }
+        chk!(!missions.is_empty(), "{}: aucune mission", label);
         for m in missions {
-            assert!(!m.required_commands.is_empty(), "{} {}: required_commands vide", label, m.id);
-            assert!(!m.checks.is_empty(), "{} {}: checks vide", label, m.id);
-            // Invariant A4: chaque check command_executed doit être atteignable par une required_command
+            chk!(!m.required_commands.is_empty(), "{} {}: required_commands vide", label, m.id);
+            chk!(!m.checks.is_empty(), "{} {}: checks vide", label, m.id);
+            // Invariant A4: chaque check de commande est atteignable par les required_commands
+            let parsed: Vec<parse::Parsed> = m.required_commands.iter().map(|c| parse::parse(c)).collect();
             for ck in &m.checks {
                 if ck.check_type == "command_executed" {
-                    let tb = ck.target.split_whitespace().next().unwrap_or(&ck.target);
-                    let reachable = m.required_commands.iter().any(|c| c.split_whitespace().any(|w| w == tb) || c.contains(&ck.target));
-                    assert!(reachable, "{} {}: check '{}' non atteignable par aucune required_command", label, m.id, ck.target);
+                    chk!(parse::command_matches(&ck.target, &m.required_commands, &parsed),
+                        "{} {}: check '{}' non atteignable par les required_commands", label, m.id, ck.target);
+                }
+                if ck.check_type == "file_read" {
+                    chk!(parse::file_read_matches(&ck.target, &parsed), "{} {}: lecture de '{}' non atteignable", label, m.id, ck.target);
                 }
             }
-            assert!(skill_ok(m), "{} {}: skill {:?} n'est pas une commande requise de la mission (règle A15)", label, m.id, m.skill.as_ref().map(|s| s.name.clone()));
-            assert!(BLOOM_FR.contains(&m.bloom_level.as_str()), "{} {}: bloom_level {:?} pas en français (règle B8/C9)", label, m.id, m.bloom_level);
-            // Règle C3: 20+ lignes de contexte AFFICHÉES (wrap à 60 car., comme show_mission)
-            let disp = m.story.lines().map(|l| wrap60(l)).sum::<usize>() + m.description.lines().map(|l| wrap60(l)).sum::<usize>();
-            assert!(disp >= 18, "{} {}: contexte trop court ({} lignes affichées, règle C3: 20+)", label, m.id, disp);
+            chk!(skill_ok(m), "{} {}: skill {:?} n'est pas une commande requise de la mission (règle A15)", label, m.id, m.skill.as_ref().map(|s| s.name.clone()));
+            chk!(BLOOM_FR.contains(&m.bloom_level.as_str()), "{} {}: bloom_level {:?} pas en français (règle B8/C9)", label, m.id, m.bloom_level);
+            // Règle C3: 20+ lignes de contexte AFFICHÉES
+            let disp = m.story.lines().map(wrap60).sum::<usize>() + m.description.lines().map(wrap60).sum::<usize>();
+            chk!(disp >= 20, "{} {}: contexte trop court ({} lignes affichées, règle C3: 20+)", label, m.id, disp);
             let all_text = format!("{} {} {} {}", m.title, m.description, m.story, m.goal);
             for bad in PNJ_BLACKLIST {
-                assert!(!all_text.split_whitespace().any(|w| w.trim_matches(|c: char| !c.is_alphabetic()).starts_with(bad) && w.starts_with(bad)),
+                chk!(!all_text.split_whitespace().any(|w| w.trim_matches(|c: char| !c.is_alphabetic()).starts_with(bad) && w.starts_with(bad)),
                     "{} {}: nom PNJ interdit '{}' (règle C13)", label, m.id, bad);
+            }
+            // Règle C4: l'objectif ne nomme jamais la commande (ni option, pipe, parenthèse de syntaxe)
+            let goal_words: Vec<String> = m.goal.split_whitespace().map(|w| w.trim_matches(|c: char| !c.is_alphanumeric() && c != '-' && c != '_').to_string()).collect();
+            for p in &parsed {
+                for (b, _) in p.effective() {
+                    if b.len() >= 2 && !FRENCH_WORDS.contains(&b.as_str()) {
+                        chk!(!goal_words.iter().any(|w| *w == b), "{} {}: l'objectif nomme la commande '{}' (règle C4): {}", label, m.id, b, m.goal);
+                    }
+                }
+            }
+            chk!(!m.goal.contains(" | ") && !m.goal.contains("(sudo") && !m.goal.contains(" -l)"), "{} {}: syntaxe shell dans l'objectif (règle C4): {}", label, m.id, m.goal);
+            // Règle C5: le nom exact des fichiers attendus figure dans le dialogue ou l'objectif
+            for ck in &m.checks {
+                if matches!(ck.check_type.as_str(), "file_exists" | "file_read") {
+                    let base = ck.target.trim_end_matches('/').rsplit('/').next().unwrap_or(&ck.target);
+                    chk!(m.story.contains(base) || m.goal.contains(base), "{} {}: le nom '{}' n'apparaît ni dans l'histoire ni dans l'objectif (règle C5)", label, m.id, base);
+                }
+            }
+            // P1.1: « echo <toutes les cibles> » et « ls /armes » ne valident jamais un check de commande
+            let echo = format!("echo {}", m.checks.iter().map(|c| format!("'{}'", c.target)).collect::<Vec<_>>().join(" "));
+            let traps = vec![parse::parse(&echo), parse::parse("ls /armes"), parse::parse("foobar123")];
+            for ck in &m.checks {
+                if ck.check_type == "command_executed" && !matches!(ck.target.split_whitespace().next(), Some("ls") | Some("echo")) {
+                    chk!(!parse::command_matches(&ck.target, &m.required_commands, &traps), "{} {}: '{}' validé par un piège (echo/ls/garbage)", label, m.id, ck.target);
+                }
+                if ck.check_type == "file_read" {
+                    chk!(!parse::file_read_matches(&ck.target, &traps), "{} {}: lecture '{}' validée par echo", label, m.id, ck.target);
+                }
             }
         }
     }
 
+    pub static CAMPAIGN_LOCK: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
     #[test]
     fn missions_conformes() {
-        for camp in [1u8, 2, 3] {
-            std::env::set_var("GAMESHELL_CAMPAIGN", camp.to_string());
-            let ms = load_all_missions();
-            std::env::remove_var("GAMESHELL_CAMPAIGN");
-            let label = match camp { 2 => "japon", 3 => "reseau", _ => "espace" };
+        for (camp, ms) in all_campaigns() {
+            let label = label(camp);
             assert_eq!(ms.len(), 100, "campagne {}: 100 missions en dur attendues (20 chapitres x 5, 5 actes x 20)", label);
-            check_missions(&ms, label);
-            // 20 missions par acte (règle C1)
+            let mut errs = Vec::new();
+            check_missions(&ms, label, &mut errs);
+            assert!(errs.is_empty(), "{} non-conformités:\n{}", errs.len(), errs.join("\n"));
             for act in 1..=5u32 {
                 let n = ms.iter().filter(|m| m.act == act).count();
                 assert_eq!(n, 20, "{} acte {} doit avoir 20 missions, trouvé {}", label, act, n);
             }
-            // Progression de difficulté (Vague 1): l'acte 1 ne contient jamais de niveau "Créer",
-            // l'acte 5 doit en contenir au moins un (courbe de difficulté croissante).
             let act1_creer = ms.iter().filter(|m| m.act == 1 && m.bloom_level == "Créer").count();
             assert_eq!(act1_creer, 0, "{}: l'acte 1 ne doit pas contenir de mission 'Créer' (difficulté progressive)", label);
             let act5_creer = ms.iter().filter(|m| m.act == 5 && m.bloom_level == "Créer").count();
@@ -144,22 +187,85 @@ mod conformity_tests {
         }
     }
 
+    /// A17: un check d'état système ne doit jamais être déjà vrai dans l'état initial
+    #[test]
+    fn checks_systeme_jamais_vrais_au_depart() {
+        let tmp = std::env::temp_dir().join(format!("gsh_a17_{}", std::process::id()));
+        for (camp, ms) in all_campaigns() {
+            let etc = tmp.join(format!("etc{}", camp));
+            crate::sim::init_system(etc.to_str().unwrap(), camp, true);
+            let ctx = crate::sim::Ctx::host(camp, "/", etc.to_str().unwrap());
+            for m in &ms {
+                for ck in &m.checks {
+                    let e = ck.expected.clone().unwrap_or_default();
+                    let line_has = |name: &str| { let parts: Vec<&str> = e.split("&&").map(|s| s.trim()).collect(); ctx.lines(name).iter().any(|l| parts.iter().all(|p| l.contains(p))) };
+                    let vacuous = match ck.check_type.as_str() {
+                        "user_exists" => crate::sim::users::user_exists(&ctx, &ck.target),
+                        "group_exists" => crate::sim::users::group_exists(&ctx, &ck.target),
+                        "user_in_group" => crate::sim::users::user_groups(&ctx, &ck.target).iter().any(|(_, g)| *g == e),
+                        "user_has_password" => crate::sim::users::has_password(&ctx, &ck.target),
+                        "package_installed" => crate::sim::admin::installed(&ctx, &ck.target),
+                        "process_absent" => !crate::sim::procs::running(&ctx, &ck.target),
+                        "sim_contains" => line_has(&ck.target),
+                        "sim_not_contains" => !line_has(&ck.target),
+                        "permission" | "file_not_exists" => ck.expected.is_none() && ck.check_type == "permission",
+                        _ => false,
+                    };
+                    assert!(!vacuous, "{} {}: check {}:{} déjà vrai dans l'état initial (règle A17)", label(camp), m.id, ck.check_type, ck.target);
+                }
+            }
+        }
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
+
+    /// A12: les fichiers lus / verrouillés par les missions existent dans le monde généré
+    #[test]
+    fn cibles_existent_dans_le_monde() {
+        let root = env!("CARGO_MANIFEST_DIR");
+        let tmp = std::env::temp_dir().join(format!("gsh_a12_{}", std::process::id()));
+        let _ = std::fs::create_dir_all(&tmp);
+        for (camp, ms) in all_campaigns() {
+            let (dir, home) = match camp { 2 => ("monde_japon", "/quartiers/seigneur"), 3 => ("monde_reseau", "/noc/netrunner"), _ => ("vaisseau", "/cabines/capitaine") };
+            let world = tmp.join(dir);
+            let ok = std::process::Command::new("bash").arg(format!("{}/vaisseau-gen.sh", root)).arg(label(camp)).arg(&world)
+                .env("GAMESHELL_HOME", &tmp).stdout(std::process::Stdio::null()).status().map(|s| s.success()).unwrap_or(false);
+            assert!(ok, "génération du monde {} impossible", label(camp));
+            let mut names: Vec<String> = Vec::new();
+            fn walk(p: &std::path::Path, out: &mut Vec<String>) {
+                if let Ok(rd) = std::fs::read_dir(p) { for e in rd.flatten() { out.push(e.file_name().to_string_lossy().to_string()); if e.path().is_dir() { walk(&e.path(), out); } } }
+            }
+            walk(&world, &mut names);
+            let produced: Vec<String> = ms.iter().flat_map(|m| m.required_commands.iter().flat_map(|c| c.split_whitespace().map(|w| w.trim_end_matches('/').rsplit('/').next().unwrap_or(w).to_string()).collect::<Vec<_>>())).collect();
+            for m in &ms {
+                for ck in &m.checks {
+                    let base = ck.target.trim_end_matches('/').rsplit('/').next().unwrap_or(&ck.target).to_string();
+                    if ck.check_type == "file_read" {
+                        assert!(names.contains(&base) || produced.contains(&base), "{} {}: fichier à lire '{}' absent du monde généré (règle A12)", label(camp), m.id, ck.target);
+                    }
+                    if ck.check_type == "permission" {
+                        let p = ck.target.replacen('~', home, 1);
+                        assert!(world.join(p.trim_start_matches('/')).exists(), "{} {}: cible de permission '{}' absente du monde (A12)", label(camp), m.id, ck.target);
+                    }
+                }
+            }
+        }
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
+
     #[test]
     fn vaisseau_gen_sans_noms_interdits() {
         // Règle C13: aucun nom contemporain banal dans les mondes générés (3 campagnes)
-        let gens = ["vaisseau-gen.sh", "monde-japon-gen.sh", "monde-reseau-gen.sh"];
-        for gen in gens {
+        for gen in ["vaisseau-gen.sh", "monde-japon-gen.sh", "monde-reseau-gen.sh"] {
             let content = std::fs::read_to_string(format!("{}/{}", env!("CARGO_MANIFEST_DIR"), gen)).unwrap();
             for bad in PNJ_BLACKLIST {
                 assert!(!content.contains(bad), "{} contient le nom interdit '{}' (règle C13)", gen, bad);
             }
             assert!(!content.contains("Capitaine Fabien"), "{}: nom du joueur en dur interdit (règle A12)", gen);
         }
-        // Le cmd_brief (analogies roleplay) ne doit pas non plus contenir de noms interdits ni le nom du joueur (règle C13/A12)
-        let brief = std::fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/src/game/mod.rs")).unwrap();
+        let brief = std::fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/src/game/brief.rs")).unwrap();
         for bad in PNJ_BLACKLIST {
-            assert!(!brief.contains(bad), "cmd_brief (game/mod.rs) contient le nom interdit '{}' (règle C13)", bad);
+            assert!(!brief.contains(bad), "cmd_brief (game/brief.rs) contient le nom interdit '{}' (règle C13)", bad);
         }
-        assert!(!brief.contains("Fabien"), "cmd_brief (game/mod.rs): nom du joueur en dur interdit (règle A12)");
+        assert!(!brief.contains("Fabien"), "cmd_brief: nom du joueur en dur interdit (règle A12)");
     }
 }

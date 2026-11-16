@@ -55,7 +55,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl note le nombre: « Voilà le compte des échecs, netrunner. L'ampleur de l'attaque est claire. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Comptez les lignes 'Failed' (grep -c).".into(),
+            goal: "Donnez à Karl uniquement le nombre de lignes 'Failed' dans /logs/auth.log, sans afficher les lignes elles-mêmes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter les résultats?".into(),
             required_commands: vec!["grep -c Failed /logs/auth.log".into()],
@@ -86,7 +86,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl relève les numéros de ligne: « Les preuves contre 10.0.0.66 sont consignées, netrunner. Le rapport sera solide. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez les lignes de 10.0.0.66 avec numéros (grep -n).".into(),
+            goal: "Montrez à Karl les lignes de /logs/auth.log qui mentionnent 10.0.0.66, avec le numéro de chaque ligne.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment afficher les numéros de ligne?".into(),
             required_commands: vec!["grep -n 10.0.0.66 /logs/auth.log".into()],

@@ -119,7 +119,7 @@ Le processus pirate PID 4242 est éliminé. Draz M'kal pousse un soupir de soula
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tuer un processus par son PID?".into(),
             required_commands: vec!["kill -9 4242".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "kill".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "kill".into(), expected: None }, MissionCheck { check_type: "process_absent".into(), target: "4242".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,

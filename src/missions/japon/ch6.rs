@@ -23,7 +23,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le forgeron parcourt la liste: « Voilà tous les systèmes qui tournent, Seigneur. Le château est bien vivant. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Listez tous les processus (ps aux).".into(),
+            goal: "Dressez la liste complète de tous les processus du château, avec leur propriétaire et leur consommation.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lister tous les processus?".into(),
             required_commands: vec!["ps aux".into()],
@@ -113,7 +113,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le forgeron regarde le cliché: « Mémoire, CPU, processus gourmands... le château tient bon, Seigneur. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Affichez un aperçu des ressources (top -bn1).".into(),
+            goal: "Donnez au forgeron un cliché unique des jauges du château (mémoire, CPU, processus gourmands), en mode lot non interactif et en une seule itération.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment surveiller les ressources?".into(),
             required_commands: vec!["top -bn1".into()],
@@ -143,11 +143,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Hanzō confirme: « Le processus espion est neutralisé, Seigneur. Nos registres sont en sûreté. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Tuez le processus 6666 (kill -9).".into(),
+            goal: "Abattez de force le processus espion 6666, avec le signal qu'il ne peut ni ignorer ni intercepter.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tuer un processus par PID?".into(),
             required_commands: vec!["kill -9 6666".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "kill".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-9".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "kill".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-9".into(), expected: None }, MissionCheck { check_type: "process_absent".into(), target: "6666".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,

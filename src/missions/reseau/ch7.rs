@@ -24,7 +24,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa confirme: « nexus.neon9.local est résolu, netrunner. Le DNS interne répond. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Résolvez nexus.neon9.local (dig +short).".into(),
+            goal: "Obtenez l'adresse IP de nexus.neon9.local en n'affichant que la réponse courte, sans le détail de la requête DNS.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment résoudre un nom de domaine?".into(),
             required_commands: vec!["dig +short nexus.neon9.local".into()],
@@ -86,7 +86,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa consulte la réponse: « L'API de statut répond, netrunner. Le service est en ligne. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Interrogez l'API de statut en HTTP (curl -s).".into(),
+            goal: "Interrogez l'API interne de statut à l'adresse http://10.0.0.1:8080/status en mode silencieux, sans barre de progression.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment interroger une API HTTP?".into(),
             required_commands: vec!["curl -s http://10.0.0.1:8080/status".into()],

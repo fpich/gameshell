@@ -24,7 +24,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa approuve: « Interfaces et IP sont claires, netrunner. La carte du réseau est dressée. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez la configuration réseau complète (ip addr).".into(),
+            goal: "Affichez la configuration réseau complète du NOC: interfaces et adresses IP.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les interfaces et IP?".into(),
             required_commands: vec!["ip addr".into()],
@@ -54,7 +54,7 @@ Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout 
 Rosa vérifie la table de routage: « La passerelle est identifiée, netrunner. Le trafic sortant est cartographié. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez la table de routage (ip route).".into(),
+            goal: "Affichez la table de routage du NOC: par quelle passerelle sort le trafic?".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les routes?".into(),
             required_commands: vec!["ip route".into()],
@@ -85,7 +85,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl confirme: « eth0 est bien UP, netrunner. Les liens sont opérationnels. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez l'état des interfaces (ip link).".into(),
+            goal: "Affichez l'état de chaque interface réseau du NOC (activée ou non, adresse matérielle).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'état des interfaces?".into(),
             required_commands: vec!["ip link".into()],
@@ -117,7 +117,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa examine la table ARP: « Les voisins directs sont listés, netrunner. Le LAN est cartographié. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez la table des voisins ARP (ip neigh).".into(),
+            goal: "Affichez la table des voisins ARP du NOC: quelles machines du réseau local ont été vues?".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les voisins du réseau local?".into(),
             required_commands: vec!["ip neigh".into()],

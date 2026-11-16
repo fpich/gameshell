@@ -1,47 +1,31 @@
 #!/bin/bash
 # ╔══════════════════════════════════════════════════════════╗
-# ║  LAUNCHER GAMESHELL - Lance le jeu dans le vaisseau       ║
-# ║  Isolation: chroot dans ~/.gameshell/vaisseau si sudo,   ║
-# ║  sinon HOME isolé avec mapping des chemins               ║
+# ║  LAUNCHER GAMESHELL — lance le jeu installé              ║
+# ║  L'isolation est assurée par le jeu lui-même: chaque     ║
+# ║  commande s'exécute dans un bac à sable bubblewrap où le ║
+# ║  monde de la campagne est la racine « / ».               ║
 # ╚══════════════════════════════════════════════════════════╝
 
 GAMESHELL_HOME="${GAMESHELL_HOME:-$HOME/.gameshell}"
-VAISSEAU="$GAMESHELL_HOME/vaisseau"
 BIN="$GAMESHELL_HOME/bin/gameshell"
-
-# Le home du joueur dans le vaisseau
 export GAMESHELL_HOME
-export GAMESHELL_HISTORY="$GAMESHELL_HOME/state/commands.log"
 mkdir -p "$GAMESHELL_HOME/state"
 
-# Mode 1: chroot si on a les droits root (vraie isolation)
-if [ "$(id -u)" = "0" ] && [ -d "$VAISSEAU" ]; then
-    # Copier le binaire dans le chroot
-    mkdir -p "$VAISSEAU/bin" "$VAISSEAU/dev" "$VAISSEAU/proc" "$VAISSEAU/tmp"
-    cp "$BIN" "$VAISSEAU/bin/gameshell" 2>/dev/null || true
-    # Monter /dev et /proc si possible
-    mount -t proc proc "$VAISSEAU/proc" 2>/dev/null || true
-    mount --bind /dev "$VAISSEAU/dev" 2>/dev/null || true
-    
-    echo "🔒 Mode chroot activé - isolation complète du vaisseau!"
-    exec chroot "$VAISSEAU" /bin/gameshell --chroot
+# P0.4: plus de mode chroot. En root, le jeu refuse de démarrer sans bac à sable:
+# une commande ratée pourrait sinon toucher la vraie machine.
+if [ "$(id -u)" = "0" ] && ! command -v bwrap >/dev/null 2>&1; then
+    echo "❌ GameShell ne se lance pas en root sans bubblewrap." >&2
+    echo "   Lancez-le avec un compte élève normal, ou installez bubblewrap (apt install bubblewrap)." >&2
+    exit 1
+fi
+if [ "$(id -u)" = "0" ]; then
+    echo "⚠️  Vous lancez GameShell en root: préférez un compte élève normal." >&2
 fi
 
-# Mode 2: isolation par HOME + mapping (sans root)
-# Le home du joueur = cabine du capitaine dans le vaisseau
-export HOME="$VAISSEAU/cabines/capitaine"
-cd "$HOME" || exit 1
+if [ ! -x "$BIN" ]; then
+    echo "❌ Jeu non installé dans $GAMESHELL_HOME (relancez ./gameshell.sh --install)" >&2
+    exit 1
+fi
 
-# Créer les liens symboliques pour navigation immersive
-ln -sf ../../pont pont 2>/dev/null
-ln -sf ../../securite securite 2>/dev/null
-ln -sf ../../reacteur reacteur 2>/dev/null
-ln -sf ../../soutes soutes 2>/dev/null
-ln -sf ../../hangar hangar 2>/dev/null
-ln -sf ../../navigation navigation 2>/dev/null
-ln -sf ../../communications communications 2>/dev/null
-ln -sf ../../armes armes 2>/dev/null
-ln -sf ../../salle-des-machines machines 2>/dev/null
-ln -sf ../../archives archives 2>/dev/null
-
-exec "$BIN"
+# P1.13: les options (--campaign, --locked, --name) sont transmises au jeu
+exec "$BIN" "$@"

@@ -23,11 +23,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Seigneur Hattori approuve: « Le mot de passe de samourai2 est changé, Seigneur. Son compte est sécurisé. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Changez le mot de passe de samourai2 (passwd).".into(),
+            goal: "Définissez un nouveau mot de passe pour le compte samourai2 afin de sécuriser son accès.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer un mot de passe?".into(),
             required_commands: vec!["sudo passwd samourai2".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "passwd".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "passwd".into(), expected: None }, MissionCheck { check_type: "user_has_password".into(), target: "samourai2".into(), expected: None }],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
@@ -53,7 +53,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes confirme: « C'est bien samourai2, Seigneur. La session est ouverte et vérifiée. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Ouvrez une session samourai2 et affichez qui il est (su - ... -c whoami).".into(),
+            goal: "Endossez l'identité de samourai2 dans une session de connexion complète, le temps d'exécuter une seule commande qui révèle sous quel nom vous agissez.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment exécuter une commande en tant qu'autre utilisateur?".into(),
             required_commands: vec!["su - samourai2 -c whoami".into()],
@@ -142,7 +142,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya confirme: « Le registre des impôts vous appartient, Seigneur. L'audit sera sans reproche. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Changez le propriétaire du registre des impôts (chown).".into(),
+            goal: "Avec les droits d'administrateur, transférez la propriété de /salle-du-trone/registres/registre_impots.txt à votre propre compte pour l'audit.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer le propriétaire d'un fichier?".into(),
             required_commands: vec!["sudo chown $USER /salle-du-trone/registres/registre_impots.txt".into()],

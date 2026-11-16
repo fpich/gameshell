@@ -111,7 +111,7 @@ Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
 Dame Kaguya vérifie le registre: « Le retard du village est ajouté, sans écraser le reste, Seigneur. Les impôts sont à jour. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Ajoutez une ligne à la fin de registre_impots.txt (>>).".into(),
+            goal: "Ajoutez la ligne 'Retard: village du haut - 10 koku' à la fin de registre_impots.txt, sans rien effacer.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter une ligne à un registre?".into(),
             required_commands: vec!["echo 'Retard: village du haut - 10 koku' >> /salle-du-trone/registres/registre_impots.txt".into()],
@@ -141,7 +141,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes consulte la fiche: « Taille, permissions, dates... le coffre-fort est parfaitement documenté, Seigneur. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Affichez les métadonnées du dossier coffre-fort (stat).".into(),
+            goal: "Remettez au capitaine la fiche technique complète du dossier /donjon/coffre-fort: taille, permissions, propriétaire et dates.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les métadonnées d'un dossier?".into(),
             required_commands: vec!["stat /donjon/coffre-fort".into()],

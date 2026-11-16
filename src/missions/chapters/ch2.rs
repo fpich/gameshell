@@ -66,7 +66,7 @@ Elle insiste sur l'option -p qui crée toute l'arborescence d'un coup,
             title: "Sauvegarder dans les soutes".into(),
             description: "Copiez le rapport dans les soutes.".into(),
             story: "Vex Korshun revient, plus sérieux cette fois: « Capitaine, avant qu'on fasse quoi que ce soit
-de plus, il faut sauvegarder ce rapport dans les soutes sécurisées.
+de plus, il faut sauvegarder ce rapport, incident_15jan.txt, dans les soutes sécurisées.
 Les pirates ont déjà tenté de modifier nos fichiers une fois. »
 
 Il vous raconte l'incident du mois dernier: un fichier de logs a été altéré,
@@ -132,8 +132,8 @@ et qu'ils prennent de la place inutile dans les systèmes de stockage.
 « En plus, dit-il, si un pirate tombe sur un fichier temporaire,
 il peut y trouver des infos sensibles. Même les fichiers de test. »
 
-Il vous demande de créer ces 3 fichiers pour simuler le nettoyage,
-puis de les supprimer proprement.
+Les 3 fichiers traînent dans votre cabine:
+supprimez-les proprement, d'un seul coup.
 
 « rm supprime définitivement. Attention, dans l'espace, pas de corbeille:
 une fois supprimé, c'est parti pour de bon. »".into(),
@@ -141,7 +141,7 @@ une fois supprimé, c'est parti pour de bon. »".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment supprimer des fichiers?".into(),
             required_commands: vec!["rm temp1.txt temp2.txt temp3.txt".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "rm".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "rm".into(), expected: None }, MissionCheck { check_type: "file_not_exists".into(), target: "~/temp1.txt".into(), expected: None }, MissionCheck { check_type: "file_not_exists".into(), target: "~/temp2.txt".into(), expected: None }, MissionCheck { check_type: "file_not_exists".into(), target: "~/temp3.txt".into(), expected: None }],
             hints: vec![],
             xp_reward: 100,
             code_required: None,

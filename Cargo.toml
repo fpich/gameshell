@@ -2,8 +2,8 @@
 name = "gameshell"
 version = "2.0.0"
 edition = "2021"
-description = "GameShell - Les Pirates de l'Espace - RPG éducatif Debian 13 pour BTS SIO SISR"
-authors = ["Mistral Vibe <vibe@mistral.ai>"]
+description = "GameShell — RPG éducatif pour apprendre le shell Debian 13 (BTS SIO SISR), 3 campagnes, 300 missions, bac à sable isolé"
+authors = ["Équipe GameShell"]
 
 [dependencies]
 colored = "2.1"

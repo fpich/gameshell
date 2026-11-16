@@ -24,7 +24,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl parcourt la liste: « Voilà les ports ouverts et leurs processus, netrunner. La surface d'attaque est visible. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez les ports en écoute avec processus (ss -tlnp).".into(),
+            goal: "Donnez à Karl la liste des ports TCP en écoute sur le NOC, en affichage numérique, avec le processus qui tient chacun.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les ports en écoute avec les processus?".into(),
             required_commands: vec!["ss -tlnp".into()],
@@ -55,7 +55,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl examine les connexions: « Voilà les sessions établies, netrunner. Rien de suspect pour l'instant. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez les connexions établies (ss -tn state established).".into(),
+            goal: "Montrez à Karl uniquement les connexions TCP actuellement établies sur le NOC, en affichage numérique.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment filtrer les connexions établies?".into(),
             required_commands: vec!["ss -tn state established".into()],
@@ -117,7 +117,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl regarde le résultat du scan: « Le port 3306 de 10.0.0.66 est renseigné, netrunner. Nous savons ce qu'il expose. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Scannez le port 3306 de 10.0.0.66 (nmap -p 3306).".into(),
+            goal: "Sondez uniquement le port 3306 de l'attaquant 10.0.0.66 pour savoir si sa base de données est exposée.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment scanner un port précis?".into(),
             required_commands: vec!["nmap -p 3306 10.0.0.66".into()],
@@ -148,7 +148,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa suit la route: « La trace vers l'attaquant est claire, netrunner. Nous savons par où il passe. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Tracez la route vers 10.0.0.66 (traceroute).".into(),
+            goal: "Révélez à Rosa chaque routeur traversé par les paquets jusqu'à l'attaquant 10.0.0.66.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment suivre le chemin des paquets?".into(),
             required_commands: vec!["traceroute 10.0.0.66".into()],

@@ -23,7 +23,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Hanzō examine les interfaces: « Toutes les coordonnées réseau du château sont là, Seigneur. Nous savons où nous sommes. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Affichez la configuration réseau complète (ip addr).".into(),
+            goal: "Affichez la configuration réseau complète du château: interfaces et adresses IP.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les adresses IP?".into(),
             required_commands: vec!["ip addr".into()],
@@ -53,7 +53,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Hanzō suit la route: « Voilà le chemin vers nos alliés, Seigneur. Le trafic est bien orienté. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Affichez la table de routage (ip route).".into(),
+            goal: "Affichez la table de routage du château: par où sortent les messages vers les autres clans?".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les routes réseau?".into(),
             required_commands: vec!["ip route".into()],
@@ -83,7 +83,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes inspecte les ports: « Voilà les portes ouvertes du château, Seigneur. Nous saurons quoi surveiller. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Affichez les ports en écoute (ss -tlnp).".into(),
+            goal: "Dressez pour le capitaine la liste des ports TCP en écoute sur le château, en affichage numérique, avec le processus qui tient chacun.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les ports en écoute?".into(),
             required_commands: vec!["ss -tlnp".into()],

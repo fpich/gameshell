@@ -3,11 +3,32 @@
 # ║  GÉNÉRATEUR DU MONDE "NEXUS" — NOC Neon-9 (campagne 3)   ║
 # ║  Niveau DIFFICILE, orienté RÉSEAU — environnement dédié  ║
 # ╚══════════════════════════════════════════════════════════╝
-# Usage: ./monde-reseau-gen.sh [dossier_destination]
+# Usage: ./monde-reseau-gen.sh DOSSIER_DESTINATION (appelé par vaisseau-gen.sh)
 
 set -e
-V="${1:-$HOME/.gameshell/monde_reseau}"
-rm -rf "$V"
+
+# ── Garde-fou (audit P0.6): ce script EFFACE puis recrée la destination. On refuse toute
+#    destination qui ne serait pas un monde du jeu sous $GAMESHELL_HOME ou un dossier temporaire.
+gsh_check_dest() {
+    local dest="$1" want="$2"
+    if [ -z "$dest" ] || [ "$(basename "$dest")" != "$want" ]; then
+        echo "❌ Destination refusée: « $dest » (le dossier doit s'appeler $want)" >&2; exit 1
+    fi
+    local parent; parent="$(dirname "$dest")"
+    mkdir -p "$parent" 2>/dev/null || true
+    parent="$(cd "$parent" 2>/dev/null && pwd -P)" || { echo "❌ Dossier parent introuvable: $(dirname "$dest")" >&2; exit 1; }
+    local ok=0 allowed
+    for allowed in "${GAMESHELL_HOME:-$HOME/.gameshell}" "${TMPDIR:-/tmp}" /tmp /var/tmp; do
+        [ -d "$allowed" ] || continue
+        allowed="$(cd "$allowed" && pwd -P)"
+        case "$parent/" in "$allowed"/*) ok=1 ;; esac
+    done
+    [ "$ok" = 1 ] || { echo "❌ Destination refusée hors de \$GAMESHELL_HOME ou d'un dossier temporaire: $dest" >&2; exit 1; }
+}
+V="${1:-}"
+gsh_check_dest "$V" "monde_reseau"
+V="$(cd "$(dirname "$V")" && pwd -P)/monde_reseau"
+rm -rf --one-file-system "$V"
 
 # ══════════ NIVEAU 0 — LE DATACENTER NEXUS ══════════
 mkdir -p "$V"/{baies,serveurs,logs,configs,captures,noc,firewall,utilisateurs,archives,monitoring,tmp,var/tmp}
@@ -40,6 +61,9 @@ cat > "$N/netrunner/plan_incident.sh" << 'SHEOF'
 echo "Isolez la cible! Coupez le trafic! Alertez la sécurité!"
 SHEOF
 chmod 644 "$N/netrunner/plan_incident.sh"
+# Captures de test à supprimer (mission 2.5)
+printf 'CAPTURE-TEST-1\n' > "$N/netrunner/test1.pcap"
+printf 'CAPTURE-TEST-2\n' > "$N/netrunner/test2.pcap"
 cat > "$N/netrunner/.secret" << 'EOF'
 Token secret du netrunner: NEON-77-KAMI
 EOF

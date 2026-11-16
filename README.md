@@ -24,47 +24,29 @@ Aucun clone git ni connexion internet requis après installation.
 
 ```bash
 # 1. Copier gameshell.sh sur la machine (clé USB, scp, ENT...)
-# 2. (Optionnel mais recommandé) installer les prérequis système:
+# 2. Installer les prérequis UNE FOIS (administrateur):
 sudo bash install-debian13.sh
-# 3. Lancer:
+# 3. Lancer avec un compte élève normal (pas root):
 chmod +x gameshell.sh
-./gameshell.sh
+./gameshell.sh                       # ou: ./gameshell.sh --campaign 2 --locked --name Alice
 ```
 
-**Prérequis minimaux** (présents par défaut sur Debian 13): `bash`, `tar`, `coreutils`
-(`ls`, `cat`, `cp`, `mv`, `rm`, `chmod`, `chown`, `mkdir`, `touch`, `date`...).
+**Prérequis**: `bubblewrap` (bac à sable), `bash`, `tar`, `coreutils`, `findutils`, `grep`,
+`sed`, `gawk`, `gzip`, `zip`/`unzip`, `nano`, `less`, `man-db` — tous installés par `install-debian13.sh`.
 
-**Paquets installés par `install-debian13.sh`** (pour les missions de durcissement
-des campagnes 1 et 3, sinon les commandes sont simulées par le jeu):
+### 🔒 Isolation de la machine (sécurité)
 
-| Paquet | Commandes | Campagnes |
-|--------|-----------|-----------|
-| `zip` / `unzip` | zip, unzip | 1, 2, 3 |
-| `nano` | nano (éditeur) | 1, 3 |
-| `curl` | curl | 3 |
-| `bind9-dnsutils` | dig, nslookup | 3 |
-| `iproute2` | ip, ss | 1, 2, 3 |
-| `iputils-ping` | ping | 1, 2, 3 |
-| `net-tools` | netstat, route | 1, 3 |
-| `traceroute` | traceroute | 3 |
-| `nmap` | nmap | 3 |
-| `openssh-client` / `openssh-server` | ssh, sshd | 1, 3 |
-| `ufw` | ufw | 1, 3 |
-| `iptables` | iptables | 1, 3 |
-| `fail2ban` | fail2ban-client | 1, 3 |
-| `auditd` | auditctl | 1, 3 |
-| `procps` | ps, top, pgrep, kill, nice | 1, 2, 3 |
-| `findutils` | find | 1, 2, 3 |
-| `gawk` | awk | 1, 2, 3 |
-| `man-db` | man | 1, 2, 3 |
-| `sudo` / `passwd` / `login` | sudo, passwd, su, useradd, groupadd | 1, 2, 3 |
-| `systemd` / `util-linux` / `mount` | systemctl, journalctl, mount, df, du | 1, 2, 3 |
-
-> 💡 Les services (`openssh-server`, `fail2ban`, `ufw`, `auditd`) sont installés mais
-> **pas démarrés automatiquement** pour ne pas modifier le comportement de la machine.
-> Le jeu fonctionne aussi sans eux (commandes simulées), mais les missions de
-> durcissement sont plus réalistes avec.
-
+- Chaque commande tapée s'exécute dans un **bac à sable bubblewrap**: le monde de la campagne
+  devient `/`, le reste de la machine est invisible, `/usr` est en lecture seule, **aucun réseau**.
+  `cd /..`, `cat /../../etc/passwd`, `echo $USER` ou `ls -l` ne révèlent jamais la machine hôte.
+- Les commandes d'administration (`sudo`, `useradd`, `passwd`, `ufw`, `iptables`, `systemctl`,
+  `apt`, `kill`, `ps`, `ping`, `ssh`, `nmap`, `curl`...) sont **simulées** par le jeu sur un état
+  fictif propre à chaque campagne: aucun compte, pare-feu, service, paquet ou processus réel
+  n'est jamais modifié. Inutile d'installer ou de démarrer ssh, ufw ou fail2ban.
+- Sans bubblewrap, le jeu démarre en **mode dégradé** (isolation partielle, signalée à l'écran)
+  et refuse de démarrer en root.
+- Mise à jour: un nouveau `gameshell.sh` réinstalle automatiquement le binaire sans toucher
+  aux sauvegardes (`./gameshell.sh --install` pour forcer).
 
 ---
 
@@ -77,10 +59,11 @@ Le joueur est le **capitaine de la station spatiale Orion-7**, attaquée par les
 | Commande | Action |
 |----------|--------|
 | `gsh help` | Aide complète (commandes gsh + syntaxe shell + Bloom) |
-| `gsh export` | Exporte progression + historique horodaté en JSON + CSV (`~/.gameshell/state/export_campagne<N>_*.json/csv`) pour l'enseignant |
+| `gsh export` | Exporte progression + historique horodaté en JSON + CSV (`~/.gameshell/state/export_campagne<N>_<joueur>_*.json/csv`) pour l'enseignant |
 | `gsh restart` | Recommence la campagne en cours depuis la mission 1.1 (supprime la sauvegarde) |
 | `gsh goal` | Réaffiche la mission en cours (même cadre que le lancement) |
-| `gsh check` | Valide la mission en cours (phase 2: code si requis) |
+| `gsh check` | Valide la mission en cours |
+| `gsh code CODE` | Donne le code demandé en phase 2 (`gsh cancel` pour annuler) |
 | `gsh reset` | Réinitialise la mission en cours |
 | `gsh skills` | Voir les compétences shell acquises |
 | `exit` | Quitter |
@@ -191,11 +174,18 @@ gameshell/
 ├── vaisseau-gen.sh        # génère les 3 mondes (espace|japon|reseau)
 ├── monde-japon-gen.sh     # monde campagne 2 (château Shiro)
 ├── monde-reseau-gen.sh   # monde campagne 3 (NOC Nexus)
-├── launcher.sh            # lance le jeu dans le monde isolé
+├── launcher.sh            # lance le jeu installé (transmet --campaign/--locked/--name)
 └── src/
-    ├── main.rs            # point d'entrée + menu campagnes + bannières
-    ├── game/mod.rs        # moteur de jeu (boucle, édition de ligne, checks, auto/edge/torture)
-    ├── shell/mod.rs       # exécution commandes + isolation chemins + sélection monde
+    ├── main.rs            # point d'entrée + menu campagnes + bannières + aiguillage multi-appel
+    ├── sys.rs             # FFI libc (termios, signaux, largeur d'affichage)
+    ├── game/mod.rs        # moteur de jeu (boucle, checks, phase 2, export)
+    ├── game/parse.rs      # analyse des lignes shell pour la validation (A4)
+    ├── game/bench.rs      # bancs AUTO / EDGE / TORTURE (commandes requises seules)
+    ├── game/lineedit.rs   # éditeur de ligne (termios, Tab, historique)
+    ├── game/ui.rs         # cadres alignés (largeur d'affichage)
+    ├── game/brief.rs      # définitions roleplay + technique des commandes
+    ├── shell/mod.rs       # bac à sable bubblewrap + sélection monde + sauvegardes
+    ├── sim/               # commandes système simulées (comptes, processus, services, pare-feu, réseau...)
     └── missions/          # 300 missions en dur (3 campagnes x 100)
         ├── types.rs       # Mission, Skill, MissionCheck
         ├── chapters/ch1..20.rs   # campagne 1 (espace)
@@ -204,18 +194,19 @@ gameshell/
 ```
 
 ## 💾 Progression & historique (RETEX par partie)
-- Sauvegarde auto par campagne (`state/save_campagne<N>.json`) + reprise au lancement.
-- **Historique horodaté de chaque action** dans `state/history_campagne<N>.log` (session, commandes, checks, missions, codes) — RETEX complet de chaque partie.
-- `gsh restart` = recommencer la campagne à zéro (ou `rm ~/.gameshell/state/save_campagne<N>.json`).
+- Sauvegarde auto par campagne ET par joueur (`state/save_campagne<N>_<joueur>.json`) + reprise au lancement.
+- **Historique horodaté de chaque action** dans `state/history_campagne<N>_<joueur>.log` (session, commandes, checks, missions, codes) — RETEX complet de chaque partie.
+- `gsh restart` = recommencer la campagne à zéro (ou `rm ~/.gameshell/state/save_campagne<N>_<joueur>.json`).
 - Tutoriel affiché au premier lancement.
 
 ## 👨‍🏫 Pour les enseignants
 
 - Distribution: un seul fichier `gameshell.sh` (clé USB, ENT...)
-- Suivi de classe: `gsh export` génère JSON + CSV par mission (id, titre, statut, XP) + historique horodaté dans `~/.gameshell/state/history_campagne<N>.log`
+- Suivi de classe: `gsh export` génère JSON + CSV par mission (id, titre, statut, XP, tentatives) + historique horodaté (`~/.gameshell/state/`)
 - Mode enseignant: lancer avec `--campaign <1|2|3>` pour imposer une campagne (et `--locked` pour verrouiller l'ordre des missions)
 - Missions modifiables dans `src/missions/{chapters,japon,reseau}/ch*.rs`
 - Rebuild: `cargo build --release && ./make-archive.sh`
+- Tests: `cargo test --release` + `./tests/run_tests.sh` (54 tests, dans un dossier temporaire: vos données ne sont jamais touchées)
 
 ## 📦 Dépôt git
 

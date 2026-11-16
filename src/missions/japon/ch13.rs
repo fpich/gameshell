@@ -23,11 +23,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Seigneur Hattori approuve: « Le compte de samourai2 est créé, avec son quartier, Seigneur. Le renfort est prêt. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Créez le compte samourai2 (useradd -m) et affichez sa fiche.".into(),
+            goal: "Créez le compte samourai2 avec son dossier personnel pour le renfort du seigneur Hattori, puis affichez sa fiche d'identité.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un utilisateur avec son home?".into(),
             required_commands: vec!["sudo useradd -m samourai2".into(), "id samourai2".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "useradd".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-m".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "id".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "useradd".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-m".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "id".into(), expected: None }, MissionCheck { check_type: "user_exists".into(), target: "samourai2".into(), expected: None }],
             hints: vec![],
             xp_reward: 150,
             code_required: None,
@@ -53,11 +53,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes confirme: « Le groupe garnison est créé, Seigneur. Les recrues ont un foyer. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Créez le groupe garnison (groupadd).".into(),
+            goal: "Fondez le groupe garnison qui accueillera les nouvelles recrues du château.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un groupe?".into(),
             required_commands: vec!["sudo groupadd garnison".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "groupadd".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "groupadd".into(), expected: None }, MissionCheck { check_type: "group_exists".into(), target: "garnison".into(), expected: None }],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
@@ -83,11 +83,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes vérifie: « samourai2 est dans la garnison, sans perdre ses autres groupes, Seigneur. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Ajoutez samourai2 à garnison (usermod -aG).".into(),
+            goal: "Affectez samourai2 au groupe garnison en complément, sans lui retirer ses autres affectations.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter un utilisateur à un groupe?".into(),
             required_commands: vec!["sudo usermod -aG garnison samourai2".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "usermod".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-aG".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "usermod".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-aG".into(), expected: None }, MissionCheck { check_type: "user_in_group".into(), target: "samourai2".into(), expected: Some("garnison".into()) }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,
@@ -113,7 +113,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya note vos groupes: « Vos accès au donjon sont confirmés, Seigneur. Le contrôle d'accès est en ordre. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Affichez vos groupes (groups).".into(),
+            goal: "Montrez à Dame Kaguya la liste des groupes auxquels votre propre compte appartient.".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Comment voir ses groupes?".into(),
             required_commands: vec!["groups".into()],
@@ -143,7 +143,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes consulte la fiche: « uid, gid, groupes... tout est là, Seigneur. samourai2 est bien enregistré. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Affichez l'identité complète de samourai2 (id samourai2).".into(),
+            goal: "Affichez l'identité complète de samourai2: numéro, groupe principal et toutes ses garnisons.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'identité d'un autre utilisateur?".into(),
             required_commands: vec!["id samourai2".into()],

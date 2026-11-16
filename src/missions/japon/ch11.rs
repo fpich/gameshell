@@ -21,7 +21,7 @@ Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
 Hanzō note le compte: « Voilà le nombre d'attaques de l'IP espion, Seigneur. La menace est mesurée. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Comptez les attaques venant de 10.0.0.66 (grep | grep | wc).".into(),
+            goal: "Comptez pour Hanzō les lignes 'Failed' venant de 10.0.0.66 dans /scribes/logs/auth.log, en enchaînant trois filtres: les échecs, puis cette IP, puis le décompte des lignes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment enchaîner trois commandes?".into(),
             required_commands: vec!["grep Failed /scribes/logs/auth.log | grep 10.0.0.66 | wc -l".into()],
@@ -51,7 +51,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya vérifie rapport.txt: « Les échecs sont consignés, Seigneur. Le rapport est prêt. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Enregistrez les lignes 'Failed' dans rapport.txt (>).".into(),
+            goal: "Enregistrez les lignes 'Failed' de /scribes/logs/auth.log dans un nouveau parchemin rapport.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment enregistrer un résultat dans un fichier?".into(),
             required_commands: vec!["grep Failed /scribes/logs/auth.log > rapport.txt".into()],
@@ -81,7 +81,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya relit rapport.txt: « Les dernières lignes du syslog sont ajoutées, sans rien écraser, Seigneur. Le rapport est complet. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Ajoutez la fin du syslog à rapport.txt (>>).".into(),
+            goal: "Ajoutez les 3 dernières lignes de /scribes/logs/syslog à la fin de rapport.txt, sans effacer ce qu'il contient.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter à la fin d'un fichier?".into(),
             required_commands: vec!["tail -3 /scribes/logs/syslog >> rapport.txt".into()],
@@ -111,7 +111,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes note le compte: « Voilà le nombre de processus de garde, Seigneur. La surveillance est en ordre. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Comptez les processus contenant 'garde' (ps | grep | wc).".into(),
+            goal: "Comptez pour le capitaine les lignes de la liste complète des processus du château qui contiennent 'garde', en enchaînant liste, filtre et décompte.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter un résultat filtré?".into(),
             required_commands: vec!["ps aux | grep garde | wc -l".into()],

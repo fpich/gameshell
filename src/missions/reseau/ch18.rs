@@ -24,11 +24,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl approuve: « La caméra d'audit est posée sur /firewall/coffre, netrunner. Chaque écriture sera tracée. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Installez une règle d'audit (sudo auditctl -w /firewall/coffre -p wa -k reseau).".into(),
+            goal: "Posez une surveillance d'audit sur /firewall/coffre qui enregistre chaque écriture et chaque changement d'attributs, marquée de l'étiquette 'reseau'.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment surveiller un dossier sensible?".into(),
             required_commands: vec!["sudo auditctl -w /firewall/coffre -p wa -k reseau".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-w".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-w".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "audit.rules".into(), expected: Some("-w /firewall/coffre".into()) }],
             hints: vec![],
             xp_reward: 175,
             code_required: None,
@@ -59,7 +59,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             bloom_level: "Créer".into(),
             bloom_question: "Comment isoler un processus?".into(),
             required_commands: vec!["mkdir -p /tmp/jail".into(), "sudo chroot /tmp/jail /bin/bash".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chroot".into(), expected: None }, MissionCheck { check_type: "dir_exists".into(), target: "/tmp/jail".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chroot".into(), expected: None }, MissionCheck { check_type: "dir_exists".into(), target: "/tmp/jail".into(), expected: None }, MissionCheck { check_type: "sim_event".into(), target: "chroot /tmp/jail".into(), expected: None }],
             hints: vec![],
             xp_reward: 175,
             code_required: None,
@@ -86,11 +86,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa approuve: « Les paquets sont à jour, netrunner. Le NOC est protégé contre les failles connues. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Mettez à jour les paquets (sudo apt update).".into(),
+            goal: "Avant la fin de semaine, rafraîchissez avec les droits d'administrateur la liste des paquets disponibles pour le NOC.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment mettre à jour?".into(),
             required_commands: vec!["sudo apt update".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "update".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "update".into(), expected: None }, MissionCheck { check_type: "sim_event".into(), target: "apt update".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,
@@ -117,11 +117,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl confirme: « snort est installé, netrunner. La détection d'intrusion est renforcée. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Installez snort (sudo apt install -y snort).".into(),
+            goal: "Installez le paquet snort, sonde de détection d'intrusion, avec les droits d'administrateur et sans demande de confirmation.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment installer un paquet?".into(),
             required_commands: vec!["sudo apt install -y snort".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "install".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-y".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "install".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-y".into(), expected: None }, MissionCheck { check_type: "package_installed".into(), target: "snort".into(), expected: None }],
             hints: vec![],
             xp_reward: 150,
             code_required: None,

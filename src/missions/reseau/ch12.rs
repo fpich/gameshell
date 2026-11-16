@@ -24,7 +24,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa regarde l'espace: « Voilà la place restante, netrunner. Le stockage est sous contrôle. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez l'espace disque (df -h).".into(),
+            goal: "Indiquez à Rosa l'espace disque restant sur le NOC, avec des tailles lisibles par un humain.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'espace disque?".into(),
             required_commands: vec!["df -h".into()],
@@ -55,7 +55,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl pèse chaque log: « Voilà la taille de chaque fichier, netrunner. Nous saurons quoi archiver. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez la taille de chaque fichier de /logs (du -sh /logs/*).".into(),
+            goal: "Pesez pour Karl chaque élément de /logs un par un, avec pour chacun un total unique en taille lisible.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir la taille de chaque fichier?".into(),
             required_commands: vec!["du -sh /logs/*".into()],
@@ -86,7 +86,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa vérifie les montages: « Les systèmes de fichiers sont listés, netrunner. Le NOC est bien monté. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez les disques montés (mount).".into(),
+            goal: "Dressez pour Rosa la liste des systèmes de fichiers actuellement montés sur le NOC.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les disques montés?".into(),
             required_commands: vec!["mount".into()],

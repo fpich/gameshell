@@ -39,6 +39,8 @@ pub struct Mission {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SaveData {
     pub campaign: u8,
+    #[serde(default)]
+    pub player_name: String, // P1.10: la sauvegarde appartient à un joueur
     pub current_mission: usize,
     pub xp: u64,
     pub level: u32,

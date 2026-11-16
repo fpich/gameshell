@@ -41,7 +41,7 @@ Le badge d'accès du nouvel arrivant est créé. Vex Korshun vérifie le compte.
             id: "14.2".into(), chapter: 14, chapter_title: "Equipage".into(), act: 4,
             title: "Equipe".into(),
             description: "Groupe equipage + matelot.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Pour gérer les accès collectifs, il faut créer un groupe d'équipage.
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Pour gérer les accès collectifs, il faut créer un groupe nommé equipage.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
@@ -52,19 +52,19 @@ Créer l'équipe equipage est une étape cruciale pour préparer la station à l
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Pour gérer les accès collectifs, il faut créer un groupe d'équipage.
+Votre mission: Pour gérer les accès collectifs, il faut créer un groupe nommé equipage.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.
 
-L'équipe 'equipage' est créée et le nouveau membre y est ajouté.
+L'équipe 'equipage' est créée. Le nouveau y sera affecté plus tard.
 
 « Parfait », note Vex Korshun. « Les groupes définissent les droits. Le nouveau peut maintenant accéder aux ressources de son équipe. »".into(),
-            goal: "Créez une équipe 'equipage' et mettez le nouveau dedans.".into(),
+            goal: "Créez l'équipe « equipage » qui regroupera bientôt les nouveaux membres.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Creer un groupe?".into(),
-            required_commands: vec!["sudo groupadd equipage".into(), "usermod".into()],
+            required_commands: vec!["sudo groupadd equipage".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "groupadd".into(), expected: None }, MissionCheck { check_type: "group_exists".into(), target: "equipage".into(), expected: None }],
             hints: vec![],
             xp_reward: 225,
@@ -99,7 +99,7 @@ Le badge du nouveau est sécurisé avec un code. Vex Korshun approuve.
             bloom_level: "Appliquer".into(),
             bloom_question: "Changer un MDP?".into(),
             required_commands: vec!["sudo passwd matelot".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "passwd".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "passwd".into(), expected: None }, MissionCheck { check_type: "user_has_password".into(), target: "matelot".into(), expected: None }],
             hints: vec![],
             xp_reward: 200,
             code_required: None,

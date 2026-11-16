@@ -83,11 +83,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le capitaine des gardes confirme: « La caméra d'audit surveille le coffre-fort, Seigneur. Chaque écriture sera tracée. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Installez une règle d'audit sur /donjon/coffre-fort (auditctl -w).".into(),
+            goal: "Posez une surveillance d'audit sur /donjon/coffre-fort qui enregistre chaque écriture et chaque changement d'attributs, marquée de l'étiquette 'sceaux'.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment surveiller un dossier sensible?".into(),
             required_commands: vec!["sudo auditctl -w /donjon/coffre-fort -p wa -k sceaux".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-w".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-w".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "audit.rules".into(), expected: Some("-w /donjon/coffre-fort".into()) }],
             hints: vec![],
             xp_reward: 175,
             code_required: None,
@@ -117,7 +117,7 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             bloom_level: "Créer".into(),
             bloom_question: "Comment isoler un processus dans un chroot?".into(),
             required_commands: vec!["sudo chroot /donjon/prison /bin/bash".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chroot".into(), expected: None }, MissionCheck { check_type: "dir_exists".into(), target: "/donjon/prison".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chroot".into(), expected: None }, MissionCheck { check_type: "sim_event".into(), target: "chroot /donjon/prison".into(), expected: None }],
             hints: vec![],
             xp_reward: 175,
             code_required: None,
@@ -143,11 +143,11 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya confirme: « Les paquets du domaine sont à jour, Seigneur. Le château est prêt pour le siège. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Mettez à jour la liste des paquets (sudo apt update).".into(),
+            goal: "Avant le siège, rafraîchissez avec les droits d'administrateur la liste des paquets disponibles pour le domaine.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment mettre à jour les paquets?".into(),
             required_commands: vec!["sudo apt update".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "update".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "apt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "update".into(), expected: None }, MissionCheck { check_type: "sim_event".into(), target: "apt update".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,

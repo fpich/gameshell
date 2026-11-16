@@ -96,7 +96,7 @@ L'état du service ssh s'affiche. Le service tourne correctement.
         },
         Mission {
             id: "19.4".into(), chapter: 19, chapter_title: "Durcissement SSH".into(), act: 5,
-            title: "Redemarrer SSH".into(),
+            title: "Appliquer la config SSH".into(),
             description: "Appliquez la nouvelle configuration en redémarrant SSH.".into(),
             story: "Tael Rhen: « Capitaine, la config est modifiée. Redémarrez le service SSH
 pour appliquer le durcissement immédiatement. »
@@ -118,7 +118,7 @@ Le service ssh redémarre. La nouvelle configuration est appliquée.
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment redémarrer un service après modification de sa config?".into(),
             required_commands: vec!["sudo systemctl restart ssh".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "restart".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "restart".into(), expected: None }, MissionCheck { check_type: "sim_event".into(), target: "systemctl restart ssh".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,

@@ -140,7 +140,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya inspecte la liste: « Permissions, tailles, dates... tout est en ordre dans vos quartiers, Seigneur. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Listez vos quartiers avec le détail des permissions (ls -l).".into(),
+            goal: "Montrez à Dame Kaguya le contenu de vos quartiers en format détaillé: permissions, propriétaire, taille et date de chaque élément.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les permissions de chaque fichier?".into(),
             required_commands: vec!["ls -l".into()],

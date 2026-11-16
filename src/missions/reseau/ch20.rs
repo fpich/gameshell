@@ -84,11 +84,11 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl approuve: « Tout le trafic entrant est bloqué sauf le 22, netrunner. Le NOC est verrouillé. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Bloquez tout sauf SSH (sudo ufw default deny incoming + allow 22).".into(),
+            goal: "Règle finale: refusez par défaut tout le trafic entrant, puis rouvrez uniquement le port 22 en TCP.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment faire une règle par défaut?".into(),
             required_commands: vec!["sudo ufw default deny incoming".into(), "sudo ufw allow 22/tcp".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "default".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "deny".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "allow".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "default".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "deny".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "allow".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "ufw.conf".into(), expected: Some("default_in=deny".into()) }, MissionCheck { check_type: "sim_contains".into(), target: "ufw.rules".into(), expected: Some("ALLOW IN 22".into()) }],
             hints: vec![],
             xp_reward: 200,
             code_required: None,
@@ -115,10 +115,10 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa examine le scan: « La surface d'attaque de 10.0.0.1 est mesurée, netrunner. Nous savons ce qui est exposé. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Scannez 10.0.0.1 (nmap -sS 10.0.0.1).".into(),
+            goal: "Scannez discrètement nos propres ports sur 10.0.0.1, en mode furtif par demi-ouverture SYN, pour évaluer la surface d'attaque.".into(),
             bloom_level: "Évaluer".into(),
             bloom_question: "Comment scanner sa propre machine?".into(),
-            required_commands: vec!["nmap -sS 10.0.0.1".into()],
+            required_commands: vec!["sudo nmap -sS 10.0.0.1".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "nmap".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-sS".into(), expected: None }],
             hints: vec![],
             xp_reward: 200,
@@ -149,7 +149,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             bloom_level: "Créer".into(),
             bloom_question: "Quel est le protocole d'isolement?".into(),
             required_commands: vec!["cat /firewall/coffre/codes.txt".into(), "sudo auditctl -w /archives -p wa -k final".into()],
-            checks: vec![MissionCheck { check_type: "file_read".into(), target: "codes.txt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "file_read".into(), target: "codes.txt".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "audit.rules".into(), expected: Some("-w /archives ".into()) }],
             hints: vec![],
             xp_reward: 500,
             code_required: Some("SHADOW-9-REI".into()),

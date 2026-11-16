@@ -117,7 +117,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl note le nombre: « Voilà le total des 'Failed' aujourd'hui, netrunner. L'ampleur est mesurée. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Comptez toutes les attaques (grep -c Failed auth.log).".into(),
+            goal: "Donnez à Karl le nombre total de lignes 'Failed' dans /logs/auth.log, sans afficher les lignes elles-mêmes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter toutes les attaques?".into(),
             required_commands: vec!["grep -c Failed /logs/auth.log".into()],
@@ -148,7 +148,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl note le compte: « Voilà les paquets bloqués aujourd'hui, netrunner. Le pare-feu a bien travaillé. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Comptez les paquets bloqués (grep -c 'UFW BLOCK' firewall.log).".into(),
+            goal: "Donnez à Karl le nombre de lignes 'UFW BLOCK' dans /logs/firewall.log, sans afficher les lignes elles-mêmes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter les paquets bloqués?".into(),
             required_commands: vec!["grep -c 'UFW BLOCK' /logs/firewall.log".into()],

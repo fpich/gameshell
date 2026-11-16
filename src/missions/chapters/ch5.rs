@@ -31,7 +31,7 @@ Vous notez dans votre carnet les permissions de votre cabine. Savoir qui peut li
             bloom_level: "Comprendre".into(),
             bloom_question: "Que signifient rwx?".into(),
             required_commands: vec!["ls -l".into(), "ls -la".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "ls -l".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "ls -la".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "-l".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,
             code_required: None,

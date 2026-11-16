@@ -31,7 +31,7 @@ Le videur automatique est en place. Les adresses malveillantes seront bannies.
             bloom_level: "Créer".into(),
             bloom_question: "Automatiser le bannissement?".into(),
             required_commands: vec!["sudo fail2ban-client status".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "fail2ban".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "fail2ban-client".into(), expected: None }],
             hints: vec![],
             xp_reward: 300,
             code_required: None,
@@ -41,7 +41,7 @@ Le videur automatique est en place. Les adresses malveillantes seront bannies.
             id: "18.2".into(), chapter: 18, chapter_title: "Durcissement".into(), act: 5,
             title: "Durcir SSH".into(),
             description: "Interdisez root et MDP!".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. SSH est vulnérable: root autorisé + mots de passe autorisés = porte ouverte.
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. SSH est vulnérable: root autorisé + mots de passe autorisés = porte ouverte. Dans /securite/config/sshd_config, il faut les deux lignes 'PermitRootLogin no' et 'PasswordAuthentication no' (éditeur de texte, ou ajout en fin de fichier).
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
@@ -52,7 +52,7 @@ Durcir SSH est une étape cruciale pour préparer la station à l'attaque immine
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: SSH est vulnérable: root autorisé + mots de passe autorisés = porte ouverte.
+Votre mission: SSH est vulnérable: root autorisé + mots de passe autorisés = porte ouverte. Dans /securite/config/sshd_config, il faut les deux lignes 'PermitRootLogin no' et 'PasswordAuthentication no' (éditeur de texte, ou ajout en fin de fichier).
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
@@ -64,7 +64,7 @@ Le login root est interdit et les mots de passe sont désactivés en SSH.
             goal: "Fermez la porte aux attaques: plus de root, plus de mots de passe en SSH.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Securiser SSH?".into(),
-            required_commands: vec!["nano /securite/config/sshd_config".into()],
+            required_commands: vec!["nano /securite/config/sshd_config".into(), "echo 'PermitRootLogin no' >> /securite/config/sshd_config".into(), "echo 'PasswordAuthentication no' >> /securite/config/sshd_config".into()],
             checks: vec![MissionCheck { check_type: "config_contains".into(), target: "/securite/config/sshd_config".into(), expected: Some("PermitRootLogin no".into()) }, MissionCheck { check_type: "config_contains".into(), target: "/securite/config/sshd_config".into(), expected: Some("PasswordAuthentication no".into()) }],
             hints: vec![],
             xp_reward: 350,
@@ -75,7 +75,7 @@ Le login root est interdit et les mots de passe sont désactivés en SSH.
             id: "18.3".into(), chapter: 18, chapter_title: "Durcissement".into(), act: 5,
             title: "iptables".into(),
             description: "Limitez SSH a 3 conn/min.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Au-delà d'UFW, iptables permet de limiter le débit de connexions SSH.
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Au-delà d'UFW, le noyau a son propre pare-feu. Avant de le modifier, il faut inspecter les règles actuellement actives, en affichage numérique.
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
@@ -86,16 +86,16 @@ Règles iptables est une étape cruciale pour préparer la station à l'attaque 
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Au-delà d'UFW, iptables permet de limiter le débit de connexions SSH.
+Votre mission: Au-delà d'UFW, le noyau a son propre pare-feu. Avant de le modifier, il faut inspecter les règles actuellement actives, en affichage numérique.
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
 la station et son équipage de 5 personnes.
 
-Les connexions SSH sont limitées au strict minimum par le pare-feu noyau.
+Les règles du pare-feu noyau s'affichent: vous savez maintenant ce qui filtre chaque paquet.
 
 « Le noyau filtre chaque paquet », explique Draz M'kal. « Ces règles sont la dernière barrière. »".into(),
-            goal: "Limitez les connexions SSH au strict minimum avec le pare-feu noyau.".into(),
+            goal: "Avant de toucher au pare-feu du noyau, inspectez toutes ses règles actives, adresses en chiffres.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Limiter les connexions?".into(),
             required_commands: vec!["sudo iptables -L -n".into()],
@@ -109,7 +109,7 @@ Les connexions SSH sont limitées au strict minimum par le pare-feu noyau.
             id: "18.4".into(), chapter: 18, chapter_title: "Durcissement".into(), act: 5,
             title: "Audit".into(),
             description: "Surveillez passwd et shadow.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Si un pirate crée un compte, il faut le détecter. Auditez passwd et shadow.
+            story: "La situation à bord d'Orion-7 se tend, Capitaine. Si un pirate crée un compte, il faut le détecter: posez une surveillance d'audit sur /etc/passwd (écritures et attributs), avec l'étiquette « comptes ».
 
 Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
 nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
@@ -120,7 +120,7 @@ Audit système est une étape cruciale pour préparer la station à l'attaque im
 Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
 pourront prendre le contrôle du vaisseau.
 
-Votre mission: Si un pirate crée un compte, il faut le détecter. Auditez passwd et shadow.
+Votre mission: Si un pirate crée un compte, il faut le détecter: posez une surveillance d'audit sur /etc/passwd (écritures et attributs), avec l'étiquette « comptes ».
 
 N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
 et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
@@ -129,11 +129,11 @@ la station et son équipage de 5 personnes.
 La surveillance des comptes est en place. Chaque création sera tracée.
 
 « La surveillance est notre meilleure alliée », conclut Draz M'kal. « Si un pirate crée un compte, nous le saurons. »".into(),
-            goal: "Si un pirate crée un compte, il faut le savoir. Mettez en place la surveillance.".into(),
+            goal: "Si un pirate crée un compte, il faut le savoir: surveillez les écritures et changements d'attributs de /etc/passwd, étiquette « comptes ».".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Tracer les modifications?".into(),
-            required_commands: vec!["sudo auditctl -l".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }],
+            required_commands: vec!["sudo auditctl -w /etc/passwd -p wa -k comptes".into(), "sudo auditctl -l".into()],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "audit.rules".into(), expected: Some("-w /etc/passwd".into()) }],
             hints: vec![],
             xp_reward: 350,
             code_required: None,
@@ -167,7 +167,7 @@ Le processus pirate est enfermé dans une cellule d'isolement. Il ne peut plus n
             bloom_level: "Créer".into(),
             bloom_question: "Isoler un processus?".into(),
             required_commands: vec!["sudo chroot /soutes/chroot /bin/bash".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chroot".into(), expected: None }, MissionCheck { check_type: "dir_exists".into(), target: "/soutes/chroot".into(), expected: None }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "chroot".into(), expected: None }, MissionCheck { check_type: "sim_event".into(), target: "chroot /soutes/chroot".into(), expected: None }],
             hints: vec![],
             xp_reward: 400,
             code_required: Some("FORTRESS".into()),

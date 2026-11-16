@@ -55,7 +55,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa vérifie le contenu: « Tout est dans l'archive, netrunner. Rien ne manque avant l'envoi. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Listez le contenu de l'archive (tar tvf).".into(),
+            goal: "Montrez à Rosa le contenu détaillé de l'archive /archives/logs_15jan.tar.gz, sans l'extraire.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister une archive?".into(),
             required_commands: vec!["tar tvf /archives/logs_15jan.tar.gz".into()],
@@ -86,7 +86,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa confirme: « L'archive est extraite dans /tmp, netrunner. Les logs sont accessibles. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Extrayez l'archive dans /tmp (tar xzf -C).".into(),
+            goal: "Décompressez et extrayez l'archive /archives/logs_15jan.tar.gz dans le répertoire /tmp.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment extraire dans un dossier précis?".into(),
             required_commands: vec!["tar xzf /archives/logs_15jan.tar.gz -C /tmp".into()],
@@ -148,7 +148,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa vérifie le ZIP: « Tout est dans l'archive, netrunner. Le rapport est complet. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Listez le contenu du ZIP (unzip -l).".into(),
+            goal: "Montrez à Rosa la liste des fichiers contenus dans rapport_incident.zip, sans rien décompresser.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister un ZIP?".into(),
             required_commands: vec!["unzip -l rapport_incident.zip".into()],

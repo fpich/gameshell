@@ -23,7 +23,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Le forgeron approuve: « Le pesage tourne en tâche de fond, à basse priorité, Seigneur. La forge garde toute sa puissance. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Lancez le pesage des greniers avec priorité basse (nice -n 19).".into(),
+            goal: "Pesez /greniers au total, en taille lisible, en lançant le calcul avec la priorité la plus faible possible, 19, pour que la forge passe d'abord.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lancer une commande en priorité basse?".into(),
             required_commands: vec!["nice -n 19 du -sh /greniers".into()],
@@ -53,7 +53,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya consulte l'espace: « Voilà la place restante, Seigneur. Les réserves du château sont saines. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Affichez l'espace disque restant (df -h).".into(),
+            goal: "Indiquez à Dame Kaguya l'espace disque restant sur les réserves du château, avec des tailles lisibles par un humain.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'espace disque restant?".into(),
             required_commands: vec!["df -h".into()],
@@ -143,7 +143,7 @@ Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près d
 Dame Kaguya sourit: « Vous êtes de retour dans vos quartiers, Seigneur. Le raccourci ~ est bien pratique. »
 
 Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
-            goal: "Revenez dans vos quartiers (~) et affichez votre position.".into(),
+            goal: "Revenez dans vos quartiers personnels par le chemin le plus court, puis affichez votre position.".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Comment revenir directement dans son home?".into(),
             required_commands: vec!["cd ~".into(), "pwd".into()],

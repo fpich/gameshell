@@ -55,7 +55,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl hoche la tête: « plan_incident.sh est exécutable, netrunner. En cas d'urgence, nous pourrons le lancer aussitôt. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Rendez plan_incident.sh exécutable (chmod +x).".into(),
+            goal: "Ajoutez à plan_incident.sh le droit d'exécution pour pouvoir le lancer en cas d'incident.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment rendre exécutable?".into(),
             required_commands: vec!["chmod +x plan_incident.sh".into()],
@@ -86,7 +86,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa consulte la fiche: « Taille, permissions, dates... tout y est, netrunner. Le plan est parfaitement documenté. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez les métadonnées (stat).".into(),
+            goal: "Remettez à Rosa la fiche technique complète de plan_incident.sh: taille, permissions, propriétaire et dates.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les métadonnées?".into(),
             required_commands: vec!["stat plan_incident.sh".into()],
@@ -117,7 +117,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl confirme: « regles.txt vous appartient officiellement, netrunner. L'audit sera sans reproche. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Changez le propriétaire de regles.txt (sudo chown $USER).".into(),
+            goal: "Avec les droits d'administrateur, transférez la propriété de /configs/ufw/regles.txt à votre propre compte pour l'audit.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer le propriétaire?".into(),
             required_commands: vec!["sudo chown $USER /configs/ufw/regles.txt".into()],

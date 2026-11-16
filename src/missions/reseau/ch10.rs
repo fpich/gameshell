@@ -24,7 +24,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl approuve: « Voilà le compte des attaques de 10.0.0.66, netrunner. L'ampleur est mesurée. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Comptez les attaques de 10.0.0.66 (grep | grep | wc -l).".into(),
+            goal: "Comptez les lignes 'Failed' venant de 10.0.0.66 dans /logs/auth.log, en enchaînant trois filtres: les échecs, puis cette IP, puis le décompte des lignes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment enchaîner trois commandes?".into(),
             required_commands: vec!["grep Failed /logs/auth.log | grep 10.0.0.66 | wc -l".into()],
@@ -55,7 +55,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa confirme: « Les 'Failed' sont enregistrés dans rapport.txt, netrunner. La preuve est conservée. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Enregistrez les attaques dans rapport.txt (>).".into(),
+            goal: "Enregistrez les lignes 'Failed' de /logs/auth.log dans un nouveau fichier rapport.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment enregistrer un résultat dans un fichier?".into(),
             required_commands: vec!["grep Failed /logs/auth.log > rapport.txt".into()],
@@ -86,7 +86,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Rosa vérifie: « Les alertes IDS sont ajoutées à la fin de rapport.txt, netrunner. Le rapport est complet. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Ajoutez les alertes IDS à rapport.txt (>>).".into(),
+            goal: "Ajoutez les alertes 'ALERT' de /logs/ids.log à la fin de rapport.txt, sans effacer son contenu.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter à la fin?".into(),
             required_commands: vec!["grep ALERT /logs/ids.log >> rapport.txt".into()],
@@ -117,7 +117,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl lit les bannissements: « Les IP bannies sont listées, netrunner. fail2ban tient ses promesses. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez les bannissements (grep BAN fail2ban.log).".into(),
+            goal: "Montrez à Karl les bannissements: les lignes de /logs/fail2ban.log qui contiennent le mot 'BAN'.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les bannissements?".into(),
             required_commands: vec!["grep BAN /logs/fail2ban.log".into()],
@@ -148,7 +148,7 @@ Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilis
 Karl consulte le journal: « Les 10 dernières lignes de ssh sont claires, netrunner. Le service est sain. »
 
 Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
-            goal: "Affichez les 10 dernières lignes du journal de ssh (journalctl -u ssh -n 10).".into(),
+            goal: "Consultez dans le journal système les messages de l'unité SSH, en vous limitant aux 10 dernières lignes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment lire le journal d'un service?".into(),
             required_commands: vec!["journalctl -u ssh -n 10".into()],
