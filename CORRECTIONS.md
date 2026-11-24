@@ -4,6 +4,11 @@ Basé sur TESTS_PLAYTHROUGH.md (playthrough Lucas, version initiale à 50 missio
 
 > ⚠️ Document historique. Le jeu compte aujourd'hui 3 campagnes × 100 missions; les commandes système
 > sont simulées par le jeu dans un bac à sable (voir AUDIT_CORRECTIONS / AGENTS.md règles A1, A23).
+>
+> **État final (cycle actuel):** les items P0–P2 sont exécutés (AUDIT des cibles/noms, phase 2, reset, export
+> enseignant A20, sauvegarde/reprise A18, écran de victoire A19, restart A21, historique A22) et le mode enseignant
+> (P3) est fonctionnel. Le jeu compte 3 campagnes × 100 missions EN DUR, `cargo test --release` 11/11 et
+> `tests/run_tests.sh` 54/54. Les cases à cocher ci-dessous sont caduques et historiques — ne pas les reprendre.
 
 ---
 

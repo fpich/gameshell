@@ -140,26 +140,15 @@ Chaque mission affiche:
 
 ## 📋 Conformité — AGENTS.md
 
-Le fichier `AGENTS.md` contient **22 règles strictes** anti-régression:
+Le fichier `AGENTS.md` contient les règles strictes de conformité, en sections:
 
-| Règle | Contenu |
-|-------|---------|
-| 1 | Isolation du monde (jamais le vrai système) |
-| 2 | Historique par mission, reset à chaque changement |
-| 3 | Pas de validation automatique |
-| 4 | Affichage obligatoire (gsh help auto, mission complète) |
-| 4b | Double définition: roleplay PUIS technique |
-| 4c | Minimum 20 lignes de contexte par mission |
-| 4d | Cohérence des analogies roleplay |
-| 4e | Textes gsh cohérents |
-| 4f | Vocabulaire: "commandes SHELL" vs "commandes gsh" |
-| 4g | ASCII art bien formé |
-| 4h | Carte ASCII obligatoire par mission |
-| 4i | Palette fond clair (texte noir, couleurs vives) |
-| 4j | Ne pas donner la réponse (objectif narratif) |
-| 4k | gsh goal = show_mission, man = compétence départ |
-| 4l | Bloom en français, footer 'gsh help' seul |
-| 4m | Check matche sur commande de base |
+| Section | Contenu |
+|---------|---------|
+| A — Moteur (A1–A25) | Isolation bubblewrap (A1), historique par mission (A2), validation manuelle (A3), matching sur commande effective (A4), parsing (A5), interceptions (A6), reset de position (A7), `gsh check` jamais révélateur (A8), pas de hint (A9), suite de tests obligatoire (A10), édition de ligne tty (A11), cibles de missions valides (A12), robustesse input (A13), UX anti-blocage (A14), compétence débloquée = commande de la mission (A15), identité vaisseau simulée (A16), checks jamais vacuels (A17), sauvegarde/reprise par campagne (A18), écran de victoire (A19), export enseignant JSON/CSV (A20), `gsh restart` (A21), historique horodaté (A22), commandes système simulées (A23), Ctrl+C (A24), tests jamais sur de vraies données (A25) |
+| B — Affichage & visuel (B1–B9) | Bannière de lancement sans vaisseau (B1), `gsh help` automatique au lancement (B2), syntaxe générique dans l'aide (B3), commande affichée telle quelle (B4), cadre mission « fenêtre terminal » (B5), palette fond clair (B6), footer = `gsh help` seul (B7), Bloom en français (B8), ASCII art bien formé (B9) |
+| C — Contenu (C1–C14) | 100 missions EN DUR par campagne (C1), compétences persistantes (C2), 20+ lignes de contexte (C3), objectif narratif sans nommer la commande (C4), noms exacts déduits dans le dialogue PNJ (C5), carte vue de dessus SUPPRIMÉE (C6), double définition roleplay puis technique (C7), analogies roleplay cohérentes (C8), taxonomie de Bloom (C9), vocabulaire strict (C10), `gsh goal` = `show_mission` (C11), textes gsh cohérents (C12), PNJ nommés science-fiction (C13), 3 campagnes fixes (C14) |
+| D — Monde (D1–D2) | Arborescence vaisseau (D1), monde dédié par campagne (D2) |
+| E — Build (E1–E3) | Build avant commit (E1), distribution 100 % offline (E2), dépôt git (E3) |
 
 ---
 
@@ -167,7 +156,7 @@ Le fichier `AGENTS.md` contient **22 règles strictes** anti-régression:
 
 ```
 gameshell/
-├── AGENTS.md              # 22 règles de conformité
+├── AGENTS.md              # règles de conformité (A/B/C/D/E)
 ├── README.md              # cette documentation
 ├── Cargo.toml
 ├── make-archive.sh        # génère gameshell.sh auto-extractible

@@ -8,6 +8,12 @@
 > des lignes réussies (A4), bancs n'exécutant que les commandes requises — `cargo test` 11/11,
 > `./tests/run_tests.sh` 54/54 dans un dossier temporaire, AUTO/EDGE/TORTURE 300/300 dont isolation réelle.
 
+> ## 📌 Rectificatif final (cycle actuel)
+> - Le jeu compte aujourd'hui **3 campagnes (espace / japon / reseau) × 100 missions EN DUR** — pas 2 × 100.
+> - `cargo test --release` **11/11** (conformité 300 missions) et `tests/run_tests.sh` **54/54** (AUTO/EDGE/TORTURE 300/300, dont isolation hôte réelle).
+> - Le « 48/48 » des sections ci-dessous désigne la version historique; la suite compte aujourd'hui 54/54.
+> - Les items P0–P3 (missions, expérimentations, isolation) sont clos; voir AGENTS.md.
+
 # 🧪 RETEX EXHAUSTIF — GameShell (2 campagnes × 100 missions)
 
 Date: session courante. Périmètre: exécution réelle du jeu (`gameshell.sh`), 200 missions jouées
