@@ -51,5 +51,54 @@ jobs:
       - name: Build distribution archive (gameshell.sh)
         run: bash make-archive.sh
 
-      - name: Full engine test suite (55 tests)
+      - name: Full engine test suite (57 tests)
         run: ./tests/run_tests.sh
+
+  fresh-install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust (via rust-toolchain.toml)
+        uses: dtolnay/rust-toolchain@master
+
+      - name: Build distribution archive
+        run: bash make-archive.sh
+
+      - name: Install bubblewrap
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bubblewrap
+
+      - name: Extract archive into a fresh HOME and launch the game
+        env:
+          GAMESHELL_HOME: ${{ runner.temp }}/gsh_fresh_home
+        run: |
+          mkdir -p "$GAMESHELL_HOME"
+          out=$(printf 'CI\nexit\n' | sed '1a 1' | timeout 60 bash gameshell.sh 2>&1)
+          echo "$out"
+          grep -q "Installation" <<< "$out"                        || { echo "❌ archive n'a pas installé"; exit 1; }
+          grep -q "100 missions" <<< "$out"                        || { echo "❌ jeu non démarré après installation"; exit 1; }
+          [ -x "$GAMESHELL_HOME/bin/gameshell" ]                  || { echo "❌ binaire absent"; exit 1; }
+          [ -f "$GAMESHELL_HOME/VERSION" ]                        || { echo "❌ VERSION absente"; exit 1; }
+          [ -d "$GAMESHELL_HOME/vaisseau" ]                       || { echo "❌ vaisseau absent"; exit 1; }
+          [ -d "$GAMESHELL_HOME/monde_japon" ]                    || { echo "❌ monde_japon absent"; exit 1; }
+          [ -d "$GAMESHELL_HOME/monde_reseau" ]                   || { echo "❌ monde_reseau absent"; exit 1; }
+          echo "✅ fresh install OK"
+
+  audit-deps:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@master
+
+      - name: Install cargo-audit
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-audit@v0.21.2
+
+      - name: cargo audit (dépendances, non bloquant)
+        run: cargo audit --deny warnings || true

@@ -176,7 +176,7 @@ gameshell/
 ├── monde-reseau-gen.sh   # monde campagne 3 (NOC Nexus)
 ├── launcher.sh            # lance le jeu installé (transmet --campaign/--locked/--name)
 ├── tests/
-│   ├── run_tests.sh       # suite automatisée (55 tests, dossier temporaire)
+│   ├── run_tests.sh       # suite automatisée (57 tests, dossier temporaire)
 │   └── playthrough_all.sh # playthrough complet en AUTO (bac à sable, non destructif)
 ├── docs/
 │   ├── suivi/             # relecture des 300 missions (README + campagne1/2/3)
@@ -212,7 +212,7 @@ gameshell/
 - Mode enseignant: lancer avec `--campaign <1|2|3>` pour imposer une campagne (et `--locked` pour verrouiller l'ordre des missions)
 - Missions modifiables dans `src/missions/{chapters,japon,reseau}/ch*.rs`
 - Rebuild: `cargo build --release && ./make-archive.sh`
-- Tests: `cargo test --release` + `./tests/run_tests.sh` (55 tests, dans un dossier temporaire: vos données ne sont jamais touchées)
+- Tests: `cargo test --release` + `./tests/run_tests.sh` (57 tests, dans un dossier temporaire: vos données ne sont jamais touchées)
 
 ## 🔒 Licence
 

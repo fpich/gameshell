@@ -11,10 +11,11 @@
 | Version | **2.0.0** |
 | Campagnes | 3 × 100 missions EN DUR (20 chapitres × 5, 5 actes × 20) |
 | Conformité cargo | **12/12** (`cargo test --release`) |
-| Suite moteur | **55/55** (`./tests/run_tests.sh`) |
+| Suite moteur | **57/57** (`./tests/run_tests.sh`) |
 | Clippy | propre (`cargo clippy --release --all-targets -- -D warnings`) |
 | Formatage | `cargo fmt --check` (CI en échec sinon) |
 | Chaîne Rust | épinglée `rust-toolchain.toml` (1.100.0, clippy + rustfmt) |
+| Process de release | tag `v*` → CI : archive + GitHub release (voir `docs/release.md`) |
 | CI | GitHub Actions (`.github/workflows/ci.yml`) |
 | Licence | propriétaire — tous droits réservés (voir `COPYRIGHT.md`) |
 
@@ -37,7 +38,7 @@
 | reecriture_mode_degrade | mode dégradé : réécriture de chemins sans bwrap |
 | slug | slugify (export JSON/CSV stable) |
 
-### `./tests/run_tests.sh` — 55/55
+### `./tests/run_tests.sh` — 57/57
 
 | Bloc | Contenu |
 |------|---------|
@@ -48,6 +49,8 @@
 | 43–48 | reprise par campagne, sauvegarde par joueur, export JSON/CSV, écrans victoire ×3, `gsh restart`, historique horodaté |
 | 49–54 | évasion impossible, commandes simulées, pipes/redirections, validation stricte, phase 2 non bloquante, `gsh   check` |
 | 55 | archive `gameshell.sh` bien formée (shebang, exécutable, VERSION de Cargo.toml embarquée, marqueur `__ARCHIVE_BELOW__`) |
+| 56 | bout en bout : l'archive s'installe dans un HOME vierge (binaire, VERSION, 3 mondes, lancement campagne 1) |
+| 57 | mode dégradé sans bwrap : démarrage signalé, garde-fou cd, prompt affiché |
 
 ## Structure du dépôt
 
@@ -65,12 +68,12 @@
 ├── rust-toolchain.toml      # toolchain épinglée
 ├── rustfmt.toml             # formatage standardisé
 ├── .editorconfig            # règles de base d'édition
-├── .github/workflows/ci.yml # CI : clippy, fmt, build, tests
+├── .github/workflows/ci.yml # CI : clippy, fmt, build, tests + fresh-install + audit deps
 ├── make-archive.sh          # génère gameshell.sh auto-extractible
 ├── vaisseau-gen.sh          # générateur des 3 mondes
 ├── monde-*.sh               # mondes campagne 2 et 3
 ├── launcher.sh              # lanceur (transmet --campaign/--locked/--name)
-├── tests/run_tests.sh       # suite (55 tests, dossier temporaire, jamais les données réelles)
+├── tests/run_tests.sh       # suite (57 tests, dossier temporaire, jamais les données réelles)
 ├── tests/playthrough_all.sh # playthrough complet en AUTO (dossier sandbox, ne détruit jamais ~/.gameshell)
 ├── docs/
 │   ├── suivi/               # relecture des 300 missions (campagne1/2/3, README d'index)
@@ -88,7 +91,7 @@
 
 - Toute modification respecte `AGENTS.md` (numérotation fixe, jamais renumérotée).
 - Avant chaque commit : `cargo clippy --release --all-targets`, `cargo fmt --check`,
-  `cargo test --release` (12/12) et `./tests/run_tests.sh` (55/55).
+  `cargo test --release` (12/12) et `./tests/run_tests.sh` (57/57).
 - Les tests tournent dans un `GAMESHELL_HOME` temporaire ; jamais sur les données réelles.
 - `git push` et publication de release : uniquement sur demande explicite du propriétaire.
 - Historique documentaire : `docs/historique/RETEX.md` et `CORRECTIONS.md` sont des records

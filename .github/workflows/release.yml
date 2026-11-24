@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust (via rust-toolchain.toml)
+        uses: dtolnay/rust-toolchain@master
+
+      - name: Build distribution archive
+        run: bash make-archive.sh
+
+      - name: Checksum
+        run: sha256sum gameshell.sh > gameshell.sh.sha256
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: GameShell ${{ github.ref_name }}
+          body: |
+            Version ${{ github.ref_name }} — GameShell (RPG éducatif shell, 3 campagnes × 100 missions).
+            ${{ github.event.repository.description }}
+
+            Fichiers:
+            - `gameshell.sh` — archive auto-extractible (installation + lancement)
+            - `gameshell.sh.sha256` — somme SHA-256 de l'archive
+          files: |
+            gameshell.sh
+            gameshell.sh.sha256
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}

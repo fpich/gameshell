@@ -44,6 +44,24 @@ if [ -r /proc/sys/kernel/unprivileged_userns_clone ] && [ "$(cat /proc/sys/kerne
     echo "    Activez-le: echo 'kernel.unprivileged_userns_clone=1' > /etc/sysctl.d/99-gameshell.conf && sysctl --system"
 fi
 
+# Smoke test: bubblewrap doit démarrer un vrai bac à sable.
+# Le jeu ne fonctionne qu'avec l'isolation des espaces de noms — un échec ici
+# signifie que l'installation est incomplète et que le jeu échouera au lancement.
+echo ""
+echo "🧪 Test bubblewrap (bac à sable)..."
+if ! command -v bwrap >/dev/null 2>&1; then
+    echo "❌ bubblewrap introuvable après installation (paquet bubblewrap manquant?)" >&2
+    exit 1
+fi
+if bwrap --unshare-all --ro-bind / / --proc /proc /bin/true 2>/dev/null; then
+    echo "✅ bubblewrap fonctionne: bac à sable opérationnel."
+else
+    echo "❌ bubblewrap n'a pas pu démarrer le bac à sable."
+    echo "   Vérifiez kernel.unprivileged_userns_clone=1 (voir fix ci-dessus) et faites:"
+    echo "     bwrap --unshare-all --ro-bind / / /bin/true   (diagnostic manuel)"
+    exit 1
+fi
+
 echo ""
 echo "✅ Prérequis installés."
 echo "🚀 Les élèves lancent maintenant, avec LEUR compte (pas root): ./gameshell.sh"

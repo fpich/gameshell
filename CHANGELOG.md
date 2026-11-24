@@ -20,6 +20,15 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/) — exemption : vers
   `SUIVI_MISSIONS.md` (~210 Ko). `docs/historique/` (RETEX.md + CORRECTIONS.md) pour les records figés.
 - `ETAT_ACTUEL.md` : page source-de-vérité de l'état du dépôt.
 - `CHANGELOG.md`, `CONTRIBUTING.md`, `COPYRIGHT.md` (notice de propriété, pas de LICENSE).
+- Tests 56 et 57 (`run_tests.sh`) : bout en bout — l'archive s'installe dans un HOME vierge
+  (bin, VERSION, 3 mondes, lancement campagne 1) ; mode dégradé sans bwrap (signalé + garde-fou cd).
+- `install-debian13.sh` : smoke test bubblewrap post-installation (`bwrap --unshare-all`) ;
+  script refusé si le test échoue.
+- CI : job `fresh-install` (l'archive s'installe dans un HOME vierge et lance la
+  campagne 1) + job `audit-deps` (`cargo audit` non bloquant). Suite 57/57 (55→57).
+- Workflow de release (`.github/workflows/release.yml`) : tag `v*` → build + checksum SHA-256
+  + GitHub Release avec `gameshell.sh`. Voir `docs/release.md`.
+- `docs/release.md` : procédure de versionnement et de publication.
 
 ### Corrigé
 - `tests/playthrough_all.sh` : ne touche plus `~/.gameshell` — bac à sable temporaire
@@ -31,7 +40,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/) — exemption : vers
 - `cargo fmt` global (26 fichiers) — formatage aligné sur la CI.
 - `SUIVI_MISSIONS.md` découpé en `docs/suivi/campagne{1,2,3}/ch<NN>[-reecrit].md`
   (campagne 1 : débutant + réécriture séparés).
-- Docs : figures de test mises à jour (55/55 suite, 12/12 cargo), structure documentaire réécrite.
+- Docs : figures de test mises à jour (57/57 suite, 12/12 cargo), structure documentaire réécrite.
 - `README.md` : section Structure du dépôt mise à jour + badge CI + note de licence.
 
 ### Supprimé

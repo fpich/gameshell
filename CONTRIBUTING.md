@@ -12,7 +12,7 @@ Merci de contribuer ! Ce fichier résume les conventions à respecter.
    cargo fmt --check
    cargo clippy --release --all-targets -- -D warnings
    cargo test --release        # 12/12
-   ./tests/run_tests.sh        # 55/55
+   ./tests/run_tests.sh        # 57/57
    ```
 
    - `cargo test` valide les 300 missions (conformité C/A).

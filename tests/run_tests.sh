@@ -321,6 +321,30 @@ echo "$out" | grep -q "✅ Mission réussie" && ok "gsh   check (espaces multipl
 # ─── TEST 55: archive gameshell.sh bien formée et VERSION synchronisée (E2) ───
 [ -f gameshell.sh ] && [ -x gameshell.sh ] && [ "$(head -1 gameshell.sh)" = "#!/bin/bash" ] && cargo_ver="$(grep -m1 '^version' Cargo.toml | cut -d'"' -f2)" && grep -q "$cargo_ver-" gameshell.sh && grep -q '__ARCHIVE_BELOW__' gameshell.sh && ok "Archive gameshell.sh bien formée (VERSION=$cargo_ver, empaquetage entrant)" || ko "Archive gameshell.sh manquante ou VERSION hors sync (relancez make-archive.sh)"
 
+
+# ─── TEST 56: bout en bout — l'archive s'installe dans un HOME vierge (E2, P1) ───
+INSTALL_TMP="$(mktemp -d "${TMPDIR:-/tmp}/gsh_install.XXXXXX")"
+INSTALL_HOME="$INSTALL_TMP/home"
+mkdir -p "$INSTALL_HOME"
+trap 'rm -rf "$INSTALL_TMP"' EXIT
+LAST_OUT=$(echo -e "Install\nexit\n" | sed '1a 1' | GAMESHELL_HOME="$INSTALL_HOME" timeout 60 bash gameshell.sh 2>&1 | strip)
+INSTALL_OK=1
+[ -x "$INSTALL_HOME/bin/gameshell" ] || INSTALL_OK=0
+[ -f "$INSTALL_HOME/VERSION" ] || INSTALL_OK=0
+[ -d "$INSTALL_HOME/vaisseau" ] || INSTALL_OK=0
+[ -d "$INSTALL_HOME/monde_japon" ] || INSTALL_OK=0
+[ -d "$INSTALL_HOME/monde_reseau" ] || INSTALL_OK=0
+echo "$LAST_OUT" | grep -q "100 missions" || INSTALL_OK=0
+echo "$LAST_OUT" | grep -qi "Installation" || INSTALL_OK=0
+[ "$INSTALL_OK" = 1 ] && ok "Bout en bout: l'archive s'installe dans un HOME vierge (bin, VERSION, 3 mondes) et lance la campagne 1" || ko "L'archive ne s'installe pas ou ne démarre pas dans un HOME vierge (voir $INSTALL_TMP)"
+rm -rf "$INSTALL_TMP" 2>/dev/null || true
+
+# ─── TEST 57: mode dégradé (sans bubblewrap) — démarrage + garde-fou cd (A1, P5) ───
+fresh
+DEGRADED_OUT=$(echo -e "Degrade\ncd /..\npwd\nls /..\nexit\n" | sed '1a 1' | GSH_NO_SANDBOX=1 timeout 30 bash gameshell.sh 2>&1 | strip)
+echo "$DEGRADED_OUT" | grep -q "isolation PARTIELLE" && echo "$DEGRADED_OUT" | grep -qF "Degrade@orion7:~$" && echo "$DEGRADED_OUT" | grep -q "accès refusé" && ok "Mode dégradé: démarrage signalé (isolation PARTIELLE), garde-fou cd (accès refusé), prompt affiché (P5)" || ko "Mode dégradé non fonctionnel ou non signalé"
+
+
 echo ""
 echo "═══════════════════════════════════════"
 echo -e "  RÉSULTAT: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL total"
