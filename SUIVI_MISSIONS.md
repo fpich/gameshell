@@ -703,7 +703,7 @@ Format: `Campagne N° | compréhension initiale | défaut | modification | rejeu
 - **Campagne 2 (japon) TERMINÉE ✅** — ch1 → ch20 : stories réécrites + rejouées 100/100 + écran de victoire A19 confirmé (XP 11300, niv 114, skills 76, badges 6). Sauvegarde test finale : `current_mission=100` (`/tmp/gsh_japon/state/save_campagne2_testeur.json`).
 - **Campagne 3 (nexus) TERMINÉE ✅** — ch1 → ch20 : stories réécrites + rejouées 100/100 (positions 5, 10, 15 … 100) + écran de victoire A19 confirmé (XP 12700, 80 compétences, 6 badges). Corrections monde : `monde-reseau-gen.sh` (chemin coffre `/firewall/coffre/codes.txt`, `dns_nexus.txt` → 10.0.0.9 cohérent avec `sim/net.rs`) ; `monde-japon-gen.sh` (RONIN majuscule) ; `vaisseau-gen.sh` (tailles soutes calibrées pour 13.4, retrait echo parasite).
 - **Clôture du cycle FAITE** : `cargo build --release` 0 erreur/warning + `cargo test --release` 11/11 + `bash make-archive.sh` (gameshell.sh 1,5M) + `./tests/run_tests.sh` **54/54 PASS** (AUTO/EDGE/TORTURE 300/300, A13/A14/A16/A18-A25, victoires 3 campagnes).
-- **Il ne reste que le commit heredoc Mistral Vibe + push origin master.**
+- **Commit + push FAITS** : `24377ec` « ✨ Revue complète des 300 missions: réécriture des stories (3 campagnes) » poussé sur `origin master` (`1f79a47..24377ec`), dépôt propre, footer co-auteur Mistral Vibe conforme. Cycle suivant : reprendre uniquement les points ouverts ou les missions affectées par des changements récents ; sinon cycle terminé.
 
 ---
 
