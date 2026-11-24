@@ -48,5 +48,8 @@ jobs:
       - name: Conformity tests (300 missions)
         run: cargo test --release
 
-      - name: Full engine test suite (54 tests)
+      - name: Build distribution archive (gameshell.sh)
+        run: bash make-archive.sh
+
+      - name: Full engine test suite (55 tests)
         run: ./tests/run_tests.sh
