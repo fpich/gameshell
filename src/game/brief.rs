@@ -6,8 +6,16 @@ use crate::shell;
 pub fn cmd_brief(cmd: &str) -> (&'static str, &'static str) {
     let (tech, rp) = cmd_brief_raw(cmd);
     match shell::campaign_id() {
-        2 => if let Some(jp) = cmd_brief_jp(cmd) { return (tech, jp); },
-        3 => if let Some(rs) = cmd_brief_rs(cmd) { return (tech, rs); },
+        2 => {
+            if let Some(jp) = cmd_brief_jp(cmd) {
+                return (tech, jp);
+            }
+        }
+        3 => {
+            if let Some(rs) = cmd_brief_rs(cmd) {
+                return (tech, rs);
+            }
+        }
         _ => {}
     }
     (tech, rp)
@@ -92,7 +100,9 @@ fn cmd_brief_rs(cmd: &str) -> Option<&'static str> {
         "cp" => "comme dupliquer une config critique en backup",
         "mv" => "comme déplacer un serveur d'une baie à une autre",
         "rm" => "comme jeter une vieille capture réseau à la corbeille (définitif)",
-        "chmod" => "comme changer les droits d'accès d'une config réseau (qui peut la lire/modifier)",
+        "chmod" => {
+            "comme changer les droits d'accès d'une config réseau (qui peut la lire/modifier)"
+        }
         "chown" => "comme transférer la responsabilité d'un équipement à un autre opérateur",
         "stat" => "comme lire la fiche technique d'un équipement (taille, dates, inode)",
         "ps" => "comme voir tous les démons actifs sur le cluster",
@@ -108,7 +118,9 @@ fn cmd_brief_rs(cmd: &str) -> Option<&'static str> {
         "echo" => "comme diffuser un message sur le canal interne du NOC",
         "ip" => "comme lire la carte réseau du NOC: interfaces, IP, routes",
         "ping" => "comme envoyer des paquets de test vers une cible pour voir si elle répond",
-        "ss" | "netstat" => "comme voir sur le radar quelles connexions sont ouvertes sur les serveurs",
+        "ss" | "netstat" => {
+            "comme voir sur le radar quelles connexions sont ouvertes sur les serveurs"
+        }
         "traceroute" => "comme suivre le chemin des paquets jusqu'à une cible (chaque saut)",
         "nmap" => "comme scanner les ports ouverts d'une machine du réseau",
         "curl" => "comme interroger une API interne du NOC par HTTP",
@@ -116,7 +128,9 @@ fn cmd_brief_rs(cmd: &str) -> Option<&'static str> {
         "ssh" => "comme ouvrir un tunnel chiffré vers un serveur du cluster",
         "ufw" => "comme régler le pare-feu du NOC: quelles IP/ports sont bloqués",
         "iptables" => "comme programmer les règles de filtrage au niveau noyau",
-        "fail2ban" | "fail2ban-client" => "comme un système qui bannit automatiquement les IP qui attaquent",
+        "fail2ban" | "fail2ban-client" => {
+            "comme un système qui bannit automatiquement les IP qui attaquent"
+        }
         "systemctl" => "comme allumer/éteindre/redémarrer les services du cluster",
         "journalctl" => "comme lire le journal système filtré par service",
         "tar" => "comme archiver les captures réseau dans une malle compressée",

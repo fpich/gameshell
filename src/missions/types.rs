@@ -24,15 +24,15 @@ pub struct Mission {
     pub title: String,
     pub description: String,
     pub story: String,
-    pub goal: String,               // Objectif en langage naturel (affiché au joueur)
+    pub goal: String, // Objectif en langage naturel (affiché au joueur)
     pub bloom_level: String,
     pub bloom_question: String,
-    pub required_commands: Vec<String>,  // Caché, utilisé pour la vérification interne
+    pub required_commands: Vec<String>, // Caché, utilisé pour la vérification interne
     pub checks: Vec<MissionCheck>,
     pub hints: Vec<String>,
     pub xp_reward: u64,
     pub skill: Option<Skill>,
-    pub code_required: Option<String>,  // Code à entrer en phase 2 de gsh check
+    pub code_required: Option<String>, // Code à entrer en phase 2 de gsh check
 }
 
 /// Sauvegarde de progression par campagne (règle A18)

@@ -4,7 +4,10 @@ use crate::missions::types::*;
 pub fn missions() -> Vec<Mission> {
     vec![
         Mission {
-            id: "3.1".into(), chapter: 3, chapter_title: "Exploration du domaine".into(), act: 1,
+            id: "3.1".into(),
+            chapter: 3,
+            chapter_title: "Exploration du domaine".into(),
+            act: 1,
             title: "Fichiers cachés des quartiers".into(),
             description: "Le sceau secret est un fichier caché.".into(),
             story: "Le moine Tetsuo vous croise dans le couloir des scribes, l'air
@@ -28,20 +31,38 @@ Vous parcourez le bureau, examinez chaque recoin, puis lisez ce
 que renferme le fichier .secret.
 
 Le moine hoche la tête: « Rien n'échappe à un œil attentif,
-Seigneur. Le domaine vous est transparent. »".into(),
+Seigneur. Le domaine vous est transparent. »"
+                .into(),
             goal: "Listez tous vos quartiers (fichiers cachés compris) et lisez .secret.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir aussi les fichiers cachés?".into(),
             required_commands: vec!["ls -la".into(), "cat .secret".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "-la".into(), expected: None }, MissionCheck { check_type: "file_read".into(), target: ".secret".into(), expected: None }],
+            checks: vec![
+                MissionCheck {
+                    check_type: "command_executed".into(),
+                    target: "-la".into(),
+                    expected: None,
+                },
+                MissionCheck {
+                    check_type: "file_read".into(),
+                    target: ".secret".into(),
+                    expected: None,
+                },
+            ],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            skill: Some(Skill { command: "ls".into(), name: "ls".into(), description: "ls — liste les fichiers et dossiers".into() }),
+            skill: Some(Skill {
+                command: "ls".into(),
+                name: "ls".into(),
+                description: "ls — liste les fichiers et dossiers".into(),
+            }),
         },
-        
-Mission {
-            id: "3.2".into(), chapter: 3, chapter_title: "Exploration du domaine".into(), act: 1,
+        Mission {
+            id: "3.2".into(),
+            chapter: 3,
+            chapter_title: "Exploration du domaine".into(),
+            act: 1,
             title: "Trouver un registre".into(),
             description: "Trouvez registre_riz.txt dans tout le château.".into(),
             story: "Dame Kaguya feuillette fébrilement son pupitre: « Seigneur, le
@@ -66,20 +87,38 @@ Vous parcourez le domaine du bout des doigts, et le nom du fichier
 finit par vous répondre.
 
 Dame Kaguya est rassurée: « Le registre du riz est retrouvé,
-Seigneur. Grâce à vous, le domaine ne perd plus rien. »".into(),
+Seigneur. Grâce à vous, le domaine ne perd plus rien. »"
+                .into(),
             goal: "Trouvez le chemin complet de registre_riz.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment chercher un fichier par nom partout?".into(),
             required_commands: vec!["find / -name registre_riz.txt".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "find".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-name".into(), expected: None }],
+            checks: vec![
+                MissionCheck {
+                    check_type: "command_executed".into(),
+                    target: "find".into(),
+                    expected: None,
+                },
+                MissionCheck {
+                    check_type: "command_executed".into(),
+                    target: "-name".into(),
+                    expected: None,
+                },
+            ],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            skill: Some(Skill { command: "find".into(), name: "find".into(), description: "find -name — recherche par nom".into() }),
+            skill: Some(Skill {
+                command: "find".into(),
+                name: "find".into(),
+                description: "find -name — recherche par nom".into(),
+            }),
         },
-        
-Mission {
-            id: "3.3".into(), chapter: 3, chapter_title: "Exploration du domaine".into(), act: 1,
+        Mission {
+            id: "3.3".into(),
+            chapter: 3,
+            chapter_title: "Exploration du domaine".into(),
+            act: 1,
             title: "Poids des greniers".into(),
             description: "Quelle taille occupent les greniers?".into(),
             story: "Le marchand Genji vous reçoit devant les greniers, tablettes à la
@@ -105,20 +144,38 @@ Vous examinez les réserves et déterminez enfin l'espace occupé par
 l'ensemble.
 
 Le marchand note la taille sur sa tablette: « Voilà, Seigneur.
-Nous pourrons négocier le riz en connaissance de cause. »".into(),
+Nous pourrons négocier le riz en connaissance de cause. »"
+                .into(),
             goal: "Donnez la taille totale du bâtiment /greniers.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment connaître la taille totale d'un dossier?".into(),
             required_commands: vec!["du -sh /greniers".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "du".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-sh".into(), expected: None }],
+            checks: vec![
+                MissionCheck {
+                    check_type: "command_executed".into(),
+                    target: "du".into(),
+                    expected: None,
+                },
+                MissionCheck {
+                    check_type: "command_executed".into(),
+                    target: "-sh".into(),
+                    expected: None,
+                },
+            ],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            skill: Some(Skill { command: "du -sh".into(), name: "du -sh".into(), description: "du -sh — taille totale lisible".into() }),
+            skill: Some(Skill {
+                command: "du -sh".into(),
+                name: "du -sh".into(),
+                description: "du -sh — taille totale lisible".into(),
+            }),
         },
-        
-Mission {
-            id: "3.4".into(), chapter: 3, chapter_title: "Exploration du domaine".into(), act: 1,
+        Mission {
+            id: "3.4".into(),
+            chapter: 3,
+            chapter_title: "Exploration du domaine".into(),
+            act: 1,
             title: "Monter au donjon".into(),
             description: "Rejoignez le donjon pour le conseil de guerre.".into(),
             story: "Un garde essoufflé surgit dans vos quartiers: « Seigneur Hattori
@@ -141,20 +198,31 @@ marches du donjon.
 
 Seigneur Hattori vous accueille au sommet: « Vous voilà, Seigneur.
 Le conseil de guerre peut commencer. Les espions approchent, mais
-nous sommes prêts. »".into(),
+nous sommes prêts. »"
+                .into(),
             goal: "Rejoignez le donjon (/donjon).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment aller au donjon en chemin absolu?".into(),
             required_commands: vec!["cd /donjon".into()],
-            checks: vec![MissionCheck { check_type: "dir_reached".into(), target: "/donjon".into(), expected: None }],
+            checks: vec![MissionCheck {
+                check_type: "dir_reached".into(),
+                target: "/donjon".into(),
+                expected: None,
+            }],
             hints: vec![],
             xp_reward: 75,
             code_required: None,
-            skill: Some(Skill { command: "cd".into(), name: "cd".into(), description: "cd — change de répertoire".into() }),
+            skill: Some(Skill {
+                command: "cd".into(),
+                name: "cd".into(),
+                description: "cd — change de répertoire".into(),
+            }),
         },
-        
-Mission {
-            id: "3.5".into(), chapter: 3, chapter_title: "Exploration du domaine".into(), act: 1,
+        Mission {
+            id: "3.5".into(),
+            chapter: 3,
+            chapter_title: "Exploration du domaine".into(),
+            act: 1,
             title: "Ordre du soir".into(),
             description: "Écrivez l'ordre du soir dans un fichier.".into(),
             story: "Dame Kaguya arrive dans vos quartiers, un rouleau à la main: «
@@ -178,16 +246,32 @@ Kaguya l'a dictée.
 Vous ouvrez le fichier ordre.txt et y inscrivez la phrase.
 
 Dame Kaguya relit le fichier: « \"Fermer le portail à la nuit
-tombée\". C'est noté, Seigneur. Vos ordres seront exécutés. »".into(),
+tombée\". C'est noté, Seigneur. Vos ordres seront exécutés. »"
+                .into(),
             goal: "Créez ordre.txt dans vos quartiers avec le texte demandé.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment écrire un texte directement dans un fichier?".into(),
             required_commands: vec!["echo 'Fermer le portail a la nuit tombee' > ordre.txt".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: ">".into(), expected: None }, MissionCheck { check_type: "file_exists".into(), target: "~/ordre.txt".into(), expected: None }],
+            checks: vec![
+                MissionCheck {
+                    check_type: "command_executed".into(),
+                    target: ">".into(),
+                    expected: None,
+                },
+                MissionCheck {
+                    check_type: "file_exists".into(),
+                    target: "~/ordre.txt".into(),
+                    expected: None,
+                },
+            ],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            skill: Some(Skill { command: "echo".into(), name: "echo".into(), description: "echo — affiche du texte à l'écran".into() }),
+            skill: Some(Skill {
+                command: "echo".into(),
+                name: "echo".into(),
+                description: "echo — affiche du texte à l'écran".into(),
+            }),
         },
     ]
 }

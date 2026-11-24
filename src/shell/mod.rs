@@ -16,12 +16,23 @@ use std::sync::atomic::{AtomicBool, Ordering};
 static TEST_MODE: AtomicBool = AtomicBool::new(false);
 
 /// Modes de test (AUTO/EDGE/TORTURE): jamais de sauvegarde ni d'historique (règle A18, P1.9)
-pub fn set_test_mode(on: bool) { TEST_MODE.store(on, Ordering::SeqCst); }
-pub fn test_mode() -> bool { TEST_MODE.load(Ordering::SeqCst) }
+pub fn set_test_mode(on: bool) {
+    TEST_MODE.store(on, Ordering::SeqCst);
+}
+pub fn test_mode() -> bool {
+    TEST_MODE.load(Ordering::SeqCst)
+}
 
 /// Dossier d'installation du jeu (isolé)
 pub fn gameshell_home() -> String {
-    std::env::var("GAMESHELL_HOME").unwrap_or_else(|_| format!("{}/.gameshell", std::env::var("GSH_REAL_HOME").or_else(|_| std::env::var("HOME")).unwrap_or_else(|_| ".".into())))
+    std::env::var("GAMESHELL_HOME").unwrap_or_else(|_| {
+        format!(
+            "{}/.gameshell",
+            std::env::var("GSH_REAL_HOME")
+                .or_else(|_| std::env::var("HOME"))
+                .unwrap_or_else(|_| ".".into())
+        )
+    })
 }
 
 /// Chemin vers le monde du jeu (dédié à la campagne choisie — règle D2)
@@ -31,13 +42,26 @@ pub fn world_dir() -> String {
 
 /// Campagne active: 1 = Pirates de l'Espace (facile), 2 = Japon Féodal (moyen), 3 = Nexus Réseau (difficile)
 pub fn campaign_id() -> u8 {
-    std::env::var("GAMESHELL_CAMPAIGN").ok().and_then(|v| v.parse().ok()).unwrap_or(1)
+    std::env::var("GAMESHELL_CAMPAIGN")
+        .ok()
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(1)
 }
 
-pub fn camp_name(c: u8) -> &'static str { match c { 2 => "japon", 3 => "reseau", _ => "espace" } }
+pub fn camp_name(c: u8) -> &'static str {
+    match c {
+        2 => "japon",
+        3 => "reseau",
+        _ => "espace",
+    }
+}
 
 fn world_of(home: &str, campaign: u8) -> String {
-    match campaign { 2 => format!("{}/monde_japon", home), 3 => format!("{}/monde_reseau", home), _ => format!("{}/vaisseau", home) }
+    match campaign {
+        2 => format!("{}/monde_japon", home),
+        3 => format!("{}/monde_reseau", home),
+        _ => format!("{}/vaisseau", home),
+    }
 }
 
 /// Home du joueur DANS le monde (chemin vu dans le jeu): /cabines/capitaine...
@@ -58,9 +82,28 @@ pub fn sim_ctx() -> crate::sim::Ctx {
 
 fn essentials(campaign: u8) -> &'static [&'static str] {
     match campaign {
-        2 => &["donjon", "pagode", "jardins", "remparts", "greniers", "quartiers"],
+        2 => &[
+            "donjon",
+            "pagode",
+            "jardins",
+            "remparts",
+            "greniers",
+            "quartiers",
+        ],
         3 => &["baies", "serveurs", "logs", "configs", "noc", "firewall"],
-        _ => &["pont", "cabines", "soutes", "reacteur", "hangar", "securite", "communications", "navigation", "armes", "salle-des-machines", "archives"],
+        _ => &[
+            "pont",
+            "cabines",
+            "soutes",
+            "reacteur",
+            "hangar",
+            "securite",
+            "communications",
+            "navigation",
+            "armes",
+            "salle-des-machines",
+            "archives",
+        ],
     }
 }
 
@@ -68,10 +111,19 @@ fn essentials(campaign: u8) -> &'static [&'static str] {
 pub fn regenerate_world(campaign: u8) -> bool {
     let home = gameshell_home();
     let gen = format!("{}/vaisseau-gen.sh", home);
-    if !Path::new(&gen).exists() { return false; }
+    if !Path::new(&gen).exists() {
+        return false;
+    }
     let world = world_of(&home, campaign);
-    Command::new("bash").arg(&gen).arg(camp_name(campaign)).arg(&world)
-        .env("GAMESHELL_HOME", &home).stdout(Stdio::null()).status().map(|s| s.success()).unwrap_or(false)
+    Command::new("bash")
+        .arg(&gen)
+        .arg(camp_name(campaign))
+        .arg(&world)
+        .env("GAMESHELL_HOME", &home)
+        .stdout(Stdio::null())
+        .status()
+        .map(|s| s.success())
+        .unwrap_or(false)
 }
 
 /// Sélectionne le monde d'une campagne (génère si absent/incomplet) et ajuste HOME — règle D2
@@ -82,8 +134,12 @@ pub fn select_world(campaign: u8) {
     }
     std::env::set_var("GAMESHELL_HOME", &home_dir);
     let world = world_of(&home_dir, campaign);
-    let missing = essentials(campaign).iter().any(|d| !Path::new(&format!("{}/{}", world, d)).exists());
-    if missing { regenerate_world(campaign); }
+    let missing = essentials(campaign)
+        .iter()
+        .any(|d| !Path::new(&format!("{}/{}", world, d)).exists());
+    if missing {
+        regenerate_world(campaign);
+    }
     crate::sim::init_system(&sys_etc(campaign), campaign, false);
     std::env::set_var("GAMESHELL_WORLD", &world);
     std::env::set_var("GAMESHELL_CAMPAIGN", campaign.to_string());
@@ -91,10 +147,14 @@ pub fn select_world(campaign: u8) {
 }
 
 /// Nom d'hôte du monde courant
-pub fn world_hostname() -> &'static str { crate::sim::Profile::of(campaign_id()).host }
+pub fn world_hostname() -> &'static str {
+    crate::sim::Profile::of(campaign_id()).host
+}
 
 /// Nom du joueur dans le monde courant
-pub fn world_user() -> &'static str { crate::sim::Profile::of(campaign_id()).user }
+pub fn world_user() -> &'static str {
+    crate::sim::Profile::of(campaign_id()).user
+}
 
 /// Home du joueur (chemin réel sur l'hôte)
 pub fn player_home() -> String {
@@ -105,17 +165,25 @@ pub fn player_home() -> String {
 pub fn to_world(real: &str) -> Option<String> {
     let w = world_dir();
     let w = w.trim_end_matches('/');
-    if real == w { return Some("/".into()); }
-    real.strip_prefix(&format!("{}/", w)).map(|r| format!("/{}", r))
+    if real == w {
+        return Some("/".into());
+    }
+    real.strip_prefix(&format!("{}/", w))
+        .map(|r| format!("/{}", r))
 }
 
 // ───────────────────────────── bac à sable ─────────────────────────────
 
 fn which(name: &str) -> Option<String> {
     let path = std::env::var("PATH").unwrap_or_else(|_| "/usr/bin:/bin".into());
-    for d in path.split(':').chain(["/usr/bin", "/bin", "/usr/local/bin"]) {
+    for d in path
+        .split(':')
+        .chain(["/usr/bin", "/bin", "/usr/local/bin"])
+    {
         let p = format!("{}/{}", d, name);
-        if Path::new(&p).is_file() { return Some(p); }
+        if Path::new(&p).is_file() {
+            return Some(p);
+        }
     }
     None
 }
@@ -124,11 +192,24 @@ static mut SANDBOX_CHECKED: Option<bool> = None;
 
 /// bwrap disponible ET fonctionnel (espaces de noms utilisateur autorisés)?
 pub fn sandbox_available() -> bool {
-    if std::env::var("GSH_NO_SANDBOX").is_ok() { return false; }
+    if std::env::var("GSH_NO_SANDBOX").is_ok() {
+        return false;
+    }
     unsafe {
-        if let Some(v) = SANDBOX_CHECKED { return v; }
-        let ok = which("bwrap").map(|b| Command::new(b).args(["--unshare-all", "--ro-bind", "/", "/", "true"])
-            .stdout(Stdio::null()).stderr(Stdio::null()).status().map(|s| s.success()).unwrap_or(false)).unwrap_or(false);
+        if let Some(v) = SANDBOX_CHECKED {
+            return v;
+        }
+        let ok = which("bwrap")
+            .map(|b| {
+                Command::new(b)
+                    .args(["--unshare-all", "--ro-bind", "/", "/", "true"])
+                    .stdout(Stdio::null())
+                    .stderr(Stdio::null())
+                    .status()
+                    .map(|s| s.success())
+                    .unwrap_or(false)
+            })
+            .unwrap_or(false);
         SANDBOX_CHECKED = Some(ok);
         ok
     }
@@ -146,25 +227,32 @@ pub fn ensure_simbin() -> String {
         };
         if !same {
             let tmp = format!("{}.tmp", target);
-            if std::fs::copy(&exe, &tmp).is_ok() { let _ = std::fs::rename(&tmp, &target); }
+            if std::fs::copy(&exe, &tmp).is_ok() {
+                let _ = std::fs::rename(&tmp, &target);
+            }
         }
     }
     for n in crate::sim::NAMES {
         let l = format!("{}/{}", dir, n);
-        if std::fs::symlink_metadata(&l).is_err() { let _ = std::os::unix::fs::symlink("gsh-sim", &l); }
+        if std::fs::symlink_metadata(&l).is_err() {
+            let _ = std::os::unix::fs::symlink("gsh-sim", &l);
+        }
     }
     dir
 }
 
+#[derive(Default)]
 pub struct RunOpts {
-    pub capture: bool,         // capture stdout+stderr (tests)
-    pub quiet: bool,           // sortie supprimée (bancs de test)
+    pub capture: bool,          // capture stdout+stderr (tests)
+    pub quiet: bool,            // sortie supprimée (bancs de test)
     pub stdin: Option<Vec<u8>>, // entrée fournie (bancs de test)
 }
 
-impl Default for RunOpts { fn default() -> Self { RunOpts { capture: false, quiet: false, stdin: None } } }
-
-pub struct RunResult { pub code: i32, pub cwd: Option<String>, pub out: String }
+pub struct RunResult {
+    pub code: i32,
+    pub cwd: Option<String>,
+    pub out: String,
+}
 
 /// Script exécuté dans le bac à sable: la ligne du joueur est passée INTACTE (P1.5) à bash,
 /// le dossier final est renvoyé sur le descripteur 3 (cd composés: `cd /pont && ls`, P1.4).
@@ -190,16 +278,42 @@ fn rewrite_for_host(line: &str, world: &str) -> String {
     let mut word_start = true;
     while i < chars.len() {
         let c = chars[i];
-        if c == '\'' && !in_double { in_single = !in_single; out.push(c); i += 1; word_start = false; continue; }
-        if c == '"' && !in_single { in_double = !in_double; out.push(c); i += 1; continue; }
-        if c == '/' && (word_start || (i > 0 && matches!(chars[i - 1], '"' | '\'' | '=' | '>' | '<' | ':'))) {
+        if c == '\'' && !in_double {
+            in_single = !in_single;
+            out.push(c);
+            i += 1;
+            word_start = false;
+            continue;
+        }
+        if c == '"' && !in_single {
+            in_double = !in_double;
+            out.push(c);
+            i += 1;
+            continue;
+        }
+        if c == '/'
+            && (word_start || (i > 0 && matches!(chars[i - 1], '"' | '\'' | '=' | '>' | '<' | ':')))
+        {
             let rest: String = chars[i..].iter().collect();
-            if !rest.starts_with(world) && !rest.starts_with("/dev/null") && !rest.starts_with("/bin/") && !rest.starts_with("/usr/") {
+            if !rest.starts_with(world)
+                && !rest.starts_with("/dev/null")
+                && !rest.starts_with("/bin/")
+                && !rest.starts_with("/usr/")
+            {
                 out.push_str(world.trim_end_matches('/'));
             }
         }
         out.push(c);
-        word_start = !in_single && !in_double && (c == ' ' || c == '\t' || c == '|' || c == ';' || c == '&' || c == '>' || c == '<' || c == '(');
+        word_start = !in_single
+            && !in_double
+            && (c == ' '
+                || c == '\t'
+                || c == '|'
+                || c == ';'
+                || c == '&'
+                || c == '>'
+                || c == '<'
+                || c == '(');
         i += 1;
     }
     out
@@ -221,26 +335,60 @@ pub fn run_line(line: &str, cwd_real: &str, oldpwd_real: &str, o: &RunOpts) -> R
     if sandbox {
         let bw = which("bwrap").unwrap_or_else(|| "bwrap".into());
         cmd = Command::new(bw);
-        cmd.args(["--unshare-all", "--die-with-parent", "--uid", "1000", "--gid", "1000", "--hostname", p.host]);
+        cmd.args([
+            "--unshare-all",
+            "--die-with-parent",
+            "--uid",
+            "1000",
+            "--gid",
+            "1000",
+            "--hostname",
+            p.host,
+        ]);
         cmd.args(["--bind", &world, "/"]);
         cmd.args(["--ro-bind", "/usr", "/usr"]);
         for d in ["bin", "sbin", "lib", "lib32", "lib64", "libx32"] {
             let hp = format!("/{}", d);
             match std::fs::symlink_metadata(&hp) {
                 Ok(m) if m.file_type().is_symlink() => {
-                    if let Ok(t) = std::fs::read_link(&hp) { cmd.args(["--symlink", &t.to_string_lossy(), &hp]); }
+                    if let Ok(t) = std::fs::read_link(&hp) {
+                        cmd.args(["--symlink", &t.to_string_lossy(), &hp]);
+                    }
                 }
-                Ok(m) if m.is_dir() => { cmd.args(["--ro-bind", &hp, &hp]); }
+                Ok(m) if m.is_dir() => {
+                    cmd.args(["--ro-bind", &hp, &hp]);
+                }
                 _ => {}
             }
         }
-        cmd.args(["--tmpfs", "/usr/local", "--ro-bind", &simbin, "/usr/local/bin"]);
+        cmd.args([
+            "--tmpfs",
+            "/usr/local",
+            "--ro-bind",
+            &simbin,
+            "/usr/local/bin",
+        ]);
         cmd.args(["--bind", &etc, "/etc"]);
         cmd.args(["--proc", "/proc", "--dev", "/dev"]);
         cwd_arg = to_world(cwd_real).unwrap_or_else(|| home_w.clone());
         oldpwd_arg = to_world(oldpwd_real).unwrap_or_else(|| cwd_arg.clone());
-        cmd.args(["--chdir", if Path::new(&format!("{}{}", world, cwd_arg)).is_dir() { &cwd_arg } else { "/" }]);
-        cmd.args(["/usr/local/bin/gsh-sim", "__exec", "/bin/bash", "--noprofile", "--norc", "-c", SCRIPT]);
+        cmd.args([
+            "--chdir",
+            if Path::new(&format!("{}{}", world, cwd_arg)).is_dir() {
+                &cwd_arg
+            } else {
+                "/"
+            },
+        ]);
+        cmd.args([
+            "/usr/local/bin/gsh-sim",
+            "__exec",
+            "/bin/bash",
+            "--noprofile",
+            "--norc",
+            "-c",
+            SCRIPT,
+        ]);
         line_arg = line.to_string();
     } else {
         cmd = Command::new(format!("{}/gsh-sim", simbin));
@@ -250,57 +398,170 @@ pub fn run_line(line: &str, cwd_real: &str, oldpwd_real: &str, o: &RunOpts) -> R
         line_arg = rewrite_for_host(line, &world);
     }
     cmd.env_clear();
-    let path = if sandbox { "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin".to_string() } else { format!("{}:/usr/bin:/bin:/usr/sbin:/sbin", simbin) };
-    let home = if sandbox { home_w.clone() } else { format!("{}{}", world, home_w) };
-    cmd.env("PATH", path).env("HOME", &home).env("USER", p.user).env("LOGNAME", p.user)
-        .env("HOSTNAME", p.host).env("SHELL", "/bin/bash").env("TMPDIR", if sandbox { "/tmp".to_string() } else { format!("{}/tmp", world) })
-        .env("TERM", std::env::var("TERM").unwrap_or_else(|_| "xterm-256color".into()))
-        .env("LANG", std::env::var("LANG").unwrap_or_else(|_| "C.UTF-8".into()))
-        .env("GSH_ROOT", if sandbox { "/".to_string() } else { world.clone() })
-        .env("GSH_ETC", if sandbox { "/etc".to_string() } else { etc.clone() })
-        .env("GSH_CAMPAIGN", camp.to_string()).env("GSH_USER", p.user).env("GSH_HOSTNAME", p.host)
-        .env("GSH_CWD", &cwd_arg).env("OLDPWD", &oldpwd_arg).env("GSH_LINE", &line_arg);
-    for k in ["LC_ALL", "LC_MESSAGES", "LANGUAGE", "COLUMNS", "LINES", "COLORTERM"] {
-        if let Ok(v) = std::env::var(k) { cmd.env(k, v); }
+    let path = if sandbox {
+        "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin".to_string()
+    } else {
+        format!("{}:/usr/bin:/bin:/usr/sbin:/sbin", simbin)
+    };
+    let home = if sandbox {
+        home_w.clone()
+    } else {
+        format!("{}{}", world, home_w)
+    };
+    cmd.env("PATH", path)
+        .env("HOME", &home)
+        .env("USER", p.user)
+        .env("LOGNAME", p.user)
+        .env("HOSTNAME", p.host)
+        .env("SHELL", "/bin/bash")
+        .env(
+            "TMPDIR",
+            if sandbox {
+                "/tmp".to_string()
+            } else {
+                format!("{}/tmp", world)
+            },
+        )
+        .env(
+            "TERM",
+            std::env::var("TERM").unwrap_or_else(|_| "xterm-256color".into()),
+        )
+        .env(
+            "LANG",
+            std::env::var("LANG").unwrap_or_else(|_| "C.UTF-8".into()),
+        )
+        .env(
+            "GSH_ROOT",
+            if sandbox {
+                "/".to_string()
+            } else {
+                world.clone()
+            },
+        )
+        .env(
+            "GSH_ETC",
+            if sandbox {
+                "/etc".to_string()
+            } else {
+                etc.clone()
+            },
+        )
+        .env("GSH_CAMPAIGN", camp.to_string())
+        .env("GSH_USER", p.user)
+        .env("GSH_HOSTNAME", p.host)
+        .env("GSH_CWD", &cwd_arg)
+        .env("OLDPWD", &oldpwd_arg)
+        .env("GSH_LINE", &line_arg);
+    for k in [
+        "LC_ALL",
+        "LC_MESSAGES",
+        "LANGUAGE",
+        "COLUMNS",
+        "LINES",
+        "COLORTERM",
+    ] {
+        if let Ok(v) = std::env::var(k) {
+            cmd.env(k, v);
+        }
     }
-    if test_mode() { cmd.env("GSH_BENCH", "1"); }
+    if test_mode() {
+        cmd.env("GSH_BENCH", "1");
+    }
 
     // Descripteur 3: dossier courant final
-    let (mut reader, writer) = match std::io::pipe() { Ok(p) => p, Err(_) => return RunResult { code: -1, cwd: None, out: String::new() } };
+    let (mut reader, writer) = match std::io::pipe() {
+        Ok(p) => p,
+        Err(_) => {
+            return RunResult {
+                code: -1,
+                cwd: None,
+                out: String::new(),
+            }
+        }
+    };
     {
         use std::os::fd::AsRawFd;
         use std::os::unix::process::CommandExt;
         let wfd = writer.as_raw_fd();
-        unsafe { cmd.pre_exec(move || { crate::sys::ignore_int_quit(); if crate::sys::dup_fd(wfd, 3) { Ok(()) } else { Err(std::io::Error::last_os_error()) } }); }
+        unsafe {
+            cmd.pre_exec(move || {
+                crate::sys::ignore_int_quit();
+                if crate::sys::dup_fd(wfd, 3) {
+                    Ok(())
+                } else {
+                    Err(std::io::Error::last_os_error())
+                }
+            });
+        }
     }
-    if o.stdin.is_some() { cmd.stdin(Stdio::piped()); }
-    if o.capture { cmd.stdout(Stdio::piped()).stderr(Stdio::piped()); }
-    else if o.quiet { cmd.stdout(Stdio::null()).stderr(Stdio::null()); }
+    if o.stdin.is_some() {
+        cmd.stdin(Stdio::piped());
+    }
+    if o.capture {
+        cmd.stdout(Stdio::piped()).stderr(Stdio::piped());
+    } else if o.quiet {
+        cmd.stdout(Stdio::null()).stderr(Stdio::null());
+    }
 
     let mut child = match cmd.spawn() {
         Ok(c) => c,
-        Err(e) => { drop(writer); return RunResult { code: 127, cwd: None, out: format!("Erreur d'exécution: {}", e) }; }
+        Err(e) => {
+            drop(writer);
+            return RunResult {
+                code: 127,
+                cwd: None,
+                out: format!("Erreur d'exécution: {}", e),
+            };
+        }
     };
     drop(writer);
     if let Some(data) = o.stdin.clone() {
-        if let Some(mut si) = child.stdin.take() { std::thread::spawn(move || { let _ = si.write_all(&data); }); }
+        if let Some(mut si) = child.stdin.take() {
+            std::thread::spawn(move || {
+                let _ = si.write_all(&data);
+            });
+        }
     }
     let mut out = String::new();
     if o.capture {
         let mut so = child.stdout.take();
         let mut se = child.stderr.take();
-        let t = std::thread::spawn(move || { let mut s = String::new(); if let Some(e) = se.as_mut() { let _ = e.read_to_string(&mut s); } s });
-        if let Some(s) = so.as_mut() { let _ = s.read_to_string(&mut out); }
+        let t = std::thread::spawn(move || {
+            let mut s = String::new();
+            if let Some(e) = se.as_mut() {
+                let _ = e.read_to_string(&mut s);
+            }
+            s
+        });
+        if let Some(s) = so.as_mut() {
+            let _ = s.read_to_string(&mut out);
+        }
         out.push_str(&t.join().unwrap_or_default());
     }
-    let code = child.wait().map(|s| s.code().unwrap_or_else(|| { use std::os::unix::process::ExitStatusExt; 128 + s.signal().unwrap_or(0) })).unwrap_or(-1);
+    let code = child
+        .wait()
+        .map(|s| {
+            s.code().unwrap_or_else(|| {
+                use std::os::unix::process::ExitStatusExt;
+                128 + s.signal().unwrap_or(0)
+            })
+        })
+        .unwrap_or(-1);
     let mut final_dir = String::new();
     let _ = reader.read_to_string(&mut final_dir);
-    let cwd = if final_dir.is_empty() { None } else if sandbox {
-        Some(if final_dir == "/" { world.clone() } else { format!("{}{}", world.trim_end_matches('/'), final_dir) })
+    let cwd = if final_dir.is_empty() {
+        None
+    } else if sandbox {
+        Some(if final_dir == "/" {
+            world.clone()
+        } else {
+            format!("{}{}", world.trim_end_matches('/'), final_dir)
+        })
     } else {
         // mode dégradé: garde-fou, on ne sort jamais du monde
-        if to_world(&final_dir).is_some() { Some(final_dir) } else {
+        if to_world(&final_dir).is_some() {
+            Some(final_dir)
+        } else {
             eprintln!("🚫 Ce passage mène hors du vaisseau: accès refusé.");
             None
         }
@@ -310,43 +571,77 @@ pub fn run_line(line: &str, cwd_real: &str, oldpwd_real: &str, o: &RunOpts) -> R
 
 // ───────────────────────────── vérifications natives (P0.7) ─────────────────────────────
 
-pub fn file_exists(path: &str) -> bool { std::fs::symlink_metadata(path).is_ok() }
-pub fn dir_exists(path: &str) -> bool { Path::new(path).is_dir() }
+pub fn file_exists(path: &str) -> bool {
+    std::fs::symlink_metadata(path).is_ok()
+}
+pub fn dir_exists(path: &str) -> bool {
+    Path::new(path).is_dir()
+}
 
 pub fn get_permissions(path: &str) -> Option<u32> {
     use std::os::unix::fs::PermissionsExt;
-    std::fs::metadata(path).ok().map(|m| m.permissions().mode() & 0o7777)
+    std::fs::metadata(path)
+        .ok()
+        .map(|m| m.permissions().mode() & 0o7777)
 }
 
-pub fn is_executable(path: &str) -> bool { get_permissions(path).map(|m| m & 0o100 != 0).unwrap_or(false) }
+pub fn is_executable(path: &str) -> bool {
+    get_permissions(path)
+        .map(|m| m & 0o100 != 0)
+        .unwrap_or(false)
+}
 
 pub fn file_contains(path: &str, pattern: &str) -> bool {
-    std::fs::read(path).map(|b| String::from_utf8_lossy(&b).contains(pattern)).unwrap_or(false)
+    std::fs::read(path)
+        .map(|b| String::from_utf8_lossy(&b).contains(pattern))
+        .unwrap_or(false)
 }
 
 pub fn file_contains_count(path: &str, pattern: &str) -> usize {
-    if pattern.is_empty() { return 0; }
-    std::fs::read(path).map(|b| String::from_utf8_lossy(&b).matches(pattern).count()).unwrap_or(0)
+    if pattern.is_empty() {
+        return 0;
+    }
+    std::fs::read(path)
+        .map(|b| String::from_utf8_lossy(&b).matches(pattern).count())
+        .unwrap_or(0)
 }
 
-pub fn file_size(path: &str) -> u64 { std::fs::metadata(path).map(|m| m.len()).unwrap_or(0) }
+pub fn file_size(path: &str) -> u64 {
+    std::fs::metadata(path).map(|m| m.len()).unwrap_or(0)
+}
 
 pub fn canonical(path: &str) -> Option<String> {
-    std::fs::canonicalize(path).ok().map(|p| p.to_string_lossy().to_string())
+    std::fs::canonicalize(path)
+        .ok()
+        .map(|p| p.to_string_lossy().to_string())
 }
 
 // ───────────────────────────── sauvegardes & historique ─────────────────────────────
 
 /// Nom de fichier sûr pour un joueur
 pub fn player_slug(name: &str) -> String {
-    let s: String = name.trim().to_lowercase().chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '_' }).collect();
+    let s: String = name
+        .trim()
+        .to_lowercase()
+        .chars()
+        .map(|c| if c.is_ascii_alphanumeric() { c } else { '_' })
+        .collect();
     let s = s.trim_matches('_').to_string();
-    if s.is_empty() { "joueur".into() } else { s.chars().take(40).collect() }
+    if s.is_empty() {
+        "joueur".into()
+    } else {
+        s.chars().take(40).collect()
+    }
 }
 
 /// Sauvegarde PAR JOUEUR et par campagne (P1.10): state/save_campagne<N>_<joueur>.json
 pub fn save_path(campaign: u8, player: &str) -> String {
-    format!("{}/state/save_campagne{}_{}.json", gameshell_home(), campaign, player_slug(player))
+    format!(
+        "{}/state/save_campagne{}_{}.json",
+        gameshell_home(),
+        campaign,
+        player_slug(player)
+    )
 }
 
 fn legacy_save_path(campaign: u8) -> String {
@@ -360,13 +655,21 @@ pub fn load_save(campaign: u8, player: &str) -> Option<crate::missions::SaveData
     // ancienne sauvegarde (avant P1.10): reprise seulement si elle n'appartient à personne d'autre
     let content = std::fs::read_to_string(legacy_save_path(campaign)).ok()?;
     let sv: crate::missions::SaveData = serde_json::from_str(&content).ok()?;
-    if sv.player_name.is_empty() || player_slug(&sv.player_name) == player_slug(player) { Some(sv) } else { None }
+    if sv.player_name.is_empty() || player_slug(&sv.player_name) == player_slug(player) {
+        Some(sv)
+    } else {
+        None
+    }
 }
 
 pub fn write_save(save: &crate::missions::SaveData) -> bool {
-    if test_mode() { return true; }
+    if test_mode() {
+        return true;
+    }
     let path = save_path(save.campaign, &save.player_name);
-    if let Some(parent) = Path::new(&path).parent() { let _ = std::fs::create_dir_all(parent); }
+    if let Some(parent) = Path::new(&path).parent() {
+        let _ = std::fs::create_dir_all(parent);
+    }
     match serde_json::to_string_pretty(save) {
         Ok(json) => {
             let tmp = format!("{}.tmp", path);
@@ -380,23 +683,41 @@ pub fn remove_save(campaign: u8, player: &str) {
     let _ = std::fs::remove_file(save_path(campaign, player));
     if let Ok(c) = std::fs::read_to_string(legacy_save_path(campaign)) {
         if let Ok(sv) = serde_json::from_str::<crate::missions::SaveData>(&c) {
-            if sv.player_name.is_empty() || player_slug(&sv.player_name) == player_slug(player) { let _ = std::fs::remove_file(legacy_save_path(campaign)); }
+            if sv.player_name.is_empty() || player_slug(&sv.player_name) == player_slug(player) {
+                let _ = std::fs::remove_file(legacy_save_path(campaign));
+            }
         }
     }
 }
 
 pub fn history_path(campaign: u8, player: &str) -> String {
-    format!("{}/state/history_campagne{}_{}.log", gameshell_home(), campaign, player_slug(player))
+    format!(
+        "{}/state/history_campagne{}_{}.log",
+        gameshell_home(),
+        campaign,
+        player_slug(player)
+    )
 }
 
 /// Historique horodaté des actions d'une partie (règle A22)
 pub fn log_action(campaign: u8, player: &str, event: &str) {
-    if test_mode() { return; }
+    if test_mode() {
+        return;
+    }
     let path = history_path(campaign, player);
-    if let Some(parent) = Path::new(&path).parent() { let _ = std::fs::create_dir_all(parent); }
+    if let Some(parent) = Path::new(&path).parent() {
+        let _ = std::fs::create_dir_all(parent);
+    }
     let ts = chrono::Local::now().format("%Y-%m-%d %H:%M:%S").to_string();
-    if let Ok(mut f) = std::fs::OpenOptions::new().create(true).append(true).open(&path) {
-        let clean: String = event.chars().map(|c| if c == '\n' || c == '\r' { ' ' } else { c }).collect();
+    if let Ok(mut f) = std::fs::OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open(&path)
+    {
+        let clean: String = event
+            .chars()
+            .map(|c| if c == '\n' || c == '\r' { ' ' } else { c })
+            .collect();
         let _ = writeln!(f, "[{}] {}", ts, clean);
     }
 }
@@ -408,8 +729,14 @@ mod tests {
     fn reecriture_mode_degrade() {
         let w = "/m";
         assert_eq!(rewrite_for_host("cat /pont/x", w), "cat /m/pont/x");
-        assert_eq!(rewrite_for_host("cat \"/pont/x\" >/soutes/f", w), "cat \"/m/pont/x\" >/m/soutes/f");
-        assert_eq!(rewrite_for_host("echo \"a  b\" 2>/dev/null", w), "echo \"a  b\" 2>/dev/null");
+        assert_eq!(
+            rewrite_for_host("cat \"/pont/x\" >/soutes/f", w),
+            "cat \"/m/pont/x\" >/m/soutes/f"
+        );
+        assert_eq!(
+            rewrite_for_host("echo \"a  b\" 2>/dev/null", w),
+            "echo \"a  b\" 2>/dev/null"
+        );
         assert_eq!(rewrite_for_host("ls '/pont'", w), "ls '/m/pont'");
     }
     #[test]

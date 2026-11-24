@@ -2,14 +2,6 @@
 use crate::missions::types::*;
 
 pub mod ch1;
-pub mod ch2;
-pub mod ch3;
-pub mod ch4;
-pub mod ch5;
-pub mod ch6;
-pub mod ch7;
-pub mod ch8;
-pub mod ch9;
 pub mod ch10;
 pub mod ch11;
 pub mod ch12;
@@ -20,7 +12,15 @@ pub mod ch16;
 pub mod ch17;
 pub mod ch18;
 pub mod ch19;
+pub mod ch2;
 pub mod ch20;
+pub mod ch3;
+pub mod ch4;
+pub mod ch5;
+pub mod ch6;
+pub mod ch7;
+pub mod ch8;
+pub mod ch9;
 
 pub fn missions() -> Vec<Mission> {
     let mut missions = Vec::new();

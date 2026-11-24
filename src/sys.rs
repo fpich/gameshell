@@ -59,7 +59,9 @@ extern "C" fn on_signal(_sig: c_int) {
     // Gestionnaire vide: le parent survit au Ctrl+C destiné à l'enfant.
     // Un gestionnaire (contrairement à SIG_IGN) est remis à zéro par exec():
     // l'enfant garde donc le comportement par défaut et SEUL lui est interrompu (P1.3).
-    unsafe { SIGNAL_SEEN = true; }
+    unsafe {
+        SIGNAL_SEEN = true;
+    }
 }
 
 /// Le jeu survit à Ctrl+C / Ctrl+\ envoyés pendant une commande (P1.3) et
@@ -75,17 +77,26 @@ pub fn protect_parent_from_signals() {
 /// Dans l'enfant (pre_exec): bwrap et son init ignorent Ctrl+C; le relais `gsh-sim __exec`
 /// rétablit ensuite le comportement par défaut pour la commande du joueur (async-signal-safe).
 pub fn ignore_int_quit() {
-    unsafe { signal(SIGINT, SIG_IGN); signal(SIGQUIT, SIG_IGN); }
+    unsafe {
+        signal(SIGINT, SIG_IGN);
+        signal(SIGQUIT, SIG_IGN);
+    }
 }
 
 /// Rétablit SIGINT/SIGQUIT par défaut (relais avant bash)
 pub fn default_int_quit() {
-    unsafe { signal(SIGINT, 0); signal(SIGQUIT, 0); }
+    unsafe {
+        signal(SIGINT, 0);
+        signal(SIGQUIT, 0);
+    }
 }
 
 /// Pour les simulateurs (ping, top, journalctl -f): Ctrl+C termine proprement.
 pub fn catch_sigint() {
-    unsafe { SIGNAL_SEEN = false; signal(SIGINT, on_signal as *const () as usize); }
+    unsafe {
+        SIGNAL_SEEN = false;
+        signal(SIGINT, on_signal as *const () as usize);
+    }
 }
 
 pub fn sigint_seen() -> bool {
@@ -97,8 +108,21 @@ pub fn is_tty(fd: i32) -> bool {
 }
 
 pub fn get_termios(fd: i32) -> Option<Termios> {
-    let mut t = Termios { c_iflag: 0, c_oflag: 0, c_cflag: 0, c_lflag: 0, c_line: 0, c_cc: [0; 32], c_ispeed: 0, c_ospeed: 0 };
-    if unsafe { tcgetattr(fd, &mut t) } == 0 { Some(t) } else { None }
+    let mut t = Termios {
+        c_iflag: 0,
+        c_oflag: 0,
+        c_cflag: 0,
+        c_lflag: 0,
+        c_line: 0,
+        c_cc: [0; 32],
+        c_ispeed: 0,
+        c_ospeed: 0,
+    };
+    if unsafe { tcgetattr(fd, &mut t) } == 0 {
+        Some(t)
+    } else {
+        None
+    }
 }
 
 pub fn set_termios(fd: i32, t: &Termios) -> bool {
@@ -111,7 +135,13 @@ pub fn raw_from(orig: &Termios, timeout_ds: u8) -> Termios {
     let mut t = *orig;
     t.c_lflag &= !(ICANON | ECHO | ISIG | IEXTEN);
     t.c_iflag &= !(ICRNL | IXON);
-    if timeout_ds == 0 { t.c_cc[VMIN] = 1; t.c_cc[VTIME] = 0; } else { t.c_cc[VMIN] = 0; t.c_cc[VTIME] = timeout_ds; }
+    if timeout_ds == 0 {
+        t.c_cc[VMIN] = 1;
+        t.c_cc[VTIME] = 0;
+    } else {
+        t.c_cc[VMIN] = 0;
+        t.c_cc[VTIME] = timeout_ds;
+    }
     t
 }
 
@@ -126,7 +156,11 @@ pub fn noecho_from(orig: &Termios) -> Termios {
 pub fn term_cols() -> usize {
     let mut ws = Winsize::default();
     let r = unsafe { ioctl(1, TIOCGWINSZ, &mut ws as *mut Winsize) };
-    if r == 0 && ws.ws_col > 0 { ws.ws_col as usize } else { 80 }
+    if r == 0 && ws.ws_col > 0 {
+        ws.ws_col as usize
+    } else {
+        80
+    }
 }
 
 pub fn dup_fd(old: i32, new: i32) -> bool {
@@ -141,9 +175,18 @@ pub fn uid() -> u32 {
 /// combinants / sélecteurs de variante / ZWJ = 0, emoji et pleine chasse = 2.
 pub fn char_width(c: char) -> usize {
     let u = c as u32;
-    if u == 0 { return 0; }
-    if u < 0x20 || (0x7f..0xa0).contains(&u) { return 0; }
-    if (0x300..=0x36f).contains(&u) || u == 0x200d || (0xfe00..=0xfe0f).contains(&u) || (0x200b..=0x200f).contains(&u) || (0xe0020..=0xe007f).contains(&u) {
+    if u == 0 {
+        return 0;
+    }
+    if u < 0x20 || (0x7f..0xa0).contains(&u) {
+        return 0;
+    }
+    if (0x300..=0x36f).contains(&u)
+        || u == 0x200d
+        || (0xfe00..=0xfe0f).contains(&u)
+        || (0x200b..=0x200f).contains(&u)
+        || (0xe0020..=0xe007f).contains(&u)
+    {
         return 0;
     }
     let wide = (0x1100..=0x115f).contains(&u)
@@ -165,7 +208,11 @@ pub fn char_width(c: char) -> usize {
             | 0x2728 | 0x274c | 0x274e | 0x2753..=0x2755 | 0x2757 | 0x2795..=0x2797 | 0x27b0 | 0x27bf | 0x2b1b
             | 0x2b1c | 0x2b50 | 0x2b55 | 0x1f004 | 0x1f0cf | 0x1f18e | 0x1f191..=0x1f19a | 0x1f201 | 0x1f21a
             | 0x1f22f | 0x1f232..=0x1f236 | 0x1f238..=0x1f23a | 0x1f250 | 0x1f251);
-    if wide { 2 } else { 1 }
+    if wide {
+        2
+    } else {
+        1
+    }
 }
 
 /// Largeur d'affichage d'une chaîne (séquences ANSI ignorées)
@@ -177,14 +224,28 @@ pub fn str_width(s: &str) -> usize {
         if c == '\x1b' {
             if chars.peek() == Some(&'[') {
                 chars.next();
-                for c2 in chars.by_ref() { if ('\x40'..='\x7e').contains(&c2) { break; } }
-            } else { chars.next(); }
+                for c2 in chars.by_ref() {
+                    if ('\x40'..='\x7e').contains(&c2) {
+                        break;
+                    }
+                }
+            } else {
+                chars.next();
+            }
             continue;
         }
-        if c == '\u{200d}' { after_zwj = true; continue; }
-        if after_zwj { after_zwj = false; continue; } // séquence emoji: le glyphe joint ne compte pas
+        if c == '\u{200d}' {
+            after_zwj = true;
+            continue;
+        }
+        if after_zwj {
+            after_zwj = false;
+            continue;
+        } // séquence emoji: le glyphe joint ne compte pas
         let mut cw = char_width(c);
-        if cw == 1 && chars.peek() == Some(&'\u{fe0f}') { cw = 2; } // présentation emoji
+        if cw == 1 && chars.peek() == Some(&'\u{fe0f}') {
+            cw = 2;
+        } // présentation emoji
         w += cw;
     }
     w

@@ -318,6 +318,9 @@ echo "$out" | grep -q "Code incorrect" && echo "$out" | grep -q "Code correct" &
 out=$(run_game 'Test\npwd\nls\ngsh   check\nexit\n')
 echo "$out" | grep -q "✅ Mission réussie" && ok "gsh   check (espaces multiples) reconnu (A5)" || ko "gsh avec espaces multiples non reconnu"
 
+# ─── TEST 55: archive gameshell.sh bien formée et VERSION synchronisée (E2) ───
+[ -f gameshell.sh ] && [ -x gameshell.sh ] && [ "$(head -1 gameshell.sh)" = "#!/bin/bash" ] && cargo_ver="$(grep -m1 '^version' Cargo.toml | cut -d'"' -f2)" && grep -q "$cargo_ver-" gameshell.sh && grep -q '__ARCHIVE_BELOW__' gameshell.sh && ok "Archive gameshell.sh bien formée (VERSION=$cargo_ver, empaquetage entrant)" || ko "Archive gameshell.sh manquante ou VERSION hors sync (relancez make-archive.sh)"
+
 echo ""
 echo "═══════════════════════════════════════"
 echo -e "  RÉSULTAT: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL total"

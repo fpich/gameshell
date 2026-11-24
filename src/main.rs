@@ -41,7 +41,11 @@ struct Cli {
 }
 
 fn campaign_label(c: u8) -> &'static str {
-    match c { 2 => "Japon Féodal", 3 => "Nexus Réseau", _ => "Pirates de l'Espace" }
+    match c {
+        2 => "Japon Féodal",
+        3 => "Nexus Réseau",
+        _ => "Pirates de l'Espace",
+    }
 }
 
 fn print_banner(campaign: u8) {
@@ -61,8 +65,14 @@ fn print_banner(campaign: u8) {
 "#;
         println!("{}", japon.red());
         println!("{}", "  *   🏯   LE JAPON FÉODAL   🏯   *".red().bold());
-        println!("{}", "     *  Mission Administration — Château Shiro  *".yellow());
-        println!("{}", "  *        Niveau MOYEN — 100 missions        *".red());
+        println!(
+            "{}",
+            "     *  Mission Administration — Château Shiro  *".yellow()
+        );
+        println!(
+            "{}",
+            "  *        Niveau MOYEN — 100 missions        *".red()
+        );
     } else if campaign == 3 {
         // P4.4: les ┌──┐ alignés au-dessus des │OK│
         let reseau = r#"
@@ -77,7 +87,10 @@ fn print_banner(campaign: u8) {
         println!("{}", reseau.cyan());
         println!("{}", "  *   🌐   NEXUS — NOC NEON-9   🌐   *".cyan().bold());
         println!("{}", "     *  Mission Administration Réseau    *".yellow());
-        println!("{}", "  *        Niveau DIFFICILE — 100 missions   *".cyan());
+        println!(
+            "{}",
+            "  *        Niveau DIFFICILE — 100 missions   *".cyan()
+        );
     } else {
         // Règle B1: espace étoilé compact + titre entouré d'étoiles (une seule fois — P4.5)
         let espace = r#"
@@ -86,9 +99,18 @@ fn print_banner(campaign: u8) {
     *   .  *    .   *    .    *  .    *  .    *
 "#;
         println!("{}", espace.green());
-        println!("{}", "  *   🏴‍☠️   LES PIRATES DE L'ESPACE   🏴‍☠️   *".green().bold());
-        println!("{}", "     *    Mission SISR — Station Orion-7    *".yellow());
-        println!("{}", "  *        Niveau FACILE — 100 missions        *".green());
+        println!(
+            "{}",
+            "  *   🏴‍☠️   LES PIRATES DE L'ESPACE   🏴‍☠️   *".green().bold()
+        );
+        println!(
+            "{}",
+            "     *    Mission SISR — Station Orion-7    *".yellow()
+        );
+        println!(
+            "{}",
+            "  *        Niveau FACILE — 100 missions        *".green()
+        );
         println!("{}", "\n  .   *    .   *    .    *   .    *   .    *\n     *    .   *    .   *    .  *    .   *".green());
     }
     println!();
@@ -97,7 +119,10 @@ fn print_banner(campaign: u8) {
 fn main() {
     // Binaire multi-appel: lancé sous le nom d'une commande simulée (useradd, ufw, ps...)
     let argv: Vec<String> = std::env::args().collect();
-    let argv0 = argv.first().map(|a| a.rsplit('/').next().unwrap_or(a).to_string()).unwrap_or_default();
+    let argv0 = argv
+        .first()
+        .map(|a| a.rsplit('/').next().unwrap_or(a).to_string())
+        .unwrap_or_default();
     if argv0 != "gameshell" && argv0 != "gsh-sim" && sim::is_sim(&argv0) {
         std::process::exit(sim::run(&argv0, argv[1..].to_vec()));
     }
@@ -110,7 +135,11 @@ fn main() {
             eprintln!("gsh-sim: {}", e);
             std::process::exit(126);
         }
-        if let Some(name) = argv.get(1) { if sim::is_sim(name) { std::process::exit(sim::run(name, argv[2..].to_vec())); } }
+        if let Some(name) = argv.get(1) {
+            if sim::is_sim(name) {
+                std::process::exit(sim::run(name, argv[2..].to_vec()));
+            }
+        }
         eprintln!("gsh-sim: simulateur des commandes système de GameShell");
         std::process::exit(2);
     }
@@ -131,25 +160,51 @@ fn main() {
     println!("  ╚══════════════════════════════════════╝\n");
     let player_name = cli.name.clone().unwrap_or_else(|| {
         let mut hist = Vec::new();
-        let name = game::lineedit::read_line("👤 Entrez votre nom: ", &mut hist, None).unwrap_or_default();
-        let name: String = name.trim().chars().filter(|c| !c.is_control()).take(32).collect();
-        if name.is_empty() { "Capitaine".to_string() } else { name }
+        let name =
+            game::lineedit::read_line("👤 Entrez votre nom: ", &mut hist, None).unwrap_or_default();
+        let name: String = name
+            .trim()
+            .chars()
+            .filter(|c| !c.is_control())
+            .take(32)
+            .collect();
+        if name.is_empty() {
+            "Capitaine".to_string()
+        } else {
+            name
+        }
     });
 
     // Sélection de la campagne (règle C14) — mode enseignant: --campaign impose la campagne
-    let campaign: u8 = if let Some(c) = cli.campaign { c } else if bench { 1 } else {
+    let campaign: u8 = if let Some(c) = cli.campaign {
+        c
+    } else if bench {
+        1
+    } else {
         println!("\n  ╔══════════════════════════════════════╗");
         println!("  ║       Choisissez votre CAMPAGNE      ║");
         println!("  ╚══════════════════════════════════════╝\n");
-        println!("  1) 🏴‍☠️  Les Pirates de l'Espace — Station Orion-7  (niveau FACILE, 100 missions)");
+        println!(
+            "  1) 🏴‍☠️  Les Pirates de l'Espace — Station Orion-7  (niveau FACILE, 100 missions)"
+        );
         println!("  2) 🏯  Le Japon Féodal — Château Shiro           (niveau MOYEN, 100 missions)");
-        println!("  3) 🌐  Nexus — NOC Neon-9 (réseau)               (niveau DIFFICILE, 100 missions)");
+        println!(
+            "  3) 🌐  Nexus — NOC Neon-9 (réseau)               (niveau DIFFICILE, 100 missions)"
+        );
         println!();
         let mut hist = Vec::new();
-        let choix = game::lineedit::read_line("👉 Numéro de campagne (1, 2 ou 3): ", &mut hist, None).unwrap_or_default();
-        match choix.trim() { "2" => 2, "3" => 3, _ => 1 }
+        let choix =
+            game::lineedit::read_line("👉 Numéro de campagne (1, 2 ou 3): ", &mut hist, None)
+                .unwrap_or_default();
+        match choix.trim() {
+            "2" => 2,
+            "3" => 3,
+            _ => 1,
+        }
     };
-    if cli.locked { std::env::set_var("GAMESHELL_LOCKED", "1"); }
+    if cli.locked {
+        std::env::set_var("GAMESHELL_LOCKED", "1");
+    }
 
     if bench {
         // Bancs de test: les 3 campagnes, sans sauvegarde ni historique (règle A18, P1.9)
@@ -160,18 +215,43 @@ fn main() {
             let name = campaign_label(c);
             if torture {
                 let (ok, issues) = g.run_torture();
-                println!("🌪️  TORTURE campagne {} ({}): {}/100 OK, {} problèmes", c, name, ok, issues.len());
-                for i in &issues { println!("   ⚠️  {}", i); }
-                if ok != 100 || !issues.is_empty() { all_ok = false; }
+                println!(
+                    "🌪️  TORTURE campagne {} ({}): {}/100 OK, {} problèmes",
+                    c,
+                    name,
+                    ok,
+                    issues.len()
+                );
+                for i in &issues {
+                    println!("   ⚠️  {}", i);
+                }
+                if ok != 100 || !issues.is_empty() {
+                    all_ok = false;
+                }
             } else if edge {
                 let (ok, issues) = g.run_edge();
-                println!("🧪 EDGE campagne {} ({}): {}/100 missions OK, {} problèmes", c, name, ok, issues.len());
-                for i in &issues { println!("   ⚠️  {}", i); }
-                if ok != 100 || !issues.is_empty() { all_ok = false; }
+                println!(
+                    "🧪 EDGE campagne {} ({}): {}/100 missions OK, {} problèmes",
+                    c,
+                    name,
+                    ok,
+                    issues.len()
+                );
+                for i in &issues {
+                    println!("   ⚠️  {}", i);
+                }
+                if ok != 100 || !issues.is_empty() {
+                    all_ok = false;
+                }
             } else {
                 let (ok, total) = g.run_auto();
-                println!("🤖 AUTO campagne {} ({}): {}/{} missions résolues", c, name, ok, total);
-                if ok != total { all_ok = false; }
+                println!(
+                    "🤖 AUTO campagne {} ({}): {}/{} missions résolues",
+                    c, name, ok, total
+                );
+                if ok != total {
+                    all_ok = false;
+                }
             }
         }
         std::process::exit(if all_ok { 0 } else { 1 });
@@ -183,5 +263,9 @@ fn main() {
     println!("📦 Chargement des missions...\n");
 
     let mut g = game::Game::new(&player_name, false);
-    if cli.test { g.run_test_mode(); } else { g.run(); }
+    if cli.test {
+        g.run_test_mode();
+    } else {
+        g.run();
+    }
 }

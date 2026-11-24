@@ -4,7 +4,10 @@ use crate::missions::types::*;
 pub fn missions() -> Vec<Mission> {
     vec![
         Mission {
-            id: "7.1".into(), chapter: 7, chapter_title: "Lire les registres".into(), act: 2,
+            id: "7.1".into(),
+            chapter: 7,
+            chapter_title: "Lire les registres".into(),
+            act: 2,
             title: "Échecs de connexion".into(),
             description: "Quelles tentatives ont échoué dans auth.log?".into(),
             story: "Le capitaine des gardes pousse la porte des scribes, un rouleau
@@ -26,19 +29,31 @@ Vous ouvrez /scribes/logs/auth.log et y cherchez les lignes
 
 Le capitaine lit les lignes une à une: « Quatre refusés. Un
 ronin a frappé à l'aube, puis un espion, puis un voleur. Et
-cette autre IP, 10.0.0.99. Nous avons de la lecture, Seigneur. »".into(),
+cette autre IP, 10.0.0.99. Nous avons de la lecture, Seigneur. »"
+                .into(),
             goal: "Affichez les lignes 'Failed' de /scribes/logs/auth.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment chercher un mot dans un fichier?".into(),
             required_commands: vec!["grep Failed /scribes/logs/auth.log".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "grep".into(), expected: None }],
+            checks: vec![MissionCheck {
+                check_type: "command_executed".into(),
+                target: "grep".into(),
+                expected: None,
+            }],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            skill: Some(Skill { command: "grep".into(), name: "grep".into(), description: "grep — recherche un motif".into() }),
+            skill: Some(Skill {
+                command: "grep".into(),
+                name: "grep".into(),
+                description: "grep — recherche un motif".into(),
+            }),
         },
         Mission {
-            id: "7.2".into(), chapter: 7, chapter_title: "Lire les registres".into(), act: 2,
+            id: "7.2".into(),
+            chapter: 7,
+            chapter_title: "Lire les registres".into(),
+            act: 2,
             title: "Combien d'attaques?".into(),
             description: "Comptez les 'Failed' dans auth.log.".into(),
             story: "Le capitaine revient, une liasse de contrats sous le bras: «
@@ -58,19 +73,31 @@ Vous comptez les occurrences 'Failed' dans /scribes/logs/auth.log.
 
 Le capitaine note le chiffre: « Quatre refusés cette nuit.
 Quatre, c'est déjà un siège en préparation. Le seigneur Hattori
-doit le savoir avant le coucher du soleil. »".into(),
+doit le savoir avant le coucher du soleil. »"
+                .into(),
             goal: "Comptez les lignes 'Failed' de auth.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter les résultats d'une recherche?".into(),
             required_commands: vec!["grep -c Failed /scribes/logs/auth.log".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "-c".into(), expected: None }],
+            checks: vec![MissionCheck {
+                check_type: "command_executed".into(),
+                target: "-c".into(),
+                expected: None,
+            }],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            skill: Some(Skill { command: "grep -c".into(), name: "grep -c".into(), description: "grep -c — compte les lignes trouvées".into() }),
+            skill: Some(Skill {
+                command: "grep -c".into(),
+                name: "grep -c".into(),
+                description: "grep -c — compte les lignes trouvées".into(),
+            }),
         },
         Mission {
-            id: "7.3".into(), chapter: 7, chapter_title: "Lire les registres".into(), act: 2,
+            id: "7.3".into(),
+            chapter: 7,
+            chapter_title: "Lire les registres".into(),
+            act: 2,
             title: "L'espion avec numéros de ligne".into(),
             description: "Lignes de 10.0.0.66 avec numéros.".into(),
             story: "Hanzō arrive sans bruit, un rouleau de preuves à la main: «
@@ -91,19 +118,31 @@ Vous ouvrez /scribes/logs/auth.log et cherchez 10.0.0.66 en
 affichant le numéro de chaque ligne trouvée.
 
 Hanzō relit les lignes numérotées: « Trois visites de cette IP.
-Le procès-verbal sera solide: le château saura qui chercher. »".into(),
+Le procès-verbal sera solide: le château saura qui chercher. »"
+                .into(),
             goal: "Affichez les lignes de 10.0.0.66 avec leur numéro.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment afficher les numéros de ligne?".into(),
             required_commands: vec!["grep -n 10.0.0.66 /scribes/logs/auth.log".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "-n".into(), expected: None }],
+            checks: vec![MissionCheck {
+                check_type: "command_executed".into(),
+                target: "-n".into(),
+                expected: None,
+            }],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            skill: Some(Skill { command: "grep -n".into(), name: "grep -n".into(), description: "grep -n — numéros de ligne".into() }),
+            skill: Some(Skill {
+                command: "grep -n".into(),
+                name: "grep -n".into(),
+                description: "grep -n — numéros de ligne".into(),
+            }),
         },
         Mission {
-            id: "7.4".into(), chapter: 7, chapter_title: "Lire les registres".into(), act: 2,
+            id: "7.4".into(),
+            chapter: 7,
+            chapter_title: "Lire les registres".into(),
+            act: 2,
             title: "Chercher 'ronin' sans la casse".into(),
             description: "Trouvez 'ronin' quelle que soit la casse.".into(),
             story: "Le capitaine des gardes tend un rapport griffonné: « Le
@@ -127,19 +166,31 @@ compte des majuscules et des minuscules.
 
 Le capitaine lit le résultat: « La mention est là. Une seule,
 cette nuit, mais elle est trouvée quelle que soit l'écriture.
-Rien ne nous échappe, Seigneur. »".into(),
+Rien ne nous échappe, Seigneur. »"
+                .into(),
             goal: "Cherchez 'ronin' dans auth.log insensible à la casse.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment chercher sans tenir compte des majuscules?".into(),
             required_commands: vec!["grep -i ronin /scribes/logs/auth.log".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "-i".into(), expected: None }],
+            checks: vec![MissionCheck {
+                check_type: "command_executed".into(),
+                target: "-i".into(),
+                expected: None,
+            }],
             hints: vec![],
             xp_reward: 100,
             code_required: None,
-            skill: Some(Skill { command: "grep -i".into(), name: "grep -i".into(), description: "grep -i — insensible à la casse".into() }),
+            skill: Some(Skill {
+                command: "grep -i".into(),
+                name: "grep -i".into(),
+                description: "grep -i — insensible à la casse".into(),
+            }),
         },
         Mission {
-            id: "7.5".into(), chapter: 7, chapter_title: "Lire les registres".into(), act: 2,
+            id: "7.5".into(),
+            chapter: 7,
+            chapter_title: "Lire les registres".into(),
+            act: 2,
             title: "Deux registres en une commande".into(),
             description: "Comptez les lignes de auth.log ET syslog.".into(),
             story: "Dame Kaguya consulte les rouleaux de la journée: « Le scribe a
@@ -161,16 +212,32 @@ Vous comptez les lignes de /scribes/logs/auth.log et de
 
 Dame Kaguya note les totaux: « Cinq lignes de connexions,
 quatre d'événements. Les comptes du scribe étaient faux. Merci,
-Seigneur: vos registres sont dignes de confiance. »".into(),
+Seigneur: vos registres sont dignes de confiance. »"
+                .into(),
             goal: "Comptez les lignes des deux fichiers de logs.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment donner deux fichiers à une commande?".into(),
             required_commands: vec!["wc -l /scribes/logs/auth.log /scribes/logs/syslog".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "wc".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-l".into(), expected: None }],
+            checks: vec![
+                MissionCheck {
+                    check_type: "command_executed".into(),
+                    target: "wc".into(),
+                    expected: None,
+                },
+                MissionCheck {
+                    check_type: "command_executed".into(),
+                    target: "-l".into(),
+                    expected: None,
+                },
+            ],
             hints: vec![],
             xp_reward: 125,
             code_required: None,
-            skill: Some(Skill { command: "wc".into(), name: "wc".into(), description: "wc — compte lignes, mots et caractères".into() }),
+            skill: Some(Skill {
+                command: "wc".into(),
+                name: "wc".into(),
+                description: "wc — compte lignes, mots et caractères".into(),
+            }),
         },
     ]
 }

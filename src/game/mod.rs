@@ -27,25 +27,32 @@ pub struct Game {
     skills: Vec<Skill>,
     completed: Vec<String>,
     badges: Vec<String>,
-    current_dir: String,          // chemin RÉEL (hôte) du dossier courant, toujours dans le monde
-    previous_dir: String,         // pour `cd -`
+    current_dir: String, // chemin RÉEL (hôte) du dossier courant, toujours dans le monde
+    previous_dir: String, // pour `cd -`
     pending_code: Option<String>, // code attendu en phase 2
-    check_fails: u32,             // échecs consécutifs de gsh check (UX, règle A14)
+    check_fails: u32,    // échecs consécutifs de gsh check (UX, règle A14)
     attempts: std::collections::HashMap<String, u32>,
     mission_commands: Vec<String>, // lignes RÉUSSIES tapées dans la mission courante (règle A2)
     history: Vec<String>,          // historique de session (flèches haut/bas)
     test_mode: bool,               // bancs AUTO/EDGE/TORTURE: ni sauvegarde ni historique (P1.9)
-    event_mark: usize,             // événements d'administration antérieurs à la mission (checks sim_event)
-    bench_quiet: bool,             // sortie des commandes masquée dans les bancs
+    event_mark: usize, // événements d'administration antérieurs à la mission (checks sim_event)
+    bench_quiet: bool, // sortie des commandes masquée dans les bancs
 }
 
 fn start_skills() -> Vec<Skill> {
-    vec![Skill { command: "man".into(), name: "man".into(), description: "man COMMANDE — affiche le manuel (compétence de départ)".into() }]
+    vec![Skill {
+        command: "man".into(),
+        name: "man".into(),
+        description: "man COMMANDE — affiche le manuel (compétence de départ)".into(),
+    }]
 }
 
 /// Le code de phase 2 peut être tapé seul s'il « ressemble » à un code (MAJUSCULES/chiffres/tirets)
 fn looks_like_code(w: &str) -> bool {
-    !w.is_empty() && w.chars().all(|c| c.is_ascii_uppercase() || c.is_ascii_digit() || c == '-') && w.chars().any(|c| c.is_ascii_alphanumeric())
+    !w.is_empty()
+        && w.chars()
+            .all(|c| c.is_ascii_uppercase() || c.is_ascii_digit() || c == '-')
+        && w.chars().any(|c| c.is_ascii_alphanumeric())
 }
 
 impl Game {
@@ -54,7 +61,11 @@ impl Game {
         let missions = load_all_missions();
         shell::set_test_mode(test_mode);
         let home = shell::player_home();
-        let save = if test_mode { None } else { shell::load_save(campaign, player_name) };
+        let save = if test_mode {
+            None
+        } else {
+            shell::load_save(campaign, player_name)
+        };
         let mut game = Game {
             player_name: player_name.to_string(),
             campaign,
@@ -97,12 +108,16 @@ impl Game {
     }
 
     fn log(&self, event: &str) {
-        if !self.test_mode { shell::log_action(self.campaign, &self.player_name, event); }
+        if !self.test_mode {
+            shell::log_action(self.campaign, &self.player_name, event);
+        }
     }
 
     /// Écrit la sauvegarde de la campagne (règle A18) — jamais en mode test (P1.9)
     fn save_progress(&self) {
-        if self.test_mode { return; }
+        if self.test_mode {
+            return;
+        }
         let save = crate::missions::SaveData {
             campaign: self.campaign,
             player_name: self.player_name.clone(),
@@ -116,20 +131,53 @@ impl Game {
             saved_at: chrono::Local::now().format("%Y-%m-%d %H:%M:%S").to_string(),
         };
         if !shell::write_save(&save) {
-            println!("  ⚠️  Sauvegarde impossible dans {}", shell::save_path(self.campaign, &self.player_name));
+            println!(
+                "  ⚠️  Sauvegarde impossible dans {}",
+                shell::save_path(self.campaign, &self.player_name)
+            );
         }
     }
 
     pub fn run(&mut self) {
         let (titre, role, camp, niveau) = match self.campaign {
-            2 => ("🏯 CHÂTEAU SHIRO — Terminal du Seigneur", "Seigneur", "Le Japon Féodal", "MOYEN"),
-            3 => ("🌐 NEXUS — NOC Neon-9", "Netrunner", "Nexus Réseau", "DIFFICILE"),
-            _ => ("🚀 ORION-7 — Terminal du Capitaine", "Admin", "Les Pirates de l'Espace", "FACILE"),
+            2 => (
+                "🏯 CHÂTEAU SHIRO — Terminal du Seigneur",
+                "Seigneur",
+                "Le Japon Féodal",
+                "MOYEN",
+            ),
+            3 => (
+                "🌐 NEXUS — NOC Neon-9",
+                "Netrunner",
+                "Nexus Réseau",
+                "DIFFICILE",
+            ),
+            _ => (
+                "🚀 ORION-7 — Terminal du Capitaine",
+                "Admin",
+                "Les Pirates de l'Espace",
+                "FACILE",
+            ),
         };
         println!();
-        println!("{}", ui::simple_box(&[titre.to_string(), format!("{}: {}", role, self.player_name), format!("Campagne: {}  │  Niveau: {}", camp, niveau)], 60));
+        println!(
+            "{}",
+            ui::simple_box(
+                &[
+                    titre.to_string(),
+                    format!("{}: {}", role, self.player_name),
+                    format!("Campagne: {}  │  Niveau: {}", camp, niveau)
+                ],
+                60
+            )
+        );
         if !shell::sandbox_available() {
-            println!("\n  {}", "⚠️  Bac à sable bubblewrap indisponible: isolation PARTIELLE du monde.".yellow().bold());
+            println!(
+                "\n  {}",
+                "⚠️  Bac à sable bubblewrap indisponible: isolation PARTIELLE du monde."
+                    .yellow()
+                    .bold()
+            );
             println!("     Demandez l'installation du paquet « bubblewrap » (sudo apt install bubblewrap).");
         }
         self.cmd_help();
@@ -141,19 +189,40 @@ impl Game {
             self.show_mission();
         }
 
-        self.log(&format!("SESSION début — joueur={} campagne={}", self.player_name, self.campaign));
+        self.log(&format!(
+            "SESSION début — joueur={} campagne={}",
+            self.player_name, self.campaign
+        ));
         loop {
             let cwd = self.display_path(&self.current_dir);
-            let prompt = format!("{}@{}:{}$ [{}/{}] ", self.player_name.bright_green(), shell::world_hostname().normal(), cwd.normal(), self.completed.len(), self.missions.len());
-            let completer = lineedit::Completer { cwd: self.current_dir.clone(), world: shell::world_dir(), home: shell::player_home() };
+            let prompt = format!(
+                "{}@{}:{}$ [{}/{}] ",
+                self.player_name.bright_green(),
+                shell::world_hostname().normal(),
+                cwd.normal(),
+                self.completed.len(),
+                self.missions.len()
+            );
+            let completer = lineedit::Completer {
+                cwd: self.current_dir.clone(),
+                world: shell::world_dir(),
+                home: shell::player_home(),
+            };
             // Règle A11: édition de ligne façon terminal (flèches, historique, Tab)
             let line = match lineedit::read_line(&prompt, &mut self.history, Some(&completer)) {
                 Some(l) => l,
-                None => { println!("\n👋 Déconnexion (EOF)."); break; } // Ctrl+D = sortie propre
+                None => {
+                    println!("\n👋 Déconnexion (EOF).");
+                    break;
+                } // Ctrl+D = sortie propre
             };
             let cmd = line.trim().to_string();
-            if cmd.is_empty() { continue; }
-            if !self.handle_line(&cmd) { break; }
+            if cmd.is_empty() {
+                continue;
+            }
+            if !self.handle_line(&cmd) {
+                break;
+            }
         }
         self.log("SESSION fin");
     }
@@ -165,28 +234,41 @@ impl Game {
             match words.get(1).copied() {
                 Some("help") => self.cmd_help(),
                 Some("goal") => self.cmd_goal(),
-                Some("check") => { if self.cmd_check() { self.show_mission(); } }
-                Some("code") => {
-                    match words.get(2) {
-                        Some(c) => { if self.submit_code(c) { self.show_mission(); } }
-                        None => println!("  Usage: gsh code VOTRE-CODE"),
+                Some("check") => {
+                    if self.cmd_check() {
+                        self.show_mission();
                     }
                 }
+                Some("code") => match words.get(2) {
+                    Some(c) => {
+                        if self.submit_code(c) {
+                            self.show_mission();
+                        }
+                    }
+                    None => println!("  Usage: gsh code VOTRE-CODE"),
+                },
                 Some("cancel") => {
-                    if self.pending_code.take().is_some() { println!("\n  ↩️  Saisie du code annulée. Refaites 'gsh check' quand vous serez prêt.\n"); }
-                    else { println!("\n  Aucun code n'est attendu pour le moment.\n"); }
+                    if self.pending_code.take().is_some() {
+                        println!("\n  ↩️  Saisie du code annulée. Refaites 'gsh check' quand vous serez prêt.\n");
+                    } else {
+                        println!("\n  Aucun code n'est attendu pour le moment.\n");
+                    }
                 }
                 Some("reset") => self.cmd_reset(),
                 Some("skills") => self.cmd_skills(),
                 Some("export") => self.cmd_export(),
                 Some("restart") => self.cmd_restart(),
-                _ => println!("  Commande gsh inconnue. Tapez 'gsh help' pour la liste des commandes gsh."),
+                _ => println!(
+                    "  Commande gsh inconnue. Tapez 'gsh help' pour la liste des commandes gsh."
+                ),
             }
             return true;
         }
         // Phase 2: un code tapé seul est accepté (sinon la ligne est une commande SHELL normale)
         if self.pending_code.is_some() && words.len() == 1 && looks_like_code(words[0]) {
-            if self.submit_code(words[0]) { self.show_mission(); }
+            if self.submit_code(words[0]) {
+                self.show_mission();
+            }
             return true;
         }
         if words.len() == 1 && matches!(words[0], "exit" | "quit" | "logout") {
@@ -205,21 +287,45 @@ impl Game {
 
     /// RÈGLE A8-compatible: rm visant un fichier critique de la mission → avertissement narratif
     fn warn_destructive(&self, parsed: &parse::Parsed) -> bool {
-        let m = match self.missions.get(self.current_mission) { Some(m) => m, None => return false };
-        let critical: Vec<String> = m.checks.iter()
-            .filter(|ck| matches!(ck.check_type.as_str(), "file_exists" | "file_read" | "file_size" | "file_owner" | "file_contains_count" | "config_contains" | "permission"))
-            .map(|ck| ck.target.clone()).collect();
-        if critical.is_empty() { return false; }
-        let hits = parsed.effective().iter().filter(|(b, _)| b == "rm").any(|(_, args)| {
-            args.iter().filter(|a| !a.starts_with('-')).any(|a| {
-                let ra = self.resolve_path(a);
-                critical.iter().any(|c| {
-                    let rc = self.resolve_path(c);
-                    let same = shell::canonical(&ra).unwrap_or(ra.clone()) == shell::canonical(&rc).unwrap_or(rc.clone());
-                    same || (!c.contains('/') && ra.rsplit('/').next() == Some(c.as_str()))
-                })
+        let m = match self.missions.get(self.current_mission) {
+            Some(m) => m,
+            None => return false,
+        };
+        let critical: Vec<String> = m
+            .checks
+            .iter()
+            .filter(|ck| {
+                matches!(
+                    ck.check_type.as_str(),
+                    "file_exists"
+                        | "file_read"
+                        | "file_size"
+                        | "file_owner"
+                        | "file_contains_count"
+                        | "config_contains"
+                        | "permission"
+                )
             })
-        });
+            .map(|ck| ck.target.clone())
+            .collect();
+        if critical.is_empty() {
+            return false;
+        }
+        let hits = parsed
+            .effective()
+            .iter()
+            .filter(|(b, _)| b == "rm")
+            .any(|(_, args)| {
+                args.iter().filter(|a| !a.starts_with('-')).any(|a| {
+                    let ra = self.resolve_path(a);
+                    critical.iter().any(|c| {
+                        let rc = self.resolve_path(c);
+                        let same = shell::canonical(&ra).unwrap_or(ra.clone())
+                            == shell::canonical(&rc).unwrap_or(rc.clone());
+                        same || (!c.contains('/') && ra.rsplit('/').next() == Some(c.as_str()))
+                    })
+                })
+            });
         if hits {
             println!("\n  ⚠️  Cette commande est DESTRUCTRICE et viserait un élément important de la mission.");
             println!("  🚀 L'équipage vous déconseille fortement cette action: elle pourrait compromettre la mission.");
@@ -235,14 +341,20 @@ impl Game {
 
     fn exec_with(&mut self, line: &str, stdin: Option<Vec<u8>>) -> i32 {
         let parsed = parse::parse(line);
-        if parsed.cmds.is_empty() { return 0; }
-        if self.warn_destructive(&parsed) { return 1; }
+        if parsed.cmds.is_empty() {
+            return 0;
+        }
+        if self.warn_destructive(&parsed) {
+            return 1;
+        }
         // Interceptions (uniquement pour une commande simple, sans pipe ni redirection — P1.4)
         if parsed.is_simple() {
             let w = &parsed.cmds[0].words;
             match (w[0].as_str(), w.len()) {
                 ("pwd", 1) => {
-                    if !self.bench_quiet { println!("{}", self.display_path(&self.current_dir)); }
+                    if !self.bench_quiet {
+                        println!("{}", self.display_path(&self.current_dir));
+                    }
                     self.mission_commands.push(line.to_string());
                     return 0;
                 }
@@ -255,18 +367,27 @@ impl Game {
                     self.mission_commands.push(line.to_string());
                     return 0;
                 }
-                ("man", 1) => { println!("Quelle page de manuel voulez-vous ?\nPar exemple: man ls — consultez gsh help pour la syntaxe générale."); return 1; }
+                ("man", 1) => {
+                    println!("Quelle page de manuel voulez-vous ?\nPar exemple: man ls — consultez gsh help pour la syntaxe générale.");
+                    return 1;
+                }
                 _ => {}
             }
         }
-        let opts = shell::RunOpts { capture: false, quiet: self.bench_quiet, stdin };
+        let opts = shell::RunOpts {
+            capture: false,
+            quiet: self.bench_quiet,
+            stdin,
+        };
         let r = shell::run_line(line, &self.current_dir, &self.previous_dir, &opts);
         if let Some(nd) = r.cwd {
             if nd != self.current_dir {
                 self.previous_dir = std::mem::replace(&mut self.current_dir, nd);
             }
         }
-        if r.code == 0 { self.mission_commands.push(line.to_string()); }
+        if r.code == 0 {
+            self.mission_commands.push(line.to_string());
+        }
         r.code
     }
 
@@ -283,9 +404,13 @@ impl Game {
         println!("    COMMANDE > fichier        → redirige la sortie vers un fichier");
         println!("\n  🎮 COMMANDES GSH:");
         println!("    gsh check        → valider la mission     gsh goal    → revoir la mission");
-        println!("    gsh code CODE    → donner le code demandé gsh cancel  → annuler la saisie du code");
+        println!(
+            "    gsh code CODE    → donner le code demandé gsh cancel  → annuler la saisie du code"
+        );
         println!("    gsh skills       → vos compétences        gsh reset   → réinitialiser la mission en cours");
-        println!("    gsh export       → export enseignant      gsh restart → recommencer la campagne");
+        println!(
+            "    gsh export       → export enseignant      gsh restart → recommencer la campagne"
+        );
         println!("\n  📚 GLOSSAIRE SHELL (rappel rapide):");
         println!("    pwd  où suis-je?    ls  voir le contenu    cd  changer de dossier");
         println!("    cat  lire un fichier   mkdir  créer un dossier   touch  créer un fichier");
@@ -317,9 +442,11 @@ impl Game {
             *self.attempts.entry(mid.clone()).or_insert(0) += 1;
             self.log(&format!("CHECK mission {} -> échec", mid));
             println!("\n  ❌ Mission non validée. Relisez le contexte et réessayez.");
-            if self.check_fails % 3 == 0 {
+            if self.check_fails.is_multiple_of(3) {
                 // Règle A8: message générique, JAMAIS la commande/fichier manquant (P1.7)
-                println!("  🧭 Relisez le dialogue du PNJ: il vous dit exactement quoi faire et où.");
+                println!(
+                    "  🧭 Relisez le dialogue du PNJ: il vous dit exactement quoi faire et où."
+                );
                 println!("     Vérifiez que vous êtes au bon endroit (pwd) et que vos commandes n'ont pas affiché d'erreur.");
             } else if self.check_fails % 3 == 2 {
                 println!("  💡 Besoin de revoir l'objectif? Tapez 'gsh goal'");
@@ -329,8 +456,12 @@ impl Game {
         self.log(&format!("CHECK mission {} -> succès", mid));
         // Phase 2: la mission demande un code
         if let Some(code) = self.missions[self.current_mission].code_required.clone() {
-            println!("\n  🔐 Actions validées! Dernière étape: donnez le code trouvé dans les fichiers.");
-            println!("     Tapez: gsh code VOTRE-CODE   (vous pouvez continuer à explorer en attendant)");
+            println!(
+                "\n  🔐 Actions validées! Dernière étape: donnez le code trouvé dans les fichiers."
+            );
+            println!(
+                "     Tapez: gsh code VOTRE-CODE   (vous pouvez continuer à explorer en attendant)"
+            );
             self.pending_code = Some(code);
             return false;
         }
@@ -362,7 +493,10 @@ impl Game {
     }
 
     fn complete_mission(&mut self) {
-        let m = match self.missions.get(self.current_mission) { Some(m) => m.clone(), None => return };
+        let m = match self.missions.get(self.current_mission) {
+            Some(m) => m.clone(),
+            None => return,
+        };
         let (congrats, bloom_note) = self.congrats(&m);
         println!("  🎖️  {}", congrats);
         println!("  🧠 {}", bloom_note);
@@ -379,7 +513,9 @@ impl Game {
             self.level += 1;
             println!("  🎉 Niveau {}!", self.level);
         }
-        if !self.completed.contains(&m.id) { self.completed.push(m.id.clone()); }
+        if !self.completed.contains(&m.id) {
+            self.completed.push(m.id.clone());
+        }
         self.current_mission += 1;
         self.mission_commands.clear(); // règle A2: historique propre à chaque mission
         self.pending_code = None;
@@ -389,21 +525,54 @@ impl Game {
         self.current_dir = shell::player_home();
         self.previous_dir = self.current_dir.clone();
         self.save_progress(); // A18
-        if self.current_mission >= self.missions.len() && self.completed.len() >= self.missions.len() {
+        if self.current_mission >= self.missions.len()
+            && self.completed.len() >= self.missions.len()
+        {
             self.show_victory_screen(); // A19
         }
     }
 
     /// Débloque des badges thématiques selon les compétences acquises
     fn update_badges(&mut self) {
-        let has = |cmds: &[&str]| cmds.iter().any(|c| self.skills.iter().any(|s| s.name.split_whitespace().next() == Some(*c)));
+        let has = |cmds: &[&str]| {
+            cmds.iter().any(|c| {
+                self.skills
+                    .iter()
+                    .any(|s| s.name.split_whitespace().next() == Some(*c))
+            })
+        };
         let mut new_badges: Vec<(&str, &str)> = Vec::new();
-        if has(&["ls", "cd", "pwd", "mkdir", "touch", "cp", "mv", "rm"]) { new_badges.push(("🗂️ Explorateur", "maîtrise des fichiers et répertoires")); }
-        if has(&["cat", "grep", "head", "tail", "wc", "find", "less"]) { new_badges.push(("🔍 Fouineur", "lecture et recherche dans les fichiers")); }
-        if has(&["chmod", "chown", "useradd", "groupadd", "passwd", "sudo", "su"]) { new_badges.push(("🛡️ Gardien", "droits, utilisateurs et sécurité")); }
-        if has(&["ps", "top", "kill", "pgrep", "systemctl", "journalctl"]) { new_badges.push(("⚙️ Mécanicien", "processus et services")); }
-        if has(&["ip", "ping", "netstat", "nmap", "ssh", "curl", "dig", "traceroute", "iptables", "ufw"]) { new_badges.push(("🌐 Réseau", "réseau et connectivité")); }
-        if has(&["tar", "zip", "unzip", "gzip", "df", "du", "mount"]) { new_badges.push(("📦 Logisticien", "archives et stockage")); }
+        if has(&["ls", "cd", "pwd", "mkdir", "touch", "cp", "mv", "rm"]) {
+            new_badges.push(("🗂️ Explorateur", "maîtrise des fichiers et répertoires"));
+        }
+        if has(&["cat", "grep", "head", "tail", "wc", "find", "less"]) {
+            new_badges.push(("🔍 Fouineur", "lecture et recherche dans les fichiers"));
+        }
+        if has(&[
+            "chmod", "chown", "useradd", "groupadd", "passwd", "sudo", "su",
+        ]) {
+            new_badges.push(("🛡️ Gardien", "droits, utilisateurs et sécurité"));
+        }
+        if has(&["ps", "top", "kill", "pgrep", "systemctl", "journalctl"]) {
+            new_badges.push(("⚙️ Mécanicien", "processus et services"));
+        }
+        if has(&[
+            "ip",
+            "ping",
+            "netstat",
+            "nmap",
+            "ssh",
+            "curl",
+            "dig",
+            "traceroute",
+            "iptables",
+            "ufw",
+        ]) {
+            new_badges.push(("🌐 Réseau", "réseau et connectivité"));
+        }
+        if has(&["tar", "zip", "unzip", "gzip", "df", "du", "mount"]) {
+            new_badges.push(("📦 Logisticien", "archives et stockage"));
+        }
         for (name, desc) in new_badges {
             if !self.badges.iter().any(|b| b.starts_with(name)) {
                 println!("  🏅 Badge débloqué: {} — {}", name, desc);
@@ -425,16 +594,34 @@ impl Game {
             format!("Campagne: {}", campagne),
             format!("Missions: {}/{}", self.completed.len(), self.missions.len()),
             format!("XP: {}  │  Niveau: {}", self.xp, self.level),
-            format!("Compétences: {}  │  Badges: {}", self.skills.len(), self.badges.len()),
+            format!(
+                "Compétences: {}  │  Badges: {}",
+                self.skills.len(),
+                self.badges.len()
+            ),
             "----".into(),
         ];
-        let names: Vec<String> = self.skills.iter().map(|s| format!("✓ {}", s.name)).collect();
+        let names: Vec<String> = self
+            .skills
+            .iter()
+            .map(|s| format!("✓ {}", s.name))
+            .collect();
         for chunk in names.chunks(3) {
-            lines.push(chunk.iter().map(|n| ui::pad(n, 19)).collect::<Vec<_>>().join(" ").trim_end().to_string());
+            lines.push(
+                chunk
+                    .iter()
+                    .map(|n| ui::pad(n, 19))
+                    .collect::<Vec<_>>()
+                    .join(" ")
+                    .trim_end()
+                    .to_string(),
+            );
         }
         if !self.badges.is_empty() {
             lines.push("----".into());
-            for b in &self.badges { lines.push(format!("🏅 {}", b.split(" — ").next().unwrap_or(b))); }
+            for b in &self.badges {
+                lines.push(format!("🏅 {}", b.split(" — ").next().unwrap_or(b)));
+            }
         }
         println!("\n{}\n", ui::heavy_box("🏆 FÉLICITATIONS!", &lines, 60));
     }
@@ -442,40 +629,94 @@ impl Game {
     /// gsh export: progression en JSON + CSV (règle A20), JSON valide (P1.8)
     fn cmd_export(&self) {
         #[derive(serde::Serialize)]
-        struct MissionRow<'a> { id: &'a str, titre: &'a str, statut: &'a str, xp: u64, tentatives: u32 }
+        struct MissionRow<'a> {
+            id: &'a str,
+            titre: &'a str,
+            statut: &'a str,
+            xp: u64,
+            tentatives: u32,
+        }
         #[derive(serde::Serialize)]
         struct Export<'a> {
-            campagne: u8, joueur: &'a str, date: String, missions: Vec<MissionRow<'a>>,
-            missions_reussies: usize, xp_total: u64, niveau: u32, competences: Vec<&'a str>, badges: Vec<&'a str>, historique: Vec<String>,
+            campagne: u8,
+            joueur: &'a str,
+            date: String,
+            missions: Vec<MissionRow<'a>>,
+            missions_reussies: usize,
+            xp_total: u64,
+            niveau: u32,
+            competences: Vec<&'a str>,
+            badges: Vec<&'a str>,
+            historique: Vec<String>,
         }
         let dir = format!("{}/state", shell::gameshell_home());
         let _ = std::fs::create_dir_all(&dir);
         let stamp = chrono::Local::now().format("%Y%m%d_%H%M%S").to_string();
         let slug = shell::player_slug(&self.player_name);
-        let json_path = format!("{}/export_campagne{}_{}_{}.json", dir, self.campaign, slug, stamp);
-        let csv_path = format!("{}/export_campagne{}_{}_{}.csv", dir, self.campaign, slug, stamp);
-        let done: std::collections::HashSet<&str> = self.completed.iter().map(|s| s.as_str()).collect();
-        let hist = std::fs::read_to_string(shell::history_path(self.campaign, &self.player_name)).unwrap_or_default();
-        let rows: Vec<MissionRow> = self.missions.iter().map(|m| MissionRow {
-            id: &m.id, titre: &m.title, statut: if done.contains(m.id.as_str()) { "réussie" } else { "à faire" }, xp: m.xp_reward,
-            tentatives: self.attempts.get(&m.id).copied().unwrap_or(0),
-        }).collect();
-        let csv_field = |s: &str| format!("\"{}\"", s.replace('"', "\"\"").replace(['\n', '\r'], " "));
+        let json_path = format!(
+            "{}/export_campagne{}_{}_{}.json",
+            dir, self.campaign, slug, stamp
+        );
+        let csv_path = format!(
+            "{}/export_campagne{}_{}_{}.csv",
+            dir, self.campaign, slug, stamp
+        );
+        let done: std::collections::HashSet<&str> =
+            self.completed.iter().map(|s| s.as_str()).collect();
+        let hist = std::fs::read_to_string(shell::history_path(self.campaign, &self.player_name))
+            .unwrap_or_default();
+        let rows: Vec<MissionRow> = self
+            .missions
+            .iter()
+            .map(|m| MissionRow {
+                id: &m.id,
+                titre: &m.title,
+                statut: if done.contains(m.id.as_str()) {
+                    "réussie"
+                } else {
+                    "à faire"
+                },
+                xp: m.xp_reward,
+                tentatives: self.attempts.get(&m.id).copied().unwrap_or(0),
+            })
+            .collect();
+        let csv_field =
+            |s: &str| format!("\"{}\"", s.replace('"', "\"\"").replace(['\n', '\r'], " "));
         let mut csv = String::from("id;titre;statut;xp;tentatives\n");
-        for r in &rows { csv.push_str(&format!("{};{};{};{};{}\n", csv_field(r.id), csv_field(r.titre), csv_field(r.statut), r.xp, r.tentatives)); }
+        for r in &rows {
+            csv.push_str(&format!(
+                "{};{};{};{};{}\n",
+                csv_field(r.id),
+                csv_field(r.titre),
+                csv_field(r.statut),
+                r.xp,
+                r.tentatives
+            ));
+        }
         let ex = Export {
-            campagne: self.campaign, joueur: &self.player_name, date: stamp.clone(), missions: rows,
-            missions_reussies: self.completed.len(), xp_total: self.xp, niveau: self.level,
+            campagne: self.campaign,
+            joueur: &self.player_name,
+            date: stamp.clone(),
+            missions: rows,
+            missions_reussies: self.completed.len(),
+            xp_total: self.xp,
+            niveau: self.level,
             competences: self.skills.iter().map(|s| s.name.as_str()).collect(),
             badges: self.badges.iter().map(|s| s.as_str()).collect(),
             historique: hist.lines().map(|l| l.to_string()).collect(),
         };
-        let okj = serde_json::to_string_pretty(&ex).map(|j| std::fs::write(&json_path, j).is_ok()).unwrap_or(false);
+        let okj = serde_json::to_string_pretty(&ex)
+            .map(|j| std::fs::write(&json_path, j).is_ok())
+            .unwrap_or(false);
         let okc = std::fs::write(&csv_path, csv).is_ok();
         self.log("EXPORT progression");
         println!("\n  📤 Export effectué:");
-        if okj { println!("     JSON: {}", json_path); }
-        if okc { println!("     CSV:  {}", csv_path); }
+        if okj {
+            println!("     JSON: {}", json_path);
+        }
+        if okc {
+            println!("     CSV:  {}", csv_path);
+        }
         println!("     ({} missions, {} XP, niveau {}, {} compétences, {} badges, historique: {} lignes)\n", self.completed.len(), self.xp, self.level, self.skills.len(), self.badges.len(), hist.lines().count());
     }
 
@@ -491,7 +732,10 @@ impl Game {
                 "Aide: gsh help  │  Skills: gsh skills",
                 "← → éditent, ↑ ↓ historique, Tab complète",
                 "Progression sauvegardée automatiquement",
-            ].iter().map(|s| s.to_string()).collect();
+            ]
+            .iter()
+            .map(|s| s.to_string())
+            .collect();
             println!("{}\n", ui::light_box("🎓 TUTORIEL", &lines, 42));
         }
     }
@@ -544,27 +788,52 @@ impl Game {
         }
         if !self.badges.is_empty() {
             println!("\n  🏅 Badges ({}):", self.badges.len());
-            for b in &self.badges { println!("    • {}", b); }
+            for b in &self.badges {
+                println!("    • {}", b);
+            }
         }
         println!();
     }
 
     /// Cadre mission style « fenêtre terminal », bordure complète (règle B5, P4.8)
     fn show_mission(&self) {
-        let m = match self.missions.get(self.current_mission) { Some(m) => m, None => return };
+        let m = match self.missions.get(self.current_mission) {
+            Some(m) => m,
+            None => return,
+        };
         const W: usize = 64; // largeur intérieure
         let yl = |s: &str| s.yellow().to_string();
-        let line = |content: String| println!("  {} {} {}", yl("┃"), ui::pad(&content, W - 2), yl("┃"));
+        let line =
+            |content: String| println!("  {} {} {}", yl("┃"), ui::pad(&content, W - 2), yl("┃"));
         let title = format!("MISSION {} — {}", m.id, m.title);
         println!();
         let tw = crate::sys::str_width(&title);
-        println!("  {}{}{}", yl("┏━ "), title.bright_yellow().bold(), yl(&format!(" {}┓", "━".repeat(W.saturating_sub(tw + 4)))));
+        println!(
+            "  {}{}{}",
+            yl("┏━ "),
+            title.bright_yellow().bold(),
+            yl(&format!(" {}┓", "━".repeat(W.saturating_sub(tw + 4))))
+        );
         // Re-flow: joint les lignes de chaque paragraphe avant le retour à la ligne
         let mut para = String::new();
-        let flush = |para: &mut String| { if !para.is_empty() { for l in ui::wrap(para, W - 2) { line(l.normal().to_string()); } para.clear(); } };
+        let flush = |para: &mut String| {
+            if !para.is_empty() {
+                for l in ui::wrap(para, W - 2) {
+                    line(l.normal().to_string());
+                }
+                para.clear();
+            }
+        };
         for l in m.story.lines() {
-            if l.trim().is_empty() { flush(&mut para); line(String::new()); }
-            else { if !para.is_empty() { para.push(' '); } para.push_str(l.trim()); }
+            if l.trim().is_empty() {
+                flush(&mut para);
+                line(String::new());
+            } else {
+                if !para.is_empty() {
+                    para.push(' ');
+                }
+                para.push_str(l.trim());
+            }
         }
         flush(&mut para);
         println!("  {}{}{}", yl("┠"), "─".repeat(W), yl("┨"));
@@ -578,55 +847,112 @@ impl Game {
         for cmd in &m.required_commands {
             // Règle B4: commande complète si un check exige une option exacte de cette commande,
             // sinon chaque commande de base (sudo, nice, du...) telle quelle
-            let exact = m.checks.iter().any(|c| c.check_type == "command_executed" && (c.target.starts_with('-') || c.target.starts_with('+')) && cmd.split_whitespace().any(|w| w == c.target));
+            let exact = m.checks.iter().any(|c| {
+                c.check_type == "command_executed"
+                    && (c.target.starts_with('-') || c.target.starts_with('+'))
+                    && cmd.split_whitespace().any(|w| w == c.target)
+            });
             let entries: Vec<(String, String)> = if exact {
                 let effs = parse::parse(cmd).effective();
-                let base = effs.iter().find(|(b, _)| b != "sudo").or(effs.first()).map(|(b, _)| b.clone()).unwrap_or_default();
+                let base = effs
+                    .iter()
+                    .find(|(b, _)| b != "sudo")
+                    .or(effs.first())
+                    .map(|(b, _)| b.clone())
+                    .unwrap_or_default();
                 vec![(cmd.clone(), base)]
             } else {
-                parse::parse(cmd).effective().into_iter().map(|(b, _)| (b.clone(), b)).collect()
+                parse::parse(cmd)
+                    .effective()
+                    .into_iter()
+                    .map(|(b, _)| (b.clone(), b))
+                    .collect()
             };
             for (full, base) in entries {
-                if shown.contains(&full) || base.is_empty() { continue; }
+                if shown.contains(&full) || base.is_empty() {
+                    continue;
+                }
                 shown.push(full.clone());
                 let (tech, rp) = cmd_brief(&base);
                 line(format!("  ▸ {}", full.bright_green().bold()));
-                for l in ui::wrap(&format!("🚀 {}", rp), W - 8) { line(format!("    {}", l.green())); }
-                for l in ui::wrap(&format!("💻 {}", tech), W - 8) { line(format!("    {}", l.normal())); }
+                for l in ui::wrap(&format!("🚀 {}", rp), W - 8) {
+                    line(format!("    {}", l.green()));
+                }
+                for l in ui::wrap(&format!("💻 {}", tech), W - 8) {
+                    line(format!("    {}", l.normal()));
+                }
             }
         }
         for op in ["|", ">>", ">"] {
-            if m.required_commands.iter().any(|c| parse::parse(c).has_operator(op)) && !shown.iter().any(|s| s == op) {
+            if m.required_commands
+                .iter()
+                .any(|c| parse::parse(c).has_operator(op))
+                && !shown.iter().any(|s| s == op)
+            {
                 let (tech, rp) = cmd_brief(op);
                 shown.push(op.to_string());
                 line(format!("  ▸ {}", op.bright_green().bold()));
-                for l in ui::wrap(&format!("🚀 {}", rp), W - 8) { line(format!("    {}", l.green())); }
-                for l in ui::wrap(&format!("💻 {}", tech), W - 8) { line(format!("    {}", l.normal())); }
+                for l in ui::wrap(&format!("🚀 {}", rp), W - 8) {
+                    line(format!("    {}", l.green()));
+                }
+                for l in ui::wrap(&format!("💻 {}", tech), W - 8) {
+                    line(format!("    {}", l.normal()));
+                }
                 break;
             }
         }
-        if m.code_required.is_some() { line("🔐 Un code sera demandé à la validation (gsh code)".to_string()); }
-        if self.pending_code.is_some() { line(format!("{}", "⏳ Actions validées: tapez gsh code VOTRE-CODE".yellow().bold())); }
+        if m.code_required.is_some() {
+            line("🔐 Un code sera demandé à la validation (gsh code)".to_string());
+        }
+        if self.pending_code.is_some() {
+            line(format!(
+                "{}",
+                "⏳ Actions validées: tapez gsh code VOTRE-CODE"
+                    .yellow()
+                    .bold()
+            ));
+        }
         println!("  {}", yl(&format!("┣{}┫", "━".repeat(W))));
-        line(format!("🏆 {} XP  │  🧠 Bloom [{}]  │  gsh help", m.xp_reward, m.bloom_level));
+        line(format!(
+            "🏆 {} XP  │  🧠 Bloom [{}]  │  gsh help",
+            m.xp_reward, m.bloom_level
+        ));
         println!("  {}", yl(&format!("┗{}┛", "━".repeat(W))));
         println!();
-        println!("  📊 {} {}/{} missions  │  ⭐ Niv {}  │  💫 {} XP  │  🎖️ {} skills\n",
-            "▰".repeat(self.completed.len() * 20 / self.missions.len().max(1)), self.completed.len(), self.missions.len(), self.level, self.xp, self.skills.len());
+        println!(
+            "  📊 {} {}/{} missions  │  ⭐ Niv {}  │  💫 {} XP  │  🎖️ {} skills\n",
+            "▰".repeat(self.completed.len() * 20 / self.missions.len().max(1)),
+            self.completed.len(),
+            self.missions.len(),
+            self.level,
+            self.xp,
+            self.skills.len()
+        );
     }
 
     fn check_mission_detailed(&self) -> (bool, Vec<String>) {
-        let m = match self.missions.get(self.current_mission) { Some(m) => m, None => return (false, vec!["?".into()]) };
+        let m = match self.missions.get(self.current_mission) {
+            Some(m) => m,
+            None => return (false, vec!["?".into()]),
+        };
         // Invariant A17: une mission se valide par des commandes TAPÉES (jamais à vide)
-        if self.mission_commands.is_empty() { return (false, vec!["aucune commande".into()]); }
-        let hist: Vec<parse::Parsed> = self.mission_commands.iter().map(|l| parse::parse(l)).collect();
+        if self.mission_commands.is_empty() {
+            return (false, vec!["aucune commande".into()]);
+        }
+        let hist: Vec<parse::Parsed> = self
+            .mission_commands
+            .iter()
+            .map(|l| parse::parse(l))
+            .collect();
         let sim = shell::sim_ctx();
         let mut missing = Vec::new();
         for check in &m.checks {
             let path = || self.resolve_path(&check.target);
             let exp = check.expected.as_deref();
             let ok = match check.check_type.as_str() {
-                "command_executed" => parse::command_matches(&check.target, &m.required_commands, &hist),
+                "command_executed" => {
+                    parse::command_matches(&check.target, &m.required_commands, &hist)
+                }
                 "file_read" => parse::file_read_matches(&check.target, &hist),
                 "file_exists" => shell::file_exists(&path()),
                 "file_not_exists" => !shell::file_exists(&path()),
@@ -638,33 +964,82 @@ impl Game {
                 }
                 "permission" => match exp {
                     Some("+x") => shell::is_executable(&path()),
-                    Some(e) => shell::get_permissions(&path()).map(|p| format!("{:o}", p) == e.trim_start_matches('0') || format!("{:03o}", p) == e).unwrap_or(false),
+                    Some(e) => shell::get_permissions(&path())
+                        .map(|p| {
+                            format!("{:o}", p) == e.trim_start_matches('0')
+                                || format!("{:03o}", p) == e
+                        })
+                        .unwrap_or(false),
                     None => false, // A17: jamais vacuel
                 },
-                "config_contains" => exp.map(|e| shell::file_contains(&path(), e)).unwrap_or(false),
-                "file_size" => shell::file_size(&path()) >= exp.and_then(|e| e.parse().ok()).unwrap_or(1),
-                "file_owner" => exp.map(|e| shell::file_exists(&path()) && crate::sim::users::owner_of(&sim, &shell::to_world(&path()).unwrap_or_default()) == e).unwrap_or(false),
+                "config_contains" => exp
+                    .map(|e| shell::file_contains(&path(), e))
+                    .unwrap_or(false),
+                "file_size" => {
+                    shell::file_size(&path()) >= exp.and_then(|e| e.parse().ok()).unwrap_or(1)
+                }
+                "file_owner" => exp
+                    .map(|e| {
+                        shell::file_exists(&path())
+                            && crate::sim::users::owner_of(
+                                &sim,
+                                &shell::to_world(&path()).unwrap_or_default(),
+                            ) == e
+                    })
+                    .unwrap_or(false),
                 "file_contains_count" => match exp.and_then(|e| e.split_once('|')) {
-                    Some((n, pat)) => shell::file_contains_count(&path(), pat.trim()) >= n.trim().parse().unwrap_or(1),
-                    None => exp.map(|e| shell::file_contains(&path(), e)).unwrap_or(false),
+                    Some((n, pat)) => {
+                        shell::file_contains_count(&path(), pat.trim())
+                            >= n.trim().parse().unwrap_or(1)
+                    }
+                    None => exp
+                        .map(|e| shell::file_contains(&path(), e))
+                        .unwrap_or(false),
                 },
                 "process_running" => crate::sim::procs::running(&sim, &check.target),
                 "process_absent" => !crate::sim::procs::running(&sim, &check.target),
                 "user_exists" => crate::sim::users::user_exists(&sim, &check.target),
                 "group_exists" => crate::sim::users::group_exists(&sim, &check.target),
-                "user_in_group" => exp.map(|g| crate::sim::users::user_groups(&sim, &check.target).iter().any(|(_, n)| n == g)).unwrap_or(false),
+                "user_in_group" => exp
+                    .map(|g| {
+                        crate::sim::users::user_groups(&sim, &check.target)
+                            .iter()
+                            .any(|(_, n)| n == g)
+                    })
+                    .unwrap_or(false),
                 "user_has_password" => crate::sim::users::has_password(&sim, &check.target),
                 "package_installed" => crate::sim::admin::installed(&sim, &check.target),
-                "sim_event" => sim.lines("events.log").iter().skip(self.event_mark).any(|l| l.contains(&check.target)),
-                "sim_contains" => exp.map(|e| sim_line_match(&sim.lines(&check.target), e)).unwrap_or(false),
-                "sim_not_contains" => exp.map(|e| !sim_line_match(&sim.lines(&check.target), e)).unwrap_or(false),
+                "sim_event" => sim
+                    .lines("events.log")
+                    .iter()
+                    .skip(self.event_mark)
+                    .any(|l| l.contains(&check.target)),
+                "sim_contains" => exp
+                    .map(|e| sim_line_match(&sim.lines(&check.target), e))
+                    .unwrap_or(false),
+                "sim_not_contains" => exp
+                    .map(|e| !sim_line_match(&sim.lines(&check.target), e))
+                    .unwrap_or(false),
                 "output_contains" => match exp {
-                    Some(e) => shell::run_line(&check.target, &self.current_dir, &self.previous_dir, &shell::RunOpts { capture: true, quiet: false, stdin: Some(Vec::new()) }).out.contains(e),
+                    Some(e) => shell::run_line(
+                        &check.target,
+                        &self.current_dir,
+                        &self.previous_dir,
+                        &shell::RunOpts {
+                            capture: true,
+                            quiet: false,
+                            stdin: Some(Vec::new()),
+                        },
+                    )
+                    .out
+                    .contains(e),
                     None => false,
                 },
                 _ => false, // type inconnu: jamais validé (A17)
             };
-            if !ok { missing.push(format!("{}:{}", check.check_type, check.target)); }
+            if !ok {
+                missing.push(format!("{}:{}", check.check_type, check.target));
+            }
         }
         (missing.is_empty(), missing)
     }
@@ -673,25 +1048,43 @@ impl Game {
     fn resolve_path(&self, path: &str) -> String {
         let world = shell::world_dir();
         let home = shell::player_home();
-        let game_abs: String = if path == "~" { shell::home_in_world(self.campaign) }
-            else if let Some(r) = path.strip_prefix("~/") { format!("{}/{}", shell::home_in_world(self.campaign), r) }
-            else if path.starts_with('/') { path.to_string() }
-            else {
-                let cur = shell::to_world(&self.current_dir).unwrap_or_else(|| shell::to_world(&home).unwrap_or_else(|| "/".into()));
-                format!("{}/{}", cur, path)
-            };
+        let game_abs: String = if path == "~" {
+            shell::home_in_world(self.campaign)
+        } else if let Some(r) = path.strip_prefix("~/") {
+            format!("{}/{}", shell::home_in_world(self.campaign), r)
+        } else if path.starts_with('/') {
+            path.to_string()
+        } else {
+            let cur = shell::to_world(&self.current_dir)
+                .unwrap_or_else(|| shell::to_world(&home).unwrap_or_else(|| "/".into()));
+            format!("{}/{}", cur, path)
+        };
         let mut stack: Vec<&str> = Vec::new();
         for p in game_abs.split('/').filter(|s| !s.is_empty()) {
-            match p { "." => {}, ".." => { stack.pop(); }, x => stack.push(x) }
+            match p {
+                "." => {}
+                ".." => {
+                    stack.pop();
+                }
+                x => stack.push(x),
+            }
         }
-        if stack.is_empty() { world } else { format!("{}/{}", world.trim_end_matches('/'), stack.join("/")) }
+        if stack.is_empty() {
+            world
+        } else {
+            format!("{}/{}", world.trim_end_matches('/'), stack.join("/"))
+        }
     }
 
     /// Chemin réel → affichage propre: ~, ~/x, /pont/x (P1.14: préfixe strict)
     fn display_path(&self, real: &str) -> String {
         let home = shell::player_home();
-        if real == home { return "~".into(); }
-        if let Some(r) = real.strip_prefix(&format!("{}/", home)) { return format!("~/{}", r); }
+        if real == home {
+            return "~".into();
+        }
+        if let Some(r) = real.strip_prefix(&format!("{}/", home)) {
+            return format!("~/{}", r);
+        }
         shell::to_world(real).unwrap_or_else(|| "/".into())
     }
 
@@ -699,7 +1092,9 @@ impl Game {
     pub fn submit_code(&mut self, input: &str) -> bool {
         match self.pending_code.clone() {
             None => {
-                println!("\n  Aucun code n'est attendu: validez d'abord la mission avec 'gsh check'.\n");
+                println!(
+                    "\n  Aucun code n'est attendu: validez d'abord la mission avec 'gsh check'.\n"
+                );
                 false
             }
             Some(expected) => {
@@ -727,13 +1122,20 @@ impl Game {
     pub fn run_test_mode(&mut self) {
         println!("🧪 {} missions", self.missions.len());
         for m in &self.missions {
-            println!("  {} {} ({}XP) code={:?}", m.id, m.title, m.xp_reward, m.code_required);
+            println!(
+                "  {} {} ({}XP) code={:?}",
+                m.id, m.title, m.xp_reward, m.code_required
+            );
         }
     }
 }
 
 /// Une ligne de l'état contient toutes les parties de `expected` (séparées par &&)
 fn sim_line_match(lines: &[String], expected: &str) -> bool {
-    let parts: Vec<&str> = expected.split("&&").map(|s| s.trim()).filter(|s| !s.is_empty()).collect();
+    let parts: Vec<&str> = expected
+        .split("&&")
+        .map(|s| s.trim())
+        .filter(|s| !s.is_empty())
+        .collect();
     !parts.is_empty() && lines.iter().any(|l| parts.iter().all(|p| l.contains(p)))
 }
