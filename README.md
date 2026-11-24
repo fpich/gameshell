@@ -1,5 +1,7 @@
 # 🏴‍☠️ GameShell — Les Pirates de l'Espace
 
+[![CI](https://github.com/fpich/gameshell/actions/workflows/ci.yml/badge.svg)](https://github.com/fpich/gameshell/actions/workflows/ci.yml)
+
 Jeu de rôle éducatif pour apprendre les **commandes shell Linux** et le **durcissement d'un serveur Debian 13**, conçu pour les étudiants de **BTS SIO SISR**.
 
 **100% local et offline** — aucune connexion internet requise après installation.
@@ -156,14 +158,29 @@ Le fichier `AGENTS.md` contient les règles strictes de conformité, en sections
 
 ```
 gameshell/
-├── AGENTS.md              # règles de conformité (A/B/C/D/E)
+├── AGENTS.md              # règles de conformité (A/B/C/D/E) — bible du projet
 ├── README.md              # cette documentation
-├── Cargo.toml
+├── ETAT_ACTUEL.md         # état source-de-vérité (tests, versions, structure)
+├── CHANGELOG.md           # historique des changements (Keep a Changelog)
+├── CONTRIBUTING.md        # conventions de contribution
+├── COPYRIGHT.md           # notice de propriété (pas de LICENSE)
+├── TESTS_PLAYTHROUGH.md   # rapport de tests
+├── PLAN.md                # plan des 3 campagnes
+├── Cargo.toml / Cargo.lock # dépendances (lock commité)
+├── rust-toolchain.toml    # toolchain épinglée (1.100.0)
+├── rustfmt.toml / .editorconfig
+├── .github/workflows/ci.yml # CI : clippy, fmt, build, tests
 ├── make-archive.sh        # génère gameshell.sh auto-extractible
 ├── vaisseau-gen.sh        # génère les 3 mondes (espace|japon|reseau)
 ├── monde-japon-gen.sh     # monde campagne 2 (château Shiro)
 ├── monde-reseau-gen.sh   # monde campagne 3 (NOC Nexus)
 ├── launcher.sh            # lance le jeu installé (transmet --campaign/--locked/--name)
+├── tests/
+│   ├── run_tests.sh       # suite automatisée (55 tests, dossier temporaire)
+│   └── playthrough_all.sh # playthrough complet en AUTO (bac à sable, non destructif)
+├── docs/
+│   ├── suivi/             # relecture des 300 missions (README + campagne1/2/3)
+│   └── historique/        # RETEX.md + CORRECTIONS.md (records figés)
 └── src/
     ├── main.rs            # point d'entrée + menu campagnes + bannières + aiguillage multi-appel
     ├── sys.rs             # FFI libc (termios, signaux, largeur d'affichage)
@@ -195,7 +212,16 @@ gameshell/
 - Mode enseignant: lancer avec `--campaign <1|2|3>` pour imposer une campagne (et `--locked` pour verrouiller l'ordre des missions)
 - Missions modifiables dans `src/missions/{chapters,japon,reseau}/ch*.rs`
 - Rebuild: `cargo build --release && ./make-archive.sh`
-- Tests: `cargo test --release` + `./tests/run_tests.sh` (54 tests, dans un dossier temporaire: vos données ne sont jamais touchées)
+- Tests: `cargo test --release` + `./tests/run_tests.sh` (55 tests, dans un dossier temporaire: vos données ne sont jamais touchées)
+
+## 🔒 Licence
+
+**Propriétaire — tous droits réservés** (`COPYRIGHT.md`). Pas de fichier `LICENSE` :
+aucune réutilisation publique n'est autorisée en l'état. Distribué en `gameshell.sh`
+(fichier auto-extractible, 100 % offline) pour l'enseignement.
+
+Pour l'enseignant : `ETAT_ACTUEL.md` (état du dépôt), `docs/suivi/` (relecture mission par mission),
+`docs/historique/RETEX.md` (méthodologie et bug history).
 
 ## 📦 Dépôt git
 

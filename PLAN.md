@@ -22,4 +22,4 @@ Château Shiro, hôte shiro, seigneur. Monde dédié `monde_japon/` (monde-japon
 
 ## Tests (figés)
 - `cargo test`: conformité des 3 campagnes (100 missions chacune, 20/acte, A4/A12/A15/A17, C3/C4/C5/C9/C13).
-- `tests/run_tests.sh`: **54/54 PASS** (dans un GAMESHELL_HOME temporaire) dont AUTO 300/300 par les seules commandes requises, EDGE 300/300, TORTURE 300/300 avec isolation réelle de l'hôte, sélections campagnes 2 et 3.
+- `tests/run_tests.sh`: **55/55 PASS** (dans un GAMESHELL_HOME temporaire) dont AUTO 300/300 par les seules commandes requises, EDGE 300/300, TORTURE 300/300 avec isolation réelle de l'hôte, sélections campagnes 2 et 3.
