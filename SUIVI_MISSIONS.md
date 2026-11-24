@@ -8,6 +8,111 @@ Format: `Campagne N° | compréhension initiale | défaut | modification | rejeu
 
 ---
 
+## CYCLE DÉBUTANT (rejeu complet, vu comme un étudiant débutant) — EN COURS
+
+Méthode : lire le cadre mission affiché (story + 🎯 + briefs 🆕) SANS consulter required_commands/checks ; déduire la commande ; jouer en pipe (`GAMESHELL_HOME=/tmp/gsh_debutant`, monde régénéré) ; `gsh check` ; consigner. Chaque mission = une exécution propre (rm -rf).
+
+## Campagne 1 — Chapitre 1 (1.1 → 1.5) — REJOUÉ DÉBUTANT ✅
+
+| Mission | Compréhension initiale (texte seul) | Défaut observé | Modification | Résultat du rejeu | Point restant |
+|---|---|---|---|---|---|
+| 1.1 | « Montrez où vous êtes et ce qui vous entoure » → `pwd` + `ls` | AUCUN (mission conforme dès HEAD) | — | ✅ validée, skill pwd | AUCUN |
+| 1.2 | « Lisez le message d'accueil » → `cat bienvenue.txt`, code trouvé dans le fichier | AUCUN | — | ✅ validée (code ORION-7-ACCUEIL), skill cat | AUCUN |
+| 1.3 | « Le dernier message de l'Amiral » dans /communications/messages → `cd` + `cat dernier_message.txt`, code dans le fichier | AUCUN | — | ✅ validée (code ANDROMEDE-7G), skill cd/cat | AUCUN |
+| 1.4 | « Qui êtes-vous sur ce vaisseau » → `hostname`/`whoami`/`id` (retour simulateurs A16) | AUCUN | — | ✅ validée | AUCUN |
+| 1.5 | « Vérifiez l'horloge de bord » → `date` | AUCUN | — | ✅ validée, skill date | AUCUN |
+
+**Vérifications ch1** : 5/5 validées à l'aveugle depuis `pwd`/`ls` initiaux ; codes phase 2 découverts dans les fichiers lus (C5) ; aucun échec.
+
+## Campagne 1 — Chapitre 2 (2.1 → 2.5) — REJOUÉ DÉBUTANT ✅
+
+| Mission | Compréhension initiale (texte seul) | Défaut observé | Modification | Résultat du rejeu | Point restant |
+|---|---|---|---|---|---|
+| 2.1 | « Créez incident_15jan.txt » (Vex Korshun nomme le fichier) → `touch incident_15jan.txt` | AUCUN | — | ✅ validée, skill touch | AUCUN |
+| 2.2 | « Créez rapports/2024/janvier dans votre cabine, une seule commande » → `mkdir -p rapports/2024/janvier` | AUCUN | — | ✅ validée, skill mkdir -p | AUCUN |
+| 2.3 | « Copiez le rapport dans les soutes » → `cp incident_15jan.txt /soutes/` | AUCUN | — | ✅ validée, skill cp | AUCUN |
+| 2.4 | « Déplacez ~/incident_15jan.txt vers ~/rapports/2024/janvier/ » → `mv` | AUCUN | — | ✅ validée, skill mv | AUCUN |
+| 2.5 | « Supprimez temp1.txt temp2.txt temp3.txt » (Tael Rhen nomme les 3) → `rm` | AUCUN | — | ✅ validée, skill rm | AUCUN |
+
+**Vérifications ch2** : 5/5 validées ; noms de fichiers cités dans la story (C5) ; enchaînement touch→mkdir→cp→mv→rm cohérent (le pendu `~/incident_15jan.txt` déplacé, pas recopié).
+
+## Campagne 1 — Chapitre 3 (3.1 → 3.5) — REJOUÉ DÉBUTANT ✅
+
+| Mission | Compréhension initiale (texte seule) | Défaut observé | Modification | Résultat du rejeu | Point restant |
+|---|---|---|---|---|---|
+| 3.1 | « Liste complète, fichiers cachés compris » + lire .secret → `ls -la` + `cat .secret` | AUCUN | — | ✅ validée, skill ls -la | AUCUN |
+| 3.2 | « L'outil qui fouille tous les compartiments pour un nom de fichier » → `find / -name dernier_message.txt` | AUCUN | — | ✅ validée (chemin affiché), skill find | AUCUN |
+| 3.3 | « Taille totale du compartiment /soutes, le total pas le détail » → `du -sh /soutes` | AUCUN | — | ✅ validée, skill du -sh | AUCUN |
+| 3.4 | « Rejoignez /pont » → `cd /pont` + `ls` | AUCUN | — | ✅ validée, skill cd | AUCUN |
+| 3.5 | « Créez rappel.txt dans votre cabine avec le texte de Zyra-7 » → `echo ... > rappel.txt` | AUCUN | — | ✅ validée, skill echo/> | AUCUN |
+
+**Vérifications ch3** : 5/5 validées ; code 3.5 sans phase 2 (le texte est dans la story) ; redirection déduite du brief 🆕 `>`.
+
+## Campagne 1 — Chapitre 4 (4.1 → 4.5) — REJOUÉ DÉBUTANT ✅
+
+| Mission | Compréhension initiale (texte seule) | Défaut observé | Modification | Résultat du rejeu | Point restant |
+|---|---|---|---|---|---|
+| 4.1 | « Lisez votre carnet notes.txt » → `cat notes.txt` | AUCUN | — | ✅ validée, skill cat | AUCUN |
+| 4.2 | « Ajoutez une entrée à la fin de notes.txt sans effacer le reste » → `echo 'Verifier les boucliers avant attaque' >> notes.txt` | AUCUN (un 1er check ❌ non reproductible : même pipe relancé → ✅ ; suspecté lecture état pendant écriture) | — | ✅ validée (rejouée 2×), skill echo | 1 événement ❌ non reproductible consigné, à surveiller |
+| 4.3 | « Nombre de lignes de bienvenue.txt, juste le nombre » → `wc -l bienvenue.txt` | AUCUN | — | ✅ validée, skill wc | AUCUN |
+| 4.4 | « Le début de l'historique du pont : 5 premières entrées » → `head -5 /pont/journaux-de-bord/historique.txt` | AUCUN | — | ✅ validée, skill head | AUCUN |
+| 4.5 | « La fin de auth.log : 3 dernières lignes » → `tail -3 /securite/logs/auth.log` | AUCUN | — | ✅ validée, skill tail | AUCUN |
+
+**Vérifications ch4** : 5/5 validées (une seule erreur ❌ non reproductible sur 4.2, rejouée 2× ✅) ; les checks 4.3/4.4/4.5 ne portent que sur `wc`/`head`/`tail` (commande suffit), conforme B4 car l'option est dans la story (« 5 premières », « 3 dernières ») — revu : la story ne nomme pas l'option shell, c'est le BESOIN qui est exprimé (C4).
+
+## Campagne 1 — Chapitre 5 (5.1 → 5.5) — REJOUÉ DÉBUTANT ✅ (1 correction rédaction)
+
+| Mission | Compréhension initiale (texte seule) | Défaut observé | Modification | Résultat du rejeu | Point restant |
+|---|---|---|---|---|---|
+| 5.1 | « Liste détaillée (rwx) des fichiers de la cabine » → `ls -l` | AUCUN | — | ✅ validée, skill ls -l | AUCUN |
+| 5.2 | « Code personnel lisible que par vous (droits 600 cités) » → `chmod 600 notes.txt` | AUCUN | — | ✅ validée, skill chmod | AUCUN |
+| 5.3 | « plan_defense.sh ne peut pas s'exécuter, ajoutez +x » → `chmod +x plan_defense.sh` | AUCUN | — | ✅ validée, skill chmod +x | AUCUN |
+| 5.4 | « equipage.txt au nom de l'ancien admin → transférez à votre nom (droits admin) » → `sudo chown capitaine /securite/rapports/equipage.txt` | AUCUN (nom « capitaine » connu depuis 1.4 whoami) | — | ✅ validée, skill chown | AUCUN |
+| 5.5 | « Détail complet de plan_defense.sh (date exacte de modif), pas la liste rapide » → `stat plan_defense.sh` | **description + goal parlaient de « comparer les dates des fichiers de sécurité », contredisant la story qui demande un seul fichier** | description = « Tael Rhen veut la fiche détaillée de plan_defense.sh » ; goal = « Montrez à Tael Rhen toutes les informations du fichier plan_defense.sh, en détail, pour vérifier sa date de modification » | ✅ validée, skill stat | AUCUN |
+
+**Vérifications ch5** : 5/5 validées à l'aveugle ; 5.5 corrigée en rédaction seulement (check `stat` inchangé, commande restée déductible de la story) ; enchaînement ls -l → chmod 600 → chmod +x → chown → stat cohérent (permissions puis propriété puis métadonnées).
+
+## Campagne 1 — Chapitre 6 (6.1 → 6.5) — REJOUÉ DÉBUTANT ✅
+
+| Mission | Compréhension initiale (texte seule) | Défaut observé | Modification | Résultat du rejeu | Point restant |
+|---|---|---|---|---|---|
+| 6.1 | « TOUT ce qui tourne, processus de n'importe quel utilisateur, avec détail » → `ps aux` | AUCUN (check matche `ps` seul, options ignorées A4) | — | ✅ validée, skill ps | AUCUN |
+| 6.2 | « Outil en direct / classement CPU-mémoire / aperçu immédiat » → `top` | AUCUN | — | ✅ validée, skill top | AUCUN |
+| 6.3 | « Vérifiez que la passerelle d'accès sécurisé est active » → `systemctl status ssh` | AUCUN (le besoin « passerelle d'accès sécurisé » ≈ ssh, cohérent NOC ; le brief ne montre que systemctl) | — | ✅ validée, skill systemctl | AUCUN |
+| 6.4 | « Backdoor PID 9999 → terminez-le » → `kill 9999` | AUCUN (PID cité dans la story, C5) | — | ✅ validée, skill kill | AUCUN |
+| 6.5 | « Scan avec priorité réduite niveau 10 » → `nice -n 10 /securite/scan_securite.sh` (commande complète affichée B4) | AUCUN | — | ✅ validée, skill nice | AUCUN |
+
+**Vérifications ch6** : 5/5 validées ; enchaînement ps → top → systemctl → kill → nice cohérent (surveillance puis action) ; le « corbeau_miner » de 6.1/6.2 (simulateur) resservira au ch7/ch8.
+
+---
+| 7.1 | « Le plan doit devenir illisible pour les autres, 700 » → `chmod 700 plan_defense.sh` | AUCUN (option 700 écrite dans la demande, B4) | — | ✅ validée, skill chmod | AUCUN |
+| 7.2 | « Le plan doit pouvoir être exécuté » → `chmod +x plan_defense.sh` (solution 7.1 déjà 700, exécutable → commande vide ?) | Confusion possible : une fois 7.1 fait, plan_defense.sh est déjà exécutable ; le joueur peut croire la mission déjà remplie | Relecture : la demande « vérifiez que le plan est exécutable » s'explique comme un contrôle ; le check exige la commande chmod +x | ✅ validée (« Mission réussie » inconditionnel) | AUCUN |
+| 7.3 | « Vérifiez les codes dans le coffre-fort » → `cat /securite/coffre-fort/codes_acces.txt` | AUCUN (nom du fichier cité dans la story) | — | ✅ validée, skill cat | AUCUN |
+| 7.4 | « Fiche détaillée de plan_defense.sh » → `stat plan_defense.sh` | AUCUN (comme 5.5) | — | ✅ validée, skill stat | AUCUN |
+| 7.5 | « Changez le propriétaire du plan pour votre compte, droits élevés » → `sudo chown capitaine plan_defense.sh` | AUCUN (whoami appris 6.4 → capitaine ; sudo vu 5.4) | — | ✅ validée, skill chown | AUCUN |
+
+**Vérifications ch7** : 5/5 validées (REUS=35 ECHECS=0, compteur [35/100]) ; enchaînement chmod (droits) → cat (lecture fichier sécurisé) → stat → chown (propriété) cohérent ; plan_defense.sh (créé 644 puis 700) reste le fil rouge ch7/8.
+
+---
+| 8.1 | « Uniquement les processus liés à SSH » → `ps aux | grep ssh` | AUCUN (briefs ps + grep + | ) | — | ✅ validée, skill grep | AUCUN |
+| 8.2 | « Processus dont le nom contient bash, avec leur commande complète » → `pgrep -a bash` | AUCUN (brief pgrep -a) | — | ✅ validée, skill pgrep | AUCUN |
+| 8.3 | « Cliché instantané, une itération, sans mode interactif » → `top -bn1` | AUCUN (brief top-temps réel + story « sans rester interactif ») | — | ✅ validée, skill top | AUCUN |
+| 8.4 | « Couper de force le PID 4242, signal imparable » → `kill -9 4242` | AUCUN (6.4 a appris kill ; story : « signal qui ne peut pas être intercepté ni ignoré » = -9, brief kill -9) | — | ✅ validée, skill kill | AUCUN |
+| 8.5 | « Pesage des soutes priorité basse en arrière-plan » → `nice -n 10 du -sh /soutes` | AUCUN (briefs nice + du) | — | ✅ validée, skill nice | AUCUN |
+
+**Vérifications ch8** : 5/5 validées (REUS=40 ECHECS=0, compteur [40/100]) ; enchaînement ps|grep (filtre) → pgrep (par nom) → top (cliches) → kill -9 (action) → nice (priorité) cohérent ; PID 4242 = corbeau_miner (retrouvé ch6) tué pour de bon dans la table du jeu.
+
+---
+| 9.1 | « Affichez les lignes Failed de auth.log puis comptez-les : le nombre servira de code » → `grep Failed /securite/logs/auth.log`, relever 6, `gsh check` puis `gsh code 6` | AUCUN (phase 2 annoncée 🔐 ; le compte 6 se lit à l'écran — vérifié exploratoire, code réel = 6 ✅) | — | ✅ validée, skill grep | AUCUN |
+| 9.2 | « Cherchez dans /securite tous les fichiers dont le nom se termine par .log » → `find /securite -name "*.log"` | AUCUN | — | ✅ validée, skill find | AUCUN |
+| 9.3 | « Processus SSH + IPs : affichez tous les processus puis gardez ssh » → `ps aux | grep ssh` | AUCUN (reprend 8.1 — révision) | — | ✅ validée | AUCUN |
+| 9.4 | « Consignez les lignes Failed dans rapport.txt de votre cabine » → `grep Failed /securite/logs/auth.log > rapport.txt` | AUCUN (cabine = ~, redirection expliquée en story) | — | ✅ validée | AUCUN |
+| 9.5 | « Ajoutez à la fin de rapport.txt, sans l'écraser, les lignes UFW de syslog » → `grep UFW /securite/logs/syslog >> rapport.txt` | AUCUN (>> expliqué) | — | ✅ validée | AUCUN |
+
+**Vérifications ch9** : 5/5 validées (REUS=45 ECHECS=0, compteur [45/100]) ; enchaînement grep → find → chaîne → > → >> cohérent (recherche, puis construction d'un rapport de preuves) ; code phase 2 (6) déductible du compte réel affiché.
+
+---
+
 ## Campagne 3 — Nexus Réseau (niveau DIFFICILE)
 
 ### Chapitre 1 (1.1 → 1.5) — RÉÉCRIT + REJOUÉ ✅
@@ -207,8 +312,22 @@ Format: `Campagne N° | compréhension initiale | défaut | modification | rejeu
 
 **Vérifications ch15** : simulateurs lus (users.rs: su ligne 121 gère `-`/`-c`/utilisateur positionnel; id ligne 157 accepte un utilisateur; groups ligne 180 sans argument = compte courant; sudo ligne 85) ; passwd/group init SANS stagiaire2 ni netops2 (A17 pour 15.1-15.3 OK) ; requirements/checks/xp/skills/codes/goals inchangés ; fix backslash (0 restant) ; build 0 erreur ; `missions_conformes` PASS ; rejeu 15.1→15.5 en pipe (5/5 « ✅ Mission réussie! » ; position finale 75 = 16.1 ; useradd crée réellement uid 1003, usermod -aG visible via `groups` + user_in_group, session su -c whoami affiche stagiaire2).
 
+## Campagne 3 — Chapitre 16 (Permissions du NOC) — réécrit + rejoué ✅
+
+| Mission | Compréhension initiale | Défaut observé | Modification | Rejeu | Point restant |
+|---|---|---|---|---|---|
+| 3.16.1 Verrouiller le plan d'incident | Verrouiller plan_incident.sh → `chmod 700 plan_incident.sh` | Story d'origine : bouche-trous « scans SYN » + confirmation AVANT ; « 700 » cité sans motiver le niveau (pourquoi seul le propriétaire) | Story réécrite: Karl explique que plan_incident.sh contient nos procédures exactes → un attaquant qui le lirait connaîtrait nos réactions, 700 = pleine maîtrise du seul propriétaire (confidentialité stricte) ; confirmation APRÈS action | ✅ `chmod 700 plan_incident.sh`+`check` → réussi | AUCUN |
+| 3.16.2 Rendre exécutable | Ajouter le droit d'exécution → `chmod +x plan_incident.sh` | Idem bouche-trous + confirmation AVANT ; « lançable » sans motiver l'exécution (réaction d'urgence) | Story réécrite: Karl explique qu'un script qu'on ne peut pas lancer = alarme sans bouton, droit d'exécution = déclencher la procédure d'une commande à l'alerte, confidentialité conservée ; confirmation APRÈS action | ✅ `chmod +x plan_incident.sh`+`check` → réussi | AUCUN |
+| 3.16.3 Fiche du plan | Afficher toutes les métadonnées → `stat plan_incident.sh` | Idem bouche-trous + confirmation AVANT ; « métadonnées »/« fiche complète » sans dire quelle commande réunit tout d'un coup d'œil | Story réécrite: Rosa a besoin pour l'audit de la fiche complète (taille, permissions, propriétaire, dates) lisible d'une seule commande, preuve du verrouillage visible pour l'auditeur ; confirmation APRÈS action | ✅ `stat plan_incident.sh`+`check` → réussi | AUCUN |
+| 3.16.4 Transférer la config | Changer le propriétaire de /configs/ufw/regles.txt → `sudo chown $USER /configs/ufw/regles.txt` | Idem bouche-trous + confirmation AVANT ; propriété = portes d'accès jamais expliquée ; sudo non motivé | Story réécrite: Karl explique qu'une propriété mal attribuée = porte mal fermée (les auditeurs le repèrent au premier regard), la config ufw doit être au nom du pilote des réglages, changer le propriétaire réservé aux pouvoirs du netrunner (sudo motivé) ; confirmation APRÈS action | ✅ `sudo chown $USER /configs/ufw/regles.txt`+`check` → réussi | AUCUN |
+| 3.16.5 Vos pouvoirs | Lister ses droits d'administrateur → `sudo -l` | Idem bouche-trous + confirmation AVANT ; « pouvoirs » jamais matérialisés (quelles commandes sont réellement permises) | Story réécrite: Karl veut vérifier ce que les pouvoirs du netrunner autorisent réellement, la liste officielle des commandes permises = la fiche de poste de l'opérateur ; confirmation APRÈS action | ✅ `sudo -l`+`check` → réussi (liste des commandes autorisées affichée) | AUCUN |
+
 **Vérifications ch16** : goals ch16 déjà conformes (inchangés) ; requirements/checks/xp/skills/codes/goals inchangés ; fix backslash (0 restant) ; build 0 erreur ; `missions_conformes` PASS ; rejeu 16.1→16.5 en pipe (5/5 « ✅ Mission réussie! » ; position finale 80 = 17.1 ; chmod 700 puis +x, stat, chown $USER, sudo -l validés).
 
+## Campagne 3 — Chapitre 17 (Durcissement SSH) — réécrit + rejoué ✅
+
+| Mission | Compréhension initiale | Défaut observé | Modification | Rejeu | Point restant |
+|---|---|---|---|---|---|
 | 3.17.1 Config SSH actuelle | Lire la config SSH → `cat /configs/sshd/sshd_config` | Bouche-trous « scans SYN depuis 10.0.0.66 » ×4, « cent serveurs comptent sur vous », « réseau bien surveillé » ; confirmation de Karl AVANT action ; doublons entre missions | Story réécrite: Karl montre les logs de connexion abusives, besoin d'un état des lieux avant de durcir, fichier nommé (C5), « d'abord on regarde, ensuite on agit » ; confirmation APRÈS action | ✅ `cat ...`+`check` → réussi | AUCUN |
 | 3.17.2 Interdire root | Ajouter PermitRootLogin no → `echo ... >> sshd_config` | Idem bouche-trous + confirmation avant ; « à la FIN » sans explication du >> | Story réécrite: Karl explique que root est une cible idéale (compte au nom connu, droits absolus), interdiction motivée, ajout en fin de fichier sans toucher l'existant (motive >>) ; confirmation APRÈS action | ✅ `echo 'PermitRootLogin no' >> ...`+`check` → réussi | AUCUN |
 | 3.17.3 Interdire les mots de passe | Ajouter PasswordAuthentication no → `echo ... >>` | Idem bouche-trous + confirmation avant ; clés SSH évoquées sans relier à pourquoi interdire les mots de passe | Story réécrite: Karl explique que tant que les mots de passe sont acceptés, tout compte faible est une porte ; tout le cluster utilise des clés → interdire les mots de passe (motive) ; ajout en fin de fichier, sans toucher l'existant ; confirmation APRÈS action | ✅ `echo 'PasswordAuthentication no' >> ...`+`check` → réussi | AUCUN |
@@ -217,6 +336,10 @@ Format: `Campagne N° | compréhension initiale | défaut | modification | rejeu
 
 **Vérifications ch17** : monde: `/configs/sshd/sshd_config` présent (Port 22, PermitRootLogin yes, PasswordAuthentication yes → A17 OK pour 17.2/17.3) ; simulateurs lus (net.rs ssh ligne 296: non-tty lit stdin puis `exit`→ferme; `ssh </dev/null` valide) ; goals/requirements/checks/xp/skills/codes inchangés ; fix backslash (0 restant) ; build 0 erreur ; `missions_conformes` PASS ; rejeu 17.1→17.5 en pipe (5/5 « ✅ Mission réussie! » ; position finale 85 = 18.1 ; `stat` du sshd_config non requis).
 
+## Campagne 3 — Chapitre 18 (Audit et isolement) — réécrit + rejoué ✅
+
+| Mission | Compréhension initiale | Défaut observé | Modification | Rejeu | Point restant |
+|---|---|---|---|---|---|
 | 3.18.1 Caméra sur le coffre | Poser l'audit → `sudo auditctl -w /firewall/coffre -p wa -k reseau` | Bouche-trous « scans SYN » ×4 + confirmation AVANT ; but de l'audit non expliqué ; coffre pas présenté (pourquoi sensibilité) | Story réécrite: Karl présente /firewall/coffre = coffre-fort réseau (une ligne modifiée ouvre/coupe tout), besoin de tracer chaque écriture, outil d'audit + sudo motivés (gestion système), étiquette 'reseau' pour retrouver les événements (motive -k) | ✅ `sudo auditctl -w /firewall/coffre -p wa -k reseau`+`check` → réussi | AUCUN |
 | 3.18.2 Isoler un processus | Confiner → `mkdir -p /tmp/jail` + `sudo chroot /tmp/jail /bin/bash` | Bouche-trous + confirmation AVANT ; chroot jamais expliqué ; but de l'isolation flou | Story réécrite: Karl explique le programme malveillant capturé tourne encore, isolation = le couper du reste du système (le dossier devient sa racine), /tmp pour environnements temporaires (motive mkdir -p), sudo motivé ; confirmation APRÈS action | ✅ `mkdir -p /tmp/jail`+`sudo chroot /tmp/jail /bin/bash`+`check` → réussi (Cellule affichée) | AUCUN |
 | 3.18.3 Mise à jour sécurité | Rafraîchir paquets → `sudo apt update` | Bouche-trous + confirmation AVANT ; « avant la fin de semaine » sans enjeu ; apt update non expliqué (ne modifie rien, prépare) | Story réécrite: Rosa rappelle la règle des mises à jour hebdomadaires (faille connue = porte d'entrée), apt update = rafraîchir la liste (prépare, ne modifie rien), sudo motivé (gestion des dépôts réservée) ; confirmation APRÈS action | ✅ `sudo apt update`+`check` → réussi | AUCUN |
@@ -225,6 +348,10 @@ Format: `Campagne N° | compréhension initiale | défaut | modification | rejeu
 
 **Vérifications ch18** : monde: `/firewall/coffre` présent, `/monitoring/rapport_jour.txt` présent, `audit.rules` vide et snort absent de `packages.installed` (A17 OK pour 18.1/18.4) ; simulateurs lus (admin.rs auditctl ligne 375: synthèse `-w <path> -p <rwxa> -k <clé>`; chroot ligne 605: exige root, dir existant, `sim_event` ; apt ligne 456: `update` marque apt.state, `install` exige root + `-y` = confirm, catalogue local contient snort ; users.rs sudo passe root) ; goals/requirements/checks/xp/skills/codes inchangés ; fix backslash (0) ; build 0 erreur ; `missions_conformes` PASS ; rejeu 18.1→18.5 en pipe (5/5 « ✅ Mission réussie! » ; position finale 90 = 19.1 ; snort bien installé dans packages.installed).
 
+## Campagne 3 — Chapitre 19 (Rapport d'incident) — réécrit + rejoué ✅
+
+| Mission | Compréhension initiale | Défaut observé | Modification | Rejeu | Point restant |
+|---|---|---|---|---|---|
 | 3.19.1 Rapport complet | Créer rapport_final.txt avec attaques puis alertes → `grep Failed /logs/auth.log > rapport_final.txt` + `grep ALERT /logs/ids.log >> rapport_final.txt` | Bouche-trous « scans SYN » ×4 + « cent serveurs comptent sur vous » ; confirmation Karl AVANT action ; but du rapport flou (2 sources jamais présentées) ; fichier rapport_final.txt cité sans expliquer à qui il sert | Story réécrite: Karl explique l'incident nocturne, besoin d'un rapport unique pour le SOC, deux sources (échecs auth = 'Failed' dans auth.log, alertes IDS = 'ALERT' dans ids.log), ordre imposé (attaques PUIS alertes), rapport dans le répertoire personnel (C5) ; confirmation APRÈS action | ✅ `grep Failed ... >` + `grep ALERT ... >>` + `check` (2 étapes) → réussi | AUCUN (nota: j'avais d'abord joué 1 seule commande → échec conforme A17: les 2 opérateurs `>` et `>>` sont exigés) |
 | 3.19.2 Archiver les preuves | Créer /archives/preuves.tar.gz contenant /logs → `tar czf /archives/preuves.tar.gz /logs/` | Idem bouche-trous + confirmation AVANT ; « archivez pour le SOC » sans expliquer l'intérêt d'une archive ; tar jamais présenté | Story réécrite: Karl explique qu'il faut sécuriser les preuves brutes pour analyse du SOC, tout le contenu de /logs regroupé dans une seule malle compressée, nom exact preuves.tar.gz dans /archives (C5) ; confirmation APRÈS action | ✅ `tar czf /archives/preuves.tar.gz /logs/`+`check` → réussi (archive créée) | AUCUN |
 | 3.19.3 Backup config durcie | Copier sshd_config durcie → `cp /configs/sshd/sshd_config /archives/configs/` | Idem bouche-trous + confirmation AVANT ; « durcie » jamais expliquée (référence des 17.x) ; copie non motivée (pourquoi garder une copie) | Story réécrite: Rosa présente la config durcie comme LA référence de l'équipe, risque de la perdre (reformatage → repartir de zéro), copie de sûreté dans /archives/configs/ sous le même nom (C5) ; confirmation APRÈS action | ✅ `cp /configs/sshd/sshd_config /archives/configs/`+`check` → réussi | AUCUN |

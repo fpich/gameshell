@@ -66,9 +66,9 @@ pub fn missions() -> Vec<Mission> {
         Mission {
             id: "5.5".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
             title: "Metadonnees".into(),
-            description: "Comparez les dates de modification.".into(),
+            description: "Tael Rhen veut la fiche detaillee de plan_defense.sh.".into(),
             story: "Tael Rhen, ingénieur-chef des machines, vous rejoint au poste de\ntravail :\n« Capitaine, une intrusion ne laisse pas toujours de traces visibles.\nMais chaque fichier garde son histoire : la date de sa dernière\nmodification, sa taille, ses permissions. Ces métadonnées ne mentent\npas. »\n\nIl pointe votre plan de défense plan_defense.sh :\n« Si quelqu'un l'a touché à votre insu, la date le trahira. Montrez-moi\ntoutes les informations du fichier, en détail — pas seulement la liste\nrapide. Je veux voir sa date exacte de modification. »\n\nAprès votre commande, le détail complet s'affiche : permissions,\ntaille, dates de modification et d'accès, numéro d'inode.\n\nTael Rhen étudie la date : « Une date suspecte peut révéler une\nintrusion, Capitaine. Ces métadonnées racontent l'histoire du\nfichier. »".into(),
-            goal: "Comparez les dates de modification des fichiers de sécurité pour détecter une intrusion.".into(),
+            goal: "Montrez à Tael Rhen toutes les informations du fichier plan_defense.sh, en détail, pour vérifier sa date de modification.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "stat vs ls -l?".into(),
             required_commands: vec!["stat plan_defense.sh".into()],
