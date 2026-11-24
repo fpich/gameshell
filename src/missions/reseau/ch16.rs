@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "16.1".into(), chapter: 16, chapter_title: "Permissions du NOC".into(), act: 4,
             title: "Verrouiller le plan d'incident".into(),
             description: "plan_incident.sh en 700.".into(),
-            story: "Karl: « plan_incident.sh contient les procédures secrètes. Verrouillez-le: 700. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl approuve: « plan_incident.sh est verrouillé à 700, netrunner. Seul vous pouvez le lire. Les procédures sont en sûreté. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl t'appelle alors que les écrans de l'IDS clignotent encore :\n« Regarde ce que le scan de 10.0.0.66 a traîné partout sur nos machines pendant des heures. S'il a eu le temps de jeter un œil à nos fichiers, je ne veux même pas y penser. Notre plan de réponse aux incidents, plan_incident.sh, contient les procédures exactes : qui couper quoi, dans quel ordre, à quel moment. Si un attaquant le lisait, il connaîtrait chacune de nos réactions à l'avance. La partie serait perdue d'avance.\n\nCe fichier doit devenir confidentiel : uniquement accessible par son propriétaire — toi, netrunner, puisque c'est toi qui mènes les opérations. Personne d'autre ne doit pouvoir y toucher : ni les autres membres du NOC, ni le groupe, ni les visiteurs.\n\nVerrouille donc le plan avec les permissions qui ne laissent au propriétaire que la pleine maîtrise, et rien à personne d'autre. C'est le niveau de confidentialité le plus strict pour un fichier dont un seul compte a la charge.\n\nFais-le maintenant, avant la prochaine vague de scans. Chaque minute passée à protéger nos procédures est une minute gagnée sur l'attaquant.\n\nAprès votre commande, Karl teste les accès au fichier :\n« plan_incident.sh est verrouillé : seul son propriétaire peut y accéder. L'attaquant peut scanner autant qu'il veut, il n'y trouvera rien. Bon travail, netrunner. »".into(),
             goal: "Mettez les permissions 700 sur plan_incident.sh.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment verrouiller un fichier?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "16.2".into(), chapter: 16, chapter_title: "Permissions du NOC".into(), act: 4,
             title: "Rendre exécutable".into(),
             description: "Le plan d'incident doit être lançable.".into(),
-            story: "Karl: « Ajoutez le droit d'exécution à plan_incident.sh. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl hoche la tête: « plan_incident.sh est exécutable, netrunner. En cas d'urgence, nous pourrons le lancer aussitôt. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl revient quelques minutes plus tard, un gobelet de café à la main :\n« Le plan est verrouillé, parfait. Maintenant réfléchis une seconde : la prochaine fois qu'une alerte retentira ici, tu n'auras pas le temps de chercher quoi que ce soit. Il faudra déclencher la procédure d'une commande, comme on appuie sur un bouton d'urgence. C'est tout l'intérêt d'un script d'incident : réagir vite.\n\nOr un script qu'on ne peut pas lancer, c'est une alarme sans bouton : elle existe, mais personne ne peut s'en servir. Le plan doit pouvoir être exécuté directement, déclenché par commande, sans détour. C'est le dernier réglage qui en fait un outil d'urgence plutôt qu'un simple document.\n\nAjoute-lui donc le droit d'exécution, celui qui autorise à le lancer. La confidentialité reste en place : seul toi, le propriétaire, pourras le déclencher comme le lire.\n\nQuand le droit sera en place, dis-le-moi : je veux pouvoir annoncer à l'équipe qu'au premier incident, le plan partira immédiatement.\n\nAprès votre commande, Karl consulte les permissions du fichier :\n« Le droit d'exécution est en place : plan_incident.sh se lance d'une commande, et la confidentialité est conservée. Au prochain incident, on réagit à la seconde. Merci, netrunner. »".into(),
             goal: "Ajoutez à plan_incident.sh le droit d'exécution pour pouvoir le lancer en cas d'incident.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment rendre exécutable?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "16.3".into(), chapter: 16, chapter_title: "Permissions du NOC".into(), act: 4,
             title: "Fiche du plan".into(),
             description: "Métadonnées de plan_incident.sh.".into(),
-            story: "Rosa: « Fiche technique complète de plan_incident.sh. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa consulte la fiche: « Taille, permissions, dates... tout y est, netrunner. Le plan est parfaitement documenté. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa te croise dans la salle des opérations, une liasse de documents sous le bras :\n« L'audit de sécurité commence demain matin, et les auditeurs veulent tout savoir sur nos fichiers sensibles : c'est leur métier de tout vérifier. Pour plan_incident.sh, celui que tu viens de verrouiller, j'ai besoin de la fiche technique complète.\n\nJe veux la vue d'ensemble que le système connaît sur ce fichier : sa taille exacte, les permissions en place, le propriétaire, les dates de création et de dernière modification. Tout doit figurer au rapport, sans exception.\n\nCette fiche se lit d'un coup d'œil : une seule commande l'affiche, sans que tu aies à chercher chaque métadonnée une par une. Je dois pouvoir la joindre telle quelle à mon dossier d'audit.\n\nJe veux aussi y retrouver les permissions verrouillées de tout à l'heure : c'est la preuve que nos procédures de confidentialité sont effectivement appliquées sur le fichier. Montre-moi ça maintenant.\n\nAprès votre commande, Rosa examine la fiche affichée :\n« Taille, permissions, propriétaire, dates : tout y est, et le verrouillage de tout à l'heure est bien visible. La fiche est complète pour l'audit. Parfait, netrunner. »".into(),
             goal: "Remettez à Rosa la fiche technique complète de plan_incident.sh: taille, permissions, propriétaire et dates.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les métadonnées?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "16.4".into(), chapter: 16, chapter_title: "Permissions du NOC".into(), act: 4,
             title: "Transférer la config".into(),
             description: "La config ufw vous appartient.".into(),
-            story: "Karl: « Pour l'audit, /configs/ufw/regles.txt doit vous appartenir. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl confirme: « regles.txt vous appartient officiellement, netrunner. L'audit sera sans reproche. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl te fait signe depuis son poste, l'air contrarié :\n« Les auditeurs sont pointilleux, je te préviens. Il y a un détail qui les fait tiquer à chaque fois : la propriété des fichiers de configuration. Un fichier qui appartient à la mauvaise personne, c'est une porte d'accès mal attribuée, et ils le repèrent au premier regard.\n\nLe fichier des règles de notre pare-feu, /configs/ufw/regles.txt, doit officiellement appartenir à ton compte : c'est toi qui pilotes les réglages de protection du NOC, alors la propriété doit être à ton nom. En ce moment, ce n'est pas le cas, et l'audit le relèverait tout de suite.\n\nTransfère donc la propriété de ce fichier à ton propre compte, avec les droits d'administrateur : changer les propriétaires est réservé à ceux qui disposent des pouvoirs du netrunner. Personne d'autre ne peut le faire.\n\nQuand la fiche du fichier portera ton nom comme propriétaire, ce point du rapport d'audit sera réglé. Fais-le maintenant, et préviens-moi quand c'est fait.\n\nAprès votre commande, Karl consulte la fiche du fichier :\n« Le propriétaire est bien ton compte, netrunner. L'audit ne trouvera rien à redire sur regles.txt. Bien joué. »".into(),
             goal: "Avec les droits d'administrateur, transférez la propriété de /configs/ufw/regles.txt à votre propre compte pour l'audit.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer le propriétaire?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "16.5".into(), chapter: 16, chapter_title: "Permissions du NOC".into(), act: 4,
             title: "Vos pouvoirs".into(),
             description: "Vos droits sudo.".into(),
-            story: "Rosa: « Pour l'audit, listez vos droits sudo. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa inspecte la liste: « Vos droits sudo sont clairs, netrunner. L'audit est complet. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa t'attend devant le tableau des autorisations du NOC :\n« Dernier point pour l'audit, et pas des moindres : les pouvoirs dont tu disposes sur ce réseau. Le NOC doit savoir exactement quelles commandes tu es autorisé à exécuter avec les droits d'administrateur — c'est ce qui définit ta place dans la chaîne d'autorisations, et ce qui permettra de tracer chaque action en cas d'incident.\n\nJe veux la liste officielle, telle que le système l'a enregistrée pour ton compte : les commandes que tu peux lancer avec les pouvoirs du netrunner. Pas une liste que tu aurais écrite toi-même — celle que le système affiche quand on l'interroge.\n\nInterroge donc le système sur tes propres droits d'administration : il te montrera les entrées enregistrées pour ton compte, et je les comparerai avec ce que l'audit attend d'un netrunner.\n\nSi tout concorde, le rapport d'audit sera complet et signé. C'est la toute dernière ligne droite, netrunner.\n\nAprès votre commande, Rosa compare la liste avec le référentiel :\n« Tes pouvoirs correspondent à ta fiche officielle, jusqu'aux options exactes. Le rapport d'audit est complet, sans réserve. Excellent travail, netrunner. »".into(),
             goal: "Listez les commandes que vous êtes autorisé à exécuter avec les pouvoirs du netrunner.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment lister ses droits sudo?".into(),

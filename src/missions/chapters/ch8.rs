@@ -7,22 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "8.1".into(), chapter: 8, chapter_title: "Surveillance avancee".into(), act: 2,
             title: "Filtrer les processus SSH".into(),
             description: "Quels processus SSH tournent sur la station?".into(),
-            story: "Vex Korshun surveille les écrans de la sécurité:
-« Capitaine, la liste de tous les processus est longue. Je veux seulement
-ceux qui concernent SSH, pour vérifier qu'aucun pirate n'est connecté. »
-
-Il vous faut lister tous les processus PUIS filtrer le résultat pour ne garder
-que les lignes contenant 'ssh'. Deux commandes enchaînées.
-
-« Montrez-moi les processus SSH, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-La liste des processus liés à SSH s'affiche. Vous vérifiez que les connexions sont légitimes.
-
-« Chaque processus est une activité du vaisseau », rappelle Tael Rhen. « Savoir filtrer, c'est repérer l'anomalie dans la masse. »".into(),
+            story: "Vex Korshun, le commandant de la station, vous appelle près des écrans de\nsécurité :\n« Capitaine, la liste complète des processus est trop longue pour être lue\nd'un coup d'œil. Je veux uniquement les activités liées à SSH, pour\nvérifier qu'aucun pirate n'ouvre de session à distance. »\n\nIl montre l'écran :\n« Je vois des connexions qui viennent de l'extérieur. Mon filtre doit\nlaisser apparaître seulement les lignes qui contiennent 'ssh'. »\n\nL'affichage se met à jour : le service d'accès distant et ses connexions\napparaissent, rien d'autre.\n\n« Un pirate qui se connecte laisse une trace », ajoute Tael Rhen en\npassant. « C'est dans cette liste qu'on la retrouve. »".into(),
             goal: "Affichez uniquement les processus liés à SSH parmi tous les processus du vaisseau.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment enchaîner deux commandes pour filtrer un résultat?".into(),
@@ -37,23 +22,7 @@ La liste des processus liés à SSH s'affiche. Vous vérifiez que les connexions
             id: "8.2".into(), chapter: 8, chapter_title: "Surveillance avancee".into(), act: 2,
             title: "Processus par nom".into(),
             description: "Lister les processus 'bash' avec leur commande complète.".into(),
-            story: "Tael Rhen: Â« Capitaine, je cherche un processus prÃ©cis. Donnez-moi la liste
-des processus dont le nom contient 'bash', avec la commande complÃ¨te. Â»
-
-La commande de recherche par nom de processus affiche le PID et la commande
-de chaque processus correspondant.
-
-Â« Quels processus bash tournent en ce moment? Â»
-
-Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
-
-La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-Vous repérez les processus liés à bash. Certains semblent anormaux.
-
-Draz M'kal s'approche: « Un processus inattendu peut cacher un pirate. Votre vigilance fait la différence. »".into(),
+            story: "Tael Rhen, l'ingénieur-chef des machines, vous rejoint dans la salle des\nmachines :\n« Capitaine, je cherche une activité bien précise : les processus qui\ntournent sous 'bash', le langage de commande. Certains scripts lancés par\nl'équipage peuvent traîner des sessions ouvertes. »\n\nIl précise le besoin :\n« Donnez-moi la liste des processus dont le nom contient 'bash', avec\nleur commande complète, pour que je puisse les reconnaître du premier\ncoup d'œil. »\n\nL'affichage montre les sessions en cours, chacune avec son numéro et sa\nligne de commande.\n\nDraz M'kal s'approche : « Une session bash inattendue peut cacher un\npirate qui s'installe. Savoir les repérer, c'est votre meilleure\ndéfense. »".into(),
             goal: "Listez tous les processus dont le nom contient 'bash'.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lister les processus par nom?".into(),
@@ -68,22 +37,7 @@ Draz M'kal s'approche: « Un processus inattendu peut cacher un pirate. Votre vi
             id: "8.3".into(), chapter: 8, chapter_title: "Surveillance avancee".into(), act: 2,
             title: "Surveillance temps reel".into(),
             description: "Tael Rhen veut un aperçu instantané des jauges du vaisseau.".into(),
-            story: "Tael Rhen, depuis la salle des machines: « Capitaine, j'ai besoin d'un cliché
-instantané de la salle des machines: CPU, mémoire, processus les plus gourmands.
-Pas de surveillance continue, juste un APERÇU. »
-
-L'outil de surveillance en temps réel du vaisseau affiche ces jauges.
-En mode non interactif, une seule image suffit.
-
-« Donnez-moi un aperçu des ressources, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-L'aperçu des ressources s'affiche: CPU, mémoire, processus gourmands.
-
-« Un cliché instantané, c'est souvent suffisant pour repérer un problème », note Tael Rhen. « La surveillance, c'est l'art de lire ces jauges. »".into(),
+            story: "Tael Rhen vous appelle depuis la salle des machines :\n« Capitaine, j'ai besoin d'un cliché instantané des jauges du vaisseau :\nCPU, mémoire, et les processus les plus gourmands. Pas une surveillance\ncontinue, juste un aperçu figé, comme une photo des ressources en ce\nmoment précis. »\n\nIl montre le poste de contrôle :\n« L'outil de surveillance en temps réel peut s'arrêter sur une seule\nimage, sans rester en mode interactif. Une itération suffit pour mon\nrapport. »\n\nL'aperçu s'affiche : les jauges de la station, les processus classés du\nplus gourmand au plus discret.\n\n« Un cliché instantané suffit souvent pour repérer un problème », note\nTael Rhen. « Savoir lire ces jauges, c'est savoir écouter la station. »".into(),
             goal: "Affichez un aperçu instantané de l'utilisation CPU/mémoire des processus.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment surveiller en direct les ressources du vaisseau?".into(),
@@ -98,23 +52,7 @@ L'aperçu des ressources s'affiche: CPU, mémoire, processus gourmands.
             id: "8.4".into(), chapter: 8, chapter_title: "Surveillance avancee".into(), act: 2,
             title: "Tuer un processus pirate".into(),
             description: "Un processus pirate (PID 4242) squatte la salle des machines.".into(),
-            story: "Alerte de Vex Korshun: Â« Capitaine! Un processus inconnu, PID 4242, tourne
-sur la station et consomme toute la mÃ©moire. C'est probablement un implant
-des Corbeaux Noirs! Â»
-
-Il vous faut couper son alimentation Ã©lectrique, de force.
-
-Â« Tuez le processus 4242, Capitaine. ImmÃ©diatement. Â»
-
-Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
-
-La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-Le processus pirate PID 4242 est éliminé. Draz M'kal pousse un soupir de soulagement.
-
-« Bien joué, Capitaine. Un processus malveillant neutralisé, c'est une menace de moins à bord. »".into(),
+            story: "L'alerte retentit dans toute la station. Vex Korshun crie presque :\n« Capitaine ! Un processus inconnu, le PID 4242, tourne dans la salle des\nmachines et dévore plus de quatre-vingts pour cent de la puissance de la\nstation ! C'est un implant des Corbeaux Noirs, il envoie nos données vers\nleur vaisseau. »\n\nIl pose sa main sur votre épaule :\n« Il faut le couper de force, immédiatement. Un simple ordre de fin ne\nsuffira pas : ce genre d'implant résiste. Utilisez le signal qui ne peut\npas être intercepté ni ignoré. »\n\nL'activité du processus s'arrête net. La station retrouve sa puissance.\n\nDraz M'kal pousse un soupir de soulagement : « Bien joué, Capitaine.\nPlus un processus malveillant à bord, c'est une menace de moins. »".into(),
             goal: "Terminez de force le processus pirate portant le PID 4242.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tuer un processus par son PID?".into(),
@@ -129,22 +67,7 @@ Le processus pirate PID 4242 est éliminé. Draz M'kal pousse un soupir de soula
             id: "8.5".into(), chapter: 8, chapter_title: "Surveillance avancee".into(), act: 2,
             title: "Tache de fond prioritaire".into(),
             description: "La surveillance des soutes ne doit pas ralentir le vaisseau.".into(),
-            story: "Tael Rhen: « Capitaine, lancez la surveillance des soutes en tâche de fond,
-mais elle ne doit PAS ralentir les systèmes de défense. Donnez-lui une
-priorité FAIBLE. »
-
-Il vous faut lancer une commande avec une priorité basse: le vaisseau
-traitera cette tâche quand il aura du temps libre.
-
-« Lancez le pesage des soutes en priorité basse, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Le pesage des soutes se lance en tâche de fond, sans gêner les autres systèmes.
-
-« Priorité basse, c'est de la politesse système », sourit Tael Rhen. « Les tâches importantes passent d'abord, les autres attendent leur tour. »".into(),
+            story: "Tael Rhen vous tend sa tablette :\n« Capitaine, le pesage des soutes doit tourner en arrière-plan pour\nsuivre l'état du carburant et du cargo. Mais ce calcul est lourd : s'il\npasse en priorité normale, il peut ralentir les systèmes de défense au\nmoment où les Corbeaux Noirs frappent. »\n\nIl insiste :\n« Lancez ce pesage avec une priorité basse, au maximum de la patience :\nla station traitera la tâche quand elle aura du temps libre, jamais au\ndétriment des boucliers. »\n\nLe calcul démarre sans à-coup ; les jauges de défense restent stables.\n\n« Priorité basse, c'est de la discipline », sourit Tael Rhen. « Les\nsystèmes vitaux passent d'abord, le reste attend son tour. »".into(),
             goal: "Lancez la commande de pesage des soutes avec une priorité basse.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lancer une commande avec une priorité basse?".into(),

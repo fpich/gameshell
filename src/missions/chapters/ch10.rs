@@ -7,26 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "10.1".into(), chapter: 10, chapter_title: "Reseau".into(), act: 3,
             title: "Coordonnees".into(),
             description: "IP du vaisseau?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Nira Okoro a besoin de l'adresse IP du vaisseau pour configurer les communications.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Coordonnées réseau est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Nira Okoro a besoin de l'adresse IP du vaisseau pour configurer les communications.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Les coordonnées réseau de la station s'affichent. Nira Okoro les note précieusement.
-
-« Parfait, Capitaine. Je pourrai enfin régler les communications avec l'Andromède. »".into(),
+            story: "Nira Okoro, la responsable des communications, s'approche de votre console sur le pont. « Capitaine, les Corbeaux Noirs ont été repérés dans le secteur 7G, mais je ne peux pas encore régler nos liaisons: il me manque les coordonnées réseau de la station. »\n\nNira Okoro appuie sur le pupitre: « Pour joindre l'Andromède, pour répondre à l'Amiral Xylia Vorn, je dois savoir sous quelle adresse nos interfaces répondent sur le réseau. »\n\nElle vous tend sa tablette: « Affichez-moi les adresses de nos interfaces réseau, Capitaine. Je les noterai et je configurerai les communications avec la flotte. »\n\nVex Korshun, le commandant de la station, confirme depuis la passerelle: « Chaque minute sans liaison nous coupe du QG. Faites vite. »\n\nLa liste des interfaces s'affiche sur le terminal. Nira Okoro la lit, note l'adresse de la station et valide la configuration.\n\n« C'est exactement ce qu'il me fallait », dit-elle en souriant. « Les communications avec l'Andromède sont prêtes. »".into(),
             goal: "Nira Okoro a besoin de nos coordonnées réseau pour régler les communications.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Voir l'IP?".into(),
@@ -41,26 +22,7 @@ Les coordonnées réseau de la station s'affichent. Nira Okoro les note précieu
             id: "10.2".into(), chapter: 10, chapter_title: "Reseau".into(), act: 3,
             title: "Liaison".into(),
             description: "Appeler la Terre?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Peut-on encore contacter la Terre et l'Andromède? La liaison est-elle intacte?
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Tester la liaison est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Peut-on encore contacter la Terre et l'Andromède? La liaison est-elle intacte?
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-La réponse de l'Andromède arrive: la liaison est toujours active. Nira Okoro sourit.
-
-« La ligne est bonne », confirme-t-elle. « Vérifier la connexion, c'est s'assurer que nous ne sommes pas coupés du monde. »".into(),
+            story: "Le pont retient son souffle. Nira Okoro a tout configuré, mais personne n'a encore vérifié que la liaison tient.\n\n« Capitaine », demande-t-elle, « on ne sait toujours pas si la station peut joindre l'extérieur. L'Amiral Xylia Vorn attend notre rapport, et si un câble était coupé, nous serions seuls sans le savoir. »\n\nElle pointe la console: « Envoyez quelques paquets de test vers notre boucle locale, 127.0.0.1, pour vérifier que la station se répond à elle-même. Si la réponse revient, la pile réseau est intacte. »\n\nVex Korshun ajoute: « Une liaison qui répond, c'est la certitude que nous ne sommes pas coupés du monde. »\n\nLes réponses arrivent: chaque paquet revient sans perte. Nira Okoro vérifie les temps de réponse et hoche la tête.\n\n« La ligne est bonne », confirme-t-elle. « La station se parle à elle-même: le réseau est vivant. »".into(),
             goal: "Vérifiez qu'on peut encore contacter l'Andromède.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Tester une connexion?".into(),
@@ -75,26 +37,7 @@ La réponse de l'Andromède arrive: la liaison est toujours active. Nira Okoro s
             id: "10.3".into(), chapter: 10, chapter_title: "Reseau".into(), act: 3,
             title: "Pare-feu".into(),
             description: "UFW actif?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Le pare-feu UFW semble inactif. Sans lui, les pirates entrent librement.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-État du pare-feu est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Le pare-feu UFW semble inactif. Sans lui, les pirates entrent librement.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-L'état du pare-feu s'affiche. Vex Korshun vérifie qu'il est bien actif.
-
-« Le pare-feu est notre bouclier », explique-t-il. « Savoir s'il est en marche, c'est savoir si nous sommes protégés. »".into(),
+            story: "Vex Korshun vous appelle sans préambule: « Capitaine, le pare-feu UFW nous protège des intrusions, mais je crains qu'il ne soit inactif. Sans lui, les Corbeaux Noirs entrent librement dans nos systèmes. »\n\nIl fait pivoter son écran vers vous: « Vérifiez l'état du pare-feu, avec les droits d'administration. S'il est éteint, nous ne sommes pas prêts pour l'attaque qu'ils préparent. »\n\nNira Okoro, qui écoute depuis son pupitre, précise: « Le pare-feu est le premier rempart de la station, Capitaine. Un bouclier éteint ne protège personne: dites-nous simplement s'il est en marche. »\n\nVex Korshun ajoute, plus bas: « Si la réponse indique qu'il est inactif, c'est une information que nous devons connaître tout de suite. Nous déciderons ensuite. »\n\nL'état du pare-feu s'affiche. Vex Korshun examine la réponse et vérifie que la protection est en place.\n\n« Le pare-feu est notre bouclier », conclut-il. « Savoir s'il est actif, c'est savoir si nous sommes protégés. »".into(),
             goal: "Le pare-feu est-il vraiment actif? Vex Korshun en doute. Vérifiez.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Etat du pare-feu?".into(),
@@ -109,26 +52,7 @@ L'état du pare-feu s'affiche. Vex Korshun vérifie qu'il est bien actif.
             id: "10.4".into(), chapter: 10, chapter_title: "Reseau".into(), act: 3,
             title: "SSH".into(),
             description: "Testez le canal SSH.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Il faut tester le canal SSH pour vérifier qu'il fonctionne avant de le durcir.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Connexion SSH est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Il faut tester le canal SSH pour vérifier qu'il fonctionne avant de le durcir.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Le canal sécurisé répond: la station se parle à elle-même sans erreur.
-
-« Le test est concluant », note Nira Okoro. « Tester une liaison, c'est vérifier qu'elle fonctionne avant d'en dépendre. »".into(),
+            story: "Nira Okoro se penche vers vous, l'air soucieux: « Avant de durcir le canal SSH, Capitaine, il faut s'assurer qu'il fonctionne. Un canal qu'on n'a jamais testé peut casser au pire moment. »\n\nElle ouvre un dossier sur sa tablette: « Connectez-vous en sécurité à la station elle-même, localhost. Si vous parvenez à ouvrir la session avec votre propre compte, le service de connexion sécurisée répond correctement. »\n\nVex Korshun, depuis la passerelle, ajoute: « Testez-le maintenant, pendant que nous sommes encore au calme. Votre mot de passe et votre compte fonctionnent, c'est ce que nous devons prouver. »\n\nLa session sécurisée s'ouvre sur la station: le canal répond sans erreur. Nira Okoro note le résultat dans son rapport.\n\n« Le test est concluant », dit-elle. « Tester une liaison, c'est vérifier qu'elle fonctionne avant d'en dépendre. »".into(),
             goal: "Testez le canal sécurisé avec la station elle-même.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Se connecter en SSH?".into(),
@@ -143,26 +67,7 @@ Le canal sécurisé répond: la station se parle à elle-même sans erreur.
             id: "10.5".into(), chapter: 10, chapter_title: "Reseau".into(), act: 3,
             title: "Ports ouverts".into(),
             description: "Quels ports sont exposés?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Quels ports sont exposés? Les pirates scannent nos défenses réseau.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Scanner les ports est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Quels ports sont exposés? Les pirates scannent nos défenses réseau.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-La liste des ports exposés s'affiche. Plusieurs ports sont ouverts vers l'extérieur.
-
-« Chaque port ouvert est une porte d'entrée potentielle », avertit Draz M'kal. « Il faut savoir lesquels sont nécessaires. »".into(),
+            story: "Draz M'kal, le chef de la sécurité, arrive au pont, l'air tendu. « Les Corbeaux Noirs scannent nos défenses réseau, Capitaine. Leurs sondes cherchent chaque porte ouverte pour s'y engouffrer. »\n\nIl pose une carte sur votre console: « Je veux connaître la liste exacte des ports qui écoutent sur la station. Chaque port ouvert est une porte d'entrée potentielle: encore faut-il savoir lesquels sont nécessaires, et lesquels sont des menaces. »\n\nIl insiste: « Montrez-moi les ports en écoute, avec le processus associé. Nous devons identifier d'où peut venir l'attaque. »\n\nLa liste des ports s'affiche sur le terminal: le service de connexion sécurisée écoute sur toutes les interfaces de la station, tandis que le service de courrier, lui, n'écoute qu'en local. Draz M'kal compare les deux lignes.\n\n« Je vois nos services », dit-il, « et je vois ce qui est exposé au réseau. Chaque port ouvert doit être justifié. »".into(),
             goal: "Quels ports de la station sont exposés? Les pirates scannent nos défenses.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Voir les ports ouverts?".into(),

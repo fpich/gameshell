@@ -7,21 +7,17 @@ pub fn missions() -> Vec<Mission> {
             id: "5.1".into(), chapter: 5, chapter_title: "Permissions et sceaux".into(), act: 2,
             title: "Verrouiller le plan de défense".into(),
             description: "plan_defense.sh ne doit être lisible que par vous: 700.".into(),
-            story: "Le capitaine des gardes: « Seigneur, plan_defense.sh contient les ordres
-de bataille. Tout le monde peut le lire actuellement! Verrouillez-le:
-seul vous (700). »
+            story: "Le capitaine des gardes entre dans vos quartiers, de la poussière sur l'épaule: « Seigneur, les ordres de bataille! »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Il pose vos notes sur le bureau: « Le plan de défense, plan_defense.sh, contient la marche à suivre en cas d'attaque: fermer le portail, sonner le gong, placer les archers. Si un espion le lit, il connaîtra nos faiblesses avant la bataille. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Il désigne le fichier: « Pour l'instant, tout le monde peut le lire dans le domaine. Verrouillez-le: vous seul devez pouvoir le lire et le modifier. Passez le fichier à 700. »
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vous songez aux coffres du donjon: les documents les plus précieux n'ont qu'une seule clé, celle du seigneur.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+Vous prenez le plan de défense et resserrez ses permissions jusqu'à ce que le fichier 700 ne parle plus qu'à vous.
 
-Le capitaine des gardes approuve: « plan_defense.sh est verrouillé, Seigneur. Seul vous pouvez le lire. Les ordres de bataille sont en sûreté. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Le capitaine vérifie d'un geste: « plan_defense.sh est verrouillé, Seigneur. Seul vous pouvez le lire. Les ordres de bataille sont en sûreté. »".into(),
             goal: "Mettez les permissions 700 sur plan_defense.sh.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment restreindre un fichier à soi seul?".into(),
@@ -36,20 +32,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "5.2".into(), chapter: 5, chapter_title: "Permissions et sceaux".into(), act: 2,
             title: "Rendre le plan exécutable".into(),
             description: "Le plan de défense doit être lançable: +x.".into(),
-            story: "Le capitaine des gardes: « Seigneur, pour lancer le plan de défense en
-urgence, il doit être exécutable. Ajoutez-lui le droit d'exécution. »
+            story: "Le capitaine des gardes revient, plus pressé que la veille: « Seigneur, bonnes nouvelles: les archers sont prêts, les remparts sont solides. Il ne manque qu'un détail au plan de défense. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Il montre plan_defense.sh: « Pour lancer le plan en pleine alerte, il doit pouvoir être exécuté. Donnez-lui le droit d'exécution, pour qu'on puisse le déclencher d'un geste quand le gong sonnera. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous songez aux ordres du conseil: un plan qui ne peut pas être lancé ne sert à rien le jour où l'ennemi attaque.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vous ajoutez le droit d'exécution au plan de défense, afin que le capitaine puisse le déclencher aussitôt.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Le capitaine des gardes hoche la tête: « Le plan de défense est exécutable, Seigneur. En cas d'urgence, nous pourrons le lancer aussitôt. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Le capitaine hoche la tête: « Le plan de défense est exécutable, Seigneur. En cas d'urgence, nous pourrons le lancer sans attendre. »".into(),
             goal: "Rendez plan_defense.sh exécutable.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment rendre un script exécutable?".into(),
@@ -64,22 +55,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "5.3".into(), chapter: 5, chapter_title: "Permissions et sceaux".into(), act: 2,
             title: "Fiche du plan de défense".into(),
             description: "Métadonnées complètes de plan_defense.sh.".into(),
-            story: "Dame Kaguya: « Seigneur, donnez-moi la fiche technique complète de
-plan_defense.sh: taille, permissions, dates. »
+            story: "Dame Kaguya vous attend au pupitre des archives, un registre ouvert: « Seigneur, l'audit du domaine commence demain. Pour chaque document sensible, je dois consigner sa fiche technique: la taille, les permissions, les dates de modification. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Elle désigne vos quartiers: « Commencez par le plan de défense, plan_defense.sh. Montrez-moi la fiche complète de ce fichier: toutes ses métadonnées, sans rien omettre. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous savez que derrière un document se cache une fiche plus discrète: ce qu'il pèse, qui peut le toucher, quand il a été modifié.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vous allez chercher le plan de défense et en déroulez la fiche technique complète pour la scribe.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya consulte la fiche: « Taille, permissions, dates... tout y est, Seigneur. Le plan de défense est parfaitement documenté. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Dame Kaguya consulte la fiche: « Taille, permissions, dates... tout y est, Seigneur. Le plan de défense est parfaitement documenté. »".into(),
             goal: "Affichez les métadonnées de plan_defense.sh.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir toutes les métadonnées?".into(),
@@ -94,22 +78,17 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "5.4".into(), chapter: 5, chapter_title: "Permissions et sceaux".into(), act: 2,
             title: "Transférer le sceau".into(),
             description: "Le plan appartient officiellement au seigneur.".into(),
-            story: "Pour l'audit, plan_defense.sh doit vous appartenir officiellement.
-« Transférez la propriété à votre compte, Seigneur. »
+            story: "Un messager du donjon apporte un rouleau scellé: l'audit du domaine.
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Dame Kaguya le déroule et fronce les sourcils: « Seigneur, le plan de défense, plan_defense.sh, porte encore la marque de son ancien ordre: celle de la garde. D'après l'auditeur, un document de bataille doit appartenir au seigneur lui-même. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Elle repose le rouleau: « Transférez la propriété du plan de défense à votre compte, pour que l'audit soit sans reproche. »
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vous songez aux sceaux des édits: un acte n'a de valeur que s'il porte le sceau du bon maître. Le plan de bataille doit porter le vôtre.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
+Vous prenez la propriété du plan de défense et la remettez en votre nom, officiellement.
 
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya confirme: « plan_defense.sh vous appartient officiellement, Seigneur. L'audit sera sans reproche. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Dame Kaguya relit le rapport et sourit: « plan_defense.sh vous appartient officiellement, Seigneur. L'audit sera sans reproche. »".into(),
             goal: "Changez le propriétaire de plan_defense.sh pour votre compte.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer le propriétaire?".into(),
@@ -124,22 +103,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "5.5".into(), chapter: 5, chapter_title: "Permissions et sceaux".into(), act: 2,
             title: "Détail des quartiers".into(),
             description: "Liste détaillée avec permissions.".into(),
-            story: "Dame Kaguya veut contrôler les permissions de vos quartiers:
-« Seigneur, listez vos quartiers EN DÉTAIL: permissions, tailles, dates. »
+            story: "Dame Kaguya se tient sur le seuil de vos quartiers, une tablette à la main: « Seigneur, pour clore l'audit, je dois vérifier l'état de vos quartiers: qui possède chaque document, qui peut le lire, sa taille, sa date. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Elle parcourt la pièce du regard: « Montrez-moi le contenu de vos quartiers en détail: pour chaque fichier, les permissions, le propriétaire, la taille et la date. Une liste complète, pas un simple aperçu. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous songez aux inventaires du domaine: on ne contrôle bien une salle qu'en regardant chaque objet un par un.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vous parcourez vos quartiers, examinez chaque document et chaque dossier, puis présentez la liste détaillée à Dame Kaguya.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya inspecte la liste: « Permissions, tailles, dates... tout est en ordre dans vos quartiers, Seigneur. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Dame Kaguya inspecte la liste: « Permissions, tailles, dates... tout est en ordre dans vos quartiers, Seigneur. L'audit est clos. »".into(),
             goal: "Montrez à Dame Kaguya le contenu de vos quartiers en format détaillé: permissions, propriétaire, taille et date de chaque élément.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les permissions de chaque fichier?".into(),

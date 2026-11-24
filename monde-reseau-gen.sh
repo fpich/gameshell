@@ -53,7 +53,7 @@ cat > "$N/netrunner/notes.txt" << 'EOF'
 NOTES DU NETRUNNER:
 - Surveiller les scans sur le port 22 (auth.log)
 - Le pare-feu doit bloquer 10.0.0.66
-- Code du coffre-fort réseau: voir /firewall/codes.txt
+- Code du coffre-fort réseau: voir /firewall/coffre/codes.txt
 EOF
 cat > "$N/netrunner/plan_incident.sh" << 'SHEOF'
 #!/bin/bash
@@ -163,7 +163,7 @@ PORTS OUVERTS SUR NEXUS (10.0.0.1):
 EOF
 cat > "$P/dns_nexus.txt" << 'EOF'
 DNS DU NOC:
-nexus.neon9.local -> 10.0.0.1
+nexus.neon9.local -> 10.0.0.9
 fai.neon9.local   -> 10.0.0.254
 EOF
 

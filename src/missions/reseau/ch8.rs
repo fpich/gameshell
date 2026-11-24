@@ -6,24 +6,8 @@ pub fn missions() -> Vec<Mission> {
         Mission {
             id: "8.1".into(), chapter: 8, chapter_title: "Surveillance du cluster".into(), act: 2,
             title: "Processus du cluster".into(),
-            description: "Tous les démons actifs.".into(),
-            story: "Karl: « Quels processus tournent sur le cluster? Liste complète. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl parcourt la liste: « Voilà tous les processus du cluster, netrunner. Le NOC est bien vivant. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            description: "Tous les processus du cluster.".into(),
+            story: "Karl: « L'API de statut a signalé un état dégradé sur le cluster, et le scan de la nuit a laissé des traces partout. Je veux une vision complète de ce qui tourne sur nos machines: chaque processus, son propriétaire, sa consommation. »\n\n« Un processus qui n'a rien à faire ici se cache dans la masse: c'est en voyant toute la liste qu'on repère l'intrus. Le propriétaire permet de savoir si un service légitime tourne, ou si quelque chose d'autre s'est invité. »\n\n« Si un programme tourne sans qu'on l'attende, il consomme du processeur et de la mémoire: c'est dans ces deux colonnes qu'on distingue un processus normal d'une charge anormale. »\n\n« Le NOC surveille ses propres machines comme il surveille les attaquants: une machine compromise, on la voit d'abord dans sa liste de processus. »\n\n« Listez-moi donc, sans filtre ni tri, l'ensemble des processus du cluster: tout doit apparaître, rien ne doit être caché. »\n\nAprès votre réponse, Karl parcourt la liste:\n« La liste est complète, netrunner. Je vois nos services habituels... et quelques charges qui ne me plaisent pas. On creuse. »".into(),
             goal: "Dressez la liste complète de tous les processus du cluster, avec leur propriétaire et leur consommation.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lister tous les processus?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "8.2".into(), chapter: 8, chapter_title: "Surveillance du cluster".into(), act: 2,
             title: "Filtrer les connexions SSH".into(),
             description: "Qui est connecté en SSH?".into(),
-            story: "Karl: « Filtrez les processus liés à sshd. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl examine le filtre: « Seuls les processus sshd, netrunner. La surveillance est ciblée. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Dans cette liste, je repère plusieurs lignes liées à notre service SSH. Normal: c'est notre porte d'entrée d'administration. Mais rappelle-toi la tentative de force brute de la nuit, depuis 10.0.0.99. »\n\n« Je veux voir uniquement les lignes qui concernent ce service: rien d'autre. Si une session SSH est ouverte par un intrus, elle apparaîtra là, et je la verrai d'un coup d'œil. »\n\n« La liste complète est trop chargée pour lire le détail de chaque ligne. Il faut extraire seulement les lignes qui mentionnent ce nom de service, et rien d'autre. »\n\n« Tu as vu comment combiner deux commandes: l'une pour lister, l'autre pour ne garder que ce qui correspond. C'est ce principe qui va m'isoler les processus SSH. »\n\n« Isole-moi donc les lignes concernant le service SSH, netrunner. On les comparera ensuite avec les sessions que nous avons ouvertes nous-mêmes. »\n\nAprès votre réponse, Karl examine la sortie:\n« Les lignes sshd sont isolées, netrunner. Aucune session inconnue pour l'instant: notre porte d'entrée est propre. »".into(),
             goal: "Isolez pour Karl, dans la liste complète des processus du cluster, uniquement les lignes qui mentionnent sshd.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment filtrer les processus?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "8.3".into(), chapter: 8, chapter_title: "Surveillance du cluster".into(), act: 2,
             title: "Processus par nom".into(),
             description: "Y a-t-il un 'miner' clandestin?".into(),
-            story: "Karl: « Cherchez un processus 'miner' sur le cluster. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl examine la liste: « Le processus 'miner' est repéré, netrunner. Nous savons où il se cache. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « La charge que j'ai vue dans la liste ne correspond à aucun de nos services. Et le scan hostile visait nos machines une par une... J'ai une hypothèse: une machine compromise fait souvent tourner un mineur de cryptomonnaie en arrière-plan. »\n\n« Cherche sur le cluster tout processus dont le nom contient \"miner\". Si mon hypothèse est juste, il est là, à pomper du processeur sans que personne ne le sache. »\n\n« Ce que je veux voir: son identifiant de processus, pour pouvoir le viser précisément, et sa ligne de commande complète, pour savoir ce qu'il fait et d'où il vient. »\n\n« N'oublie pas: un processus peut se cacher derrière un nom de dossier. C'est la ligne de commande complète qui révèle le vrai chemin d'exécution: un chemin dans /tmp, par exemple, c'est une cachette classique. »\n\n« Lançons la recherche, netrunner. Si le miner existe, nous saurons où il est. »\n\nAprès votre réponse, Karl note l'identifiant:\n« Le voilà, netrunner: identifiant 6666, et son exécutable se cache dans /tmp/.x/. C'est bien notre parasite. »".into(),
             goal: "Retrouvez sur le cluster tout processus dont le nom contient 'miner', en affichant son PID et sa ligne de commande complète.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment chercher un processus par nom?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "8.4".into(), chapter: 8, chapter_title: "Surveillance du cluster".into(), act: 2,
             title: "Jauges serveurs".into(),
             description: "Aperçu CPU/RAM du cluster.".into(),
-            story: "Rosa: « Un cliché des jauges du cluster: CPU, mémoire. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa regarde le cliché: « Mémoire, CPU, processus gourmands... le cluster tient bon, netrunner. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Pendant que Karl traque son parasite, je dois évaluer l'état général des ressources du NOC: le rapport d'incident exigera un chiffre de charge processeur et de mémoire à l'instant précis de la détection. »\n\n« Les jauges du cluster donnent cette vue d'ensemble: l'utilisation du processeur, la mémoire occupée, et le processus le plus gourmand en tête de liste. »\n\n« L'outil habituel s'affiche en continu à l'écran, avec des rafraîchissements permanents. Dans le rapport, je n'ai besoin que d'un seul cliché, pris une fois, sans interface interactive. »\n\n« Deux conditions: la sortie doit être générée sans boucle de rafraîchissement, et limitée à une seule itération. Un unique tableau, figé, prêt à être collé dans le document. »\n\n« Prends ce cliché pour moi, netrunner: l'état des jauges du cluster en un seul passage. »\n\nAprès votre réponse, Rosa lit le tableau:\n« Processeur, mémoire, processus triés du plus gourmand au plus léger... Et voilà notre parasite en tête, avec presque toute la puissance du processeur. Le rapport est accablant, et il est exact. »".into(),
             goal: "Donnez à Rosa un cliché unique des jauges du cluster (CPU, mémoire), en mode lot non interactif et en une seule itération.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment surveiller les ressources?".into(),
@@ -131,22 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "8.5".into(), chapter: 8, chapter_title: "Surveillance du cluster".into(), act: 2,
             title: "Tuer le miner".into(),
             description: "Le miner clandestin PID 6666 tourne sur nexus-02.".into(),
-            story: "Karl, alarmé: « Netrunner! Le miner PID 6666 pompe le CPU de nexus-02.
-Tuez-le de force. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Karl confirme: « Le miner PID 6666 est neutralisé, netrunner. nexus-02 respire à nouveau. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl, la voix tendue: « L'identifiant est confirmé: 6666. C'est le mineur qui tourne depuis hier sur le cluster, et il affiche presque toute la puissance du processeur d'une machine. Il faut l'arrêter, maintenant, avant qu'il ne fasse griller nos serveurs ou ne prévienne son maître. »\n\n« Tu pourrais lui demander poliment de s'arrêter... mais un mineur clandestin ignore ce genre de politesse. J'ai besoin que tu l'interrompes avec le signal le plus violent: celui qu'un processus ne peut ni ignorer, ni intercepter, ni transformer en échec. »\n\n« Vise-le par son identifiant: 6666, exactement. Pas par un nom, pas par un autre numéro: ce PID précis, celui que nous avons identifié lors de la recherche. »\n\n« Une fois l'ordre envoyé, vérifie que le processus n'existe plus: il ne doit plus apparaître dans la table des processus. S'il reste, c'est qu'il a résisté, et il aurait alors un moyen de se cacher durablement. »\n\n« Abats-le, netrunner. Le cluster a besoin de sa puissance de calcul, et nous avons besoin de la preuve que la machine est à nouveau propre. »\n\nAprès votre réponse, Karl consulte la table des processus:\n« 6666 n'existe plus, netrunner. Le parasite est éliminé. nexus-02 respire à nouveau. »".into(),
             goal: "Abattez de force le miner 6666 qui pompe le CPU de nexus-02, avec le signal qu'il ne peut ni ignorer ni intercepter.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tuer un processus par PID?".into(),

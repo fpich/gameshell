@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "19.1".into(), chapter: 19, chapter_title: "Rapport d'incident".into(), act: 5,
             title: "Rapport complet".into(),
             description: "Rédigez le rapport d'incident.".into(),
-            story: "Karl: « Rédigez rapport_final.txt à votre poste: les 'Failed' PUIS les ALERT IDS, à la suite. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl approuve: « rapport_final.txt est rédigé, netrunner. Les attaques puis les alertes IDS, tout y est. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl te tend un bloc-notes, le regard grave :\n« Un incident nous est tombé dessus cette nuit, et il faut un rapport écrit pour l'équipe, netrunner. Nous avons deux sources de traces : les échecs d'authentification du service d'accès, et les alertes de notre sonde de détection. Tout est là, dans les journaux. Ce que je veux, c'est un document unique qui rassemble d'abord les attaques, puis les alertes IDS, à la suite. Il doit s'appeler rapport_final.txt et reposer dans ton répertoire personnel. C'est ce document que j'enverrai au SOC.\n\nPour le remplir, commence par la première source : les tentatives échouées, qui sont marquées 'Failed' dans auth.log, sous /logs. Garde-en la trace écrite dans le rapport. Ajoutes-y ensuite, à la suite, les alertes levées par la sonde : elles sont marquées 'ALERT' dans ids.log. Le rapport doit contenir l'un puis l'autre, dans cet ordre.\n\nAprès votre commande, Karl ouvre le rapport et vérifie son contenu :\n« La liste des attaques puis celle des alertes IDS, tout y est dans rapport_final.txt. C'est propre, netrunner : le SOC a maintenant une trace complète de l'incident. »".into(),
             goal: "Créez rapport_final.txt avec attaques puis alertes IDS.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment composer un rapport multi-sources?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "19.2".into(), chapter: 19, chapter_title: "Rapport d'incident".into(), act: 5,
             title: "Archiver les preuves".into(),
             description: "Archivez les logs pour le SOC.".into(),
-            story: "Karl: « Archivez les logs dans /archives/preuves.tar.gz pour le SOC. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl confirme: « preuves.tar.gz est créé, netrunner. Le SOC recevra les logs. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl frappe le capot d'un poste de la salle, l'index pointé vers l'écran :\n« Maintenant que le rapport est prêt, il faut sécuriser les preuves brutes : les journaux eux-mêmes. Le SOC va avoir besoin de les analyser à son rythme, dans un environnement contrôlé. On ne va pas leur envoyer un dossier entier qui traîne : on regroupe tout le contenu de /logs dans une seule malle compressée, facile à déplacer et à conserver. C'est le principe d'une archive : tout tient dedans, et la compression réduit le volume.\n\nVa la déposer dans le local des archives, sous le nom exact preuves.tar.gz. L'ensemble du dossier /logs doit y entrer. Le contenu reste intact ; c'est juste une copie de sûreté regroupée, prête pour l'analyse du SOC.\n\nAprès votre commande, Karl inspecte la malle :\n« preuves.tar.gz est en place dans les archives : tout l'historique des journaux y est regroupé et compressé. Le SOC peut l'emporter, netrunner. »".into(),
             goal: "Créez /archives/preuves.tar.gz contenant /logs/.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment archiver les preuves?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "19.3".into(), chapter: 19, chapter_title: "Rapport d'incident".into(), act: 5,
             title: "Backup config durcie".into(),
             description: "Copiez la nouvelle sshd_config aux archives.".into(),
-            story: "Rosa: « Copiez la sshd_config durcie dans /archives/configs/. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa vérifie: « La sshd_config durcie est copiée dans les archives, netrunner. La référence est conservée. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa pose une tablette retournée sur le comptoir du NOC :\n« Notre configuration d'accès sécurisé a été durcie pendant l'incident, et c'est la référence de toute l'équipe : /configs/sshd/sshd_config. Si on devait la perdre, on repartirait de zéro avec une porte grande ouverte. Pour qu'elle ne se perde jamais, on en conserve une copie dans le local des archives centrales, dans le sous-dossier configs.\n\nVa dupliquer notre configuration durcie : elle doit porter le même nom, et rejoindre /archives/configs/. De cette façon, même si un poste est reformaté, la référence durcie reste accessible à tous. Rien ne se perdra avant la mise en production.\n\nAprès votre commande, Rosa vérifie la copie :\n« La sshd_config durcie est bien conservée dans les archives, netrunner. Même cas de panne, notre référence est en sécurité. »".into(),
             goal: "Copiez sshd_config vers /archives/configs/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment backuper la config durcie?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "19.4".into(), chapter: 19, chapter_title: "Rapport d'incident".into(), act: 5,
             title: "Compter les attaques du jour".into(),
             description: "Nombre total de tentatives échouées.".into(),
-            story: "Karl: « Nombre total de 'Failed' aujourd'hui dans auth.log. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl note le nombre: « Voilà le total des 'Failed' aujourd'hui, netrunner. L'ampleur est mesurée. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl s'accoude au bureau, les doigts comptant sur la table :\n« Le rapport est parti, mais il me manque un chiffre pour la réunion de 11 heures : le nombre total de tentatives échouées aujourd'hui. Toutes les lignes portant la marque 'Failed' dans le journal d'authentification /logs/auth.log. Pas le contenu, juste le compte : c'est le nombre que je dois annoncer à l'équipe pour mesurer l'ampleur de l'attaque. Un chiffre exact, rien d'autre.\n\nTu vas donc interroger le journal et me donner uniquement le nombre de lignes 'Failed'. Le journal va t'afficher ce compte directement ; ne me sors pas la liste des lignes, c'est le total qui compte pour la réunion.\n\nAprès votre commande, Karl note le chiffre et vérifie :\n« Un seul nombre, le total des échecs du jour : c'est exactement ce qu'il me fallait, netrunner. L'ampleur de l'attaque est maintenant mesurée. »".into(),
             goal: "Donnez à Karl le nombre total de lignes 'Failed' dans /logs/auth.log, sans afficher les lignes elles-mêmes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter toutes les attaques?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "19.5".into(), chapter: 19, chapter_title: "Rapport d'incident".into(), act: 5,
             title: "IPs bloquées aujourd'hui".into(),
             description: "Comptez les UFW BLOCK.".into(),
-            story: "Karl: « Combien de paquets bloqués aujourd'hui? (UFW BLOCK) »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl note le compte: « Voilà les paquets bloqués aujourd'hui, netrunner. Le pare-feu a bien travaillé. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa revient du poste de supervision, café à la main :\n« Dernier chiffre pour le point de veille, et il tombe du pare-feu : le nombre de paquets bloqués aujourd'hui. On veut savoir si notre barrière a tenu, combien de fois elle a refusé une tentative : une fois, dix fois, cent fois, chaque refus est une attaque repoussée. C'est marqué 'UFW BLOCK' dans le journal du pare-feu, /logs/firewall.log. Pas besoin de relire chaque blocage, il me faut juste le compte : le nombre de lignes où le pare-feu a bloqué.\n\nInterroge donc le journal et donne-moi uniquement le nombre de lignes 'UFW BLOCK' du jour. Un chiffre clair, comme pour les échecs précédents : c'est le bilan d'activité du pare-feu que je présenterai à l'équipe.\n\nAprès votre commande, Rosa compare avec sa feuille :\n« Le compte des paquets bloqués correspond bien à l'activité du pare-feu, netrunner. La barrière a tenu, et on le sait précisément maintenant. »".into(),
             goal: "Donnez à Karl le nombre de lignes 'UFW BLOCK' dans /logs/firewall.log, sans afficher les lignes elles-mêmes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter les paquets bloqués?".into(),

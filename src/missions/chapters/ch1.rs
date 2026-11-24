@@ -90,7 +90,7 @@ sous-compartiment messages, fichier dernier_message.txt.
             id: "1.4".into(), chapter: 1, chapter_title: "Arrivee a bord".into(), act: 1,
             title: "Qui etes-vous?".into(),
             description: "Vex Korshun verifie votre identite.".into(),
-            story: "Vex Korshun, l'officier sécurité, vous interpelle depuis le poste de garde:
+            story: "Vex Korshun, le commandant de la station, vous interpelle depuis le poste de garde:
 « Capitaine? Ici Vex Korshun. Avant que je vous ouvre les accès sécurisés du pont,
 je dois vérifier votre identité sur le système. »
 

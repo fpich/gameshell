@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "12.1".into(), chapter: 12, chapter_title: "Stockage et disques".into(), act: 3,
             title: "Espace disque".into(),
             description: "Quelle place reste sur les serveurs?".into(),
-            story: "Rosa: « Quelle place disque reste-t-il? Taille lisible. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa regarde l'espace: « Voilà la place restante, netrunner. Le stockage est sous contrôle. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « L'archive des preuves est partie, mais l'espace de stockage du NOC se remplit vite. Avant la prochaine rotation des journaux, je dois savoir combien de place il reste sur chaque volume: si un volume est plein, les journaux cesseront de s'écrire et nous perdrions des traces. »\n\n« Une valeur brute, en blocs, ne parle à personne: je veux des tailles que l'on lit d'un coup d'œil, en giga-octets et méga-octets. C'est ce format que nous utilisons dans nos rapports de capacité. »\n\n« Le NOC entier dépend de ces volumes: le système, les journaux, les archives. Chacun peut se remplir à son rythme, et chacun doit être surveillé. »\n\n« Montre-moi donc l'espace restant de tous les systèmes de fichiers du NOC, avec des tailles lisibles par un humain. Je veux voir d'un coup d'œil les volumes qui respirent et ceux qui approchent de la limite. »\n\nAprès votre commande, Rosa consulte les chiffres:\n« /logs est encore large, /archives se remplit régulièrement. Le stockage est sous contrôle, netrunner: on sait exactement où on en est. »".into(),
             goal: "Indiquez à Rosa l'espace disque restant sur le NOC, avec des tailles lisibles par un humain.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'espace disque?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "12.2".into(), chapter: 12, chapter_title: "Stockage et disques".into(), act: 3,
             title: "Taille des logs par fichier".into(),
             description: "Taille de chaque log individuellement.".into(),
-            story: "Karl: « Pesez chaque log UN PAR UN. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl pèse chaque log: « Voilà la taille de chaque fichier, netrunner. Nous saurons quoi archiver. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Nous venons d'archiver les journaux, mais ils continuent de grossir chaque jour. Avant de décider quels journaux faire tourner en priorité, je veux le poids de chacun, un par un: le plus lourd partira le premier. »\n\n« Je veux un total unique par élément, une valeur lisible, pour comparer les journaux entre eux d'un coup d'œil. Un journal qui pèse dix fois les autres mérite une attention immédiate. »\n\n« Certains journaux sont des fichiers simples, d'autres peuvent contenir des sous-dossiers: la mesure doit toujours donner un total complet, sans se perdre dans le détail de chaque sous-élément. »\n\n« Pèse donc pour moi chaque élément du répertoire des journaux, individuellement, avec un total unique en taille lisible. Je saurai par où commencer la rotation. »\n\nAprès votre commande, Karl compare les poids:\n« auth.log grossit le plus vite: c'est lui qu'on fera tourner en premier. Les autres sont sages. Merci, netrunner. »".into(),
             goal: "Pesez pour Karl chaque élément de /logs un par un, avec pour chacun un total unique en taille lisible.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir la taille de chaque fichier?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "12.3".into(), chapter: 12, chapter_title: "Stockage et disques".into(), act: 3,
             title: "Disques montés".into(),
             description: "Quels disques sont montés?".into(),
-            story: "Rosa: « Quels systèmes de fichiers sont montés sur le NOC? »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa vérifie les montages: « Les systèmes de fichiers sont listés, netrunner. Le NOC est bien monté. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « L'intervention sur la baie A3 approche, et avant de manipuler un volume je dois savoir où chaque système de fichiers est monté. Un volume qui n'est pas monté au bon endroit, c'est un service qui s'arrête. »\n\n« Le NOC accueille plusieurs systèmes de fichiers: un pour le système lui-même, un dédié aux journaux, un pour les archives sur son volume redondant. Je veux la liste de tous ceux qui sont actuellement montés. »\n\n« Certains supports sont éphémères et ne contiennent que des données de travail: ils apparaissent aussi dans cette liste, et c'est normal. »\n\n« Dresse donc pour moi la liste des systèmes de fichiers actuellement montés sur le NOC. Je verrai d'un coup d'œil où intervient chaque volume avant de toucher à la baie. »\n\nAprès votre commande, Rosa étudie la liste:\n« /logs sur son volume dédié, /archives sur le volume redondant: je sais exactement où intervenir, et où ne pas toucher. Merci, netrunner. »".into(),
             goal: "Dressez pour Rosa la liste des systèmes de fichiers actuellement montés sur le NOC.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les disques montés?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "12.4".into(), chapter: 12, chapter_title: "Stockage et disques".into(), act: 3,
             title: "Etat des baies".into(),
             description: "Lisez l'état des baies.".into(),
-            story: "Karl: « Lisez l'état des baies: /baies/etat_baies.txt. La baie A3 a un disque à changer! »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl lit l'état des baies: « La baie A3 a bien un disque à changer, netrunner. Nous allons intervenir. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Le monitoring du datacenter a signalé une baie en alerte: la baie A3, celle qui héberge nos outils de supervision. Son état est consigné dans le fichier /baies/etat_baies.txt, avec celui des trois autres baies. »\n\n« Je veux savoir exactement ce qui cloche sur A3 avant d'engager l'intervention: il y a peut-être un disque à remplacer, ou un serveur à redémarrer, ou pire. »\n\n« Quatre baies se partagent le datacenter: les serveurs web, la base de données, la supervision et les sauvegardes. Chaque baie a son rôle, et chaque alerte doit être attribuée à la bonne baie. »\n\n« Le fichier décrit chaque baie et son état: lis-le-moi tel qu'il est, sans rien omettre. Je lirai le diagnostic moi-même sur l'écran. »\n\nAprès votre commande, Karl parcourt le diagnostic:\n« La baie A3 a bien un disque à changer: l'alerte du monitoring est confirmée. Je lance l'intervention, netrunner. »".into(),
             goal: "Lisez etat_baies.txt.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire l'état des baies?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "12.5".into(), chapter: 12, chapter_title: "Stockage et disques".into(), act: 3,
             title: "Cluster".into(),
             description: "Quels serveurs forment le cluster?".into(),
-            story: "Rosa: « Lisez la liste du cluster: /serveurs/cluster.txt. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa lit la liste: « Le cluster est répertorié, netrunner. Chaque serveur est identifié. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « La rotation des journaux va être déployée sur toutes nos machines, et je dois vérifier quels serveurs forment le cluster avant de lancer quoi que ce soit. La liste est consignée dans /serveurs/cluster.txt. »\n\n« Chaque serveur y est identifié par son nom et son adresse: c'est notre carte du parc. Si la liste est à jour, la rotation touchera les bonnes machines et aucune autre. »\n\n« Un cluster, c'est plusieurs serveurs qui travaillent ensemble: si la liste en oublie un, la rotation le laissera de côté, et ce serveur restera avec des journaux non traités. L'erreur serait silencieuse et découverte trop tard. »\n\n« Lis-moi ce fichier tel qu'il est: je compare les noms avec la console du NOC pour être sûr que rien n'a changé depuis la dernière mise à jour. »\n\nAprès votre commande, Rosa compare avec sa console:\n« nexus-01, nexus-02, nexus-03: les trois serveurs sont identifiés et correspondent. La rotation peut être déployée sur tout le cluster, netrunner. »".into(),
             goal: "Lisez cluster.txt.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire la liste du cluster?".into(),

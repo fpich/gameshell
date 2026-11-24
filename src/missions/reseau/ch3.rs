@@ -7,22 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "3.1".into(), chapter: 3, chapter_title: "Exploration du datacenter".into(), act: 1,
             title: "Fichiers cachés du poste".into(),
             description: "Le token secret est caché (.secret).".into(),
-            story: "Karl vous souffle: « Listez TOUT votre poste, fichiers cachés compris,
-puis lisez .secret. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Karl hoche la tête: « Vous avez trouvé le fichier caché, netrunner. Rien n'échappe à un œil attentif. Le poste vous est transparent. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl vous souffle: « Listez TOUT votre poste, fichiers cachés compris,\npuis lisez .secret. »\n\n« Nous stockons les tokens d'accès dans des fichiers qui commencent\npar un point. Une liste normale ne les montre pas; c'est justement\npour que personne ne les voie par accident. Moi, j'ai besoin de tout\nvoir: utilisez la liste complète, puis affichez-moi le contenu du\nfichier secret. »\n\nVous listez le contenu complet de votre répertoire de travail, cachés\ncompris, puis vous affichez le contenu du fichier .secret.\n\nKarl hoche la tête: « Vous avez trouvé le fichier caché, netrunner.\nRien n'échappe à un œil attentif. Le poste vous est transparent. »".into(),
             goal: "Listez votre poste en détail (cachés compris) et lisez .secret.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir aussi les fichiers cachés?".into(),
@@ -37,22 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "3.2".into(), chapter: 3, chapter_title: "Exploration du datacenter".into(), act: 1,
             title: "Trouver un log".into(),
             description: "Trouvez firewall.log dans tout le NOC.".into(),
-            story: "Rosa a perdu le chemin du log pare-feu: « Trouvez où se cache
-firewall.log dans le datacenter. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Rosa est rassurée: « firewall.log est retrouvé, netrunner. Grâce à vous, le NOC ne perd plus aucune trace. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa a perdu le chemin du log pare-feu: « Trouvez où se cache\nfirewall.log dans le datacenter. »\n\n« Nos scripts d'archivage doivent pointer vers ce fichier chaque\nnuit. Sans le chemin exact, ils échouent et nous perdons la trace des\nrègles. Le fichier est quelque part sous la racine; cherchez-le par\nson nom, dans tout le datacenter, et dites-moi où il vit. »\n\nVous lancez une recherche par nom dans tout le datacenter et vous\nrepérez le chemin complet du log pare-feu.\n\nRosa est rassurée: « firewall.log est retrouvé, netrunner. Grâce à vous,\nle NOC ne perd plus aucune trace. »".into(),
             goal: "Trouvez le chemin complet de firewall.log.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment chercher un fichier par nom partout?".into(),
@@ -67,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "3.3".into(), chapter: 3, chapter_title: "Exploration du datacenter".into(), act: 1,
             title: "Taille des logs".into(),
             description: "Quelle taille occupent les logs?".into(),
-            story: "Karl: « Avant d'archiver, dites-moi combien occupent les logs au total. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl note: « Voilà la taille des logs, netrunner. Nous pourrons archiver en connaissance de cause. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Avant d'archiver, dites-moi combien occupent les logs au\ntotal. »\n\n« Tous les logs du NOC sont regroupés dans le dossier /logs: pare-feu,\nIDS, système, applications. Nous devons prévoir l'espace d'archivage\navant de vider ce qui est périmé. Donnez-moi la taille totale du\ndossier, en une mesure unique avec son unité, sans détailler fichier\npar fichier. »\n\nVous mesurez la taille totale du dossier /logs d'un seul coup.\n\nKarl note: « Voilà la taille des logs, netrunner. Nous pourrons archiver\nen connaissance de cause. »".into(),
             goal: "Donnez la taille totale du dossier /logs.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment connaître la taille totale d'un dossier?".into(),
@@ -98,22 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "3.4".into(), chapter: 3, chapter_title: "Exploration du datacenter".into(), act: 1,
             title: "Salle des baies".into(),
             description: "Rejoignez la salle des baies.".into(),
-            story: "Karl vous convoque dans la salle des baies: « Netrunner! Réunion
-dans la salle BAIES immédiatement. Scan détecté. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Karl vous accueille dans la salle des baies: « Vous voilà, netrunner. Le point sur le scan peut commencer. Nous sommes prêts. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl vous convoque dans la salle des baies: « Netrunner! Réunion\ndans la salle BAIES immédiatement. Scan détecté. »\n\n« Le scanner a été vu dans le secteur des baies de serveurs. Je veux\nque vous me rejoigniez là-bas pour qu'on parle de la parade face aux\nmachines. La salle est un dossier du datacenter, à la racine. Allez-y:\nle chemin complet vous y mène depuis n'importe où, où que vous soyez. »\n\nVous rejoignez la salle des baies à la racine du datacenter.\n\nKarl vous accueille: « Vous voilà, netrunner. Le point sur le scan peut\ncommencer. Nous sommes prêts. »".into(),
             goal: "Rejoignez la salle des baies (/baies).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment aller à /baies en chemin absolu?".into(),
@@ -128,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "3.5".into(), chapter: 3, chapter_title: "Exploration du datacenter".into(), act: 1,
             title: "Note d'alerte".into(),
             description: "Écrivez l'alerte dans alerte.txt.".into(),
-            story: "Rosa: « Notez dans alerte.txt à votre poste: 'Scan SYN depuis 10.0.0.66'. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa relit alerte.txt: « 'Scan SYN depuis 10.0.0.66'. C'est noté, netrunner. L'alerte est consignée. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Notez dans alerte.txt à votre poste: 'Scan SYN depuis 10.0.0.66'. »\n\n« Nos outils de corrélation trient les notes par horodatage, mais la\nphrase exacte doit y être: nous avons besoin que toute l'équipe voie\nla même alerte au même endroit. Créez le fichier alerte.txt dans\nvotre répertoire de travail et écrivez-y la phrase telle que je vous\nl'ai dictée, mot pour mot. »\n\nVous créez alerte.txt à votre poste et y écrivez le texte de l'alerte.\n\nRosa relit le fichier: « 'Scan SYN depuis 10.0.0.66'. C'est noté,\nnetrunner. L'alerte est consignée. »".into(),
             goal: "Créez alerte.txt avec le texte demandé.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment écrire un texte directement dans un fichier?".into(),

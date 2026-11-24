@@ -7,22 +7,28 @@ pub fn missions() -> Vec<Mission> {
             id: "12.1".into(), chapter: 12, chapter_title: "Archives du domaine".into(), act: 3,
             title: "Archiver les registres".into(),
             description: "Archive compressée des logs vers les archives.".into(),
-            story: "Dame Kaguya: « Seigneur, archivez tous les logs des scribes dans une
-caisse compressée: /archives/backup_logs.tar.gz. »
+            story: "Dame Kaguya: « Seigneur, le convoi vers la capitale part
+avant l'aube. Avant de sceller les caisses, mettez tous
+les logs des scribes en sûreté dans une seule caisse
+compressée: /archives/backup_logs.tar.gz. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Les scribes consignent chaque nuit les allées et venues
+au portail dans /scribes/logs/auth.log et l'activité du
+château dans /scribes/logs/syslog. Si une seule de ces
+pages se perd, l'enquête sur les espions perd ses
+preuves. Tout le dossier /scribes/logs/ doit entrer dans
+la caisse, sans exception.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Le moine Tetsuo a signalé des traces fraîches près des
+remparts est. Le seigneur Hattori a ordonné de préparer
+le départ avant l'aube. Vous descendez aux archives, une
+lanterne à la main. Une seule caisse, bien scellée,
+compressée pour traverser la route: le domaine ne doit
+rien laisser traîner derrière lui.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya approuve: « Les logs des scribes sont archivés, Seigneur. backup_logs.tar.gz est en sûreté. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Quand la caisse sera prête, Dame Kaguya la fera partir
+avec le premier convoi.
+".into(),
             goal: "Créez /archives/backup_logs.tar.gz contenant /scribes/logs/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer une archive compressée?".into(),
@@ -37,21 +43,26 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "12.2".into(), chapter: 12, chapter_title: "Archives du domaine".into(), act: 3,
             title: "Vérifier l'archive".into(),
             description: "Contenu de l'archive sans l'extraire.".into(),
-            story: "Dame Kaguya: « Vérifiez le contenu de l'archive avant l'envoi. »
+            story: "Dame Kaguya: « La caisse part au lever du soleil. Avant
+qu'elle ne quitte le château, montrez-moi ce qu'elle
+contient, en détail, sans l'ouvrir. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Vous la descendez de l'étagère des archives et vous vous
+apprêtez à rendre compte. La dame veut voir chaque
+fichier de /archives/backup_logs.tar.gz: les noms, les
+tailles, tout. Rien ne doit rester caché dans la caisse.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Le scribe en chef attend la liste pour signer son
+registre de départ. S'il manque une page, l'archive ne
+sera pas scellée et le convoi partira incomplet. Il a
+consigné l'inventaire exact lors de l'écriture: c'est
+votre liste qui doit le confirmer.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya vérifie le contenu: « Tout est dans l'archive, Seigneur. Rien ne manque avant l'envoi. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Vous soulevez le couvercle de la caisse avec précaution:
+la vapeur des herbes à l'intérieur. Non, ce n'est que le
+parfum des archives. Voilà: la liste s'affiche, fichier
+par fichier. Les pages sont toutes là.
+".into(),
             goal: "Montrez à Dame Kaguya le contenu détaillé de l'archive /archives/backup_logs.tar.gz, sans l'extraire.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister une archive sans l'extraire?".into(),
@@ -66,21 +77,28 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "12.3".into(), chapter: 12, chapter_title: "Archives du domaine".into(), act: 3,
             title: "Extraire l'archive".into(),
             description: "Extrayez l'archive dans /tmp.".into(),
-            story: "Dame Kaguya: « Extrayez l'archive dans /tmp pour vérification. »
+            story: "Le scribe en chef: « Seigneur, la caisse est arrivée
+saine et sauve sur les étagères. Dame Kaguya veut
+contrôler les pages une à une avant de clore l'inventaire
+des espoirs. Décompressez l'archive dans /tmp, pour
+qu'elle puisse vérifier sur place. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Vous ne devez pas toucher au contenu original: l'archive
+doit rester intacte dans /archives/backup_logs.tar.gz.
+Seule la zone de travail /tmp recevra les fichiers
+sortis de la caisse. Ainsi, si une page est déchirée,
+l'original reste à l'abri et la comparaison est possible.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Le scribe pose la lanterne sur la table et vous tend le
+rouleau récapitulatif. Pendant que vous travaillez, il
+murmure les noms des fichiers, comme s'il les comptait.
+Au bout du couloir, les gardes changent de poste. La
+vérification peut commencer dès que les fichiers sont
+posés dans /tmp.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya inspecte /tmp: « L'archive est bien extraite, Seigneur. La vérification peut commencer. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Le scribe aligne ses outils sur la table: rien ne
+doit manquer d'ici la fin de la corvée de nuit.
+".into(),
             goal: "Décompressez et extrayez l'archive /archives/backup_logs.tar.gz dans le répertoire /tmp pour que Dame Kaguya la vérifie.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment extraire dans un dossier précis?".into(),
@@ -95,20 +113,29 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "12.4".into(), chapter: 12, chapter_title: "Archives du domaine".into(), act: 3,
             title: "Archiver en ZIP".into(),
             description: "Le clan Hattori préfère le ZIP.".into(),
-            story: "Le marchand Genji: « Seigneur, le clan Hattori préfère le ZIP.
-Créez registres.zip avec les registres de la salle du trône. »
+            story: "Genji le marchand: « Seigneur, le clan Hattori de la
+capitale utilise des colis au format ZIP pour ses
+registres. Ils ont demandé celui des impôts de la salle
+du trône. Créez registres.zip avec le dossier
+/salle-du-trone/registres/, et préparez-le dans vos
+quartiers: je viendrai le prendre au matin. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+La salle du trône abrite le registre_impots.txt, la
+liste de toutes les redevances du domaine. Le clan
+allié veut pouvoir l'ouvrir avec ses propres outils,
+d'où le format ZIP, la formule qu'ils emploient pour
+toutes leurs transmissions.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous rentrez dans vos quartiers, refermez la porte et
+vous mettez à l'ouvrage. Le fichier doit tenir dans un
+seul colis compact, comme le marchand l'a demandé.
+L'écho des pas de Genji s'atténue dans le couloir:
+vous avez jusqu'au matin.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Le marchand Genji approuve: « registres.zip est créé, Seigneur. Le clan Hattori recevra ses registres au format qu'il préfère. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Les comptes du domaine reposent sur ce registre:
+une page perdue, et le clan de la capitale perd
+confiance dans notre parole.
+".into(),
             goal: "Créez registres.zip contenant /salle-du-trone/registres/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer une archive ZIP?".into(),
@@ -123,21 +150,28 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "12.5".into(), chapter: 12, chapter_title: "Archives du domaine".into(), act: 3,
             title: "Lire le ZIP".into(),
             description: "Contenu de registres.zip.".into(),
-            story: "Genji: « Vérifiez le contenu de registres.zip avant l'envoi. »
+            story: "Genji se présente à l'aube, le sac de cuir à l'épaule:
+« Seigneur, je n'embarque pas un colis dont je ne
+connais pas le contenu. Montrez-moi la liste des
+fichiers de registres.zip, sans rien décompresser.
+Je vérifie, je signe, et le corbeau messager s'envole. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Le format pourra attendre: ce que le marchand veut
+voir, c'est la preuve que le registre des impôts est
+bien dans la caisse. Ouvrir le colis, le déballer,
+serait inutile et risqué: il suffit de faire défiler
+la liste devant lui, fichier par fichier.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous prenez registres.zip dans vos quartiers et vous
+lui montrez. Genji hoche la tête à chaque ligne, l'œil
+vif. Au bout du compte, il appose son sceau sur le
+parchemin et glisse le colis dans son sac. Le corbeau
+attend sur le toit de la pagode.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Genji vérifie le contenu: « Tout est dans registres.zip, Seigneur. L'envoi peut partir. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+La lune pâlit derrière les remparts. Le temps des
+vérifications touche à sa fin: une fois la liste
+officialisée, le corbeau filera vers la capitale.
+".into(),
             goal: "Montrez à Genji la liste des fichiers contenus dans registres.zip, sans rien décompresser.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister un ZIP?".into(),

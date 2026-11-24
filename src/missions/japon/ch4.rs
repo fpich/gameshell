@@ -7,22 +7,15 @@ pub fn missions() -> Vec<Mission> {
             id: "4.1".into(), chapter: 4, chapter_title: "Registres du domaine".into(), act: 1,
             title: "Lire vos notes".into(),
             description: "Relisez notes.txt.".into(),
-            story: "Sur votre bureau: notes.txt, votre carnet. « Seigneur, relisez vos notes:
-elle contient des points à ne pas oublier. »
+            story: "Dame Kaguya pousse la porte de vos quartiers, un plateau de thé à la main: « Seigneur, avant de recevoir les rapports de la journée, vous devriez relire vos notes. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Elle désigne le bureau: « Le carnet notes.txt est resté ouvert toute la nuit. Vous y avez consigné les affaires en cours: le riz des greniers, les lettres du clan Hattori, le code du coffre. Un détail oublié peut coûter cher. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous vous souvenez du soir précédent: les scribes passaient les listes deux à deux, et vous notiez chaque tâche pour ne rien laisser échapper. Vos notes sont la mémoire du seigneur.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vous prenez le carnet, l'ouvrez, et relisez notes.txt ligne après ligne.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Vous relisez vos notes, Seigneur. Chaque point y est consigné. Un seigneur qui se souvient de tout ne se laisse jamais surprendre.
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Dame Kaguya observe, puis hoche la tête: « Voilà, Seigneur. Tout est en tête. Le registre de vos obligations est à jour. »".into(),
             goal: "Lisez notes.txt dans vos quartiers.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire un fichier?".into(),
@@ -37,22 +30,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "4.2".into(), chapter: 4, chapter_title: "Registres du domaine".into(), act: 1,
             title: "Ajouter au registre".into(),
             description: "Ajoutez une ligne à la fin de notes.txt.".into(),
-            story: "Dame Kaguya: « Ajoutez à la FIN de notes.txt, sans écraser le reste:
-'Reparer le rempart est'. »
+            story: "Dame Kaguya revient de la cour, un rouleau froissé à la main: « Seigneur, un messager du rempart est vient de déposer ceci: le mur de l'est s'affaisse par endroits. Il faut le réparer avant l'hiver. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Elle fait glisser vos notes sur le bureau: « Ajoutez cette tâche à la fin de notes.txt, sans effacer ce qui est déjà écrit. La consigne exacte des charpentiers est: Reparer le rempart est. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous songez aux édits du domaine: chaque tâche doit être consignée pour être exécutée. Vos notes ne doivent rien perdre des affaires en cours.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vous prenez le carnet, ajoutez la ligne à la suite des précédentes, et replacez notes.txt sur le bureau.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya vérifie notes.txt: « 'Reparer le rempart est' est bien ajouté, sans rien écraser. Le registre est complet, Seigneur. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Dame Kaguya relit le carnet: « Reparer le rempart est est bien consigné, après tout le reste, sans rien écraser. Le registre est complet, Seigneur. »".into(),
             goal: "Ajoutez une ligne à la fin de notes.txt sans l'écraser.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter à la fin d'un fichier?".into(),
@@ -67,22 +53,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "4.3".into(), chapter: 4, chapter_title: "Registres du domaine".into(), act: 1,
             title: "Compter les lignes du kaisho".into(),
             description: "Combien de lignes fait kaisho.txt?".into(),
-            story: "Dame Kaguya: « Pour le registre, dites-moi combien de lignes fait
-kaisho.txt. Juste le nombre. »
+            story: "Le scribe en chef vous attend au pupitre des registres, un pinceau levé: « Seigneur, j'établis le registre des visiteurs du château. J'ai besoin du compte exact des lignes du kaisho. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Il désigne le registre d'accueil: « Le fichier kaisho.txt, dans vos quartiers, accueille chaque invité et chaque ordre du jour. Pour le relier, il me faut sa longueur: combien de lignes le composent? Juste le nombre. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous vous souvenez des rouleaux des scribes: avant de relier un registre, on compte ses lignes pour vérifier qu'aucune page ne manque.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vous allez chercher le kaisho, comptez ses lignes une à une, et revenez annoncer le nombre au scribe.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya note le nombre: « Voilà la longueur du kaisho, Seigneur. Le registre est à jour. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Le scribe note le chiffre sur sa tablette: « Voilà la longueur du kaisho, Seigneur. Le registre des visiteurs est à jour. »".into(),
             goal: "Comptez les lignes de kaisho.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment compter les lignes?".into(),
@@ -97,20 +76,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "4.4".into(), chapter: 4, chapter_title: "Registres du domaine".into(), act: 1,
             title: "Début du journal des gardes".into(),
             description: "Les 5 premières lignes du journal des gardes.".into(),
-            story: "Au donjon, le capitaine des gardes consulte journal_gardes.txt:
-« Seigneur, montrez-moi le DÉBUT du journal des gardes. 5 premières lignes. »
+            story: "Le capitaine des gardes vous accueille en haut des marches du donjon, un livre épais sous le bras: « Seigneur, je dois rendre compte de la nuit à Hattori. Montrez-moi ce que dit le registre des rondes. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Il ouvre le registre des rondes: « Le journal des gardes, journal_gardes.txt, rangé dans /donjon/gardes, consigne chaque tour de veille depuis minuit. Les cinq premières lignes suffisent pour le rapport du matin: les rondes du nord, le bruit du portail est, la relève. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous savez que le début d'un registre montre l'ordre des événements: ce qui s'est passé en premier éclaire le reste.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vous vous penchez sur le registre, lisez les premières consignes, et présentez au capitaine le début du journal.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Le capitaine des gardes lit le début du journal: « Les premières rondes sont consignées, Seigneur. La garde fait son devoir. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Le capitaine lit par-dessus votre épaule: « Les premières rondes sont consignées, Seigneur. La garde a fait son devoir toute la nuit. »".into(),
             goal: "Affichez les 5 premières lignes du journal des gardes.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment n'afficher que le début?".into(),
@@ -125,22 +99,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "4.5".into(), chapter: 4, chapter_title: "Registres du domaine".into(), act: 1,
             title: "Fin du journal système".into(),
             description: "Les 3 dernières lignes du syslog.".into(),
-            story: "Le moine Tetsuo: « Seigneur, quelles sont les DERNIÈRES nouvelles du
-château? Montrez-moi la fin du syslog. »
+            story: "Le moine Tetsuo vous croise dans la cour de la pagode, un parchemin roulé sous le bras: « Seigneur, les scribes tiennent le journal des événements du château, le syslog, rangé dans /scribes/logs. Les dernières heures y sont consignées minute par minute. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Il le déroule à demi: « Montrez-moi les trois dernières consignes. Ce sont les plus récentes nouvelles du domaine: la ronde de l'est, la cuisine, les dernières entrées. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous vous souvenez que la fin d'un journal dit ce qui vient de se passer, tandis que le début raconte le passé lointain.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vous allez aux archives des scribes, lisez la fin du syslog, et revenez rapporter les dernières consignes au moine.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le moine Tetsuo lit la fin du syslog: « Les dernières nouvelles du château sont claires, Seigneur. Rien d'inquiétant pour l'instant. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Tetsuo écoute, puis hoche la tête: « Les dernières nouvelles du château sont claires, Seigneur. Rien d'inquiétant pour l'instant. Le domaine veille. »".into(),
             goal: "Affichez les 3 dernières lignes du syslog.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment n'afficher que la fin?".into(),

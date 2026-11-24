@@ -7,22 +7,15 @@ pub fn missions() -> Vec<Mission> {
             id: "10.1".into(), chapter: 10, chapter_title: "Reseau du domaine".into(), act: 3,
             title: "Coordonnées du château".into(),
             description: "Configuration réseau complète de Shiro.".into(),
-            story: "Hanzō: « Seigneur, quelles sont les coordonnées réseau du château?
-Toutes les interfaces, toutes les IP. »
+            story: "Hanzō vous attend au quartier des renseignements, le visage fermé: « Seigneur, le château échange des messages avec d'autres machines par un réseau invisible. Pour savoir qui est connecté et comment, il me faut les coordonnées complètes du château: toutes les interfaces réseau et toutes les adresses qui y sont rattachées. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Il déroule un parchemin vierge: « Le conseil veut un état précis avant la nuit. Montrez-moi rien que la configuration réseau de Shiro, dans son intégralité. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous pensez aux remparts: comme les portes d'entrée d'une forteresse, chaque interface est une ouverture vers l'extérieur. Il faut toutes les voir.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Le moine Tetsuo, qui descendait l'escalier, s'arrête: « Connaître ses propres portes, Seigneur, c'est la première défense contre ceux qui les cherchent. »
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Hanzō examine les interfaces: « Toutes les coordonnées réseau du château sont là, Seigneur. Nous savons où nous sommes. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Hanzō pose son pinceau. Il attend votre rapport: quelles interfaces le château possède-t-il, et quelles adresses portent-elles?".into(),
             goal: "Affichez la configuration réseau complète du château: interfaces et adresses IP.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les adresses IP?".into(),
@@ -37,22 +30,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "10.2".into(), chapter: 10, chapter_title: "Reseau du domaine".into(), act: 3,
             title: "Routes du domaine".into(),
             description: "Par où passe le trafic vers le clan Hattori?".into(),
-            story: "Hanzō: « Seigneur, par quelle route passe le trafic vers nos alliés?
-Montrez la table de routage. »
+            story: "Hanzō revient vers vous, un message du clan Hattori à la main: « Seigneur, nos alliés nous ont écrit. Le rouleau a voyagé à travers plusieurs machines avant d'arriver. Pour comprendre par où passent nos messages, je dois voir la table de routage du château. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Il trace une carte sommaire: « Il y a le domaine local, et au-delà la passerelle qui mène vers les autres clans. Montrez-moi comment Shiro choisit ses routes: vers quoi part le trafic, et par quelle voie. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous songez aux sentiers qui quittent le château: certains mènent aux champs voisins, d'autres rejoignent la grand-route. La table de routage est cette carte, en caractères précis.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Le moine Tetsuo vous croise dans le couloir: « Un messager qui connaît ses chemins ne se perd jamais, Seigneur. »
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Hanzō suit la route: « Voilà le chemin vers nos alliés, Seigneur. Le trafic est bien orienté. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Hanzō aligne ses pinceaux. Il veut voir, d'un coup d'œil, toutes les routes que le château connaît: montrez-les-lui.".into(),
             goal: "Affichez la table de routage du château: par où sortent les messages vers les autres clans?".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les routes réseau?".into(),
@@ -67,22 +53,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "10.3".into(), chapter: 10, chapter_title: "Reseau du domaine".into(), act: 3,
             title: "Ports ouverts".into(),
             description: "Quels ports du château sont en écoute?".into(),
-            story: "Le capitaine des gardes: « Seigneur, quels ports sont OUVERTS sur le
-château? Connexions actives et ports en écoute. »
+            story: "Le capitaine des gardes entre dans la salle du conseil, les sourcils froncés: « Seigneur, le château a des portes que personne n'a ordonné d'ouvrir: des services qui écoutent en permanence, prêts à recevoir des visiteurs. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Il pose la pointe de sa lance au sol: « Avant de verrouiller quoi que ce soit, il faut savoir lesquelles sont ouvertes. Dressez-moi la liste des services du château qui écoutent, avec un affichage numérique pour que je puisse compter, et le nom de la sentinelle qui monte la garde sur chacun. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous sentez le danger: chaque service en écoute est une porte qui peut s'ouvrir de l'extérieur. Et parmi elles, une seule devrait suffire à alerter.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Dame Kaguya, qui observait depuis la porte, murmure: « Nous avons peut-être ouvert une porte à quelqu'un qui n'aurait pas dû entrer, Seigneur. »
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le capitaine des gardes inspecte les ports: « Voilà les portes ouvertes du château, Seigneur. Nous saurons quoi surveiller. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Le capitaine attend, sa lance prête. Il faut lui montrer les portes ouvertes du château, en chiffres, avec leur gardien.".into(),
             goal: "Dressez pour le capitaine la liste des ports TCP en écoute sur le château, en affichage numérique, avec le processus qui tient chacun.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les ports en écoute?".into(),
@@ -97,22 +76,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "10.4".into(), chapter: 10, chapter_title: "Reseau du domaine".into(), act: 3,
             title: "L'IP espion répond-il?".into(),
             description: "Pingez l'IP 10.0.0.66.".into(),
-            story: "Hanzō: « Seigneur, l'IP espion 10.0.0.66 a été détectée. Envoyez-lui
-4 pings pour voir s'il répond. »
+            story: "Hanzō surgit dans vos quartiers, un parchemin déchiré à la main: « Seigneur! Les scribes ont relevé des messages venant de l'adresse 10.0.0.66, et cette machine n'est jamais annoncée dans aucun registre du domaine. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Il le déplie devant vous: « C'est une adresse étrangère, peut-être une machine espionne postée près de nos remparts électroniques. Avant de lancer quoi que ce soit contre elle, il faut savoir si elle est vivante, si elle écoute, si elle répond. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous comprenez l'enjeu: une machine muette peut n'être qu'un fantôme dans les registres; une machine qui répond est une présence réelle qui vous observe.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Le moine Tetsuo, assis dans un coin, laisse tomber: « On ne craint que ce qui répond, Seigneur. Un silence n'a jamais reparlé. »
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Hanzō observe les réponses: « L'IP espion répond aux pings, Seigneur. Elle est bien là. Nous la tenons. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Hanzō vous tend un rouleau: « Interrogez-la, mais avec mesure: envoyez-lui quatre salutations, pas une de plus. Quatre, et quatre seulement. Puis dites-moi ce qu'elle a répondu. »".into(),
             goal: "Envoyez 4 pings vers 10.0.0.66.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tester la connectivité vers une IP?".into(),
@@ -127,22 +99,15 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "10.5".into(), chapter: 10, chapter_title: "Reseau du domaine".into(), act: 3,
             title: "Offrandes de la pagode".into(),
             description: "Lisez le fichier de la pagode.".into(),
-            story: "Le moine Tetsuo: « Seigneur, pour le rapport, lisez les offrandes du
-jour à la pagode: /pagode/autel/offrandes.txt. »
+            story: "Le moine Tetsuo vous accueille au seuil de la pagode, les mains jointes: « Seigneur, le conseil prépare le rapport de la journée, et la pagode doit y figurer. Les offrandes déposées ce matin sur l'autel sont consignées dans le fichier /pagode/autel/offrandes.txt. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Il incline la tête: « Pendant que la lune monte, je voudrais que vous lisiez ce qui y est écrit, pour que personne ne prétende que la pagode a été oubliée dans le rapport. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous contemplez l'autel: les bols de saké, les fruits, l'encens. Chaque détail de la journée y est consigné, comme une mémoire de pierre.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Dame Kaguya, qui vous a suivi, ajoute doucement: « Même les plus petits gestes du domaine méritent d'être rapportés, Seigneur. »
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le moine Tetsuo lit les offrandes: « Les offrandes du jour sont consignées, Seigneur. La pagode veille sur le domaine. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Tetsuo se retire en silence. La réponse est dans le parchemin de la pagode: lisez-le, et le rapport sera complet.".into(),
             goal: "Lisez le fichier offrandes.txt de la pagode.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire un fichier de la pagode?".into(),

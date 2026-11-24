@@ -1,29 +1,13 @@
-//! Campagne 3 (Nexus Réseau, niveau DIFFICILE) — CHAPITRE 10 — Analyse avancee des logs (Acte 3) — missions EN DUR
+//! Campagne 3 (Nexus Réseau, niveau DIFFICILE) — CHAPITRE 10 — Analyse avancée des logs (Acte 3) — missions EN DUR
 use crate::missions::types::*;
 
 pub fn missions() -> Vec<Mission> {
     vec![
         Mission {
-            id: "10.1".into(), chapter: 10, chapter_title: "Analyse avancee des logs".into(), act: 3,
+            id: "10.1".into(), chapter: 10, chapter_title: "Analyse avancée des logs".into(), act: 3,
             title: "Attaques d'une IP, comptées".into(),
             description: "Combien d'attaques depuis 10.0.0.66?".into(),
-            story: "Karl: « Combinez: 'Failed' dans auth.log, puis seulement 10.0.0.66, puis COMPTEZ. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl approuve: « Voilà le compte des attaques de 10.0.0.66, netrunner. L'ampleur est mesurée. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « L'adresse 10.0.0.66 est la suspecte principale: c'est d'elle que partent les scans SYN. Pour le rapport à l'amiral, il me faut le nombre exact de tentatives d'authentification échouées venues de cette machine. »\n\n« Trois étapes, dans l'ordre: d'abord ne garder que les échecs dans le journal des authentifications, puis ne garder que les lignes qui mentionnent 10.0.0.66, et enfin compter ce qui reste. »\n\n« Trois traitements successifs sur le même flux de données: tu sais les relier entre eux pour que le premier alimente le deuxième, et le deuxième le troisième. »\n\n« Le résultat final est un nombre, pas une liste: un chiffre qui mesure l'ampleur de l'attaque de cette machine. »\n\n« Enchaîne ces trois filtres, netrunner, et donne-moi le compte: combien d'échecs venus de 10.0.0.66. »\n\nKarl consulte le résultat:\n« Le compte des attaques de 10.0.0.66 est là, netrunner. L'ampleur est mesurée: le rapport aura son chiffre. »".into(),
             goal: "Comptez les lignes 'Failed' venant de 10.0.0.66 dans /logs/auth.log, en enchaînant trois filtres: les échecs, puis cette IP, puis le décompte des lignes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment enchaîner trois commandes?".into(),
@@ -35,26 +19,10 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             skill: Some(Skill { command: "|".into(), name: "|".into(), description: "| — chaîne de commandes".into() }),
         },
         Mission {
-            id: "10.2".into(), chapter: 10, chapter_title: "Analyse avancee des logs".into(), act: 3,
+            id: "10.2".into(), chapter: 10, chapter_title: "Analyse avancée des logs".into(), act: 3,
             title: "Rapport d'attaques".into(),
             description: "Enregistrez les attaques dans rapport.txt.".into(),
-            story: "Rosa: « Enregistrez les 'Failed' dans rapport.txt à votre poste. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa confirme: « Les 'Failed' sont enregistrés dans rapport.txt, netrunner. La preuve est conservée. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Le diagnostic est clair, mais un écran ne suffit pas: il me faut une trace écrite. Les échecs d'authentification doivent être conservés dans un fichier que je pourrai joindre au rapport et conserver comme preuve. »\n\n« Le NOC classe ses preuves dans des fichiers texte: chaque pièce d'un dossier d'incident doit être sauvegardée, datée, lisible. Un résultat affiché disparaît, un résultat conservé devient une preuve. »\n\n« Crée donc ce fichier: il s'appellera rapport.txt et se trouvera dans ton répertoire personnel, là où sont rangées tes documents de travail. »\n\n« Le fichier doit contenir toutes les tentatives échouées du journal des authentifications, et rien d'autre. La commande qui affiche ces lignes peut, au lieu de les montrer, les écrire dans le fichier. »\n\n« Enregistre les échecs d'authentification dans rapport.txt, netrunner. La preuve sera conservée. »\n\nRosa vérifie le fichier:\n« rapport.txt contient les échecs, netrunner. La preuve est conservée, datée et prête à être jointe au dossier. »".into(),
             goal: "Enregistrez les lignes 'Failed' de /logs/auth.log dans un nouveau fichier rapport.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment enregistrer un résultat dans un fichier?".into(),
@@ -66,26 +34,10 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             skill: Some(Skill { command: ">".into(), name: ">".into(), description: "> — redirige vers un fichier".into() }),
         },
         Mission {
-            id: "10.3".into(), chapter: 10, chapter_title: "Analyse avancee des logs".into(), act: 3,
+            id: "10.3".into(), chapter: 10, chapter_title: "Analyse avancée des logs".into(), act: 3,
             title: "Ajouter les alertes IDS".into(),
             description: "Ajoutez les ALERT de ids.log au rapport.".into(),
-            story: "Rosa: « Ajoutez les alertes IDS à la FIN de rapport.txt. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa vérifie: « Les alertes IDS sont ajoutées à la fin de rapport.txt, netrunner. Le rapport est complet. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Le dossier d'incident prend forme: rapport.txt contient déjà la liste des échecs d'authentification. Mais une preuve ne suffit pas: l'IDS a lui aussi consigné l'attaque, et ces alertes doivent rejoindre le même dossier. »\n\n« Je veux que les alertes du système de détection soient ajoutées à la fin de rapport.txt, pour que le dossier raconte toute l'histoire: les tentatives, puis les détections. »\n\n« Attention: rapport.txt existe déjà et contient des preuves précieuses. Si tu l'écrases en réenregistrant dessus, tu perds les échecs. Il faut ajouter, pas remplacer. »\n\n« Il existe deux manières d'écrire dans un fichier: l'une remplace tout le contenu, l'autre ajoute à la suite. C'est la seconde qu'il te faut. »\n\n« Ajoute donc les alertes du système de détection à la fin de rapport.txt, netrunner, sans toucher à ce qu'il contient déjà. »\n\nRosa relit le dossier:\n« Les alertes sont ajoutées à la fin de rapport.txt, netrunner, et les échecs sont toujours là. Le dossier est complet. »".into(),
             goal: "Ajoutez les alertes 'ALERT' de /logs/ids.log à la fin de rapport.txt, sans effacer son contenu.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter à la fin?".into(),
@@ -97,26 +49,10 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             skill: Some(Skill { command: ">>".into(), name: ">>".into(), description: ">> — ajoute à la fin".into() }),
         },
         Mission {
-            id: "10.4".into(), chapter: 10, chapter_title: "Analyse avancee des logs".into(), act: 3,
+            id: "10.4".into(), chapter: 10, chapter_title: "Analyse avancée des logs".into(), act: 3,
             title: "Bannissements fail2ban".into(),
             description: "Quelles IP ont été bannies?".into(),
-            story: "Karl: « Lisez les bannissements dans fail2ban.log (lignes 'BAN'). »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl lit les bannissements: « Les IP bannies sont listées, netrunner. fail2ban tient ses promesses. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Le pare-feu a repoussé les paquets, mais il y a plus radical: notre gardien automatique surveille les tentatives répétées et bannit les adresses qui insistent. Quand une machine est bannie, elle ne peut plus nous contacter du tout. »\n\n« Le gardien consigne ses décisions dans son propre journal. Je veux voir les bannissements: les adresses qu'il a exclues, et pour quel service. »\n\n« Ce journal contient aussi d'autres nouvelles, comme les levées de bannissement lorsqu'une adresse se rachète après un délai. Je ne veux que les décisions de bannissement, marquées d'un mot précis dans chaque entrée. »\n\n« Tu connais la démarche: trier un journal pour n'en garder que les lignes qui portent la marque qu'on cherche. »\n\n« Montre-moi les bannissements décidés par notre gardien, netrunner. Nous saurons quelles machines il a exclues du réseau. »\n\nKarl parcourt la sortie:\n« Les bannissements sont listés, netrunner: les machines hostiles ont été exclues du réseau après leurs tentatives. Le gardien tient ses promesses. »".into(),
             goal: "Montrez à Karl les bannissements: les lignes de /logs/fail2ban.log qui contiennent le mot 'BAN'.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les bannissements?".into(),
@@ -128,26 +64,10 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             skill: Some(Skill { command: "grep".into(), name: "grep".into(), description: "grep — recherche un motif".into() }),
         },
         Mission {
-            id: "10.5".into(), chapter: 10, chapter_title: "Analyse avancee des logs".into(), act: 3,
+            id: "10.5".into(), chapter: 10, chapter_title: "Analyse avancée des logs".into(), act: 3,
             title: "Journal d'un service".into(),
             description: "Les 10 dernières lignes du journal de ssh.".into(),
-            story: "Karl: « Consultez le journal du service ssh: 10 dernières lignes. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl consulte le journal: « Les 10 dernières lignes de ssh sont claires, netrunner. Le service est sain. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Les bannissements confirment la menace, mais je veux maintenant la version du service lui-même: le service SSH tient son propre journal, distinct des fichiers que nous avons lus jusqu'ici. »\n\n« Chaque service du NOC consigne ses événements dans le journal système: connexions acceptées, refusées, sessions ouvertes ou fermées. C'est la parole du service sur ce qui lui est arrivé. »\n\n« Je veux lire les dernières nouvelles du service SSH: ses dix dernières entrées, pas davantage. Les dix dernières lignes suffisent à voir si le service fonctionne normalement ou s'il témoigne d'un problème. »\n\n« L'outil qui lit ce journal sait se limiter à un service précis, et sait ne montrer que le nombre de lignes demandé à la fin. Deux réglages, un seul outil. »\n\n« Consulte donc le journal du service SSH et montre-moi ses dix dernières entrées. Nous verrons ce que le service lui-même a à dire. »\n\nKarl lit le journal:\n« Les dix dernières entrées du service SSH sont claires, netrunner. Le service est sain: les connexions sont légitimes. »".into(),
             goal: "Consultez dans le journal système les messages de l'unité SSH, en vous limitant aux 10 dernières lignes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment lire le journal d'un service?".into(),

@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "14.1".into(), chapter: 14, chapter_title: "Fail2ban et services".into(), act: 4,
             title: "Statut fail2ban".into(),
             description: "Quelles IP sont bannies?".into(),
-            story: "Karl: « Le système anti-bruteforce a banni quelles IP? Statut. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl consulte le statut: « Voilà les IP bannies par fail2ban, netrunner. L'anti-bruteforce travaille. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « 10.0.0.66 harcèle le port 22 depuis des heures, et notre gardien anti-intrusion est censé répondre tout seul : il surveille les tentatives d'accès, et quand une adresse échoue trop souvent, il la bannit automatiquement pour un temps. Avant de décider quoi que ce soit, je veux savoir ce qu'il a déjà fait, et contre qui. »\n\n« Son état se consulte via un client de commande, avec les droits d'administrateur du NOC : sans ce niveau de droits, il refuse de répondre. C'est la procédure habituelle, et tu disposes de l'accès nécessaire. »\n\n« Je veux la vue d'ensemble : les prisons en service et, surtout, les adresses qui s'y trouvent bannies en ce moment. C'est la preuve que la défense travaille — ou le signe qu'elle dort. »\n\n« L'IDS a recensé deux adresses particulièrement agressives ces dernières heures : je veux confronter sa liste avec ce que le gardien a réellement banni. »\n\n« Interroge donc le gardien anti-intrusion, avec les droits d'administrateur, et affiche son état : je compare avec l'IDS sur-le-champ. »\n\nAprès votre commande, Karl compare avec l'IDS :\n« Les deux adresses agressives sont bien bannies. Le gardien tient le port 22. On peut respirer, netrunner. »".into(),
             goal: "Affichez l'état de la protection anti-intrusion du NOC.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les bannissements?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "14.2".into(), chapter: 14, chapter_title: "Fail2ban et services".into(), act: 4,
             title: "Débannir le FAI".into(),
             description: "Le FAI (10.0.0.254) a été banni par erreur.".into(),
-            story: "Rosa, paniquée: « Le fail2ban a banni le FAI 10.0.0.254 par erreur! Débanissez-le! »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa, soulagée: « Le FAI 10.0.0.254 est débanni, netrunner. La liaison est rétablie. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa, alarmée : « Arrête tout : le gardien anti-intrusion vient de bannir 10.0.0.254, et c'est une erreur. Cette adresse, c'est le nœud de notre fournisseur d'accès : c'est par elle que passent toutes nos liaisons sortantes vers le monde extérieur. »\n\n« Le FAI a probablement provoqué des échecs de connexion pendant une maintenance, et le gardien, trop rigoureux, l'a confondu avec un attaquant. Résultat : nos échanges avec l'extérieur sont coupés, et l'équipe voit les liaisons tomber une à une. »\n\n« Il faut lever ce bannissement immédiatement, avec les droits d'administrateur : c'est au gardien qu'on demande cela, à l'adresse exacte, pour qu'il retire la mauvaise marque et laisse 10.0.0.254 repasser. »\n\n« Attention à ne toucher qu'à cette adresse : les autres bannissements, ceux des vraies menaces, doivent rester en place. Une erreur de plus et je te jure que la journée devient très longue. »\n\n« Libère donc le FAI maintenant, et dis-moi quand c'est fait : chaque seconde de coupure coûte cher au réseau. »\n\nAprès votre commande, Rosa teste la liaison :\n« Le FAI répond de nouveau : nos liaisons sortantes remontent une à une. Erreur corrigée, netrunner. Merci. »".into(),
             goal: "Levez immédiatement le bannissement infligé par erreur au FAI 10.0.0.254 par le gardien anti-intrusion.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment révoquer un bannissement?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "14.3".into(), chapter: 14, chapter_title: "Fail2ban et services".into(), act: 4,
             title: "État du service SSH".into(),
             description: "sshd tourne-t-il?".into(),
-            story: "Karl: « Vérifiez que sshd tourne bien. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl vérifie: « sshd tourne bien, netrunner. Le service est en ordre. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Après tout ce qui vient de se passer sur le port 22 — les scans, les bannissements, et le fait que le FAI a failli être coupé — je veux être certain d'une chose simple : le service qui permet l'accès distant sécurisé aux serveurs du NOC tourne-t-il encore, ici, en ce moment ? »\n\n« Je parle du service qui prend en charge ces connexions : s'il est tombé pendant la confusion, personne ne pourra plus administrer les serveurs à distance, et l'incident deviendrait un deuxième incident. Il faut trancher tout de suite. »\n\n« Je veux voir son état affiché : actif ou non, avec le détail. La commande est celle utilisée pour les services ; elle fonctionne sans droits particuliers, puisqu'il s'agit de consulter. »\n\n« Le journal du service, les dernières lignes, te soutiendront si quelque chose a déraillé : regarde bien tout ce que l'affichage donne. »\n\n« Montre-moi que ce service tourne, et je passerai à la suite. »\n\nAprès votre commande, Karl regarde l'état du service :\n« Actif, en service depuis ce matin, sans interruption. Le port 22 est tenu. On enchaîne, netrunner. »".into(),
             goal: "Vérifiez pour Karl que le service d'accès distant sécurisé du NOC tourne bien, en affichant son état.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'état d'un service?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "14.4".into(), chapter: 14, chapter_title: "Fail2ban et services".into(), act: 4,
             title: "Redémarrer SSH".into(),
             description: "Redémarrez ssh après les changements.".into(),
-            story: "Karl: « Redémarrez ssh pour appliquer les réglages. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl confirme: « ssh est redémarré, netrunner. Les réglages sont appliqués. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « La configuration du service d'accès distant vient d'être modifiée pour durcir les échecs : nouveau seuil avant bannissement, nouvelles règles. Mais une configuration, tant qu'elle n'est pas rechargée par le service concerné, ne sert à rien : il continue de tourner avec l'ancienne. »\n\n« Il faut que le service reparte proprement, avec les droits d'administrateur : c'est lui qui lit sa configuration au démarrage. Un simple regard ne suffit pas, il faut réellement le relancer. »\n\n« La coupure sera brève : les connexions en cours seront fermées quelques instants, puis le service reviendra avec les nouveaux réglages. Tous les administrateurs le savent, c'est une manœuvre courante. »\n\n« Pendant que tu le fais, je surveille les liaisons de mon côté : dès que le service revient, elles se reconstruisent toutes seules. Si quelque chose clochait, je le verrais immédiatement. »\n\n« Relance donc le service maintenant, avec les droits d'administrateur, et préviens-moi quand c'est fait. »\n\nAprès votre commande, Karl observe les liaisons :\n« Le service est reparti, les connexions se reconstruisent, les nouveaux seuils sont en vigueur. La manœuvre est propre, netrunner. »".into(),
             goal: "Redémarrez le service SSH pour appliquer la nouvelle configuration.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment redémarrer un service?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "14.5".into(), chapter: 14, chapter_title: "Fail2ban et services".into(), act: 4,
             title: "Services critiques".into(),
             description: "Lisez la liste des services critiques.".into(),
-            story: "Rosa: « Lisez la liste des services critiques: /configs/services/services_critiques.txt. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa lit la liste: « Les services critiques sont répertoriés, netrunner. Nous savons quoi protéger. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « La phase de durcissement continue, et avant d'aller plus loin je veux la liste exacte des services que nous considérons comme critiques : ceux dont la perte mettrait tout le NOC en difficulté. Cette liste est consignée dans le fichier /configs/services/services_critiques.txt. »\n\n« C'est elle qui guide nos priorités : on protège d'abord ce qui est irremplaçable, et on surveille le reste. Si un service critique tombe, c'est une procédure immédiate ; si ce n'est pas critique, on peut respirer. »\n\n« Le fichier est court, mais il est notre référence au moment de décider : chaque entrée correspond à un maillon du réseau qu'on ne veut pas perdre. »\n\n« Lis-moi ce fichier tel qu'il est, sans rien omettre : je veux voir la liste sous les yeux et vérifier qu'elle est bien à jour depuis le durcissement. »\n\n« Une fois que je l'ai vue, je saurai exactement quoi surveiller en priorité pendant la suite. »\n\nAprès votre commande, Rosa compare avec ses notes :\n« Accès distant, pare-feu, gardien anti-intrusion, journal système, serveur web : tout y est. La liste est à jour, on sait quoi protéger. »".into(),
             goal: "Lisez services_critiques.txt.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire la liste des services?".into(),

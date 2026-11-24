@@ -7,23 +7,22 @@ pub fn missions() -> Vec<Mission> {
             id: "19.1".into(), chapter: 19, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Lire la config SSH".into(),
             description: "Vex Korshun audite la configuration SSH de la station.".into(),
-            story: "Vex Korshun: Â« Capitaine, avant de durcir la station, lisons la
-configuration actuelle du service SSH: /securite/config/sshd_config. Â»
+            story: "Zyra-7, l'IA de bord, s'illumine dans la passerelle. « Capitaine, le
+durcissement de la liaison sécurisée est en cours. Avant de modifier un seul
+réglage, j'ai besoin que vous me montriez l'état actuel de la configuration :
+elle est enregistrée dans /securite/config/sshd_config. »
 
-Ce fichier contient les rÃ©glages de sÃ©curitÃ© du canal de communication
-sÃ©curisÃ©. Lisez-le entiÃ¨rement.
+Elle affiche une copie du plan de travail.
 
-Â« Montrez-moi la config SSH actuelle, Capitaine. Â»
+« Lisez le fichier de configuration en entier : je dois savoir exactement
+quelles portes sont encore ouvertes avant de les fermer une à une. Les
+réglages que nous allons changer sont dedans. »
 
-Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
+Vous lisez la configuration actuelle de la liaison sécurisée. Les options
+y sont listées les unes après les autres.
 
-La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-Vous lisez la configuration SSH du vaisseau. Certaines options sont dangereuses.
-
-« Le login root est autorisé », constate Draz M'kal. « C'est une faille que les pirates pourraient exploiter. »".into(),
+« Je vois que vous avez lu le fichier, Capitaine. Le rapport est
+enregistré : nous savons maintenant ce qui doit être fermé. »".into(),
             goal: "Lisez le contenu du fichier de configuration /securite/config/sshd_config.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire un fichier de configuration?".into(),
@@ -38,22 +37,21 @@ Vous lisez la configuration SSH du vaisseau. Certaines options sont dangereuses.
             id: "19.2".into(), chapter: 19, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Interdire le login root".into(),
             description: "Ajoutez 'PermitRootLogin no' à la config SSH.".into(),
-            story: "Vex Korshun: « Capitaine, la config actuelle autorise le login root
-(PermitRootLogin yes). C'est une faille: les pirates essaient le compte root
-en premier. »
+            story: "Draz M'kal, de la sécurité, pointe l'écran de la console. « Capitaine, regardez
+la configuration que vous venez de lire : le compte root a encore le droit de
+se connecter. C'est la porte que les pirates essaient en premier, et elle est
+grande ouverte. »
 
-Il faut ajouter la ligne 'PermitRootLogin no' à la fin du fichier
-sshd_config, sans effacer le reste.
+Il vérifie le plan de durcissement.
 
-« Ajoutez 'PermitRootLogin no' à la fin de sshd_config, Capitaine. »
+« Nous allons la fermer : ajoutez la ligne 'PermitRootLogin no' à la fin du
+fichier /securite/config/sshd_config, sans effacer le reste. Une fois cette
+ligne en place, root ne pourra plus ouvrir de session à distance. »
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+Vous ajoutez la ligne d'interdiction à la fin du fichier. La porte que les
+pirates visaient en premier est désormais condamnée.
 
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-La ligne 'PermitRootLogin no' est ajoutée à la fin du fichier. Le login root est désormais interdit.
-
-« Bien », approuve Draz M'kal. « Une faille de moins. Chaque ligne durcie renforce nos défenses. »".into(),
+« Bien, Capitaine. Le compte root est hors de portée des intrus. »".into(),
             goal: "Ajoutez la ligne 'PermitRootLogin no' à la fin du fichier sshd_config.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter une ligne de configuration à la fin d'un fichier?".into(),
@@ -68,22 +66,21 @@ La ligne 'PermitRootLogin no' est ajoutée à la fin du fichier. Le login root e
             id: "19.3".into(), chapter: 19, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Etat du service SSH".into(),
             description: "Le service SSH tourne-t-il encore sur la station?".into(),
-            story: "Tael Rhen, depuis la salle des machines: « Capitaine, avant de redémarrer
-SSH après la modification, vérifiez qu'il tourne bien actuellement. »
+            story: "Tael Rhen, depuis la salle des machines, vous appelle sur l'intercom. « Le
+fichier est modifié, Capitaine. Avant de redémarrer quoi que ce soit, vérifions
+le service de la liaison sécurisée tourne encore. »
 
-La commande de gestion des services affiche l'état d'un service.
+Il vous laisse un instant pour réfléchir.
 
-« Le service ssh est-il actif, Capitaine? »
+« Affichez l'état du service ssh : je veux savoir s'il est actif en ce
+moment, avec les détails de son fonctionnement. S'il est tombé, autant le
+savoir avant de lancer le redémarrage. »
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+Vous affichez l'état du service : la liaison sécurisée est bien active et
+prête.
 
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-L'état du service ssh s'affiche. Le service tourne correctement.
-
-« Le service est actif », confirme Draz M'kal. « Vérifier son état, c'est s'assurer que la porte reste ouverte aux bons visiteurs. »".into(),
+« Parfait, Capitaine. Le service est vivant — nous pouvons passer à la
+suite en toute sécurité. »".into(),
             goal: "Affichez l'état actuel du service ssh.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'état d'un service systemd?".into(),
@@ -98,22 +95,21 @@ L'état du service ssh s'affiche. Le service tourne correctement.
             id: "19.4".into(), chapter: 19, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Appliquer la config SSH".into(),
             description: "Appliquez la nouvelle configuration en redémarrant SSH.".into(),
-            story: "Tael Rhen: « Capitaine, la config est modifiée. Redémarrez le service SSH
-pour appliquer le durcissement immédiatement. »
+            story: "Tael Rhen revient sur l'intercom, la voix pressée. « Le durcissement est en
+place : la ligne d'interdiction est dans le fichier, et le service tourne
+toujours. Il ne reste qu'une étape : redémarrer la liaison sécurisée pour
+qu'elle reparte avec la nouvelle configuration. »
 
-« Redémarrez ssh maintenant, Capitaine. »
+Le ronronnement des machines vous parvient en fond.
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+« Relancez le service ssh, Capitaine. C'est lui qui applique les réglages
+au démarrage : tant qu'il n'a pas redémarré, la porte la plus dangereuse est
+encore ouverte. »
 
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
+Vous relancez la liaison sécurisée. Le service repart aussitôt avec les
+réglages durcis.
 
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-Zyra-7, l'IA de bord, surveille les capteurs en permanence et vous alerte dès qu'une signature hostile approche le secteur.
-
-Le service ssh redémarre. La nouvelle configuration est appliquée.
-
-« Redémarrer, c'est appliquer les changements », explique Draz M'kal. « Le service repart avec les réglages durcis. »".into(),
+« Le service est reparti avec la porte condamnée. Bien joué, Capitaine. »".into(),
             goal: "Redémarrez le service ssh pour appliquer la nouvelle configuration.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment redémarrer un service après modification de sa config?".into(),
@@ -128,23 +124,21 @@ Le service ssh redémarre. La nouvelle configuration est appliquée.
             id: "19.5".into(), chapter: 19, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Logs du service SSH".into(),
             description: "Consultez les 10 dernières lignes du journal du service SSH.".into(),
-            story: "Vex Korshun: « Capitaine, pour vérifier que le redémarrage s'est bien passé,
-consultez les dernières entrées du journal du service SSH. »
+            story: "Draz M'kal vous fait signe près de la console de sécurité. « Le service a
+redémarré, Capitaine. Maintenant, vérifions que tout s'est bien passé — le
+journal du service raconte ce qui se passe à l'intérieur. »
 
-Le journal journalisé permet de filtrer par service et de limiter le nombre
-de lignes affichées.
+Il se penche sur l'écran.
 
-« Montrez-moi les 10 dernières lignes du journal de ssh. »
+« Affichez les 10 dernières entrées du journal de la liaison sécurisée (ssh) :
+je veux voir ce qui s'est passé récemment, pas toute l'histoire depuis le
+début. C'est là qu'on repère une connexion suspecte dès son arrivée. »
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+Vous affichez les dernières entrées du journal. La relance du service y
+figure, ainsi que les connexions récentes.
 
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-Les dix dernières lignes du journal de ssh s'affichent. Vous y voyez les connexions récentes.
-
-« Le journal raconte l'activité du service », note Draz M'kal. « C'est là qu'on repère les connexions suspectes. »".into(),
+« Le journal montre une relance propre, Capitaine. La liaison sécurisée
+est durcie et surveillée. »".into(),
             goal: "Affichez les 10 dernières lignes du journal du service ssh.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment consulter les logs d'un service précis?".into(),

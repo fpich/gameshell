@@ -7,22 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "20.1".into(), chapter: 20, chapter_title: "Isolement total".into(), act: 5,
             title: "Token du netrunner".into(),
             description: "Prouvez votre identité avec le token caché.".into(),
-            story: "Karl: « Avant les renforts du SOC, prouvez que vous êtes le netrunner:
-donnez le TOKEN (fichier caché .secret de votre poste). »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Karl vérifie le token: « Token confirmé, netrunner. Vous êtes bien le netrunner du NOC. Les renforts du SOC arrivent. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl range son casque, les yeux sur le flux d'alertes du NOC :\n« L'incident de ce matin remonte à des heures, et le SOC exige une preuve avant d'envoyer les renforts : chaque opérateur de ce centre est identifié par un token personnel, unique, stocké dans un fichier discret de son répertoire privé. Le mien est bien visible, le tien aussi : il s'appelle .secret, déposé dans ton répertoire personnel, fermé aux regards indiscrets. Rien ne doit l'afficher à l'écran sans que tu le lises volontairement.\n\nPour ouvrir la porte du protocole d'urgence, je dois vérifier que tu sais toi-même t'identifier : lis ton token, exactement comme son nom l'indique — montre son contenu. Tu le retrouveras aussitôt, en toutes lettres : c'est la preuve que le SOC attend de toi. Une fois ce code entre tes mains, tu devras me le redonner pour confirmer ton identité.\n\nAprès votre commande, Karl vérifie le mot de passe que vous lui récitez :\n« Token confirmé, netrunner. Vous êtes bien l'opérateur du NOC. Les renforts arrivent — en attendant, tenez le poste. »".into(),
             goal: "Trouvez le token dans .secret et validez avec ce code.".into(),
             bloom_level: "Évaluer".into(),
             bloom_question: "Où est le token secret?".into(),
@@ -37,22 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "20.2".into(), chapter: 20, chapter_title: "Isolement total".into(), act: 5,
             title: "Code du pare-feu".into(),
             description: "Validez avec le code du coffre-fort réseau.".into(),
-            story: "Karl: « Le coffre-fort réseau est verrouillé. Donnez le CODE PARE-FEU
-(/firewall/coffre/codes.txt). »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Karl vérifie le code: « Code pare-feu confirmé, netrunner. Le coffre réseau est ouvert. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa pousse le registre du pare-feu sur le comptoir :\n« Notre défense est verrouillée par un code d'urgence, conservé dans le coffre-fort réseau : le local sécurisé /firewall/coffre, dans lequel un fichier codes.txt réunit tous les codes de la nuit. J'ai besoin que tu l'ouvres et me rappelles celui du pare-feu tel qu'il y est écrit — je dois composer la séquence sur la console avant que la prochaine salve ne passe.\n\nCe fichier, c'est la clé de toute la protection : sans lui, personne ne peut modifier une règle ni lancer la contre-mesure. Ouvre le coffre comme on ouvre un registre : en affichant son contenu, mot pour mot. Tu verras les codes alignés ; reprends celui du pare-feu et communique-le-moi tel quel.\n\nAprès votre commande, Rosa compare avec sa tablette :\n« Le code du pare-feu est bien celui du coffre, netrunner. La console est armée, la défense peut être reconfigurée. »".into(),
             goal: "Trouvez le code pare-feu et validez avec ce code.".into(),
             bloom_level: "Évaluer".into(),
             bloom_question: "Où est le code pare-feu?".into(),
@@ -67,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "20.3".into(), chapter: 20, chapter_title: "Isolement total".into(), act: 5,
             title: "Bloquer tout le trafic entrant".into(),
             description: "Dernière règle: tout bloquer sauf SSH.".into(),
-            story: "Karl: « Règle finale: refusez TOUT le trafic entrant sauf le 22. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl approuve: « Tout le trafic entrant est bloqué sauf le 22, netrunner. Le NOC est verrouillé. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl se penche sur le poste d'administration, le visage éclairé par les voyants :\n« Dernière règle avant le repli : le pare-feu doit passer en posture de forteresse. Aujourd'hui, par défaut, notre barrière laisse entrer ce qui n'est pas explicitement interdit — c'est trop permissif pour ce qui arrive. Je veux l'inverse : que tout le trafic entrant soit refusé par défaut, sans exception. C'est la base d'une défense saine : ce qui n'est pas ouvert n'existe pas pour l'extérieur.\n\nMais il faut garder une porte à l'équipe : l'accès d'administration à distance, qui se fait par SSH, sur le port 22, en TCP. Une fois le refus général posé, rouvre uniquement ce port-là, et rien d'autre. Deux réglages, dans cet ordre : d'abord tout interdire par défaut, ensuite faire une exception unique pour le 22.\n\nCes changements exigent les droits d'administrateur du NOC : c'est une décision de verrouillage globale, pas une simple lecture. Tu es habilité : le poste te le rappellera si tu t'y prends sans la bonne élévation.\n\nAprès votre commande, Karl relit la configuration :\n« Tout ce qui entre est refusé par défaut, et seul le port 22 reste ouvert pour nous, netrunner. Le NOC est verrouillé. »".into(),
             goal: "Règle finale: refusez par défaut tout le trafic entrant, puis rouvrez uniquement le port 22 en TCP.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Comment faire une règle par défaut?".into(),
@@ -98,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "20.4".into(), chapter: 20, chapter_title: "Isolement total".into(), act: 5,
             title: "Dernier scan défensif".into(),
             description: "Scannez nos propres ports pour vérifier.".into(),
-            story: "Rosa: « Scannez nos propres ports (10.0.0.1) pour vérifier la surface d'attaque. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa examine le scan: « La surface d'attaque de 10.0.0.1 est mesurée, netrunner. Nous savons ce qui est exposé. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa revient de la salle des machines, l'air préoccupé :\n« L'attaque de ce matin a touché plusieurs postes, et avant de baisser la garde, je veux vérifier notre propre exposition : quelle surface offrons-nous nous-mêmes à l'extérieur ? Le plus sûr est de scanner nos propres ports, comme le ferait un attaquant, afin de voir ce qui répond depuis la passerelle du NOC, 10.0.0.1.\n\nUn scan classique envoie une poignée de main complète et laisse des traces ; la méthode discrète, elle, ne fait qu'à moitié la connexion avant de l'abandonner : c'est celle qu'emploient les intrus pour passer inaperçus. Je veux que tu utilises cette technique-là, la plus silencieuse, contre notre propre passerelle.\n\nComme pour la reconfiguration du pare-feu, ce contrôle exige les droits d'administrateur : scanner un réseau, même le nôtre, reste une action sensible. Fais-le depuis ta console, et observe : la liste des ports ouverts que le scan te renverra, c'est notre surface d'attaque réelle.\n\nAprès votre commande, Rosa étudie la liste des ports :\n« Les ports exposés de 10.0.0.1 sont identifiés, netrunner. Nous savons exactement ce qu'un intrus verrait — et quoi colmater. »".into(),
             goal: "Scannez discrètement nos propres ports sur 10.0.0.1, en mode furtif par demi-ouverture SYN, pour évaluer la surface d'attaque.".into(),
             bloom_level: "Évaluer".into(),
             bloom_question: "Comment scanner sa propre machine?".into(),
@@ -129,22 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "20.5".into(), chapter: 20, chapter_title: "Isolement total".into(), act: 5,
             title: "Protocole isolement total".into(),
             description: "Dernière épreuve: validez avec le protocole du coffre-fort.".into(),
-            story: "Karl: « Dernière épreuve: donnez le PROTOCOLE D'ISOLEMENT TOTAL
-(/firewall/coffre/codes.txt) pour lancer la contre-mesure décisive. »
-
-Lisez le coffre, posez une caméra d'audit sur /archives, validez avec ce code.
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Karl, solennel: « Protocole d'isolement total confirmé, netrunner. La contre-mesure décisive est lancée. Le réseau Neon-9 est sauvé. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Le NOC est silencieux. Karl pose la main sur la console centrale :\n« C'est la dernière épreuve, netrunner. Tout ce que tu as appris cette nuit converge ici : le code d'isolement total est dans le coffre-fort, avec les autres, dans /firewall/coffre/codes.txt. Lis-le et garde-le pour la validation finale : il lance la contre-mesure décisive qui isolera le cluster du reste du réseau.\n\nAvant de l'appliquer, il reste une garantie à poser : les archives de cette nuit contiennent toutes les preuves et les configurations de repli. Si la contre-mesure échoue, on saura exactement ce qui s'est passé — mais seulement si chaque accès à ces archives laisse une trace. Je veux une surveillance permanente sur /archives : toute écriture ou modification qui y touche doit être enregistrée, et chaque événement relié à un libellé unique, 'final', pour qu'on puisse tout retrouver après coup.\n\nC'est ta dernière action d'administrateur : c'est elle qui scelle la campagne. Prépare-toi : une fois le protocole donné, le réseau Neon-9 basculera en isolement total.\n\nAprès votre commande, Karl vérifie les journaux d'audit :\n« La surveillance des archives est active, et le protocole d'isolement total est confirmé, netrunner. Le réseau Neon-9 est sauvé. Vous pouvez reposer le clavier : votre mission est accomplie. »".into(),
             goal: "Lisez le coffre, audit sur /archives, validez avec le protocole.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Quel est le protocole d'isolement?".into(),

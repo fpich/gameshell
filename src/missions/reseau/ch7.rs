@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "7.1".into(), chapter: 7, chapter_title: "DNS et HTTP".into(), act: 2,
             title: "Résolution DNS".into(),
             description: "Quelle IP derrière nexus.neon9.local?".into(),
-            story: "Rosa: « Résolvez nexus.neon9.local en IP. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa confirme: « nexus.neon9.local est résolu, netrunner. Le DNS interne répond. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Ton poste est déclaré dans notre zone DNS interne sous le nom nexus.neon9.local. Avant de te débloquer des accès supplémentaires au cluster, je dois vérifier que ce nom correspond bien à ta machine. »\n\n« Ta carte réseau t'a déjà montré son adresse sur le réseau, il y a quelques missions. Le serveur de noms interne doit associer ton nom exactement à cette même adresse: ni plus, ni moins. »\n\n« Interroge donc la zone interne sur ce nom. Je n'ai pas besoin des détails techniques de la requête, seulement de la réponse: l'adresse associée, rien d'autre. »\n\n« Compare-la avec ce que ta machine affiche pour elle-même. Si les deux correspondent, ton identité réseau est propre et je peux te débloquer la suite des accès. »\n\nAprès votre réponse, Rosa compare les deux adresses et approuve:\n« Les deux correspondent, netrunner. La zone interne et ta carte réseau parlent de la même machine. Accès confirmés. »".into(),
             goal: "Obtenez l'adresse IP de nexus.neon9.local en n'affichant que la réponse courte, sans le détail de la requête DNS.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment résoudre un nom de domaine?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "7.2".into(), chapter: 7, chapter_title: "DNS et HTTP".into(), act: 2,
             title: "Lire les DNS du NOC".into(),
             description: "Lisez le fichier DNS du NOC.".into(),
-            story: "Karl: « Lisez les enregistrements DNS internes: /captures/dns_nexus.txt. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl lit les enregistrements: « Les entrées DNS internes sont claires, netrunner. La zone est documentée. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « J'ai récupéré une copie de notre zone DNS interne, enregistrée dans les captures du NOC. Je veux la confronter à ce que vient de te répondre le serveur de noms. »\n\n« Le fichier est dans le dossier des captures réseau: /captures/dns_nexus.txt. Ouvre-le et lis-moi ce qu'il contient. »\n\n« Il y figure les noms internes du NOC et l'adresse à laquelle chacun doit répondre. Ton poste doit y apparaître, ainsi que le lien vers le fournisseur d'accès, fai. »\n\n« Si la copie écrite concorde avec les réponses du serveur de noms, la documentation est fiable et on pourra s'appuyer dessus pour la suite. Un écart, et c'est un piège à signaler. »\n\nAprès votre lecture, Karl vérifie les deux sources:\n« La copie et le serveur de noms concordent, netrunner. La documentation est fiable: on la garde comme référence. »".into(),
             goal: "Lisez le fichier dns_nexus.txt des captures.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire le fichier DNS?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "7.3".into(), chapter: 7, chapter_title: "DNS et HTTP".into(), act: 2,
             title: "API interne du NOC".into(),
             description: "Interrogez l'API de statut du cluster.".into(),
-            story: "Rosa: « Interrogez l'API interne de statut: curl -s http://10.0.0.1:8080/status. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa consulte la réponse: « L'API de statut répond, netrunner. Le service est en ligne. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Le cluster expose une API de statut sur la passerelle. Elle répond sur le port 8080, à la ressource /status, à l'adresse de la passerelle: 10.0.0.1. »\n\n« Je dois intégrer sa réponse brute dans le rapport d'incident. Or l'outil de requête affiche par défaut des messages parasites et une barre de progression qui pollueraient le document. Je te demande une exécution sans aucune distraction: la seule réponse, rien d'autre. »\n\n« Interroge l'API de statut sur la passerelle, à l'adresse http://10.0.0.1:8080/status, en mode silencieux. »\n\n« La réponse est un objet structuré: l'état du cluster, l'état du pare-feu, et éventuellement une alerte en cours. C'est exactement ce dont le rapport a besoin. »\n\nAprès votre requête, Rosa récupère la réponse et la relit:\n« Propre, sans bruit: parfait pour le rapport. L'API confirme l'état dégradé du cluster, netrunner. On tient notre diagnostic. »".into(),
             goal: "Interrogez l'API interne de statut à l'adresse http://10.0.0.1:8080/status en mode silencieux, sans barre de progression.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment interroger une API HTTP?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "7.4".into(), chapter: 7, chapter_title: "DNS et HTTP".into(), act: 2,
             title: "Capture du scan".into(),
             description: "Lisez la capture du scan de l'attaquant.".into(),
-            story: "Karl: « Lisez la capture du scan de 10.0.0.66: /captures/scan_10.0.0.66.txt. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl lit la capture: « Le scan de 10.0.0.66 est documenté, netrunner. Nous avons la preuve de l'attaque. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « On a capturé le scan que la machine hostile a mené contre nous. Je veux confirmer ce qu'elle a découvert, pour comprendre ce qu'elle prépare. »\n\n« La capture est enregistrée dans le dossier des captures réseau: /captures/scan_10.0.0.66.txt. Lis-la et dis-moi ce qu'elle révèle. »\n\n« Elle liste les services ouverts sur la machine 10.0.0.66: chaque port, le service qui y répond. C'est la surface d'attaque qu'elle présente au réseau extérieur. »\n\n« Regarde en particulier la ligne signalée comme dangereuse: c'est elle qui va orienter notre prochaine décision. »\n\nAprès votre lecture, Karl note les services:\n« Confirmé, netrunner: la base de données est exposée. C'est exactement l'angle qu'on suspectait. On s'en sert pour la suite. »".into(),
             goal: "Lisez la capture scan_10.0.0.66.txt.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment lire une capture réseau?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "7.5".into(), chapter: 7, chapter_title: "DNS et HTTP".into(), act: 2,
             title: "Ports documentés".into(),
             description: "Quels ports sont documentés sur Nexus?".into(),
-            story: "Rosa: « Lisez la doc des ports: /captures/ports_nexus.txt. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa lit la doc des ports: « Les ports du NOC sont répertoriés, netrunner. La référence est à jour. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Dernière pièce du dossier: la référence des ports ouverts sur la passerelle du NOC. Elle nous sert à distinguer un service connu d'une ouverture suspecte. »\n\n« La documentation est enregistrée dans les captures réseau: /captures/ports_nexus.txt. Ouvre-la et lis-moi la liste. »\n\n« Chaque port ouvert sur la passerelle doit y figurer, avec le service qui légitime cette ouverture. Tout port qui s'y trouverait en plus serait une anomalie à remonter immédiatement. »\n\n« Compare-la avec la capture du scan hostile: tu verras quelles ouvertures sont normales chez nous et lesquelles sont des failles chez l'attaquant. »\n\nAprès votre lecture, Rosa range la référence:\n« Tout est à jour, netrunner. La passerelle n'expose que ses services légitimes: la référence est validée et versée au dossier. »".into(),
             goal: "Lisez ports_nexus.txt.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire la doc des ports?".into(),

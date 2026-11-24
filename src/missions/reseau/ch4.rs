@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "4.1".into(), chapter: 4, chapter_title: "Registres du NOC".into(), act: 1,
             title: "Lire vos notes".into(),
             description: "Relisez notes.txt.".into(),
-            story: "Votre carnet notes.txt contient les points à ne pas oublier. « Relisez-le. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Vous relisez vos notes, netrunner. Chaque point y est consigné. Un opérateur qui se souvient de tout ne se laisse jamais surprendre.
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl vous rappelle: « Votre carnet notes.txt contient les points de\nveille à ne pas oublier. Relisez-le. »\n\n« Les notes sont dans votre répertoire de travail, comme tout ce qui\nconcerne votre poste. Affichez le contenu du carnet: un opérateur qui\nse souvient de tout ne se laisse jamais surprendre. »\n\n« Ce carnet est notre mémoire commune: vous y avez consigné les\nprocédures à suivre, les horaires de vérification et les pièges déjà\nrencontrés sur le réseau. Tant que vous savez le relire, vous n'êtes\njamais seul face à une anomalie. »\n\nVous relisez vos notes à votre poste.\n\nKarl approuve: « Les points de veille sont bien consignés, netrunner.\nVous savez où chercher quand le doute vous prend. »".into(),
             goal: "Lisez notes.txt à votre poste.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire un fichier?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "4.2".into(), chapter: 4, chapter_title: "Registres du NOC".into(), act: 1,
             title: "Ajouter au registre".into(),
             description: "Ajoutez une ligne à la fin de notes.txt.".into(),
-            story: "Rosa: « Ajoutez à la FIN de notes.txt, sans écraser: 'Vérifier ids.log à 14h'. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa vérifie notes.txt: « 'Vérifier ids.log à 14h' est bien ajouté, sans rien écraser. Le carnet est complet, netrunner. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Notez le prochain point de veille: 'Vérifier ids.log à 14h'.\nAjoutez-le à la FIN de notes.txt, sans écraser ce qui existe déjà. »\n\n« Le carnet doit garder tous les points, l'ancien et le nouveau. Si\ntu écrivais par-dessus, tu perdrais la veille passée: ajoute, ne\nremplace pas. »\n\n« La commande qui ajoute se distingue de celle qui écrase par le sens\ndes chevrons: l'un remplace tout d'un coup, l'autre dépose à la suite\ndes lignes déjà présentes. Utilisez celle qui conserve. »\n\nVous ajoutez la ligne demandée à la fin de votre carnet, sans rien\neffacer.\n\nRosa vérifie notes.txt: « 'Vérifier ids.log à 14h' est bien ajouté,\nsans rien écraser. Le carnet est complet, netrunner. »".into(),
             goal: "Ajoutez une ligne à la fin de notes.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter à la fin d'un fichier?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "4.3".into(), chapter: 4, chapter_title: "Registres du NOC".into(), act: 1,
             title: "Compter les lignes".into(),
             description: "Combien de lignes fait bienvenue.txt?".into(),
-            story: "Rosa: « Pour le rapport, comptez les lignes de bienvenue.txt. Juste le nombre. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa note le nombre: « Voilà la longueur du guide, netrunner. Le rapport sera exact. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Pour le rapport de veille, comptez les lignes de\nbienvenue.txt. Juste le nombre, rien d'autre. »\n\n« Le guide du NOC doit faire une longueur précise dans notre registre.\nUtilisez le comptage qui restitue uniquement le nombre de lignes, sans\nafficher le contenu du fichier. »\n\n« Le guide est dans votre poste: pas besoin d'aller au datacenter,\nil est posé à côté de vous. Comptez ses lignes, donnez-moi le\nnombre. »\n\nVous comptez les lignes du guide sans afficher son contenu.\n\nRosa note le nombre: « Voilà la longueur du guide, netrunner. Le\nrapport sera exact. »".into(),
             goal: "Comptez les lignes de bienvenue.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment compter les lignes d'un fichier?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "4.4".into(), chapter: 4, chapter_title: "Registres du NOC".into(), act: 1,
             title: "Début d'un log".into(),
             description: "Les 5 premières lignes d'auth.log.".into(),
-            story: "Karl consulte auth.log: « Montrez-moi le DÉBUT d'auth.log. 5 premières lignes. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl lit le début d'auth.log: « Les premières connexions sont consignées, netrunner. La surveillance fait son travail. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl consulte auth.log: « Montrez-moi le DÉBUT du log des\nconnexions. Les 5 premières lignes, pas plus. »\n\n« Le log d'authentification se trouve avec tous les autres logs, dans\nle dossier /logs du datacenter. Je veux voir les premières tentatives\nde connexion enregistrées ce matin: affichez le début du fichier. »\n\n« Affichez uniquement l'amorce du journal, pas tout le fichier: les\npremières lignes suffisent à voir qui s'est connecté en premier. »\n\nVous affichez les 5 premières lignes du log des connexions.\n\nKarl lit le début d'auth.log: « Les premières connexions sont\nconsignées, netrunner. La surveillance fait son travail. »".into(),
             goal: "Affichez les 5 premières lignes d'auth.log.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment n'afficher que le début?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "4.5".into(), chapter: 4, chapter_title: "Registres du NOC".into(), act: 1,
             title: "Fin du syslog".into(),
             description: "Les 3 dernières lignes du syslog.".into(),
-            story: "Karl: « Quelles sont les DERNIÈRES nouvelles du cluster? La fin du syslog. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl lit la fin du syslog: « Les dernières nouvelles du cluster sont claires, netrunner. Rien d'inquiétant pour l'instant. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Quelles sont les DERNIÈRES nouvelles du cluster? La fin du\nsyslog. »\n\n« Le syslog se trouve dans /logs, avec les autres journaux du\nsystème. Je veux les toutes dernières lignes, les plus récentes: les\n3 dernières exactement. »\n\n« Un incident récent s'afficherait tout en bas du journal: c'est là\nqu'on regarde quand on veut savoir ce qui vient de se passer sur le\nréseau. Ne me montrez pas tout le fichier, seulement sa fin. »\n\nVous affichez les 3 dernières lignes du journal système.\n\nKarl lit la fin du syslog: « Les dernières nouvelles du cluster sont\nclaires, netrunner. Rien d'inquiétant pour l'instant. »".into(),
             goal: "Affichez les 3 dernières lignes du syslog.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment n'afficher que la fin?".into(),

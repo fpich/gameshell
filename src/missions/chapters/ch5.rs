@@ -7,26 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "5.1".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
             title: "Comprendre les permissions".into(),
             description: "Vex Korshun explique: ls -l montre rwx.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Vex Korshun vous explique que chaque fichier du vaisseau a des permissions. Sans comprendre ça, impossible de protéger quoi que ce soit.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Comprendre les permissions est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Vex Korshun vous explique que chaque fichier du vaisseau a des permissions. Sans comprendre ça, impossible de protéger quoi que ce soit.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Vex Korshun examine la liste des permissions: « Bien, Capitaine. Chaque fichier a un propriétaire et des droits. Comprendre ces droits, c'est la base de toute sécurité. »
-
-Vous notez dans votre carnet les permissions de votre cabine. Savoir qui peut lire, écrire ou exécuter chaque fichier sera votre premier réflexe de défense.".into(),
+            story: "Vex Korshun, le commandant de la station, s'arrête devant votre cabine :\n« Capitaine, avant toute défense, il faut comprendre comment la\nstation protège ses fichiers. Chaque fichier du vaisseau porte des\npermissions : qui peut le lire, qui peut l'écrire, qui peut\nl'exécuter. »\n\nIl sort sa tablette et affiche une ligne de permissions :\n« Regardez. Ces trois lettres rwx et leurs tirets disent tout. Sans\ncette lecture, vous ne pourrez jamais protéger un document. »\n\n« Montrez-moi les permissions des fichiers de votre cabine, avec le\ndétail. J'ai besoin de voir qui peut toucher à quoi. »\n\nAprès votre commande, la liste détaillée s'affiche : propriétaire,\ngroupe, droits, taille, date. Vex Korshun l'examine d'un œil expert.\n\n« Bien, Capitaine. Comprendre ces droits, c'est la base de toute\nsécurité. Quand vous saurez les lire, vous saurez les corriger. »".into(),
             goal: "Vex Korshun vous explique que chaque fichier a des permissions. Regardez celles de votre cabine.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Que signifient rwx?".into(),
@@ -40,27 +21,8 @@ Vous notez dans votre carnet les permissions de votre cabine. Savoir qui peut li
         Mission {
             id: "5.2".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
             title: "Proteger le code secret".into(),
-            description: "Votre .secret contient FALCON-9. Protegez-le.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Votre code personnel FALCON-9 est dans un fichier lisible par tous. Un pirate pourrait le voler.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Protéger le code secret est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Votre code personnel FALCON-9 est dans un fichier lisible par tous. Un pirate pourrait le voler.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Votre code personnel FALCON-9 est désormais lisible par vous seul. Vex Korshun approuve: « Parfait. Un secret doit rester secret. »
-
-Vous comprenez que protéger un fichier, c'est en restreindre l'accès. Les pirates ne pourront plus lire votre code.".into(),
+            description: "Vex Korshun: vos notes sont lisibles par tous. Protegez notes.txt.".into(),
+            story: "Vex Korshun revient, soucieux :\n« Capitaine, votre carnet notes.txt est lisible par tout l'équipage.\nIl contient vos notes personnelles : adresses des attaquants, état du\npare-feu, et des indices qui mèneraient droit à votre code personnel.\nSi un pirate le lit, il saura tout de vos faiblesses. »\n\nIl vous explique que pour qu'un fichier ne soit lisible que par vous,\nil faut lui donner les droits 600 : lecture et écriture pour vous\nseul, et rien pour les autres.\n\n« Rendez vos notes.txt illisibles pour les autres, Capitaine. Un\nsecret doit rester secret. »\n\nAprès votre commande, le carnet ne montre plus que vos propres droits\ndans la liste : les autres n'y ont plus accès.\n\nVex Korshun vérifie et approuve : « Parfait. Vos notes sont\nprotégées. Les pirates ne pourront plus les lire. »".into(),
             goal: "Votre code personnel ne doit être lisible que par vous. Protégez ce fichier.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Restreindre au proprio seul?".into(),
@@ -75,26 +37,7 @@ Vous comprenez que protéger un fichier, c'est en restreindre l'accès. Les pira
             id: "5.3".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
             title: "Rendre executable".into(),
             description: "Le plan de defense doit s'executer.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Le plan de défense plan_defense.sh ne peut pas s'exécuter. Il lui manque le droit d'exécution.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Rendre le plan exécutable est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Le plan de défense plan_defense.sh ne peut pas s'exécuter. Il lui manque le droit d'exécution.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Le plan de défense plan_defense.sh peut enfin s'exécuter. Vex Korshun hoche la tête: « Bien joué. Un plan inutilisable ne sert à rien. »
-
-Vous réalisez qu'un fichier peut être lisible sans être exécutable. Savoir ajuster les droits, c'est rendre chaque outil opérationnel.".into(),
+            story: "Vex Korshun vous montre le plan de défense de la station :\n« Capitaine, ce script plan_defense.sh est prêt : il active les\nboucliers, les logs et le pare-feu. Mais il ne peut pas s'exécuter :\nil lui manque le droit d'exécution. »\n\nIl précise que lire un fichier et l'exécuter sont deux choses\ndifférentes : ici, il faut ajouter le droit +x pour que le plan\npuisse se lancer.\n\n« Lancez ce dont il a besoin, Capitaine. Le plan de défense doit\npouvoir s'exécuter avant l'attaque. »\n\nAprès votre commande, le script passe en vert dans la liste des\npermissions : il est maintenant exécutable.\n\nVex Korshun hoche la tête : « Bien joué. Un plan inutilisable ne\nsert à rien. Dès que l'attaque commence, vous pourrez l'activer. »".into(),
             goal: "Le plan de défense ne peut pas se lancer. Il lui manque quelque chose. Corrigez.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter +x?".into(),
@@ -109,26 +52,7 @@ Vous réalisez qu'un fichier peut être lisible sans être exécutable. Savoir a
             id: "5.4".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
             title: "Changer le proprio".into(),
             description: "Transferez le fichier equipage.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Un fichier appartient à root. Vous devez en prendre la responsabilité pour le modifier.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Changer le propriétaire est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Un fichier appartient à root. Vous devez en prendre la responsabilité pour le modifier.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Le fichier appartient désormais à votre nom. Vex Korshun vérifie: « C'est corrigé. La propriété doit refléter la réalité des responsabilités. »
-
-Vous comprenez que chaque fichier a un propriétaire, et que cette attribution est essentielle pour l'audit et la sécurité.".into(),
+            story: "Draz M'kal, chef de la sécurité, vous fait signe dans la coursive :\n« Capitaine, le rapport d'équipage /securite/rapports/equipage.txt\nest resté au nom de l'ancien administrateur. Tant qu'il ne vous\nappartient pas, vous ne pouvez pas le modifier ni l'approuver, et\nl'audit ne sait pas qui en est responsable. »\n\nIl vous explique que pour prendre la responsabilité d'un fichier, il\nfaut en changer le propriétaire, avec les droits d'administrateur du\nvaisseau.\n\n« Transférez ce rapport à votre nom, Capitaine. La propriété doit\nrefléter les responsabilités réelles. »\n\nAprès votre commande, le rapport d'équipage affiche votre nom comme\npropriétaire.\n\nDraz M'kal vérifie : « C'est corrigé. Désormais, c'est vous qui\nrépondez de ce fichier. »".into(),
             goal: "Un fichier appartient encore à l'ancien admin. Transférez-le à votre nom.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer le proprio?".into(),
@@ -143,26 +67,7 @@ Vous comprenez que chaque fichier a un propriétaire, et que cette attribution e
             id: "5.5".into(), chapter: 5, chapter_title: "Securiser les acces".into(), act: 2,
             title: "Metadonnees".into(),
             description: "Comparez les dates de modification.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Pour détecter une intrusion, comparez les dates de modification des fichiers sensibles.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Analyser les métadonnées est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Pour détecter une intrusion, comparez les dates de modification des fichiers sensibles.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Vous comparez les dates de modification des fichiers de sécurité. Une date semble anormale.
-
-« Ces métadonnées racontent l'histoire du fichier », explique Tael Rhen. « Une date suspecte peut révéler une intrusion. »".into(),
+            story: "Tael Rhen, ingénieur-chef des machines, vous rejoint au poste de\ntravail :\n« Capitaine, une intrusion ne laisse pas toujours de traces visibles.\nMais chaque fichier garde son histoire : la date de sa dernière\nmodification, sa taille, ses permissions. Ces métadonnées ne mentent\npas. »\n\nIl pointe votre plan de défense plan_defense.sh :\n« Si quelqu'un l'a touché à votre insu, la date le trahira. Montrez-moi\ntoutes les informations du fichier, en détail — pas seulement la liste\nrapide. Je veux voir sa date exacte de modification. »\n\nAprès votre commande, le détail complet s'affiche : permissions,\ntaille, dates de modification et d'accès, numéro d'inode.\n\nTael Rhen étudie la date : « Une date suspecte peut révéler une\nintrusion, Capitaine. Ces métadonnées racontent l'histoire du\nfichier. »".into(),
             goal: "Comparez les dates de modification des fichiers de sécurité pour détecter une intrusion.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "stat vs ls -l?".into(),

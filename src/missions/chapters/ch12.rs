@@ -7,22 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "12.1".into(), chapter: 12, chapter_title: "Diagnostic reseau".into(), act: 3,
             title: "Coordonnees radio du vaisseau".into(),
             description: "Nira Okoro veut la configuration réseau complète d'Orion-7.".into(),
-            story: "Nira Okoro, depuis la salle des communications: « Capitaine, quels sont
-les coordonnées radio exactes du vaisseau? Toutes les interfaces, toutes
-les adresses IP. »
-
-Il vous faut la commande qui affiche la configuration réseau complète:
-interfaces, adresses IP, état des liens.
-
-« Donnez-moi la config réseau complète, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-La configuration réseau complète du vaisseau s'affiche: interfaces, adresses IP.
-
-Nira Okoro note les coordonnées: « Parfait. Je pourrai enfin régler les communications avec l'Andromède. »".into(),
+            story: "Nira Okoro, depuis la salle des communications, consulte une carte toute vide. « Capitaine, l'Andromède me demande nos coordonnées radio, et je n'ai rien à lui montrer. Toutes les interfaces, toutes les adresses IP du vaisseau. »\n\nElle précise: « Il me faut la configuration réseau complète: les interfaces, les adresses IP, l'état des liaisons. Vérifiez ce que le système lui-même connaît. »\n\nLe moyen le plus direct: demander la configuration réseau au système.\n\n« Montrez-moi la configuration réseau complète, Capitaine. »\n\nLes interfaces s'affichent: la boucle lo, puis eth0 avec son adresse. Nira Okoro la note.\n\n« Cette adresse, c'est notre carte d'identité dans le réseau », dit-elle. « L'Andromède pourra enfin nous joindre. »".into(),
             goal: "Affichez la configuration réseau complète du vaisseau (interfaces et IP).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les adresses IP du vaisseau?".into(),
@@ -37,22 +22,7 @@ Nira Okoro note les coordonnées: « Parfait. Je pourrai enfin régler les commu
             id: "12.2".into(), chapter: 12, chapter_title: "Diagnostic reseau".into(), act: 3,
             title: "Par où passe le trafic?".into(),
             description: "Nira Okoro veut la table de routage du vaisseau.".into(),
-            story: "Nira Okoro: « Capitaine, par quelle route passe le trafic vers l'Andromède?
-Montrez-moi la table de routage du vaisseau: les routes et la passerelle. »
-
-La commande réseau affiche aussi les routes.
-
-« Quelles sont les routes du vaisseau? »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-La table de routage s'affiche. Vous voyez par où passe le trafic vers l'extérieur.
-
-« Sans cette route, aucun message ne sortirait du vaisseau », explique Nira Okoro. « C'est notre lien avec le monde. »".into(),
+            story: "Nira Okoro appelle depuis le pupitre radio. « Capitaine, tous les messages de la station passent par une route: celle qui mène à l'Andromède et au reste de la flotte. Sans elle, nos transmissions restent coincées dans le vaisseau. Montrez-moi la table de routage: les routes et la passerelle. »\n\nElle ajoute: « La commande qui affiche la configuration réseau sait aussi dire par où part le trafic. C'est le moyen direct de voir nos routes. »\n\n« Quelles sont les routes du vaisseau? »\n\nLa table s'affiche: la route par défaut passe par la passerelle, et le réseau local est relié directement. Nira Okoro lit chaque ligne avant de répondre.\n\n« Sans cette route, aucun message ne sortirait du vaisseau », explique-t-elle. « C'est notre lien avec le monde. »".into(),
             goal: "Affichez la table de routage du vaisseau.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les routes réseau du vaisseau?".into(),
@@ -67,22 +37,7 @@ La table de routage s'affiche. Vous voyez par où passe le trafic vers l'extéri
             id: "12.3".into(), chapter: 12, chapter_title: "Diagnostic reseau".into(), act: 3,
             title: "Le pirate repond-il?".into(),
             description: "Testez la connectivité vers l'IP pirate 10.0.0.66.".into(),
-            story: "Nira Okoro: « Capitaine, les capteurs ont détecté un vaisseau pirate à
-l'adresse 10.0.0.66. Envoyez-lui 4 signaux 'ping' pour voir s'il répond. »
-
-La commande ping envoie des paquets et mesure la réponse.
-
-« 4 pings vers 10.0.0.66, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-Les quatre paquets partent vers 10.0.0.66. Les réponses reviennent: la cible est bien là.
-
-« Elle répond », confirme Draz M'kal. « L'attaquant est actif. Nous savons maintenant qu'il est joignable. »".into(),
+            story: "Draz M'kal pointe son écran radar. « Capitaine, les capteurs ont identifié un vaisseau pirate à l'adresse 10.0.0.66: une corvette des Corbeaux Noirs qui rôde à proximité. Je veux savoir s'il est joignable, et s'il nous voit. »\n\nIl demande: « Envoyez-lui 4 signaux de sonde. S'il répond, c'est qu'il est actif, dans notre portée, et qu'il connaît notre présence. »\n\nUn signal de sonde mesure la réponse d'une machine distante, paquet par paquet.\n\n« 4 sondes vers 10.0.0.66, Capitaine. »\n\nLes quatre paquets partent vers la corvette, un à un. Elle répond aux quatre: elle est là, active, à portée.\n\n« Elle répond », confirme Draz M'kal. « L'attaquant est en ligne. Maintenant, nous savons qu'il nous observe. »".into(),
             goal: "Testez la connectivité vers l'adresse 10.0.0.66 en envoyant 4 paquets.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tester si une adresse réseau répond?".into(),
@@ -97,23 +52,7 @@ Les quatre paquets partent vers 10.0.0.66. Les réponses reviennent: la cible es
             id: "12.4".into(), chapter: 12, chapter_title: "Diagnostic reseau".into(), act: 3,
             title: "Quels vaisseaux sont connectes?".into(),
             description: "Quels ports du vaisseau sont en écoute?".into(),
-            story: "Vex Korshun: Â« Capitaine, quels vaisseaux sont actuellement connectÃ©s
-Ã  nos ports? Je veux la liste des connexions actives et des ports en Ã©coute. Â»
-
-Il vous faut la commande qui affiche les connexions rÃ©seau actives
-et les ports en Ã©coute, avec les processus associÃ©s.
-
-Â« Quels ports sont ouverts sur la station? Â»
-
-Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
-
-La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-Les connexions actives et les ports en écoute s'affichent. Plusieurs ports sont ouverts.
-
-« Chaque port ouvert est une porte d'entrée potentielle », avertit Draz M'kal. « Il faut savoir lesquels sont nécessaires. »".into(),
+            story: "Draz M'kal, le chef de la sécurité, regarde les portes du sas avec méfiance. « Un vaisseau peut avoir des dizaines de ports ouverts, Capitaine. Chaque port est une porte d'entrée pour un assaillant. Je veux la liste des connexions actives et des ports en écoute, avec les processus qui les gardent. »\n\nLe système connaît les ports ouverts, les connexions en cours et les programmes qui les utilisent.\n\n« Quels ports sont ouverts sur la station, et par qui? »\n\nLa liste s'affiche: le service SSH écoute sur toutes les interfaces, le courrier seulement en local. Draz M'kal compare chaque ligne à son inventaire.\n\n« Le service de commande est joignable de partout, le courrier non », constate-t-il. « C'est exactement ce que je devais vérifier avant de resserrer les accès. »".into(),
             goal: "Affichez les connexions réseau actives et les ports en écoute du vaisseau.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les ports en écoute du vaisseau?".into(),
@@ -128,21 +67,7 @@ Les connexions actives et les ports en écoute s'affichent. Plusieurs ports sont
             id: "12.5".into(), chapter: 12, chapter_title: "Diagnostic reseau".into(), act: 3,
             title: "Coordonnees d'Orion-7".into(),
             description: "Lisez le fichier des coordonnées de navigation.".into(),
-            story: "Nira Okoro: « Capitaine, pour le rapport à l'Andromède, j'ai besoin des
-coordonnées officielles de la station. Elles sont dans la salle de navigation:
-/navigation/coordonnees/orion7.txt. »
-
-« Lisez ce fichier et dites-moi où nous sommes. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-Vous lisez les coordonnées de navigation d'Orion-7. Le vaisseau est positionné dans le secteur 7G.
-
-« Ces coordonnées sont notre adresse dans l'espace », explique Nira Okoro. « Sans elles, personne ne saurait où nous trouver. »".into(),
+            story: "Nira Okoro vous tend une tablette vide. « Pour le rapport à l'Andromède, j'ai besoin des coordonnées officielles de la station. Elles sont consignées dans la salle de navigation: /navigation/coordonnees/orion7.txt. »\n\nElle insiste: « Ouvrez ce fichier et lisez-moi le contenu: nous devons confirmer notre position officielle. »\n\nUn fichier texte se lit avec la commande qui affiche son contenu complet.\n\n« Lisez le fichier des coordonnées, Capitaine. »\n\nVous ouvrez le registre: secteur 7G, quadrant X-42, position et passerelle. Nira Okoro copie chaque valeur.\n\n« Ces coordonnées sont notre adresse dans l'espace », dit-elle. « Sans elles, personne ne saurait où nous trouver. »".into(),
             goal: "Lisez le fichier orion7.txt des coordonnées de navigation.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire un fichier de coordonnées dans un autre compartiment?".into(),

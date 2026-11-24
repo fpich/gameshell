@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "9.1".into(), chapter: 9, chapter_title: "Logs et intrusions".into(), act: 3,
             title: "Tentatives SSH échouées".into(),
             description: "Quelles attaques dans auth.log?".into(),
-            story: "Karl ouvre auth.log: « Montrez-moi toutes les tentatives 'Failed'. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl lit les échecs: « Toutes les tentatives 'Failed' sont là, netrunner. Quelqu'un cherche à entrer. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « La force brute de la nuit vient de refaire surface: des tentatives de connexion SSH répétées, toutes échouées. Pour savoir qui nous vise, il faut lire le journal des authentifications. »\n\n« Chaque essai de mot de passe laisse une trace dans ce journal. Je veux voir toutes les tentatives qui ont échoué, et rien d'autre: pas les connexions réussies, pas le bruit de fond. »\n\n« Le journal entier est trop bavard pour être lu ligne à ligne. Il faut ne garder que les entrées qui signalent un échec d'authentification: c'est là que se cache l'attaquant. »\n\n« Tu as déjà trié une liste avec une commande de filtrage: ce principe fonctionne aussi sur un fichier de log. La cible, c'est le mot qui marque l'échec dans le journal. »\n\n« Ouvre donc le journal des authentifications et montre-moi uniquement les tentatives qui ont échoué. Nous verrons qui frappe à la porte. »\n\nKarl parcourt la sortie:\n« Les échecs sont là, netrunner, et ils viennent d'adresses que nous n'attendions pas. Quelqu'un cherche à entrer. »".into(),
             goal: "Affichez les lignes 'Failed' de /logs/auth.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment chercher un mot dans un log?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "9.2".into(), chapter: 9, chapter_title: "Logs et intrusions".into(), act: 3,
             title: "Combien d'attaques?".into(),
             description: "Comptez les 'Failed'.".into(),
-            story: "Karl: « Juste le NOMBRE d'échecs. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl note le nombre: « Voilà le compte des échecs, netrunner. L'ampleur de l'attaque est claire. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « J'ai la liste des échecs, netrunner. Maintenant, pour le rapport que je dois envoyer à l'amiral, j'ai besoin de l'ampleur de l'attaque: un chiffre, exactement. »\n\n« Pas les lignes une à une, je les ai déjà lues. Je veux savoir combien de tentatives ont échoué au total: un décompte, rien de plus. »\n\n« Un rapport d'incident ne se rédige pas avec des pages de logs: il se rédige avec des chiffres. Un nombre de tentatives échouées, c'est la première statistique que l'amiral réclamera. »\n\n« Ce que tu as affiché, c'est le détail. Il existe une manière de demander uniquement le total de lignes correspondantes, sans les afficher. »\n\n« Donne-moi donc le nombre de tentatives qui ont échoué dans le journal des authentifications: le total, rien d'autre. »\n\nKarl note le nombre:\n« Le compte des échecs est là, netrunner. L'ampleur de l'attaque est claire, et le rapport peut partir. »".into(),
             goal: "Donnez à Karl uniquement le nombre de lignes 'Failed' dans /logs/auth.log, sans afficher les lignes elles-mêmes.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter les résultats?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "9.3".into(), chapter: 9, chapter_title: "Logs et intrusions".into(), act: 3,
             title: "L'attaquant avec numéros".into(),
             description: "Lignes de 10.0.0.66 numérotées.".into(),
-            story: "Karl: « Quelles lignes parlent de 10.0.0.66? Avec leur NUMÉRO. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl relève les numéros de ligne: « Les preuves contre 10.0.0.66 sont consignées, netrunner. Le rapport sera solide. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Le rapport doit maintenant prouver que la machine 10.0.0.66 est bien à l'origine de la vague de scans SYN. Une preuve doit pouvoir être citée précisément. »\n\n« Toutes les lignes du journal qui mentionnent cette adresse doivent être présentées: c'est l'ensemble des faits qui l'accusent. »\n\n« Mais un rapport ne parle pas de \"la troisième ligne en partant du haut\": il cite une référence exacte. Pour chaque ligne trouvée, je dois pouvoir la désigner sans ambiguïté par son numéro. »\n\n« Tu peux compléter la recherche: demander au filtre d'afficher, en plus du contenu, la position de chaque ligne trouvée dans le journal. »\n\n« Montre-moi donc toutes les lignes qui mentionnent l'adresse 10.0.0.66, chacune avec son numéro de ligne, pour que les preuves soient citables. »\n\nKarl relève les numéros:\n« Chaque ligne est référencée, netrunner. Les preuves contre 10.0.0.66 sont consignées et le rapport sera solide. »".into(),
             goal: "Montrez à Karl les lignes de /logs/auth.log qui mentionnent 10.0.0.66, avec le numéro de chaque ligne.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment afficher les numéros de ligne?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "9.4".into(), chapter: 9, chapter_title: "Logs et intrusions".into(), act: 3,
             title: "Alertes IDS".into(),
             description: "Quelles alertes dans ids.log?".into(),
-            story: "Karl: « L'IDS a levé quelles alertes? Filtrez 'ALERT' dans ids.log. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl approuve: « Toutes les alertes 'ALERT' de l'IDS sont trouvées, netrunner. Rien ne nous échappe. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « L'IDS du NOC surveille chaque paquet qui entre dans le réseau. Quand il détecte un comportement hostile, il consigne une alerte dans son propre journal: c'est notre première ligne de défense. »\n\n« Je veux reconstituer la chronologie de la menace: un scan SYN en début de matinée, puis une tentative de force brute... Tout cela doit être dans le journal de l'IDS. »\n\n« Le journal contient aussi des lignes d'information de routine, comme les messages de bon fonctionnement. Je ne veux que les vraies alertes: les entrées qui signalent une activité hostile. »\n\n« C'est la même démarche que pour le journal des connexions: on filtre un journal pour n'en garder que ce qui compte. Le mot qui marque une alerte est écrit avant chaque entrée hostile. »\n\n« Ouvre le journal du système de détection et montre-moi uniquement ses alertes. Nous saurons ce qu'il a vu. »\n\nRosa parcourt la sortie:\n« Toutes les alertes sont là, netrunner: les scans SYN, la force brute... L'IDS a tout vu, et tout est horodaté. »".into(),
             goal: "Affichez les alertes 'ALERT' de /logs/ids.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment filtrer les alertes IDS?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "9.5".into(), chapter: 9, chapter_title: "Logs et intrusions".into(), act: 3,
             title: "Blocages pare-feu".into(),
             description: "Quels paquets le pare-feu a bloqués?".into(),
-            story: "Karl: « Montrez les paquets BLOQUÉS par le pare-feu (UFW BLOCK). »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl note les blocages: « Les paquets 'UFW BLOCK' sont listés, netrunner. Le pare-feu fait son travail. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Le pare-feu est la muraille du réseau: chaque paquet qui tente d'entrer y est jugé, autorisé ou bloqué. Et chaque paquet bloqué laisse une trace dans son journal. »\n\n« Après les alertes de l'IDS, je veux maintenant la contre-attaque: la preuve que notre muraille a repoussé les paquets hostiles. Tous les blocages doivent être listés. »\n\n« Dans le journal du pare-feu, deux types d'entrées se mélangent: celles qui disent qu'un paquet a été laissé passer, et celles qui disent qu'il a été refusé. Je ne veux que les refus. »\n\n« Une entrée de refus se reconnaît à deux mots collés, écrits dans le journal: marque la décision du pare-feu. Garde uniquement les lignes qui portent cette marque. »\n\n« Ouvre le journal du pare-feu et montre-moi uniquement les paquets qu'il a bloqués. »\n\nRosa vérifie les blocages:\n« Tous les refus sont là, netrunner. Le pare-feu a tenu sa muraille: les paquets hostiles n'ont pas passé une seule fois. »".into(),
             goal: "Affichez les lignes 'UFW BLOCK' de firewall.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les paquets bloqués?".into(),

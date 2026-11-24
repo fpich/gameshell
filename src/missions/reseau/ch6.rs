@@ -7,23 +7,15 @@ pub fn missions() -> Vec<Mission> {
             id: "6.1".into(), chapter: 6, chapter_title: "Ports et connexions".into(), act: 2,
             title: "Ports en écoute".into(),
             description: "Quels ports Nexus écoute?".into(),
-            story: "Karl: « Quels ports sont OUVERTS sur le NOC? Connexions actives + écoute, avec processus. »
+            story: "Karl: « Cette nuit, une machine du secteur a tenté de forcer notre serveur SSH. Pour savoir ce qu'elle pouvait viser, il faut d'abord connaître la surface d'attaque du NOC: tous les services qui acceptent une connexion de l'extérieur.
 
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+Un port en écoute, c'est une porte ouverte sur cette machine. Chaque porte ouverte est une cible possible. Sans cette liste, nous travaillons à l'aveugle.
 
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+L'affichage numérique évite la résolution des noms: chaque adresse reste lisible telle quelle, ce qui la rend comparable aux logs de l'IDS. Sans les numéros de ports, la liste serait inutilisable pour recouper les journaux de la nuit.
 
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+Interrogez les sockets du poste: montrez les ports TCP en écoute, en affichage numérique, et surtout le processus qui tient chaque port. La passerelle, le service de courrier et les services web du NOC doivent y figurer.
 
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl parcourt la liste: « Voilà les ports ouverts et leurs processus, netrunner. La surface d'attaque est visible. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+Nous avons besoin de savoir si l'attaquant a déjà pu atteindre l'un de ces services pendant sa tentative. »".into(),
             goal: "Donnez à Karl la liste des ports TCP en écoute sur le NOC, en affichage numérique, avec le processus qui tient chacun.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les ports en écoute avec les processus?".into(),
@@ -38,23 +30,15 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "6.2".into(), chapter: 6, chapter_title: "Ports et connexions".into(), act: 2,
             title: "Connexions établies".into(),
             description: "Qui est connecté au NOC en ce moment?".into(),
-            story: "Karl: « Quelles connexions sont ÉTABLIES actuellement? »
+            story: "Karl: « La liste des ports est précisée: rien n'écoute hors de nos services connus. Reste la question immédiate: qui tient actuellement une session ouverte sur le NOC?
 
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+Les connexions établies sont des canaux actifs, en cours. Une session ouverte vers une machine que nous ne connaissons pas est la signature typique d'une intrusion en cours: l'attaquant garde un accès pendant que ses outils tournent.
 
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+L'équipe netops a relevé 10.0.0.66 dans les logs de la nuit. Je veux savoir si cette machine tient encore une session avec notre poste, maintenant, à l'instant où vous lisez ces lignes.
 
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+La table des connexions distingue les états: écoute, établie, en attente. On ne regarde que les sessions réellement ouvertes, pas celles qui attendent une nouvelle connexion. Si une adresse du secteur y apparaît, c'est qu'un dialogue est en cours avec nous: c'est le point à noter.
 
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl examine les connexions: « Voilà les sessions établies, netrunner. Rien de suspect pour l'instant. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+Affichez uniquement les connexions TCP établies sur le NOC, en affichage numérique, et dites-moi quelles machines dialoguent avec nous. »".into(),
             goal: "Montrez à Karl uniquement les connexions TCP actuellement établies sur le NOC, en affichage numérique.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment filtrer les connexions établies?".into(),
@@ -69,23 +53,13 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "6.3".into(), chapter: 6, chapter_title: "Ports et connexions".into(), act: 2,
             title: "Ancien outil netstat".into(),
             description: "Vérifiez avec netstat aussi.".into(),
-            story: "Rosa: « Certains vieux serveurs utilisent encore netstat. Listez les ports avec. »
+            story: "Rosa: « Les procédures de réponse rédigées l'an dernier utilisent toutes l'ancien outil netstat. Les serveurs de secours ne sont pas encore migrés: seul netstat y est disponible.
 
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+Une même liste de ports doit pouvoir être vérifiée par les deux outils, sinon les équipes de nuit ne sauront pas quoi contrôler sur les machines qu'ils n'ont pas mises à jour.
 
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+Refaites la liste des ports en écoute de ce poste avec netstat, en affichage numérique et avec le détail des processus. Comparez-la à celle fournie tout à l'heure: si vous voyez un port absent de la première liste, vous saurez que les deux outils ne lisent pas les mêmes sockets et nous devrons creuser.
 
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa vérifie avec netstat: « Les ports en écoute sont listés, netrunner. Les vieux serveurs sont couverts. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+Affichez les ports en écoute du poste via netstat, avec les processus concernés. »".into(),
             goal: "Affichez les ports en écoute de votre poste avec le détail des processus.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir les ports avec netstat?".into(),
@@ -100,23 +74,15 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "6.4".into(), chapter: 6, chapter_title: "Ports et connexions".into(), act: 2,
             title: "Scan d'un port précis".into(),
             description: "Le port 3306 (mysql) est-il ouvert sur l'attaquant?".into(),
-            story: "Karl: « Scannez un seul port sur 10.0.0.66: le 3306 (mysql). »
+            story: "Karl: « La machine 10.0.0.66 est revenue taper sur notre SSH pendant des heures. Nos sondes passives la montrent comme un serveur ancien: je parie qu'elle expose des services obsolètes, d'une autre époque.
 
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+Un service vieillissant, c'est une porte ouverte pour nous: base de données sans correctif, protocole désuet... Si elle abrite une base de données accessible, nous tenons peut-être de quoi comprendre ce qu'elle prépare contre le cluster.
 
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+Sondez la machine 10.0.0.66 sur un seul point: son port 3306, celui des bases de données. Je ne veux pas d'un scan général qui attirerait son attention, juste ce port précis: est-il ouvert et quel service répond?
 
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+L'outil de scan nomme le port cible et limite son analyse à lui seul. Avec le nom du service qui répond, nous saurons si c'est un serveur de bases de données exposé, et de quel logiciel: de quoi préparer la suite du diagnostic sans alerter la cible.
 
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl regarde le résultat du scan: « Le port 3306 de 10.0.0.66 est renseigné, netrunner. Nous savons ce qu'il expose. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+Rapportez-moi l'état de ce port: ouvert, fermé, et le service annoncé. »".into(),
             goal: "Sondez uniquement le port 3306 de l'attaquant 10.0.0.66 pour savoir si sa base de données est exposée.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment scanner un port précis?".into(),
@@ -131,23 +97,15 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "6.5".into(), chapter: 6, chapter_title: "Ports et connexions".into(), act: 2,
             title: "Chemin vers la cible".into(),
             description: "Par quels sauts passent les paquets vers 10.0.0.66?".into(),
-            story: "Rosa: « Tracez la route des paquets vers l'attaquant 10.0.0.66. »
+            story: "Rosa: « Le port 3306 est ouvert sur 10.0.0.66, avec un vieux serveur de bases de données qui n'a rien à faire exposé. Voilà une piste.
 
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
+Pour préparer notre réponse, il faut connaître le chemin que prennent nos paquets pour la rejoindre: quels routeurs sont traversés entre le NOC et cette machine. Chaque routeur entre nous et elle est un point où nous pourrons la couper, ou un point qu'elle peut utiliser contre nous.
 
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
+Le premier saut doit être notre passerelle, vers le FAI. Ensuite, le trafic emprunte des relais dont nous ignorons encore l'existence: c'est exactement ce que la mission d'aujourd'hui doit révéler.
 
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
+La trace liste les routeurs un à un, du plus proche au plus lointain, avec le temps de réponse de chacun. si un saut ne répond pas mais que le suivant répond, c'est lui qui fait transiter nos paquets sans se faire voir: un comportement de relais qui vaut d'être noté.
 
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa suit la route: « La trace vers l'attaquant est claire, netrunner. Nous savons par où il passe. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+Tracez le chemin des paquets jusqu'à 10.0.0.66 et listez les routeurs traversés. »".into(),
             goal: "Révélez à Rosa chaque routeur traversé par les paquets jusqu'à l'attaquant 10.0.0.66.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment suivre le chemin des paquets?".into(),

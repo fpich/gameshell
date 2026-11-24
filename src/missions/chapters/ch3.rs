@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "3.1".into(), chapter: 3, chapter_title: "Explorer la station".into(), act: 1,
             title: "Fichiers caches de la cabine".into(),
             description: "Zyra-7: certains documents de la cabine sont invisibles au premier abord.".into(),
-            story: "Zyra-7, l'IA de bord, vous parle par l'intercom depuis la salle des machines:
-« Capitaine, avant de poursuivre, familiarisez-vous avec votre cabine.
-Certains fichiers sont cachés: ils commencent par un point et n'apparaissent
-pas avec un simple listing. »
-
-Elle vous explique que sur Orion-7, les documents sensibles du capitaine
-sont stockés dans des fichiers cachés, comme le fichier .secret posé sur
-votre bureau.
-
-« Affichez TOUT le contenu de votre cabine, y compris les fichiers cachés,
-puis lisez ce fichier .secret. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-Zyra-7 approuve: « Bien vu, Capitaine. Les fichiers cachés sont la mémoire discrète du vaisseau. »
-
-Le contenu du fichier .secret s'affiche à l'écran. Vous comprenez que rien, à bord, ne doit vous échapper: chaque document, même invisible, peut contenir une information capitale.".into(),
+            story: "Zyra-7, l'IA de bord, vous parle depuis la salle des machines :\n« Capitaine, avant de poursuivre, familiarisez-vous avec votre cabine.\nCertains documents sont invisibles au premier abord : ils commencent\npar un point et un simple listing ne les montre pas. »\n\nElle ajoute que sur Orion-7, les documents sensibles du capitaine sont\nrangés dans ces fichiers cachés, et que le vôtre, .secret, attend\ntoujours d'être lu sur votre bureau.\n\n« Affichez tout le contenu de votre cabine, fichiers cachés compris,\npuis lisez ce fichier .secret. Je veux voir la liste complète. »\n\nAprès votre commande, la liste s'étire et les fichiers à point\napparaissent enfin ; le contenu de .secret s'affiche, marqué\n« CODE PERSONNEL: FALCON-9 ».\n\nZyra-7 approuve : « Bien vu, Capitaine. Les fichiers cachés sont la\nmémoire discrète du vaisseau : rien, à bord, ne doit vous échapper. »".into(),
             goal: "Zyra-7 veut la liste complète de votre cabine, fichiers cachés compris, et le contenu du fichier caché.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lister aussi les fichiers caches?".into(),
@@ -38,23 +22,7 @@ Le contenu du fichier .secret s'affiche à l'écran. Vous comprenez que rien, à
             id: "3.2".into(), chapter: 3, chapter_title: "Explorer la station".into(), act: 1,
             title: "Trouver un document".into(),
             description: "Nira Okoro a besoin du dernier message de l'Andromède, perdu quelque part.".into(),
-            story: "Nira Okoro, officier communications, coupe l'intercom:
-« Capitaine, j'ai égaré le chemin exact du dernier message de l'Amiral Xylia Vorn.
-Le fichier s'appelle dernier_message.txt mais je ne sais plus dans quel
-compartiment il se trouve. »
-
-Elle vous conseille d'utiliser l'outil de recherche du vaisseau qui fouille
-TOUS les compartiments à la recherche d'un nom de fichier.
-
-« Trouvez où se cache dernier_message.txt, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Nira Okoro pousse un soupir de soulagement: « Le voilà! Merci, Capitaine. Sans vous, ce message serait resté introuvable. »
-
-Vous réalisez que le vaisseau est vaste et que chaque fichier a sa place. Savoir fouiller méthodiquement vous sera précieux pour la suite.".into(),
+            story: "Nira Okoro, officier communications, coupe l'intercom :\n« Capitaine, j'ai égaré le chemin exact du dernier message de\nl'Amiral Xylia Vorn. Le fichier s'appelle dernier_message.txt,\nmais je ne sais plus dans quel compartiment il se trouve. »\n\nElle vous conseille l'outil de recherche du vaisseau, qui fouille\ntous les compartiments à la recherche d'un nom de fichier.\n\n« Trouvez où se cache dernier_message.txt, Capitaine. Le message\ncontient les consignes de l'Amiral pour la défense : il est capital. »\n\nAprès votre commande, le chemin s'affiche à l'écran : le fichier\nest rangé dans /communications/messages/.\n\nNira Okoro pousse un soupir de soulagement : « Le voilà ! Merci,\nCapitaine. Sans vous, ce message serait resté introuvable. »".into(),
             goal: "Retrouvez dans quel compartiment du vaisseau se trouve le fichier dernier_message.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment rechercher un fichier par son nom dans tout le vaisseau?".into(),
@@ -69,22 +37,7 @@ Vous réalisez que le vaisseau est vaste et que chaque fichier a sa place. Savoi
             id: "3.3".into(), chapter: 3, chapter_title: "Explorer la station".into(), act: 1,
             title: "Poids des soutes".into(),
             description: "Tael Rhen veut savoir combien occupent les soutes.".into(),
-            story: "Tael Rhen, ingénieur-chef des machines, vous interpelle:
-« Capitaine, avant qu'on remplisse les soutes de nouvelles caisses,
-je voudrais savoir combien d'espace elles occupent déjà. »
-
-Il explique que chaque compartiment du vaisseau a un poids numérique:
-la somme de tous les fichiers qu'il contient.
-
-« Donnez-moi la taille totale des soutes, Capitaine. Une seule commande. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Tael Rhen note la taille sur sa tablette: « Parfait. Je saurai maintenant combien de caisses je peux encore ranger. »
-
-Les soutes sont le ventre du vaisseau: savoir ce qu'elles contiennent et combien elles pèsent évite bien des surprises lors des ravitaillements.".into(),
+            story: "Tael Rhen, ingénieur-chef des machines, vous interpelle :\n« Capitaine, avant qu'on remplisse les soutes de nouvelles caisses,\nje voudrais savoir combien d'espace elles occupent déjà. »\n\nIl explique que chaque compartiment a une taille chiffrable : la\nsomme de tous les fichiers qu'il contient.\n\n« Donnez-moi la taille totale du compartiment /soutes, Capitaine.\nUne seule commande suffit : je veux le total, pas le détail. »\n\nAprès votre commande, Tael Rhen lit la ligne qui s'affiche et note\nla taille sur sa tablette :\n\n« Parfait. Je saurai maintenant combien de caisses je peux encore\nranger avant de dépasser la capacité des soutes. »".into(),
             goal: "Indiquez à Tael Rhen l'espace total occupé par le compartiment /soutes.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment connaître la taille totale d'un compartiment?".into(),
@@ -99,21 +52,7 @@ Les soutes sont le ventre du vaisseau: savoir ce qu'elles contiennent et combien
             id: "3.4".into(), chapter: 3, chapter_title: "Explorer la station".into(), act: 1,
             title: "Monter au pont".into(),
             description: "L'Amiral Xylia Vorn vous attend au pont de commandement.".into(),
-            story: "L'intercom grésille: « Capitaine! Amiral Xylia Vorn, vaisseau-mère Andromède.
-Je vous attends au PONT de commandement pour le briefing de défense. »
-
-Vous quittez votre cabine et empruntez les coursives jusqu'au pont.
-Le pont est le compartiment /pont à la racine du vaisseau.
-
-« Venez me voir au pont, Capitaine. Les Corbeaux Noirs approchent. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Vous poussez la porte du pont de commandement. L'Amiral Xylia Vorn vous accueille d'un signe de tête.
-
-« Capitaine, vous voilà enfin. Les Corbeaux Noirs approchent, et c'est d'ici que nous allons les repousser. »".into(),
+            story: "L'intercom grésille :\n« Ici l'Amiral Xylia Vorn, vaisseau-mère Andromède. Capitaine, je\nvous attends au pont de commandement pour le briefing de défense. »\n\nVous quittez votre cabine et empruntez les coursives. Le pont est\nle compartiment /pont, à la racine du vaisseau.\n\n« Venez me voir au pont, Capitaine. Les Corbeaux Noirs approchent\net c'est d'ici que nous allons préparer la riposte. »\n\nAprès votre commande, le prompt du vaisseau vous place dans /pont,\nau cœur des consoles et des écrans de la station.\n\nVous poussez la porte. L'Amiral Xylia Vorn vous accueille d'un signe\nde tête : « Capitaine, vous voilà enfin. À nous de jouer. »".into(),
             goal: "Rejoignez le pont de commandement (/pont) où vous attend l'Amiral.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment se déplacer jusqu'au pont avec un chemin absolu?".into(),
@@ -128,22 +67,7 @@ Vous poussez la porte du pont de commandement. L'Amiral Xylia Vorn vous accueill
             id: "3.5".into(), chapter: 3, chapter_title: "Explorer la station".into(), act: 1,
             title: "Premier rappel sur le bureau".into(),
             description: "Zyra-7 vous demande de noter un rappel sur votre bureau.".into(),
-            story: "Zyra-7 revient à l'intercom, plus calme:
-« Capitaine, notez sur votre bureau un rappel pour ne rien oublier:
-'Verifier les boucliers avant l'attaque'. »
-
-Elle vous explique que pour écrire directement dans un fichier sans l'ouvrir,
-on redirige un texte vers le fichier: le contenu est enregistré tel quel.
-
-« Créez le fichier rappel.txt sur votre bureau avec ce message dedans. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Zyra-7 vérifie votre fichier: « C'est noté, Capitaine. Les boucliers seront vérifiés avant l'attaque. »
-
-Vous refermez votre carnet. Un bon capitaine note tout: les rappels écrits sont la garantie que rien ne sera oublié dans le feu de l'action.".into(),
+            story: "Zyra-7 revient à l'intercom, plus calme :\n« Capitaine, notez sur votre bureau un rappel pour ne rien oublier :\n'Verifier les boucliers avant l'attaque'. »\n\nElle vous explique que pour écrire directement dans un fichier sans\nl'ouvrir, on redirige un texte vers le fichier : le contenu est alors\nenregistré tel quel.\n\n« Créez le fichier rappel.txt dans votre cabine avec ce message\ndedans, Capitaine. C'est votre pense-bête pour la défense. »\n\nAprès votre commande, Zyra-7 lit le fichier rappel.txt et confirme :\n« C'est noté : 'Verifier les boucliers avant l'attaque'. Les boucliers\nseront vérifiés, Capitaine. »\n\nVous refermez votre carnet : un bon capitaine note tout, et ce rappel\nvous attendra au moment de l'attaque.".into(),
             goal: "Créez un fichier rappel.txt dans votre cabine contenant le texte demandé par Zyra-7.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment écrire un texte directement dans un fichier?".into(),

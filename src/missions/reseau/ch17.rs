@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "17.1".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Config SSH actuelle".into(),
             description: "Lisez la config SSH du cluster.".into(),
-            story: "Karl: « Lisez la config SSH actuelle: /configs/sshd/sshd_config. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl lit la config: « La config SSH actuelle est claire, netrunner. Nous allons pouvoir la durcir. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl arrive avec un rapport qui ne lui plaît pas :\n« Regarde les logs de connexion du cluster, netrunner. Depuis la dernière attaque, des tentatives de connexion SSH se multiplient contre nos serveurs, et la configuration actuelle ne les décourage pas. Avant de toucher à quoi que ce soit, j'ai besoin de savoir exactement comment notre service SSH est paramétré : c'est notre état des lieux, la base de tout ce qu'on va durcir ensemble.\n\nTout est écrit dans le fichier de configuration du service SSH, /configs/sshd/sshd_config : les règles d'accès, les options d'authentification, tout ce que le service applique à chaque connexion qui arrive sur le cluster.\n\nMontre-moi le contenu de ce fichier, tel qu'il est aujourd'hui : je veux lire chaque ligne pour décider ce qui doit changer et ce qui peut rester. Ne modifie rien pour l'instant — d'abord on regarde, ensuite on agit.\n\nCe que tu vas afficher, c'est ce que le service applique réellement à chaque tentative de connexion depuis l'extérieur.\n\nAprès votre commande, Karl examine la configuration affichée :\n« J'ai ce qu'il me faut : la liste des options actuellement appliquées. Je vois déjà deux réglages qui n'ont rien à faire dans une config sérieuse. On commence tout de suite, netrunner. »".into(),
             goal: "Lisez sshd_config.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire la config SSH?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "17.2".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Interdire root".into(),
             description: "Ajoutez 'PermitRootLogin no' à sshd_config.".into(),
-            story: "Karl: « PermitRootLogin yes est une faille. Ajoutez 'PermitRootLogin no' à la FIN. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl approuve: « PermitRootLogin no est ajouté, netrunner. La faille est colmatée. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl pointe du doigt la ligne qu'il vient de lire dans le rapport :\n« Tu l'as vu comme moi : le compte root est autorisé à se connecter directement en SSH. C'est exactement ce que nos attaquants espèrent : un compte au nom connu, à attaquer sans réfléchir, avec des droits absolus s'ils réussissent. Autant leur laisser la clé du cluster sur la porte.\n\nInterdis l'accès root au service SSH : ajoute la règle qui refuse la connexion directe du compte root dans la configuration. Cette ligne doit s'ajouter en fin de fichier, sans toucher aux réglages existants : on complète la configuration, on ne la réécrit pas. Chaque règle ajoutée doit s'ajouter proprement à la suite de celles déjà en place.\n\nQuand la règle refusant root sera dans la configuration, le service cesserait de l'accepter au prochain rechargement — mais on s'occupera de l'appliquer juste après.\n\nAprès votre commande, Karl vérifie la fin du fichier :\n« La règle est en place : plus aucun accès direct au compte root depuis l'extérieur. Les attaquants devront trouver autre chose, netrunner. »".into(),
             goal: "Ajoutez 'PermitRootLogin no' à la fin de sshd_config.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter une ligne de config?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "17.3".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Interdire les mots de passe".into(),
             description: "Ajoutez 'PasswordAuthentication no'.".into(),
-            story: "Karl: « Passez aussi PasswordAuthentication à no (clés SSH uniquement). »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl confirme: « PasswordAuthentication no est en place, netrunner. Seules les clés SSH sont acceptées. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl reste suspicieux, il connaît la suite du scénario :\n« Refuser root, c'est bien, mais ne te fais pas d'illusions : les attaquants ne visent pas que le compte root. Tant que le service SSH accepte les mots de passe, n'importe quel compte au mot de passe faible devient une porte d'entrée. Or sur le cluster, personne ne se connecte avec un mot de passe : tous les comptes utilisent des clés d'authentification, c'est notre règle de base.\n\nIl faut donc interdire aussi l'authentification par mot de passe, pour que seule une clé valide puisse ouvrir une session. Ajoute cette interdiction dans la configuration : elle se place en fin de fichier, à la suite de la règle précédente, toujours sans modifier ce qui est déjà écrit.\n\nAinsi, même si un mot de passe fuitait quelque part, il ne servirait à rien pour entrer dans le cluster.\n\nAprès votre commande, Karl relit la fin de la configuration :\n« L'authentification par mot de passe est interdite : seule une clé correcte ouvre une session sur le cluster. Les comptes faibles ne sont plus une porte d'entrée, netrunner. »".into(),
             goal: "Ajoutez 'PasswordAuthentication no' à sshd_config.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment durcir l'authentification?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "17.4".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Appliquer le durcissement SSH".into(),
             description: "Appliquez la config.".into(),
-            story: "Karl: « Redémarrez ssh pour appliquer le durcissement. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl vérifie: « ssh est redémarré, netrunner. Le durcissement est appliqué. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl rassemble ses notes et te regarde d'un air entendu :\n« Les règles sont dans le fichier, très bien. Mais ne crois pas que le service les applique déjà : il lit sa configuration au démarrage, et il n'a pas redémarré depuis des heures. Tant qu'il ne sera pas relancé, nos nouvelles règles resteront lettre morte. C'est exactement ce que fait un service : il applique ce qu'on lui demande quand on le recharge.\n\nRelance donc le service SSH pour qu'il relise sa configuration et applique les deux interdictions qu'on vient d'ajouter. La manœuvre demande les pouvoirs d'administrateur du NOC : la gestion des services système est réservée à ceux qui ont la main sur l'infrastructure — toi, avec tes droits.\n\nSans cette étape, tout notre durcissement ne resterait qu'un texte dans un fichier. C'est le geste qui transforme la configuration en protection réelle.\n\nAprès votre commande, Karl surveille la relance du service :\n« Le service SSH a bien été relancé et a relu sa configuration : les interdictions sont désormais appliquées à chaque connexion entrante. Le durcissement est en vigueur, netrunner. »".into(),
             goal: "Redémarrez le service SSH pour appliquer la nouvelle configuration.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment appliquer la nouvelle config?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "17.5".into(), chapter: 17, chapter_title: "Durcissement SSH".into(), act: 5,
             title: "Connexion SSH au cluster".into(),
             description: "Testez un tunnel SSH vers nexus-02.".into(),
-            story: "Rosa: « Testez un tunnel chiffré vers nexus-02 (10.0.0.2). »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa confirme: « Le tunnel chiffré vers nexus-02 est établi, netrunner. La liaison est sécurisée. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa t'appelle depuis la salle des opérations, un casque sur les oreilles :\n« Bravo pour le durcissement, mais il reste une vérification indispensable : s'assurer que nos propres accès fonctionnent toujours ! Une configuration qui rejette tout le monde, y compris nous, serait une catastrophe bien pire que la faille initiale. Il faut tester la connexion depuis notre poste, avec les clés du NOC.\n\nConnecte-toi donc au serveur nexus-02, notre nœud du cluster sur 10.0.0.2, en utilisant ton compte netrunner et le canal sécurisé. C'est le tunnel chiffré qu'on utilise pour administrer les serveurs : chaque session part de chez nous chiffrée, de bout en bout.\n\nSi la connexion s'établit, c'est la preuve que les accès légitimes fonctionnent avec les clés, et que l'attaquant, lui, n'a plus aucune porte d'entrée. Tout le durcissement du chapitre tient dans ce test.\n\nAprès votre commande, Rosa suit l'établissement de la session sur son écran :\n« La connexion au serveur est établie avec ton compte, par le canal chiffré : le durcissement fonctionne, et nos propres accès aussi. Parfait, netrunner. »".into(),
             goal: "Ouvrez un tunnel chiffré d'accès distant vers nexus-02, 10.0.0.2, en vous connectant avec le compte netrunner.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment se connecter en SSH à un serveur?".into(),

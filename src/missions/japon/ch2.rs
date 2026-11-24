@@ -7,21 +7,28 @@ pub fn missions() -> Vec<Mission> {
             id: "2.1".into(), chapter: 2, chapter_title: "Organisation des quartiers".into(), act: 1,
             title: "Nouveau sceau".into(),
             description: "Créez un fichier vierge pour un nouveau sceau.".into(),
-            story: "Dame Kaguya: « Seigneur, créez un fichier sceau_du_soir.txt sur votre
-bureau pour consigner les ordres de ce soir. C'est la première étape
-du registre quotidien. »
+            story: "Dame Kaguya entre dans vos quartiers, un rouleau d'ordres à la
+main:
+« Seigneur, les consignes de ce soir doivent être consignées par
+écrit avant le coucher du soleil. Les scribes noteront chaque
+ordre que vous donnerez dans la nuit. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Elle pose un doigt sur votre bureau:
+« Commençons le registre quotidien. Créez un fichier vierge
+nommé sceau_du_soir.txt dans vos quartiers. Il recevra les
+ordres de la soirée. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Le registre du domaine exige une trace écrite: un seigneur qui
+ordonne sans laisser de sceau laisse ses vassaux sans
+instructions claires.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Créez le fichier, puis montrez à Dame Kaguya qu'il est bien là,
+en affichant le contenu de vos quartiers avec le détail complet
+(tailles, permissions, dates).
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Dame Kaguya approuve: « Le sceau du soir est créé, Seigneur. Le registre quotidien commence. Chaque ordre sera consigné. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Dame Kaguya vérifie le fichier:
+« Le sceau du soir est créé, Seigneur. Le registre quotidien
+commence. Chaque ordre sera consigné. »".into(),
             goal: "Créez le fichier sceau_du_soir.txt dans vos quartiers.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un fichier vide?".into(),
@@ -36,21 +43,27 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "2.2".into(), chapter: 2, chapter_title: "Organisation des quartiers".into(), act: 1,
             title: "Classer les archives".into(),
             description: "Créez l'arborescence archives/2024/lettres.".into(),
-            story: "Dame Kaguya veut un classement strict: archives/AAAA/type/.
-« Créez archives/2024/lettres dans vos quartiers, Seigneur. Une seule
-commande avec l'option qui crée tous les parents. »
+            story: "Dame Kaguya déroule un plan sur votre bureau:
+« Seigneur, les archives du domaine suivent un classement
+strict: d'abord l'année, puis le type de document. Aujourd'hui
+nous ouvrons l'année 2024. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Elle trace un trait sur le plan:
+« Créez l'arborescence archives/2024/lettres dans vos
+quartiers. Ainsi, chaque lettre entrante aura sa place
+définitive. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Elle précise, en vous regardant:
+« Une seule commande suffit, si vous utilisez l'option qui crée
+tous les dossiers intermédiaires au passage. »
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Vos quartiers accueilleront bientôt copies et courriers; un
+classement impeccable évite de chercher un document au milieu
+de la nuit.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Dame Kaguya vérifie l'arborescence: « archives/2024/lettres est en place, Seigneur. Un classement strict, c'est un domaine bien tenu. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Dame Kaguya vérifie l'arborescence:
+« archives/2024/lettres est en place, Seigneur. Un classement
+strict, c'est un domaine bien tenu. »".into(),
             goal: "Créez l'arborescence archives/2024/lettres dans vos quartiers.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer une arborescence complète en une commande?".into(),
@@ -65,22 +78,26 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "2.3".into(), chapter: 2, chapter_title: "Organisation des quartiers".into(), act: 1,
             title: "Copier la lettre aux archives".into(),
             description: "Gardez une copie de la lettre Hattori dans les archives.".into(),
-            story: "Dame Kaguya: « Seigneur, copiez la lettre du clan Hattori dans
-/archives/2024/lettres/ pour la conserver sûrement. »
+            story: "Dame Kaguya vous croise dans le couloir des archives:
+« Seigneur, la lettre du clan Hattori est trop précieuse pour
+rester dans le seul dossier des lettres entrantes. Les archives
+du château gardent désormais une copie classée par année. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Elle désigne la grande salle:
+« Copiez /archives/lettres/lettre_clan_hattori.txt dans le
+dossier /archives/2024/lettres/, en conservant l'original en
+place. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Les archives centrales sont organisées par année depuis la
+fondation du château: un document rangé là ne se perd jamais,
+même si le dossier des entrées est remanié.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Copiez le document, sans le déplacer. Dame Kaguya attend de
+voir la copie enregistrée avant de clore le registre.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya confirme: « La lettre du clan Hattori est en sûreté dans les archives, Seigneur. Rien ne se perdra. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Dame Kaguya confirme:
+« La lettre du clan Hattori est en sûreté dans les archives,
+Seigneur. Rien ne se perdra. »".into(),
             goal: "Copiez lettre_clan_hattori.txt vers /archives/2024/lettres/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment copier un fichier vers un autre dossier?".into(),
@@ -95,22 +112,24 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "2.4".into(), chapter: 2, chapter_title: "Organisation des quartiers".into(), act: 1,
             title: "Renommer un document".into(),
             description: "Renommez sceau_du_soir.txt en ordre_du_soir.txt.".into(),
-            story: "Dame Kaguya: « Seigneur, le fichier sceau_du_soir.txt s'appellera plutôt
-ordre_du_soir.txt. Renommez-le. »
+            story: "Dame Kaguya revient vers vous, un sceau à la main:
+« Seigneur, réflexion faite, le fichier sceau_du_soir.txt porte
+un nom trompeur. Il consigne des ordres, pas un sceau. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Elle hoche la tête:
+« Renommez-le ordre_du_soir.txt. Ainsi, les scribes sauront
+immédiatement ce qu'il contient. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Les noms des documents du domaine doivent être explicites: un
+messager pressé ne lit pas le contenu, il se fie au nom pour
+acheminer le rouleau.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Renommez le fichier dans vos quartiers. L'ancien nom ne doit
+plus subsister nulle part dans le registre.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya approuve: « ordre_du_soir.txt, c'est plus clair, Seigneur. Vos quartiers sont bien tenus. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Dame Kaguya approuve:
+« ordre_du_soir.txt, c'est plus clair, Seigneur. Vos quartiers
+sont bien tenus. »".into(),
             goal: "Renommez sceau_du_soir.txt en ordre_du_soir.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment renommer un fichier?".into(),
@@ -125,22 +144,26 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "2.5".into(), chapter: 2, chapter_title: "Organisation des quartiers".into(), act: 1,
             title: "Faire le ménage".into(),
             description: "Supprimez les brouillons inutiles.".into(),
-            story: "Dame Kaguya: « Seigneur, vos quartiers sont en désordre. Supprimez
-les brouillons: brouillon1.txt, brouillon2.txt. »
+            story: "Dame Kaguya contemple vos quartiers d'un œil sévère:
+« Seigneur, ces brouillons qui traînent sur votre bureau
+prêtent à confusion. Un serviteur pourrait les prendre pour des
+ordres et les exécuter. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Elle désigne les deux feuillets:
+« brouillon1.txt et brouillon2.txt sont des notes à jeter. Le
+registre du domaine ne doit contenir que des documents
+officiels. Supprimez-les. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Un domaine bien tenu ne garde pas d'écrits non datés et non
+signés: ils n'ont aucune valeur d'archives et encombrent le
+classement.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
+Supprimez les deux brouillons de vos quartiers, puis montrez
+que votre bureau est net.
 
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya sourit: « Vos quartiers sont enfin ordonnés, Seigneur. Un seigneur rangé est un seigneur qui voit clair. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Dame Kaguya sourit:
+« Vos quartiers sont enfin ordonnés, Seigneur. Un seigneur
+rangé est un seigneur qui voit clair. »".into(),
             goal: "Supprimez les fichiers brouillon de vos quartiers.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment supprimer un fichier?".into(),

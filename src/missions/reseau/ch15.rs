@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "15.1".into(), chapter: 15, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Nouvel opérateur".into(),
             description: "Créez le compte 'stagiaire2'.".into(),
-            story: "Rosa: « Un nouveau stagiaire arrive: créez le compte stagiaire2 avec son home. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa approuve: « Le compte stagiaire2 est créé avec son home, netrunner. Le nouveau stagiaire est attendu. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa, chef de l'équipe netops, t'attend dans la salle des opérations :\n« Dès demain matin, un nouveau stagiaire rejoint mon équipe. Il suivra les rotations de surveillance avec nous au NOC, alors il faut que tout soit prêt pour son arrivée : c'est toi qui t'en occupes.\n\nIl n'a encore aucun accès à nos machines. Crée-lui son compte sur la référence des comptes du NOC, avec les droits d'administrateur : un compte qui ne passe pas par cette procédure officielle n'existe pas pour le réseau, et demain il ne pourra rien ouvrir.\n\nEt point important : il doit avoir son propre dossier personnel, son espace de travail à lui, où il rangera ses notes et ses scripts de surveillance. Un compte sans espace personnel, c'est un compte qui traîne partout ailleurs.\n\nQuand ce sera fait, montre-moi sa fiche d'identité : le numéro qui lui est attribué, son nom, ses groupes. Je vérifie que tout est cohérent avant de le laisser travailler.\n\nAprès votre commande, Rosa consulte la fiche du nouveau compte :\n« Le compte est créé, avec son dossier personnel et une fiche d'identité en règle. Le stagiaire pourra commencer demain matin, netrunner. Bien joué. »".into(),
             goal: "Avec les droits d'administrateur, créez le compte stagiaire2 avec son dossier personnel, puis affichez sa fiche d'identité.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un utilisateur avec home?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "15.2".into(), chapter: 15, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Équipe netops".into(),
             description: "Créez le groupe 'netops2'.".into(),
-            story: "Karl: « Créez le groupe netops2 pour les nouveaux. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl confirme: « Le groupe netops2 est créé, netrunner. Les nouveaux ont leur place. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl, du service sécurité, te fait signe depuis son écran :\n« On va accueillir plusieurs stagiaires dans les prochaines semaines, et on ne va pas gérer leurs accès un par un : ça devient ingérable, et dangereux. Il nous faut une équipe dédiée, un groupe unique qui rassemble tous les membres du futur groupe de travail.\n\nCe groupe, c'est un conteneur d'accès : on lui donne les droits une fois, et tous ceux qui y sont ajoutés les partagent sans qu'on touche à chaque compte. Sur la référence du réseau, un tel groupe n'existe pas encore.\n\nCrée donc cette équipe, avec les droits d'administrateur. Le nom doit parler de lui-même : l'équipe qui veille sur les opérations réseau, avec un numéro pour la distinguer de l'équipe existante. Les nouveaux y seront versés.\n\nUne fois le groupe en place, dis-le-moi : c'est la fondation de tout le reste. Sans lui, on ne peut pas affecter les stagiaires, et leur arrivée tournera au bazar.\n\nAprès votre commande, Karl vérifie la référence du réseau :\n« Le groupe netops2 existe, avec sa fiche propre. La fondation est posée : on pourra y verser les stagiaires. Bien, netrunner. »".into(),
             goal: "Avec les droits d'administrateur, créez le groupe netops2 qui accueillera les nouveaux.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un groupe?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "15.3".into(), chapter: 15, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Affecter le stagiaire".into(),
             description: "Ajoutez stagiaire2 à netops2.".into(),
-            story: "Karl: « Ajoutez stagiaire2 au groupe netops2. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl vérifie: « stagiaire2 est bien dans netops2, netrunner. Les droits sont en place. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl revient vers toi, une liste à la main :\n« Le groupe netops2 est en place, très bien. Maintenant, il faut y verser le stagiaire dont on a créé le compte : c'est là que l'accès devient concret. Tant qu'il n'est pas membre du groupe, il est isolé et ne partage aucun droit avec l'équipe.\n\nSurtout, fais bien attention : le stagiaire peut déjà appartenir à d'autres groupes, par défaut ou parce qu'on l'a prévu. Tu dois l'ajouter à netops2 en complément, sans toucher à ses autres affectations. Si tu les remplaçais, tu casserais des réglages en place.\n\nL'ajout se fait sur la référence des groupes, avec les droits d'administrateur. Le geste doit être précis : ajouter, rien d'autre.\n\nQuand c'est fait, confirme-le-moi : je veux pouvoir l'annoncer à l'équipe avant la fin de la journée.\n\nAprès votre commande, Karl consulte la fiche de stagiaire2 :\n« Le stagiaire est membre de netops2, et ses autres groupes sont intacts. Affectation réussie, sans dégât collatéral. Parfait, netrunner. »".into(),
             goal: "Affectez stagiaire2 au groupe netops2 en complément, sans lui retirer ses autres affectations.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter à un groupe?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "15.4".into(), chapter: 15, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Vos équipes".into(),
             description: "À quels groupes appartenez-vous?".into(),
-            story: "Rosa: « Vérifiez vos propres groupes pour le contrôle d'accès. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa vérifie vos groupes: « Vos groupes sont corrects, netrunner. Le contrôle d'accès est cohérent. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa te croise dans un couloir, tablette en main :\n« Avant de fermer la journée, j'aimerais que tu vérifies un point sur ton propre compte : à quelles équipes appartiens-tu, toi ? C'est important pour le contrôle d'accès — cela détermine ce que tu peux ouvrir, modifier et administrer sur le réseau.\n\nLa question se pose pour chaque compte, et je veux que tu saches lire la réponse pour le tien sans hésiter : c'est une compétence de base que tout membre du NOC doit maîtriser, et je dois vérifier que la tienne est à jour dans le référentiel.\n\nRien d'autre à faire, juste m'afficher la liste de tes groupes. Si un de tes accès est mal réglé, je le verrai d'un coup d'œil et on le corrigera.\n\nAprès votre commande, Rosa compare avec sa liste de référence :\n« Tes groupes correspondent à ta fiche : tout est cohérent, rien à corriger. Contrôle d'accès en règle, netrunner. Merci. »".into(),
             goal: "Montrez à Rosa la liste des groupes auxquels votre propre compte appartient.".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Comment voir ses groupes?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "15.5".into(), chapter: 15, chapter_title: "Comptes et acces".into(), act: 4,
             title: "Session du stagiaire".into(),
             description: "Testez le compte stagiaire2.".into(),
-            story: "Karl: « Prenez la session de stagiaire2 et dites qui il est. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl confirme: « La session de stagiaire2 est ouverte, netrunner. L'identité est vérifiée. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl te fait monter dans la salle de supervision sécurisée :\n« Le compte de stagiaire2 est créé, son groupe est prêt, il est bien affecté. Il reste une dernière vérification, la plus importante à mes yeux : est-ce que la session du compte fonctionne pour de vrai ? Un compte qu'on ne peut pas utiliser, c'est un compte inutile — et pire, un compte cassé qu'on croit bon.\n\nOuvre une session de connexion complète en tant que stagiaire2, avec les droits d'administrateur : on y entre comme si le stagiaire arrivait à sa machine le premier matin, dossier personnel chargé et tout le reste.\n\nDans cette session, exécute une seule petite commande : celle qui révèle sous quel nom tu agis. Si elle affiche stagiaire2, la session est bonne et le compte est prêt à travailler.\n\nLe test doit être fait exactement comme le stagiaire le vivra : session complète, pas un raccourci. Fais-le, et dis-moi ce que la vérification a donné.\n\nAprès votre commande, Karl vérifie le résultat de la session :\n« La session s'ouvre normalement et l'identité affichée est bien stagiaire2. Le compte est pleinement opérationnel. Tu peux annoncer au stagiaire que tout est prêt, netrunner. »".into(),
             goal: "Endossez l'identité de stagiaire2 dans une session de connexion complète, le temps d'exécuter une seule commande qui révèle sous quel nom vous agissez.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tester un autre compte?".into(),

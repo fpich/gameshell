@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "13.1".into(), chapter: 13, chapter_title: "Pare-feu ufw".into(), act: 4,
             title: "État du pare-feu".into(),
             description: "Le pare-feu est-il actif?".into(),
-            story: "Karl: « Netrunner, vérifiez l'état du pare-feu en détaillé. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl approuve: « L'état du pare-feu est clair, netrunner. Nous savons où nous en sommes. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Netrunner, l'IDS vient d'enregistrer une nouvelle salve de scans SYN dirigée contre le cluster nexus, toujours depuis la même adresse : 10.0.0.66. Avant de réagir, je dois savoir exactement où en est le pare-feu du NOC : est-il en service, quelles règles sont définies pour les connexions entrantes, quelle est la politique par défaut ? »\n\n« C'est un bilan complet et détaillé que j'attends, pas un simple aperçu : l'état du service, le réglage par défaut, et la liste de toutes les règles en vigueur, une par une, avec leur action. Rien d'approximatif : c'est sur ce diagnostic que je déciderai de la suite de la défense. »\n\n« Le pare-feu se pilote avec les droits d'administrateur du NOC : tu disposes d'un accès sudo, utilise-le. Sans ces droits, la commande refusera de s'exécuter, et je resterai sans réponse pendant que les sondes continuent d'arriver. »\n\n« S'il est actif, tant mieux ; s'il ne l'est pas, il faut que je le sache maintenant, pas après l'intrusion. Un pare-feu dont personne ne vérifie l'état est une porte ouverte dont personne ne parle. »\n\n« Fais-moi ce diagnostic complet et détaillé, avec les droits d'administrateur, et reste sur l'écran : je lirai le résultat avec toi, ligne par ligne. »\n\nAprès votre commande, Karl étudie le résultat :\n« Inactif... et le port 80 encore ouvert en entrée. Voilà pourquoi le cluster encaisse ces scans. Au moins, on sait où on en est : il reste tout à faire. »".into(),
             goal: "Vérifiez avec les droits d'administrateur l'état complet et détaillé du pare-feu du NOC.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'état du pare-feu?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "13.2".into(), chapter: 13, chapter_title: "Pare-feu ufw".into(), act: 4,
             title: "Bloquer l'attaquant".into(),
             description: "Bloquez 10.0.0.66 définitivement.".into(),
-            story: "Karl, alarmé: « L'attaquant 10.0.0.66 scanne nos ports. BLOQUEZ-LE. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl, soulagé: « 10.0.0.66 est bloqué, netrunner. Le scan est stoppé net. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Le scan vient de reprendre, plus soutenu que jamais. fail2ban a bien banni 10.0.0.66 du service SSH, mais cela ne protège que SSH : toutes les autres portes restent ouvertes à ses sondes. Il est temps de couper le problème à la racine. »\n\n« Je veux une règle de pare-feu qui refuse tout trafic entrant en provenance de cette adresse, quel que soit le port. Tant qu'elle est là, aucune de ses sondes, aucune de ses tentatives ne pourra atteindre un seul de nos services. »\n\n« Réfléchis : nos échanges avec 10.0.0.66 sont nuls, c'est une machine hostile. Elle n'a aucun service légitime à rejoindre chez nous : la couper complètement ne casse rien, et cela nous protège tous. »\n\n« Utilise les droits d'administrateur du NOC et pose cette règle de refus maintenant. Je veux la voir apparaître dans la liste des règles du pare-feu, pour être sûr qu'elle est bien en vigueur. »\n\n« Fais-le, et dis-le-moi quand la règle est en place : tant qu'elle n'y est pas, chaque seconde est une porte ouverte. »\n\nAprès votre commande, Karl vérifie la liste des règles :\n« La règle de refus est en place. Que 10.0.0.66 sonde autant qu'il veut : plus rien ne lui répondra, sur aucun port. »".into(),
             goal: "Avec les droits d'administrateur, interdisez au pare-feu tout trafic en provenance de l'attaquant 10.0.0.66.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment bloquer une IP?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "13.3".into(), chapter: 13, chapter_title: "Pare-feu ufw".into(), act: 4,
             title: "Autoriser HTTPS".into(),
             description: "Autorisez le port 443.".into(),
-            story: "Rosa: « Le portail web a besoin du 443. Autorisez-le. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa confirme: « Le port 443 est autorisé, netrunner. Le portail web est accessible. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Le portail web de supervision du NOC, celui par lequel les équipes suivent le réseau en direct, écoute sur le port 443 en TCP. Avec tout ce qui vient d'être durci, ce port doit être autorisé de façon explicite par le pare-feu, sinon les équipes perdront leur vue d'ensemble au pire moment. »\n\n« Sans cette autorisation, les superviseurs verraient le portail se figer sous leurs yeux pendant l'incident : le réseau serait aveugle exactement quand il est attaqué. C'est inacceptable. »\n\n« Ouvre donc le port 443 pour les connexions entrantes, en TCP uniquement. Rien d'autre : le reste du trafic doit continuer de suivre les règles existantes, et je ne veux aucune ouverture plus large que nécessaire. »\n\n« Tu disposes des droits d'administrateur du NOC : c'est avec eux que le pare-feu accepte ce genre de modification. Pose l'autorisation, et préviens-moi dès que c'est fait. »\n\n« Je teste le portail sitôt ta confirmation : si la règle est bonne, il répondra immédiatement. »\n\nAprès votre commande, Rosa teste le portail depuis sa console :\n« Le portail répond sur 443 : les équipes gardent leur supervision. Merci, netrunner. »".into(),
             goal: "Ouvrez au pare-feu le port 443, en TCP uniquement, pour le portail web.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment autoriser un port?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "13.4".into(), chapter: 13, chapter_title: "Pare-feu ufw".into(), act: 4,
             title: "Activer le pare-feu".into(),
             description: "Activez ufw maintenant.".into(),
-            story: "Karl: « Les règles sont prêtes. ACTIVEZ le pare-feu. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl approuve: « Le pare-feu est actif, netrunner. Les règles sont en vigueur. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « Les règles sont en place : l'adresse hostile est bloquée, le portail reste ouvert. Mais tout cela reste de l'encre sur du papier tant que le pare-feu n'est pas en service : pour l'instant, il est inactif, et aucune de ces règles n'est appliquée au trafic réel. »\n\n« Mets donc le pare-feu en marche, définitivement, avec les droits d'administrateur. À partir de ce moment, chaque connexion entrante sera réellement confrontée aux règles que nous avons posées : les refus couperont les sondes, les autorisations laisseront passer le portail. »\n\n« C'est l'étape que tout le monde redoute, parce qu'elle coupe réellement ce qui doit l'être. Mais nos règles sont prêtes, calibrées, vérifiées : c'est exactement le comportement que nous voulons. »\n\n« Active-le maintenant, et confirme-moi que le service est actif : je dois donner le feu vert à l'équipe, et je ne le ferai pas tant que le pare-feu ne tourne pas. »\n\n« Une fois en service, ce ne sera plus une configuration : ce sera la réalité du réseau. »\n\nAprès votre commande, Karl vérifie l'état du service :\n« Actif. Désormais, les refus et les autorisations que nous avons posés s'appliquent pour de vrai. Le NOC respire, netrunner. »".into(),
             goal: "Les règles sont prêtes: mettez le pare-feu du NOC en service, avec les droits d'administrateur.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment activer le pare-feu?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "13.5".into(), chapter: 13, chapter_title: "Pare-feu ufw".into(), act: 4,
             title: "Règles du noyau".into(),
             description: "Vérifiez les règles iptables.".into(),
-            story: "Karl: « Au-delà d'ufw, listez les règles du noyau (iptables). »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Karl examine les règles: « Les règles iptables sont listées, netrunner. Le noyau est sous contrôle. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Karl: « ufw est une surcouche pratique, mais l'ultime juge de paix, c'est le noyau : c'est lui qui filtre réellement chaque paquet qui entre ou sort. Pour le rapport de fin d'incident, je veux voir les règles de filtrage telles que le noyau les applique, pas telles qu'ufw les imagine. »\n\n« Utilise les droits d'administrateur et affiche ces règles de filtrage, sans résolution de noms d'hôtes : cela ira plus vite, et les adresses resteront en chiffres, comme nous les mettons dans nos rapports. C'est le format exact que l'équipe attend. »\n\n« Je dois comparer ces règles avec celles d'ufw : si une règle manque à l'appel ici, c'est qu'elle n'est jamais appliquée, et toute la chaîne de défense est à revoir. Ce contrôle fait partie de la procédure, il n'est pas facultatif. »\n\n« Montre-moi ces règles telles qu'elles sont dans le noyau, avec les droits d'administrateur. Je veux les lire moi-même, une à une, et vérifier la cohérence. »\n\n« Une fois que je les aurai vues, je saurai si notre confinement tient vraiment. »\n\nAprès votre commande, Karl parcourt la liste :\n« Entrée acceptée pour SSH, les connexions établies, le reste mesuré. Tout est cohérent avec nos règles : la chaîne de défense tient. »".into(),
             goal: "Listez les règles de filtrage du pare-feu du NOC.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment lister les règles du noyau?".into(),

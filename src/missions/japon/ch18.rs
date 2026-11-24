@@ -7,22 +7,27 @@ pub fn missions() -> Vec<Mission> {
             id: "18.1".into(), chapter: 18, chapter_title: "Services du chateau".into(), act: 5,
             title: "État du service SSH".into(),
             description: "Le service SSH tourne-t-il?".into(),
-            story: "Hanzō: « Seigneur, avant le siège, vérifiez que le service SSH tourne
-bien: systemctl status ssh. »
+            story: "Le capitaine des gardes: « Seigneur, les messagers du
+clan Hattori passeront par le canal chiffré, mais un
+canal ne vaut que si le service qui le garde fonctionne.
+Avant d'ouvrir les portes, montrez-moi l'état du service
+qui reçoit leurs messages. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Le passage chiffré est la seule voie sûre entre le
+château et ses alliés: s'il est éteint, la parole des
+messagers reste à la porte et l'ennemi gagne le temps de
+la surprendre. Un service muet est une porte condamnée
+sans que personne ne s'en aperçoive.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Le capitaine veut lire l'état exact du service: est-il
+en marche? Depuis quand? Quelle est sa santé telle que
+le système la consigne? C'est la première question d'un
+siège bien préparé: savoir ce qui veille, avant de
+savoir qui vient.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Hanzō vérifie: « Le service SSH tourne bien, Seigneur. Le portail est ouvert et fonctionnel. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Montrez-lui l'état du service du canal chiffré, tel que
+le système le rapporte. Quand il verra la ligne de vie
+du service, il saura si les messagers peuvent entrer.".into(),
             goal: "Affichez l'état du service ssh.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'état d'un service?".into(),
@@ -37,21 +42,26 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "18.2".into(), chapter: 18, chapter_title: "Services du chateau".into(), act: 5,
             title: "Redémarrer SSH".into(),
             description: "Redémarrez SSH après les réglages.".into(),
-            story: "Hanzō: « Seigneur, redémarrez SSH pour appliquer les réglages. »
+            story: "Le capitaine des gardes: « Seigneur, le service du canal
+chiffré fonctionne, mais ses réglages viennent d'être
+modifiés: ordres de veille, écoutes à rejeter. Tant que
+le service ne repart pas, il continue avec les anciennes
+consignes. Relancez-le avec les droits d'administrateur,
+pour qu'il applique les nouveaux réglages. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Un service réglé mais jamais relancé est une sentinelle
+qui garde l'ancien mot de passe: tout le monde croit la
+consigne changée, personne ne le sait. Il faut que le
+service s'arrête et reparte pour charger sa nouvelle
+mission.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+La manœuvre est brève: le canal sera muet quelques
+instants, puis reprendra selon les nouveaux réglages.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Hanzō confirme: « SSH est redémarré, Seigneur. Les réglages sont appliqués. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Relancez le service du canal chiffré avec les droits
+d'administrateur. Quand il repartira sous sa nouvelle
+consigne, les messagers pourront reprendre leurs allées
+et venues sans crainte.".into(),
             goal: "Avec les droits d'administrateur, redémarrez le service d'accès distant sécurisé du château pour appliquer les nouveaux réglages.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment redémarrer un service?".into(),
@@ -66,22 +76,26 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "18.3".into(), chapter: 18, chapter_title: "Services du chateau".into(), act: 5,
             title: "Logs du service SSH".into(),
             description: "Les 10 dernières lignes du journal de ssh.".into(),
-            story: "Le capitaine des gardes: « Seigneur, vérifiez le journal du service SSH:
-10 dernières lignes. »
+            story: "Le capitaine des gardes: « Seigneur, le service a repris,
+mais je ne me fie pas à une simple lecture de veille: je
+veux voir ce que le service a écrit lui-même. Consultez
+son journal, et montrez-m'en les dix dernières lignes,
+celles qui racontent la reprise. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Chaque service note son histoire au fil des heures:
+ouvertures, refus, erreurs. Le journal ne ment pas, lui
+qui consigne les faits à mesure. Les dix dernières
+lignes diront si la reprise s'est bien passée ou si le
+service boite depuis son redémarrage.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Le capitaine veut le récit des derniers instants du
+service: les dix dernières lignes de son journal, ni
+plus ni moins. Trois lignes de plus ou de moins et le
+récit serait tronqué ou bavard: il veut la fin exacte.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le capitaine des gardes lit le journal: « Les dernières lignes de SSH sont claires, Seigneur. Le service est sain. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Montrez-lui ces dix dernières lignes telles que le
+système les a écrites. Il y lira la santé du service et
+décidera si le canal peut être rouvert.".into(),
             goal: "Affichez les 10 dernières lignes du journal de ssh.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les logs d'un service?".into(),
@@ -96,22 +110,26 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "18.4".into(), chapter: 18, chapter_title: "Services du chateau".into(), act: 5,
             title: "Bannissements fail2ban".into(),
             description: "Quels espions sont bannis?".into(),
-            story: "Le capitaine des gardes: « Seigneur, le videur automatique (fail2ban)
-a banni des IP. Montrez le statut. »
+            story: "Le capitaine des gardes: « Seigneur, le videur
+automatique veille jour et nuit derrière le passage
+chiffré: il repère les assauts répétés et bannit les
+adresses qui insistent. J'ai besoin de voir qui il tient
+à l'écart. Montrez-moi l'état de cette protection, avec
+les droits d'administrateur. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Le videur est la sentinelle invisible du domaine: il ne
+dort pas et garde la liste des adresses interdites. En
+le consultant, le capitaine saura quels agresseurs ont
+été écartés et si la liste correspond aux visages qu'il
+redoutait.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Le château vient d'essuyer des vagues de tentatives: qui
+le videur a-t-il attrapé? Voilà ce que la consultation
+doit révéler.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le capitaine des gardes consulte le statut: « Le videur a banni des IP, Seigneur. Les intrus sont tenus à distance. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Montrez-lui l'état de la protection anti-intrusion.
+Quand la liste des bannis sera sous ses yeux, il saura
+si le domaine a été bien défendu.".into(),
             goal: "Affichez l'état de la protection anti-intrusion du château.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir les bannissements?".into(),
@@ -126,22 +144,26 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "18.5".into(), chapter: 18, chapter_title: "Services du chateau".into(), act: 5,
             title: "Débannir l'allié".into(),
             description: "Le clan Hattori (10.0.0.99) a été banni par erreur.".into(),
-            story: "Hanzō, paniqué: « Seigneur! Le videur a banni par erreur le clan Hattori
-(10.0.0.99)! Débanissez-le immédiatement! »
+            story: "Le capitaine des gardes, alarmé: « Seigneur, le videur
+automatique a commis une méprise: il a banni le messager
+du clan Hattori, 10.0.0.99, en pleine négociation! Ce
+n'est pas un espion, c'est notre allié. Levez son
+bannissement immédiatement, avec les droits
+d'administrateur. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Le videur juge sur les apparences: des tentatives
+répétées venaient de ce quartier, et il a frappé sans
+demander conseil. Mais le messager allié insistait à
+juste titre: il cherchait à entrer, pas à forcer.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Chaque instant de bannissement est une nouvelle perdue
+pour la négociation: l'allié attend à la porte, empêché
+d'approcher par une erreur. Le capitaine ne veut pas
+qu'une décision automatique fasse fuir un clan ami.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Hanzō, soulagé: « Le clan Hattori est débanni, Seigneur. Nos alliés peuvent revenir. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Levez le bannissement du messager 10.0.0.99, avec les
+droits d'administrateur. Quand la porte lui sera rouverte,
+le clan Hattori reprendra sa place au conseil.".into(),
             goal: "Levez immédiatement le bannissement infligé par erreur au clan Hattori, 10.0.0.99, par le videur anti-intrusion.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment révoquer un bannissement?".into(),

@@ -7,22 +7,28 @@ pub fn missions() -> Vec<Mission> {
             id: "13.1".into(), chapter: 13, chapter_title: "Recrutement".into(), act: 4,
             title: "Recruter un samouraï".into(),
             description: "Créez le compte du nouveau samouraï 'samourai2'.".into(),
-            story: "Seigneur Hattori envoie un renfort: « Seigneur, créez le compte du
-samouraï 'samourai2' avec son quartier (-m). »
+            story: "Le seigneur Hattori: « Seigneur, un samouraï renfort arrive
+du clan allié: samourai2. Donnez-lui un compte qui existe
+vraiment, avec ses propres quartiers, pour qu'il ne dorme
+pas dans le couloir. Puis montrez-moi sa fiche d'identité,
+pour que je sache le numéro qui lui est attribué. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Un compte sans quartier, c'est un soldat sans chambre:
+il ne peut ni ranger ses affaires ni se reposer entre
+deux gardes. Le renfort veut servir le domaine, mais il
+lui faut un foyer à son nom, un dossier personnel ouvert
+au château.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Le moine Tetsuo a préparé une paillasse dans les
+quartiers des invités et attend le nouveau venu. Une
+fois le compte créé avec son logement, vous appellerez
+sa fiche: le numéro d'identité, le groupe principal,
+tout ce qui permettra de reconnaître samourai2 dans
+les registres du domaine.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Seigneur Hattori approuve: « Le compte de samourai2 est créé, avec son quartier, Seigneur. Le renfort est prêt. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Le seigneur Hattori consulte les registres avant de
+partir accueillir le renfort à la porte.
+".into(),
             goal: "Créez le compte samourai2 avec son dossier personnel pour le renfort du seigneur Hattori, puis affichez sa fiche d'identité.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un utilisateur avec son home?".into(),
@@ -37,22 +43,27 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "13.2".into(), chapter: 13, chapter_title: "Recrutement".into(), act: 4,
             title: "Créer une garnison".into(),
             description: "Créez le groupe 'garnison'.".into(),
-            story: "Le capitaine des gardes: « Seigneur, créez le groupe 'garnison' pour
-les nouvelles recrues. »
+            story: "Le capitaine des gardes: « Seigneur, les recrues du
+clan allié arrivent par petits groupes. Rassemblez-les
+sous un même drapeau: créez le groupe garnison, pour
+qu'elles aient toutes un foyer commun dans les
+registres du château. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Une unité sans nom, c'est une troupe que personne ne
+peut compter. Quand le groupe garnison existera, les
+capitaines pourront y ranger chaque nouvelle recrue
+et savoir, d'un regard, qui défend le domaine. C'est
+le quartier-maître qui tient ce registre, et il attend
+votre ordre.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous vous installez devant les registres des gardes.
+Les noms des soldats s'y inscriront bientôt sous une
+même bannière. Le capitaine hoche la tête: dès que le
+groupe sera fondé, il fera défiler les recrues.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le capitaine des gardes confirme: « Le groupe garnison est créé, Seigneur. Les recrues ont un foyer. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Chaque recrue aura ainsi une bannière commune, lisible
+d'un seul regard dans les registres du château.
+".into(),
             goal: "Fondez le groupe garnison qui accueillera les nouvelles recrues du château.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un groupe?".into(),
@@ -67,22 +78,27 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "13.3".into(), chapter: 13, chapter_title: "Recrutement".into(), act: 4,
             title: "Affecter le samouraï".into(),
             description: "Ajoutez samourai2 au groupe garnison.".into(),
-            story: "Le capitaine des gardes: « Seigneur, ajoutez samourai2 à la garnison,
-sans retirer ses autres groupes. »
+            story: "Le capitaine des gardes: « Seigneur, samourai2 doit
+rejoindre la garnison. Ajoutez-le au groupe garnison
+sans lui retirer ses autres affectations: il reste du
+clan allié, et il devient nôtre. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Un soldat peut servir deux bannières quand les deux
+domaines sont alliés. Le renfort garde ses liens
+d'origine et gagne sa place dans la garnison: rien ne
+doit être perdu en route. Il ne s'agit pas de remplacer
+ses autres groupes, seulement d'en ajouter un.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous ouvrez le registre de samourai2. Sa ligne contient
+déjà des affectations anciennes, qu'il faut respecter.
+Vous ajoutez la garnison à la suite, sans rayer le
+reste. Le capitaine vérifiera d'un coup d'œil que le
+nouveau soldat est bien dans les deux colonnes.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le capitaine des gardes vérifie: « samourai2 est dans la garnison, sans perdre ses autres groupes, Seigneur. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Le groupe garnison sera ajouté à sa ligne, et les
+anciennes affectations resteront en place: un soldat
+ne s'efface pas quand il prête serment ailleurs.
+".into(),
             goal: "Affectez samourai2 au groupe garnison en complément, sans lui retirer ses autres affectations.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter un utilisateur à un groupe?".into(),
@@ -97,22 +113,26 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "13.4".into(), chapter: 13, chapter_title: "Recrutement".into(), act: 4,
             title: "Vos groupes".into(),
             description: "À quels groupes appartenez-vous?".into(),
-            story: "Dame Kaguya: « Seigneur, pour le contrôle d'accès du donjon, vérifiez
-vos propres groupes. »
+            story: "Dame Kaguya: « Seigneur, le donjon est verrouillé selon
+les groupes d'accès. Avant de vous en remettre les
+clés, montrez-moi la liste des groupes auxquels votre
+propre compte appartient. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Les portes du donjon s'ouvrent selon les bannières que
+vous portez. Si un groupe manque à votre liste, un
+couloir vous restera fermé. La dame veut vérifier que
+votre présence est bien enregistrée: c'est votre propre
+fiche qu'elle demande.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous fouillez vos quartiers pour trouver les parchemins
+de votre maisonnée. Inutile: la réponse est inscrite
+dans le compte lui-même, là où le château garde trace
+de vos affectations. Il suffit de l'appeler pour que
+la liste s'affiche sous les yeux de Dame Kaguya.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Dame Kaguya note vos groupes: « Vos accès au donjon sont confirmés, Seigneur. Le contrôle d'accès est en ordre. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Elle compare avec son rouleau et marque votre nom d'un
+sceau: les clés du donjon suivront.
+".into(),
             goal: "Montrez à Dame Kaguya la liste des groupes auxquels votre propre compte appartient.".into(),
             bloom_level: "Se souvenir".into(),
             bloom_question: "Comment voir ses groupes?".into(),
@@ -127,22 +147,28 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "13.5".into(), chapter: 13, chapter_title: "Recrutement".into(), act: 4,
             title: "Fiche du samouraï".into(),
             description: "Identité complète de samourai2.".into(),
-            story: "Le capitaine des gardes: « Seigneur, montrez la fiche complète de
-samourai2: uid, gid, groupes. »
+            story: "Le capitaine des gardes: « Seigneur, je dois inscrire
+samourai2 au registre des tours de garde, et il me
+faut sa fiche complète: son numéro d'identité, son
+groupe principal, et tous les groupes auxquels il
+appartient. Montrez-les-moi. »
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+Le registre des gardes exige l'état exact du soldat:
+numéro, famille, unités. Une seule ligne manquante, et
+le capitaine ne saura pas où poster l'homme quand la
+cloche sonnera la nuit.
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Vous appelez la fiche complète de samourai2, celle que
+le château tient à jour depuis sa création. Tout s'y
+trouve en une seule ligne: son numéro, sa maison et
+ses affectations. Le capitaine la recopie sur son
+rouleau et range sa plume: le tour de garde peut être
+écrit.
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le capitaine des gardes consulte la fiche: « uid, gid, groupes... tout est là, Seigneur. samourai2 est bien enregistré. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+La fiche sortira dans son entier, de la première
+colonne à la dernière, pour que rien ne soit oublié
+lors de la recopie.
+".into(),
             goal: "Affichez l'identité complète de samourai2: numéro, groupe principal et toutes ses garnisons.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'identité d'un autre utilisateur?".into(),

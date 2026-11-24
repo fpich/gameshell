@@ -7,22 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "2.1".into(), chapter: 2, chapter_title: "Organisation du poste".into(), act: 1,
             title: "Nouveau ticket".into(),
             description: "Créez un ticket d'incident vierge.".into(),
-            story: "Rosa: « Créez ticket_incident.txt à votre poste pour consigner
-les alertes de la journée. Et listez le poste en détail. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Rosa approuve: « Le ticket est créé, netrunner. Chaque alerte sera consignée. Le registre du jour commence. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa vous appelle sur le canal netops:\n« Netrunner, la journée commence. Créez un ticket d'incident vide à votre\nposte: ticket_incident.txt. Il servira de registre pour consigner les\nalertes que nous allons traiter. »\n\n« Le fichier doit apparaître dans votre répertoire de travail, celui où\nvous étiez tout à l'heure. Créez-le, puis faites-moi voir le contenu du\nposte en détail: je dois vérifier que le ticket est bien là, avec toutes\nles informations des fichiers. »\n\nVous créez le ticket, puis vous listez le contenu de votre poste avec\nles détails complets (tailles, permissions, dates).\n\nRosa valide: « Le ticket est créé, netrunner. Chaque alerte y sera\nconsignée. Le registre du jour commence. »".into(),
             goal: "Créez ticket_incident.txt à votre poste.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un fichier vide?".into(),
@@ -37,22 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "2.2".into(), chapter: 2, chapter_title: "Organisation du poste".into(), act: 1,
             title: "Classer les rapports".into(),
             description: "Créez archives/2024/incidents.".into(),
-            story: "Rosa veut un classement: archives/AAAA/type/.
-« Créez archives/2024/incidents à votre poste, une seule commande. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Rosa vérifie l'arborescence: « archives/2024/incidents est en place, netrunner. Un classement strict, c'est un NOC bien tenu. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa poursuit: « Maintenant, il faut ranger ce poste. Je veux un\nclassement clair: un dossier archives, puis une année 2024, puis un\ndossier par type d'incident. Créez archives/2024/incidents en une seule\ncommande, directement dans votre répertoire de travail. »\n\n« Plus le classement est strict, plus on retrouve vite un rapport quand\nun incident remonte. Les tickets de 2024 iront là-dedans. »\n\nVous créez l'arborescence complète d'un seul coup: le dossier\narchives, son sous-dossier 2024, et le dossier incidents au fond.\n\nRosa vérifie l'arborescence: « archives/2024/incidents est en place,\nnetrunner. Un classement strict, c'est un NOC bien tenu. »".into(),
             goal: "Créez l'arborescence archives/2024/incidents.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer toute une arborescence d'un coup?".into(),
@@ -67,24 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "2.3".into(), chapter: 2, chapter_title: "Organisation du poste".into(), act: 1,
             title: "Backup de la config".into(),
             description: "Copiez sshd_config vers vos archives.".into(),
-            story: "Rosa: « Copiez /configs/sshd/sshd_config dans /archives/2024/incidents/
-pour garder une trace avant modification. »
-
-Créez le dossier d'abord si besoin.
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Rosa confirme: « La config SSH est en sûreté dans les archives, netrunner. Rien ne se perdra avant modification. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa vous rappelle: « Avant de toucher à la configuration SSH, on\ngarde une trace de l'état actuel. Prenez /configs/sshd/sshd_config et\nplacez une copie dans les archives centrales: /archives/2024/incidents/. »\n\n« Le dossier d'archives centrales existe déjà à la racine du datacenter;\nsi besoin, complétez l'arborescence avant de copier. La copie doit\nporter le même nom, sshd_config. »\n\nVous dupliquez la configuration dans les archives de l'année, prête à\nêtre comparée après durcissement.\n\nRosa confirme: « La config SSH est en sûreté dans les archives,\nnetrunner. Rien ne se perdra avant modification. »".into(),
             goal: "Copiez sshd_config vers /archives/2024/incidents/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment copier un fichier vers un autre dossier?".into(),
@@ -99,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "2.4".into(), chapter: 2, chapter_title: "Organisation du poste".into(), act: 1,
             title: "Renommer un ticket".into(),
             description: "Renommez ticket_incident.txt en ticket_urgent.txt.".into(),
-            story: "Rosa: « Ce ticket est URGENT: renommez ticket_incident.txt en ticket_urgent.txt. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa approuve: « ticket_urgent.txt, c'est plus clair, netrunner. L'équipe saura quoi traiter en premier. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa revient vers vous, pressée:\n« Netrunner, un incident critique vient d'être signalé sur le firewall.\nCe ticket passe en priorité maximale. Renommez-le: ticket_incident.txt\ndoit devenir ticket_urgent.txt à votre poste. »\n\n« Le fichier est dans votre répertoire de travail. Changez son nom pour\nque toute l'équipe voie immédiatement qu'il faut le traiter en premier. »\n\nVous renommez le ticket à votre poste. L'ancien nom disparaît, le\nnouveau apparaît.\n\nRosa approuve: « ticket_urgent.txt, c'est plus clair, netrunner.\nL'équipe saura quoi traiter en premier. »".into(),
             goal: "Renommez ticket_incident.txt en ticket_urgent.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment renommer un fichier?".into(),
@@ -130,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "2.5".into(), chapter: 2, chapter_title: "Organisation du poste".into(), act: 1,
             title: "Ménage".into(),
             description: "Supprimez les vieilles captures de test.".into(),
-            story: "Rosa: « Supprimez les captures de test: test1.pcap, test2.pcap. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa sourit: « Les captures de test sont supprimées, netrunner. Votre poste est enfin propre. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa termine la revue de votre poste:\n« Il reste deux vieilles captures de test qui traînent: test1.pcap et\ntest2.pcap. Elles datent de la mise en service du poste et n'ont plus\naucune valeur. Supprimez-les. »\n\n« Les deux captures sont dans votre répertoire de travail, à votre\nposte, comme le ticket que vous avez créé ce matin. »\n\n« Un poste propre, c'est un poste fiable: moins de fichiers inutiles,\nmoins de risques de confondre une vraie capture avec un test. »\n\nVous supprimez les deux captures de test de votre répertoire de travail.\n\nRosa sourit: « Les captures de test sont supprimées, netrunner. Votre\nposte est enfin propre. »".into(),
             goal: "Supprimez les fichiers de test de votre poste.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment supprimer un fichier?".into(),

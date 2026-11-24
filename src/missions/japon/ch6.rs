@@ -7,22 +7,22 @@ pub fn missions() -> Vec<Mission> {
             id: "6.1".into(), chapter: 6, chapter_title: "Surveiller le chateau".into(), act: 2,
             title: "Tous les processus".into(),
             description: "Quels systèmes tournent dans le château?".into(),
-            story: "Le forgeron: « Seigneur, quels systèmes tournent en ce moment dans le
-château? Donnez-moi la liste complète des processus. »
+            story: "Le forgeron arrive des salles des machines, la suie au visage. Il essuie ses
+mains sur son tablier et s'incline devant vous.
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+« Seigneur, on me dit que des espions du clan rival rôdent près des remparts
+depuis trois nuits. S'ils ont passé le portail, ils tournent quelque part dans
+le château, en ce moment même. Je veux savoir quels systèmes vivent et
+travaillent. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Il sort un rouleau. « Donnez-moi la liste complète de tous les processus qui
+tournent, avec leur propriétaire et leur consommation. Nous verrons bien ce
+qui ne devrait pas être là. »
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le forgeron parcourt la liste: « Voilà tous les systèmes qui tournent, Seigneur. Le château est bien vivant. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Vous vous penchez sur les registres du château: les gardes et les scribes
+apparaissent, chacun avec ce qu'il dévore. Le forgeron parcourt vos notes et
+hoche la tête. « Tout est là, Seigneur. Les processus connus, et les autres.
+On saura quoi surveiller. »".into(),
             goal: "Dressez la liste complète de tous les processus du château, avec leur propriétaire et leur consommation.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment lister tous les processus?".into(),
@@ -37,22 +37,21 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "6.2".into(), chapter: 6, chapter_title: "Surveiller le chateau".into(), act: 2,
             title: "Filtrer les gardes".into(),
             description: "Quels processus concernent les gardes?".into(),
-            story: "Le capitaine des gardes: « La liste est longue. Je veux seulement les
-processus qui parlent de 'garde'. Filtrez le résultat. »
+            story: "Le capitaine des gardes pousse la porte, son armure cliquetant à chaque pas.
+Il déroule votre précédent rapport et le tapote du doigt.
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+« La liste complète est utile, Seigneur, mais elle est trop longue à lire
+d'un coup. Je veux seulement les processus qui concernent la garde: ceux dont
+le nom parle des gardes, rien d'autre. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Il marque un temps. « Filtrez le résultat pour ne garder que les lignes qui
+contiennent ces mots. Je dois voir la surveillance du château d'un seul
+regard, sans mêler les forges ni les greniers. »
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le capitaine des gardes examine le filtre: « Seuls les processus de garde, Seigneur. La surveillance est ciblée. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Vous isolez les lignes de la garde du reste des registres. Le capitaine
+examine le rouleau épuré et approuve d'un geste sec. « Voilà ce qu'il me
+fallait, Seigneur. La garde est sous nos yeux, et le reste ne nous distrait
+plus. »".into(),
             goal: "Affichez uniquement les processus contenant 'garde'.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment filtrer la sortie d'une commande?".into(),
@@ -67,22 +66,22 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "6.3".into(), chapter: 6, chapter_title: "Surveiller le chateau".into(), act: 2,
             title: "Processus par nom".into(),
             description: "Y a-t-il des processus 'espion'?".into(),
-            story: "Le ninja Hanzō prévient qu'un processus suspect tourne.
-« Seigneur, listez les processus dont le nom contient 'espion'. »
+            story: "Hanzō, le maître des ombres, surgit sans un bruit derrière vous. Sa voix ne
+porte pas plus haut qu'un murmure, mais chacun de ses mots pèse.
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+« Seigneur, mes informateurs ont surpris un échange entre un ronin et un
+messager du clan rival. Un nom revenait sans cesse: \"espion\". Si ce
+processus dormait caché dans le château, il réveillerait ses semblables dès
+ce soir. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Il glisse un doigt sur la table où sont consignés les processus. « Cherchez
+les processus dont le nom contient \"espion\", et montrez-les-moi en entier:
+leur identifiant et leur commande. Je dois savoir où il se terre pour le
+rabattre. »
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le ninja Hanzō examine la liste: « Le processus espion est repéré, Seigneur. Nous savons où il se cache. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Vous fouillez les registres et en tirez le fil de l'espion. Hanzō déchiffre
+la ligne, puis son ombre s'étire en un sourire glacé. « Le voilà, Seigneur.
+Il ne nous échappera plus. »".into(),
             goal: "Listez les processus dont le nom contient 'espion'.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment lister des processus par nom?".into(),
@@ -97,22 +96,21 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "6.4".into(), chapter: 6, chapter_title: "Surveiller le chateau".into(), act: 2,
             title: "Jauges du château".into(),
             description: "Aperçu instantané des ressources.".into(),
-            story: "Le forgeron: « Seigneur, un aperçu des jauges du château: mémoire, CPU,
-processus gourmands. Un cliché suffit. »
+            story: "Le forgeron revient deux heures plus tard, les bras chargés de feuillets. Il
+les dépose devant vous, visiblement épuisé.
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+« Seigneur, les salles des machines chauffent anormalement depuis ce matin.
+La mémoire du château est sous tension, les fours tirent trop de souffle, et
+quelque chose dévore nos forces. J'ai besoin d'un cliché des jauges: l'état
+de la mémoire, du souffle, et les processus les plus gourmands. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Il pose la main sur les feuillets. « Un seul aperçu suffit, pris d'un coup,
+sans que je doive rester devant l'écran à l'interroger. En mode non
+interactif, et une seule itération. »
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Le forgeron regarde le cliché: « Mémoire, CPU, processus gourmands... le château tient bon, Seigneur. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Vous prenez le cliché; les jauges s'affichent d'un trait. Le forgeron le
+compare à ses chiffres et souffle. « Voilà qui lève le doute, Seigneur. Ce
+qui avale nos forces apparaît noir sur blanc. »".into(),
             goal: "Donnez au forgeron un cliché unique des jauges du château (mémoire, CPU, processus gourmands), en mode lot non interactif et en une seule itération.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment surveiller les ressources?".into(),
@@ -127,22 +125,20 @@ Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes v
             id: "6.5".into(), chapter: 6, chapter_title: "Surveiller le chateau".into(), act: 2,
             title: "Éliminer l'intrus".into(),
             description: "Le processus espion PID 6666 tourne encore.".into(),
-            story: "Hanzō: « Seigneur! Le processus espion, PID 6666, vole nos registres.
-Coupez son alimentation, de force. »
+            story: "Hanzō surgit à nouveau, mais cette fois son calme a disparu. Son poignard est
+déjà tiré, et sa voix porte.
 
-Les espions du clan rival rôdent autour du château Shiro. Chaque seconde compte. Le seigneur Hattori attend votre rapport.
+« Seigneur! Le processus espion a été repéré: il porte le numéro 6666 et il
+est en train de copier nos registres, un rouleau après l'autre, vers le clan
+rival. Chaque instant qui passe, c'est un secret de Shiro qui s'en va. »
 
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.
+Il vous fixe. « Il faut couper son alimentation, de force. Une demande
+polie, il l'ignorerait et continuerait à voler: il faut le signal qu'il ne
+peut ni ignorer ni intercepter. Visez le numéro exact, 6666. Rien d'autre. »
 
-N'oubliez pas: un domaine bien administré ne tombe jamais. La préparation fait la différence entre la victoire et le siège.
-
-Le moine Tetsuo médite à la pagode et prie pour la paix du domaine.
-
-Les gardes surveillent le portail jour et nuit. Un ronin a été aperçu près des remparts est.
-
-Hanzō confirme: « Le processus espion est neutralisé, Seigneur. Nos registres sont en sûreté. »
-
-Le château Shiro est perché sur sa colline, entouré de remparts. Cent âmes vivent dans le domaine et comptent sur vous, Seigneur.".into(),
+Vous abattez le processus d'un geste net. Le cliquetis s'arrête. Hanzō
+consulte les registres, puis range son poignard. « Le voleur est tombé,
+Seigneur. Nos rouleaux restent à Shiro. »".into(),
             goal: "Abattez de force le processus espion 6666, avec le signal qu'il ne peut ni ignorer ni intercepter.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment tuer un processus par PID?".into(),

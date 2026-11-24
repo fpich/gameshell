@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "11.1".into(), chapter: 11, chapter_title: "Archives et preuves".into(), act: 3,
             title: "Archiver les logs".into(),
             description: "Archive compressée des logs vers /archives.".into(),
-            story: "Rosa: « Archivez tous les logs dans /archives/logs_15jan.tar.gz. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa approuve: « L'archive des logs est créée, netrunner. Les preuves sont en sûreté. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Le dossier d'incident du 15 janvier est presque complet, netrunner. Il reste à préserver les pièces dans leur état d'origine: je veux un paquet unique, horodaté, qui contienne l'ensemble des journaux du NOC. »\n\n« Les journaux vivent dans /logs: authentifications, détections de l'IDS, blocages du pare-feu, bannissements. Tous doivent entrer dans ce paquet, dans l'état où ils sont, sans en oublier un seul. »\n\n« Une simple copie prendrait de la place et pourrait être altérée au fil du temps. Un paquet unique et compressé protège son contenu: on le déplace, on le conserve, on le transmet comme un seul objet. C'est la forme que prennent nos preuves. »\n\n« Le paquet doit être rangé dans le répertoire des archives, à côté des autres preuves, sous le nom logs_15jan.tar.gz. Ce nom raconte tout: les journaux, la date de l'incident, le format du paquet. Rien d'autre à ajouter. »\n\n« Crée donc le paquet compressé des journaux, netrunner, et dépose-le dans les archives sous le nom logs_15jan.tar.gz. »\n\nAprès votre commande, Rosa inspecte les archives:\n« Le paquet logs_15jan.tar.gz est en place, netrunner. Toute la journée du 15 janvier est sous clef: les preuves sont préservées. »".into(),
             goal: "Créez /archives/logs_15jan.tar.gz contenant /logs/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer une archive compressée?".into(),
@@ -38,23 +22,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "11.2".into(), chapter: 11, chapter_title: "Archives et preuves".into(), act: 3,
             title: "Vérifier l'archive".into(),
             description: "Contenu de l'archive sans l'extraire.".into(),
-            story: "Rosa: « Vérifiez le contenu de l'archive avant envoi. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa vérifie le contenu: « Tout est dans l'archive, netrunner. Rien ne manque avant l'envoi. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Le paquet est créé, mais je n'envoie rien à l'amiral sans savoir ce qu'il contient. Ouvre-le pour moi, netrunner: je veux voir la liste des journaux qui sont dedans, avec la taille et la date de chaque entrée. »\n\n« Attention: je ne veux pas déballer le contenu sur le disque. J'ai seulement besoin de le regarder, de vérifier que chaque journal du NOC est là et que rien n'a été oublié avant l'envoi. »\n\n« Quand on ouvre une malle pour contrôler son contenu, on peut soit tout sortir, soit consulter l'inventaire sans rien déplacer. C'est l'inventaire que je veux, pas le déballage: les fichiers restent dans le paquet. »\n\n« Liste-moi donc le contenu du paquet logs_15jan.tar.gz, avec le détail de chaque entrée, sans extraire les fichiers. Si un journal manque, c'est maintenant que je dois le savoir. »\n\nAprès votre commande, Rosa examine la liste:\n« Chaque journal est là, netrunner. L'inventaire est complet, rien ne manque: le paquet peut partir vers l'enquête. »".into(),
             goal: "Montrez à Rosa le contenu détaillé de l'archive /archives/logs_15jan.tar.gz, sans l'extraire.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister une archive?".into(),
@@ -69,23 +37,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "11.3".into(), chapter: 11, chapter_title: "Archives et preuves".into(), act: 3,
             title: "Extraire l'archive".into(),
             description: "Extrayez dans /tmp pour vérification.".into(),
-            story: "Rosa: « Extrayez l'archive dans /tmp. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa confirme: « L'archive est extraite dans /tmp, netrunner. Les logs sont accessibles. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « L'équipe d'analyse ne fouillera pas les archives: elle veut travailler sur le contenu du paquet, dans un répertoire de travail. Déballe pour elle les journaux dans le dossier /tmp. »\n\n« Le paquet reste dans les archives, intact, comme preuve originale. Ce que tu déballes, c'est une copie de travail, dans /tmp, là où le NOC fait ses analyses. L'original n'est jamais touché. »\n\n« Deux choses sont nécessaires: décompresse le paquet, puis dépose les fichiers précisément dans le répertoire de travail. Si tu les laisses tomber dans le répertoire courant, l'équipe les cherchera au mauvais endroit et perdra du temps. »\n\n« Les journaux, une fois sortis du paquet, doivent donc se retrouver dans /tmp et nulle part ailleurs. Je compte sur toi pour viser juste. »\n\nAprès votre commande, Rosa vérifie les fichiers:\n« Les journaux sont dans /tmp, netrunner. L'équipe peut travailler sur sa copie, et l'original reste sous clef dans les archives. »".into(),
             goal: "Décompressez et extrayez l'archive /archives/logs_15jan.tar.gz dans le répertoire /tmp.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment extraire dans un dossier précis?".into(),
@@ -100,23 +52,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "11.4".into(), chapter: 11, chapter_title: "Archives et preuves".into(), act: 3,
             title: "Rapport ZIP".into(),
             description: "Le SOC préfère le ZIP.".into(),
-            story: "Rosa: « Créez rapport_incident.zip avec les captures du poste. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa approuve: « Le ZIP des captures est créé, netrunner. Le rapport d'incident est prêt. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « L'équipe du SOC, le centre de sécurité, travaille avec ses propres outils: elle préfère recevoir les captures réseau dans une archive ZIP, son format habituel. Les captures du 15 janvier doivent lui parvenir dans un seul fichier. »\n\n« Les captures sont dans /captures: le scan de la machine hostile, les ports ouverts de notre réseau, la résolution DNS du NOC. Tout ce poste de capture doit entrer dans l'archive, y compris les fichiers des sous-dossiers. »\n\n« Un ZIP ne s'assemble pas comme une malle: il faut lui demander explicitement de reprendre les dossiers de l'original, sinon seuls les fichiers du premier niveau seront pris. Ne laisse rien de côté. »\n\n« Le fichier s'appellera rapport_incident.zip, c'est le nom que le SOC attend. Dépose-le dans ton répertoire personnel, avec tes documents de travail: il fera partie du dossier d'incident. »\n\n« Crée donc l'archive ZIP des captures, netrunner, et dépose rapport_incident.zip chez toi. »\n\nAprès votre commande, Rosa valide le dépôt:\n« rapport_incident.zip est chez toi, netrunner, avec toutes les captures. Le SOC a son dossier, il peut commencer son analyse. »".into(),
             goal: "Créez rapport_incident.zip contenant /captures/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer un ZIP?".into(),
@@ -131,23 +67,7 @@ Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous
             id: "11.5".into(), chapter: 11, chapter_title: "Archives et preuves".into(), act: 3,
             title: "Lire le ZIP".into(),
             description: "Contenu du ZIP.".into(),
-            story: "Rosa: « Vérifiez le contenu du ZIP. »
-
-Une vague de scans SYN balaie le secteur depuis 10.0.0.66. Chaque seconde compte. L'équipe netops attend votre diagnostic.
-
-Le NOC Nexus-9 est le cœur du réseau Neon-9. Cent serveurs comptent sur vous, netrunner.
-
-N'oubliez pas: un réseau bien surveillé ne tombe jamais. La détection fait la différence entre un scan et une intrusion.
-
-L'IDS a levé une alerte: bruteforce SSH détecté depuis 10.0.0.99.
-
-Le pare-feu bloque déjà les ports sensibles. Sans configuration stricte, tout le cluster est vulnérable.
-
-Chaque commande que vous apprenez ici sert à protéger le réseau et ses utilisateurs.
-
-Rosa vérifie le ZIP: « Tout est dans l'archive, netrunner. Le rapport est complet. »
-
-Le NOC Neon-9 poursuit sa veille. Les cent serveurs du réseau comptent sur vous, netrunner.".into(),
+            story: "Rosa: « Avant que le SOC n'ouvre rapport_incident.zip, je veux vérifier son contenu moi-même: chaque capture doit y être, rien de plus, rien de moins. Liste-le pour moi, netrunner. »\n\n« Comme pour le paquet de tout à l'heure, je ne veux pas déballer les fichiers dans le répertoire courant: seulement l'inventaire, la liste de ce que contient l'archive. Rien ne doit être extrait. »\n\n« Le ZIP possède son propre outil de lecture, adapté à son format. Il affiche la liste des entrées avec leur taille et leur nom, sans toucher aux fichiers. »\n\n« Montre-moi donc la liste des fichiers contenus dans rapport_incident.zip, sans rien décompresser. Si une capture manque, elle doit être ajoutée avant l'envoi. »\n\nAprès votre commande, Rosa compare avec le poste de capture:\n« Les trois captures sont dans le ZIP, netrunner: rien ne manque, rien en trop. Le dossier peut partir vers le SOC. »".into(),
             goal: "Montrez à Rosa la liste des fichiers contenus dans rapport_incident.zip, sans rien décompresser.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister un ZIP?".into(),

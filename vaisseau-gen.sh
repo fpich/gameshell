@@ -439,6 +439,18 @@ isolé, sans accès au reste de la station.
 Code d'accès à la cellule: FORTRESS
 EOF
 
+# Réserves des soutes (tailles calibrées pour la mission 13.4 « du -sh /soutes/* »:
+# municions 40M > armes 12M > nourriture 8M > pieces 6M > carburant 5M > cargo 1M > dechets 64K)
+mkdir -p "$SO/municions/caisses" "$SO/armes/munitions-lourdes" "$SO/nourriture/rations" \
+         "$SO/pieces/moteurs" "$SO/carburant/tanks" "$SO/cargo/containers"
+dd if=/dev/zero of="$SO/municions/caisses/caisse_missiles.dat" bs=1M count=40 status=none
+dd if=/dev/zero of="$SO/armes/munitions-lourdes/bloc_plasma.dat" bs=1M count=12 status=none
+dd if=/dev/zero of="$SO/nourriture/rations/rations_proteines.dat" bs=1M count=8 status=none
+dd if=/dev/zero of="$SO/pieces/moteurs/moteur_ion.dat" bs=1M count=6 status=none
+dd if=/dev/zero of="$SO/carburant/tanks/reserve_hydrazine.dat" bs=1M count=5 status=none
+dd if=/dev/zero of="$SO/cargo/containers/container_medical.dat" bs=1M count=1 status=none
+dd if=/dev/zero of="$SO/dechets/debris_un.dat" bs=1K count=64 status=none
+
 # ═══════════════════════════════════════════════
 #  COMMUNICATIONS
 # ═══════════════════════════════════════════════
@@ -501,7 +513,6 @@ N="$V/navigation"
 mkdir -p "$N"/{cartes,coordonnees,trajectoire,secteurs}
 
 cat > "$N/coordonnees/orion7.txt" << 'EOF'
-echo "orion7" > "$N/coordonnees/hostname"
 COORDONNÉES ORION-7:
   Secteur: 7G
   Quadrant: X-42

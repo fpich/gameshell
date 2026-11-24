@@ -7,21 +7,23 @@ pub fn missions() -> Vec<Mission> {
             id: "15.1".into(), chapter: 15, chapter_title: "Archives et sauvegardes".into(), act: 4,
             title: "Archiver les rapports".into(),
             description: "Tael Rhen veut une archive compressée des rapports dans les soutes.".into(),
-            story: "Tael Rhen: « Capitaine, avant l'attaque, archivons tous les rapports
-dans une caisse hermétique compressée, dans les soutes sécurisées. »
+            story: "Tael Rhen vous rejoint sur le pont, un casier de transport à la main :
+« Capitaine, l'Andromède veut une copie de nos rapports avant la prochaine
+relève. Ne partons pas avec seulement les originaux dans la cabine. »
 
-Il vous demande de créer une archive .tar.gz de tout le dossier rapports/
-de votre cabine, et de la déposer dans /soutes/.
+Il pose le casier : « Créez une archive compressée de tout le dossier
+rapports/ de votre cabine, et déposez-la dans les soutes : la caisse
+s'appellera backup_rapports.tar.gz. Sous-dossiers compris. »
 
-« Créez /soutes/backup_rapports.tar.gz contenant rapports/, Capitaine. »
+Vous vérifiez votre cabine : le dossier rapports/ est bien là, rangé par
+année et par mois, avec le rapport incident_15jan.txt et le contrôle
+moteur.
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+Votre commande terminée, la caisse backup_rapports.tar.gz est dans les
+soutes, à côté des autres réserves. Les rapports y sont en sécurité.
 
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-L'archive compressée est créée dans les soutes. Les rapports sont désormais en sécurité.
-
-« Une sauvegarde, c'est une assurance », explique Tael Rhen. « Si les originaux sont perdus, la copie nous sauve. »".into(),
+« Une sauvegarde, c'est une assurance », explique Tael Rhen. « Si les
+originaux se perdent, la copie nous sauve. »".into(),
             goal: "Créez une archive compressée /soutes/backup_rapports.tar.gz contenant le dossier rapports/.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment créer une archive compressée d'un dossier?".into(),
@@ -36,20 +38,21 @@ L'archive compressée est créée dans les soutes. Les rapports sont désormais 
             id: "15.2".into(), chapter: 15, chapter_title: "Archives et sauvegardes".into(), act: 4,
             title: "Vérifier le contenu de l'archive".into(),
             description: "Qu'y a-t-il dans backup_rapports.tar.gz?".into(),
-            story: "Tael Rhen: « Capitaine, avant d'envoyer l'archive à l'Andromède,
-vérifiez ce qu'elle contient. Listez son contenu sans l'extraire. »
+            story: "Tael Rhen examine la caisse qui vient d'arriver dans les soutes :
+« Capitaine, avant d'envoyer cette archive à l'Andromède, vérifions ce
+qu'elle contient réellement. Une caisse envoyée à vide, ce serait une
+déception pour l'Amiral. »
 
-« Quels fichiers contient /soutes/backup_rapports.tar.gz? »
+Il se tourne vers vous : « Listez le contenu de la caisse
+backup_rapports.tar.gz, sans en sortir les fichiers. Vous verrez d'un
+coup d'œil si tous nos rapports sont dedans. »
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+Vous passez en revue le contenu affiché : le dossier rapports/, son
+sous-dossier 2024/janvier, et les fichiers qu'il contient sont bien
+repris.
 
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-Le contenu de l'archive s'affiche sans l'extraire. Vous vérifiez que tous les rapports sont bien là.
-
-« Vérifier avant d'envoyer, c'est éviter les mauvaises surprises », note Tael Rhen. « Un coup d'œil suffit. »".into(),
+« Vérifier avant d'envoyer, c'est éviter les mauvaises surprises »,
+note Tael Rhen. « Un coup d'œil suffit. »".into(),
             goal: "Listez le contenu de l'archive /soutes/backup_rapports.tar.gz sans l'extraire.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister le contenu d'une archive sans l'extraire?".into(),
@@ -64,22 +67,22 @@ Le contenu de l'archive s'affiche sans l'extraire. Vous vérifiez que tous les r
             id: "15.3".into(), chapter: 15, chapter_title: "Archives et sauvegardes".into(), act: 4,
             title: "Extraire l'archive".into(),
             description: "Extrayez l'archive dans le compartiment temporaire /tmp.".into(),
-            story: "Tael Rhen: Â« Capitaine, extrayez l'archive backup_rapports.tar.gz dans
-le compartiment temporaire /tmp pour vÃ©rification, sans toucher aux soutes. Â»
+            story: "Tael Rhen déplie un plan du compartiment temporaire sur la table :
+« Capitaine, la caisse backup_rapports.tar.gz est dans les soutes, mais
+nous allons devoir examiner ses fichiers de près. N'ouvrez pas la caisse
+sur place : extrayez son contenu dans le compartiment temporaire, le
+dossier /tmp, sans toucher aux soutes. »
 
-Â« DÃ©compressez l'archive dans /tmp, Capitaine. Â»
+Il ajoute : « Le dossier temporaire est fait pour ce genre de travail.
+Les originaux restent rangés dans les soutes pendant qu'on inspecte la
+copie. »
 
-Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
+Votre commande terminée, les fichiers de la caisse sont déposés dans
+/tmp, prêts à être consultés. La caisse elle-même reste intacte dans les
+soutes.
 
-La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la prÃ©paration et la prÃ©cision font la diffÃ©rence entre la victoire et la dÃ©faite.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-L'archive est extraite dans /tmp. Les fichiers sont prêts à être examinés.
-
-« Extraire dans un espace de travail, c'est plus sûr », explique Tael Rhen. « On ne touche pas aux originaux. »".into(),
+« Extraire dans un espace de travail, c'est plus sûr », explique
+Tael Rhen. « On ne touche pas aux originaux. »".into(),
             goal: "Extrayez l'archive /soutes/backup_rapports.tar.gz dans le répertoire /tmp.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment extraire une archive dans un dossier précis?".into(),
@@ -94,22 +97,20 @@ L'archive est extraite dans /tmp. Les fichiers sont prêts à être examinés.
             id: "15.4".into(), chapter: 15, chapter_title: "Archives et sauvegardes".into(), act: 4,
             title: "Lire une archive ZIP".into(),
             description: "L'Andromède préfère le ZIP: listez rapports.zip.".into(),
-            story: "Nira Okoro: Â« Capitaine, l'AndromÃ¨de prÃ©fÃ¨re recevoir les rapports au format
-ZIP. Vous avez crÃ©Ã© rapports.zip dans votre cabine. Montrez-moi son contenu. Â»
+            story: "Nira Okoro, la responsable des communications, vous appelle depuis la
+salle des messages, un écran à la main :
+« Capitaine, l'Andromède préfère recevoir nos échanges au format ZIP.
+Vous avez déjà préparé rapports.zip dans votre cabine. »
 
-Â« Listez le contenu de rapports.zip, Capitaine. Â»
+Elle désigne l'écran : « Montrez-moi ce que contient ce fichier
+rapports.zip, sans le déballer : je dois vérifier que tous nos rapports
+y sont avant de l'envoyer au vaisseau-mère. »
 
-Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
+Vous listez l'archive depuis votre cabine : le dossier rapports/, ses
+sous-dossiers et les fichiers du mois de janvier y figurent bien.
 
-La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la prÃ©paration et la prÃ©cision font la diffÃ©rence entre la victoire et la dÃ©faite.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-Le contenu du fichier ZIP s'affiche. L'Andromède pourra lire ces rapports.
-
-« Le format ZIP est universel », note Nira Okoro. « C'est le langage commun des vaisseaux. »".into(),
+« Le format ZIP est universel », note Nira Okoro. « C'est le langage
+commun des vaisseaux. »".into(),
             goal: "Listez le contenu de l'archive rapports.zip de votre cabine.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lister le contenu d'une archive ZIP?".into(),
@@ -124,21 +125,21 @@ Le contenu du fichier ZIP s'affiche. L'Andromède pourra lire ces rapports.
             id: "15.5".into(), chapter: 15, chapter_title: "Archives et sauvegardes".into(), act: 4,
             title: "Etat des reservoirs".into(),
             description: "Tael Rhen veut la jauge des réservoirs de données du vaisseau.".into(),
-            story: "Tael Rhen: « Capitaine, combien de carburant numérique reste-t-il dans
-les réservoirs de données? Donnez-moi l'état de toutes les partitions,
-en taille lisible. »
+            story: "Tael Rhen vous rejoint à la passerelle, un bloc-notes à la main :
+« Capitaine, avant de charger de nouvelles données, il faut savoir où
+nous en sommes. Chaque compartiment de stockage a sa jauge : total,
+utilisé et restant. »
 
-« Quelle place disque restante sur le vaisseau? »
+Il tend le bloc : « Donnez-moi la jauge de toutes les partitions du
+vaisseau, avec les tailles en format lisible. Je dois savoir si nous
+pouvons encore charger les cartes de la prochaine mission. »
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
+Vous affichez la jauge : la partition racine, les soutes et les archives
+montrent leur capacité, ce qui est occupé et ce qui reste, en taille
+humaine.
 
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-L'espace disque s'affiche en taille lisible. Les soutes de données ont encore de la place.
-
-« Bien », approuve Tael Rhen. « Nous savons combien de données nous pouvons encore stocker avant saturation. »".into(),
+« Bien », approuve Tael Rhen. « Nous savons exactement combien de
+données nous pouvons encore stocker avant saturation. »".into(),
             goal: "Affichez l'espace disque utilisé et disponible de toutes les partitions, en taille lisible.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir l'espace disque restant?".into(),

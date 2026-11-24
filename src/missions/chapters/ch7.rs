@@ -7,22 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "7.1".into(), chapter: 7, chapter_title: "Permissions et acces".into(), act: 2,
             title: "Verrouiller le plan de defense".into(),
             description: "Vex Korshun: le plan de défense ne doit être lisible que par vous.".into(),
-            story: "Vex Korshun, officier sécurité, frappe à votre porte:
-« Capitaine, le fichier plan_defense.sh sur votre bureau contient les codes
-de déploiement des armes. En ce moment, tout l'équipage peut le lire! »
-
-Il vous demande de verrouiller le fichier: seul le capitaine (vous) doit
-pouvoir le lire et l'écrire. Les autres: aucun accès.
-
-« Mettez les permissions 700 sur plan_defense.sh, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Vex Korshun vérifie les permissions: « Désormais, seul vous pouvez lire le plan de défense. C'est une question de sécurité vitale. »
-
-Le plan est protégé. Vous comprenez que restreindre l'accès aux documents sensibles est la première ligne de défense contre les espions.".into(),
+            story: "Vex Korshun, le commandant de la station, frappe à votre porte :\n« Capitaine, le fichier plan_defense.sh sur votre bureau contient les\ncodes de déploiement des armes. En ce moment, tout l'équipage peut\nle lire ! Si un espion le consulte, il connaîtra notre plan avant\nqu'on le lance. »\n\nIl tapote sa tablette :\n« Il faut le verrouiller : que vous seul puissiez le lire et\nl'écrire. Les autres, aucun accès. Le reste du vaisseau n'a pas à\nconnaître les codes des armes. »\n\nSur votre bureau, le fichier affiche encore des permissions larges.\nRestreignez-les pour que le capitaine soit le seul à y toucher.\n\nAprès votre commande, les permissions passent à 700 : lecture et\nécriture pour vous, et rien pour les autres.\n\nVex Korshun vérifie : « Désormais, seul vous pouvez lire le plan de\ndéfense. C'est une question de sécurité vitale. »".into(),
             goal: "Restreignez plan_defense.sh pour que seul vous puissiez le lire (permissions 700).".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment interdire l'accès à un fichier à tout le monde sauf soi?".into(),
@@ -37,23 +22,7 @@ Le plan est protégé. Vous comprenez que restreindre l'accès aux documents sen
             id: "7.2".into(), chapter: 7, chapter_title: "Permissions et acces".into(), act: 2,
             title: "Rendre le script executable".into(),
             description: "Le plan de défense doit pouvoir être lancé comme un programme.".into(),
-            story: "Vex Korshun revient: Â« Capitaine, plan_defense.sh est un script de dÃ©fense.
-Pour le lancer en urgence, il doit Ãªtre exÃ©cutable. Â»
-
-Un fichier texte n'est pas exÃ©cutable par dÃ©faut: il faut lui ajouter
-le droit d'exÃ©cution.
-
-Â« Ajoutez le droit d'exÃ©cution Ã  plan_defense.sh, Capitaine. Â»
-
-Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
-
-La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-Le plan de défense est maintenant exécutable. Vex Korshun hoche la tête: « En cas d'urgence, vous pourrez le lancer d'une simple commande. »
-
-Un fichier protégé mais inutilisable ne sert à rien. Savoir ajuster les droits d'exécution, c'est rendre un outil réellement opérationnel.".into(),
+            story: "Vex Korshun revient avec un air pressé :\n« Capitaine, le plan_defense.sh est un script : il ne se lit pas\ncomme un simple rapport, il SE LANCE. Quand l'attaque commencera, il\nfaudra l'exécuter en une seconde, pas ouvrir un éditeur. »\n\nIl explique qu'un fichier texte n'est pas exécutable par défaut : il\nfaut lui ajouter explicitement le droit de se lancer comme un\nprogramme.\n\n« Assurez-vous que le plan de défense peut s'exécuter. Vérifiez que\nce droit est bien présent, et ajoutez-le s'il manque. »\n\nAprès votre commande, le script affiche le droit d'exécution dans sa\nligne de permissions. Il peut maintenant être lancé directement.\n\nVex Korshun hoche la tête : « En cas d'urgence, vous pourrez lancer\nle plan d'une simple commande. Un fichier protégé mais inutilisable\nne sert à rien. »".into(),
             goal: "Rendez le fichier plan_defense.sh exécutable.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment rendre un fichier exécutable?".into(),
@@ -68,23 +37,7 @@ Un fichier protégé mais inutilisable ne sert à rien. Savoir ajuster les droit
             id: "7.3".into(), chapter: 7, chapter_title: "Permissions et acces".into(), act: 2,
             title: "Lire le coffre-fort".into(),
             description: "Les codes d'accès de la station sont dans le coffre-fort.".into(),
-            story: "Vex Korshun vous confie: « Capitaine, les codes d'accès de la station
-sont dans le coffre-fort du compartiment sécurité:
-/securite/coffre-fort/codes_acces.txt. »
-
-L'Amiral Xylia Vorn en aura besoin pour la contre-attaque.
-
-« Lisez le contenu du coffre-fort et dites-moi ce qu'il contient. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-Vous lisez les codes d'accès du coffre-fort de la sécurité. Chaque code ouvre une porte, chaque porte protège un secret.
-
-Draz M'kal vous observe: « Ces codes sont la clé du vaisseau. Gardez-les en mémoire, Capitaine. »".into(),
+            story: "Vex Korshun vous confie une mission délicate :\n« Capitaine, les codes d'accès de la station sont dans le coffre-fort\ndu compartiment sécurité : /securite/coffre-fort/codes_acces.txt.\nL'Amiral Xylia Vorn en aura besoin pour la contre-attaque. »\n\nIl baisse la voix :\n« Le coffre-fort est verrouillé, mais votre badge de capitaine ouvre\ntout. Récupérez le contenu de ce fichier et dites-moi ce qu'il\ncontient. Nous devons vérifier que les codes sont toujours les\nbons. »\n\nLe fichier est dans un dossier protégé du compartiment sécurité,\nréservé aux plus hauts gradés.\n\nAprès votre commande, le contenu du coffre-fort s'affiche : les\ncoordonnées de la flotte, le code de lancement des missiles.\n\nDraz M'kal vous observe depuis l'entrée : « Ces codes sont la clé du\nvaisseau. Gardez-les en mémoire, Capitaine. »".into(),
             goal: "Lisez le fichier codes_acces.txt du coffre-fort de la sécurité.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire un fichier dans un autre compartiment?".into(),
@@ -99,21 +52,7 @@ Draz M'kal vous observe: « Ces codes sont la clé du vaisseau. Gardez-les en m�
             id: "7.4".into(), chapter: 7, chapter_title: "Permissions et acces".into(), act: 2,
             title: "Fiche technique du plan".into(),
             description: "Vérifiez les métadonnées de plan_defense.sh.".into(),
-            story: "Tael Rhen veut la fiche technique complète de plan_defense.sh:
-sa taille, ses permissions actuelles, sa date de modification.
-
-« Capitaine, donnez-moi toutes les métadonnées du fichier plan_defense.sh
-avant qu'on le modifie. »
-
-Il vous faut la commande qui affiche la fiche technique complète d'un fichier.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-La fiche technique de plan_defense.sh s'affiche: taille, permissions, dates de modification.
-
-« Ces métadonnées racontent l'histoire du fichier », explique Tael Rhen. « Une date anormale peut révéler une intrusion. »".into(),
+            story: "Tael Rhen, ingénieur-chef des machines, vous arrête dans la\ncoursive, outil de diagnostic à la main :\n« Capitaine, avant qu'on modifie le plan de défense, je dois figer\nson état exact. Si quelqu'un le touche à notre insu plus tard, nous\ndevrons pouvoir comparer : taille, droits, dates. »\n\nIl réclame la fiche technique complète du fichier plan_defense.sh :\n« Donnez-moi toutes les métadonnées : la taille exacte, les droits en\nmode octal, la date de dernière modification. Pas une liste rapide,\nla fiche complète. »\n\nLe système sait afficher l'historique technique d'un fichier : ce qui\nle constitue, qui peut y accéder, quand il a été modifié pour la\ndernière fois.\n\nAprès votre commande, la fiche s'affiche : permissions codées,\ntaille, dates de modification et d'accès, numéro d'inode.\n\n« Ces métadonnées racontent l'histoire du fichier », note Tael Rhen.\n« Une date anormale peut révéler une intrusion. N'ayez plus jamais\npeur de les consulter. »".into(),
             goal: "Affichez les métadonnées complètes (taille, permissions, dates) de plan_defense.sh.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment voir toutes les métadonnées d'un fichier?".into(),
@@ -128,21 +67,7 @@ La fiche technique de plan_defense.sh s'affiche: taille, permissions, dates de m
             id: "7.5".into(), chapter: 7, chapter_title: "Permissions et acces".into(), act: 2,
             title: "Transférer la responsabilité".into(),
             description: "Le plan de défense relève officiellement du capitaine.".into(),
-            story: "Vex Korshun: « Capitaine, pour les audits, plan_defense.sh doit officiellement
-vous appartenir. Actuellement il appartient à un autre membre d'équipage. »
-
-Il vous faut changer le propriétaire du fichier pour vous-même.
-Utilisez votre propre nom d'utilisateur système.
-
-« Transférez la propriété de plan_defense.sh à votre compte, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Le plan de défense vous appartient désormais officiellement. Vex Korshun approuve: « Bien. La propriété d'un fichier doit refléter la réalité des responsabilités. »
-
-Vous comprenez que chaque fichier a un propriétaire, et que cette attribution est essentielle pour l'audit et la sécurité.".into(),
+            story: "Vex Korshun vous fait signe dans son bureau :\n« Capitaine, pour les audits de la station, le plan de défense doit\nofficiellement vous appartenir. C'est vous qui le lancez, c'est vous\nqui en répondez. Or le fichier est encore enregistré au nom d'un\nautre membre de l'équipage. »\n\nIl précise :\n« Il faut changer le propriétaire du fichier pour votre propre\ncompte. Utilisez votre nom d'utilisateur système : c'est le même que\ncelui affiché quand vous tapez la commande qui dit qui vous êtes. »\n\nChanger le propriétaire d'un fichier est un acte d'administration :\nil réclame les droits élevés du vaisseau.\n\nAprès votre commande, le fichier plan_defense.sh affiche votre nom\ncomme propriétaire.\n\nVex Korshun approuve : « Bien. La propriété d'un fichier doit\nrefléter la réalité des responsabilités. Les audits le vérifieront. »".into(),
             goal: "Changez le propriétaire de plan_defense.sh pour votre compte utilisateur.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment changer le propriétaire d'un fichier?".into(),

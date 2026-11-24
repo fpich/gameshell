@@ -7,22 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "4.1".into(), chapter: 4, chapter_title: "Journal de bord".into(), act: 1,
             title: "Lire vos notes personnelles".into(),
             description: "Vos propres notes de cabine: notes.txt.".into(),
-            story: "Sur votre bureau, à côté de bienvenue.txt, se trouve votre carnet personnel:
-notes.txt.
-
-Zyra-7 vous conseille de le relire: le précédent capitaine y a noté des
-choses importantes sur la station.
-
-« Lisez vos notes, Capitaine. Elles contiennent des indices sur les
-habitudes de sécurité de l'équipage. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Vous relisez vos notes. Chaque ligne vous rappelle une consigne, une astuce, un avertissement.
-
-« Gardez ce carnet précieusement, Capitaine », murmure Zyra-7. « C'est votre mémoire, et elle vous servira tout au long de votre mission. »".into(),
+            story: "Sur votre bureau, à côté de bienvenue.txt, se trouve votre carnet\npersonnel : notes.txt.\n\nZyra-7 vous conseille de le relire : le précédent capitaine y a laissé\ndes indications précieuses sur la station — les adresses des attaquants,\nl'état du pare-feu, la position du coffre-fort.\n\n« Lisez vos notes, Capitaine. Elles vous disent ce qui cloche à bord\navant même que les alarmes ne sonnent. »\n\nAprès votre commande, le contenu de notes.txt s'affiche : les ordres\nde l'Amiral, les adresses des pirates, les réglages à corriger.\n\n« Gardez ce carnet précieusement », murmure Zyra-7. « C'est votre\nmémoire, Capitaine. Elle vous servira à chaque étape de votre mission. »".into(),
             goal: "Lisez le contenu de votre fichier notes.txt dans votre cabine.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Comment lire le contenu d'un fichier texte?".into(),
@@ -37,21 +22,7 @@ Vous relisez vos notes. Chaque ligne vous rappelle une consigne, une astuce, un 
             id: "4.2".into(), chapter: 4, chapter_title: "Journal de bord".into(), act: 1,
             title: "Ajouter une ligne au journal".into(),
             description: "Ajoutez une entrée à la fin de notes.txt sans l'écraser.".into(),
-            story: "Zyra-7: « Capitaine, ajoutez une nouvelle entrée à la FIN de votre carnet
-sans effacer le reste: 'Verifier les boucliers avant attaque'. »
-
-Elle vous prévient: avec une simple redirection, le fichier serait écrasé.
-Il faut une redirection qui AJOUTE à la fin du fichier existant.
-
-« Ne perdez pas vos notes précédentes, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Votre note s'ajoute à la fin du carnet sans rien effacer. Zyra-7 approuve: « Bien. Chaque ajout enrichit votre mémoire sans perdre l'existant. »
-
-Vous comprenez l'importance de consigner sans détruire: l'historique complet est souvent plus précieux que la dernière ligne.".into(),
+            story: "Zyra-7 reprend l'intercom :\n« Capitaine, ajoutez une nouvelle entrée à la fin de votre carnet\nnotes.txt, sans effacer le reste : 'Verifier les boucliers avant\nattaque'. »\n\nElle vous prévient : une simple redirection vers le fichier l'écraserait\net ferait disparaître toutes vos notes. Il faut une redirection qui\nAJOUTE à la fin du fichier existant.\n\n« Ne perdez pas vos notes précédentes, Capitaine. L'historique complet\nvaut plus que la dernière ligne. »\n\nAprès votre commande, la nouvelle consigne s'ajoute au bas de notes.txt,\net les lignes déjà écrites restent intactes.\n\nZyra-7 approuve : « Bien. Chaque ajout enrichit votre mémoire sans\njamais détruire l'existant. »".into(),
             goal: "Ajoutez la ligne demandée à la fin de notes.txt sans effacer le contenu existant.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment ajouter du texte à la fin d'un fichier sans l'écraser?".into(),
@@ -66,22 +37,7 @@ Vous comprenez l'importance de consigner sans détruire: l'historique complet es
             id: "4.3".into(), chapter: 4, chapter_title: "Journal de bord".into(), act: 1,
             title: "Compter les lignes du guide".into(),
             description: "Combien de lignes fait bienvenue.txt?".into(),
-            story: "Nira Okoro passe par là: « Capitaine, pour calibrer l'affichage des écrans
-du pont, j'ai besoin de savoir combien de lignes fait le guide de survie
-bienvenue.txt. »
-
-Elle vous demande de compter uniquement les lignes du fichier, sans afficher
-le contenu.
-
-« Juste le nombre, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Nira Okoro note le nombre: « Merci, Capitaine. Je saurai maintenant si le guide est complet ou s'il manque des sections. »
-
-Compter les lignes d'un document, c'est en mesurer l'ampleur. Un outil simple, mais essentiel pour évaluer un fichier d'un coup d'œil.".into(),
+            story: "Nira Okoro, officier communications, passe par votre cabine :\n« Capitaine, pour calibrer l'affichage des écrans du pont, j'ai besoin\nde savoir combien de lignes fait le guide de survie bienvenue.txt. »\n\nElle précise qu'elle veut uniquement le nombre de lignes, sans afficher\ntout le contenu à l'écran.\n\n« Juste le nombre, Capitaine. Une mesure, pas une lecture. »\n\nAprès votre commande, le décompte s'affiche et Nira Okoro le note sur\nsa tablette :\n\n« Merci, Capitaine. Je saurai maintenant si le guide est complet ou s'il\nmanque des sections à l'équipage. »".into(),
             goal: "Donnez à Nira Okoro le nombre de lignes du fichier bienvenue.txt.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment compter les lignes d'un fichier?".into(),
@@ -96,23 +52,7 @@ Compter les lignes d'un document, c'est en mesurer l'ampleur. Un outil simple, m
             id: "4.4".into(), chapter: 4, chapter_title: "Journal de bord".into(), act: 1,
             title: "Début de l'historique du pont".into(),
             description: "Les premières lignes du journal de bord du pont.".into(),
-            story: "Au pont, l'Amiral Xylia Vorn consulte le grand journal de bord:
-historique.txt dans /pont/journaux-de-bord/.
-
-Â« Capitaine, montrez-moi seulement le DÃBUT de l'historique du pont.
-Les 5 premiÃ¨res lignes. Pas besoin de tout dÃ©filer. Â»
-
-Le fichier est long: il ne faut afficher que ses premiÃ¨res lignes.
-
-Les Corbeaux Noirs ont Ã©tÃ© dÃ©tectÃ©s dans le secteur 7G et leurs sondes scannent nos dÃ©fenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mÃ¨re AndromÃ¨de.
-
-La station Orion-7 est un vaisseau de classe Ã©claireur postÃ© en sentinelle. Cinq membres d'Ã©quipage comptent sur vous pour la dÃ©fendre.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-Le début du journal de bord s'affiche. Vous y lisez les premières entrées de la journée, écrites par l'équipage.
-
-« Le début d'un journal raconte souvent l'essentiel », commente Zyra-7. « C'est là que se cachent les premières anomalies. »".into(),
+            story: "Au pont de commandement, l'Amiral Xylia Vorn consulte le grand\njournal de bord de la station : historique.txt, dans\n/pont/journaux-de-bord/.\n\n« Capitaine, montrez-moi le début de l'historique : les 5 premières\nentrées seulement. Le fichier est long, inutile de tout défiler à\nl'écran. »\n\nVous vous exécutez et n'affichez que le début du journal.\n\nLes premières entrées de la station s'alignent à l'écran : la mise en\nservice, les premiers scans du secteur, la détection de la flotte\npirate.\n\n« Le début d'un journal raconte souvent l'essentiel », commente\nZyra-7. « C'est là que se cachent les premières anomalies. »".into(),
             goal: "Affichez uniquement les premières lignes du journal de bord du pont.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment n'afficher que le début d'un fichier long?".into(),
@@ -127,21 +67,7 @@ Le début du journal de bord s'affiche. Vous y lisez les premières entrées de 
             id: "4.5".into(), chapter: 4, chapter_title: "Journal de bord".into(), act: 1,
             title: "Fin des logs d'authentification".into(),
             description: "Les dernières tentatives de connexion pirates dans auth.log.".into(),
-            story: "Vex Korshun, officier sécurité, vous montre les logs d'authentification:
-/securite/logs/auth.log.
-
-« Capitaine, les dernières entrées de ce fichier sont les tentatives de
-connexion des pirates cette nuit. Montrez-moi seulement la FIN du fichier. »
-
-Le fichier est long: il ne faut afficher que ses dernières lignes.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Les dernières lignes du journal de sécurité défilent. Vous y repérez des tentatives de connexion suspectes.
-
-Draz M'kal, chef de la sécurité, fronce les sourcils: « La fin du journal, c'est ce qui s'est passé en dernier. C'est là qu'on voit les intrusions en cours. »".into(),
+            story: "Draz M'kal, chef de la sécurité, vous montre le fichier des\nauthentifications : /securite/logs/auth.log.\n\n« Capitaine, les dernières entrées de ce fichier sont les tentatives\nde connexion des pirates cette nuit. Montrez-moi seulement la fin du\nfichier : les 3 dernières lignes. Le reste ne nous intéresse pas. »\n\nVous n'affichez que la fin du journal de sécurité.\n\nLes dernières lignes défilent : des connexions refusées venant de\n10.0.0.99 et 10.0.0.66, des comptes inconnus, des échecs sur root.\n\nDraz M'kal fronce les sourcils : « La fin du journal, c'est ce qui\ns'est passé en dernier. C'est là qu'on voit les intrusions en cours. »".into(),
             goal: "Affichez uniquement les dernières lignes du fichier auth.log de la sécurité.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Comment n'afficher que la fin d'un fichier long?".into(),

@@ -7,7 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "2.1".into(), chapter: 2, chapter_title: "Organisation de la cabine".into(), act: 1,
             title: "Creer un rapport".into(),
             description: "Vex Korshun a besoin d'un fichier vierge.".into(),
-            story: "Vex Korshun, l'officier sécurité, passe la tête par l'embrasure de la porte de votre cabine.
+            story: "Vex Korshun, le commandant de la station, passe la tête par l'embrasure de la porte de votre cabine.
 « Capitaine, on démarre l'enquête sur les attaques. J'ai besoin d'un rapport vierge
 pour consigner toutes nos observations. »
 

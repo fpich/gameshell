@@ -7,26 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "6.1".into(), chapter: 6, chapter_title: "Surveillance".into(), act: 2,
             title: "Processus actifs".into(),
             description: "Quels processus tournent?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Tael Rhen entend des bruits bizarres dans les coursives. Des processus inconnus tournent peut-être.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Voir les processus actifs est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Tael Rhen entend des bruits bizarres dans les coursives. Des processus inconnus tournent peut-être.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-La liste des systèmes en cours d'exécution s'affiche. Tael Rhen l'examine: « Tout semble normal, Capitaine. Merci. »
-
-Vous comprenez que surveiller les processus actifs, c'est garder un œil sur l'activité du vaisseau.".into(),
+            story: "Tael Rhen, ingénieur-chef des machines, vous croise dans la coursive,\nl'oreille tendue :\n« Capitaine, vous entendez ce bruit ? Dans la salle des machines, on\ndirait un ventilateur qui tourne en surrégime. Quelque chose\nconsomme du courant sans que personne ne l'ait lancé. »\n\nIl sort sa tablette :\n« Je voudrais voir TOUT ce qui tourne en ce moment sur la station.\nPas seulement mes propres fenêtres : chaque programme, chaque\nprocessus, de n'importe quel utilisateur. S'il y a un intrus, il se\ncache parmi eux. »\n\nPour obtenir la liste complète de tous les processus, il précise\nqu'il faut demander le détail et inclure les processus des autres\nutilisateurs.\n\n« Montrez-moi ça, Capitaine. Si quelque chose tourne sans\nautorisation, nous le verrons. »\n\nAprès votre commande, la liste s'affiche. Tael Rhen la parcourt et\ns'arrête sur deux lignes suspectes : un « corbeau_miner » et une\n« backdoor ». « Voilà qui n'a rien à faire à bord », murmure-t-il.\n\n« Bien vu, Capitaine. Savoir ce qui tourne, c'est la première ligne\nde défense. Nous y reviendrons. »".into(),
             goal: "Tael Rhen entend des bruits bizarres. Vérifiez quels systèmes tournent actuellement.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Voir tous les processus?".into(),
@@ -41,26 +22,7 @@ Vous comprenez que surveiller les processus actifs, c'est garder un œil sur l'a
             id: "6.2".into(), chapter: 6, chapter_title: "Surveillance".into(), act: 2,
             title: "Ressources".into(),
             description: "Surveillez CPU/RAM.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. La station ralentit. Les boucliers consomment trop de ressources.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Surveiller les ressources est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: La station ralentit. Les boucliers consomment trop de ressources.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Les jauges de ressources s'affichent: CPU, mémoire, charge. Vous repérez un processus qui consomme trop.
-
-« Voilà le coupable », note Tael Rhen. « Surveiller les ressources, c'est diagnostiquer les ralentissements. »".into(),
+            story: "Tael Rhen revient, contrarié :\n« Capitaine, la station ralentit. Les portes du hangar mettent trois\nfois plus de temps à s'ouvrir, et les écrans du pont clignotent.\nQuelque chose pompe la puissance de calcul. »\n\nIl vous explique qu'il existe un outil qui montre, en direct, quels\nprocessus consomment le plus de CPU et de mémoire, avec une mise à\njour régulière et un classement par consommation.\n\n« Je veux voir ce classement maintenant, sans attendre. Juste un\naperçu immédiat de ce qui dévore nos ressources. »\n\nAprès votre commande, le classement s'affiche. En tête : un processus\n« corbeau_miner » qui consomme plus de quatre-vingt pour cent du\nprocesseur.\n\n« Voilà le coupable », souffle Tael Rhen. « Un mineur de\ncryptomonnaie, installé en douce par les Corbeaux Noirs. C'est lui\nqui ralentit toute la station. »".into(),
             goal: "La station ralentit. Surveillez les ressources pour comprendre pourquoi.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Surveiller les ressources?".into(),
@@ -75,26 +37,7 @@ Les jauges de ressources s'affichent: CPU, mémoire, charge. Vous repérez un pr
             id: "6.3".into(), chapter: 6, chapter_title: "Surveillance".into(), act: 2,
             title: "Services".into(),
             description: "Verifiez ssh et les services.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Vex Korshun veut vérifier que tous les services de sécurité sont bien actifs.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Vérifier les services est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Vex Korshun veut vérifier que tous les services de sécurité sont bien actifs.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-La liste des services de sécurité s'affiche. Vex Korshun vérifie que chacun est bien actif.
-
-« Bien », approuve-t-il. « Savoir quels services tournent, c'est s'assurer que nos défenses sont en place. »".into(),
+            story: "Vex Korshun, le commandant de la station, vous appelle au pont :\n« Capitaine, je dois m'assurer que les services essentiels de la\nstation sont bien en fonctionnement. En particulier la passerelle\nd'accès sécurisé qui permet à l'équipage de se connecter à distance\naux consoles du vaisseau. »\n\nIl précise que chaque service critique tourne comme une petite\néquipe : l'une gère les connexions à distance, d'autres les journaux,\nle pare-feu, la surveillance. Pour savoir si une équipe est bien en\nposte, on demande son statut.\n\n« Vérifiez pour moi que la passerelle d'accès sécurisé est bien\nactive, Capitaine. Si ce service tombe, plus personne ne pourra se\nconnecter aux consoles. »\n\nAprès votre commande, l'état du service s'affiche : actif et en\ncours d'exécution, avec son numéro de processus et ses dernières\nentrées de journal.\n\nVex Korshun hoche la tête : « Tout est en ordre. Vérifier l'état\nd'un service, c'est s'assurer que l'équipage est en poste avant\nl'attaque. »".into(),
             goal: "Vex Korshun veut savoir si tous les services de sécurité sont bien en marche.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Gerer les services?".into(),
@@ -109,26 +52,7 @@ La liste des services de sécurité s'affiche. Vex Korshun vérifie que chacun e
             id: "6.4".into(), chapter: 6, chapter_title: "Surveillance".into(), act: 2,
             title: "Tuer un pirate".into(),
             description: "PID 9999 backdoor!".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. ALERTE ROUGE! Un processus backdoor (PID 9999) a été détecté. Il faut l'éliminer immédiatement.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Tuer le processus pirate est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: ALERTE ROUGE! Un processus backdoor (PID 9999) a été détecté. Il faut l'éliminer immédiatement.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Le processus pirate est éliminé. Draz M'kal pousse un soupir de soulagement.
-
-« Bien joué, Capitaine. Un processus malveillant neutralisé, c'est une menace de moins à bord. »".into(),
+            story: "ALERTE ROUGE. Draz M'kal, chef de la sécurité, surgit dans votre\ncabine :\n« Capitaine ! Nos moniteurs viennent de repérer une backdoor dans la\ntable des processus : le PID 9999, lancé depuis un dossier caché et\nqui communique avec une adresse des Corbeaux Noirs. Il a déjà\nprobablement ouvert une porte dérobée dans nos défenses. »\n\nIl montre la ligne à l'écran : le processus tourne encore, en\narrière-plan.\n\n« Il faut l'éliminer maintenant. Terminez ce processus, Capitaine.\nChaque seconde de plus, c'est une seconde où nos secrets peuvent\nfuiter. »\n\nAprès votre commande, la ligne disparaît de la table des processus.\nLa backdoor ne répond plus.\n\nDraz M'kal vérifie l'écran, puis souffle : « C'est fait. Ce\nprocessus ne reviendra pas. Éliminer un processus malveillant, c'est\ncouper la main du pirate à l'intérieur du vaisseau. »".into(),
             goal: "Un système pirate a pris le contrôle! Éliminez-le immédiatement!".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Tuer un processus?".into(),
@@ -143,33 +67,7 @@ Le processus pirate est éliminé. Draz M'kal pousse un soupir de soulagement.
             id: "6.5".into(), chapter: 6, chapter_title: "Surveillance".into(), act: 2,
             title: "Priorites".into(),
             description: "Scan prioritaire.".into(),
-            story: "Tael Rhen surgit du local technique, une tablette à la main:
-« Capitaine, le scan de sécurité est prêt: c'est le script
-/securite/scan_securite.sh. Mais il est très gourmand en calcul! »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes
-scannent nos défenses. Les boucliers déflecteurs ont besoin de toute
-la puissance du processeur de bord en ce moment.
-
-« Si on lance le scan normalement, il va voler du temps de calcul
-aux boucliers », explique-t-il. « Il faut le lancer avec une priorité
-réduite: niveau 10. Il tournera quand même, mais il laissera passer
-les systèmes vitaux d'abord. »
-
-Sur Linux, chaque processus a une « gentillesse »: de -20 (très
-prioritaire, réservé à l'administrateur) à 19 (très effacé). Plus le
-nombre est grand, plus le processus cède sa place aux autres.
-
-Draz M'kal hoche la tête: « Un bon capitaine sait quelles tâches
-peuvent attendre. »
-
-Votre mission: lancez /securite/scan_securite.sh avec une priorité
-réduite de niveau 10.
-
-Le scan démarre sans ralentir les boucliers.
-
-« Parfait », sourit Tael Rhen. « Les boucliers gardent toute leur
-puissance, et le scan avance quand même. »".into(),
+            story: "Tael Rhen surgit du local technique, une tablette à la main :\n« Capitaine, le scan de sécurité est prêt : le script\n/securite/scan_securite.sh passe nos défenses au peigne fin. Mais il\nest très gourmand en calcul ! Les boucliers déflecteurs ont besoin de\ntoute la puissance du processeur en ce moment. »\n\nIl explique que chaque processus a une « priorité » : plus elle est\nhaute, plus le système lui donne de temps de calcul. Les boucliers\nsont prioritaires ; le scan doit passer APRÈS eux.\n\n« Lancez le scan avec une priorité réduite, niveau 10. Il tournera\nquand même, mais il laissera les systèmes vitaux passer d'abord. »\n\nSur la station, la priorité se règle entre -20 (la plus urgente,\nréservée au noyau) et 19 (la plus effacée) : plus le nombre est\ngrand, plus le processus cède sa place aux autres.\n\nAprès votre commande, le scan démarre sans ralentir les boucliers.\n\n« Parfait, Capitaine », sourit Tael Rhen. « Les boucliers gardent\ntoute leur puissance et le scan avance quand même. Donner sa juste\nplace à chaque tâche, voilà tout l'art du commandement. »".into(),
             goal: "Lancez le scan /securite/scan_securite.sh avec une priorité réduite de niveau 10, pour ne pas ralentir les boucliers.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Changer la priorite?".into(),

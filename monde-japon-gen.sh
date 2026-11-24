@@ -174,7 +174,7 @@ EOF
 S="$V/scribes"
 mkdir -p "$S"/{logs,registres,alertes}
 cat > "$S/logs/auth.log" << 'EOF'
-Jan 15 08:31:15 shiro sshd[1589]: Failed password for invalid user ronin from 10.0.0.66 port 44123 ssh2
+Jan 15 08:31:15 shiro sshd[1589]: Failed password for invalid user RONIN from 10.0.0.66 port 44123 ssh2
 Jan 15 08:31:45 orion7 sshd[1601]: Failed password for invalid user espion from 10.0.0.66 port 44125 ssh2
 Jan 15 09:15:23 shiro sshd[1892]: Accepted password for seigneur from 192.168.1.100 port 55432 ssh2
 Jan 15 10:15:45 shiro sshd[2103]: Failed password for invalid user ninja from 10.0.0.99 port 33221 ssh2

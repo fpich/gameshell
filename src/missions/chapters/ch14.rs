@@ -6,27 +6,8 @@ pub fn missions() -> Vec<Mission> {
         Mission {
             id: "14.1".into(), chapter: 14, chapter_title: "Equipage".into(), act: 4,
             title: "Recruter".into(),
-            description: "Creez le compte matelot.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Un nouvel arrivant rejoint l'équipage. Il lui faut un compte sur le système.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Recruter un matelot est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Un nouvel arrivant rejoint l'équipage. Il lui faut un compte sur le système.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Le badge d'accès du nouvel arrivant est créé. Vex Korshun vérifie le compte.
-
-« Bien », approuve-t-il. « Chaque membre de l'équipage a désormais son identité à bord. »".into(),
+            description: "Le nouveau matelot débarque : créez-lui son compte avec son quartier personnel.".into(),
+            story: "Vex Korshun, chef de la sécurité, vous attend devant la porte du sas, une\nliasse de badges à la main :\n« Capitaine, un nouveau matelot monte à bord dans une heure. Pour\nl'instant, il n'existe nulle part sur les systèmes de la station :\naucun compte, aucun accès. »\n\nIl vous tend la fiche du nouvel arrivant : « Créez-lui un compte au nom\nde matelot. Pensez à lui préparer aussi son quartier personnel : un\nnouveau membre doit avoir un endroit où poser ses affaires. Et\nrappelez-vous, c'est une opération d'administrateur : vous êtes le\nseul habilité à l'accomplir. »\n\nVous consultez l'annuaire des équipages : aucune entrée ne porte le nom\nde matelot. Un compte est bien à créer.\n\nAprès votre commande, le nom matelot apparaît dans les registres de la\nstation, avec son quartier personnel prêt à l'accueil.\n\n« Le badge est créé », constate Vex Korshun. « Il pourra se connecter\net s'installer. Le nouvel arrivant n'est plus un inconnu pour la\nstation. »".into(),
             goal: "Un nouvel arrivant monte à bord. Créez-lui son badge d'accès.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Creer un user?".into(),
@@ -40,27 +21,8 @@ Le badge d'accès du nouvel arrivant est créé. Vex Korshun vérifie le compte.
         Mission {
             id: "14.2".into(), chapter: 14, chapter_title: "Equipage".into(), act: 4,
             title: "Equipe".into(),
-            description: "Groupe equipage + matelot.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Pour gérer les accès collectifs, il faut créer un groupe nommé equipage.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Créer l'équipe equipage est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Pour gérer les accès collectifs, il faut créer un groupe nommé equipage.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-L'équipe 'equipage' est créée. Le nouveau y sera affecté plus tard.
-
-« Parfait », note Vex Korshun. « Les groupes définissent les droits. Le nouveau peut maintenant accéder aux ressources de son équipe. »".into(),
+            description: "Créez le groupe equipage pour gérer les droits collectifs de l'équipage.".into(),
+            story: "Vex Korshun revient, votre rapport de la mission précédente en main :\n« Le compte de matelot est en place. Il faut maintenant organiser les\ndroits. Sur Orion-7, les autorisations se gèrent par équipe : on ne\ndéclare pas chaque accès personne par personne. »\n\nIl s'explique : « Créez le groupe equipage. Il regroupera le matelot et\nles prochains arrivants. Quand un nouveau rejoindra l'équipe, il\nbénéficiera d'un coup de tous les accès du groupe au lieu de les\ndemander un par un. »\n\nVous ouvrez la liste des équipes enregistrées sur la station :\nequipage n'y figure pas encore. Le groupe est bien à créer.\n\nUne fois votre commande passée, le groupe equipage est inscrit dans\nl'annuaire, prêt à accueillir ses membres.\n\n« Le groupe est enregistré », approuve Vex Korshun. « Les droits\ncollectifs de l'équipage s'appuieront sur lui. »".into(),
             goal: "Créez l'équipe « equipage » qui regroupera bientôt les nouveaux membres.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Creer un groupe?".into(),
@@ -74,27 +36,8 @@ L'équipe 'equipage' est créée. Le nouveau y sera affecté plus tard.
         Mission {
             id: "14.3".into(), chapter: 14, chapter_title: "Equipage".into(), act: 4,
             title: "Mot de passe".into(),
-            description: "Securisez matelot.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Le compte matelot n'a pas de mot de passe. C'est une faille de sécurité.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Changer le mot de passe est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Le compte matelot n'a pas de mot de passe. C'est une faille de sécurité.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Le badge du nouveau est sécurisé avec un code. Vex Korshun approuve.
-
-« Un badge sans code, c'est une porte ouverte », explique-t-il. « Le sécuriser, c'est protéger l'accès. »".into(),
+            description: "Le compte de matelot n'est pas protégé : donnez-lui son mot de passe.".into(),
+            story: "Vex Korshun consulte le registre des badges et secoue la tête :\n« Capitaine, le compte de matelot est encore ouvert : aucun mot de\npasse ne le protège. Si un intrus passait par cette identité, il\nentrerait dans la station sans aucune vérification. »\n\nIl referme le registre : « Sécurisez le compte de matelot en lui\ndonnant son mot de passe. Vous choisirez la phrase de passe vous-même,\npuis vous la confierez au nouvel arrivant à son arrivée. Personne\nd'autre ne doit la connaître. »\n\nVous interrogez l'état du compte : l'entrée de matelot ne porte aucun\nmot de passe actif. La faille est bien réelle.\n\nAprès votre commande, le compte de matelot est protégé par son mot de\npasse personnel.\n\n« Faille refermée », confirme Vex Korshun. « Un badge sans code, c'est\nune porte ouverte. Désormais, seul matelot pourra entrer derrière son\nidentité. »".into(),
             goal: "Le badge du nouveau n'a pas de code. Sécurisez-le.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Changer un MDP?".into(),
@@ -108,27 +51,8 @@ Le badge du nouveau est sécurisé avec un code. Vex Korshun approuve.
         Mission {
             id: "14.4".into(), chapter: 14, chapter_title: "Equipage".into(), act: 4,
             title: "Changer d'user".into(),
-            description: "Testez le compte matelot.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Il faut tester que le compte matelot fonctionne correctement.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Tester le compte matelot est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Il faut tester que le compte matelot fonctionne correctement.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Le nouveau badge est testé: la session fonctionne correctement.
-
-« Le compte est opérationnel », confirme Vex Korshun. « Tester une session, c'est vérifier que tout est en ordre. »".into(),
+            description: "Vérifiez que le compte de matelot fonctionne.".into(),
+            story: "Vex Korshun observe l'écran de contrôle d'accès, satisfait :\n« Le compte et le mot de passe sont en place. Il reste à prouver que\nl'ensemble fonctionne : que matelot peut vraiment ouvrir une session\navec son identité. »\n\nIl se tourne vers vous : « Endossez l'identité de matelot, sans fermer\nvotre propre session, puis affichez le nom sous lequel le système vous\nreconnaît. La réponse doit être matelot, pas capitaine. »\n\nVous glissez dans la peau du nouveau venu. Le système vous demande son\nmot de passe : celui que vous venez de définir.\n\nLa session s'ouvre et le système affiche l'identité active : matelot.\n\n« La session s'ouvre correctement », note Vex Korshun. « Le compte est\npleinement opérationnel. Il peut prendre son service. »".into(),
             goal: "Testez que le nouveau badge fonctionne bien.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Changer d'user?".into(),
@@ -142,27 +66,8 @@ Le nouveau badge est testé: la session fonctionne correctement.
         Mission {
             id: "14.5".into(), chapter: 14, chapter_title: "Equipage".into(), act: 4,
             title: "Sudo".into(),
-            description: "Prouvez vos droits admin.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. En tant que capitaine, vous devez connaître vos pouvoirs sudo.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Utiliser sudo est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: En tant que capitaine, vous devez connaître vos pouvoirs sudo.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Vous montrez vos pouvoirs de capitaine. Vex Korshun vérifie vos droits.
-
-« Ces pouvoirs sont une responsabilité », rappelle-t-il. « Utilisez-les avec discernement. »".into(),
+            description: "Prouvez que vos droits d'administrateur répondent.".into(),
+            story: "Vex Korshun ferme son carnet de sécurité et vous regarde droit dans\nles yeux :\n« Une dernière formalité, Capitaine. Sur Orion-7, certaines opérations\n— comme celles que vous venez de mener — exigent des privilèges\nd'administrateur. Vous êtes le seul à bord habilité à les exercer. »\n\nIl demande : « Prouvez que vos pouvoirs répondent bien. Lancez la\ncommande qui affiche l'identité courante, mais avec vos privilèges\nd'administrateur. Au lieu de votre nom, le système doit vous répondre\nroot. »\n\nVous exécutez l'affichage d'identité avec vos privilèges : le système\nconfirme root.\n\n« Pouvoirs confirmés », conclut Vex Korshun. « Ces privilèges font de\nvous le seul administrateur de la station. Usez-en avec discernement,\nl'équipage compte sur vous. »".into(),
             goal: "Montrez que vous avez bien les pouvoirs du capitaine.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Executer en root?".into(),

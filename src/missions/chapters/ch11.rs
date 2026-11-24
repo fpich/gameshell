@@ -7,23 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "11.1".into(), chapter: 11, chapter_title: "Logs de securite".into(), act: 3,
             title: "Tentatives de connexion pirates".into(),
             description: "Draz M'kal analyse auth.log: quelles attaques?".into(),
-            story: "Draz M'kal, l'officier de sécurité, ouvre le journal d'authentification de la station:
-/securite/logs/auth.log.
-
-« Capitaine, ce fichier enregistre toutes les tentatives de connexion.
-Je veux voir seulement les lignes qui parlent d'ÉCHEC ('Failed'). »
-
-Il vous faut chercher un mot précis dans ce fichier.
-
-« Montrez-moi les tentatives échouées, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Les lignes 'Failed' défilent: des dizaines de tentatives de connexion échouées.
-
-Draz M'kal analyse: « Chaque échec est une tentative d'intrusion repoussée. Ces traces sont notre première preuve. »".into(),
+            story: "Draz M'kal, le chef de la sécurité, fait défiler ses écrans d'un geste sec. « Capitaine, quelqu'un essaie d'entrer dans la station. Le journal d'authentification a tout noté: /securite/logs/auth.log. »\n\nIl zoome sur une ligne: « Chaque refus de connexion est marqué du mot 'Failed'. Je veux voir toutes les tentatives échouées, rien d'autre. »\n\nLe journal est long, des dizaines d'entrées s'y bousculent. Une recherche ciblée n'affichera que les échecs.\n\n« Montrez-moi les tentatives échouées, Capitaine. Chaque ligne est une attaque repoussée. »\n\nLes lignes 'Failed' défilent: six tentatives, toutes venues de la même adresse, 10.0.0.66. Draz M'kal compare avec ses notes.\n\n« Toutes les mêmes origines », constate-t-il. « Ces traces sont notre première preuve: il faut les garder. »".into(),
             goal: "Affichez uniquement les lignes contenant 'Failed' dans le fichier auth.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment chercher un mot précis dans un fichier de logs?".into(),
@@ -38,23 +22,7 @@ Draz M'kal analyse: « Chaque échec est une tentative d'intrusion repoussée. C
             id: "11.2".into(), chapter: 11, chapter_title: "Logs de securite".into(), act: 3,
             title: "Combien d'attaques?".into(),
             description: "Comptez les tentatives échouées dans auth.log.".into(),
-            story: "Vex Korshun: « Capitaine, au lieu des lignes entières, je veux juste
-SAVOIR COMBIEN de tentatives ont échoué. Le nombre suffit. »
-
-La recherche dans le fichier existe, mais avec une option qui ne compte
-que les lignes trouvées.
-
-« Donnez-moi le nombre d'échecs, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-Le compteur affiche le nombre total de tentatives échouées. Le chiffre est alarmant.
-
-« Autant d'attaques en si peu de temps », murmure Draz M'kal. « Nous devons renforcer nos défenses. »".into(),
+            story: "Vex Korshun, le commandant de la station, vous fait signe depuis la passerelle. « Capitaine, votre recherche précédente montrait les lignes d'échec une à une. Le quartier général veut un chiffre, pas un défilé de texte: combien de tentatives ont échoué en tout? »\n\nIl précise: « Dans le même journal, /securite/logs/auth.log. Cherchez les échecs marqués 'Failed', mais je ne veux que le nombre total. »\n\nIl existe une façon de compter les lignes trouvées au lieu de les afficher une à une.\n\n« Donnez-moi ce chiffre, Capitaine. Le QG évalue la menace à partir de lui. »\n\nLe terminal répond: six. Six tentatives rejetées depuis la même adresse. Vex Korshun lit le résultat, puis échange un regard avec Draz M'kal.\n\n« Autant d'attaques en si peu de temps », murmure Draz M'kal. « Le chiffre parle de lui-même: nous devons renforcer nos défenses. »".into(),
             goal: "Comptez combien de lignes contiennent 'Failed' dans auth.log.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment compter les lignes trouvées par une recherche?".into(),
@@ -69,21 +37,7 @@ Le compteur affiche le nombre total de tentatives échouées. Le chiffre est ala
             id: "11.3".into(), chapter: 11, chapter_title: "Logs de securite".into(), act: 3,
             title: "L'IP du pirate avec les numeros de ligne".into(),
             description: "Nira Okoro veut les lignes parlant de 10.0.0.66, avec leur numéro.".into(),
-            story: "Nira Okoro, officier communications: « Capitaine, dans le fichier des
-fréquences ennemies, je veux les lignes qui parlent de l'IP 10.0.0.66.
-Et j'ai besoin de leur NUMÉRO de ligne pour citer le rapport. »
-
-Fichier concerné: /communications/frequences/frequences_ennemies.txt.
-
-« Lignes de 10.0.0.66 avec numéros, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Les lignes mentionnant l'adresse 10.0.0.66 s'affichent avec leur numéro. Cette IP revient sans cesse.
-
-« C'est elle », affirme Draz M'kal. « L'adresse de l'attaquant. Chaque ligne numérotée est une pièce du dossier. »".into(),
+            story: "Nira Okoro, la responsable des communications, vous tend sa tablette. « L'analyse des fréquences a isolé une adresse: 10.0.0.66. Je veux savoir où elle apparaît dans notre registre des fréquences ennemies. »\n\nLe registre est rangé dans /communications/frequences/frequences_ennemies.txt.\n\nElle insiste: « Mon rapport doit citer la ligne exacte du dossier. Affichez la recherche avec le NUMÉRO de chaque ligne trouvée: je pourrai référencer précisément. »\n\n« Les lignes de 10.0.0.66 avec leurs numéros, Capitaine. »\n\nLe terminal répond: une seule entrée, ligne 2, qui associe l'adresse à la fréquence des Corbeaux Noirs. Nira Okoro la copie dans son rapport.\n\n« C'est elle », confirme Draz M'kal en lisant par-dessus son épaule. « L'adresse de l'attaquant, écrite noir sur blanc dans nos archives. »".into(),
             goal: "Affichez les lignes contenant 10.0.0.66 avec leur numéro de ligne.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment afficher les numéros de ligne d'une recherche?".into(),
@@ -98,23 +52,7 @@ Les lignes mentionnant l'adresse 10.0.0.66 s'affichent avec leur numéro. Cette 
             id: "11.4".into(), chapter: 11, chapter_title: "Logs de securite".into(), act: 3,
             title: "Qui a ete banni?".into(),
             description: "Le log fail2ban enregistre les bannissements de pirates.".into(),
-            story: "Vex Korshun consulte le journal du videur automatique:
-/securite/logs/fail2ban.log.
-
-« Capitaine, je veux voir toutes les lignes qui parlent de BANNISSEMENT,
-sans tenir compte de la casse (Ban, ban, BAN...). »
-
-La recherche doit ignorer la différence majuscules/minuscules.
-
-« Quels pirates ont été bannis? »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-Les lignes de bannissement s'affichent, insensibles à la casse. Plusieurs adresses ont été bloquées.
-
-« Le videur automatique fait son travail », note Draz M'kal. « Mais il faut vérifier qu'il ne bannit pas des alliés par erreur. »".into(),
+            story: "Vex Korshun consulte le journal du videur automatique de la station, /securite/logs/fail2ban.log. « Ce programme surveille les entrées de la station et bannit les intrus. Je veux la liste des bannissements. »\n\nIl lève un doigt: « Attention: dans le journal, le mot peut s'écrire 'Ban', 'ban' ou 'BAN' selon l'outil qui l'a écrit. Je veux TOUTES ces lignes, quelle que soit la casse. »\n\nIl faut une recherche qui ignore la différence entre majuscules et minuscules.\n\n« Quels pirates ont été bannis? Montrez-les-moi, Capitaine. »\n\nLes lignes s'affichent: deux adresses ont été bloquées par le videur automatique. Vex Korshun les lit une à une.\n\n« Le videur fait son travail », note Draz M'kal. « Mais vérifions qu'il ne bannit pas des alliés par erreur. »".into(),
             goal: "Affichez les lignes parlant de bannissement dans fail2ban.log, insensible à la casse.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment chercher un mot sans tenir compte des majuscules?".into(),
@@ -129,23 +67,7 @@ Les lignes de bannissement s'affichent, insensibles à la casse. Plusieurs adres
             id: "11.5".into(), chapter: 11, chapter_title: "Logs de securite".into(), act: 3,
             title: "Les dernieres alertes systeme".into(),
             description: "Les 5 dernières lignes du syslog de la station.".into(),
-            story: "Tael Rhen a besoin des événements les plus récents du vaisseau:
-« Capitaine, le syslog de la station est interminable. Montrez-moi seulement
-les 5 DERNIÈRES lignes: ce qui vient de se passer. »
-
-Fichier: /securite/logs/syslog.
-
-« Les 5 dernières lignes du syslog, Capitaine. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre action depuis le vaisseau-mère Andromède.
-
-La station Orion-7 est un vaisseau de classe éclaireur posté en sentinelle. Cinq membres d'équipage comptent sur vous pour la défendre.
-
-N'oubliez pas, Capitaine: dans l'espace, la préparation et la précision font la différence entre la victoire et la défaite.
-
-Les cinq dernières lignes du syslog s'affichent. Vous y lisez les derniers événements du vaisseau.
-
-« La fin du journal, c'est l'instant présent », explique Zyra-7. « C'est là que se joue la situation actuelle. »".into(),
+            story: "Tael Rhen, l'ingénieur-chef des machines, s'éponge le front devant sa console. « Le syslog de la station ne s'arrête jamais, Capitaine: /securite/logs/syslog s'allonge à chaque événement. »\n\nIl se penche: « Ce qui compte, c'est la FIN du journal: ce qui vient de se passer. Les premières lignes sont de l'histoire ancienne. Montrez-moi seulement les 5 dernières entrées. »\n\n« Les 5 dernières lignes du syslog, Capitaine. Le réacteur a peut-être émis une alerte, et je ne veux pas la rater dans la masse. »\n\nLes cinq dernières lignes s'affichent: des tentatives d'accès rejetées, des blocs du pare-feu, une session validée. Tael Rhen les lit, puis désigne l'une d'elles.\n\n« Le pare-feu a bloqué une sonde venue de l'extérieur », explique-t-il. « La fin du journal, c'est l'instant présent: c'est là que se joue la situation actuelle. »".into(),
             goal: "Affichez les 5 dernières lignes du fichier syslog.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Comment voir seulement la fin d'un fichier de logs?".into(),

@@ -7,26 +7,7 @@ pub fn missions() -> Vec<Mission> {
             id: "13.1".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
             title: "Archiver les logs".into(),
             description: "Archivez avant contre-attaque!".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Avant la contre-attaque, il faut archiver tout le dossier /securite/logs comme preuves, dans une archive compressée logs.tar.gz posée dans votre cabine.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Archiver les logs est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Avant la contre-attaque, il faut archiver tout le dossier /securite/logs comme preuves, dans une archive compressée logs.tar.gz posée dans votre cabine.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Les logs sont archivés en une seule archive. Les preuves sont désormais en sécurité.
-
-« Une sauvegarde, c'est une assurance », explique Tael Rhen. « Si les originaux sont perdus, la copie nous sauve. »".into(),
+            story: "Boz Tark, le mécanicien en chef, vous appelle des soutes à carburant :\n« Capitaine, avant de purger les réservoirs, je veux une copie de sécurité\ndes journaux de la station. Si un fichier du dossier des logs est endommagé\npendant l'incident, on saura quand et comment. »\n\nIl précise : « /securite/logs contient auth.log, fail2ban.log et syslog.\nRassemblez tout le dossier dans une archive, un seul fichier, compressé,\nque vous déposerez dans votre cabine. »\n\nVous ouvrez /securite/logs : les trois journaux y sont bien.\n\nAprès votre commande, l'archive logs.tar.gz apparaît dans votre cabine.\nBoz Tark la consulte :\n\n« Parfait. Si les originaux sont perdus, cette copie nous sauve. »\n".into(),
             goal: "Avant la contre-attaque, rangez tout le dossier /securite/logs dans une archive compressée logs.tar.gz, dans votre cabine.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Creer une archive?".into(),
@@ -41,26 +22,7 @@ Les logs sont archivés en une seule archive. Les preuves sont désormais en sé
             id: "13.2".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
             title: "ZIP".into(),
             description: "L'Andromède prefere le ZIP.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. L'Andromède demande le dossier rapports de votre cabine (avec tout son contenu) au format ZIP, dans un fichier rapports.zip.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Compresser en ZIP est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: L'Andromède demande le dossier rapports de votre cabine (avec tout son contenu) au format ZIP, dans un fichier rapports.zip.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Les rapports sont compressés au format ZIP. L'Andromède pourra les lire.
-
-« Le format ZIP est universel », note Nira Okoro. « C'est le langage commun des vaisseaux. »".into(),
+            story: "Nira Okoro revient de la salle des messages :\n« Capitaine, l'Andromède préfère le format ZIP. Elle veut tout votre\ndossier de rapports, sous-dossiers compris, dans un seul fichier\nrapports.zip, déposé ici dans votre cabine. »\n\nElle ajoute : « Le dossier rapports de votre cabine contient vos rapports\nd'incident rangés par année et par mois. Compressez-le tel quel. »\n\nVous vérifiez : votre cabine contient bien le dossier rapports/ avec ses\nsous-dossiers 2024/janvier et le rapport incident_15jan.txt.\n\nAprès votre commande, rapports.zip apparaît à côté du dossier.\n\nNira Okoro teste le fichier : « ZIP est le langage commun des vaisseaux.\nL'Andromède pourra le lire, sous-dossiers compris. »\n".into(),
             goal: "L'Andromède veut tout votre dossier rapports, sous-dossiers compris, compressé dans rapports.zip.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Faire un ZIP?".into(),
@@ -75,26 +37,7 @@ Les rapports sont compressés au format ZIP. L'Andromède pourra les lire.
             id: "13.3".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
             title: "Espace disque".into(),
             description: "Espace restant?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Avant d'archiver, vérifiez qu'il reste assez d'espace dans les soutes.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Vérifier l'espace disque est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Avant d'archiver, vérifiez qu'il reste assez d'espace dans les soutes.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-L'espace disque s'affiche. Les soutes de données ont encore de la place pour archiver.
-
-« Bien », approuve Tael Rhen. « Nous savons combien de données nous pouvons encore stocker. »".into(),
+            story: "Tael Rhen, ingénieur-chef des machines, vous montre sa tablette :\n« Capitaine, avant de brancher les disques de secours, il faut savoir si\nla station a encore de la place pour les archives. Si une partition est\npleine, l'écriture échoue et on perd des données au pire moment. »\n\nIl demande : « Affichez l'état de l'espace disque de toutes les partitions,\nen tailles lisibles pour un humain. Je veux voir le total, l'utilisé et le\npourcentage, pour les soutes comme pour la racine. »\n\nVous lancez la commande : la racine, les soutes et les archives affichent\nchacune leur taille et leur taux d'occupation.\n\n« Bien, conclut Tael Rhen. 90 % sur /soutes, je retire la moitié des\ncaisses avant d'archiver. L'espace libre se lit d'un coup d'œil. »\n".into(),
             goal: "Vérifiez qu'il reste assez de place dans les soutes avant d'archiver.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Voir l'espace disque?".into(),
@@ -109,26 +52,7 @@ L'espace disque s'affiche. Les soutes de données ont encore de la place pour ar
             id: "13.4".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
             title: "Gros fichiers".into(),
             description: "Quel compartiment est gros?".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Quelle soute prend le plus de place? Pesez un par un chaque compartiment de /soutes pour optimiser le stockage.
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Trouver les gros fichiers est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Quelle soute prend le plus de place? Pesez un par un chaque compartiment de /soutes pour optimiser le stockage.
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-Le pesage des soutes s'affiche. Vous repérez la soute la plus pleine.
-
-« Celle-là est saturée », note Tael Rhen. « Comparer les tailles, c'est gérer l'espace intelligemment. »".into(),
+            story: "Tael Rhen revient avec une nouvelle inquiétude :\n« Capitaine, on va remplir les soutes de nouvelles réserves. Avant, je\nveux savoir quelle soute pèse le plus lourd. Si l'une d'elles est saturée,\nc'est là que je commence le tri. »\n\nIl précise : « Pesez chaque compartiment de /soutes un par un, avec la\ntaille totale et lisible, pour les comparer. La soute la plus grosse, je la\ndécharge en priorité. »\n\nVous lancez le pesage : les chiffres tombent, une soute après l'autre.\n\nLa ligne soutes/municions dépasse toutes les autres : 40 M, loin devant\narmes (12 M) et nourriture (8 M).\n\n« La soute des munitions est pleine à craquer », constate Tael Rhen.\n« C'est elle qu'on vide d'abord. Comparer les tailles, c'est gérer\nl'espace de manière intelligente. »\n".into(),
             goal: "Quelle soute est la plus pleine? Pesez un par un chaque compartiment de /soutes, en tailles lisibles.".into(),
             bloom_level: "Analyser".into(),
             bloom_question: "Taille des dossiers?".into(),
@@ -143,28 +67,7 @@ Le pesage des soutes s'affiche. Vous repérez la soute la plus pleine.
             id: "13.5".into(), chapter: 13, chapter_title: "Sauvegarde".into(), act: 4,
             title: "Disques".into(),
             description: "Boz Tark veut savoir quels disques sont branchés.".into(),
-            story: "Boz Tark, le mécanicien en chef, vous appelle depuis la salle des machines:
-« Capitaine, avant de brancher les disques de secours, je dois savoir quels disques
-sont physiquement connectés à la station. »
-
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
-
-Voir les disques montés est une étape cruciale pour préparer la station à l'attaque imminente.
-
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
-
-Votre mission: Quels disques sont physiquement connectés à la station?
-
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
-
-La liste des disques connectés s'affiche. Vous voyez les volumes de stockage de la station.
-
-« Chaque disque est un réservoir de données », explique Tael Rhen. « Savoir lesquels sont connectés, c'est connaître nos capacités. »".into(),
+            story: "Boz Tark vous retrouve devant la salle des machines, une clé à molette\nà la main :\n« Capitaine, avant de brancher les disques de secours, je dois savoir\nquels disques sont réellement connectés à la station. Si j'en monte un\ndeux fois, on corrompt les données. »\n\nIl ajoute : « Un seul coup d'œil dans le système me suffit : la liste des\nsystèmes de fichiers montés, avec le point de montage de chacun. »\n\nVous interrogez le système : la racine, les soutes et les archives\napparaissent, chacun monté à son emplacement.\n\n« Voilà ce que je voulais », dit Boz Tark. « Chaque disque est un réservoir\nde données. Savoir lesquels sont connectés, c'est connaître nos capacités. »\n".into(),
             goal: "Quels disques sont physiquement connectés à la station?".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Voir les partitions?".into(),

@@ -7,26 +7,29 @@ pub fn missions() -> Vec<Mission> {
             id: "18.1".into(), chapter: 18, chapter_title: "Durcissement".into(), act: 5,
             title: "fail2ban".into(),
             description: "Bannissez automatiquement!".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Les pirates reviennent sans cesse. fail2ban les bannira automatiquement.
+            story: "Draz M'kal vous fait signe d'approcher de la console de sécurité.
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
+« Les pirates ont frappé toute la nuit, Capitaine : des dizaines de
+tentatives d'accès, depuis les adresses 10.0.0.66 et 10.0.0.99. Heureusement,
+le videur automatique est à bord : il surveille les connexions et bannit
+tout seul les adresses qui se comportent mal. »
 
-Installer fail2ban est une étape cruciale pour préparer la station à l'attaque imminente.
+Il tape sur le clavier.
 
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
+« Le videur tourne, mais je veux vérifier qu'il fait bien son travail : qu'il
+est opérationnel et qu'il surveille les bons services. Les adresses
+malveillantes doivent être prises en charge automatiquement, sans que
+personne n'ait à intervenir. »
 
-Votre mission: Les pirates reviennent sans cesse. fail2ban les bannira automatiquement.
+Il s'écarte de l'écran.
 
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
+« Interrogez le videur : montrez-moi son état et les services qu'il surveille.
+S'il est bien en place, nous sommes protégés. »
 
-Le videur automatique est en place. Les adresses malveillantes seront bannies.
+Vous interrogez le videur automatique : il est opérationnel et surveille les
+services attendus.
 
-« Le videur fait son travail », note Draz M'kal. « Mais il faut vérifier qu'il ne bannit pas des alliés par erreur. »".into(),
+« Parfait, Capitaine. Le videur est prêt à bannir tout intrus. »".into(),
             goal: "Les pirates reviennent sans cesse. Il faut un videur automatique.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Automatiser le bannissement?".into(),
@@ -41,26 +44,29 @@ Le videur automatique est en place. Les adresses malveillantes seront bannies.
             id: "18.2".into(), chapter: 18, chapter_title: "Durcissement".into(), act: 5,
             title: "Durcir SSH".into(),
             description: "Interdisez root et MDP!".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. SSH est vulnérable: root autorisé + mots de passe autorisés = porte ouverte. Dans /securite/config/sshd_config, il faut les deux lignes 'PermitRootLogin no' et 'PasswordAuthentication no' (éditeur de texte, ou ajout en fin de fichier).
+            story: "Draz M'kal vous reçoit dans la salle de sécurité, un comprimé de config à la main.
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
+« Nos pare-feu repoussent les attaques, Capitaine, mais le service d'accès à
+distance est encore vulnérable. Regardez : il accepte les connexions du
+compte root, et il accepte les mots de passe. C'est une porte ouverte pour
+les pirates : deux lignes du fichier de configuration les laissent entrer. »
 
-Durcir SSH est une étape cruciale pour préparer la station à l'attaque imminente.
+Il vous tend le comprimé.
 
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
+« La configuration du service ssh est dans /securite/config/sshd_config.
+Il faut fermer ces deux portes : interdire les connexions du compte root,
+et exiger autre chose que les mots de passe. Si un pirate essayait
+d'entrer en root avec un mot de passe deviné, il serait refusé. »
 
-Votre mission: SSH est vulnérable: root autorisé + mots de passe autorisés = porte ouverte. Dans /securite/config/sshd_config, il faut les deux lignes 'PermitRootLogin no' et 'PasswordAuthentication no' (éditeur de texte, ou ajout en fin de fichier).
+Il recule d'un pas.
 
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
+« Modifiez la configuration pour bloquer root et bloquer les mots de passe.
+C'est un durcissement simple mais vital. »
 
-Le login root est interdit et les mots de passe sont désactivés en SSH.
+Vous modifiez la configuration : le compte root est refusé et les mots de
+passe sont désactivés.
 
-« Bien », approuve Draz M'kal. « Des failles de moins. Chaque ligne durcie renforce nos défenses. »".into(),
+« Deux failles de moins, Capitaine. La porte est fermée. »".into(),
             goal: "Fermez la porte aux attaques: plus de root, plus de mots de passe en SSH.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Securiser SSH?".into(),
@@ -75,26 +81,29 @@ Le login root est interdit et les mots de passe sont désactivés en SSH.
             id: "18.3".into(), chapter: 18, chapter_title: "Durcissement".into(), act: 5,
             title: "iptables".into(),
             description: "Limitez SSH a 3 conn/min.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Au-delà d'UFW, le noyau a son propre pare-feu. Avant de le modifier, il faut inspecter les règles actuellement actives, en affichage numérique.
+            story: "Draz M'kal vous attend devant la baie réseau, un câble à la main.
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
+« Les pirates entrent par les connexions, Capitaine. UFW filtre déjà les
+adresses classiques, mais le noyau a son propre pare-feu, plus profond : il
+décide du sort de chaque paquet qui traverse la station. Avant d'y toucher,
+il faut savoir exactement ce qui filtre déjà. »
 
-Règles iptables est une étape cruciale pour préparer la station à l'attaque imminente.
+Il pointe l'écran.
 
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
+« Je veux voir toutes les règles actives du pare-feu du noyau : les chaînes,
+les politiques et surtout les adresses en chiffres, sans les traduire en
+noms. Ce n'est qu'une inspection : rien ne sera modifié, mais je dois
+connaître l'état exact des lieux avant de renforcer quoi que ce soit. »
 
-Votre mission: Au-delà d'UFW, le noyau a son propre pare-feu. Avant de le modifier, il faut inspecter les règles actuellement actives, en affichage numérique.
+Il vous tend la console.
 
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
+« Affichez les règles du pare-feu du noyau, avec les adresses en chiffres.
+Je veux voir ce qui est filtré aujourd'hui. »
 
-Les règles du pare-feu noyau s'affichent: vous savez maintenant ce qui filtre chaque paquet.
+Les règles défilent : chaque chaîne, chaque politique, chaque adresse en
+chiffres.
 
-« Le noyau filtre chaque paquet », explique Draz M'kal. « Ces règles sont la dernière barrière. »".into(),
+« Voilà la carte exacte de nos défenses, Capitaine. On pourra la renforcer. »".into(),
             goal: "Avant de toucher au pare-feu du noyau, inspectez toutes ses règles actives, adresses en chiffres.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Limiter les connexions?".into(),
@@ -109,26 +118,29 @@ Les règles du pare-feu noyau s'affichent: vous savez maintenant ce qui filtre c
             id: "18.4".into(), chapter: 18, chapter_title: "Durcissement".into(), act: 5,
             title: "Audit".into(),
             description: "Surveillez passwd et shadow.".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Si un pirate crée un compte, il faut le détecter: posez une surveillance d'audit sur /etc/passwd (écritures et attributs), avec l'étiquette « comptes ».
+            story: "Draz M'kal ferme la porte de la sécurité avant de parler.
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
+« Un pirate entré une fois essaiera de rester, Capitaine. S'il parvenait à
+créer un compte sur la station, nous devrions le savoir immédiatement. Le
+garde d'audit est à bord et peut tracer chaque modification sensible. »
 
-Audit système est une étape cruciale pour préparer la station à l'attaque imminente.
+Il ouvre une console.
 
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
+« Le fichier des comptes enregistrés, /etc/passwd, est la cible : si un
+intrus y ajoute une ligne, c'est qu'un compte vient d'être créé. Il faut
+poser une surveillance sur ce fichier : enregistrer chaque écriture et
+chaque changement d'attribut, et étiqueter ces événements « comptes » pour
+les retrouver facilement dans le journal d'audit. »
 
-Votre mission: Si un pirate crée un compte, il faut le détecter: posez une surveillance d'audit sur /etc/passwd (écritures et attributs), avec l'étiquette « comptes ».
+Il vous montre la liste des règles actives.
 
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
+« Posez cette surveillance, puis affichez les règles d'audit pour confirmer
+qu'elle est en place. »
 
-La surveillance des comptes est en place. Chaque création sera tracée.
+La surveillance est posée : chaque écriture ou changement d'attribut sur
+/etc/passwd sera tracé sous l'étiquette « comptes ».
 
-« La surveillance est notre meilleure alliée », conclut Draz M'kal. « Si un pirate crée un compte, nous le saurons. »".into(),
+« Si un compte apparaît, nous le saurons, Capitaine. Merci. »".into(),
             goal: "Si un pirate crée un compte, il faut le savoir: surveillez les écritures et changements d'attributs de /etc/passwd, étiquette « comptes ».".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Tracer les modifications?".into(),
@@ -143,26 +155,30 @@ La surveillance des comptes est en place. Chaque création sera tracée.
             id: "18.5".into(), chapter: 18, chapter_title: "Durcissement".into(), act: 5,
             title: "Chroot".into(),
             description: "Isolez un processus!".into(),
-            story: "La situation à bord d'Orion-7 se tend, Capitaine. Dernière barrière: isolez un processus dans un chroot pour le contenir définitivement.
+            story: "Draz M'kal vous conduit jusqu'à une soute condamnée, au bout du couloir.
 
-Les Corbeaux Noirs ont été détectés dans le secteur 7G et leurs sondes scannent
-nos défenses. Chaque seconde compte. L'Amiral Xylia Vorn attend votre rapport
-depuis l'Andromède.
+« Nous avons capturé un processus pirate, Capitaine. Il rôdait dans la
+station et tentait de lire et d'écrire où il ne fallait pas. On ne peut pas
+le détruire, mais on peut l'enfermer : le mettre dans une cellule où il ne
+verra plus que ce qu'on lui donne à voir. »
 
-Chroot - la forteresse est une étape cruciale pour préparer la station à l'attaque imminente.
+Il ouvre la trappe de la soute.
 
-Sans cette étape, les systèmes de défense resteront vulnérables et les pirates
-pourront prendre le contrôle du vaisseau.
+« La cellule d'isolement est prête dans /soutes/chroot. Lisez d'abord le
+guide qui s'y trouve : il explique comment fonctionne la cellule et vous
+donnera le code d'accès. Ensuite, lancez le processus à l'intérieur de la
+cellule pour qu'il soit définitivement contenu. »
 
-Votre mission: Dernière barrière: isolez un processus dans un chroot pour le contenir définitivement.
+Il s'écarte.
 
-N'oubliez pas: dans l'espace, la préparation fait la différence entre la victoire
-et la défaite. Chaque commande que vous apprenez ici sera utile pour sauver
-la station et son équipage de 5 personnes.
+« Quand ce sera fait, entrez le code d'accès de la cellule pour sceller
+l'opération. »
 
-Le processus pirate est enfermé dans une cellule d'isolement. Il ne peut plus nuire.
+Vous enfermez le processus dans la cellule d'isolement : il ne peut plus
+voir ni toucher au reste de la station. Le code d'accès scelle la
+procédure.
 
-« Dernière barrière franchie », conclut Draz M'kal. « Le vaisseau est désormais durci contre les intrusions. »".into(),
+« Dernière barrière franchie, Capitaine. Le vaisseau est durci. »".into(),
             goal: "Dernière barrière: enfermez un processus dans une cellule d'isolement.".into(),
             bloom_level: "Créer".into(),
             bloom_question: "Isoler un processus?".into(),
