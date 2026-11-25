@@ -745,6 +745,11 @@ fn legacy_save_path(campaign: u8) -> String {
     format!("{}/state/save_campagne{}.json", gameshell_home(), campaign)
 }
 
+/// Une sauvegarde "legacy" (avant P1.10) n'est reprise que si elle n'appartient pas à un autre joueur
+pub fn legacy_save_usable(sv_player_name: &str, current_player: &str) -> bool {
+    sv_player_name.is_empty() || player_slug(sv_player_name) == player_slug(current_player)
+}
+
 pub fn load_save(campaign: u8, player: &str) -> Option<crate::missions::SaveData> {
     if let Ok(content) = std::fs::read_to_string(save_path(campaign, player)) {
         return serde_json::from_str(&content).ok();
@@ -752,7 +757,7 @@ pub fn load_save(campaign: u8, player: &str) -> Option<crate::missions::SaveData
     // ancienne sauvegarde (avant P1.10): reprise seulement si elle n'appartient à personne d'autre
     let content = std::fs::read_to_string(legacy_save_path(campaign)).ok()?;
     let sv: crate::missions::SaveData = serde_json::from_str(&content).ok()?;
-    if sv.player_name.is_empty() || player_slug(&sv.player_name) == player_slug(player) {
+    if legacy_save_usable(&sv.player_name, player) {
         Some(sv)
     } else {
         None
@@ -780,7 +785,7 @@ pub fn remove_save(campaign: u8, player: &str) {
     let _ = std::fs::remove_file(save_path(campaign, player));
     if let Ok(c) = std::fs::read_to_string(legacy_save_path(campaign)) {
         if let Ok(sv) = serde_json::from_str::<crate::missions::SaveData>(&c) {
-            if sv.player_name.is_empty() || player_slug(&sv.player_name) == player_slug(player) {
+            if legacy_save_usable(&sv.player_name, player) {
                 let _ = std::fs::remove_file(legacy_save_path(campaign));
             }
         }
@@ -797,6 +802,14 @@ pub fn history_path(campaign: u8, player: &str) -> String {
 }
 
 /// Historique horodaté des actions d'une partie (règle A22)
+/// Un event ne doit JAMAIS injecter de saut de ligne dans le log (un seul event = une ligne)
+pub fn sanitize_log_event(event: &str) -> String {
+    event
+        .chars()
+        .map(|c| if c == '\n' || c == '\r' { ' ' } else { c })
+        .collect()
+}
+
 pub fn log_action(campaign: u8, player: &str, event: &str) {
     if test_mode() {
         return;
@@ -811,11 +824,7 @@ pub fn log_action(campaign: u8, player: &str, event: &str) {
         .append(true)
         .open(&path)
     {
-        let clean: String = event
-            .chars()
-            .map(|c| if c == '\n' || c == '\r' { ' ' } else { c })
-            .collect();
-        let _ = writeln!(f, "[{}] {}", ts, clean);
+        let _ = writeln!(f, "[{}] {}", ts, sanitize_log_event(event));
     }
 }
 
@@ -908,6 +917,25 @@ mod tests {
             lexical_normalize(Path::new("a/b/../c")),
             std::path::PathBuf::from("a/c")
         );
+    }
+    #[test]
+    fn legacy_save_usable_separe_les_joueurs() {
+        assert!(legacy_save_usable("", "quelqu'un"));
+        assert!(legacy_save_usable("Bob", "bob"));
+        assert!(legacy_save_usable("Bob le Pirate", "bob le pirate"));
+        assert!(!legacy_save_usable("Alice", "Bob"));
+        assert!(!legacy_save_usable("  ", "bob"));
+    }
+    #[test]
+    fn sanitize_log_event_neutralise_les_sauts_de_ligne() {
+        assert_eq!(sanitize_log_event("a\nb"), "a b");
+        assert_eq!(sanitize_log_event("a\r\nb"), "a  b");
+        assert_eq!(
+            sanitize_log_event("ligne une\nligne deux\r\nligne trois"),
+            "ligne une ligne deux  ligne trois"
+        );
+        assert_eq!(sanitize_log_event(""), "");
+        assert_eq!(sanitize_log_event("tout tranquille"), "tout tranquille");
     }
     #[test]
     fn to_world_in_mappe_les_chemins() {
