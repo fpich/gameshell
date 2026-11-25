@@ -55,8 +55,6 @@ fn looks_like_code(w: &str) -> bool {
         && w.chars().any(|c| c.is_ascii_alphanumeric())
 }
 
-/// Niveau atteint après `xp` XP (chaque niveau exige `level * 100` XP — P1.14).
-/// Fonction pure pour tous les tests.
 /// Niveau atteint après `xp` XP cumulé (règle P1.14: `level * 100` XP par niveau,
 /// plusieurs niveaux possibles d'un coup). Fonction pure pour tous les tests.
 fn levels_up_to(xp: u64, level: u32) -> u32 {
@@ -65,6 +63,30 @@ fn levels_up_to(xp: u64, level: u32) -> u32 {
         l += 1;
     }
     l
+}
+
+/// Texte de félicitation général, par campagne (1 = espace, 2 = Japon, 3 = réseau).
+/// Fonction pure pour tous les tests.
+fn campaign_congrats(campaign: u8) -> &'static str {
+    match campaign {
+        2 => "Le château Shiro vous salue, seigneur.",
+        3 => "Le NOC Neon-9 valide votre intervention.",
+        _ => "La station Orion-7 vous félicite, Capitaine.",
+    }
+}
+
+/// Note Bloom par niveau (Se souvenir, Comprendre, Appliquer, Analyser, Évaluer, Créer).
+/// Fonction pure pour tous les tests.
+fn bloom_note(bloom_level: &str) -> &'static str {
+    match bloom_level {
+        "Se souvenir" => "Vous maîtrisez désormais ce réflexe essentiel.",
+        "Comprendre" => "Vous ne l'exécutez plus: vous le comprenez.",
+        "Appliquer" => "Vous savez mettre cette compétence en pratique.",
+        "Analyser" => "Vous savez décomposer et raisonner sur la situation.",
+        "Évaluer" => "Vous savez juger et choisir la bonne action.",
+        "Créer" => "Vous avez construit quelque chose de nouveau.",
+        _ => "L'équipage vous salue avec respect.",
+    }
 }
 
 impl Game {
@@ -487,21 +509,10 @@ impl Game {
 
     /// Rétroaction positive contextualisée par niveau de Bloom et par campagne
     fn congrats(&self, m: &Mission) -> (&'static str, &'static str) {
-        let a = match shell::campaign_id() {
-            2 => "Le château Shiro vous salue, seigneur.",
-            3 => "Le NOC Neon-9 valide votre intervention.",
-            _ => "La station Orion-7 vous félicite, Capitaine.",
-        };
-        let b = match m.bloom_level.as_str() {
-            "Se souvenir" => "Vous maîtrisez désormais ce réflexe essentiel.",
-            "Comprendre" => "Vous ne l'exécutez plus: vous le comprenez.",
-            "Appliquer" => "Vous savez mettre cette compétence en pratique.",
-            "Analyser" => "Vous savez décomposer et raisonner sur la situation.",
-            "Évaluer" => "Vous savez juger et choisir la bonne action.",
-            "Créer" => "Vous avez construit quelque chose de nouveau.",
-            _ => "L'équipage vous salue avec respect.",
-        };
-        (a, b)
+        (
+            campaign_congrats(shell::campaign_id()),
+            bloom_note(&m.bloom_level),
+        )
     }
 
     fn complete_mission(&mut self) {
@@ -1225,5 +1236,30 @@ mod levels_up_to_tests {
         let max = levels_up_to(u64::MAX, u32::MAX - 1);
         assert_eq!(max, u32::MAX);
         assert_eq!(levels_up_to(u64::MAX, u32::MAX), u32::MAX);
+    }
+}
+
+#[cfg(test)]
+mod congrats_tests {
+    use super::{bloom_note, campaign_congrats};
+
+    #[test]
+    fn campagne_congrats_par_campagne() {
+        assert!(campaign_congrats(1).contains("Orion-7"));
+        assert!(campaign_congrats(2).contains("Shiro"));
+        assert!(campaign_congrats(3).contains("Neon-9"));
+        assert!(campaign_congrats(42).contains("Orion-7")); // repli
+    }
+
+    #[test]
+    fn bloom_note_par_niveau() {
+        assert!(bloom_note("Se souvenir").contains("réflexe"));
+        assert!(bloom_note("Comprendre").contains("exécutez"));
+        assert!(bloom_note("Appliquer").contains("pratique"));
+        assert!(bloom_note("Analyser").contains("raisonner"));
+        assert!(bloom_note("Évaluer").contains("juger"));
+        assert!(bloom_note("Créer").contains("nouveau"));
+        assert!(bloom_note("???").contains("respect")); // repli
+        assert!(bloom_note("").contains("respect")); // repli
     }
 }
