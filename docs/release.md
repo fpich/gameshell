@@ -14,7 +14,7 @@
 1. Vérifier l'état du dépôt :
    - `cargo clippy --release --all-targets -- -D warnings` — propre
    - `cargo fmt --check` — propre
-   - `cargo test --release` — 12/12
+   - `cargo test --release` — 18/18
    - `./tests/run_tests.sh` — 57/57 (inclut tests 55/56/57 : archive, fresh install, mode dégradé)
 2. Mettre à jour `CHANGELOG.md` (section `[X.Y.Z]` avec la date du jour) et
    `ETAT_ACTUEL.md` (version).

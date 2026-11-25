@@ -10,7 +10,7 @@
 |------------|--------|
 | Version | **2.0.0** |
 | Campagnes | 3 × 100 missions EN DUR (20 chapitres × 5, 5 actes × 20) |
-| Conformité cargo | **12/12** (`cargo test --release`) |
+| Conformité cargo | **18/18** (`cargo test --release`) |
 | Suite moteur | **57/57** (`./tests/run_tests.sh`) |
 | Clippy | propre (`cargo clippy --release --all-targets -- -D warnings`) |
 | Formatage | `cargo fmt --check` (CI en échec sinon) |
@@ -21,7 +21,7 @@
 
 ## Tests
 
-### `cargo test --release` — 12/12
+### `cargo test --release` — 18/18
 
 | Test | Rôle |
 |------|------|
@@ -37,6 +37,9 @@
 | bordures_alignees | B5 : cadre mission aligné (largeur d'affichage) |
 | reecriture_mode_degrade | mode dégradé : réécriture de chemins sans bwrap |
 | slug | slugify (export JSON/CSV stable) |
+| safe_join | unzip embarqué : chemin normal accepté, traversal refusé (anti-évasion) |
+| unzip_embedded | extraction embarquée : sortie dans la destination, entrées traversal ignorées |
+| safe_state_name | noms d'état fictifs acceptés, traversal refusé |
 
 ### `./tests/run_tests.sh` — 57/57
 
@@ -91,7 +94,7 @@
 
 - Toute modification respecte `AGENTS.md` (numérotation fixe, jamais renumérotée).
 - Avant chaque commit : `cargo clippy --release --all-targets`, `cargo fmt --check`,
-  `cargo test --release` (12/12) et `./tests/run_tests.sh` (57/57).
+  `cargo test --release` (18/18) et `./tests/run_tests.sh` (57/57).
 - Les tests tournent dans un `GAMESHELL_HOME` temporaire ; jamais sur les données réelles.
 - `git push` et publication de release : uniquement sur demande explicite du propriétaire.
 - Historique documentaire : `docs/historique/RETEX.md` et `CORRECTIONS.md` sont des records
