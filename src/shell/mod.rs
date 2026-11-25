@@ -163,14 +163,18 @@ pub fn player_home() -> String {
 }
 
 /// Chemin réel → chemin vu dans le jeu (« / » = racine du monde). None si hors du monde.
-pub fn to_world(real: &str) -> Option<String> {
-    let w = world_dir();
-    let w = w.trim_end_matches('/');
+/// Mutualisé avec `to_world` (qui lit le monde courant) pour testabilité.
+pub fn to_world_in(real: &str, world: &str) -> Option<String> {
+    let w = world.trim_end_matches('/');
     if real == w {
         return Some("/".into());
     }
     real.strip_prefix(&format!("{}/", w))
         .map(|r| format!("/{}", r))
+}
+
+pub fn to_world(real: &str) -> Option<String> {
+    to_world_in(real, &world_dir())
 }
 
 // ───────────────────────────── bac à sable ─────────────────────────────
@@ -904,6 +908,19 @@ mod tests {
             lexical_normalize(Path::new("a/b/../c")),
             std::path::PathBuf::from("a/c")
         );
+    }
+    #[test]
+    fn to_world_in_mappe_les_chemins() {
+        assert_eq!(to_world_in("/m", "/m").as_deref(), Some("/"));
+        assert_eq!(to_world_in("/m/pont", "/m").as_deref(), Some("/pont"));
+        assert_eq!(to_world_in("/m/a/b/c", "/m").as_deref(), Some("/a/b/c"));
+        // préfixe stricte : passe sous /m/ mais n'en est pas un descendant
+        assert_eq!(to_world_in("/mandroite", "/m"), None);
+        assert_eq!(to_world_in("/m2/x", "/m"), None);
+        assert_eq!(to_world_in("/autre", "/m"), None);
+        // slash final du monde toléré
+        assert_eq!(to_world_in("/m", "/m/").as_deref(), Some("/"));
+        assert_eq!(to_world_in("/m/pont", "/m/").as_deref(), Some("/pont"));
     }
     #[test]
     fn file_contains_refuse_le_motif_vide() {
