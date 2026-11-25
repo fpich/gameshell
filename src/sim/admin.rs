@@ -1316,12 +1316,30 @@ mod admin_tests {
 
     #[test]
     fn parse_rule_forms_simples() {
-        assert_eq!(parse_rule(&["allow".into(), "22".into()]), Some("ALLOW IN 22 from Anywhere".into()));
-        assert_eq!(parse_rule(&["allow".into(), "port".into(), "22".into()]), Some("ALLOW IN 22 from Anywhere".into()));
-        assert_eq!(parse_rule(&["deny".into(), "in".into(), "port".into(), "22".into()]), Some("DENY IN 22 from Anywhere".into()));
-        assert_eq!(parse_rule(&["allow".into(), "ssh".into()]), Some("ALLOW IN 22/tcp from Anywhere".into()));
-        assert_eq!(parse_rule(&["deny".into(), "from".into(), "10.0.0.9".into()]), Some("DENY IN Anywhere from 10.0.0.9".into()));
-        assert_eq!(parse_rule(&["allow".into(), "out".into(), "port".into(), "80".into()]), Some("ALLOW OUT 80 from Anywhere".into()));
+        assert_eq!(
+            parse_rule(&["allow".into(), "22".into()]),
+            Some("ALLOW IN 22 from Anywhere".into())
+        );
+        assert_eq!(
+            parse_rule(&["allow".into(), "port".into(), "22".into()]),
+            Some("ALLOW IN 22 from Anywhere".into())
+        );
+        assert_eq!(
+            parse_rule(&["deny".into(), "in".into(), "port".into(), "22".into()]),
+            Some("DENY IN 22 from Anywhere".into())
+        );
+        assert_eq!(
+            parse_rule(&["allow".into(), "ssh".into()]),
+            Some("ALLOW IN 22/tcp from Anywhere".into())
+        );
+        assert_eq!(
+            parse_rule(&["deny".into(), "from".into(), "10.0.0.9".into()]),
+            Some("DENY IN Anywhere from 10.0.0.9".into())
+        );
+        assert_eq!(
+            parse_rule(&["allow".into(), "out".into(), "port".into(), "80".into()]),
+            Some("ALLOW OUT 80 from Anywhere".into())
+        );
         // action inconnue
         assert_eq!(parse_rule(&["bogus".into()]), None);
     }
@@ -1389,10 +1407,18 @@ mod installed_tests {
         assert!(!installed(&c, ""));
         // state absent → rien n'est installé
         let root2 = root.with_file_name(format!("gsh-ut-pkg-absent-{}", std::process::id()));
-        let c2 = Ctx { etc: root2.to_string_lossy().into(), ..Ctx {
-            root: "/".into(), etc: root.to_string_lossy().into(), camp: 1,
-            user: "capitaine".into(), euid: "capitaine".into(), host: "orion7".into(), homebase: "/cabines".into(),
-        } };
+        let c2 = Ctx {
+            etc: root2.to_string_lossy().into(),
+            ..Ctx {
+                root: "/".into(),
+                etc: root.to_string_lossy().into(),
+                camp: 1,
+                user: "capitaine".into(),
+                euid: "capitaine".into(),
+                host: "orion7".into(),
+                homebase: "/cabines".into(),
+            }
+        };
         assert!(!installed(&c2, "nginx"));
         let _ = std::fs::remove_dir_all(&root);
         let _ = std::fs::remove_dir_all(&root2);

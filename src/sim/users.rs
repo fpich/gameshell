@@ -992,7 +992,10 @@ mod valid_name_tests {
 
 #[cfg(test)]
 mod ctx_file_tests {
-    use super::{group_db, group_exists, has_password, passwd_db, set_shadow, shadow_hash, user_exists, user_groups, Ctx};
+    use super::{
+        group_db, group_exists, has_password, passwd_db, set_shadow, shadow_hash, user_exists,
+        user_groups, Ctx,
+    };
 
     fn tmp_dir(tag: &str) -> String {
         let root = std::env::temp_dir().join(format!("gsh-ut-{}-{}", std::process::id(), tag));
@@ -1020,12 +1023,16 @@ mod ctx_file_tests {
     #[test]
     fn passwd_db_parse_et_filtre() {
         let etc = tmp_dir("passwd");
-        write(&etc, "passwd", &[
-            "capitaine:x:1000:1001:capitaine:/cabines/capitaine:/bin/bash",
-            "pirate:x:1002:1002:pirate:/tmp:/bin/sh",
-            "majou-sans-uid:x:abc:1001:x:/tmp:/bin/sh",
-            "ligne-garbage",
-        ]);
+        write(
+            &etc,
+            "passwd",
+            &[
+                "capitaine:x:1000:1001:capitaine:/cabines/capitaine:/bin/bash",
+                "pirate:x:1002:1002:pirate:/tmp:/bin/sh",
+                "majou-sans-uid:x:abc:1001:x:/tmp:/bin/sh",
+                "ligne-garbage",
+            ],
+        );
         let c = ctx(&etc);
         let db = passwd_db(&c);
         assert_eq!(db.len(), 2);
@@ -1040,17 +1047,24 @@ mod ctx_file_tests {
     #[test]
     fn group_db_parse_et_members() {
         let etc = tmp_dir("group");
-        write(&etc, "group", &[
-            "equipage_pont:x:1001:capitaine,nexus-02",
-            "securite:x:1002:",
-            "errone:x:not-a-gid:",
-        ]);
+        write(
+            &etc,
+            "group",
+            &[
+                "equipage_pont:x:1001:capitaine,nexus-02",
+                "securite:x:1002:",
+                "errone:x:not-a-gid:",
+            ],
+        );
         let c = ctx(&etc);
         let db = group_db(&c);
         assert_eq!(db.len(), 2);
         assert_eq!(db[0].name, "equipage_pont");
         assert_eq!(db[0].gid, 1001);
-        assert_eq!(db[0].members, vec!["capitaine".to_string(), "nexus-02".to_string()]);
+        assert_eq!(
+            db[0].members,
+            vec!["capitaine".to_string(), "nexus-02".to_string()]
+        );
         assert_eq!(db[1].members.len(), 0);
         let _ = std::fs::remove_dir_all(&etc);
     }
@@ -1058,14 +1072,22 @@ mod ctx_file_tests {
     #[test]
     fn user_et_group_exists_et_user_groups() {
         let etc = tmp_dir("exists");
-        write(&etc, "passwd", &[
-            "capitaine:x:1000:1001:capitaine:/cabines/capitaine:/bin/bash",
-            "pirate:x:1002:1002:pirate:/tmp:/bin/sh",
-        ]);
-        write(&etc, "group", &[
-            "equipage_pont:x:1001:capitaine,pirate",
-            "securite:x:1002:pirate",
-        ]);
+        write(
+            &etc,
+            "passwd",
+            &[
+                "capitaine:x:1000:1001:capitaine:/cabines/capitaine:/bin/bash",
+                "pirate:x:1002:1002:pirate:/tmp:/bin/sh",
+            ],
+        );
+        write(
+            &etc,
+            "group",
+            &[
+                "equipage_pont:x:1001:capitaine,pirate",
+                "securite:x:1002:pirate",
+            ],
+        );
         let c = ctx(&etc);
         assert!(user_exists(&c, "capitaine"));
         assert!(user_exists(&c, "pirate"));
@@ -1083,36 +1105,58 @@ mod ctx_file_tests {
     #[test]
     fn set_shadow_et_has_password() {
         let etc = tmp_dir("shadow");
-        write(&etc, "passwd", &[
-            "capitaine:x:1000:1001:capitaine:/cabines/capitaine:/bin/bash",
-        ]);
+        write(
+            &etc,
+            "passwd",
+            &["capitaine:x:1000:1001:capitaine:/cabines/capitaine:/bin/bash"],
+        );
         let c = ctx(&etc);
         assert!(!has_password(&c, "capitaine"));
         set_shadow(&c, "capitaine", "$gsh$abcd1234");
         assert!(has_password(&c, "capitaine"));
-        assert_eq!(shadow_hash(&c, "capitaine").as_deref(), Some("$gsh$abcd1234"));
+        assert_eq!(
+            shadow_hash(&c, "capitaine").as_deref(),
+            Some("$gsh$abcd1234")
+        );
         // mise à jour in-place (pas de nouvelle ligne)
         set_shadow(&c, "capitaine", "$gsh$efef5678");
         let lines = std::fs::read_to_string(format!("{}/shadow", etc)).unwrap();
-        assert_eq!(lines.lines().filter(|l| l.starts_with("capitaine:")).count(), 1);
-        assert_eq!(shadow_hash(&c, "capitaine").as_deref(), Some("$gsh$efef5678"));
+        assert_eq!(
+            lines
+                .lines()
+                .filter(|l| l.starts_with("capitaine:"))
+                .count(),
+            1
+        );
+        assert_eq!(
+            shadow_hash(&c, "capitaine").as_deref(),
+            Some("$gsh$efef5678")
+        );
         // utilisateurs non-existants : shadow ajouté, sans effet sur passwd_db
         set_shadow(&c, "invité-fantôme", "$gsh$dead5678");
-        assert_eq!(shadow_hash(&c, "invité-fantôme").as_deref(), Some("$gsh$dead5678"));
+        assert_eq!(
+            shadow_hash(&c, "invité-fantôme").as_deref(),
+            Some("$gsh$dead5678")
+        );
         let _ = std::fs::remove_dir_all(&etc);
     }
 
     #[test]
     fn shadow_hash_refuse_marqueur_invalide() {
         let etc = tmp_dir("shadow2");
-        write(&etc, "shadow", &[
-            "capitaine:$pas-un-marqueur:19700:0:99999:7:::",
-        ]);
+        write(
+            &etc,
+            "shadow",
+            &["capitaine:$pas-un-marqueur:19700:0:99999:7:::"],
+        );
         let c = ctx(&etc);
         // la ligne existe mais sans préfixe $gsh$ → pas has_password
         assert!(!has_password(&c, "capitaine"));
         // shadow_hash renvoie la valeur même si elle est invalide
-        assert_eq!(shadow_hash(&c, "capitaine").as_deref(), Some("$pas-un-marqueur"));
+        assert_eq!(
+            shadow_hash(&c, "capitaine").as_deref(),
+            Some("$pas-un-marqueur")
+        );
         let _ = std::fs::remove_dir_all(&etc);
     }
 }

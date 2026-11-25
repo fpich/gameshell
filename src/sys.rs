@@ -259,20 +259,20 @@ mod str_width_tests {
     use super::str_width;
 
     #[test]
-    fn ASCII_width() {
+    fn ascii_width() {
         assert_eq!(str_width(""), 0);
         assert_eq!(str_width("abc"), 3);
         assert_eq!(str_width("abc def"), 7);
     }
 
     #[test]
-    fn emoji_compté_deux_colonnes_et_ZWJ_neutre() {
+    fn emoji_compte_deux_colonnes_et_zwj_neutre() {
         // emoji simple = 2 colonnes
         assert_eq!(str_width("🏆"), 2);
         // séquence ZWJ (famille = emoji + join + emoji) : ne compte que les 2 = 4
         // ménage simple avecZWJ: on teste simplement que ZWJ+emoji ne compte pas le join
         assert_eq!(str_width("a\u{200d}b"), 2); // a + b
-        // emoji avec variation-selector fe0f
+                                                // emoji avec variation-selector fe0f
         assert_eq!(str_width("⭐️"), 2);
     }
 

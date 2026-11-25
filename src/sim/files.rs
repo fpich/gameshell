@@ -552,7 +552,8 @@ mod collect_tests {
     use super::collect;
 
     fn tmp_dir(tag: &str) -> std::path::PathBuf {
-        let root = std::env::temp_dir().join(format!("gsh-ut-collect-{}-{}", std::process::id(), tag));
+        let root =
+            std::env::temp_dir().join(format!("gsh-ut-collect-{}-{}", std::process::id(), tag));
         let _ = std::fs::remove_dir_all(&root);
         std::fs::create_dir_all(&root).unwrap();
         root
@@ -590,7 +591,10 @@ mod collect_tests {
         // contenu des fichiers bien récupéré
         let a = out.iter().find(|(n, _)| n == "root/a.txt").unwrap();
         assert_eq!(a.1.as_deref(), Some(b"aaa".as_slice()));
-        let inner = out.iter().find(|(n, _)| n == "root/zdir/inner.txt").unwrap();
+        let inner = out
+            .iter()
+            .find(|(n, _)| n == "root/zdir/inner.txt")
+            .unwrap();
         assert_eq!(inner.1.as_deref(), Some(b"inner".as_slice()));
         // trié par nom : aucun file orphelin flottant
         assert_eq!(paths.len(), 5);

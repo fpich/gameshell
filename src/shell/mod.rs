@@ -842,7 +842,10 @@ mod tests {
         );
         assert_eq!(rewrite_for_host("cat /mfoo", "/m").unwrap(), "cat /m/mfoo");
         // /usr, /bin, /dev/null passent tel quel
-        assert_eq!(rewrite_for_host("ls /usr/local/bin", "/m").unwrap(), "ls /usr/local/bin");
+        assert_eq!(
+            rewrite_for_host("ls /usr/local/bin", "/m").unwrap(),
+            "ls /usr/local/bin"
+        );
         assert_eq!(rewrite_for_host("ls /bin/ls", "/m").unwrap(), "ls /bin/ls");
         // chemin interne au monde : réécrit (idempotent)
         assert_eq!(rewrite_for_host("ls /m/pont", "/m").unwrap(), "ls /m/pont");
@@ -869,13 +872,28 @@ mod tests {
     #[test]
     fn lexical_normalize_resolves_dots() {
         use std::path::Path;
-        assert_eq!(lexical_normalize(Path::new("/a/b/c")), std::path::PathBuf::from("/a/b/c"));
-        assert_eq!(lexical_normalize(Path::new("/a/b/./c")), std::path::PathBuf::from("/a/b/c"));
-        assert_eq!(lexical_normalize(Path::new("/a/b/../c")), std::path::PathBuf::from("/a/c"));
+        assert_eq!(
+            lexical_normalize(Path::new("/a/b/c")),
+            std::path::PathBuf::from("/a/b/c")
+        );
+        assert_eq!(
+            lexical_normalize(Path::new("/a/b/./c")),
+            std::path::PathBuf::from("/a/b/c")
+        );
+        assert_eq!(
+            lexical_normalize(Path::new("/a/b/../c")),
+            std::path::PathBuf::from("/a/c")
+        );
         // ParentDir clampé au root physique : jamais de segments au-dessus de /
-        assert_eq!(lexical_normalize(Path::new("/../../etc/passwd")), std::path::PathBuf::from("/etc/passwd"));
+        assert_eq!(
+            lexical_normalize(Path::new("/../../etc/passwd")),
+            std::path::PathBuf::from("/etc/passwd")
+        );
         // Chemin relatif : on garde le segment du début seulement
-        assert_eq!(lexical_normalize(Path::new("a/b/../c")), std::path::PathBuf::from("a/c"));
+        assert_eq!(
+            lexical_normalize(Path::new("a/b/../c")),
+            std::path::PathBuf::from("a/c")
+        );
     }
     #[test]
     fn camp_name_et_profil() {

@@ -1158,10 +1158,7 @@ mod code_tests {
 
     #[test]
     fn sim_line_match_separe_et_contient() {
-        assert!(sim_line_match(
-            &["cat f && ls".to_string()],
-            "cat f && ls"
-        ));
+        assert!(sim_line_match(&["cat f && ls".to_string()], "cat f && ls"));
         // toutes les parties doivent être sur la MÊME ligne
         assert!(sim_line_match(
             &["ps aux && grep root".to_string()],
@@ -1171,14 +1168,8 @@ mod code_tests {
             &["ps aux".to_string(), "grep root".to_string()],
             "ps aux && grep root"
         ));
-        assert!(sim_line_match(
-            &["uname -a".to_string()],
-            "uname"
-        ));
-        assert!(!sim_line_match(
-            &["pwd".to_string()],
-            "uname -a"
-        ));
+        assert!(sim_line_match(&["uname -a".to_string()], "uname"));
+        assert!(!sim_line_match(&["pwd".to_string()], "uname -a"));
         assert!(!sim_line_match(&[], "echo"));
     }
 }

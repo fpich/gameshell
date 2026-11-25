@@ -787,6 +787,9 @@ mod safe_state_name_hardening_tests {
         // les noms normaux restent acceptés
         assert_eq!(super::safe_state_name("journal"), "journal");
         assert_eq!(super::safe_state_name("a.b"), "a.b");
-        assert_eq!(super::safe_state_name("packages.installed"), "packages.installed");
+        assert_eq!(
+            super::safe_state_name("packages.installed"),
+            "packages.installed"
+        );
     }
 }

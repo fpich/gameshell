@@ -708,7 +708,8 @@ mod tests {
             (">".to_string(), "/soutes/f".to_string())
         );
         assert_eq!(p.cmds[0].redirs[1].0, "2>");
-        assert!(!p.is_simple());        assert!(parse("pwd").is_simple());
+        assert!(!p.is_simple());
+        assert!(parse("pwd").is_simple());
     }
 
     #[test]
@@ -802,8 +803,16 @@ mod tests {
         assert!(command_matches("|", &rc(&["ps aux | grep ssh"]), &history));
         // multi-mots: apt update exige la sous-commande
         let apt_rc = rc(&["sudo apt update"]);
-        assert!(command_matches("apt update", &apt_rc, &h(&["sudo apt update"])));
-        assert!(!command_matches("apt install", &apt_rc, &h(&["sudo apt update"])));
+        assert!(command_matches(
+            "apt update",
+            &apt_rc,
+            &h(&["sudo apt update"])
+        ));
+        assert!(!command_matches(
+            "apt install",
+            &apt_rc,
+            &h(&["sudo apt update"])
+        ));
         // la commande effective derrière sudo doit correspondre même si l'historique cite "sudo"
         assert!(command_matches(
             "ls",
@@ -852,30 +861,18 @@ mod tests {
     #[test]
     fn file_read_and_redirections() {
         // file_read: ARGUMENT présent chez le lecteur
-        assert!(file_read_matches(
-            "notes.txt",
-            &h(&["cat ~/notes.txt"])
-        ));
+        assert!(file_read_matches("notes.txt", &h(&["cat ~/notes.txt"])));
         // base_of: cible passée par redirection <
-        assert!(file_read_matches(
-            "notes.txt",
-            &h(&["less < notes.txt"])
-        ));
+        assert!(file_read_matches("notes.txt", &h(&["less < notes.txt"])));
         // même résultat pour une lecture via redirection et le nom du fichier
         assert!(file_read_matches(
             "rapport.txt",
             &h(&["grep X rapport.txt"])
         ));
         // argument non-lecteur ne vaut rien (cat est bon)
-        assert!(!file_read_matches(
-            "rapport.txt",
-            &h(&["echo rapport.txt"])
-        ));
+        assert!(!file_read_matches("rapport.txt", &h(&["echo rapport.txt"])));
         // args avec guillemets
-        assert!(file_read_matches(
-            "notes.txt",
-            &h(&["cat \"notes.txt\""])
-        ));
+        assert!(file_read_matches("notes.txt", &h(&["cat \"notes.txt\""])));
     }
 
     #[test]
@@ -903,11 +900,15 @@ mod tests {
         // flags_of_args: chiffre-à-la-fin devient valeur (head -n 5 / top -bn1)
         let a7 = args(&["-n", "5"]);
         let have = flags_of_args(&a7);
-        assert!(have.iter().any(|(c, v)| *c == 'n' && v.as_deref() == Some("5")));
+        assert!(have
+            .iter()
+            .any(|(c, v)| *c == 'n' && v.as_deref() == Some("5")));
         let a8 = args(&["-bn1"]);
         let have = flags_of_args(&a8);
         assert!(have.iter().any(|(c, _v)| *c == 'b'));
-        assert!(have.iter().any(|(c, v)| *c == 'n' && v.as_deref() == Some("1")));
+        assert!(have
+            .iter()
+            .any(|(c, v)| *c == 'n' && v.as_deref() == Some("1")));
         // mot propre non-option: inconnu
         let a9 = args(&["file"]);
         let have = flags_of_args(&a9);

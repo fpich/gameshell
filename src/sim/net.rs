@@ -895,7 +895,10 @@ mod tests {
     fn resolve_noms_et_adresses_connus() {
         let c = ctx(1);
         let (n, ip, up, ttl) = resolve(&c, "localhost").unwrap();
-        assert_eq!((n.as_str(), ip.as_str(), up, ttl), ("localhost", "127.0.0.1", true, 64));
+        assert_eq!(
+            (n.as_str(), ip.as_str(), up, ttl),
+            ("localhost", "127.0.0.1", true, 64)
+        );
         let (n, ip, ..) = resolve(&c, "nexus-02").unwrap();
         assert_eq!((n.as_str(), ip.as_str()), ("nexus-02", "10.0.0.2"));
         let (n, ip, ..) = resolve(&c, "10.0.0.66").unwrap();
@@ -959,14 +962,33 @@ mod hosts_tests {
         for camp in [1u8, 2] {
             let hs = hosts(&ctx(camp));
             let local = hs.iter().find(|h| h.ip == Profile::of(camp).ip).unwrap();
-            assert_eq!(local.ports.len(), 1, "campagne {}: un seul port attendu", camp);
-            assert_eq!(hs.iter().find(|h| h.name == "localhost").unwrap().ports.len(), 1);
+            assert_eq!(
+                local.ports.len(),
+                1,
+                "campagne {}: un seul port attendu",
+                camp
+            );
+            assert_eq!(
+                hs.iter()
+                    .find(|h| h.name == "localhost")
+                    .unwrap()
+                    .ports
+                    .len(),
+                1
+            );
         }
         // campagne 3: 3 ports (ssh, http, mysql) sur localhost et hôte local
         let hs = hosts(&ctx(3));
         let local = hs.iter().find(|h| h.ip == Profile::of(3).ip).unwrap();
         assert_eq!(local.ports.len(), 3);
-        assert_eq!(hs.iter().find(|h| h.name == "localhost").unwrap().ports.len(), 3);
+        assert_eq!(
+            hs.iter()
+                .find(|h| h.name == "localhost")
+                .unwrap()
+                .ports
+                .len(),
+            3
+        );
         // les autres serveurs sont stables
         assert!(hs.iter().any(|h| h.name == "passerelle"));
         assert!(hs.iter().any(|h| h.name == "nexus-02"));
