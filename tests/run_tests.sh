@@ -59,7 +59,7 @@ run_game() {
 }
 # Session sans remise à zéro (reprise de sauvegarde)
 run_keep() {
-    LAST_OUT=$(printf "$1" | timeout 30 bash gameshell.sh 2>&1 | strip)
+    LAST_OUT=$(printf '%b' "$1" | timeout 30 bash gameshell.sh 2>&1 | strip)
     echo "$LAST_OUT" > "$LOGDIR/last.out"
     echo "$LAST_OUT"
 }
