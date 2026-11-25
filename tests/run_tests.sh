@@ -28,7 +28,8 @@ ko()   {
 }
 info() { echo -e "${YELLOW}ℹ️  $1${NC}"; }
 
-export GAMESHELL_HOME="$(mktemp -d "${TMPDIR:-/tmp}/gsh_tests.XXXXXX")"
+GAMESHELL_HOME="$(mktemp -d "${TMPDIR:-/tmp}/gsh_tests.XXXXXX")"
+export GAMESHELL_HOME
 trap 'rm -rf "$GAMESHELL_HOME"' EXIT
 LOGDIR="$GAMESHELL_HOME.logs"
 mkdir -p "$LOGDIR"
