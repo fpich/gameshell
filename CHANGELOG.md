@@ -40,7 +40,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/) — exemption : vers
 - `cargo fmt` global (26 fichiers) — formatage aligné sur la CI.
 - `SUIVI_MISSIONS.md` découpé en `docs/suivi/campagne{1,2,3}/ch<NN>[-reecrit].md`
   (campagne 1 : débutant + réécriture séparés).
-- Docs : figures de test mises à jour (57/57 suite, 12/12 cargo), structure documentaire réécrite.
+- Docs : figures de test mises à jour (57/57 suite, 18/18 cargo), structure documentaire réécrite.
 - `README.md` : section Structure du dépôt mise à jour + badge CI + note de licence.
 
 ### Supprimé
