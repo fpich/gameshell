@@ -180,7 +180,8 @@ gameshell/
 │   └── playthrough_all.sh # playthrough complet en AUTO (bac à sable, non destructif)
 ├── docs/
 │   ├── suivi/             # relecture des 300 missions (README + campagne1/2/3)
-│   └── historique/        # RETEX.md + CORRECTIONS.md (records figés)
+│   ├── historique/        # RETEX.md + CORRECTIONS.md (records figés)
+│   └── release.md         # procédure de release (tag -> build + GitHub release)
 └── src/
     ├── main.rs            # point d'entrée + menu campagnes + bannières + aiguillage multi-appel
     ├── sys.rs             # FFI libc (termios, signaux, largeur d'affichage)

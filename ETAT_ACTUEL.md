@@ -80,7 +80,8 @@
 ├── tests/playthrough_all.sh # playthrough complet en AUTO (dossier sandbox, ne détruit jamais ~/.gameshell)
 ├── docs/
 │   ├── suivi/               # relecture des 300 missions (campagne1/2/3, README d'index)
-│   └── historique/          # RETEX.md + CORRECTIONS.md (records historiques, figés)
+│   ├── historique/          # RETEX.md + CORRECTIONS.md (records historiques, figés)
+│   └── release.md           # procédure de release (tag -> archive + GitHub release)
 └── src/
     ├── main.rs              # entrée, menu campagnes, bannières
     ├── sys.rs               # FFI libc (termios, signaux)
