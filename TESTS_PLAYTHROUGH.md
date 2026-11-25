@@ -13,7 +13,7 @@
 | Test 56 | bout en bout: l'archive s'installe dans un HOME vierge (bin, VERSION, 3 mondes, lancement) |
 | Test 57 | mode dégradé sans bwrap: démarrage signalé, garde-fou cd, prompt |
 
-## Conformité contenu: `cargo test --release` (18/18)
+## Conformité contenu: `cargo test --release` (103/103)
 300 missions (3 campagnes, 20/acte), 20+ lignes de contexte (C3), double définition 🚀💻 (C7),
 skill = commande de la mission (A15), checks atteignables (A4), Bloom FR (C9), PNJ interdits (C13).
 Ajouté en révision: scan sans mojibake (`stories_sans_mojibake`), tests archive/fresh-install/mode-dégradé (55–57).
