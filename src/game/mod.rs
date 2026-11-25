@@ -4,7 +4,7 @@
 //! - phase 2 (code) sans bloquer le shell: `gsh code <CODE>`
 //! - pas de gsh hint (règle A9), gsh check ne révèle jamais rien (règle A8)
 
-use crate::missions::{load_all_missions, Mission, Skill};
+use crate::missions::{load_all_missions, Mission, MissionCheck, Skill};
 use crate::shell;
 use colored::Colorize;
 use std::io::{self, Write};
@@ -126,6 +126,27 @@ fn badges_to_unlock(known: &dyn Fn(&str) -> bool) -> Vec<(&'static str, &'static
         new_badges.push(("📦 Logisticien", "archives et stockage"));
     }
     new_badges
+}
+
+/// Cibles « critiques » d'une mission (fichiers/types de checks qui déclenchent
+/// l'avertissement destructive avant `rm`) — pure pour tous les tests.
+fn critical_targets(checks: &[MissionCheck]) -> Vec<String> {
+    checks
+        .iter()
+        .filter(|ck| {
+            matches!(
+                ck.check_type.as_str(),
+                "file_exists"
+                    | "file_read"
+                    | "file_size"
+                    | "file_owner"
+                    | "file_contains_count"
+                    | "config_contains"
+                    | "permission"
+            )
+        })
+        .map(|ck| ck.target.clone())
+        .collect()
 }
 
 impl Game {
@@ -364,23 +385,7 @@ impl Game {
             Some(m) => m,
             None => return false,
         };
-        let critical: Vec<String> = m
-            .checks
-            .iter()
-            .filter(|ck| {
-                matches!(
-                    ck.check_type.as_str(),
-                    "file_exists"
-                        | "file_read"
-                        | "file_size"
-                        | "file_owner"
-                        | "file_contains_count"
-                        | "config_contains"
-                        | "permission"
-                )
-            })
-            .map(|ck| ck.target.clone())
-            .collect();
+        let critical = critical_targets(&m.checks);
         if critical.is_empty() {
             return false;
         }
@@ -1304,5 +1309,45 @@ mod badges_tests {
     fn commande_inconnue_ne_donne_rien() {
         let b = badges_to_unlock(&known_contains(&["foo"]));
         assert!(b.is_empty());
+    }
+}
+
+#[cfg(test)]
+mod critical_targets_tests {
+    use super::critical_targets;
+    use crate::missions::MissionCheck;
+
+    fn ck(check_type: &str, target: &str) -> MissionCheck {
+        MissionCheck {
+            check_type: check_type.into(),
+            target: target.into(),
+            expected: None,
+        }
+    }
+
+    #[test]
+    fn filtre_sur_les_types_critiques() {
+        let checks = vec![
+            ck("file_exists", "/pont/notes.txt"),
+            ck("command_executed", "ls"),
+            ck("file_read", "/archives/log.txt"),
+            ck("permission", "/securite/vault"),
+            ck("sim_event", "unknown"),
+        ];
+        let t = critical_targets(&checks);
+        assert_eq!(
+            t,
+            vec!["/pont/notes.txt", "/archives/log.txt", "/securite/vault"]
+        );
+    }
+
+    #[test]
+    fn liste_vide_sans_checks_critiques() {
+        let checks = vec![
+            ck("command_executed", "ls"),
+            ck("file_size", "/archives/big"),
+        ];
+        assert_eq!(critical_targets(&checks), vec!["/archives/big"]);
+        assert!(critical_targets(&[]).is_empty());
     }
 }
