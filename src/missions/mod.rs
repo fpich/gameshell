@@ -1,4 +1,17 @@
 //! Système de missions - Agrège tous les chapitres
+
+/// Collecteur partagé des 20 chapitres: une liste de chemins vers les modules chN::missions()
+/// ramène la liste plate des 100 missions. Avant, ce patron était écrit en dur à trois endroits
+/// (espace/japon/reseau) avec 20 lignes chacune; il reste lisible sans divergence possible.
+#[macro_export]
+macro_rules! collect_chapters {
+    ($prefix:ident , $($seg:ident),* $(,)?) => {{
+        let mut missions = Vec::new();
+        $(missions.extend($crate::missions::$prefix::$seg::missions());)*
+        missions
+    }};
+}
+
 pub mod japon;
 pub mod reseau;
 pub mod types;
@@ -40,28 +53,10 @@ pub fn load_all_missions() -> Vec<Mission> {
         3 => return reseau::missions(),
         _ => {}
     }
-    let mut missions = Vec::new();
-    missions.extend(chapters::ch1::missions());
-    missions.extend(chapters::ch2::missions());
-    missions.extend(chapters::ch3::missions());
-    missions.extend(chapters::ch4::missions());
-    missions.extend(chapters::ch5::missions());
-    missions.extend(chapters::ch6::missions());
-    missions.extend(chapters::ch7::missions());
-    missions.extend(chapters::ch8::missions());
-    missions.extend(chapters::ch9::missions());
-    missions.extend(chapters::ch10::missions());
-    missions.extend(chapters::ch11::missions());
-    missions.extend(chapters::ch12::missions());
-    missions.extend(chapters::ch13::missions());
-    missions.extend(chapters::ch14::missions());
-    missions.extend(chapters::ch15::missions());
-    missions.extend(chapters::ch16::missions());
-    missions.extend(chapters::ch17::missions());
-    missions.extend(chapters::ch18::missions());
-    missions.extend(chapters::ch19::missions());
-    missions.extend(chapters::ch20::missions());
-    missions
+    crate::collect_chapters!(
+        chapters, ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10, ch11, ch12, ch13, ch14, ch15,
+        ch16, ch17, ch18, ch19, ch20,
+    )
 }
 
 #[cfg(test)]

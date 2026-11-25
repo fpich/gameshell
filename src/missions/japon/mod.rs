@@ -23,26 +23,8 @@ pub mod ch8;
 pub mod ch9;
 
 pub fn missions() -> Vec<Mission> {
-    let mut missions = Vec::new();
-    missions.extend(ch1::missions());
-    missions.extend(ch2::missions());
-    missions.extend(ch3::missions());
-    missions.extend(ch4::missions());
-    missions.extend(ch5::missions());
-    missions.extend(ch6::missions());
-    missions.extend(ch7::missions());
-    missions.extend(ch8::missions());
-    missions.extend(ch9::missions());
-    missions.extend(ch10::missions());
-    missions.extend(ch11::missions());
-    missions.extend(ch12::missions());
-    missions.extend(ch13::missions());
-    missions.extend(ch14::missions());
-    missions.extend(ch15::missions());
-    missions.extend(ch16::missions());
-    missions.extend(ch17::missions());
-    missions.extend(ch18::missions());
-    missions.extend(ch19::missions());
-    missions.extend(ch20::missions());
-    missions
+    crate::collect_chapters!(
+        japon, ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10, ch11, ch12, ch13, ch14, ch15,
+        ch16, ch17, ch18, ch19, ch20,
+    )
 }
