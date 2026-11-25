@@ -255,6 +255,56 @@ pub fn str_width(s: &str) -> usize {
 }
 
 #[cfg(test)]
+mod termios_tests {
+    use super::{
+        noecho_from, raw_from, Termios, ECHO, ICANON, ICRNL, IEXTEN, ISIG, IXON, VMIN, VTIME,
+    };
+
+    fn base() -> Termios {
+        Termios {
+            c_iflag: ICRNL | IXON,
+            c_oflag: 0,
+            c_cflag: 0,
+            c_lflag: ICANON | ECHO | ISIG | IEXTEN,
+            c_line: 0,
+            c_cc: [0; 32],
+            c_ispeed: 0,
+            c_ospeed: 0,
+        }
+    }
+
+    #[test]
+    fn raw_mode_clears_all_flags_and_preserves_oflag() {
+        let t = raw_from(&base(), 0);
+        assert_eq!(t.c_lflag & (ICANON | ECHO | ISIG | IEXTEN), 0);
+        assert_eq!(t.c_iflag & (ICRNL | IXON), 0);
+        // OPOST reste actif
+
+        assert_eq!(t.c_oflag, base().c_oflag);
+        // timeout 0: lecture bloquante
+        assert_eq!(t.c_cc[VMIN], 1);
+        assert_eq!(t.c_cc[VTIME], 0);
+    }
+
+    #[test]
+    fn raw_mode_timeout_mode() {
+        let t = raw_from(&base(), 3);
+        assert_eq!(t.c_cc[VMIN], 0);
+        assert_eq!(t.c_cc[VTIME], 3);
+    }
+
+    #[test]
+    fn noecho_clears_only_echo_and_keeps_icanc_flags() {
+        let t = noecho_from(&base());
+        assert_eq!(t.c_lflag & ECHO, 0);
+        assert_eq!(t.c_lflag & ICANON, ICANON);
+        assert_eq!(t.c_lflag & ISIG, ISIG);
+        // c_iflag inchangé
+        assert_eq!(t.c_iflag, base().c_iflag);
+    }
+}
+
+#[cfg(test)]
 mod str_width_tests {
     use super::str_width;
 
