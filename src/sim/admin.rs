@@ -1343,3 +1343,23 @@ mod admin_tests {
         assert_eq!(from, "");
     }
 }
+
+#[cfg(test)]
+mod catalog_tests {
+    use super::pkg;
+
+    #[test]
+    fn pkg_retrouve_catalogue_et_refuse_hors_catalogue() {
+        let nginx = pkg("nginx").unwrap();
+        assert_eq!(nginx.0, "nginx");
+        assert_eq!(nginx.1, "1.26.0-3");
+        assert!(!nginx.2.is_empty());
+        assert!(pkg("nginx-plus").is_none());
+        assert!(pkg("").is_none());
+        assert!(pkg("nginx2").is_none());
+        // entrées connues exactes (pas de correspondance partielle)
+        assert!(pkg("ufw").is_some());
+        assert!(pkg("sudo").is_some());
+        assert!(pkg("apt-get").is_none()); // apt-get n'est pas un paquet du catalogue
+    }
+}

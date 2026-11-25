@@ -733,3 +733,40 @@ mod hash_pw_tests {
         assert_eq!(hash_pw(""), hash_pw(""));
     }
 }
+
+#[cfg(test)]
+mod profile_and_is_sim_tests {
+    use super::{is_sim, Profile};
+
+    #[test]
+    fn is_sim_noms_couverts_et_exclus() {
+        assert!(is_sim("sudo"));
+        assert!(is_sim("ls"));
+        assert!(is_sim("curl"));
+        assert!(is_sim("useradd"));
+        assert!(is_sim("fail2ban-client"));
+        assert!(!is_sim("ls1"));
+        assert!(!is_sim("sudoers"));
+        assert!(!is_sim("echo"));
+        assert!(!is_sim(""));
+    }
+
+    #[test]
+    fn profile_par_campagne_et_repli() {
+        let p1 = Profile::of(1);
+        assert_eq!(p1.user, "capitaine");
+        assert_eq!(p1.host, "orion7");
+        assert_eq!(p1.homebase, "/cabines");
+        assert_eq!(p1.ip, "10.0.0.7");
+        let p2 = Profile::of(2);
+        assert_eq!(p2.user, "seigneur");
+        assert_eq!(p2.domain, "shiro.clan");
+        let p3 = Profile::of(3);
+        assert_eq!(p3.user, "netrunner");
+        assert_eq!(p3.domain, "neon9.local");
+        // campagne inconnue → repli sur l'espace
+        let unknown = Profile::of(99);
+        assert_eq!(unknown.host, "orion7");
+        assert_eq!(unknown.user, "capitaine");
+    }
+}

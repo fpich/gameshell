@@ -442,3 +442,48 @@ mod matches_tests {
         assert!(!matches("^sshd$", "xxsshd"));
     }
 }
+
+#[cfg(test)]
+mod name_vsz_tests {
+    use super::{vsz, Proc};
+
+    fn proc(cmd: &str, mem: &str) -> Proc {
+        Proc {
+            pid: 1,
+            user: "root".into(),
+            cpu: "1.0".into(),
+            mem: mem.into(),
+            stat: "R".into(),
+            start: "2024-01-01".into(),
+            cmd: cmd.into(),
+        }
+    }
+
+    #[test]
+    fn name_extrait_le_programme() {
+        assert_eq!(proc("sshd: /usr/sbin/sshd", "1.0").name(), "sshd");
+        assert_eq!(proc("-bash", "1.0").name(), "bash");
+        assert_eq!(proc("/usr/bin/curl -f https://x", "1.0").name(), "curl");
+        assert_eq!(proc("nginx: master process", "1.0").name(), "nginx");
+        // commande vide → nom vide, jamais de panic
+        assert_eq!(proc("", "1.0").name(), "");
+    }
+
+    #[test]
+    fn vsz_est_deterministe_et_accepte_la_virgule() {
+        let (vsz1, rss1) = vsz(&proc("p", "1.5"));
+        let (vsz2, rss2) = vsz(&proc("p", "1.5"));
+        assert_eq!((vsz1, rss1), (vsz2, rss2));
+        // convention VSZ > RSS (appelé v, r dans ps)
+        assert!(vsz1 > rss1);
+        // délimiteur décimal français toléré
+        let (vsz3, rss3) = vsz(&proc("p", "1,5"));
+        assert_eq!((vsz3, rss3), (vsz1, rss1));
+        // valeur illisible → repli déterministe non nul
+        let (vsz4, rss4) = vsz(&proc("p", "n/a"));
+        assert!(vsz4 > 0 && rss4 > 0);
+        // plus de mémoire → plus de VSZ
+        let (big_vsz, _) = vsz(&proc("p", "9.0"));
+        assert!(big_vsz > vsz1);
+    }
+}

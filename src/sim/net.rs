@@ -872,3 +872,66 @@ pub fn ssh(c: &Ctx, a: &[String]) -> i32 {
     println!("logout\nConnection to {} closed.", host);
     0
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{resolve, Ctx};
+
+    fn ctx(camp: u8) -> Ctx {
+        use super::Profile;
+        let p = Profile::of(camp);
+        Ctx {
+            root: "/".into(),
+            etc: "/etc".into(),
+            camp,
+            user: p.user.into(),
+            euid: p.user.into(),
+            host: p.host.into(),
+            homebase: p.homebase.into(),
+        }
+    }
+
+    #[test]
+    fn resolve_noms_et_adresses_connus() {
+        let c = ctx(1);
+        let (n, ip, up, ttl) = resolve(&c, "localhost").unwrap();
+        assert_eq!((n.as_str(), ip.as_str(), up, ttl), ("localhost", "127.0.0.1", true, 64));
+        let (n, ip, ..) = resolve(&c, "nexus-02").unwrap();
+        assert_eq!((n.as_str(), ip.as_str()), ("nexus-02", "10.0.0.2"));
+        let (n, ip, ..) = resolve(&c, "10.0.0.66").unwrap();
+        assert_eq!((n.as_str(), ip.as_str()), ("corbeau-noir", "10.0.0.66"));
+        // le nom propre des camnaines locales est résolu par nom
+        let (n, ip, ..) = resolve(&c, "orion7").unwrap();
+        assert_eq!((n.as_str(), ip.as_str()), ("orion7", "10.0.0.7"));
+    }
+
+    #[test]
+    fn resolve_suffixe_domaine_et_at_prefixe() {
+        let c = ctx(1);
+        // suffixe de domaine : le nom court est retenu
+        let (n, ip, ..) = resolve(&c, "passerelle.orion7.flotte").unwrap();
+        assert_eq!((n.as_str(), ip.as_str()), ("passerelle", "10.0.0.1"));
+        // préfixe utilisateur@ (ssh) : le host compte
+        let (n, ip, ..) = resolve(&c, "netrunner@passerelle.orion7.flotte").unwrap();
+        assert_eq!((n.as_str(), ip.as_str()), ("passerelle", "10.0.0.1"));
+        // point final : normalisé
+        let (n, ..) = resolve(&c, "passerelle.").unwrap();
+        assert_eq!(n, "passerelle");
+    }
+
+    #[test]
+    fn resolve_alias_et_host_inconnu() {
+        let c = ctx(1);
+        // alias « gateway » → passerelle
+        let (_, ip, up, ..) = resolve(&c, "gateway").unwrap();
+        assert_eq!((ip.as_str(), up), ("10.0.0.1", true));
+        // hôte privé connu mais inconnu du jeu → down (host 10.0.0.x)
+        let (n, ..) = resolve(&c, "10.0.0.200").unwrap();
+        assert_eq!(n, "10.0.0.200");
+        // IP invalide
+        assert!(resolve(&c, "10.0.0.300").is_none());
+        // absent complet
+        assert!(resolve(&c, "inconnu.com").is_none());
+        assert!(resolve(&c, "").is_none());
+    }
+}

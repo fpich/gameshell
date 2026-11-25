@@ -841,6 +841,25 @@ mod tests {
             "cat /usr/bin/ls"
         );
         assert_eq!(rewrite_for_host("cat /mfoo", "/m").unwrap(), "cat /m/mfoo");
+        // /usr, /bin, /dev/null passent tel quel
+        assert_eq!(rewrite_for_host("ls /usr/local/bin", "/m").unwrap(), "ls /usr/local/bin");
+        assert_eq!(rewrite_for_host("ls /bin/ls", "/m").unwrap(), "ls /bin/ls");
+        // chemin interne au monde : réécrit (idempotent)
+        assert_eq!(rewrite_for_host("ls /m/pont", "/m").unwrap(), "ls /m/pont");
+        // chemin avec titre en guillemets + traversal interne
+        assert_eq!(
+            rewrite_for_host("ls \"/pont/../armes/file.txt\"", "/m").unwrap(),
+            "ls \"/m/armes/file.txt\""
+        );
+        // ligne avec plusieurs chemins dessynchronisés
+        assert_eq!(
+            rewrite_for_host("cp /pont/a /soutes/b", "/m").unwrap(),
+            "cp /m/pont/a /m/soutes/b"
+        );
+        assert_eq!(
+            rewrite_for_host("cd /pont && ls /archives", "/m").unwrap(),
+            "cd /m/pont && ls /m/archives"
+        );
     }
     #[test]
     fn slug() {
