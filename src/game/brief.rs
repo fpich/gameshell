@@ -4,8 +4,13 @@ use crate::shell;
 /// Définition double d'une commande: (technique Linux, analogie role play)
 /// RÈGLE C7: roleplay d'abord, technique ensuite. Analogie selon la campagne (C14).
 pub fn cmd_brief(cmd: &str) -> (&'static str, &'static str) {
+    brief_for_campaign(cmd, shell::campaign_id())
+}
+
+/// Cœur pur de `cmd_brief`: (technique, analogie roleplay) selon la campagne.
+fn brief_for_campaign(cmd: &str, campaign: u8) -> (&'static str, &'static str) {
     let (tech, rp) = cmd_brief_raw(cmd);
-    match shell::campaign_id() {
+    match campaign {
         2 => {
             if let Some(jp) = cmd_brief_jp(cmd) {
                 return (tech, jp);
@@ -226,5 +231,62 @@ fn cmd_brief_raw(cmd: &str) -> (&'static str, &'static str) {
         "dig" => ("résolution DNS: IP d'un nom de domaine (+short)", "comme demander à l'annuaire galactique l'adresse d'un vaisseau"),
         "nano" => ("éditeur de texte terminal", "comme rédiger un rapport directement sur la console de bord"),
         _ => ("commande shell standard", "action dans le vaisseau Orion-7"),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::brief_for_campaign;
+
+    #[test]
+    fn campagne_1_garde_les_analogies_vaisseau() {
+        let (tech, rp) = brief_for_campaign("pwd", 1);
+        assert!(tech.contains("répertoire courant"));
+        assert!(rp.contains("compartiment"));
+    }
+
+    #[test]
+    fn campagne_2_reprend_les_analogies_japon() {
+        let (_, rp) = brief_for_campaign("pwd", 2);
+        assert!(rp.contains("château"), "analogie japon: {rp}");
+        let (_, rp_ls) = brief_for_campaign("ls -la", 2);
+        assert!(rp_ls.contains("salle"), "analogie japon (ls): {rp_ls}");
+    }
+
+    #[test]
+    fn campagne_3_reprend_les_analogies_reseau() {
+        let (_, rp) = brief_for_campaign("pwd", 3);
+        assert!(
+            rp.contains("NOC") || rp.contains("réseau") || rp.contains("serveurs"),
+            "analogie réseau: {rp}"
+        );
+    }
+
+    #[test]
+    fn la_base_est_extractee_des_arguments() {
+        // « sudo ls -la » → cible « sudo » (pas « ls »), mais « ls -la » → « ls »
+        let (_, rp) = brief_for_campaign("ls -la /pont", 1);
+        assert!(
+            rp.contains("compartiment"),
+            "analogie ls avec options: {rp}"
+        );
+        let (_, rp_pwd) = brief_for_campaign("pwd", 1);
+        assert!(rp_pwd.contains("compartiment"));
+    }
+
+    #[test]
+    fn commande_inconnue_retombe_sur_le_fallback() {
+        let (tech, rp) = brief_for_campaign("commande-inconnue-xyz", 1);
+        assert!(tech.contains("commande shell"));
+        assert!(rp.contains("Orion-7"));
+        let (tech, _rp) = brief_for_campaign("zzz", 3);
+        assert!(tech.contains("commande shell"));
+    }
+
+    #[test]
+    fn chaine_vide_ne_panique_pas() {
+        let (tech, rp) = brief_for_campaign("", 1);
+        assert!(tech.contains("commande shell"));
+        assert!(!rp.is_empty());
     }
 }
