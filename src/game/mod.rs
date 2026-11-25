@@ -55,6 +55,18 @@ fn looks_like_code(w: &str) -> bool {
         && w.chars().any(|c| c.is_ascii_alphanumeric())
 }
 
+/// Niveau atteint après `xp` XP (chaque niveau exige `level * 100` XP — P1.14).
+/// Fonction pure pour tous les tests.
+/// Niveau atteint après `xp` XP cumulé (règle P1.14: `level * 100` XP par niveau,
+/// plusieurs niveaux possibles d'un coup). Fonction pure pour tous les tests.
+fn levels_up_to(xp: u64, level: u32) -> u32 {
+    let mut l = level;
+    while xp >= l as u64 * 100 && l < u32::MAX {
+        l += 1;
+    }
+    l
+}
+
 impl Game {
     pub fn new(player_name: &str, test_mode: bool) -> Self {
         let campaign = shell::campaign_id();
@@ -509,10 +521,12 @@ impl Game {
         }
         self.xp += m.xp_reward;
         // plusieurs niveaux possibles d'un coup (P1.14)
-        while self.xp >= self.level as u64 * 100 {
-            self.level += 1;
-            println!("  🎉 Niveau {}!", self.level);
+        let old_level = self.level;
+        let new_level = levels_up_to(self.xp, old_level);
+        for l in (old_level + 1)..=new_level {
+            println!("  🎉 Niveau {}!", l);
         }
+        self.level = new_level;
         if !self.completed.contains(&m.id) {
             self.completed.push(m.id.clone());
         }
@@ -1176,5 +1190,40 @@ mod code_tests {
         assert!(sim_line_match(&["uname -a".to_string()], "uname"));
         assert!(!sim_line_match(&["pwd".to_string()], "uname -a"));
         assert!(!sim_line_match(&[], "echo"));
+    }
+}
+
+#[cfg(test)]
+mod levels_up_to_tests {
+    use super::levels_up_to;
+
+    #[test]
+    fn sans_xp_pas_de_niveau() {
+        assert_eq!(levels_up_to(0, 1), 1);
+        assert_eq!(levels_up_to(99, 1), 1);
+        assert_eq!(levels_up_to(100, 1), 2);
+    }
+
+    #[test]
+    fn multi_niveaux_un_coup() {
+        assert_eq!(levels_up_to(250, 1), 3);
+        assert_eq!(levels_up_to(1000, 1), 11);
+        assert_eq!(levels_up_to(9999, 1), 100);
+        assert_eq!(levels_up_to(10500, 5), 106);
+    }
+
+    #[test]
+    fn niveau_initial_eleve() {
+        assert_eq!(levels_up_to(0, 5), 5);
+        assert_eq!(levels_up_to(500, 5), 6);
+        assert_eq!(levels_up_to(1, 3), 3);
+        assert_eq!(levels_up_to(300, 3), 4);
+    }
+
+    #[test]
+    fn garde_anti_depassement_u32() {
+        let max = levels_up_to(u64::MAX, u32::MAX - 1);
+        assert_eq!(max, u32::MAX);
+        assert_eq!(levels_up_to(u64::MAX, u32::MAX), u32::MAX);
     }
 }
