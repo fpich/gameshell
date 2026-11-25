@@ -847,4 +847,35 @@ mod tests {
         assert_eq!(player_slug("Eve \"le pirate\""), "eve__le_pirate");
         assert_eq!(player_slug("  "), "joueur");
     }
+    #[test]
+    fn lexical_normalize_resolves_dots() {
+        use std::path::Path;
+        assert_eq!(lexical_normalize(Path::new("/a/b/c")), std::path::PathBuf::from("/a/b/c"));
+        assert_eq!(lexical_normalize(Path::new("/a/b/./c")), std::path::PathBuf::from("/a/b/c"));
+        assert_eq!(lexical_normalize(Path::new("/a/b/../c")), std::path::PathBuf::from("/a/c"));
+        // ParentDir clampé au root physique : jamais de segments au-dessus de /
+        assert_eq!(lexical_normalize(Path::new("/../../etc/passwd")), std::path::PathBuf::from("/etc/passwd"));
+        // Chemin relatif : on garde le segment du début seulement
+        assert_eq!(lexical_normalize(Path::new("a/b/../c")), std::path::PathBuf::from("a/c"));
+    }
+    #[test]
+    fn camp_name_et_profil() {
+        assert_eq!(camp_name(1), "espace");
+        assert_eq!(camp_name(2), "japon");
+        assert_eq!(camp_name(3), "reseau");
+        assert_eq!(camp_name(99), "espace");
+        assert_eq!(world_of("/home/x", 1), "/home/x/vaisseau");
+        assert_eq!(world_of("/home/x", 2), "/home/x/monde_japon");
+        assert_eq!(world_of("/home/x", 3), "/home/x/monde_reseau");
+        assert_eq!(world_of("/home/x", 7), "/home/x/vaisseau");
+        assert_eq!(player_slug("  TEST  "), "test");
+        assert_eq!(player_slug(""), "joueur");
+        assert_eq!(player_slug("a_b-c d!"), "a_b_c_d");
+        // Troncature à 40 caractères
+        assert_eq!(player_slug(&"x".repeat(100)).len(), 40);
+        // home_in_world selon campagne
+        assert_eq!(home_in_world(1), "/cabines/capitaine");
+        assert_eq!(home_in_world(2), "/quartiers/seigneur");
+        assert_eq!(home_in_world(3), "/noc/netrunner");
+    }
 }

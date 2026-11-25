@@ -543,6 +543,10 @@ mod tests {
         v.iter().map(|s| s.to_string()).collect()
     }
 
+    fn args(v: &[&str]) -> Vec<String> {
+        v.iter().map(|s| s.to_string()).collect()
+    }
+
     #[test]
     fn substring_ne_valide_plus() {
         // P1.1: echo / sous-chaînes ne valident jamais
@@ -704,7 +708,209 @@ mod tests {
             (">".to_string(), "/soutes/f".to_string())
         );
         assert_eq!(p.cmds[0].redirs[1].0, "2>");
-        assert!(!p.is_simple());
-        assert!(parse("pwd").is_simple());
+        assert!(!p.is_simple());        assert!(parse("pwd").is_simple());
+    }
+
+    #[test]
+    fn tokenize_quotes_and_comments() {
+        // commentaire hors guillemets
+        let p = parse("echo hi # note");
+        assert_eq!(p.cmds[0].words, vec!["echo", "hi"]);
+        // # en début de mot = commentaire (comportement shell)
+        let p = parse("echo #notcomment");
+        assert_eq!(p.cmds[0].words, vec!["echo"]);
+        // # intérieur d'un mot = littéral
+        let p = parse("echo foo#bar");
+        assert_eq!(p.cmds[0].words, vec!["echo", "foo#bar"]);
+        // Guillemets échappés et caractères spéciaux conservés tels quels
+        let p = parse("echo \"a\\\"b\"");
+        let w = &p.cmds[0].words;
+        assert_eq!(w.len(), 2);
+        assert_eq!(w[1], "a\"b");
+        // Backslash échappe le caractère suivant (mot unique)
+        let p = parse("echo \\;");
+        assert_eq!(p.cmds[0].words, vec!["echo", ";"]);
+        // $(...) et `...` 保留 as whole word
+        let p = parse("echo $(date)");
+        assert_eq!(p.cmds[0].words, vec!["echo", "$(date)"]);
+        let p = parse("echo \x60date\x60");
+        assert_eq!(p.cmds[0].words, vec!["echo", "\x60date\x60"]);
+    }
+
+    #[test]
+    fn redirections_and_operators() {
+        // >> et > distincts, et opérateur de liaison
+        let p = parse("echo a >> f");
+        assert!(p.has_operator(">>"));
+        assert!(!p.has_operator(">"));
+        let p = parse("cat f 2>/dev/null");
+        assert!(p.has_operator("2>"));
+        let p = parse("echo a && echo b");
+        assert_eq!(p.ops, vec!["&&"]);
+        assert_eq!(p.cmds.len(), 2);
+        let p = parse("echo a; echo b");
+        assert_eq!(p.ops, vec![";"]);
+        let p = parse("cat f || cat g");
+        assert_eq!(p.ops, vec!["||"]);
+        let p = parse("cmd <<< txt");
+        assert_eq!(p.cmds[0].redirs[0].0, "<<<");
+        // is_simple uniquement pour une commande unique sans mot-clé de substitution
+        assert!(parse("ls -la").is_simple());
+        assert!(!parse("echo $(true)").is_simple());
+        assert!(!parse("ls -la > out").is_simple());
+    }
+
+    #[test]
+    fn effective_of_skips_prefixes_and_assignments() {
+        // assignment en amont
+        let p = parse("FOO=bar sudo ls -a");
+        let effs = p.effective();
+        assert!(effs.iter().any(|(b, _)| b == "ls"));
+        // sudo -u skippe l'utilisateur (2 mots)
+        let p = parse("sudo -u admin chown x f");
+        let effs = p.effective();
+        assert!(effs.iter().any(|(b, _)| b == "chown"));
+        // env -u skippe VAR (2 mots)
+        let p = parse("env -u FOO ls -l");
+        let effs = p.effective();
+        assert!(effs.iter().any(|(b, _)| b == "ls"));
+        // nice -n 19 skippe -n 19 (2 mots)
+        let p = parse("nice -n 19 du -sh");
+        let effs = p.effective();
+        assert!(effs.iter().any(|(b, _)| b == "du"));
+        // timeout skippe la durée (+1 si présence d'options)
+        let p = parse("timeout 10 cmd");
+        let effs = p.effective();
+        assert!(effs.iter().any(|(b, _)| b == "cmd"));
+        // su -c / bash -c déplient la commande interne
+        let p = parse("bash -c \"ls -la\"");
+        let effs = p.effective();
+        assert!(effs.iter().any(|(b, _)| b == "ls"));
+        let p = parse("su -c whoami root");
+        let effs = p.effective();
+        assert!(effs.iter().any(|(b, _)| b == "whoami"));
+        // guillemets autour du -c: chaine interne parsée
+        let p = parse("su -c \'echo x\' user");
+        let effs = p.effective();
+        assert!(effs.iter().any(|(b, _)| b == "echo"));
+    }
+
+    #[test]
+    fn command_matches_associations_and_operators() {
+        // opérateur présent hors guillemets
+        let history = h(&["ps aux | grep ssh"]);
+        assert!(command_matches("|", &rc(&["ps aux | grep ssh"]), &history));
+        // multi-mots: apt update exige la sous-commande
+        let apt_rc = rc(&["sudo apt update"]);
+        assert!(command_matches("apt update", &apt_rc, &h(&["sudo apt update"])));
+        assert!(!command_matches("apt install", &apt_rc, &h(&["sudo apt update"])));
+        // la commande effective derrière sudo doit correspondre même si l'historique cite "sudo"
+        assert!(command_matches(
+            "ls",
+            &rc(&["sudo ls -la"]),
+            &h(&["sudo ls"])
+        ));
+        // commande non exécutée (hors historique)
+        assert!(!command_matches("pwd", &rc(&["pwd"]), &h(&["ls"])));
+        // historique vide = rien ne valide
+        assert!(!command_matches("ls", &rc(&["ls"]), &h(&[])));
+    }
+
+    #[test]
+    fn arg_present_cases() {
+        use super::arg_present;
+        let a = args(&["-la", "/pont"]);
+        assert!(arg_present("ls", "-la", &a));
+        assert!(arg_present("ls", "-al", &a));
+        let a1 = args(&["-l"]);
+        assert!(!arg_present("ls", "-la", &a1));
+        let a2 = args(&["-bn1"]);
+        assert!(arg_present("top", "-bn1", &a2));
+        let a3 = args(&["-n", "5"]);
+        assert!(arg_present("head", "-5", &a3));
+        assert!(arg_present("head", "-n5", &a3));
+        // +x: chmod +x / chmod u+x
+        assert!(arg_present("chmod", "+x", &args(&["+x", "f"])));
+        assert!(arg_present("chmod", "+x", &args(&["u+x", "f"])));
+        // kill -9 ≡ -KILL
+        assert!(arg_present("kill", "-9", &args(&["-KILL", "42"])));
+        assert!(arg_present("kill", "-9", &args(&["-s", "KILL", "42"])));
+        assert!(arg_present("kill", "-9", &args(&["-9", "42"])));
+        // ip: cible full-word = objet (addr / route / link / neigh)
+        assert!(arg_present("ip", "route", &args(&["route"])));
+        assert!(arg_present("ip", "addr", &args(&["addr"])));
+        // objet absent : pas de match
+        assert!(!arg_present("ip", "addr", &args(&["link"])));
+        // sous-commande pour tar/ps: lettres groupées
+        assert!(arg_present("tar", "czf", &args(&["-czf", "a.tgz", "d"])));
+        assert!(arg_present("tar", "czf", &args(&["czf", "a.tgz", "d"])));
+        assert!(arg_present("ps", "aux", &args(&["-aux"])));
+        // fichier inconnu
+        assert!(!arg_present("ls", "-zzz", &args(&["-la", "/pont"])));
+    }
+
+    #[test]
+    fn file_read_and_redirections() {
+        // file_read: ARGUMENT présent chez le lecteur
+        assert!(file_read_matches(
+            "notes.txt",
+            &h(&["cat ~/notes.txt"])
+        ));
+        // base_of: cible passée par redirection <
+        assert!(file_read_matches(
+            "notes.txt",
+            &h(&["less < notes.txt"])
+        ));
+        // même résultat pour une lecture via redirection et le nom du fichier
+        assert!(file_read_matches(
+            "rapport.txt",
+            &h(&["grep X rapport.txt"])
+        ));
+        // argument non-lecteur ne vaut rien (cat est bon)
+        assert!(!file_read_matches(
+            "rapport.txt",
+            &h(&["echo rapport.txt"])
+        ));
+        // args avec guillemets
+        assert!(file_read_matches(
+            "notes.txt",
+            &h(&["cat \"notes.txt\""])
+        ));
+    }
+
+    #[test]
+    fn history_empty_and_zero_words() {
+        let p = parse("");
+        assert!(p.cmds.is_empty());
+        let p = parse("   ");
+        assert!(p.cmds.is_empty());
+        // commentaire seul
+        let p = parse("# just comment");
+        assert!(p.cmds.is_empty());
+        // effective() vide sur une ligne vide
+        let p = parse("");
+        assert!(p.effective().is_empty());
+    }
+
+    #[test]
+    fn assignments_and_option_values() {
+        // is_assignment: forme valide et invalide
+        assert!(is_assignment("FOO=bar"));
+        assert!(is_assignment("A_B=1"));
+        assert!(!is_assignment("1ABC=x"));
+        assert!(!is_assignment("FOO"));
+        assert!(!is_assignment("A-B=1"));
+        // flags_of_args: chiffre-à-la-fin devient valeur (head -n 5 / top -bn1)
+        let a7 = args(&["-n", "5"]);
+        let have = flags_of_args(&a7);
+        assert!(have.iter().any(|(c, v)| *c == 'n' && v.as_deref() == Some("5")));
+        let a8 = args(&["-bn1"]);
+        let have = flags_of_args(&a8);
+        assert!(have.iter().any(|(c, _v)| *c == 'b'));
+        assert!(have.iter().any(|(c, v)| *c == 'n' && v.as_deref() == Some("1")));
+        // mot propre non-option: inconnu
+        let a9 = args(&["file"]);
+        let have = flags_of_args(&a9);
+        assert!(have.is_empty());
     }
 }

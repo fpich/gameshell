@@ -119,6 +119,40 @@ pub fn heavy_box(title: &str, lines: &[String], w: usize) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn pad_tronque_ou_remplit() {
+        assert_eq!(pad("abc", 5), "abc  ");
+        assert_eq!(pad("a", 3), "a  ");
+        // emoji (2 colonnes) compté correctement
+        let p = pad("🏆", 4);
+        assert_eq!(str_width(&p), 4);
+        // troncation sans couper une séquence ANSI (du texte brut uniquement)
+        let p = pad("abcdefgh", 4);
+        assert_eq!(str_width(&p), 4);
+        // emoji + texte : au moins un caractère des 2 colonnes compté
+        assert_eq!(str_width(&pad("🏆★", 5)), 5);
+    }
+
+    #[test]
+    fn wrap_casse_sur_mots() {
+        assert_eq!(wrap("un deux trois", 10), vec!["un deux", "trois"]);
+        // mot dépasse la largeur : il est isolé
+        assert_eq!(wrap("abcdefgh", 4), vec!["abcdefgh"]);
+        // ligne vide conservée
+        assert_eq!(wrap("", 10), vec![String::new()]);
+        // horizontalement de 2 emoji
+        assert_eq!(str_width(&wrap("ab", 2)[0]), 2);
+    }
+
+    #[test]
+    fn wrap_keep_preserve_vides() {
+        assert_eq!(wrap_keep("", 10), vec![String::new()]);
+        assert_eq!(wrap_keep("abc", 10), vec!["abc".to_string()]);
+        // mot plus large que la boîte : isolé (pas de coupure destructrice)
+        let parts = wrap_keep("aaa", 2);
+        assert_eq!(parts, vec!["aaa".to_string()]);
+    }
     #[test]
     fn bordures_alignees() {
         let b = heavy_box(

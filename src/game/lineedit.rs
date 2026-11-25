@@ -576,3 +576,23 @@ fn read_line_raw(
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::strip_ansi;
+
+    #[test]
+    fn strip_les_sequences_curseur() {
+        assert_eq!(strip_ansi("\x1b[A\x1b[2Jabc"), "abc");
+        assert_eq!(strip_ansi("\x1b[0m\x1b[31mABC"), "ABC");
+        assert_eq!(strip_ansi("\x1b[1;1Htest"), "test");
+        // ESC + 1 char
+        assert_eq!(strip_ansi("\x1bMabc"), "abc");
+        // ESC seul en fin de chaîne : ignoré
+        assert_eq!(strip_ansi("abc\x1b"), "abc");
+        // CR espurgé
+        assert_eq!(strip_ansi("a\rb"), "ab");
+        // texte simple inchangé
+        assert_eq!(strip_ansi("ls -la"), "ls -la");
+    }
+}
