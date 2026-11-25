@@ -88,6 +88,7 @@
 ├── make-archive.sh          # génère gameshell.sh auto-extractible
 ├── vaisseau-gen.sh          # générateur des 3 mondes
 ├── monde-*.sh               # mondes campagne 2 et 3
+├── gens-guard.sh            # garde-fou de destination `gsh_check_dest` sourcé par les 3 générateurs
 ├── launcher.sh              # lanceur (transmet --campaign/--locked/--name)
 ├── tests/run_tests.sh       # suite (57 tests, dossier temporaire, jamais les données réelles)
 ├── tests/playthrough_all.sh # playthrough complet en AUTO (dossier sandbox, ne détruit jamais ~/.gameshell)

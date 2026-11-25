@@ -176,6 +176,7 @@ gameshell/
 ├── vaisseau-gen.sh        # génère les 3 mondes (espace|japon|reseau)
 ├── monde-japon-gen.sh     # monde campagne 2 (château Shiro)
 ├── monde-reseau-gen.sh   # monde campagne 3 (NOC Nexus)
+├── gens-guard.sh         # garde-fou de destination sourcé par les 3 générateurs
 ├── launcher.sh            # lance le jeu installé (transmet --campaign/--locked/--name)
 ├── tests/
 │   ├── run_tests.sh       # suite automatisée (57 tests, dossier temporaire)

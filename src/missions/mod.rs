@@ -496,6 +496,7 @@ mod conformity_tests {
             "vaisseau-gen.sh",
             "monde-japon-gen.sh",
             "monde-reseau-gen.sh",
+            "gens-guard.sh",
         ] {
             let content =
                 std::fs::read_to_string(format!("{}/{}", env!("CARGO_MANIFEST_DIR"), gen)).unwrap();

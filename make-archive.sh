@@ -24,10 +24,11 @@ cp launcher.sh "$TMPDIR/payload/gameshell"
 chmod +x "$TMPDIR/payload/gameshell"
 
 # embarquer les générateurs de monde (pour gsh reset par campagne)
-cp vaisseau-gen.sh monde-japon-gen.sh monde-reseau-gen.sh "$TMPDIR/payload/"
+cp vaisseau-gen.sh monde-japon-gen.sh monde-reseau-gen.sh gens-guard.sh "$TMPDIR/payload/"
 chmod +x "$TMPDIR/payload/vaisseau-gen.sh" "$TMPDIR/payload/monde-japon-gen.sh" "$TMPDIR/payload/monde-reseau-gen.sh"
+chmod +x "$TMPDIR/payload/gens-guard.sh"
 
-VERSION="$(grep -m1 '^version' Cargo.toml | cut -d'"' -f2)-$(sha256sum target/release/gameshell vaisseau-gen.sh monde-japon-gen.sh monde-reseau-gen.sh launcher.sh | sha256sum | cut -c1-12)"
+VERSION="$(grep -m1 '^version' Cargo.toml | cut -d'"' -f2)-$(sha256sum target/release/gameshell vaisseau-gen.sh monde-japon-gen.sh monde-reseau-gen.sh gens-guard.sh launcher.sh | sha256sum | cut -c1-12)"
 echo "$VERSION" > "$TMPDIR/payload/VERSION"
 tar czf "$TMPDIR/payload.tar.gz" -C "$TMPDIR/payload" .
 
@@ -62,7 +63,7 @@ if [ "$FORCE" = 1 ] || [ ! -x "$GAMESHELL_HOME/bin/gameshell" ] || [ "$INSTALLED
     # binaire, lanceur et générateurs: toujours mis à jour; la progression (state/) n'est jamais touchée
     mkdir -p "$GAMESHELL_HOME/bin"
     cp -f "$TMPX/bin/gameshell" "$GAMESHELL_HOME/bin/gameshell"
-    cp -f "$TMPX/gameshell" "$TMPX/vaisseau-gen.sh" "$TMPX/monde-japon-gen.sh" "$TMPX/monde-reseau-gen.sh" "$TMPX/VERSION" "$GAMESHELL_HOME/"
+    cp -f "$TMPX/gameshell" "$TMPX/vaisseau-gen.sh" "$TMPX/monde-japon-gen.sh" "$TMPX/monde-reseau-gen.sh" "$TMPX/gens-guard.sh" "$TMPX/VERSION" "$GAMESHELL_HOME/"
     chmod +x "$GAMESHELL_HOME/bin/gameshell" "$GAMESHELL_HOME/gameshell" "$GAMESHELL_HOME"/*.sh
     # mondes: installés seulement s'ils manquent (une mise à jour garde la partie en cours)
     for w in vaisseau monde_japon monde_reseau; do
