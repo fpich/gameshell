@@ -11,7 +11,7 @@ Merci de contribuer ! Ce fichier résume les conventions à respecter.
    ```bash
    cargo fmt --check
    cargo clippy --release --all-targets -- -D warnings
-   cargo test --release        # 12/12
+   cargo test --release        # 18/18
    ./tests/run_tests.sh        # 57/57
    ```
 

@@ -166,7 +166,7 @@ Toute régression = bug critique. Numérotation fixe, ne jamais renuméroter.
 - `gsh hint` est SUPPRIMÉ. Ne jamais le réintroduire.
 
 ## RÈGLE A10 — Suite de tests obligatoire
-- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **54/54 PASS** obligatoire.
+- Avant chaque commit: `cargo test --release` (conformité) + `./tests/run_tests.sh` → **57/57 PASS** obligatoire.
 
 ---
 
@@ -316,7 +316,7 @@ Générée par `vaisseau-gen.sh`. Jamais `/srv/`, `/home/etudiant/`, ni pièces 
 ```bash
 cargo build --release 2>&1 | grep -E "^error"   # vide
 bash make-archive.sh                               # régénère gameshell.sh
-./tests/run_tests.sh                               # 54/54 PASS + cargo test (conformité)
+./tests/run_tests.sh                               # 57/57 PASS + cargo test (conformité)
 ```
 
 ## RÈGLE E2 — Distribution 100% offline
