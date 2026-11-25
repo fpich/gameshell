@@ -2,6 +2,7 @@
 name = "gameshell"
 version = "2.0.0"
 edition = "2021"
+publish = false
 description = "GameShell — RPG éducatif pour apprendre le shell Debian 13 (BTS SIO SISR), 3 campagnes, 300 missions, bac à sable isolé"
 authors = ["Équipe GameShell"]
 license = "Proprietary"
