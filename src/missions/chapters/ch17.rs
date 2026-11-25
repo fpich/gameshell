@@ -52,7 +52,6 @@ dernier lot.
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 200,
             code_required: None,
             skill: Some(Skill {
@@ -108,7 +107,6 @@ Capitaine. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 225,
             code_required: None,
             skill: Some(Skill {
@@ -162,7 +160,6 @@ réglages.
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 225,
             code_required: None,
             skill: Some(Skill {
@@ -211,7 +208,6 @@ réactions des défenses s'enchaînent.
                 target: "journalctl".into(),
                 expected: None,
             }],
-            hints: vec![],
             xp_reward: 250,
             code_required: None,
             skill: Some(Skill {
@@ -276,7 +272,6 @@ Le stock est purgé : les vieilleries ont disparu et l'espace est libéré.
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 225,
             code_required: None,
             skill: Some(Skill {

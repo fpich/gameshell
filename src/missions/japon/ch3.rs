@@ -49,7 +49,6 @@ Seigneur. Le domaine vous est transparent. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -105,7 +104,6 @@ Seigneur. Grâce à vous, le domaine ne perd plus rien. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -162,7 +160,6 @@ Nous pourrons négocier le riz en connaissance de cause. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -209,7 +206,6 @@ nous sommes prêts. »"
                 target: "/donjon".into(),
                 expected: None,
             }],
-            hints: vec![],
             xp_reward: 75,
             code_required: None,
             skill: Some(Skill {
@@ -264,7 +260,6 @@ tombée\". C'est noté, Seigneur. Vos ordres seront exécutés. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {

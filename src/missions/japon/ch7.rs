@@ -40,7 +40,6 @@ cette autre IP, 10.0.0.99. Nous avons de la lecture, Seigneur. »"
                 target: "grep".into(),
                 expected: None,
             }],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -84,7 +83,6 @@ doit le savoir avant le coucher du soleil. »"
                 target: "-c".into(),
                 expected: None,
             }],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -129,7 +127,6 @@ Le procès-verbal sera solide: le château saura qui chercher. »"
                 target: "-n".into(),
                 expected: None,
             }],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -177,7 +174,6 @@ Rien ne nous échappe, Seigneur. »"
                 target: "-i".into(),
                 expected: None,
             }],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -230,7 +226,6 @@ Seigneur: vos registres sont dignes de confiance. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 125,
             code_required: None,
             skill: Some(Skill {

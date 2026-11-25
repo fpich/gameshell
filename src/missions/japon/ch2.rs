@@ -49,7 +49,6 @@ commence. Chaque ordre sera consigné. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 75,
             code_required: None,
             skill: Some(Skill {
@@ -103,7 +102,6 @@ strict, c'est un domaine bien tenu. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -159,7 +157,6 @@ Seigneur. Rien ne se perdra. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -215,7 +212,6 @@ sont bien tenus. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -273,7 +269,6 @@ rangé est un seigneur qui voit clair. »"
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {

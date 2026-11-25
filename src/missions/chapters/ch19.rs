@@ -37,7 +37,6 @@ enregistré : nous savons maintenant ce qui doit être fermé. »"
                 target: "sshd_config".into(),
                 expected: None,
             }],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -88,7 +87,6 @@ pirates visaient en premier est désormais condamnée.
                     expected: Some("PermitRootLogin no".into()),
                 },
             ],
-            hints: vec![],
             xp_reward: 150,
             code_required: None,
             skill: Some(Skill {
@@ -129,7 +127,6 @@ suite en toute sécurité. »"
                 target: "systemctl".into(),
                 expected: None,
             }],
-            hints: vec![],
             xp_reward: 100,
             code_required: None,
             skill: Some(Skill {
@@ -177,7 +174,6 @@ réglages durcis.
                     expected: None,
                 },
             ],
-            hints: vec![],
             xp_reward: 125,
             code_required: None,
             skill: Some(Skill {
@@ -219,7 +215,6 @@ est durcie et surveillée. »"
                 target: "journalctl".into(),
                 expected: None,
             }],
-            hints: vec![],
             xp_reward: 125,
             code_required: None,
             skill: Some(Skill {
