@@ -13,7 +13,7 @@ Jeu de rôle éducatif pour apprendre les **commandes shell Linux** et le **durc
 ```bash
 # Depuis le dépôt source: compiler et générer l'archive auto-extractible
 cargo build --release && ./make-archive.sh
-# → génère gameshell.sh (un seul fichier ~540K)
+# → génère gameshell.sh (un seul fichier ~1,5 Mo)
 
 # Sur la machine de l'étudiant:
 ./gameshell.sh          # installe dans ~/.gameshell/ et lance le jeu
