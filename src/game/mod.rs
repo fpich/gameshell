@@ -89,6 +89,45 @@ fn bloom_note(bloom_level: &str) -> &'static str {
     }
 }
 
+/// Badges à débloquer en fonction des commandes connues (pure, pour tous les tests).
+/// Renvoie les badges dont la catégorie contient au moins une commande connue.
+fn badges_to_unlock(known: &dyn Fn(&str) -> bool) -> Vec<(&'static str, &'static str)> {
+    let has = |cmds: &[&str]| cmds.iter().any(|c| known(c));
+    let mut new_badges: Vec<(&'static str, &'static str)> = Vec::new();
+    if has(&["ls", "cd", "pwd", "mkdir", "touch", "cp", "mv", "rm"]) {
+        new_badges.push(("🗂️ Explorateur", "maîtrise des fichiers et répertoires"));
+    }
+    if has(&["cat", "grep", "head", "tail", "wc", "find", "less"]) {
+        new_badges.push(("🔍 Fouineur", "lecture et recherche dans les fichiers"));
+    }
+    if has(&[
+        "chmod", "chown", "useradd", "groupadd", "passwd", "sudo", "su",
+    ]) {
+        new_badges.push(("🛡️ Gardien", "droits, utilisateurs et sécurité"));
+    }
+    if has(&["ps", "top", "kill", "pgrep", "systemctl", "journalctl"]) {
+        new_badges.push(("⚙️ Mécanicien", "processus et services"));
+    }
+    if has(&[
+        "ip",
+        "ping",
+        "netstat",
+        "nmap",
+        "ssh",
+        "curl",
+        "dig",
+        "traceroute",
+        "iptables",
+        "ufw",
+    ]) {
+        new_badges.push(("🌐 Réseau", "réseau et connectivité"));
+    }
+    if has(&["tar", "zip", "unzip", "gzip", "df", "du", "mount"]) {
+        new_badges.push(("📦 Logisticien", "archives et stockage"));
+    }
+    new_badges
+}
+
 impl Game {
     pub fn new(player_name: &str, test_mode: bool) -> Self {
         let campaign = shell::campaign_id();
@@ -559,46 +598,12 @@ impl Game {
 
     /// Débloque des badges thématiques selon les compétences acquises
     fn update_badges(&mut self) {
-        let has = |cmds: &[&str]| {
-            cmds.iter().any(|c| {
-                self.skills
-                    .iter()
-                    .any(|s| s.name.split_whitespace().next() == Some(*c))
-            })
+        let known = |cmd: &str| {
+            self.skills
+                .iter()
+                .any(|s| s.name.split_whitespace().next() == Some(cmd))
         };
-        let mut new_badges: Vec<(&str, &str)> = Vec::new();
-        if has(&["ls", "cd", "pwd", "mkdir", "touch", "cp", "mv", "rm"]) {
-            new_badges.push(("🗂️ Explorateur", "maîtrise des fichiers et répertoires"));
-        }
-        if has(&["cat", "grep", "head", "tail", "wc", "find", "less"]) {
-            new_badges.push(("🔍 Fouineur", "lecture et recherche dans les fichiers"));
-        }
-        if has(&[
-            "chmod", "chown", "useradd", "groupadd", "passwd", "sudo", "su",
-        ]) {
-            new_badges.push(("🛡️ Gardien", "droits, utilisateurs et sécurité"));
-        }
-        if has(&["ps", "top", "kill", "pgrep", "systemctl", "journalctl"]) {
-            new_badges.push(("⚙️ Mécanicien", "processus et services"));
-        }
-        if has(&[
-            "ip",
-            "ping",
-            "netstat",
-            "nmap",
-            "ssh",
-            "curl",
-            "dig",
-            "traceroute",
-            "iptables",
-            "ufw",
-        ]) {
-            new_badges.push(("🌐 Réseau", "réseau et connectivité"));
-        }
-        if has(&["tar", "zip", "unzip", "gzip", "df", "du", "mount"]) {
-            new_badges.push(("📦 Logisticien", "archives et stockage"));
-        }
-        for (name, desc) in new_badges {
+        for (name, desc) in badges_to_unlock(&known) {
             if !self.badges.iter().any(|b| b.starts_with(name)) {
                 println!("  🏅 Badge débloqué: {} — {}", name, desc);
                 self.badges.push(format!("{} — {}", name, desc));
@@ -1261,5 +1266,43 @@ mod congrats_tests {
         assert!(bloom_note("Créer").contains("nouveau"));
         assert!(bloom_note("???").contains("respect")); // repli
         assert!(bloom_note("").contains("respect")); // repli
+    }
+}
+
+#[cfg(test)]
+mod badges_tests {
+    use super::badges_to_unlock;
+
+    fn known_contains(cmds: &[&str]) -> impl Fn(&str) -> bool {
+        let owned: Vec<String> = cmds.iter().map(|s| s.to_string()).collect();
+        move |cmd| owned.iter().any(|c| c == cmd)
+    }
+
+    #[test]
+    fn rien_connu_aucun_badge() {
+        assert!(badges_to_unlock(&known_contains(&[])).is_empty());
+    }
+
+    #[test]
+    fn explorateur_et_fouineur_sur_commandes_de_base() {
+        let b = badges_to_unlock(&known_contains(&["ls", "cat"]));
+        let names: Vec<&str> = b.iter().map(|(n, _)| *n).collect();
+        assert!(names.iter().any(|n| n.contains("Explorateur")));
+        assert!(names.iter().any(|n| n.contains("Fouineur")));
+        assert!(!names.iter().any(|n| n.contains("Gardien")));
+    }
+
+    #[test]
+    fn tous_les_badges_sur_toutes_les_commandes_connues() {
+        let cmds = vec!["ls", "cat", "chmod", "ps", "ip", "tar"];
+        let b = badges_to_unlock(&known_contains(&cmds));
+        let names: Vec<&str> = b.iter().map(|(n, _)| *n).collect();
+        assert_eq!(names.len(), 6);
+    }
+
+    #[test]
+    fn commande_inconnue_ne_donne_rien() {
+        let b = badges_to_unlock(&known_contains(&["foo"]));
+        assert!(b.is_empty());
     }
 }
