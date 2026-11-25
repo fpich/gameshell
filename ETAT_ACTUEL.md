@@ -10,7 +10,7 @@
 |------------|--------|
 | Version | **2.0.0** |
 | Campagnes | 3 × 100 missions EN DUR (20 chapitres × 5, 5 actes × 20) |
-| Conformité cargo | **95/95** (`cargo test --release`) |
+| Conformité cargo | **103/103** (`cargo test --release`) |
 | Suite moteur | **57/57** (`./tests/run_tests.sh`) |
 | Clippy | propre (`cargo clippy --release --all-targets -- -D warnings`) |
 | Formatage | `cargo fmt --check` (CI en échec sinon) |
@@ -21,7 +21,7 @@
 
 ## Tests
 
-### `cargo test --release` — 95/95
+### `cargo test --release` — 103/103
 
 | Test | Rôle |
 |------|------|
@@ -47,6 +47,8 @@
 | truncate_input | troncature 4096 chars jamais rompue en multi-octets (pur) |
 | sanitize_player_name | nom nettoyé (trim, contrôle, 32e) + repli Capitaine (pur, mode interactif ET --name) |
 | campaign_label | libellé des 3 campagnes + repli (pur) |
+| csv_escape | champs CSV : guillemets doublés, sauts neutralisés, emoji/unicode (pur) |
+| display_path_in | chemin réel → affichage propre: ~, ~/x, /pont/x, repli hôte "/" (pur) |
 
 ### `./tests/run_tests.sh` — 57/57
 
@@ -104,7 +106,7 @@
 
 - Toute modification respecte `AGENTS.md` (numérotation fixe, jamais renumérotée).
 - Avant chaque commit : `cargo clippy --release --all-targets`, `cargo fmt --check`,
-  `cargo test --release` (95/95) et `./tests/run_tests.sh` (57/57).
+  `cargo test --release` (103/103) et `./tests/run_tests.sh` (57/57).
 - Les tests tournent dans un `GAMESHELL_HOME` temporaire ; jamais sur les données réelles.
 - `git push` et publication de release : uniquement sur demande explicite du propriétaire.
 - Historique documentaire : `docs/historique/RETEX.md` et `CORRECTIONS.md` sont des records

@@ -155,6 +155,18 @@ fn csv_escape(s: &str) -> String {
     format!("\"{}\"", s.replace('"', "\"\"").replace(['\n', '\r'], " "))
 }
 
+/// Chemin réel → affichage propre: ~, ~/x, /pont/x (P1.14: préfixe strict)
+/// Pure: testable via `home`/`world` injectés.
+fn display_path_in(real: &str, home: &str, world: &str) -> String {
+    if real == home {
+        return "~".into();
+    }
+    if let Some(r) = real.strip_prefix(&format!("{}/", home)) {
+        return format!("~/{}", r);
+    }
+    shell::to_world_in(real, world).unwrap_or_else(|| "/".into())
+}
+
 impl Game {
     pub fn new(player_name: &str, test_mode: bool) -> Self {
         let campaign = shell::campaign_id();
@@ -1123,14 +1135,7 @@ impl Game {
 
     /// Chemin réel → affichage propre: ~, ~/x, /pont/x (P1.14: préfixe strict)
     fn display_path(&self, real: &str) -> String {
-        let home = shell::player_home();
-        if real == home {
-            return "~".into();
-        }
-        if let Some(r) = real.strip_prefix(&format!("{}/", home)) {
-            return format!("~/{}", r);
-        }
-        shell::to_world(real).unwrap_or_else(|| "/".into())
+        display_path_in(real, &shell::player_home(), &shell::world_dir())
     }
 
     /// Saisie du code phase 2 (retourne true si la mission est validée)
@@ -1386,5 +1391,50 @@ mod csv_tests {
         assert_eq!(csv_escape(""), "\"\"");
         // emoji + accents conservés tels quels (séparateur « ; » protégé par guillemets)
         assert_eq!(csv_escape("🏴‍☠️ — étape 4.2"), "\"🏴‍☠️ — étape 4.2\"");
+    }
+}
+
+#[cfg(test)]
+mod display_path_tests {
+    use super::display_path_in;
+
+    const HOME: &str = "/w/home/capitaine";
+    const WORLD: &str = "/w";
+
+    #[test]
+    fn home_exact_donne_tilde() {
+        assert_eq!(display_path_in(HOME, HOME, WORLD), "~");
+    }
+
+    #[test]
+    fn sous_home_donne_tilde_barre() {
+        assert_eq!(
+            display_path_in("/w/home/capitaine/notes/x.txt", HOME, WORLD),
+            "~/notes/x.txt"
+        );
+    }
+
+    #[test]
+    fn chemin_dans_monde_hors_home_donne_chemins_monde() {
+        assert_eq!(display_path_in("/w/pont", HOME, WORLD), "/pont");
+        assert_eq!(
+            display_path_in("/w/archives/plan.txt", HOME, WORLD),
+            "/archives/plan.txt"
+        );
+    }
+
+    #[test]
+    fn chemin_hors_monde_donne_fallback_slash() {
+        // Hôte absolu hors du monde: aucune préfixe home ne matche (cache strict)
+        assert_eq!(display_path_in("/tmp/x", HOME, WORLD), "/");
+    }
+
+    #[test]
+    fn home_comme_préfixe_partiel_ne_matche_pas() {
+        // /w/home/capitainex ne doit PAS être traité comme ~/... (préfixe strict)
+        assert_eq!(
+            display_path_in("/w/home/capitainex/y", HOME, WORLD),
+            "/home/capitainex/y"
+        );
     }
 }
