@@ -5,8 +5,8 @@ use super::{Ctx, Profile};
 use std::io::Write;
 
 struct HostInfo {
-    name: &'static str,
-    ip: &'static str,
+    name: String,
+    ip: String,
     up: bool,
     ports: &'static [(u16, &'static str, &'static str)],
     ttl: u8,
@@ -22,12 +22,12 @@ fn hosts(c: &Ctx) -> Vec<HostInfo> {
         ],
         _ => &[(22, "ssh", "OpenSSH 9.7p1 Debian")],
     };
-    let local: &'static str = Box::leak(p.ip.to_string().into_boxed_str());
-    let lname: &'static str = Box::leak(p.host.to_string().into_boxed_str());
+    let local = p.ip.to_string();
+    let lname = p.host.to_string();
     vec![
         HostInfo {
-            name: "localhost",
-            ip: "127.0.0.1",
+            name: "localhost".to_string(),
+            ip: "127.0.0.1".to_string(),
             up: true,
             ports: me_ports,
             ttl: 64,
@@ -40,8 +40,8 @@ fn hosts(c: &Ctx) -> Vec<HostInfo> {
             ttl: 64,
         },
         HostInfo {
-            name: "passerelle",
-            ip: "10.0.0.1",
+            name: "passerelle".to_string(),
+            ip: "10.0.0.1".to_string(),
             up: true,
             ports: &[
                 (22, "ssh", "OpenSSH 9.7p1"),
@@ -52,8 +52,8 @@ fn hosts(c: &Ctx) -> Vec<HostInfo> {
             ttl: 64,
         },
         HostInfo {
-            name: "nexus-02",
-            ip: "10.0.0.2",
+            name: "nexus-02".to_string(),
+            ip: "10.0.0.2".to_string(),
             up: true,
             ports: &[
                 (22, "ssh", "OpenSSH 9.7p1 Debian"),
@@ -62,8 +62,8 @@ fn hosts(c: &Ctx) -> Vec<HostInfo> {
             ttl: 64,
         },
         HostInfo {
-            name: "corbeau-noir",
-            ip: "10.0.0.66",
+            name: "corbeau-noir".to_string(),
+            ip: "10.0.0.66".to_string(),
             up: true,
             ports: &[
                 (22, "ssh", "OpenSSH 7.2 (obsolète)"),
@@ -74,15 +74,15 @@ fn hosts(c: &Ctx) -> Vec<HostInfo> {
             ttl: 52,
         },
         HostInfo {
-            name: "allie",
-            ip: "10.0.0.99",
+            name: "allie".to_string(),
+            ip: "10.0.0.99".to_string(),
             up: true,
             ports: &[(22, "ssh", "OpenSSH 9.7p1")],
             ttl: 64,
         },
         HostInfo {
-            name: "fai",
-            ip: "10.0.0.254",
+            name: "fai".to_string(),
+            ip: "10.0.0.254".to_string(),
             up: true,
             ports: &[(53, "domain", "unbound"), (179, "bgp", "BIRD")],
             ttl: 63,
