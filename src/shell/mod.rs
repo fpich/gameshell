@@ -598,11 +598,12 @@ pub fn run_line(line: &str, cwd_real: &str, oldpwd_real: &str, o: &RunOpts) -> R
         }
     };
     drop(writer);
+    let mut stdin_writer = None;
     if let Some(data) = o.stdin.clone() {
         if let Some(mut si) = child.stdin.take() {
-            std::thread::spawn(move || {
+            stdin_writer = Some(std::thread::spawn(move || {
                 let _ = si.write_all(&data);
-            });
+            }));
         }
     }
     let mut out = String::new();
@@ -630,6 +631,11 @@ pub fn run_line(line: &str, cwd_real: &str, oldpwd_real: &str, o: &RunOpts) -> R
             })
         })
         .unwrap_or(-1);
+    // Le thread écriture stdin est attendu après la fin du processus: l'enfant est mort,
+    // le tuyau est fermé, l'écriture échoue immédiatement et le thread se termine.
+    if let Some(h) = stdin_writer {
+        let _ = h.join();
+    }
     let mut final_dir = String::new();
     let _ = reader.read_to_string(&mut final_dir);
     let cwd = if final_dir.is_empty() {

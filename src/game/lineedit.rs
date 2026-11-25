@@ -579,7 +579,7 @@ fn read_line_raw(
 
 #[cfg(test)]
 mod tests {
-    use super::strip_ansi;
+    use super::{char_left, char_right, common_prefix, strip_ansi};
 
     #[test]
     fn strip_les_sequences_curseur() {
@@ -594,5 +594,39 @@ mod tests {
         assert_eq!(strip_ansi("a\rb"), "ab");
         // texte simple inchangé
         assert_eq!(strip_ansi("ls -la"), "ls -la");
+    }
+
+    #[test]
+    fn char_left_right_ascii() {
+        let buf = b"abcdef";
+        assert_eq!(char_left(buf, 3), 2);
+        assert_eq!(char_left(buf, 0), 0);
+        assert_eq!(char_right(buf, 2), 3);
+        assert_eq!(char_right(buf, 6), 6);
+    }
+
+    #[test]
+    fn char_left_right_utf8() {
+        // « é » = 2 octets, « ✈ » = 3 octets
+        let s = "abé✈cd";
+        let buf = s.as_bytes();
+        // positions : a=0, b=1, é=2..4, ✈=4..7, c=7
+        assert_eq!(char_left(buf, 5), 4); // curseur dans « é » → début de « é »
+        assert_eq!(char_right(buf, 1), 2); // après « b » → début de « é »
+        assert_eq!(char_right(buf, 2), 4); // après « é » → début de « ✈ »
+        assert_eq!(char_right(buf, 4), 7); // après « ✈ » → après « cd »
+        assert_eq!(char_left(buf, 7), 4); // curseur sur « c » (début) → début de « ✈ »
+    }
+
+    #[test]
+    fn common_prefix_entre_candidats() {
+        assert_eq!(common_prefix(&["abc".into(), "abd".into()]), "ab");
+        assert_eq!(
+            common_prefix(&["abc".into(), "abd".into(), "a".into()]),
+            "a"
+        );
+        assert_eq!(common_prefix(&["unique".into()]), "unique");
+        assert_eq!(common_prefix(&[]), "");
+        assert_eq!(common_prefix(&["abd".into(), "abc".into()]), "ab");
     }
 }
