@@ -4,6 +4,7 @@
 #![allow(non_camel_case_types)]
 
 use std::os::raw::{c_int, c_ulong};
+use std::sync::atomic::{AtomicBool, Ordering};
 
 pub const SIGINT: c_int = 2;
 pub const SIGQUIT: c_int = 3;
@@ -53,15 +54,13 @@ const VTIME: usize = 5;
 const VMIN: usize = 6;
 const TIOCGWINSZ: c_ulong = 0x5413;
 
-static mut SIGNAL_SEEN: bool = false;
+static SIGNAL_SEEN: AtomicBool = AtomicBool::new(false);
 
 extern "C" fn on_signal(_sig: c_int) {
     // Gestionnaire vide: le parent survit au Ctrl+C destiné à l'enfant.
     // Un gestionnaire (contrairement à SIG_IGN) est remis à zéro par exec():
     // l'enfant garde donc le comportement par défaut et SEUL lui est interrompu (P1.3).
-    unsafe {
-        SIGNAL_SEEN = true;
-    }
+    SIGNAL_SEEN.store(true, Ordering::Relaxed);
 }
 
 /// Le jeu survit à Ctrl+C / Ctrl+\ envoyés pendant une commande (P1.3) et
@@ -93,14 +92,14 @@ pub fn default_int_quit() {
 
 /// Pour les simulateurs (ping, top, journalctl -f): Ctrl+C termine proprement.
 pub fn catch_sigint() {
+    SIGNAL_SEEN.store(false, Ordering::Relaxed);
     unsafe {
-        SIGNAL_SEEN = false;
         signal(SIGINT, on_signal as *const () as usize);
     }
 }
 
 pub fn sigint_seen() -> bool {
-    unsafe { SIGNAL_SEEN }
+    SIGNAL_SEEN.load(Ordering::Relaxed)
 }
 
 pub fn is_tty(fd: i32) -> bool {
