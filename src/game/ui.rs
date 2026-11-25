@@ -6,26 +6,48 @@ use crate::sys::str_width;
 /// Complète `s` avec des espaces jusqu'à `w` colonnes affichées (tronque si trop long)
 pub fn pad(s: &str, w: usize) -> String {
     let cur = str_width(s);
-    if cur >= w {
-        if cur == w {
-            return s.to_string();
-        }
-        // tronque proprement (sans couper une séquence ANSI: on ne tronque que du texte brut)
-        let mut out = String::new();
-        let mut acc = 0;
-        for ch in s.chars() {
-            let cw = crate::sys::str_width(&ch.to_string());
-            if acc + cw > w.saturating_sub(1) {
-                break;
-            }
-            out.push(ch);
-            acc += cw;
-        }
-        out.push('…');
-        acc += 1;
-        return format!("{}{}", out, " ".repeat(w.saturating_sub(acc)));
+    if cur < w {
+        return format!("{}{}", s, " ".repeat(w - cur));
     }
-    format!("{}{}", s, " ".repeat(w - cur))
+    if cur == w {
+        return s.to_string();
+    }
+    // Troncature: les séquences ANSI (ESC [ ... ) passent telles quelles sans
+    // être comptées, seule la partie visible est tronquée (jamais de séquence
+    // coupée en plein milieu).
+    let mut out = String::new();
+    let mut acc = 0;
+    let mut chars = s.chars().peekable();
+    while let Some(c) = chars.next() {
+        if c == '\x1b' {
+            // séquence ANSI terminée par un caractère dans la plage @-~
+            out.push(c);
+            if chars.peek() == Some(&'[') {
+                chars.next();
+                out.push('[');
+                for c2 in chars.by_ref() {
+                    out.push(c2);
+                    if ('\x40'..='\x7e').contains(&c2) {
+                        break;
+                    }
+                }
+            } else {
+                if let Some(c2) = chars.next() {
+                    out.push(c2); // séquence ESC + 1 caractère (ex: \x1bM)
+                }
+            }
+            continue;
+        }
+        let cw = crate::sys::char_width(c);
+        if acc + cw > w.saturating_sub(1) {
+            break;
+        }
+        out.push(c);
+        acc += cw;
+    }
+    out.push('…');
+    acc += 1;
+    format!("{}{}", out, " ".repeat(w.saturating_sub(acc)))
 }
 
 /// Retour à la ligne par mots sur `width` colonnes affichées
@@ -171,5 +193,13 @@ mod tests {
             widths,
             b
         );
+    }
+    #[test]
+    fn pad_tronque_le_texte_colore_sans_compte_les_echappements() {
+        // ANSI colorée de longueur nominale > w: seule la partie visible compte
+        let s = "\x1b[31mabcdefgh\x1b[0m"; // "abcdefgh" = 8 colonnes, w = 5
+        let p = pad(s, 5);
+        assert_eq!(str_width(&p), 5);
+        assert!(p.contains("abc"), "contenu conservé: {p:?}");
     }
 }
