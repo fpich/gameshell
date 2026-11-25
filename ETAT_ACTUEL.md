@@ -58,7 +58,9 @@
 | 38 | AUTO: 300/300 missions résolues par leurs seules commandes requises |
 | 40 | EDGE: 300/300 (check vide, garbage, mauvais code, reset...) |
 | 42 | TORTURE: 300/300 + isolation hôte sur l'exécution réelle |
-| 43–48 | reprise par campagne, sauvegarde par joueur, export JSON/CSV, écrans victoire ×3, `gsh restart`, historique horodaté |
+| 43 | reprise par campagne (A18) |
+| 44 | sauvegarde par joueur (P1.10) |
+| 45–48 | export JSON/CSV (A20), écrans victoire ×3 (A19), `gsh restart` (A21), historique horodaté (A22) |
 | 49–54 | évasion impossible, commandes simulées, pipes/redirections, validation stricte, phase 2 non bloquante, `gsh   check` |
 | 55 | archive `gameshell.sh` bien formée (shebang, exécutable, VERSION de Cargo.toml embarquée, marqueur `__ARCHIVE_BELOW__`) |
 | 56 | bout en bout : l'archive s'installe dans un HOME vierge (binaire, VERSION, 3 mondes, lancement campagne 1) |

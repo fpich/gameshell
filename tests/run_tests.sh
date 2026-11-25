@@ -267,55 +267,57 @@ for c in "1 (Pirates de l'Espace)" "2 (Japon Féodal)" "3 (Nexus Réseau)"; do
 done
 [ "$ok42" = "1" ] && ok "TORTURE: 300/300 (check vide/partiel/typo, 2 mauvais codes, isolation hôte réelle)" || ko "TORTURE: $(echo "$LAST_OUT" | grep -o 'TORTURE campagne [0-9][^:]*: [0-9/]* OK, [0-9]* problèmes' | tr '\n' ' ')"
 
-# ─── TEST 43: Sauvegarde/reprise par campagne et par joueur (A18, P1.10) ───
+# ─── TEST 43: Sauvegarde/reprise (A18) ───
 fresh
 printf 'Test\n1\npwd\nls\ngsh check\nexit\n' | timeout 30 bash gameshell.sh > /dev/null 2>&1
 out=$(run_keep 'Test\n1\ngsh goal\nexit\n')
 echo "$out" | grep -q "MISSION 1.2" && echo "$out" | grep -q "\[1/100\]" && ok "Reprise: session 2 reprend à la mission 1.2 avec [1/100] (A18)" || ko "La sauvegarde/reprise ne fonctionne pas"
+
+# ─── TEST 44: Sauvegarde par joueur (P1.10) ───
 out=$(run_keep 'Autre\n1\nexit\n')
 [ -f "$STATE/save_campagne1_test.json" ] && echo "$out" | grep -q "\[0/100\]" && ok "Sauvegarde par joueur: save_campagne1_test.json, un autre élève repart de zéro (P1.10)" || ko "Pas de sauvegarde par joueur"
 
-# ─── TEST 44: gsh export enseignant JSON+CSV valides (A20, P1.8) ───
+# ─── TEST 45: gsh export enseignant JSON+CSV valides (A20, P1.8) ───
 fresh
 LAST_OUT=$(printf 'Eve "le pirate"\n1\npwd\nls\ngsh check\ngsh export\nexit\n' | timeout 30 bash gameshell.sh 2>&1 | strip)
 J=$(ls "$STATE"/export_campagne1_*.json 2>/dev/null | head -1)
 C=$(ls "$STATE"/export_campagne1_*.csv 2>/dev/null | head -1)
 echo "$LAST_OUT" | grep -q "Export effectué" && [ -n "$J" ] && [ -n "$C" ] && python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["joueur"]=="Eve \"le pirate\""; assert len(d["missions"])==100; assert d["missions_reussies"]==1' "$J" && ok "gsh export: JSON valide (nom avec guillemets) + CSV dans state/" || ko "gsh export a échoué ou JSON invalide"
 
-# ─── TEST 45: Écran de victoire par campagne (A19) ───
+# ─── TEST 46: Écran de victoire par campagne (A19) ───
 n=$(echo "$out38" | grep -c "FÉLICITATIONS")
 [ "$n" -ge 3 ] && ok "Écran de victoire affiché pour les 3 campagnes ($n FÉLICITATIONS)" || ko "Écran de victoire manquant ($n/3)"
 
-# ─── TEST 46: gsh restart remet la campagne à zéro (A21) ───
+# ─── TEST 47: gsh restart remet la campagne à zéro (A21) ───
 fresh
 out=$(run_keep 'Test\n1\npwd\nls\ngsh check\ngsh restart\ngsh goal\nexit\n')
 echo "$out" | grep -q "recommencée depuis la mission 1.1" && echo "$out" | grep -q "MISSION 1.1" && echo "$out" | grep -q "\[0/100\]" && ok "gsh restart: retour à la mission 1.1 avec [0/100] (A21)" || ko "gsh restart ne remet pas à zéro"
 
-# ─── TEST 47: historique horodaté des actions (A22) ───
+# ─── TEST 48: historique horodaté des actions (A22) ───
 H="$STATE/history_campagne1_test.log"
 [ -f "$H" ] && grep -qE "^\[20[0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9:]{8}\]" "$H" && grep -q "MISSION 1.1 réussie" "$H" && grep -q "CMD pwd" "$H" && ok "Historique horodaté avec timestamps + CMD + MISSION (A22)" || ko "Pas d'historique horodaté"
 
-# ─── TEST 48: évasion impossible — cd /.., cat /../../etc/passwd, $USER, ls -l (A1/A16, P0.1) ───
+# ─── TEST 49: évasion impossible — cd /.., cat /../../etc/passwd, $USER, ls -l (A1/A16, P0.1) ───
 out=$(run_game 'Test\ncd /..\ncd ../../../..\npwd\ncat /../../../../etc/passwd\necho USER=$USER HOME=$HOME\nls -l ~\nexit\n')
 echo "$out" | grep -q "\] /$" && echo "$out" | grep -q "USER=capitaine HOME=/cabines/capitaine" && echo "$out" | grep -q "^capitaine:x:1000" && ! echo "$out" | grep -qw "$HOST_USER" && ok "Aucune évasion: cd /.. reste à /, /etc/passwd du jeu, USER=capitaine (P0.1)" || ko "Évasion du monde ou fuite de l'utilisateur hôte"
 
-# ─── TEST 49: commandes système simulées, jamais exécutées sur l'hôte (P0.2) ───
+# ─── TEST 50: commandes système simulées, jamais exécutées sur l'hôte (P0.2) ───
 out=$(run_game 'Test\nsudo useradd -m gsh_matelot_test\nid gsh_matelot_test\nsudo ufw enable\nsudo ufw status\nkill 9999\nps aux | grep backdoor\nexit\n')
 ! grep -q gsh_matelot_test /etc/passwd && echo "$out" | grep -q "uid=.*(gsh_matelot_test)" && echo "$out" | grep -q "Status: active" && ! echo "$out" | grep -q "backdoor --c2" && ok "sudo useradd/ufw/kill simulés dans le monde, hôte intact (P0.2)" || ko "Commandes système non simulées"
 
-# ─── TEST 50: commandes interceptées compatibles pipes/redirections (P1.4, P1.5) ───
+# ─── TEST 51: commandes interceptées compatibles pipes/redirections (P1.4, P1.5) ───
 out=$(run_game 'Test\npwd > position.txt\ncat position.txt\nwhoami | tr a-z A-Z\necho "a  b" > espaces.txt\ncat espaces.txt\ncd /pont && ls\nexit\n')
 echo "$out" | grep -q "\] /cabines/capitaine$" && echo "$out" | grep -q "CAPITAINE" && echo "$out" | grep -q "a  b" && echo "$out" | grep -q "Test@orion7:/pont" && ok "pwd > fichier, whoami | tr, guillemets et cd composé fonctionnent (P1.4/P1.5)" || ko "Pipes/redirections des commandes interceptées"
 
-# ─── TEST 51: validation stricte — echo des commandes et commandes en échec ne valident pas (P1.1) ───
+# ─── TEST 52: validation stricte — echo des commandes et commandes en échec ne valident pas (P1.1) ───
 out=$(run_game 'Test\necho slsx pwdx\necho pwd ls\ngsh check\nls /fichier_inexistant\npwd\ngsh check\nexit\n')
 [ "$(echo "$out" | grep -c "❌ Mission non validée")" = "2" ] && ! echo "$out" | grep -q "✅ Mission réussie" && ok "echo pwd ls / ls en échec ne valident pas la mission 1.1 (P1.1)" || ko "Validation trop permissive"
 
-# ─── TEST 52: phase 2 non bloquante — le shell reste utilisable, gsh code (P1.2) ───
+# ─── TEST 53: phase 2 non bloquante — le shell reste utilisable, gsh code (P1.2) ───
 out=$(run_game 'Test\npwd\nls\ngsh check\ncat bienvenue.txt\ngsh check\ngsh help\ncat bienvenue.txt\ngsh code MAUVAIS\ngsh code ORION-7-ACCUEIL\nexit\n')
 echo "$out" | grep -q "Code incorrect" && echo "$out" | grep -q "Code correct" && echo "$out" | grep -q "MISSION 1.3" && [ "$(echo "$out" | grep -c "COMMANDES SHELL")" -ge 2 ] && ok "Phase 2: gsh help/cat restent utilisables, gsh code valide (P1.2)" || ko "Phase 2 bloquante"
 
-# ─── TEST 53: gsh avec espaces multiples (A5, P1.14) ───
+# ─── TEST 54: gsh avec espaces multiples (A5, P1.14) ───
 out=$(run_game 'Test\npwd\nls\ngsh   check\nexit\n')
 echo "$out" | grep -q "✅ Mission réussie" && ok "gsh   check (espaces multiples) reconnu (A5)" || ko "gsh avec espaces multiples non reconnu"
 
