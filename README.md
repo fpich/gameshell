@@ -169,7 +169,9 @@ gameshell/
 ├── Cargo.toml / Cargo.lock # dépendances (lock commité)
 ├── rust-toolchain.toml    # toolchain épinglée (1.100.0)
 ├── rustfmt.toml / .editorconfig
-├── .github/workflows/ci.yml # CI : clippy, fmt, build, tests
+├── .github/workflows/ci.yml # CI : clippy, fmt, build, tests + fresh-install + audit deps
+├── .github/workflows/release.yml # release : tag v* -> build + GitHub release
+├── install-debian13.sh     # installation des prérequis (apt + smoke test bwrap)
 ├── make-archive.sh        # génère gameshell.sh auto-extractible
 ├── vaisseau-gen.sh        # génère les 3 mondes (espace|japon|reseau)
 ├── monde-japon-gen.sh     # monde campagne 2 (château Shiro)

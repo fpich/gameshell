@@ -71,7 +71,9 @@
 ├── rust-toolchain.toml      # toolchain épinglée
 ├── rustfmt.toml             # formatage standardisé
 ├── .editorconfig            # règles de base d'édition
-├── .github/workflows/ci.yml # CI : clippy, fmt, build, tests + fresh-install + audit deps
+├── .github/workflows/ci.yml               # CI : clippy, fmt, build, tests + fresh-install + audit deps
+├── .github/workflows/release.yml          # release : tag v* -> archive + GitHub release
+├── install-debian13.sh                    # prérequis Debian 13 (apt + smoke test bwrap)
 ├── make-archive.sh          # génère gameshell.sh auto-extractible
 ├── vaisseau-gen.sh          # générateur des 3 mondes
 ├── monde-*.sh               # mondes campagne 2 et 3
