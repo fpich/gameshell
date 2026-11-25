@@ -6,7 +6,8 @@
 //! utilisateur réel (uid 1000 = capitaine/seigneur/netrunner). Les commandes d'administration
 //! (sudo, useradd, ufw, systemctl, kill, ping...) sont des SIMULATEURS (module sim) placés en
 //! tête du PATH: rien n'est jamais exécuté sur la machine hôte.
-//! Sans bwrap: mode dégradé (réécriture des chemins + garde-fou sur cd), signalé au joueur.
+//! Sans bwrap: mode dégradé (réécriture des chemins + garde-fou sur TOUS les chemins
+//! absolus qui échapperaient au monde — cd, ls, cat...), signalé au joueur.
 
 use std::io::{Read, Write};
 use std::path::Path;
@@ -188,18 +189,15 @@ fn which(name: &str) -> Option<String> {
     None
 }
 
-static mut SANDBOX_CHECKED: Option<bool> = None;
+static SANDBOX_CHECKED: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
 
 /// bwrap disponible ET fonctionnel (espaces de noms utilisateur autorisés)?
 pub fn sandbox_available() -> bool {
     if std::env::var("GSH_NO_SANDBOX").is_ok() {
         return false;
     }
-    unsafe {
-        if let Some(v) = SANDBOX_CHECKED {
-            return v;
-        }
-        let ok = which("bwrap")
+    *SANDBOX_CHECKED.get_or_init(|| {
+        which("bwrap")
             .map(|b| {
                 Command::new(b)
                     .args(["--unshare-all", "--ro-bind", "/", "/", "true"])
@@ -209,10 +207,8 @@ pub fn sandbox_available() -> bool {
                     .map(|s| s.success())
                     .unwrap_or(false)
             })
-            .unwrap_or(false);
-        SANDBOX_CHECKED = Some(ok);
-        ok
-    }
+            .unwrap_or(false)
+    })
 }
 
 /// Installe le binaire multi-appel des simulateurs dans <home>/simbin (liens useradd → gsh-sim...)
@@ -268,8 +264,30 @@ __gsh_rc=$?
 { builtin printf '%s' "$(builtin pwd -P)" >&3; } 2>/dev/null
 exit $__gsh_rc"#;
 
-/// Réécrit les chemins absolus d'une ligne pour le mode dégradé (sans bac à sable)
-fn rewrite_for_host(line: &str, world: &str) -> String {
+/// Normalise un chemin absolu hôte (lexical: résout "." et "..", clampées au root physique).
+fn lexical_normalize(p: &std::path::Path) -> std::path::PathBuf {
+    use std::path::Component;
+    let mut out = std::path::PathBuf::new();
+    for c in p.components() {
+        match c {
+            Component::RootDir => out.push("/"),
+            Component::CurDir => {}
+            Component::ParentDir => {
+                out.pop();
+            }
+            Component::Normal(seg) => out.push(seg),
+            _ => {}
+        }
+    }
+    out
+}
+
+/// Garde-fou de chemins (mode dégradé): lève une erreur si un chemin absolu de la ligne
+/// échappe au monde (résolution lexicale après préfixe monde). Les chemins hôtes déjà
+/// dans le monde et les chemins techniques hôte (/dev/null, /bin/, /usr/) passent.
+fn rewrite_for_host(line: &str, world: &str) -> Result<String, String> {
+    let world = world.trim_end_matches('/');
+    let inside_prefix = format!("{}/", world);
     let mut out = String::new();
     let chars: Vec<char> = line.chars().collect();
     let mut i = 0;
@@ -294,14 +312,69 @@ fn rewrite_for_host(line: &str, world: &str) -> String {
         if c == '/'
             && (word_start || (i > 0 && matches!(chars[i - 1], '"' | '\'' | '=' | '>' | '<' | ':')))
         {
-            let rest: String = chars[i..].iter().collect();
-            if !rest.starts_with(world)
-                && !rest.starts_with("/dev/null")
-                && !rest.starts_with("/bin/")
-                && !rest.starts_with("/usr/")
-            {
-                out.push_str(world.trim_end_matches('/'));
+            // borne le token: fin au prochain séparateur non quoté (espace, |, >, (, etc.)
+            let mut j = i;
+            let mut l_single = in_single;
+            let mut l_double = in_double;
+            while j < chars.len() {
+                let d = chars[j];
+                if d == '\'' && !l_double {
+                    l_single = !l_single;
+                    j += 1;
+                    continue;
+                }
+                if d == '"' && !l_single {
+                    l_double = !l_double;
+                    j += 1;
+                    continue;
+                }
+                if !l_single
+                    && !l_double
+                    && matches!(d, ' ' | '\t' | '|' | ';' | '&' | '>' | '<' | '(' | ')')
+                {
+                    break;
+                }
+                j += 1;
             }
+            let raw: String = chars[i..j].iter().collect();
+            let trimmed = raw.trim_end_matches(['\'', '"']);
+            let skip = trimmed.starts_with("/dev/null")
+                || trimmed.starts_with("/bin/")
+                || trimmed.starts_with("/usr/")
+                || trimmed == world
+                || trimmed.starts_with(&inside_prefix);
+            if skip {
+                out.extend(chars[i..j].iter());
+                i = j;
+                word_start = false;
+                continue;
+            }
+            let abs = lexical_normalize(
+                &std::path::Path::new(world).join(trimmed.trim_start_matches('/')),
+            );
+            let inside =
+                abs == std::path::Path::new(world) || abs.starts_with(std::path::Path::new(world));
+            if !inside {
+                return Err(trimmed.to_string());
+            }
+            let rel = abs.strip_prefix(std::path::Path::new(world)).unwrap();
+            let rel_s = rel.to_string_lossy().into_owned();
+            let mut new_path = world.to_string();
+            if !rel_s.is_empty() {
+                new_path = format!("{}/{}", world, rel_s);
+            }
+            let trailing = if raw.ends_with('\'') || raw.ends_with('"') {
+                raw.chars().last().unwrap().to_string()
+            } else {
+                String::new()
+            };
+            out.push_str(&new_path);
+            if !trailing.is_empty() {
+                out.push_str(&trailing);
+            }
+            i = j;
+            word_start = false;
+            continue;
         }
         out.push(c);
         word_start = !in_single
@@ -316,7 +389,7 @@ fn rewrite_for_host(line: &str, world: &str) -> String {
                 || c == '(');
         i += 1;
     }
-    out
+    Ok(out)
 }
 
 /// Exécute une ligne du joueur dans le monde. `cwd_real` = dossier courant (chemin réel).
@@ -395,7 +468,17 @@ pub fn run_line(line: &str, cwd_real: &str, oldpwd_real: &str, o: &RunOpts) -> R
         cmd.args(["__exec", "/bin/bash", "--noprofile", "--norc", "-c", SCRIPT]);
         cwd_arg = cwd_real.to_string();
         oldpwd_arg = oldpwd_real.to_string();
-        line_arg = rewrite_for_host(line, &world);
+        line_arg = match rewrite_for_host(line, &world) {
+            Ok(l) => l,
+            Err(_) => {
+                eprintln!("🚫 Ce passage mène hors du vaisseau: accès refusé.");
+                return RunResult {
+                    code: 1,
+                    cwd: None,
+                    out: String::new(),
+                };
+            }
+        };
     }
     cmd.env_clear();
     let path = if sandbox {
@@ -728,16 +811,36 @@ mod tests {
     #[test]
     fn reecriture_mode_degrade() {
         let w = "/m";
-        assert_eq!(rewrite_for_host("cat /pont/x", w), "cat /m/pont/x");
+        assert_eq!(rewrite_for_host("cat /pont/x", w).unwrap(), "cat /m/pont/x");
         assert_eq!(
-            rewrite_for_host("cat \"/pont/x\" >/soutes/f", w),
+            rewrite_for_host("cat \"/pont/x\" >/soutes/f", w).unwrap(),
             "cat \"/m/pont/x\" >/m/soutes/f"
         );
         assert_eq!(
-            rewrite_for_host("echo \"a  b\" 2>/dev/null", w),
+            rewrite_for_host("echo \"a  b\" 2>/dev/null", w).unwrap(),
             "echo \"a  b\" 2>/dev/null"
         );
-        assert_eq!(rewrite_for_host("ls '/pont'", w), "ls '/m/pont'");
+        assert_eq!(rewrite_for_host("ls '/pont'", w).unwrap(), "ls '/m/pont'");
+        assert_eq!(
+            rewrite_for_host("ls /pont/../armes", w).unwrap(),
+            "ls /m/armes"
+        );
+        assert_eq!(
+            rewrite_for_host("ls /pont/../../etc/passwd", w).unwrap_err(),
+            "/pont/../../etc/passwd"
+        );
+        assert_eq!(rewrite_for_host("ls /..", w).unwrap_err(), "/..");
+        assert_eq!(
+            rewrite_for_host("ls '/../etc/passwd'", w).unwrap_err(),
+            "/../etc/passwd"
+        );
+        // chemins hôtes déjà dans le monde: inchangés
+        assert_eq!(rewrite_for_host("ls /m/pont", w).unwrap(), "ls /m/pont");
+        assert_eq!(
+            rewrite_for_host("cat /usr/bin/ls", w).unwrap(),
+            "cat /usr/bin/ls"
+        );
+        assert_eq!(rewrite_for_host("cat /mfoo", "/m").unwrap(), "cat /m/mfoo");
     }
     #[test]
     fn slug() {
