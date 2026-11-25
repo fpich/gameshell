@@ -681,6 +681,10 @@ pub fn is_executable(path: &str) -> bool {
 }
 
 pub fn file_contains(path: &str, pattern: &str) -> bool {
+    // A17: un motif vide serait toujours « présent » — jamais de check vacuel
+    if pattern.is_empty() {
+        return false;
+    }
     std::fs::read(path)
         .map(|b| String::from_utf8_lossy(&b).contains(pattern))
         .unwrap_or(false)
@@ -900,6 +904,17 @@ mod tests {
             lexical_normalize(Path::new("a/b/../c")),
             std::path::PathBuf::from("a/c")
         );
+    }
+    #[test]
+    fn file_contains_refuse_le_motif_vide() {
+        // A17: motif vide = toujours "présent" sans garde-fou → jamais valide
+        let tmp = std::env::temp_dir().join(format!("gsh_test_fc_{}", std::process::id()));
+        std::fs::write(&tmp, "hello world").unwrap();
+        assert!(!file_contains(tmp.to_str().unwrap(), ""));
+        assert!(file_contains(tmp.to_str().unwrap(), "hello"));
+        assert!(!file_contains(tmp.to_str().unwrap(), "xyz"));
+        assert!(!file_contains("/nonexistent_gsh_file", "hello"));
+        std::fs::remove_file(&tmp).ok();
     }
     #[test]
     fn camp_name_et_profil() {

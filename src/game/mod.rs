@@ -976,7 +976,10 @@ impl Game {
                     .map(|e| shell::file_contains(&path(), e))
                     .unwrap_or(false),
                 "file_size" => {
-                    shell::file_size(&path()) >= exp.and_then(|e| e.parse().ok()).unwrap_or(1)
+                    // A17: un expected illisible ne valide jamais (repli 1 = vacuel)
+                    exp.and_then(|e| e.parse().ok())
+                        .map(|n| shell::file_size(&path()) >= n)
+                        .unwrap_or(false)
                 }
                 "file_owner" => exp
                     .map(|e| {
@@ -988,10 +991,12 @@ impl Game {
                     })
                     .unwrap_or(false),
                 "file_contains_count" => match exp.and_then(|e| e.split_once('|')) {
-                    Some((n, pat)) => {
-                        shell::file_contains_count(&path(), pat.trim())
-                            >= n.trim().parse().unwrap_or(1)
-                    }
+                    Some((n, pat)) => n
+                        .trim()
+                        .parse::<usize>()
+                        .ok()
+                        .map(|n| shell::file_contains_count(&path(), pat.trim()) >= n)
+                        .unwrap_or(false),
                     None => exp
                         .map(|e| shell::file_contains(&path(), e))
                         .unwrap_or(false),
@@ -1021,7 +1026,7 @@ impl Game {
                     .map(|e| !sim_line_match(&sim.lines(&check.target), e))
                     .unwrap_or(false),
                 "output_contains" => match exp {
-                    Some(e) => shell::run_line(
+                    Some(e) if !e.trim().is_empty() => shell::run_line(
                         &check.target,
                         &self.current_dir,
                         &self.previous_dir,
@@ -1033,7 +1038,7 @@ impl Game {
                     )
                     .out
                     .contains(e),
-                    None => false,
+                    _ => false, // A17: expected vide/absent jamais valide
                 },
                 _ => false, // type inconnu: jamais validé (A17)
             };
