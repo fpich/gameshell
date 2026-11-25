@@ -534,3 +534,15 @@ mod tests {
         assert!(safe_join("/dest", "/sub/x").is_some()); // racine trimée = chemin relatif
     }
 }
+
+#[cfg(test)]
+mod crc_tests {
+    use super::crc32;
+
+    #[test]
+    fn crc32_reference_connue() {
+        // vecteur de test standard CRC-32 (poly 0xEDB88320)
+        assert_eq!(crc32(b"123456789"), 0xCBF43926);
+        assert_eq!(crc32(b""), 0x00000000);
+    }
+}

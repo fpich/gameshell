@@ -969,3 +969,23 @@ pub fn who(c: &Ctx, long: bool) {
         println!("{:<8} pts/0        2024-01-15 08:15 (10.0.0.1)", c.user);
     }
 }
+
+#[cfg(test)]
+mod valid_name_tests {
+    use super::valid_name;
+
+    #[test]
+    fn forme_valide() {
+        assert!(valid_name("capitaine"));
+        assert!(valid_name("_install"));
+        assert!(valid_name("a-b-c"));
+        assert!(valid_name("test123"));
+        assert!(!valid_name(""));
+        assert!(!valid_name("1ABC"));
+        assert!(!valid_name("MajUsCUlE"));
+        assert!(!valid_name("avec espace"));
+        assert!(!valid_name("-avec"));
+        assert!(!valid_name(&"a".repeat(33)));
+        assert!(valid_name(&"a".repeat(32)));
+    }
+}

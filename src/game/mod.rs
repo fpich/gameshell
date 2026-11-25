@@ -1139,3 +1139,46 @@ fn sim_line_match(lines: &[String], expected: &str) -> bool {
         .collect();
     !parts.is_empty() && lines.iter().any(|l| parts.iter().all(|p| l.contains(p)))
 }
+
+#[cfg(test)]
+mod code_tests {
+    use super::{looks_like_code, sim_line_match};
+
+    #[test]
+    fn code_se_lit() {
+        assert!(looks_like_code("ALPHA-7"));
+        assert!(looks_like_code("123456"));
+        assert!(looks_like_code("A-B-C"));
+        assert!(!looks_like_code(""));
+        assert!(!looks_like_code("abc"));
+        assert!(!looks_like_code("abc-123"));
+        assert!(!looks_like_code("---"));
+        assert!(!looks_like_code("A B"));
+    }
+
+    #[test]
+    fn sim_line_match_separe_et_contient() {
+        assert!(sim_line_match(
+            &["cat f && ls".to_string()],
+            "cat f && ls"
+        ));
+        // toutes les parties doivent être sur la MÊME ligne
+        assert!(sim_line_match(
+            &["ps aux && grep root".to_string()],
+            "ps aux && grep root"
+        ));
+        assert!(!sim_line_match(
+            &["ps aux".to_string(), "grep root".to_string()],
+            "ps aux && grep root"
+        ));
+        assert!(sim_line_match(
+            &["uname -a".to_string()],
+            "uname"
+        ));
+        assert!(!sim_line_match(
+            &["pwd".to_string()],
+            "uname -a"
+        ));
+        assert!(!sim_line_match(&[], "echo"));
+    }
+}

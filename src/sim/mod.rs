@@ -716,3 +716,20 @@ mod tests {
         assert_eq!(super::safe_state_name("a\\b"), "invalid");
     }
 }
+
+#[cfg(test)]
+mod hash_pw_tests {
+    use super::hash_pw;
+
+    #[test]
+    fn deterministic_et_prefix() {
+        let h = hash_pw("motdepasse");
+        assert!(h.starts_with("$gsh$"));
+        assert_eq!(h.len(), "$gsh$".len() + 16);
+        assert_eq!(h, hash_pw("motdepasse"));
+        // deux entrées différentes → hachages différents
+        assert_ne!(hash_pw("motdepasse"), hash_pw("motdepasse2"));
+        // chaîne vide : déterministe
+        assert_eq!(hash_pw(""), hash_pw(""));
+    }
+}

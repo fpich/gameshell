@@ -239,8 +239,12 @@ pub fn str_width(s: &str) -> usize {
         }
         if after_zwj {
             after_zwj = false;
-            continue;
-        } // séquence emoji: le glyphe joint ne compte pas
+            // séquence emoji: le glyphe joint (emoji) ne compte pas, mais un glyphe
+            // simple après un ZWJ (texte ordinaire) reste compté normalement
+            if char_width(c) >= 2 {
+                continue;
+            }
+        }
         let mut cw = char_width(c);
         if cw == 1 && chars.peek() == Some(&'\u{fe0f}') {
             cw = 2;
@@ -248,4 +252,34 @@ pub fn str_width(s: &str) -> usize {
         w += cw;
     }
     w
+}
+
+#[cfg(test)]
+mod str_width_tests {
+    use super::str_width;
+
+    #[test]
+    fn ASCII_width() {
+        assert_eq!(str_width(""), 0);
+        assert_eq!(str_width("abc"), 3);
+        assert_eq!(str_width("abc def"), 7);
+    }
+
+    #[test]
+    fn emoji_compté_deux_colonnes_et_ZWJ_neutre() {
+        // emoji simple = 2 colonnes
+        assert_eq!(str_width("🏆"), 2);
+        // séquence ZWJ (famille = emoji + join + emoji) : ne compte que les 2 = 4
+        // ménage simple avecZWJ: on teste simplement que ZWJ+emoji ne compte pas le join
+        assert_eq!(str_width("a\u{200d}b"), 2); // a + b
+        // emoji avec variation-selector fe0f
+        assert_eq!(str_width("⭐️"), 2);
+    }
+
+    #[test]
+    fn controle_et_séq_ansi() {
+        // caractères de contrôle (code < 0x20) = 0 colonnes
+        assert_eq!(str_width("\x1b[1m"), 0);
+        assert_eq!(str_width("a\x00b"), 2);
+    }
 }

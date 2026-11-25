@@ -424,3 +424,21 @@ pub fn top(c: &Ctx, a: &[String]) -> i32 {
     }
     0
 }
+
+#[cfg(test)]
+mod matches_tests {
+    use super::matches;
+
+    #[test]
+    fn ancrage_et_sous_chacune() {
+        assert!(matches("sshd", "sshd"));
+        assert!(matches("sshd", "sshd.service"));
+        assert!(!matches("sshd", "ss"));
+        assert!(matches("^sshd", "sshd"));
+        assert!(!matches("^sshd", "xxsshd"));
+        assert!(matches("sshd$", "systemd-sshd"));
+        assert!(!matches("sshd$", "sshd.service"));
+        assert!(matches("^sshd$", "sshd"));
+        assert!(!matches("^sshd$", "xxsshd"));
+    }
+}

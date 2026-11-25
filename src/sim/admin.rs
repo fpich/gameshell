@@ -1300,3 +1300,46 @@ pub fn chroot(c: &Ctx, a: &[String]) -> i32 {
     c.event(&format!("chroot {}", abs.trim_end_matches('/')));
     0
 }
+
+#[cfg(test)]
+mod admin_tests {
+    use super::*;
+
+    #[test]
+    fn unit_name_normalise() {
+        assert_eq!(unit_name("sshd"), "ssh");
+        assert_eq!(unit_name("sshd.service"), "ssh");
+        assert_eq!(unit_name("fail2ban-server"), "fail2ban");
+        assert_eq!(unit_name("cron"), "cron");
+        assert_eq!(unit_name("nginx.service"), "nginx");
+    }
+
+    #[test]
+    fn parse_rule_forms_simples() {
+        assert_eq!(parse_rule(&["allow".into(), "22".into()]), Some("ALLOW IN 22 from Anywhere".into()));
+        assert_eq!(parse_rule(&["allow".into(), "port".into(), "22".into()]), Some("ALLOW IN 22 from Anywhere".into()));
+        assert_eq!(parse_rule(&["deny".into(), "in".into(), "port".into(), "22".into()]), Some("DENY IN 22 from Anywhere".into()));
+        assert_eq!(parse_rule(&["allow".into(), "ssh".into()]), Some("ALLOW IN 22/tcp from Anywhere".into()));
+        assert_eq!(parse_rule(&["deny".into(), "from".into(), "10.0.0.9".into()]), Some("DENY IN Anywhere from 10.0.0.9".into()));
+        assert_eq!(parse_rule(&["allow".into(), "out".into(), "port".into(), "80".into()]), Some("ALLOW OUT 80 from Anywhere".into()));
+        // action inconnue
+        assert_eq!(parse_rule(&["bogus".into()]), None);
+    }
+
+    #[test]
+    fn rule_cols_parse_forme_longue() {
+        let (to, action, from) = rule_cols("ALLOW IN 22/tcp from Anywhere");
+        assert_eq!(action, "ALLOW IN");
+        assert_eq!(to, "22/tcp");
+        assert_eq!(from, "Anywhere");
+        let (to, action, from) = rule_cols("DENY OUT 80 from 10.0.0.9");
+        assert_eq!(action, "DENY OUT");
+        assert_eq!(to, "80");
+        assert_eq!(from, "10.0.0.9");
+        // forme courte : valeur = la règle entière
+        let (to, action, from) = rule_cols("ALLOW");
+        assert_eq!(to, "ALLOW");
+        assert_eq!(action, "");
+        assert_eq!(from, "");
+    }
+}
