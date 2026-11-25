@@ -149,6 +149,12 @@ fn critical_targets(checks: &[MissionCheck]) -> Vec<String> {
         .collect()
 }
 
+/// Échappe un champ CSV (aide de cmd_export): guillemets doublés, sauts de ligne remplacés
+/// par des espaces, champ entouré de guillemets. Le séparateur est « ; » (CSV latin).
+fn csv_escape(s: &str) -> String {
+    format!("\"{}\"", s.replace('"', "\"\"").replace(['\n', '\r'], " "))
+}
+
 impl Game {
     pub fn new(player_name: &str, test_mode: bool) -> Self {
         let campaign = shell::campaign_id();
@@ -715,8 +721,7 @@ impl Game {
                 tentatives: self.attempts.get(&m.id).copied().unwrap_or(0),
             })
             .collect();
-        let csv_field =
-            |s: &str| format!("\"{}\"", s.replace('"', "\"\"").replace(['\n', '\r'], " "));
+        let csv_field = csv_escape;
         let mut csv = String::from("id;titre;statut;xp;tentatives\n");
         for r in &rows {
             csv.push_str(&format!(
@@ -1349,5 +1354,37 @@ mod critical_targets_tests {
         ];
         assert_eq!(critical_targets(&checks), vec!["/archives/big"]);
         assert!(critical_targets(&[]).is_empty());
+    }
+}
+
+#[cfg(test)]
+mod csv_tests {
+    use super::csv_escape;
+
+    #[test]
+    fn champs_simples_quoted_sans_sauts() {
+        assert_eq!(csv_escape("abc"), "\"abc\"");
+        assert_eq!(
+            csv_escape("1.2 — Titre ; avec ;"),
+            "\"1.2 — Titre ; avec ;\""
+        );
+        // sauts de ligne neutralisés (pas de champ multi-lignes)
+        assert_eq!(csv_escape("a\nb\rc\nd"), "\"a b c d\"");
+    }
+
+    #[test]
+    fn guillemets_doubles_par_doublon() {
+        assert_eq!(csv_escape("il dit \"oui\""), "\"il dit \"\"oui\"\"\"");
+        // guillemet seul
+        assert_eq!(csv_escape("\""), "\"\"\"\"");
+        // guillemets consécutifs (évasion classique)
+        assert_eq!(csv_escape("\"\""), "\"\"\"\"\"\"");
+    }
+
+    #[test]
+    fn vide_et_emoji_et_unicode() {
+        assert_eq!(csv_escape(""), "\"\"");
+        // emoji + accents conservés tels quels (séparateur « ; » protégé par guillemets)
+        assert_eq!(csv_escape("🏴‍☠️ — étape 4.2"), "\"🏴‍☠️ — étape 4.2\"");
     }
 }
