@@ -83,8 +83,13 @@ pub fn is_sim(name: &str) -> bool {
 
 /// Sanitise un nom de fichier d'état : jamais de séparateur de chemin ni de traversal.
 fn safe_state_name(name: &str) -> String {
-    let valid =
-        !name.is_empty() && !name.contains('/') && !name.contains('\\') && !name.contains("..");
+    let valid = !name.is_empty()
+        && name != "."
+        && name != ".."
+        && !name.contains('/')
+        && !name.contains('\\')
+        && !name.contains("..")
+        && !name.trim().is_empty();
     if valid {
         name.to_string()
     } else {
@@ -768,5 +773,20 @@ mod profile_and_is_sim_tests {
         let unknown = Profile::of(99);
         assert_eq!(unknown.host, "orion7");
         assert_eq!(unknown.user, "capitaine");
+    }
+}
+
+#[cfg(test)]
+mod safe_state_name_hardening_tests {
+    #[test]
+    fn rejette_le_comportement_point_unique() {
+        assert_eq!(super::safe_state_name("."), "invalid");
+        assert_eq!(super::safe_state_name(".."), "invalid");
+        assert_eq!(super::safe_state_name("   "), "invalid");
+        assert_eq!(super::safe_state_name("\t"), "invalid");
+        // les noms normaux restent acceptés
+        assert_eq!(super::safe_state_name("journal"), "journal");
+        assert_eq!(super::safe_state_name("a.b"), "a.b");
+        assert_eq!(super::safe_state_name("packages.installed"), "packages.installed");
     }
 }

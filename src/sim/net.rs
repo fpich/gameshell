@@ -935,3 +935,43 @@ mod tests {
         assert!(resolve(&c, "").is_none());
     }
 }
+
+#[cfg(test)]
+mod hosts_tests {
+    use super::{hosts, Ctx, Profile};
+
+    fn ctx(camp: u8) -> Ctx {
+        let p = Profile::of(camp);
+        Ctx {
+            root: "/".into(),
+            etc: "/etc".into(),
+            camp,
+            user: p.user.into(),
+            euid: p.user.into(),
+            host: p.host.into(),
+            homebase: p.homebase.into(),
+        }
+    }
+
+    #[test]
+    fn hosts_ports_par_campagne() {
+        // campagnes 1 et 2: 1 port local (ssh) au localhost et à l'hôte local
+        for camp in [1u8, 2] {
+            let hs = hosts(&ctx(camp));
+            let local = hs.iter().find(|h| h.ip == Profile::of(camp).ip).unwrap();
+            assert_eq!(local.ports.len(), 1, "campagne {}: un seul port attendu", camp);
+            assert_eq!(hs.iter().find(|h| h.name == "localhost").unwrap().ports.len(), 1);
+        }
+        // campagne 3: 3 ports (ssh, http, mysql) sur localhost et hôte local
+        let hs = hosts(&ctx(3));
+        let local = hs.iter().find(|h| h.ip == Profile::of(3).ip).unwrap();
+        assert_eq!(local.ports.len(), 3);
+        assert_eq!(hs.iter().find(|h| h.name == "localhost").unwrap().ports.len(), 3);
+        // les autres serveurs sont stables
+        assert!(hs.iter().any(|h| h.name == "passerelle"));
+        assert!(hs.iter().any(|h| h.name == "nexus-02"));
+        assert!(hs.iter().any(|h| h.name == "corbeau-noir"));
+        // l'hôte local porte son propre ip (campagne 3: 10.0.0.9)
+        assert_eq!(local.ip, "10.0.0.9");
+    }
+}

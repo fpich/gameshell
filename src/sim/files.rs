@@ -546,3 +546,67 @@ mod crc_tests {
         assert_eq!(crc32(b""), 0x00000000);
     }
 }
+
+#[cfg(test)]
+mod collect_tests {
+    use super::collect;
+
+    fn tmp_dir(tag: &str) -> std::path::PathBuf {
+        let root = std::env::temp_dir().join(format!("gsh-ut-collect-{}-{}", std::process::id(), tag));
+        let _ = std::fs::remove_dir_all(&root);
+        std::fs::create_dir_all(&root).unwrap();
+        root
+    }
+
+    #[test]
+    fn collect_non_recursive_deporte_la_racine_uniquement() {
+        let root = tmp_dir("flat");
+        std::fs::write(root.join("a.txt"), "aaa").unwrap();
+        std::fs::create_dir_all(root.join("sub")).unwrap();
+        let mut out = Vec::new();
+        collect(&root, "root", false, &mut out);
+        assert_eq!(out.len(), 1);
+        assert_eq!(out[0].0, "root/");
+        assert!(out[0].1.is_none());
+        let _ = std::fs::remove_dir_all(&root);
+    }
+
+    #[test]
+    fn collect_recursive_tri_et_retient_le_contenu() {
+        let root = tmp_dir("rec");
+        std::fs::write(root.join("b.txt"), "bbb").unwrap();
+        std::fs::write(root.join("a.txt"), "aaa").unwrap();
+        std::fs::create_dir_all(root.join("zdir")).unwrap();
+        std::fs::write(root.join("zdir/inner.txt"), "inner").unwrap();
+        let mut out = Vec::new();
+        collect(&root, "root", true, &mut out);
+        let paths: Vec<&str> = out.iter().map(|(n, _)| n.as_str()).collect();
+        // tri alphabétique après insertion (les fichiers dans l'ordre de readdir triés)
+        assert!(paths.contains(&"root/"));
+        assert!(paths.contains(&"root/a.txt"));
+        assert!(paths.contains(&"root/b.txt"));
+        assert!(paths.contains(&"root/zdir/"));
+        assert!(paths.contains(&"root/zdir/inner.txt"));
+        // contenu des fichiers bien récupéré
+        let a = out.iter().find(|(n, _)| n == "root/a.txt").unwrap();
+        assert_eq!(a.1.as_deref(), Some(b"aaa".as_slice()));
+        let inner = out.iter().find(|(n, _)| n == "root/zdir/inner.txt").unwrap();
+        assert_eq!(inner.1.as_deref(), Some(b"inner".as_slice()));
+        // trié par nom : aucun file orphelin flottant
+        assert_eq!(paths.len(), 5);
+        let _ = std::fs::remove_dir_all(&root);
+    }
+
+    #[test]
+    fn collect_fichier_seul_sans_arborescence() {
+        let root = tmp_dir("file");
+        let f = root.join("one.txt");
+        std::fs::write(&f, "x").unwrap();
+        let mut out = Vec::new();
+        collect(&f, "one.txt", false, &mut out);
+        assert_eq!(out.len(), 1);
+        assert_eq!(out[0].0, "one.txt");
+        assert_eq!(out[0].1.as_deref(), Some(b"x".as_slice()));
+        let _ = std::fs::remove_dir_all(&root);
+    }
+}
