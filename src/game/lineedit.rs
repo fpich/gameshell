@@ -211,24 +211,29 @@ const GSH_WORDS: &[&str] = &[
     "gsh restart",
 ];
 
-fn command_names() -> Vec<String> {
-    let mut v: Vec<String> = [
-        "cd", "echo", "pwd", "exit", "clear", "gsh", "history", "type", "export", "alias", "printf",
-    ]
-    .iter()
-    .map(|s| s.to_string())
-    .collect();
-    v.extend(crate::sim::NAMES.iter().map(|s| s.to_string()));
-    for d in ["/usr/bin", "/usr/sbin"] {
-        if let Ok(rd) = std::fs::read_dir(d) {
-            for e in rd.flatten() {
-                v.push(e.file_name().to_string_lossy().to_string());
+fn command_names() -> &'static Vec<String> {
+    use std::sync::OnceLock;
+    static COMMAND_NAMES: OnceLock<Vec<String>> = OnceLock::new();
+    COMMAND_NAMES.get_or_init(|| {
+        let mut v: Vec<String> = [
+            "cd", "echo", "pwd", "exit", "clear", "gsh", "history", "type", "export", "alias",
+            "printf",
+        ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+        v.extend(crate::sim::NAMES.iter().map(|s| s.to_string()));
+        for d in ["/usr/bin", "/usr/sbin"] {
+            if let Ok(rd) = std::fs::read_dir(d) {
+                for e in rd.flatten() {
+                    v.push(e.file_name().to_string_lossy().to_string());
+                }
             }
         }
-    }
-    v.sort();
-    v.dedup();
-    v
+        v.sort();
+        v.dedup();
+        v
+    })
 }
 
 /// Candidats pour le mot `word` (en position de commande ou non)
@@ -245,8 +250,9 @@ fn candidates(c: &Completer, line_before: &str, word: &str) -> Vec<String> {
     }
     if first && !word.contains('/') {
         return command_names()
-            .into_iter()
+            .iter()
             .filter(|n| n.starts_with(word))
+            .cloned()
             .collect();
     }
     // chemin: dossier du mot, résolu dans le monde
