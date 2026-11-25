@@ -12,7 +12,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/) — exemption : vers
 - `.github/workflows/` + badge de CI dans `README.md`.
 - `rust-toolchain.toml` (1.100.0, components clippy + rustfmt), `rustfmt.toml`, `.editorconfig`.
 - `Cargo.lock` commité (reproductibilité maximale : 3 dépendances + transitives).
-- Métadonnées `Cargo.toml` : `license = "Proprietary"`, `repository`, `keywords`, `categories`.
+- Métadonnées `Cargo.toml` : `license = "Proprietary"`, `repository`, `keywords`, `categories`, `publish = false`.
 - Tests : `stories_sans_mojibake` (scan story/description/goal/title sur marqueurs UTF-8 corrompus)
   et test 55 de la suite (archive `gameshell.sh` bien formée : shebang, exécutable, VERSION
   embarquée, marqueur d'archivage).
