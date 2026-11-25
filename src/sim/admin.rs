@@ -1363,3 +1363,38 @@ mod catalog_tests {
         assert!(pkg("apt-get").is_none()); // apt-get n'est pas un paquet du catalogue
     }
 }
+
+#[cfg(test)]
+mod installed_tests {
+    use super::{installed, Ctx};
+
+    #[test]
+    fn installed_decte_dans_le_state_et_refuse_l_invalide() {
+        let root = std::env::temp_dir().join(format!("gsh-ut-pkg-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root);
+        std::fs::create_dir_all(root.join("gsh")).unwrap();
+        let c = Ctx {
+            root: "/".into(),
+            etc: root.to_string_lossy().into(),
+            camp: 1,
+            user: "capitaine".into(),
+            euid: "capitaine".into(),
+            host: "orion7".into(),
+            homebase: "/cabines".into(),
+        };
+        std::fs::write(c.state("packages.installed"), "nginx\nsudo\n").unwrap();
+        assert!(installed(&c, "nginx"));
+        assert!(installed(&c, "sudo"));
+        assert!(!installed(&c, "apache2"));
+        assert!(!installed(&c, ""));
+        // state absent → rien n'est installé
+        let root2 = root.with_file_name(format!("gsh-ut-pkg-absent-{}", std::process::id()));
+        let c2 = Ctx { etc: root2.to_string_lossy().into(), ..Ctx {
+            root: "/".into(), etc: root.to_string_lossy().into(), camp: 1,
+            user: "capitaine".into(), euid: "capitaine".into(), host: "orion7".into(), homebase: "/cabines".into(),
+        } };
+        assert!(!installed(&c2, "nginx"));
+        let _ = std::fs::remove_dir_all(&root);
+        let _ = std::fs::remove_dir_all(&root2);
+    }
+}
