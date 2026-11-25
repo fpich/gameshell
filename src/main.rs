@@ -40,6 +40,22 @@ struct Cli {
     locked: bool,
 }
 
+/// Nettoie un nom de joueur: espaces blanchis avant/après, caractères de contrôle
+/// supprimés, 32 caractères maximum. Vide (ou purement contrôle) → « Capitaine ».
+fn sanitize_player_name(name: &str) -> String {
+    let s: String = name
+        .trim()
+        .chars()
+        .filter(|c| !c.is_control())
+        .take(32)
+        .collect();
+    if s.is_empty() {
+        "Capitaine".to_string()
+    } else {
+        s
+    }
+}
+
 fn campaign_label(c: u8) -> &'static str {
     match c {
         2 => "Japon Féodal",
@@ -158,22 +174,16 @@ fn main() {
     println!("  ║           🕹️  GAMESHELL               ║");
     println!("  ║   Jeu RPG éducatif — shell Debian    ║");
     println!("  ╚══════════════════════════════════════╝\n");
-    let player_name = cli.name.clone().unwrap_or_else(|| {
-        let mut hist = Vec::new();
-        let name =
-            game::lineedit::read_line("👤 Entrez votre nom: ", &mut hist, None).unwrap_or_default();
-        let name: String = name
-            .trim()
-            .chars()
-            .filter(|c| !c.is_control())
-            .take(32)
-            .collect();
-        if name.is_empty() {
-            "Capitaine".to_string()
-        } else {
-            name
-        }
-    });
+    let player_name = cli
+        .name
+        .clone()
+        .map(|n| sanitize_player_name(&n))
+        .unwrap_or_else(|| {
+            let mut hist = Vec::new();
+            let name = game::lineedit::read_line("👤 Entrez votre nom: ", &mut hist, None)
+                .unwrap_or_default();
+            sanitize_player_name(&name)
+        });
 
     // Sélection de la campagne (règle C14) — mode enseignant: --campaign impose la campagne
     let campaign: u8 = if let Some(c) = cli.campaign {
@@ -267,5 +277,36 @@ fn main() {
         g.run_test_mode();
     } else {
         g.run();
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{campaign_label, sanitize_player_name};
+
+    #[test]
+    fn sanitize_nom_nettoyage_et_troncature() {
+        assert_eq!(sanitize_player_name("  Capitaine  "), "Capitaine");
+        assert_eq!(sanitize_player_name(""), "Capitaine");
+        assert_eq!(sanitize_player_name("   "), "Capitaine");
+        assert_eq!(sanitize_player_name("\u{0007}\u{001b}"), "Capitaine");
+        // caractères de contrôle supprimés (pas les mutateurs)
+        assert_eq!(sanitize_player_name("Capi\u{0007}taire"), "Capitaire");
+        // troncature à 32 caractères
+        assert_eq!(sanitize_player_name(&"x".repeat(100)).len(), 32);
+        // nom enseignant transmis tel quel (après nettoyage)
+        assert_eq!(sanitize_player_name("Alice 3000"), "Alice 3000");
+        // emoji comptés comme caractères (pas octets)
+        assert_eq!(sanitize_player_name("🏴‍☠️").chars().count(), 4);
+    }
+
+    #[test]
+    fn campaign_label_couvre_les_3_campagnes() {
+        assert_eq!(campaign_label(1), "Pirates de l'Espace");
+        assert_eq!(campaign_label(2), "Japon Féodal");
+        assert_eq!(campaign_label(3), "Nexus Réseau");
+        // repli sur la campagne 1 (jamais de panic, jamais de titre vide)
+        assert_eq!(campaign_label(0), "Pirates de l'Espace");
+        assert_eq!(campaign_label(99), "Pirates de l'Espace");
     }
 }

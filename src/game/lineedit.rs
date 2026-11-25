@@ -54,14 +54,22 @@ fn read_line_plain() -> Option<String> {
     }
     let mut line = String::from_utf8_lossy(&raw).to_string(); // binaire/UTF-8 invalide: jamais de panic
     if line.len() > 4096 {
-        let mut cut = 4096;
-        while !line.is_char_boundary(cut) {
-            cut -= 1;
-        }
-        line.truncate(cut);
+        line = truncate_input(&line);
         eprintln!("(input tronqué à 4096 caractères)");
     }
     Some(strip_ansi(&line))
+}
+
+/// Tronque une ligne à 4096 caractères en ne coupant jamais un caractère multi-octets (A13)
+pub fn truncate_input(line: &str) -> String {
+    if line.len() <= 4096 {
+        return line.to_string();
+    }
+    let mut cut = 4096;
+    while !line.is_char_boundary(cut) {
+        cut -= 1;
+    }
+    line[..cut].to_string()
 }
 
 /// Nettoie les séquences d'échappement ANSI (ESC [ ... final, et ESC + 1 char)
@@ -339,11 +347,7 @@ fn read_line_raw(
                 finish(&mut scr, prompt, &buf, cur, "");
                 let mut line = String::from_utf8_lossy(&buf).to_string();
                 if line.len() > 4096 {
-                    let mut cut = 4096;
-                    while !line.is_char_boundary(cut) {
-                        cut -= 1;
-                    }
-                    line.truncate(cut);
+                    line = truncate_input(&line);
                     eprintln!("(input tronqué à 4096 caractères)");
                 }
                 let t = line.trim().to_string();
@@ -579,7 +583,7 @@ fn read_line_raw(
 
 #[cfg(test)]
 mod tests {
-    use super::{char_left, char_right, common_prefix, strip_ansi};
+    use super::{char_left, char_right, common_prefix, strip_ansi, truncate_input};
 
     #[test]
     fn strip_les_sequences_curseur() {
@@ -628,5 +632,26 @@ mod tests {
         assert_eq!(common_prefix(&["unique".into()]), "unique");
         assert_eq!(common_prefix(&[]), "");
         assert_eq!(common_prefix(&["abd".into(), "abc".into()]), "ab");
+    }
+
+    #[test]
+    fn truncate_ne_coupe_jamais_un_caractere_multi_octets() {
+        // chaîne ASCII courte : inchangée
+        assert_eq!(truncate_input("abc"), "abc");
+        // chaîne de 4096 côtés-octets : inchangée (limite exacte)
+        let exact = "x".repeat(4096);
+        assert_eq!(truncate_input(&exact), exact);
+        // dépasse la limite : coupée à une frontière de caractères
+        let s = "é".repeat(3000); // 6000 octets, couper à 4096 tombé dans un « é »
+        let t = truncate_input(&s);
+        assert!(t.len() <= 4096);
+        assert!(t.is_char_boundary(t.len())); // frontière garantie
+        assert_eq!(t.chars().count(), 2048); // 2048 é × 2 octets = 4096 octets
+                                             // multi-octets dont la limite tombe au milieu du caractère
+        let mut s2 = "a".repeat(4095).to_string(); // 4095 octets
+        s2.push('✈'); // 3 octets → 4098 octets total
+        let t2 = truncate_input(&s2);
+        assert_eq!(t2.chars().count(), 4095); // on garde les 4095 « a », jamais le milieu de l'avion
+        assert_eq!(t2.len(), 4095);
     }
 }
