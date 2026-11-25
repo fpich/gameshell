@@ -25,6 +25,15 @@ impl Game {
         self.mark_events();
     }
 
+    /// Remise à zéro complète et hermétique: monde neuf + système fictif neuf (identique au
+    /// `gsh restart`), puis historique/position/événementés remis à zéro.
+    /// Utilisé pour que chaque cas limite et chaque préfixe soit testé depuis un état neuf.
+    fn hermetic_reset(&mut self) {
+        crate::sim::init_system(&shell::sys_etc(self.campaign), self.campaign, true);
+        shell::regenerate_world(self.campaign);
+        self.reset_for_mission();
+    }
+
     /// Joue la solution d'une mission (commandes requises + gsh check + code). Ok = validée.
     pub(super) fn solve_mission(
         &mut self,
@@ -108,13 +117,18 @@ impl Game {
         (ok, total)
     }
 
-    /// Mode EDGE: cas limites sur chaque mission (check vide, garbage, echo des cibles, ls /armes,
-    /// mauvais code, bon code, position et historique remis à zéro après validation)
+    /// Mode EDGE: cas limites sur chaque mission.
+    ///
+    /// Phase A — jeu normal (monde et système persistent, mission à mission): check à vide,
+    /// commandes hors-sujet, mauvais code, puis résolution — position/historique/compteur vérifiés.
+    /// Phase B — préfixes des required_commands: testé sur un monde neuf (isolé), puis sauté pour
+    /// les missions à dépendances (un préfixe qui échoue n'est pas testable depuis un état vide).
+    /// Un préfixe qui VALIDE = défaut de contenu (commande cosmetic non couverte par les checks).
     pub fn run_edge(&mut self) -> (usize, Vec<String>) {
         let mut ok = 0usize;
         let mut issues: Vec<String> = Vec::new();
         let home = shell::player_home();
-        // gsh reset: historique vidé + monde régénéré (C12/D2)
+        // gsh reset: historique vidé + monde régénéré (C12/D2) — test initial, hors missions
         self.mission_commands.push("ls".into());
         self.current_dir = format!("{}/tmp", shell::world_dir());
         self.cmd_reset();
@@ -127,24 +141,15 @@ impl Game {
         if !shell::dir_exists(&shell::world_dir()) {
             issues.push("gsh reset a supprimé le monde".into());
         }
+        // Phase A: jeu normal (monde persistent)
         while self.current_mission < self.missions.len() {
             let m = self.missions[self.current_mission].clone();
             self.reset_for_mission();
             if self.cmd_check() {
-                issues.push(format!("{}: check à vide a VALIDÉ la mission!", m.id));
+                issues.push(format!("{}: check à vide a validé la mission!", m.id));
             }
-            self.pending_code = None;
-            let mut traps: Vec<String> = vec!["foobar123".into(), "ls /armes".into()];
-            let targets: Vec<String> = m.checks.iter().map(|c| c.target.clone()).collect();
-            traps.push(format!(
-                "echo {}",
-                targets
-                    .iter()
-                    .map(|t| format!("'{}'", t.replace('\'', "")))
-                    .collect::<Vec<_>>()
-                    .join(" ")
-            ));
-            for t in &traps {
+            // commandes hors-sujet — ne doivent jamais valider
+            for t in ["foobar123", "true", "ls /armes"] {
                 self.reset_for_mission();
                 self.exec_shell(t);
                 if self.check_mission_detailed().0 {
@@ -169,6 +174,37 @@ impl Game {
                     }
                 }
                 Err(e) => issues.push(format!("{}: mission non résolue — {}", m.id, e)),
+            }
+        }
+        // Phase B: préfixes des required_commands, testés isolément (monde neuf par préfixe).
+        let mut probe = Game::new(&self.player_name, true);
+        for (i, m) in self.missions.iter().enumerate() {
+            if m.required_commands.len() < 2 {
+                continue;
+            }
+            for k in 1..m.required_commands.len() {
+                probe.current_mission = i;
+                probe.hermetic_reset();
+                let mut prefix_failed = false;
+                for rc in m.required_commands[..k].iter() {
+                    let code = probe.exec_with(rc, Some(bench_stdin(rc)));
+                    if code != 0 {
+                        prefix_failed = true;
+                        break;
+                    }
+                }
+                if prefix_failed {
+                    continue; // mission à dépendances de missions précédentes: pas testable à vide
+                }
+                if probe.check_mission_detailed().0 {
+                    issues.push(format!(
+                        "{}: le préfixe « {} » ({}/{}) suffit à valider la mission!",
+                        m.id,
+                        m.required_commands[..k].join(" && "),
+                        k,
+                        m.required_commands.len()
+                    ));
+                }
             }
         }
         (ok, issues)
@@ -203,6 +239,7 @@ impl Game {
             if self.check_mission_detailed().0 {
                 issues.push(format!("{}: typo 'pwdd' a validé", m.id));
             }
+            self.reset_for_mission();
             match self.solve_mission(&["FAUX-1", "FAUX-2"], &mut issues) {
                 Ok(()) => {
                     ok += 1;

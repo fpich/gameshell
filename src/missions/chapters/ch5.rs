@@ -11,7 +11,7 @@ pub fn missions() -> Vec<Mission> {
             goal: "Vex Korshun vous explique que chaque fichier a des permissions. Regardez celles de votre cabine.".into(),
             bloom_level: "Comprendre".into(),
             bloom_question: "Que signifient rwx?".into(),
-            required_commands: vec!["ls -l".into(), "ls -la".into()],
+            required_commands: vec!["ls -l".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "-l".into(), expected: None }],
             hints: vec![],
             xp_reward: 125,

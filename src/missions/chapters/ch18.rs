@@ -145,7 +145,7 @@ La surveillance est posée : chaque écriture ou changement d'attribut sur
             bloom_level: "Créer".into(),
             bloom_question: "Tracer les modifications?".into(),
             required_commands: vec!["sudo auditctl -w /etc/passwd -p wa -k comptes".into(), "sudo auditctl -l".into()],
-            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "audit.rules".into(), expected: Some("-w /etc/passwd".into()) }],
+            checks: vec![MissionCheck { check_type: "command_executed".into(), target: "auditctl".into(), expected: None }, MissionCheck { check_type: "command_executed".into(), target: "-l".into(), expected: None }, MissionCheck { check_type: "sim_contains".into(), target: "audit.rules".into(), expected: Some("-w /etc/passwd".into()) }],
             hints: vec![],
             xp_reward: 350,
             code_required: None,

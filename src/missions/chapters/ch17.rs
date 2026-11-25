@@ -102,6 +102,11 @@ Capitaine. »"
                     target: "cowsay".into(),
                     expected: None,
                 },
+                MissionCheck {
+                    check_type: "command_executed".into(),
+                    target: "dpkg".into(),
+                    expected: None,
+                },
             ],
             hints: vec![],
             xp_reward: 225,

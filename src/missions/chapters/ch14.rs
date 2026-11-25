@@ -11,7 +11,7 @@ pub fn missions() -> Vec<Mission> {
             goal: "Un nouvel arrivant monte à bord. Créez-lui son badge d'accès.".into(),
             bloom_level: "Appliquer".into(),
             bloom_question: "Creer un user?".into(),
-            required_commands: vec!["sudo useradd -m matelot".into(), "id".into()],
+            required_commands: vec!["sudo useradd -m matelot".into()],
             checks: vec![MissionCheck { check_type: "command_executed".into(), target: "useradd".into(), expected: None }, MissionCheck { check_type: "user_exists".into(), target: "matelot".into(), expected: None }],
             hints: vec![],
             xp_reward: 225,
