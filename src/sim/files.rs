@@ -298,6 +298,10 @@ pub fn unzip(a: &[String]) -> i32 {
     if real_bin("unzip").is_some() {
         return exec_real("unzip", a);
     }
+    unzip_embedded(a)
+}
+
+fn unzip_embedded(a: &[String]) -> i32 {
     let list = a.iter().any(|x| x == "-l");
     let dest = a
         .iter()
@@ -372,8 +376,17 @@ pub fn unzip(a: &[String]) -> i32 {
     }
     println!("Archive:  {}", archive);
     let base = dest.unwrap_or_else(|| ".".into());
+    // Traversal refusé: une entrée de ZIP ne peut jamais s'échapper du répertoire de destination
+    let mut skipped = 0usize;
     for (n, d) in &entries {
-        let p = std::path::Path::new(&base).join(n.trim_start_matches('/'));
+        let p = match safe_join(&base, n) {
+            Some(p) => p,
+            None => {
+                eprintln!("unzip: entrée ignorée (chemin hors du but): {}", n);
+                skipped += 1;
+                continue;
+            }
+        };
         if n.ends_with('/') {
             let _ = std::fs::create_dir_all(&p);
             println!("   creating: {}", n);
@@ -385,5 +398,139 @@ pub fn unzip(a: &[String]) -> i32 {
         let _ = std::fs::write(&p, d);
         println!(" extracting: {}", n);
     }
+    if skipped > 0 {
+        return 1;
+    }
     0
+}
+
+/// Racine + nom de ZIP normalisés: refuse `..`, racine absolue et préfixes (traversal).
+/// `base` reste relatif au répertoire du joueur; seuls des composants normaux sont acceptés.
+fn safe_join(base: &str, name: &str) -> Option<std::path::PathBuf> {
+    use std::path::{Component, PathBuf};
+    let mut p = PathBuf::from(base);
+    for comp in std::path::Path::new(name.trim_start_matches('/')).components() {
+        match comp {
+            Component::Normal(c) => p.push(c),
+            Component::CurDir => {}
+            _ => return None,
+        }
+    }
+    Some(p)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{crc32, safe_join, unzip_embedded};
+
+    fn build_stored_zip(entries: &[(&str, &[u8])]) -> Vec<u8> {
+        fn le16(v: &mut Vec<u8>, x: u16) {
+            v.extend_from_slice(&x.to_le_bytes());
+        }
+        fn le32(v: &mut Vec<u8>, x: u32) {
+            v.extend_from_slice(&x.to_le_bytes());
+        }
+        let mut out = Vec::new();
+        for (name, data) in entries {
+            le32(&mut out, 0x04034b50);
+            le16(&mut out, 10);
+            le16(&mut out, 0x0800);
+            le16(&mut out, 0); // méthode 0 = stocké
+            le16(&mut out, 0x5821);
+            le16(&mut out, 0);
+            le32(&mut out, crc32(data));
+            le32(&mut out, data.len() as u32);
+            le32(&mut out, data.len() as u32);
+            le16(&mut out, name.len() as u16);
+            le16(&mut out, 0);
+            out.extend_from_slice(name.as_bytes());
+            out.extend_from_slice(data);
+        }
+        out
+    }
+
+    #[test]
+    fn unzip_embedded_ignore_traversal() {
+        let pid = std::process::id();
+        let nanos = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos())
+            .unwrap_or(0);
+        let tmp = std::env::temp_dir().join(format!("gsh_unzip_{}_{}", pid, nanos));
+        let base = tmp.join("base");
+        std::fs::create_dir_all(&base).unwrap();
+        let zip_path = tmp.join("hostile.zip");
+        let zip = build_stored_zip(&[
+            ("ok.txt", b"legitimate"),
+            ("../escaped.txt", b"evil"),
+            ("sub/deep.txt", b"deep"),
+        ]);
+        std::fs::write(&zip_path, &zip).unwrap();
+        let rc = unzip_embedded(&[
+            "-d".to_string(),
+            base.to_string_lossy().into_owned(),
+            zip_path.to_string_lossy().into_owned(),
+        ]);
+        assert_eq!(rc, 1, "une entrée traversée doit échouer");
+        assert!(base.join("ok.txt").exists());
+        assert_eq!(
+            std::fs::read_to_string(base.join("ok.txt")).unwrap(),
+            "legitimate"
+        );
+        assert!(base.join("sub").join("deep.txt").exists());
+        assert!(
+            !tmp.join("escaped.txt").exists(),
+            "aucune entrée ne doit échapper du répertoire de destination"
+        );
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
+
+    #[test]
+    fn unzip_embedded_est_ecrite_dans_la_but() {
+        let pid = std::process::id();
+        let nanos = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos())
+            .unwrap_or(0);
+        let tmp = std::env::temp_dir().join(format!("gsh_unzip_ok_{}_{}", pid, nanos));
+        let base = tmp.join("base");
+        std::fs::create_dir_all(&base).unwrap();
+        let zip_path = tmp.join("legit.zip");
+        let zip = build_stored_zip(&[("a/b/c.txt", b"sciemment"), ("root.txt", b"r")]);
+        std::fs::write(&zip_path, &zip).unwrap();
+        let rc = unzip_embedded(&[
+            "-d".to_string(),
+            base.to_string_lossy().into_owned(),
+            zip_path.to_string_lossy().into_owned(),
+        ]);
+        assert_eq!(rc, 0);
+        assert_eq!(
+            std::fs::read_to_string(base.join("a").join("b").join("c.txt")).unwrap(),
+            "sciemment"
+        );
+        assert!(base.join("root.txt").exists());
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
+
+    #[test]
+    fn safe_join_refuse_traversal() {
+        assert!(safe_join(".", "../evasion.txt").is_none());
+        assert!(safe_join(".", "foo/../../etc/passwd").is_none());
+        assert!(safe_join("/abs", "/etc/passwd").is_some()); // racine trimée = relative sous /abs
+        assert!(safe_join(".", "..").is_none());
+    }
+
+    #[test]
+    fn safe_join_accepte_chemins_normaux() {
+        let r = safe_join(".", "sub/dir/fichier.txt").unwrap();
+        assert_eq!(
+            r,
+            std::path::PathBuf::from(".")
+                .join("sub")
+                .join("dir")
+                .join("fichier.txt")
+        );
+        assert!(safe_join(".", "sub/./x").is_some()); // « . » normal
+        assert!(safe_join("/dest", "/sub/x").is_some()); // racine trimée = chemin relatif
+    }
 }
