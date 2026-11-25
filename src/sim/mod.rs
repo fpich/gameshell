@@ -81,6 +81,17 @@ pub fn is_sim(name: &str) -> bool {
     NAMES.contains(&name)
 }
 
+/// Sanitise un nom de fichier d'état : jamais de séparateur de chemin ni de traversal.
+fn safe_state_name(name: &str) -> String {
+    let valid =
+        !name.is_empty() && !name.contains('/') && !name.contains('\\') && !name.contains("..");
+    if valid {
+        name.to_string()
+    } else {
+        "invalid".to_string()
+    }
+}
+
 /// Contexte d'exécution d'un simulateur (variables posées par le moteur)
 #[derive(Clone)]
 pub struct Ctx {
@@ -144,10 +155,10 @@ impl Ctx {
     }
 
     pub fn state(&self, name: &str) -> PathBuf {
-        PathBuf::from(format!("{}/gsh/{}", self.etc, name))
+        PathBuf::from(format!("{}/gsh/{}", self.etc, safe_state_name(name)))
     }
     pub fn etc_file(&self, name: &str) -> PathBuf {
-        PathBuf::from(format!("{}/{}", self.etc, name))
+        PathBuf::from(format!("{}/{}", self.etc, safe_state_name(name)))
     }
 
     pub fn lines(&self, name: &str) -> Vec<String> {
@@ -682,4 +693,26 @@ pub fn init_system(etc: &str, camp: u8, force: bool) {
     ctx.set_lines("events.log", &[]);
     ctx.set_lines("owners", &[]);
     w("gsh/version", "2\n".into());
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn safe_state_name_accepte_noms_simples() {
+        assert_eq!(super::safe_state_name("journal"), "journal");
+        assert_eq!(super::safe_state_name("ufw.rules"), "ufw.rules");
+        assert_eq!(
+            super::safe_state_name("packages.installed"),
+            "packages.installed"
+        );
+    }
+
+    #[test]
+    fn safe_state_name_refuse_traversal() {
+        assert_eq!(super::safe_state_name("../etc/passwd"), "invalid");
+        assert_eq!(super::safe_state_name("a/b"), "invalid");
+        assert_eq!(super::safe_state_name(".."), "invalid");
+        assert_eq!(super::safe_state_name(""), "invalid");
+        assert_eq!(super::safe_state_name("a\\b"), "invalid");
+    }
 }
